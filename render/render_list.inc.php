@@ -931,12 +931,16 @@ class ListBlock extends PageBlock
 		global $auth;
 
 		$this->row_count++;
-		$oddeven=($this->row_count %2) ? "odd" : "even";
+		$oddeven =($this->row_count %2) 
+		         ? "odd" 
+		         : "even";
+
+		$style.= " ".$oddeven;
 
 		if(isset($obj->pub_level)) {
 			$level=$obj->pub_level;
 			global $g_pub_level_names;
-            $style.=" pub_".$g_pub_level_names[$level] .' '. $oddeven;
+            $style.=" pub_".$g_pub_level_names[$level];
 		}
 
 		if(isset($this->id) && isset($obj->id)) {
@@ -948,7 +952,7 @@ class ListBlock extends PageBlock
             }
 		}
 		else {
-			echo "<tr>";
+			echo "<tr class='$style'>";
 		}
 
 		foreach($this->columns as $c) {

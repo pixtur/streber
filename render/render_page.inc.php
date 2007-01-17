@@ -185,6 +185,7 @@ class Page
     public  $functions      =array();
     public  $content_columns=false;
 	public  $format         = FORMAT_HTML;
+	public  $extra_header_html = '';
 
     #--- constructor ---------------------------
     public function __construct($args=NULL)
@@ -548,6 +549,10 @@ document.my_form." . $this->page->autofocus_field. ".select();";
             . '<script type="text/javascript" src="js/calendar-setup.js"></script>'
             . '<script type="text/javascript" src="js/dragslider.js"></script>';
         }
+        
+        ### add extra html ###
+        $buffer.= $this->page->extra_header_html;
+        
         $buffer.= "
         </head>";
         $buffer.='<body ';

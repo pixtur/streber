@@ -35,25 +35,41 @@ class Block_DocuNavigation extends PageBlock
     public  $project        = NULL;     # object
     public  $reduced_header = true;
     private $tasks          = array();
+    public  $root           = NULL;
     
-    
+
+
+    public function __construct($args=NULL) {
+        $this->title= __("Further Documentation");
+        $this->id = 'parent_task';
+        parent::__construct($args);
+    }    
+
     
     private function initStructure()
     {
-        
-#        $this->query_options['order_by']= 't.order_id, t.id';
-#
-#        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-#            $this->query_options['visible_only']=false;
-#
-#        }
-#        $this->query_options['category']= TCATEGORY_DOCU;
-#        $tasks = array();
         $tasks= array();
 
-
         ### with parents ###
-        if($parents= $this->current_task->getFolder()) {
+        if($this->root) {
+            foreach($this->getDocuTasks($this->root->id) as $p) {
+                $p->level = LEVEL_NORMAL;
+                if($p->id == $this->current_task->id && $p->category == TCATEGORY_FOLDER) {
+                    $p->view_collapsed = 0;
+                    $tasks[]= $p;
+
+                    foreach($this->getDocuTasks($p->id) as $sp) {
+                        $sp->level = LEVEL_CHILDREN;
+                        $tasks[]= $sp;
+                    }
+                }
+                else {
+                    $p->view_collapsed= 1;
+                    $tasks[]= $p;
+                }
+            }            
+        }
+        else if($parents= $this->current_task->getFolder()) {
 
             foreach($parents as $pt) {
                 $pt->level = LEVEL_PARENTS;
@@ -141,7 +157,6 @@ class Block_DocuNavigation extends PageBlock
     
     public function print_all()
     {
-
         $this->initStructure();
         $this->render_BlockStart();
         echo "<div class=docuNavigation>";

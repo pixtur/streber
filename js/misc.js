@@ -40,8 +40,8 @@ function misc()
             //alert(myBodyName);
             myBody= document.getElementById(myBodyName);
             myHead.style.display = 'none';
-            //myBody.style.display = 'block';
-            $(myBody).slideDown("fast");
+            myBody.style.display = 'block';
+            /*$(myBody).slideDown("fast");*/
 
             return false;
         }
@@ -58,9 +58,9 @@ function misc()
             myBodyName= myHeadName.replace(/_long/, "_short");
             //alert(myBodyName);
             myBody= document.getElementById(myBodyName);
-            //myHead.style.display = 'none';
+            myHead.style.display = 'none';
             myBody.style.display = 'block';
-            $(myHead).slideUp("fast");
+            /*$(myHead).slideUp("fast");*/
             //$(myBody).slideDown("fast");
 
             return false;

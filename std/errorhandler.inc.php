@@ -257,12 +257,13 @@ set_error_handler("customHandler");
 */
 function log_message($message, $level= false, $traceback= false)
 {
-    if(!$level || (confGet('LOG_LEVEL') & $level) ) {
+    if((!$level) || (confGet('LOG_LEVEL') & $level) ) {
 
         $message ="\n".$message;
 
         $prepend = "\nLog " . @gmdate("YmdHis") . " ";
         $message = ereg_replace("\n", $prepend, $message);
+
 
         if(!error_log($message, 3, dirname(__FILE__)."/../_tmp/errors.log.php")) {
             trigger_error("log message failed",E_USER_NOTICE);

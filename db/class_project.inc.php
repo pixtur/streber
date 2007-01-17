@@ -954,7 +954,6 @@ class Project extends DbProjectItem
             $str_state
             $str_project
             $str_show_issues
-            $str_order_by
             $str_modified_by
             $str_not_modified_by
             $str_date_min

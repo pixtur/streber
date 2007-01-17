@@ -589,6 +589,9 @@ function search()
                 case ITEM_TASK:
                     $PH->show('taskView',array('tsk'=>$id));
                     exit;
+                case ITEM_PROJECT:
+                    $PH->show('projView', array('prj'=>$id));
+                    exit;
                 case ITEM_COMPANY:
                     $PH->show('companyView', array('company'=>$id));
                     exit;

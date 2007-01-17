@@ -845,6 +845,12 @@ div.form {
     div.tabgroup div.Hidden {
         display:none;
     }
+    div.tabgroup div.tab_body label {
+        position:relative;
+    }
+    .block label {
+        position:relative;
+    }
 
 
 /*--- quick new -------------------------------*/
@@ -927,6 +933,7 @@ div.block {
  	background-position:right;
  	border-left:1px solid #C8C8C8;
  	border-bottom:1px solid #C8C8C8;
+ 	position:relative;
 }
     /**
     * additional layoutcontainer
@@ -970,19 +977,38 @@ div.block {
 		padding:0.4em 2px 0px 0.4em;
 		font-weight:bold;
 		height:20px;
+
 	}
 
-    div.block.reduced_header  div.extra_top {
+    
+    
+    /* IE 6.0 */
+    div.block.reduced_header h2 {
      	background: url(layout/bg_block_header.png);
      	background-repeat:no-repeat;
      	background-position:top right;
-		padding:0.4em 2px 0px 0.4em;
-		height:15px;
     }
 
+    
+    /* good browsers */
+    div.block.reduced_header > div.extra_top {
+		padding:0.4em 2px 0px 0.4em;
+		position:releative;
+		height:15px;
+     	background: url(layout/bg_block_header.png);
+     	background-repeat:no-repeat;
+     	background-position:top right;
+    }
+
+    div.block.reduced_header > h2 {
+        background-image:none;
+    }
+
+
     /* hide from IE6 */
-    div.block.reduced_header  div.extra_top {
+    div.block.reduced_header > div.extra_top {
         margin-bottom:-15px;
+		position:releative;
 
     }
 
@@ -991,7 +1017,7 @@ div.block {
         background-image:url(img/toggle_block_open.gif);
         background-repeat:no-repeat;
         background-position:top left;
-	}
+    }
 
 	.closed div.header h2{
         background-image:url(img/toggle_block_closed.gif);
@@ -1002,6 +1028,7 @@ div.block {
 		cursor:pointer;
         padding-left:16px;
         font-size:90%;
+		position:releative;
 
 	}
 
@@ -2074,6 +2101,7 @@ div.wiki pre {
     margin:0px 0px 10px 10px;
     clear:right;
     overflow:auto;
+    width:95%;  /* fix IE 6.0 */
 
 }
 /*  hide monaco from IE 6.0 */
@@ -2287,6 +2315,9 @@ div.wiki table th {
     margin:0px;
     line-height:130%;
 }
+div.wiki .edit_chapter:hover {
+    background-color:#ee8;
+}
 
 /*----------- diff table -----------------------------------*/
 div.diff h2 {
@@ -2480,3 +2511,4 @@ body #sideboard {
     padding:0.3em;
 }
 */
+

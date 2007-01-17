@@ -352,6 +352,7 @@ class Auth
     */
     public static function getUserByHttpAuth()
     {
+        log_message("setCurUserByHttpAuth()", LOG_MESSAGE_DEBUG);
         $tmp_auth = '';
         foreach(array('REMOTE_USER','REDIRECT_REMOTE_USER', 'REDIRECT_REDIRECT_REMOTE_USER') as $t) {
             if(isset($_SERVER[$t]) && $_SERVER[$t]) {

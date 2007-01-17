@@ -300,8 +300,7 @@ class Form_DateTime extends PageFormElement
             ."</p>"
             ."<script>"
             ."DragSlider.init('drag_{$field_id}','{$field_id}_time','time');
-              Calendar.setup(
-                {
+              Calendar.setup({
                   inputField  : \"{$field_id}_date\",         // ID of the input field
                   ifFormat    : \"%a, %d.%m.%Y\",    // the date format
                   button      : \"trigger_{$field_id}_date\"       // ID of the button
@@ -349,7 +348,7 @@ class Form_Date extends PageFormElement {
               button      : \"trigger_{$this->name}\"       // ID of the button
             }
           );
-          DragSlider('drag_{$this->name}','{$this->name}');
+          //DragSlider('drag_{$this->name}','{$this->name}');
         </script>" ;
         return $buffer;
     }

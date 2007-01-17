@@ -2558,9 +2558,11 @@ function projViewAsRSS()
 
     $project_id= getOnePassedId('prj','projects_*'); # aborts on failure
     
-    if(!$project= Project::getById($project_id)) {
-        $PH->abortWarning();
+    if(!$project= Project::getVisibleById($project_id)) {
+        echo "Project is not readable. Anonymous user active?";
+        exit();
     }
+
 
     ### used cached? ###
     $filepath = "_rss/proj_$project->id.xml";
@@ -2568,6 +2570,7 @@ function projViewAsRSS()
         RSS::updateRSS($project);
     }
     readfile_chunked($filepath);
+
     exit();    
 }
 

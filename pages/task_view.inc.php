@@ -236,18 +236,9 @@ function TaskView()
     echo (new PageContentOpen_Columns);
 
 
-    ### navigation structure for documentation ###
-    if($task->category == TCATEGORY_DOCU) {
-        require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
-        $list=new ListBlock_docustructure(array(
-            'current_task'=> $task->id
-        ));
-        $list->print_automatic();
-
-    }
 
     #--- info block ------------
-    else {
+    {
         $block=new PageBlock(array(
             'title'=>__("Summary","Block title"),
             'id'=>'summary',
@@ -387,6 +378,20 @@ function TaskView()
         $block->render_blockEnd();
     }
 
+    #--- navigation structure for documentation --------------------------------------------
+    if($task->category == TCATEGORY_FOLDER) {
+        require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
+        $list=new Block_docuNavigation(array(
+            'current_task'=> $task,
+            'root'          => $task,
+        ));
+        
+        $list->title = __("Further Documentation");
+
+
+        $list->print_all();
+    }
+
 
     #--- list files --------------------------------------------------------------------------
     {
@@ -463,12 +468,27 @@ echo "
 onLoadFunctions.push(function() 
 {
     var chapter= $('div.wiki')[0];
+    
     $('body.taskView div.edit_functions a.edit_description').editable('index.php?go=itemSaveField&item={$task->id}&field=description', {
-        postload: 'index.php?go=itemLoadField&item={$task->id}&field=description',
-        type: 'textarea',
-        obj:   chapter,
-        submit: 'Save3',
-        cancel: 'Cancel',
+        postload:'index.php?go=itemLoadField&item={$task->id}&field=description',
+        type:'textarea',
+        obj:chapter,
+        submit:'Save3',
+        cancel:'Cancel'
+    });
+
+    $('div.wiki h1,div.wiki h2').each(function() {
+        var chapter= this;
+    
+        $(this).addClass('edit_chapter');
+        var chapter_name=$(this).html();
+
+        $(this).editable('index.php?go=itemSaveField&item={$task->id}&field=description&chapter_name=' + chapter_name, {
+            postload:'index.php?go=itemLoadField&item={$task->id}&field=description&chapter_name=' + chapter_name,
+            type:'chapter',
+            submit:'Save3',
+            cancel:'Cancel'
+        });
     });
 });
 
@@ -1097,19 +1117,6 @@ function taskViewAsDocu()
 
 
     #--- navigation structure for documentation --------------------------------------------
-    if(0) {
-        require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
-        $list=new ListBlock_docustructure(array(
-            'current_task'=> $task->id
-        ));
-        $list->query_options['project']= $task->project;
-        $list->query_options['status_min']= 0;
-        $list->query_options['status_max']= 100;
-
-        $list->print_automatic($task->project);
-    }
-
-
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
         $list=new Block_docuNavigation(array(
@@ -1203,7 +1210,7 @@ function taskViewAsDocu()
         $list->no_items_html= $list->summary='<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
         .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
 		.'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-		.'<input id="userfiletask" name="userfile" type="file" size="15" accept="*" /><br />'
+		.'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
         .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
         .'</div>';
 

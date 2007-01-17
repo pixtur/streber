@@ -825,8 +825,10 @@ class PageHandler extends BaseObject
     *
     * Does not check for user rights
     */
+
     public function getRequestedPage() 
     {
+
         if(isset($this->hash[get('go')])) {
             return $this->hash[get('go')];
         }

@@ -36,7 +36,6 @@ error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT |E_PARSE|E_
 ### create a function to make sure we started at index.php ###
 function startedIndexPhp() {return true; }
 
-
 initialBasicFixes();
 initProfiler();
 
@@ -114,10 +113,11 @@ if(!$user = $auth->setCurUserByCookie()) {
 }
 measure_stop('authorize');
 
+
 ### set language as early as here to start translation... ###
 {
     measure_start('language');
-    if($user) {
+    if($user && !Auth::isAnonymousUser()) {
         $auth->storeUserCookie();                               # refresh user-cookie
     
         if(isset($auth->cur_user->language)
@@ -163,14 +163,21 @@ if(!$requested_page_id = get('go')) {
     validateEnvironment();
 }
 
+
+
 $requested_page= $PH->getRequestedPage();
 
 ### pages with http auth ###
+
+
 if($requested_page->http_auth) {
-    if((!$user) && (!Auth::isAnonymousUser())) {
+
+    if(!$user) {
        
         if($user= Auth::getUserByHttpAuth()) {
+
             $PH->show($requested_page->id);
+            
             exit;
         }
         else {

@@ -35,23 +35,21 @@ class RSS
 	        return NULL;
 	    }
 
-		$list= new ListBlock_projectchanges();
-    	$list->query_options['project']= $project->id;				# query only this project history
-        $list->query_options['alive_only']=false;					# get deleted entries
-        $list->query_options['visible_only']=false;					# ignore user viewing rights
-        $list->query_options['limit']=20;							# show only last 20 entries in rss feed
-        $list->query_options['show_assignments']=false;				# ignore simple assignment events
-
-		$pass= true;												# setting for list view
-        $changes= Project::getChanges($list->query_options);		# get all the changes (array of history items)
+        ### get all the changes (array of history items) ##
+        $changes= Project::getChanges(array(
+            'project'           => $project->id;				# query only this project history
+            'alive_only'        => false;					# get deleted entries
+            'visible_only'      => false;					# ignore user viewing rights
+            'limit'             =>20;							# show only last 20 entries in rss feed
+            'show_assignments'  => false;				# ignore simple assignment events        
+        ));		                    
 
         $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');	# url part of the link to the task
     	$from_domain = confGet('SELF_DOMAIN');						# domain url
 
 		
-        # define general rss file settings
+        ### define general rss file settings ###
         $rss = new UniversalFeedCreator();
-		#$rss->useCached();
 		$rss->title = "StreberPM: ".$project->name;
 		$rss->description = "Latest Project News";
 		$rss->link = "$url?go=projView&prj={$project->id}";

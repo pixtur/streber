@@ -53,7 +53,6 @@ function itemLoadField()
         return NULL;
     }
     print $object->$field_name;
-
 }
 
 /**

@@ -1681,12 +1681,12 @@ class FormatBlockTable extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/(.*?)\r?\n((?:\|.*?\|\r?\n)+)\s*\r*\n*(.*)/su", $text, $matches)) {
+                    if(preg_match("/(.*?)\r?\n((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
 
                         $blocks_new[]= new FormatBlock($matches[1]);
 
                         ### check number of pipes in each line...
-                        $lines= explode("\r", $matches[2]);
+                        $lines= explode("\n", $matches[2]);
                         $line_cells=array();
                         $rest= $matches[3];
 
