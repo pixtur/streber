@@ -4,7 +4,7 @@
 *  language:      Swedish
 *  translated by: Mats Djärf <md@webbplatsen.se>
 *                 www.webbplatsen.se
-*  last updated:  2006-11-05
+*  last updated:  2007-01-12
 *
 *  comments: plaese inform me if there is some misspelled words,
 *            wrong translation or text string that is too long etc.
@@ -1154,7 +1154,7 @@ $g_lang_table= array(
 'Prio|Form label'             =>'Prio',  # line 960
 
 ### ../std/constant_names.inc.php   ###
-'undefined'                   =>'ej definierad',  # line 115
+'undefined'                   =>'-- ej definierad --',  # line 115
 
 ### ../pages/task.inc.php   ###
 '30 min'                      =>'30 min',  # line 987
@@ -1605,11 +1605,6 @@ $g_lang_table= array(
 ### ../std/mail.inc.php   ###
 'Please set a password to activate it.|notification'=>'Vänligen ange lösenord för att aktivera konto.',  # line 153
 'If you do not want to get further notifications or you forgot your password feel free to|notification'=>'Om du inte vill få fler meddelanden eller om du glömt lösenord går det bra att',  # line 289
-
-
-#
-#undefined keys (2006-10):
-#-------------------------
 
 ### ../db/class_project.inc.php ###
 'only team members can create items'=>'endast medlemmar kan skapa poster', # line 1178
@@ -2155,7 +2150,214 @@ $g_lang_table= array(
 'rejected|Resolve reason'     =>'Ej godkänd',  # line 159
 'deferred|Resolve reason'     =>'Försenad',  # line 160
 
+### ../db/db_itemperson.inc.php   ###
+'Comment|form label for items'=>'Kommentar',  # line 45
 
+### ../pages/_handles.inc.php   ###
+'Mark as bookmark'            =>'Lägg till som bokmärke',  # line 45
+
+### ../lists/list_comments.inc.php   ###
+'version %s'                  =>'version %s',  # line 140
+
+### ../lists/list_efforts.inc.php   ###
+'View selected Efforts'       =>'Visa valda försök',  # line 72
+
+### ../lists/list_items.inc.php   ###
+'Your bookmarks'              =>'Dina bokmärken',  # line 32
+'You have no bookmarks'       =>'Du har inga bokmärken',  # line 33
+
+### ../pages/item.inc.php   ###
+'Edit bookmark'               =>'Ändra bokmärke',  # line 399
+
+### ../pages/_handles.inc.php   ###
+'Remove bookmark'             =>'Ta bort bokmärke',  # line 52
+
+### ../pages/item.inc.php   ###
+'Notify on change'            =>'Meddela vid ändring',  # line 421
+
+### ../lists/list_items.inc.php   ###
+'Remind'                      =>'Påminn',  # line 415
+'in %s day(s)'                =>'%s dag(ar)',  # line 464
+'since %s day(s)'             =>'sedan %s dag(ar)',  # line 468
+'State'                       =>'Tillstånd',  # line 711
+'Modified by'                 =>'Ändrad av',  # line 744
+
+### ../lists/list_projectchanges.inc.php   ###
+'Nothing has changed.'        =>'Ingenting har änfrats.',  # line 33
+
+### ../lists/list_tasks.inc.php   ###
+'Status->Closed'              =>'Status',  # line 208
+'List|List sort mode'         =>'Lista',  # line 240
+'Tree|List sort mode'         =>'Träd',  # line 251
+'Grouped|List sort mode'      =>'Grupperad',  # line 262
+'Page name'                   =>'Sidnamn',  # line 1132
+
+### ../pages/_handles.inc.php   ###
+'Playground'                  =>'Lekplats',  # line 17
+'Send notification'           =>'Skicka meddelande',  # line 59
+'Remove notification'         =>'Ta bort meddelande',  # line 65
+'Edit monitored items'        =>'Ändra bevakades poster',  # line 71
+
+### ../pages/project_more.inc.php   ###
+'Documentation'               =>'Dokumentation',  # line 1091
+
+### ../pages/_handles.inc.php   ###
+'View Task As Docu'           =>'Visa uppgifter som Doku',  # line 368
+'Mark tasks as Closed'        =>'Markera uppgifter som stängda',  # line 460
+
+### ../pages/person.inc.php   ###
+'Link Companies'              =>'Koppla företag',  # line 645
+'Remove companies from person'=>'Ta bort företag från användare',  # line 651
+
+### ../pages/_handles.inc.php   ###
+'Marks all items viewed'      =>'Markera alla visade',  # line 1069
+'Forgot your password?'       =>'Glömt lösenord?',  # line 1129
+
+### ../std/class_pagehandler.inc.php   ###
+'Export as CSV'               =>'Exportera som CSV',  # line 829
+
+### ../pages/company.inc.php   ###
+'Delete this company'         =>'Radera företag',  # line 510
+
+### ../pages/project_view.inc.php   ###
+'Delete this project'         =>'Radera projekt',  # line 96
+
+### ../pages/custom_projView.inc.php   ###
+'News'                        =>'Nyheter',  # line 373
+'%s comments'                 =>'%s kommentarer',  # line 397
+
+### ../pages/custom_projViewFiles.inc.php   ###
+'Downloads'                   =>'Nerladdningar',  # line 62
+
+### ../pages/file.inc.php   ###
+'Could not access parent task Id:%s'=>'Det gick inte att komma åt uppgift ID: %s',  # line 52
+
+### ../pages/home.inc.php   ###
+'status->Closed|context menu function'=>'status',  # line 265
+
+### ../pages/item.inc.php   ###
+'itemsSetPubLevel requires item_pub_level'=>'itemsSetPubLevel kräver item_pub_level',  # line 67
+'No item(s) selected.'        =>'Inget valt.',  # line 283
+'Select one or more bookmark(s)'=>'Välj en eller flera bokmärken',  # line 314
+'Removed %s bookmark(s).'     =>'Raderade %s bokmärk(en).',  # line 183
+'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'Kan inte radera %s bomärke(n). Försök igen.',  # line 187
+'An error occured'            =>'Ett fel har inträffat',  # line 318
+'Edit bookmark "%s"|Page title'	=> 'Ändra bokmärke "%s"',
+'Bookmark "%s"'               =>'Bokmärke "%s"',  # line 402
+'Notify if unchanged in'      =>'Meddelande om oförändrat i',  # line 423
+'Could not get bookmark'      =>'Det gick inte att hämta bokmärke',  # line 456
+
+### ../pages/login.inc.php   ###
+'Continue anonymously'        =>'Fortsätt anonymt',  # line 106
+'Password reminder|Page title'=>'Påminnslseord för lösenord',  # line 310
+'Please enter your nickname'  =>'Ange inloggningnamn',  # line 322
+'We will then sent you an E-mail with a link to adjust your password.'=>'Det kommer skickas ett e-postmeddelande med länk för att justera ditt lösenord.',  # line 332
+'If you do not know your nickname, please contact your administrator: %s.'=>'Om du inte kan ditt användarnamn kontakta administratören %s.',  # line 334
+'A notification mail has been sent.'=>'Meddelande har skickats via e-post.',  # line 393
+
+### ../pages/person.inc.php   ###
+'Add existing companies to this person'=>'Lägg til befintligt företag för denna användare',  # line 518
+'link existing Company'       =>'koppla befintligt företag',  # line 659
+'no companies related'        =>'Inga företag kopplade',  # line 664
+'Account'                     =>'Konto',  # line 958
+'Options'                     =>'Alternativ',  # line 1102
+'Add related companies'       =>'Lägg till företag',  # line 2031
+'No companies selected...'    =>'Inga företag valda...',  # line 2132
+'Company already related to person'=>'Företag redan kopplat till användare',  # line 2108
+'Failed to remove %s companies'=>'Det gick inte att ta bort företag',  # line 2172
+'Removed %s companies'        =>'Tagit bort %s företag',  # line 2175
+'Marked all previous items as viewed.'=>'Markera alla föregående poster som visade.',  # line 2225
+
+### ../pages/project_more.inc.php   ###
+'modified by me'              =>'ändrat av mig',  # line 284
+'modified by others'          =>'ändrat av någon annan',  # line 309
+'last logout'                 =>'senast utloggad',  # line 334
+'1 week'                      =>'1 vecka',  # line 352
+'2 weeks'                     =>'2 veckor',  # line 371
+'Create a new page'           =>'Skapa ny sida',  # line 1111
+
+### ../pages/task_view.inc.php   ###
+'Page'                        =>'Sida',  # line 1052
+
+### ../pages/task_more.inc.php   ###
+'Display'                     =>'Visa',  # line 684
+
+### ../pages/search.inc.php   ###
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'Medans MySQL implementeras är följande ord inte sökbara och har ignorerats: %s',  # line 658
+'Sorry, but there is nothing left to search.'=>'Det finns inget kvar att söka.',  # line 663
+
+### ../pages/task_more.inc.php   ###
+'Display as'                  =>'Visa som',  # line 357
+'This folder has %s subtasks. Changing category will ungroup them.'=>'Denna mapp har %s underliggande uppgifter. Om kategori ändras kommer uppgifterna inte vara kopplade till mappen.',  # line 361
+'Bug Report'                  =>'Bugrapport',  # line 569
+'Timing'                      =>'Tidrapport',  # line 632
+'Comment has been rejected, because it looks like spam.'=>'Kommentar har nekats pga att den verkar vara skräppost.',  # line 844
+'Milestones may not have sub tasks'=>'Milstolpar får inte ha underliggande uppgifter ',  # line 1150
+'Select some task(s) to mark as closed'=>'Välj uppgift(er) som ska markeras som stängda',  # line 1792
+'Marked %s tasks as closed.'  =>'Markerat %s upppgifter som stängda.',  # line 1812
+'Not enough rights to close %s tasks.'=>'Ej tillräckligt med rättigheter för att stänga %s uppgifter.',  # line 1814
+'Category'                    =>'Kategori',  # line 2303
+'select person'               =>'välj användare',  # line 2463
+'Also assigned to'            =>'Tilldela även',  # line 2464
+
+### ../pages/task_view.inc.php   ###
+'View previous %s versions'   =>'Visa %s föregående versioner',  # line 1112
+'Update'                      =>'Uppdatera',  # line 719
+
+### ../render/render_form.inc.php   ###
+'Please copy the text'        =>'Kopiera texten',  # line 62
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'För att minska effektiviteten hos skräppostrobotar så måste gäster kopiera texten',  # line 64
+
+### ../render/render_misc.inc.php   ###
+'Docu|Project option'         =>'Doku',  # line 351
+'Releases|Project option'     =>'Utgåvor',  # line 366
+
+### ../render/render_page.inc.php   ###
+'Go to parent / alt-U'        =>'Gå till överliggande',  # line 986
+'rendered in'                 =>'renderad på',  # line 1304
+'memory used'                 =>'minne använt',  # line 1305
+'querrying approx.'           =>'förfrågar ca ',  # line 1306
+'db-fields'                   =>'databasfält',  # line 1306
+
+### ../std/common.inc.php   ###
+'Sorry, but the entered number did not match'=>'Angiven siffra matchade inte',  # line 236
+
+### ../std/constant_names.inc.php   ###
+'Enable Efforts|Project setting'=>'Aktivera försök',  # line 74
+'Enable Milestones|Project setting'=>'Aktivera milstolpar',  # line 75
+'Enable Versions|Project setting'=>'Aktivera versioner',  # line 76
+'Only PM may close tasks|Project setting'=>'Endast projektledare får stänga uppgifter',  # line 77
+'Task|Task Category'          =>'Uppgift',  # line 213
+'Bug|Task Category'           =>'Bug',  # line 214
+'Documentation|Task Category' =>'Dokumentation',  # line 215
+'Event|Task Category'         =>'Händelse',  # line 216
+'Folder|Task Category'        =>'Mapp',  # line 217
+'Milestone|Task Category'     =>'Milstolpe',  # line 218
+'Version|Task Category'       =>'Version',  # line 219
+'never|notification period'   =>'aldrig',  # line 225
+'one day|notification period' =>'1 dag',  # line 226
+'two days|notification period'=>'2 dagar',  # line 227
+'three days|notification period'=>'3 dagar',  # line 228
+'four days|notification period'=>'4 dagar',  # line 229
+'five days|notification period'=>'5 dagar',  # line 230
+'one week|notification period'=>'1 vecka',  # line 231
+'two weeks|notification period'=>'2 veckor',  # line 232
+'three weeks|notification period'=>'3 veckor',  # line 233
+'one month|notification period'=>'1 månad',  # line 234
+'two months|notification period'=>'2 månader',  # line 235
+
+### ../std/mail.inc.php   ###
+'Your account at|notification'=>'Ditt konto på',  # line 464
+'Your account at %s is still active.|notification'=>'Ditt konto på %s är fortfarande aktivt.',  # line 481
+'Your login name is|notification'=>'Ditt inloggningsnamn är',  # line 482
+'Maybe you want to %s set your password|notification'=>'Du vill kanske %s ange ditt lösenord',  # line 483
+'Unchanged item|notifcation mail from'=>'Oförädrad post',  # line 805
+'No emails sent.'             =>'Inga e-postmeddelande skickade.',  # line 1069
+'No changes on "%s" since %s (%s day(s))|notication mail subject'=>'Inga ändringar på "%s" sedan %s (%s dagar)',  # line 831
+'The following item is unchanged:|notification'=>'Följande post är oförändrat:',  # line 847
+'Notification on changed item|notifcation mail from'=>'Meddelande om post ändras',  # line 1039
+'Changes on "%s"|notication mail subject'=>'Ändringar på "%s"',  # line 1075
+'The following item was changed:|notification'=>'Följande post har ändrats:',  # line 1091
 
 );
 

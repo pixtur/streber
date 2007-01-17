@@ -10,7 +10,10 @@
 global $g_lang_table;
 $g_lang_table= array(
 
+'en_US.utf8,en_US,enu|list of locales'=>'de.utf8,deu,german',
+
 #--- top navigation tabs -------------------------------------------------------
+
 '<span class=accesskey>H</span>ome'
                     =>'<span class=accesskey>H</span>ome',
 'Go to your home. Alt-h / Option-h'
