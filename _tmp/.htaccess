@@ -1,0 +1,6 @@
+# redirectpermanent errors.log.php ../index.php
+
+RewriteEngine on
+
+RewriteRule ^.* ../notfound.html [F]
+

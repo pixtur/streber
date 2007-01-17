@@ -1,0 +1,12 @@
+RewriteEngine on
+
+RewriteRule ^([0-9]+)$ index.php?go=itemView&id=$1 [L]
+
+RewriteRule ^([a-zA-Z]+)$ index.php?go=globalView&id=$1 [L]
+
+
+ErrorDocument 400 /streber/index.php
+ErrorDocument 401 /streber/index.php
+ErrorDocument 403 /streber/index.php
+ErrorDocument 404 /streber/index.php
+ErrorDocument 500 /streber/index.php

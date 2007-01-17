@@ -1,0 +1,923 @@
+streber-version-history
+
+v0.078 - rc1 for v0.08 [2007-01-03]
+====================
+
+major:
+- full compatibilty with php5.2
+- polished default theme 'clean'
+- forms splitted into tab groups
+- Task categories to distinguish between tasks and documentation
+- Documentation navigator
+- Export to CSV format
+- Anonymous Browsing (for guests and search engines) (#2665)
+- sorted view of project history
+- Keep track of unviewed / changed items
+- Bookmark items (not stable yet)
+- display modification history for all item types (not just tasks)
+
+minor:
+- Polish translation finished. 100%
+- stupid captcha and spam check for guests
+- possibility of derive customized style sheats (#2971)
+- refined search (support multiple word search)
+
+internal:
+- refined installation from available SQL-structure file
+- Polish translation finished. 100%
+
+
+v0.0703
+======
+major:
+- added clean url support to some pages 
+- added anonymous browsing (not considered stable yet)
+
+minor:
+- fixed rendering of ordered wiki lists with high numbers 
+- added wiki syntax for rendering ordered lists  with any numbering (like 1. 2. 4. )
+- renamed .htacess file to avoid problems with apache v1.3
+- own comments can be deleted
+- comments can now be restored
+- added "New company" as page function
+- directly publish suggested comments
+- fixed bug #2680
+- allow trusted clients to comment all tasks (reduced quick edit form)
+- fixed right validation in taskEditSubmit
+- hide edit functions in taskView if cur_user has not enough right to edit
+- fixed default values for is_milestone (#2721)
+
+
+v0.0702rc2
+===========
+major
+-----
+- added Note on Person (creates tasks, projects and efforts on the fly)
+- assign new projects direct to a project
+- fixed display of completed tasks 
+- fixed display of folders in tree 
+- fixed rendering of tables (foreach Warnings in wiki pages with tables)
+- renamed Dumpster -> Trash
+
+minor
+------
+- fixed default user rights of new persons #1785
+- changed wrapping of long indented task names in tree view
+- added server_time_offset option 
+- added ROUND_AUTO_DETECTED_TIME_OFFSET option
+- milestones can be toggled
+- added time zone setting in user profiles 
+- folders can be moved
+- show "edit description"-button even if there is no description yet 
+- wiki: liked items (like #234) are striked if completed 
+- fixed usage of back slashes in wiki texts
+- increased performance with long tasklists (e.g. a few hundred tasks)
+
+
+v0.07RC1
+=======
+major:
+----------
+- fixed #1499 dates are changing in a mysterious way
+- changed interactions with lists (refactored jquery functions)
+- updated translations
+- added new wiki-syntax to link to item ids (#123)
+
+minor:
+-------
+- version v0.07rc1
+- fixed deletion of task description
+- fixed wiki line syntax (_____)
+- fixed wiki links to persons like [[item:##]]
+- fixed wiki rendering of empty code blocks
+- fixed style sheets for printing
+- fixed layout problems with too long nick names in projView team list
+- list milestones does no longer show completion bar if there are not tasks for milestone
+- display of files / file lists 
+- adjusted display of versions 
+- resolved tasks for next version are set to new version 
+- more reasonable debug output in log-file 
+
+internal:
+-----------
+- fixed ITEM_TYPES of new created persons
+- fixed DbProjectItem::getVisibleById() for non project items 
+- DEV_AJAX is been made the default (removed)
+
+
+v0.068
+========
+major:
+---------
+- released versions 
+- task:resolved version and task:resolve reason
+- taskViewEffort 
+- quick edit in task view
+- added comment field in quick edit form of normal task view
+- fixed login of new persons when not checking IP-ADRESS
+- fixed tasks visibility related to status of folders in tree lists 
+- add new definitions for company and person categories
+- fixed strange modification date for project and persons 
+- new Translation into: Polish, Swedish, Norwegian,
+
+minor
+-----
+- "My tasks" do no longer list completed tasks 
+- effortEdit: improved task selection
+- moved company / person updates by freshframes to v0.0681
+- fixed bug with new bug on milestone
+- started using jquery-library
+- labels of form fields can now be overwritten 
+- in German translation Notizen -> Kommentare
+- added filter presets for "all", "Modified" and "without milestone"
+- fixed install function when aborting on write protected tmp-dir
+
+
+internal
+--------
+- missing files logged 
+- resolve reason for tasks 
+- adjusted quickEditForm
+- fixed client / Database Date conversion (see sysInfo for check)
+- fixed effort style for creator of new projects 
+- added reproducibility and severity to task display
+- fixed link-styles
+- fixed wiki links inside tables
+- moved edit description below description 
+- issue-report only display on issues
+- fixed wiki list at end of text
+- added support for pjpeg mime type
+- added quick task edit including comment by Tino
+
+
+v0.067 (2006-07-29)
+=====================
+
+major
+--------
+- add a quick edit form in the normal task view (http://streber.pixtur.de/index.php?go=taskView&tsk=1351)
+- fixed "searching for Item-IDs does not work" (http://streber.pixtur.de/index.php?go=taskView&tsk=1405) - Search works with Item-ID for persons, companies, projects and tasks
+
+minor
+-----
+- replaced icons in comments block by text-labels (http://streber.pixtur.de/index.php?go=taskView&tsk=560)
+- fixed Bug in Person View (FATAL error) - a result of the date functions
+
+
+v0.065 (2006-07-13)
+====================
+
+major
+-----
+- fixed creating of project templates
+- new theme "webplasten"
+- added slovak translation
+- fixed display of milestones
+
+
+Minor
+------
+- fixed visibility of upcomming projects
+- fixed "comment on task added to project"-bug
+- fixed download name of files containing spaces
+- fixed display of effort sum in task-list
+- in wiki texts show completed tasks with line through
+- keep user logged in if IP_-ADDRESS not checked (do not refresh cookie)
+- added reduced header functionality to person lists (http://streber.pixtur.de/index.php?go=taskView&tsk=1220)
+
+
+v0.063 (2006-06-19)
+=====================
+
+major
+--------
+- rewrote the search results (sorted and designed)
+- added editting of multiple tasks
+
+minor
+-----
+- version, plattform, os and production-builds of new bug-reports are initialized with ealier settings of user
+- person description
+- added warning and documentation on database exceptions (http://streber.pixtur.de/index.php?go=taskView&tsk=1272)
+- added display of worst-case estimated time to tasks and milestone lists 
+- fixed display of projects in home
+- added CRC-checksum for hidden form fields
+- added "tasks needed approval" preset
+- search: added quick-jump with "!"
+- search: highlight query with javascript
+
+internal
+---------
+- added cycle-lock detection when listing task folders
+- splitted task.inc.php into task_view and task_more.inc.php
+- added LOG_LEVEL_HACKING_ALERT
+- fixed right to adjust setting pub-level
+- started implementation for taskEditMultiple
+- added caching to person and project (experimental)
+- added assigntype to figure out initial assignments (has to be added to taskEditSubmit)
+- added phpVersion-check to index.php
+- refactured some of the notification-stuff (maybe the mails make more sense now)
+- adjusted browsing the error-log
+- fixed fatal error with incomplete translations
+- added incomplete slovak translation
+- fixed typo
+- person has option to log efforts as duration or times (affects new projects only)
+- adjusted / styled grouped list-style 
+- adjusted print output
+- task status is automatically set to "open" after been edited
+- Task-Status is printed in the breadcrumbs (above headline)
+- wiki: fixed line breaks inside quotes
+- guess client time shift with javascript (is been tested)
+- fixed "canceling new template duplicates project" bug
+- fixed browser-caching of old css-styles (caused layout-issues on upgrades)
+- fixed some errors in the style-sheets
+
+
+v0.062
+========
+
+
+major
+------
++ wiki: added table syntax
++ wiki: fixed cascacading lists (now supports mixing of unsorted and numbered lists)
+% fixed encoding of notification-messages (distinguis server-specific OS linebreaks)
+
+minor
+------
++ wiki config-option to autoinsert ids to wiki-texts
+% fixed display of upcomming projects
++ added delete-milestone function
+% adjusted display of error-messages (distinguish notes, warnings, errors)
+% fixed sorting of tasks in tree-view
++ added "create another tasks after submit"-option
++ Wiki: added long minus ("--") syntax
++ automatically set complettion to 100% if tasks status is set to completed
++ errors.log - can be filtered (very very handy for development) and deleted in sysInfo (see footer)
+- fixed undefined g_wiki_project where possible
+- adjusted Diff-View
+% fixed warning if no milestone defined
+% fixed bug when adding new team members to project
+% fixed unsetting task's for_milestone setting
+
+
+internal
+---------
++ optimized browser-caching of downloaded images by adjusting http-headers
+% fix Project::getChanges-bug should be static function bug
+% adjusted display of project changes
+% slightly adjusted display of attached files for tasks
++ made "can login"  default option for new persons
+
+
+
+
+
+=== v0.061 =========
+
+
+major
+------
+- show differences of tasks / task history (including wiki difference of text-block)
+- cleaned version history
+- added personListDeleted (deleted person can be restored)
+- fixed toggling of folders in tree task-list
+- notification-mails are sent as multipart message with HTML and(!) plain-text
+
+minor
+--------
+- added DB_USE_UTF8_ENCODING config setting
+- list changes list (move and added attachments)
+- fixed database-error when sorting for file-ID
+- fixed wrapping for milestone completion graph
+- fixed display of page functions in companyView and personView
+- fixed print styles
+- added "from -options to wiki code blocks
+- fix mysql date bug
+- set default-values for database fields
+- also search closed tasks
+- fixed "-" birthday bug
+- fixed wiki-link not rendered with emphasized words inside
+
+internal
+--------
+- hide list function in task filelist
+- fixed fatal error with undefined profile
+- fixed some undefined vars
+- refactured user_profile-handling (user profiles can now be translated)
+- add production build to task forms
+- fixed bug in notification mail
+- validate edit time request (prevent from overwriting of later changes)
+
+=== v0.06 =========
+- new page function for tasks "move" 
+- display of grouped list adjusted
+- wiki: added `monospace`-syntax
+- wiki: added ''emphasize''-syntax
+
+- fixed default sorting of comments
+- fixed an issue with IIS-Support
+- fixed intergration with mysqli-interface
+- new page function for tasks "move" 
+- in taskView attached files are displayed as thumbnails
+- display of grouped list adjusted
+
+=== v0.0592
+- list estimated/completed time for milestones
+- fixed urls in notification mails (including https-support)
+- fixed "next milestone"-filter preset
+- added ID-column to files list
+- fixed missing wiki-link in grouped lists
+- projView, taskView -> adjusted page function display
+- fixed "folder not used as parent for new task"
+- assigned tasks are no longer listed in "projView" (but as preset in projViewTasks)
+- fixed "tree"-style of tasks list
+- taskView > added "estimated time" and "Milestone" to details block
+- taskView > if task is a milestone, attached tasks are listed
+
+=== v0.059 [2006-04-07] ============================
+
+minor
+-----
+- added "severity" security
+- project-labels for new projects can be customized with "PROJECT_DEFAULT_LABELS"
+- added additional output on login procedure
+- resorted project objects in navigation bar
+- fixed pageFunctions at taskView
+- check for tasks with identical names
+- fixed some errors with related to task editting and validation
+- show icon to tasks with attached files
+- hide label, if tasks is a folder
+- added "wiki"-label for new projects
+- wiki finds team-members by nickname
+- fixed wiki-formatting for some lists
+- fixed wiki-formatting for some items
+- wiki supports numbers lists with syntax 1. 2. 3.
+- wiki checks for existence of images before querrying them from the database (and causing an error)
+
+internal
+----------
+- increased cookie lifetime
+- moved db-upgrades to separate file
+- fixed files querry
+- prepared "milestone", "versions" and "roadmap"
+- fixed visibility-check for persons
+- refactured listFilters
+- refactured display of tasks in tree-view (this is much slower now, but should work)
+
+
+=== v0.0572 [2006-03-31] ===============================================
+
+minor
+------------
+- fixed comment-sorting
+- fixed add effort `Database`-error
+
+
+=== v0.057 [2006-03-24] ===============================================
+
+major
+-----
+- refactured notifications:
+  - uses person's language
+  - lists all project changes
+  - correctly obeys visibility for person
+
+
+minor
+-----
+- finished changes list
+- refactured Persons::getPersons()
+- capture mail() error with error-handler
+- added "www.somehost.de/index.php?go=triggerSendNotifications" to externally trigger notification by cron-jobs
+- added 'STMP'-config-var
+
+
+security
+--------
+- cleaning search-string (might have been tricked into SQL-injection)
+
+
+=== v0.057ß1 [2006-03-22] ===============================================
+
+major
+-----
+- change-log (history) for all items
+- fixed upgrade-link to installation
+
+minor
+-----
+- refactured error-log output
+- renamed status "onhold" into "blocked"
+- efforts > fixed setting of 'person'-field
+
+security
+--------
+- fixed unconverted html-output in project-history (could have been used for XSS)
+
+
+
+
+=== v0.056 [2006-03-20] ===============================================
+
+security
+---------
+- cookie depreciated on changed ip-address
+- random cookie-string for each login
+
+minor
+-----
+- fixed several issues related to converting html-special changes 
+- fixed several minor issues with using image-files
+- slightly changed layout of projView and taskView
+- fixed drop-downlist-behaviour in opera v8.x
+- fixed page-function of taskView (delete, approve, complete)
+- added "edit project description"-function
+- fixed "assigned tasks not visible in projView"-bug (added tree-view)
+- added favicon (very important ,-) )
+- fixed UTF8-encoding of notification mails
+
+
+wiki
+-----
+- adjusted the wiki-styling
+- fixed several issues with wiki-formating
+  - code-blocks sometimes do not work
+- [sub]subset[/sub]-syntax
+-  "___" -syntax to add an HR
+- clicking an non-existing link opens edit-dialog for a new task at the current location (project and folder)
+- fixed overwriting link-name like [[item:324|actually this name is better]]
+
+
+
+
+=== v0.055 [2006-03-15] ===============================================
+
+security
+---------
+- html-characters are always converted (avoid XSS and js-code-injection)
+
+major
+-----
+- fixed mySql5 compatibility
+- added mySQLDump tool for backup-purposes (see _sql/mysqldump.php)
+- "fixed blank-page after submit"-bug
+- tested compitibility with XAMPP 1.1.5
+
+
+=== v0.0541 [2006-02-24] ===============================================
+
+minor
+-----
+- fixed "no page-id in params got by from_handle"-bug
+- added list of closed tasks
+
+
+=== v0.054 [2006-02-22] ===============================================
+
+major
+-----
+- wiki formatting (also allows embedding uploaded images)
+- french translation by Yves Perrenoud
+- tweaked interface
+
+minor
+-----
+- lots(!) of minor bugfixes and improvements
+
+
+
+=== v0.052 [2006-02-04] ===============================================
+
+minor
+-----
++ display last_login of team-members
++ display item-id for tasks
++ enable searching for task-ids
+
+% fixed up/downloading of large files
+% fixed "created_by=__CUR_USER__" bug
+% fixed "forced logout after password change when login by notification mail"
+% fixed several "passed reference"-warnings
+% added additional messages to log-file (login/logout and optionally debug-output)
+% fixed display of grouped list when grouping for "parent_task" (folders)
+% adjusted print style
+
+
+=== v0.051 [2006-01-28] ===============================================
+
+major
+-----
++ additional details of tasks (descriptions, last comment, etc) in grouped list style
++ adjusted display of projects and companies (RIGHT_VIEWALL required to see non-relevant)
+
+minor
+-----
++ removed some "pass referenced variables" bugs
+% fixed display of thumbnails in gif and png-format
+% fixed display of "no" times
+% lots of minor adjustments in translation
+% lots of minor adjustments in list-displays
+
+
+=== v0.05 [2006-01-24] ================================================
+
+major
+-----
++ higlight items modified since last login
++ file uploads
+% fixed timezone-warnings in php 5.1
++ added grouped display to some lists
++ personView list assigned tasks
+
+
+minor
+-----
++ changed default labels for new projects to "Bug,Feature,Tweak,Idea,Refacture,Research,Organize,Docu"
++ persons assigned to projects can no longer be deleted
++ translated priority-values
++ deleted items can be restored from project's history-list
++ fixed some minor issues in installation
++ DbProjectItem::getById() getVisibleById() getEditableById()
++ zend.ze1_compatibility_mode set to 0
+% adjusted display number of subtasks
++ tasks onhold are shown at home
+% adjusted code for eAccelerator comptibility
++ "add comment to task" in context menu of task-lists
+% fixed some minor html and layout issues
++ display all of person's information in personView
+% fixed canceling new projects
+% fixed unsetting company for project
+
+
+
+=== v0.0493 [2006-01-05] ==============================================
+
+
+major
+----
++ fixed "white page after upgrade" (db_type has not been set correctly. Please adjust manually)
+
+minor
+-----
++ autotically init SELF_URL for links in notification-mails
++ ignore "folders" for number of project tasks
++ taskEdit -> status options "undefined" "upcoming" no longer available
++ fixed personEdit profile not shown correctly
++ fixed personNew with profile "user", rights not init correctly
++ fixed projDuplicate with issues (issues could not be inserted: mySQL-Exception was caused)
++ fixed list_companies display of open projects (templates were counted)
++ fixed projView ->moveCommentsToFolder()
++ fixed taskView addBugReport()
++ translated some more texts (Company)
++ disable QuickNew (was to complex for most testers)
++ removed the "color" and "send mail as html"-fields from editPerson
++ removed "production build" and "os" from issue-report
+
+
+
+
+=== v0.0492 [2006-01-04] ==============================================
+
+fixes
+----------
++ "required" bug in installation
++ searching projects
+
+
+minor
+------
++ searching with wildcards (like apple*)
+
+internal
+--------
++ global namespace is cleaned when register globals is on
++ refactured handling of request variables
++ restructured installation code
++ forward all pages other than "index.php", "install.php" and "tests/testsuite_pages.php" to index.php
+
+
+=== v0.0491 [2006-01-02] ==============================================
+
+major fixes
+------
++ fixed login process (login as admin was not possible in v0.049)
++ fixed db_settings extension from ".inc" to ".php" (some servers display .inc-files as plaintext)
+
+
+=== v0.049 [2006-01-01] ==============================================
+
+major
+------
++ activation mail
++ notification on project assignments and task assigments (are collected and send after logout)
++ forgot password / password remind email
++ tooltips for form-fields
++ list with grouping of lines (e.g. group projects from same company)
++ moveTasks (to other folders)
+- TaskFolders no longer shown in project overview
++ urls to task and project views are used after login (this allows bookmarking)
+% projView has been cleaned up
++ tasks are shown in more details at new page projViewTasks 
++ desaturated theme
++ all themes but "clean" have been depreciated
++ added a basic cycle-check for hierarchical tasks (children cannot become parent)
+
+minor
+-----
++ some constants can now be translated (Status, Priority)
++ reduced block headers if single list on a page
++ fixed display of person efforts
++ removed from-handle from most links (reduced html-size and bookmarks)
+
+
+internal
+--------
++ filters for lists (not older than, status, etc.) 
+
+
+=== v0.048 [2005-12-21] ==============================================
+
+major
+-----
++ header navigation completly rebuild
++ some more items can be translated
++ support for MySQLi databases (thanks to LoloIrie)
+
+minor
+------
+% made Db-Queries more strict (check for item-type)
+
+
+=== v0.0475 [2005-12-20] ==============================================
+
+major
+--------
++ link to error-log
++ system information
++ portogise-brasilian translation
++ commentView
+
+minor
+-------
++ links in takes are made active
++ with project's wikipage is defined links like "[[this topic]]" will point there
+
+
+fixes
+-------
+% fixed bug in view Item validation
+% fixed display of comments on tasks
++ display number of comments in task-lists
+% fixed visibility of own user (if not in any project team)
+% adjusted some text for translation
+% changed all Exceptions into trigger-errors()
+% fixed usage of % character for get-URLs (using &amp; instead)
+% fixed (hopefully all) usages of utf8-chars in block-ids
+% fixed calendar-popup in projEdit DateTime-fields
++ adjusted pageFunctions of Tasks depending on Subtask or Folder
+
+
+
+
+
+
+
+=== v0.047 [2005-12-07] ===============================================
+
+interface / major
+-----------------
++ fulltext-search for all objects
++ Option for each project-team-member if efforts are booked as times start/end or durations
+% fixed fatal bug when creating Task with Issue-Reports (v0.046)
++ when upgrading, old db-settings are read from settings-file (this is a security issue, if install-dir has not been removed!)
+
+minor
+-----
+% fixed 'undefined index 15'- bug (when getting taskpersons)
++ installation >> password fields no longer clear-text
++ effortEdit >> validates for name and time_end > time_start
++ companyView >> added option to link new persons
++ projView >> fixed breadcrumbs for template-projects
++ projViewIssues >> added pageFunction to "report Bugs"
+% fixed language used after login
+% fixed some issues concerning "no time" in forms
++ taskView >> adjusted display of task-description
+% quickNew >> fixed parsing of entered line (order is no longer importand)
++ quickNew (task) Issue automatically added if starting with "bug:"
++ made some more strings sensitive for language-support (German translation getting more complete)
+
+internal
+---------
++ Comment::getAll()
++ Issue::getAll()
+% fixed scanLanguage.pl to "__()" (instead of _()"
++ fixed error-logging during installation
+
+
+
+=== v0.046 [2005-12-04] ===============================================
+interface
+------------
++ error_handler with output into LogFile and consistent HTML-structure (_tmp/error.log)
+% change task-fields "date_due / date_due_end" into "planned_start"/"planned_end" and turned them into Datetime
++ functions for creating and using Project-Templates
+% fixed htmlStructure of some pages
+% fixed passing empty dateTime-fields from forms
+
+
+
+
+internal
+---------
++ getById(), getVisibleById(), getEditableById() for all Db-Objects
+% trace()-calls changed into trigger_error()
+% unit-tests corrected and expanded
+% fixed display of unnamed items ("-" instead of "View task")
++ added error_reporting(E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR)
+% fixed scanLanguages.pl handling for strings with ()
++ added optional context-clarification for multilanguage-strings like _("BUG","as column headline")
+% made DbItem a abstract class (just to be sure it's instanciated)
++ DbItem->getShortWithTitle()
+% can pass multiple messages to next page
+% fixed: upcomming projects not listed in active projects
+% fixed: visibility-check for displayed persons at many places
+% fixed creating for Issues and Comments (where sometimes not correctly linked to project and therefore not duplicated)
+
+
+
+
+=== v0.0453a [2005-11-24] =============================================
+
+interface
+---------
++ multi language support (including tools for handling language-tables)
++ German Translattion
++ users can select Theme and Language in editProfile
++ task-assignment 
++ home > only show assigned tasks (can be adjusted for each user)
+% fixed display of teamMembers for clients (they were not hidden correctly)
++ when creating new Projects current use becomes admin and is made public
++ visibility (pub_level) of project team members can be edited
+% fixed dropDown-list functions companyView / personView
+% fixed display of projects(team) in companyView
++ reduced list of persons companyView
++ companyView -> add list for closedProjects
+% taskView fixed display of description
+
+
+internal
+--------
++ visible projectteam is cached for increased performance
++ changed "new Person($id)" -> "Person::getById($id)"   (this avoids some nasty errors, if creation fails)
++ added unit-tests for some renderable pages
++ fixed html-structure of some pages
+
+
+
+
+
+
+
+
+=== v0.0452d [2005-10-24] ==============================================
+
+install
+--------
++ option to continue upgrade on errors
+% fixed bugs when upgrading tables with table-prefixed
+
+
+
+=== v0.0452c [2005-10-23] ==============================================
+
+interface
+----------
++ comment as tree
++ comments can be collapsed
++ new tasks status changed from open -> new
+% fixed initial display of tasks as tree / list
+% fixed display of task-details
+% fixed form passing for task.estimated time
+% fixed sorting of comments
++ changed default profile of new people to user
+% person, who cannot login no longer require unique nickname (but if you want to provide a nickname it has to be unique)
++ display of comment-details depends on display-style
+% fixed reopen of projects
+
+
+internal:
+----------
++ Project::getComment
++ Comment::getSubComments
++ comment::collapse / shrink /toggle view
+
+
+
+=== vo.0452b [2005-10-08] ==============================================
+interface
+----------
++ toggle task viel collapsed
++ home > projList : create new project icon
+% automatically jump to project-view if assigned to only one project
+% home>tasklist: fixed sorting
++ home>taskList: added logging effort
+% project>viewEfforts: fixed create new effort
++ project>viewEfforts: create effort behind selected effort
+% fixed admin-view if not project-member
+
+
+internal:
+-----------
+% hierarchical sorting of tasks done with sql
+% valid-param-list for pageHandles
+% fixed view of collapsed tasks
+% improved user-rights validation on multiple taskedits
+% rewrote task-listing
+% check user-rights when adding Issue-report
+
+
+=== v0.0452 [2005-09-09] ====================================================
+
+interface
+-----------
++ commentMoveToFolder
++ go up in hierarchie (ALT-U)
+% hide help-block from home
+
+interal
+---------
++ theme-settings for list-row-colors (odd/even/selected/hover)
++ define welcome-message in conf
+% fixed display of dropDown menu
+- use php5- _GET _POST _COOKIE - vars
+% initialize selected rows-hilighting on page load
+% remove quicknew and pagefunctions from print-theme
+% validate user-rights on moving tasks
+% fixed HTTP_GET_VARS - complaints with on restrictive php-environments
+
+
+=== v0.0451 [2005-09-04] ====================================================
+
++ create another project after submut
++ fixed comment-view_collapsed error
+
+
+
+=== v0.045 [2005-09-02]  ================================================================
+
+major changes
+------------------
++ duplicating project including all sub-items (that actually enables using templates)
++ list Person with accounts
++ installation can now upgrade (starting from v0.044)
++ print_style / (just try print-preview in your browser... it's nice)
+% fixed bug with double assigning people if current user is admin but not in team
+% company-names not wrapping in project-overview
+% added correct toggle-buttons to blocks
+% fixed overwriting nickname-bug
+
+interface
+--------------
++ in personListAccounts...
+  + show current projects of person
+  + show user-profile
++ add status-summary-text field to projects
++ added cancel-buttons to edit-forms
++ added styles to buttons
++ added page-functions at the upper right (for tasks, projects, persons, companies)
++ project->closed tasks
++ project->History
++ added functions to taskFolder-List
++ efforts are now related to tasks (drop-downlist for project-foldes when editing effort)
++ effort-list show parent-task
++ public-level can be changed for effort
++ fixed colors of labels
++ fixed font-size of comment-texts
++ tasks can now be undeleted (restored)
+
+minor changes
+----------------------
+% fixed display of daygraph
+% fixed validation of environment (php-version and db-connection)
+% added a config-text of fatal-startup-errors
+% hide client-view-link from client
++ added STRING_LENGTH_SHORT - config setting
+% changed display of level-open (was shown as 4)
+% fixed the db-version check when logging in
+% the last breadcrumb is not a link
+% adjusted page-title when editing efforts and comments
+
+
+
+internal
+----------
++ g_item_names
+% fixed initialization of abstract project-items
+% set modification-timestamp and user when updating
+% set delete-timestamp and user when deleting
++ Task::getSumEfforts() (recursively including all subtasks)
+% finetuned Project::getTasks() (support of min ... max_status)
+% projectView options are now define in build_projVew_options()
+
+

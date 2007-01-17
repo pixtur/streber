@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+ <head>
+  <title>star-light</title>
+  <meta name="author" content="Dean Edwards"/>
+  <!-- keeping code tidy!! -->
+  <meta name="copyright" content="&copy; copyright 2005, Dean Edwards"/>
+  <link rel="stylesheet" href="star-light.css" type="text/css"/>
+ </head>
+
+<body>
+<h1>star-light</h1>
+<p>A configurable syntax-highlighter.</p>
+
+<h2>HTML</h2>
+<pre class="html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+ &lt;head&gt;
+  &lt;title&gt;Sample HTML&lt;/title&gt;
+
+  &lt;meta name="author" content="Dean Edwards"/&gt;
+  &lt;!-- keeping code tidy!! --&gt;
+  &lt;meta name="copyright" content="&amp;copy; copyright 2005, Dean Edwards"/&gt;
+  &lt;style type="text/css"&gt;
+   body {color: black;}
+  &lt;/style&gt;
+  &lt;script type="text/javascript"&gt;
+   onload = function() {
+    	// do something
+   };
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;p&gt;Hello&amp;nbsp;World!&lt;/p&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>CSS</h2>
+<pre class="css">
+@import url(http://www.example.com/test.css);
+
+/* comment */
+@media screen {
+	div.document {
+		background-color: #eee;
+		width: 0;
+	}
+}
+</pre>
+
+<h2>JavaScript</h2>
+<pre class="javascript">
+// this is a "comment"
+/* so is this */
+var string = "/* string */";
+alert('Hello \'Dean\'!');
+function getText(a, b, c) {
+	if (a && b) return a + b + c.toString();
+};
+</pre>
+
+<h2>PHP</h2>
+<pre class="php">
+&lt;?php
+// author: dean@edwards.name
+$string = "/* string */";
+print('Hello Dean!');
+function getText($a, $b, $c) {
+	return $a + $b + $c;
+};
+?>
+</pre>
+
+<h2>Email/Discussion</h2>
+<pre class="email">
+So said the script writer:
+&gt; I like *bold* text! :-)
+&gt;
+&gt; But the other man said:
+&gt;&gt; I like /italicised/ text. :(
+&gt;&gt;
+&gt;&gt; A third fellow chimed in:
+&gt;&gt;&gt; I think _underlined_ text should suit you both. ;-)
+&gt;&gt;&gt;
+&gt;&gt; _Hey_! He's right! :-)
+&gt; _Groovy_. ;-)
+</pre>
+
+<h3>VBScript</h3>
+<pre class="vbscript">
+Rem this is a "comment"
+' so is this
+Function MyHex(ByVal Number)
+	Dim Sign
+	Const HexChars = "0123456789ABCDEF"
+	Sign = Sgn(Number)
+	Number = Fix(Abs(CDbl(number)))
+	If Number = 0 Then
+		MyHex = "0"
+		Exit Function
+	End If
+	While Number > 0
+		MyHex = Mid(HexChars, 1 + (Number - 16 * Fix(Number / 16)), 1) & MyHex
+		Number = Fix(Number/16)
+	WEnd
+	If Sign = -1 Then MyHex = "-" & MyHex
+End Function
+</pre>
+
+<h3>T-SQL</h3>
+<pre class="tsql">
+CREATE PROC nth (
+	@table_name sysname,
+	@column_name sysname,
+	@nth int
+)
+AS
+BEGIN
+
+--Date written: December 23rd 2000
+--Purpose: To find out the nth highest number in a column.
+
+SET @table_name = RTRIM(@table_name)
+SET @column_name = RTRIM(@column_name)
+
+DECLARE @exec_str CHAR(400)
+IF (SELECT OBJECT_ID(@table_name,'U')) IS NULL
+BEGIN
+	RAISERROR('Invalid table name',18,1)
+	RETURN -1
+END
+</pre>
+</body>
+</html>
