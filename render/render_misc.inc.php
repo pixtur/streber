@@ -534,21 +534,44 @@ function renderBacktrace($arr)
 
 
 /**
-* wrapper functions for formated time output
+* wrapper functions for formatted time output
+* cache strings to avoid too many access to the language tables and
+* to attempt to fix portability problems with strftime
 */
 function getUserFormatDate()
 {
-    return __('%b %e, %Y', 'strftime format string');
+    global $userFormatDate;
+    if(!$userFormatDate)
+    {
+        $userFormatDate = __('%b %e, %Y', 'strftime format string');
+        
+        // fix %e formatter if not supported (e.g. on Windows)
+        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
+            $userFormatDate = str_replace("%e", "%d", $userFormatDate);
+    }
+    return $userFormatDate;
 }
 
 function getUserFormatTime()
 {
-    return __('%I:%M%P', 'strftime format string');
+    global $userFormatTime;
+    if($userFormatTime)
+        $userFormatTime = __('%I:%M%P', 'strftime format string');
+    return $userFormatTime;
 }
 
 function getUserFormatTimestamp()
 {
-    return __('%a %b %e, %Y %I:%M%P', 'strftime format string');
+    global $userFormatTimestamp;
+    if(!$userFormatTimestamp)
+    {
+        $userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
+        
+        // fix %e formatter if not supported (e.g. on Windows)
+        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
+            $userFormatTimestamp = str_replace("%e", "%d", $userFormatTimestamp);
+    }
+    return $userFormatTimestamp;
 }
 
 
