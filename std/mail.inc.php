@@ -309,7 +309,7 @@ class Notifier
             $message_html.=
               "<br>\r\n"
               .__('If you do not want to get further notifications or you forgot your password feel free to','notification'). ' '
-              . "<a href='$url/index.php?go=activateAccount&amp;tuid={$person->identifier}'>"
+              . "<a href='$url?go=activateAccount&amp;tuid={$person->identifier}'>"
               . __('adjust your profile','notification')
               . "</a>"
               . "."
@@ -323,7 +323,7 @@ class Notifier
               . ' '
               . __('adjust your profile','notification')
               . ":\n"
-              . $url."/index.php?go=activateAccount&tuid={$person->identifier}"
+              . $url."?go=activateAccount&tuid={$person->identifier}"
               . "\n"
               . "\n"
               .'  ' . __('Thanks for your time','notication') . "\n"

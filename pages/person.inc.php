@@ -1217,6 +1217,14 @@ function personEditSubmit()
         $person= new Person(array('id'=>0));
     }
     else {
+        if($tuid= get('tuid')) {
+            // setCurUserByIdentifier have already been called, but somehow it was
+            // called too early. Calling it a second time here won't hurt and fixes bug #3817
+            $user= $auth->setCurUserByIdentifier($tuid); // will call asKey($tuid)
+            if(!$user || $user->id != $id) {
+                $PH->abortWarning(__("Malformed activation url"));
+            }
+        }
         if(!$person= Person::getEditableById($id)) {
             $PH->abortWarning(__("Could not get person"));
             return;
