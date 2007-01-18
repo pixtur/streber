@@ -8,7 +8,7 @@ require_once(confGet('DIR_STREBER') . 'lists/list_comments.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
-
+require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
 function TaskNewBug()
 {
@@ -1429,6 +1429,7 @@ function TasksMoveToFolder()
                 else {
                     $task->parent_task= $target_id;
                     $task->update();
+					$task->nowChangedByUser();
                 }
             }
             else {
@@ -1630,6 +1631,7 @@ function TasksUndelete()
             $task->state=1;
             if($task->update()) {
                 new FeedbackMessage(sprintf(__("Task <b>%s</b> restored"),$task->name));
+				$task->nowChangedByUser();
             }
             else {
                 new FeedbackMessage(sprintf(__("Failed to restore Task <b>%s</b>"),$task->name));
@@ -1711,6 +1713,7 @@ function TasksComplete()
             $task->date_closed= gmdate("Y-m-d", time());
             $task->completion=100;
             $task->update();
+			$task->nowChangedByUser();
 
             ### get all subtasks ###
             if($subtasks= $task->getSubtasks()) {
@@ -1721,6 +1724,7 @@ function TasksComplete()
                         $subtask_editable->date_closed= gmdate("Y-m-d", time());
                         $subtask_editable->completion=100;
                         $subtask_editable->update();
+						$subtask_editable->nowChangedByUser();
                     }
                     else {
                         $num_errors++;
@@ -1771,6 +1775,7 @@ function TasksApproved()
             $task->date_closed = gmdate("Y-m-d", time());
             $task->completion = 100;
             $task->update();
+			$task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -1813,6 +1818,7 @@ function TasksClosed()
             $task->date_closed = gmdate("Y-m-d", time());
             $task->completion = 100;
             $task->update();
+			$task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -1849,6 +1855,7 @@ function TasksReopen()
             $count++;
             $task->status=STATUS_OPEN;
             $task->update();
+			$task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -2729,7 +2736,7 @@ function taskEditMultipleSubmit()
 					if(isset($task_persons_delete)){
 						foreach($task_persons_delete as $tpd){
 							$tpd->delete();
-
+							
 						}
 					}
 					foreach($task_persons_overwrite as $tpo)
@@ -2763,6 +2770,7 @@ function taskEditMultipleSubmit()
 
 				##update##
                 $task->update();
+				$task->nowChangedByUser();
             }
         }
         else {

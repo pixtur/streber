@@ -1214,7 +1214,11 @@ $g_lang_table= array(
 'Adjust user-rights'          =>'Rechte bearbeiten',
 
 
-
+### ../std/mail.inc   ###
+'Changed monitored items:|notification'  	=> 'Geänderte Elemente:',
+'Unchanged monitored items:|notification'	=> 'Unveränderte Elemente:',
+'%s edited > %s'							=> '%s bearbeitete > %s',
+'%s (not touched since %s day(s))'          => '%s (nicht verändert seit %s Tag(en))', 
 
 ### ../db/class_company.inc   ###
 'Tag line|form field for company'=>'Namenszusatz',

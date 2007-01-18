@@ -667,14 +667,6 @@ abstract class DbItem {
 	{
 		require_once('std/mail.inc.php');
 		require_once('db/db_itemperson.inc.php');
-		### if notify on change is true ###
-		if($i = ItemPerson::checkChangedItem(array('item'=>$this->id,'notify_on_change'=>true))){
-			if(isset($i)){
-				## sends notification
-				$n = new Notifier();
-				$n->sendNotificationOnItem($this);
-			}
-		}
 		### if notify_if_unchanges is set ###
 		if ($ip = ItemPerson::getAll(array('item'=>$this->id,'notify_if_unchanged_min'=>NOTIFY_1DAY))){
 			if(isset($ip)){

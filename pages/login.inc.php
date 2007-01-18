@@ -202,19 +202,8 @@ function loginFormSubmit()
 
         ### display taskView ####
         $projects=$auth->cur_user->getProjects();
-		
-		/**
-		* send notification for monitored items
-		*/
-		{
-			require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
-			$n= new Notifier();
-			$n->checkItemNotification();
-		}
-		
+				
         ### if go-parameter was present before logging in
-
-
         if($go_after= get('go_after')) {
             $params=array();
             foreach($g_valid_login_params as $var) {

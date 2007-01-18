@@ -2162,7 +2162,7 @@ $g_lang_table= array(
 ### ../lists/list_efforts.inc.php   ###
 'View selected Efforts'       =>'Visa valda försök',  # line 72
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Your bookmarks'              =>'Dina bokmärken',  # line 32
 'You have no bookmarks'       =>'Du har inga bokmärken',  # line 33
 
@@ -2175,7 +2175,7 @@ $g_lang_table= array(
 ### ../pages/item.inc.php   ###
 'Notify on change'            =>'Meddela vid ändring',  # line 421
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Remind'                      =>'Påminn',  # line 415
 'in %s day(s)'                =>'%s dag(ar)',  # line 464
 'since %s day(s)'             =>'sedan %s dag(ar)',  # line 468

@@ -409,7 +409,7 @@ $g_lang_table= array(
 'Summary|Column header'       =>'',  # line 414
 'Thumbnail|Column header'     =>'',  # line 475
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Your bookmarks'              =>'',  # line 32
 'You have no bookmarks'       =>'',  # line 33
 
@@ -430,7 +430,7 @@ $g_lang_table= array(
 ### ../std/constant_names.inc.php   ###
 'Comment'                     =>'',  # line 128
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Remind'                      =>'',  # line 415
 'in %s day(s)'                =>'',  # line 464
 'since %s day(s)'             =>'',  # line 468
@@ -438,7 +438,7 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Modified'                    =>'',  # line 197
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'State'                       =>'',  # line 711
 'Modified by'                 =>'',  # line 744
 

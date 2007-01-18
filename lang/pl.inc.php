@@ -1924,14 +1924,14 @@ $g_lang_table= array(
 ### ../pages/_handles.inc.php   ###
 'Mark as bookmark'            =>'Dodaj do zakładek',  # line 45
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'My bookmarks'                =>'Moje zakładki',  # line 32
 'You have no bookmarks'       =>'Nie masz żadnych zakładek',  # line 33
 
 ### ../pages/_handles.inc.php   ###
 'Remove bookmark'             =>'Usuń zakładkę',  # line 52
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Modified by'                 =>'Zmodyfikowana przez',  # line 228
 
 ### ../pages/item.inc.php   ###
@@ -1943,7 +1943,7 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Go to parent / alt-U'        =>'Przejdź poziom wyżej / alt-U',  # line 875
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'State'                       =>'Stan',  # line 299
 
 ### ../lists/list_tasks.inc.php   ###
@@ -1988,14 +1988,14 @@ $g_lang_table= array(
 ### ../lists/list_comments.inc.php   ###
 'version %s'                  =>'wersja %s',  # line 140
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Your bookmarks'              =>'Twoje zakładki',  # line 32
 
 ### ../pages/item.inc.php   ###
 'Edit bookmark'               =>'Edycja zakładki',  # line 399
 'Notify on change'            =>'Powiadom o zmianie',  # line 421
 
-### ../lists/list_items.inc.php   ###
+### ../lists/list_bookmarks.inc.php   ###
 'Remind'                      =>'Przypomnij',  # line 415
 'in %s day(s)'                =>'za %s dzień/dni',  # line 464
 'since %s day(s)'             =>'od %s dnia/dni',  # line 468

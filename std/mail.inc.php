@@ -6,6 +6,7 @@
 require_once(confGet('DIR_STREBER') . './db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . './db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . './db/class_person.inc.php');
+require_once(confGet('DIR_STREBER') . './db/db_item.inc.php');
 require_once(confGet('DIR_STREBER') . './db/db_itemperson.inc.php');
 //require_once(confGet('DIR_STREBER') . 'render/render_misc.inc.php');
 
@@ -22,16 +23,13 @@ class Notifier
     	$persons=Person::getPersons(array('visible_only'=>false, 'can_login'=>true));
 
         foreach($persons as $p) {
-
             if($p->settings & USER_SETTING_NOTIFICATIONS) {
-
                 if($p->office_email  || $p->personal_email )  {
                     $now= time();
                     $last= strToGMTime($p->notification_last);
                     $period= $p->notification_period * 60*60*24;
-
+					
                     if(strToGMTime($p->notification_last) + $period  < time()) {
-
                         $result= $this->sendNotifcationForPerson($p);
                         if($result) {
                             if($result === true) {
@@ -116,7 +114,7 @@ class Notifier
 
 		### subject ###
 		$subject = sprintf(__('Updates at %s','notication mail subject'), confGet('SELF_DOMAIN'));
-
+		
 		### message ###
         $message_txt= '';
         $message_html= '';
@@ -165,7 +163,7 @@ class Notifier
 
             $information_count++;
         }
-
+		
         ### recently assigned to projects ###
         $projects= array();
         {
@@ -209,8 +207,146 @@ class Notifier
             $message_html.= $close_list_html;
             $message_txt.= $close_list_txt;
         }
-
-
+		
+		### changed and unchanged items ###
+		{
+			## All changed items ##
+		 	$changes_headline_html = '';
+        	$changes_headline_txt = '';
+			$changes_message_html = '';
+        	$changes_message_txt = '';
+			
+			$monitored_items = ItemPerson::getAll(array(
+			                   'is_bookmark'=>1,
+							   'notify_on_change'=>1,
+							   'person'=>$person->id));
+							   
+			if(!monitored_items){
+				# do nothing
+			}
+			else{
+				$changes_headline_html = "<h3>"
+                     . __('Changed monitored items:','notification')
+                     . "</h3>"
+                     . "<ul>";
+            	$changes_headline_txt = "\n". __('Changed monitored items:','notification')."\n";
+								
+				foreach($monitored_items as $mi){
+					if($pi = DbProjectItem::getById($mi->item)){
+						if(strToGMTime($pi->modified) > strToGMTime($person->notification_last)){
+							if($pi->modified_by != $auth->cur_user->id){
+								$information_count++;
+								$p = Person::GetVisibleById($pi->modified_by);
+								$object = DbProjectItem::getObjectById($pi->id);
+								$changes_message_html .= '<li>' . sprintf(__("%s edited > %s"), $p->nickname, $object->name) . '</li>';
+								$changes_message_txt .= '- ' . sprintf(__("%s edited > %s"), $p->nickname, $object->name) . '\n';
+							}
+						}
+					}
+				}
+				if($changes_message_html != ''){
+					$changes_message_html .= "</ul>";
+					$changes_message_txt .= "\n";
+				}
+			}
+			
+			## All unchanged items ##
+			$unchanged_headline_html = '';
+        	$unchanged_headline_txt = '';
+			$unchanged_message_html = '';
+        	$unchanged_message_txt = '';
+			
+			$monitored_items_unchanged = ItemPerson::getAll(array(
+			                           'is_bookmark'=>1,
+							           'notify_if_unchanged_min'=>NOTIFY_1DAY,
+							           'person'=>$person->id));
+							   
+			if(!monitored_items_unchanged){
+				# do nothing
+			}
+			else{
+				
+				$unchanged_headline_html = "<h3>"
+                     . __('Unchanged monitored items:','notification')
+                     . "</h3>" 
+                     . "<ul>";
+            	$unchanged_headline_txt = "\n". __('Unchanged monitored items:','notification')."\n";
+												
+				foreach($monitored_items_unchanged as $miu){
+					## reminder period ##
+					$period = '';
+					switch($miu->notify_if_unchanged){
+						case NOTIFY_1DAY:
+							$period = 24*60*60;
+							break;
+						case NOTIFY_2DAYS:
+							$period = 2*24*60*60;
+							break;
+						case NOTIFY_3DAYS:
+							$period = 3*24*60*60;
+							break;
+						case NOTIFY_4DAYS:
+							$period = 4*24*60*60;
+							break;
+						case NOTIFY_5DAYS:
+							$period = 5*24*60*60;
+							break;
+						case NOTIFY_1WEEK:
+							$period = 7*24*60*60;
+							break;
+						case NOTIFY_2WEEKS:
+							$period = 2*7*24*60*60;
+							break;
+						case NOTIFY_3WEEKS:
+							$period = 3*7*24*60*60;
+							break;
+						case NOTIFY_1MONTH:
+							$period = 4*7*24*60*60;
+							break;
+						case NOTIFY_2MONTH:
+							$period = 2*4*7*24*60*60;
+							break;
+					}
+					
+					$date = $miu->notify_date;
+					
+					if($pi = DbProjectItem::getVisibleById($miu->item)){
+						#if(strToGMTime($pi->modified) > strToGMTime($person->notification_last)){
+							$mod_date = $pi->modified;
+							if($date != '0000-00-00 00:00:00'){
+								$date = strToGMTime($date) + $period;
+								$date = date('Y-m-d H:i:s',$date);
+								if(($date >= $mod_date) && (strToGMTime($date) <= time())){
+									$diff = strToGMTime($date) - strToGMTime($mod_date);
+									if($diff >= $period){
+										### diff in days ###
+										$information_count++;
+										$days = round((time() - strToGMTime($miu->notify_date)) / 60 / 60 / 24);
+										$object = DbProjectItem::getObjectById($pi->id);
+										
+										$unchanged_message_html .= '<li>' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '</li>';
+										$unchanged_message_txt .= '- ' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '\n';
+									}
+								}
+							}
+						#}
+					}
+				}
+				if($unchanged_message_html != ''){
+					$unchanged_message_html .= "</ul>";
+					$unchanged_message_txt .= "\n";
+				}
+			}
+		}
+		if($changes_message_html != ''){
+			$message_html .= $changes_headline_html . $changes_message_html;
+			$message_txt .= $changes_headline_txt . $changes_message_txt;
+		}
+		if($unchanged_message_html != ''){
+			$message_html .= $unchanged_headline_html . $unchanged_message_html;
+			$message_txt .= $unchanged_headline_txt . $unchanged_message_txt;
+		}
+		
         ### list project changes ###
         require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
 
@@ -303,7 +439,6 @@ class Notifier
 
         }
 
-
         ### footer ####
         {
             $message_html.=
@@ -394,7 +529,7 @@ class Notifier
             }
 
             mail($to, $subject, $msg, $headers);
-
+			
             global $g_error_mail;
             if(isset($g_error_mail)) {
                 $error= $g_error_mail. ' ("'. $to. '" <'. $person->name .'>)';
@@ -514,633 +649,7 @@ class Notifier
         }
         $auth->cur_user= $keep_cur_user;
     }
-    
-     public function outputNotifcationForPersonTXT($person)
-     {
-        $information_count = 0;
-        $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-     
-        /**
-        * temporary overwrite the current-user to obey item-visibility
-        * MUST BE RESET BEFORE LEAVING THIS FUNCTION!
-        */
-        global $auth;
-        $keep_cur_user= $auth->cur_user;
-        $auth->cur_user= $person;
-
-        setLang($person->language);
-
-
-       	### message ###
-        $message_txt= '';
-        $message_html= '';
-
-        ### recently assigned to projects ###
-        $projects= array();
-        {
-            $headline_html= '<h3>'
-                     . __('You have been assigned to projects:','notification')
-                     . '</h3>'
-                     . '<ul>';
-            $headline_txt= "\n". __('You have been assigned to projects:','notification')."\n";
-
-            $close_list_html= '';
-            $close_list_txt= '';
-
-
-            $pps= $person->getProjectPersons();
-            foreach($pps as $pp) {
-                if($project= Project::getVisibleById($pp->project)) {
-                    if($project->state) {
-                        $projects[]= $project;
-                        if(strToGMTime($pp->created) > strToGMTime($person->notification_last)) {
-                            $message_html.= $headline_html;
-                            $message_txt.= $headline_txt;
-                            $message_html.="<li>"
-                                    . "<a href='$url?go=projView&prj={$pp->project}'>". asHtml($project->name) ."</a>"
-                                    . "</li>";
-                            $message_txt.= "- ". $project->name. "\n";
-
-                            $headline_html='';
-                            $headline_txt='';
-                            $close_list_html= '</ul>';
-                            $close_list_txt= "\n";
-                            $information_count++;
-                        }
-                    }
-                }
-            }
-            $message_html.= $close_list_html;
-            $message_txt.= $close_list_txt;
-        }
-
-
-        ### list project changes ###
-        require_once('lists/list_changes.inc.php');
-
-        $updates_html='';
-        $updates_txt='';
-
-        foreach($projects as $p) {
-            if($changes= ChangeLine::getChangeLinesForPerson($person,$p, $person->notification_last)) {
-                $information_count++;
-                $updates_html.= '<h4>'
-                        . "<a href='$url?go=projView&amp;prj={$p->id}'>". asHtml($p->name) ."</a>"
-                        . '</h4><ul>';
-
-                $updates_txt.= "\n". $p->name."\n";
-
-                foreach($changes as $c) {
-                    $updates_html.='<li>';
-                    $updates_txt.="\n- ";
-
-                    ### who...
-                    if($c->person_by) {
-                        if($p_who= Person::getVisibleById($c->person_by)) {
-                    		$updates_html.= "<b>". asHtml($p_who->nickname) ."</b>"
-                    		      ." ";
-                    		$updates_txt.= $p_who->nickname
-                    		      .": ";
-
-                        }
-                        else {
-                        	$updates_html.= '??? ';		# invisible user
-                        	$updates_txt.= '???: ';		# invisible user
-                        }
-                    }
-
-                    ### what...
-                    if($c->html_what) {
-                        $updates_html.= $c->html_what. ' ';
-                        $updates_txt.= isset($c->txt_what)
-                                    ? $c->txt_what
-                                    : strip_tags($c->html_what);
-                        $updates_txt.=' > ';
-                    }
-
-
-
-                    ### task
-                    if($task= Task::getVisibleById($c->task_id)) {
-                		$updates_html.= "<a href='$url?go=taskView&amp;tsk={$task->id}'>". asHtml($task->name). "</a>";
-                        $updates_txt.= $task->name;
-                    }
-
-                    ### to...
-                    /**
-                    * @@@ bug: this contains internal links that can be viewed from mail
-                    **/
-                    if($c->html_assignment) {
-                        $updates_html.= ' ('.$c->html_assignment. ') ';
-                        #$updates_txt.= ' '.$c->html_assignment. ' ';
-                    }
-                }
-                $updates_html.='</ul>';
-                $updates_txt.="\n\n";
-            }
-        }
-        if($updates_html) {
-            $message_html.='<h3>'. __('Project Updates'). '</h3>'
-                    . $updates_html;
-            $message_txt.= "\n== ". __('Project Updates'). " ==\n"
-                    . $updates_txt;
-
-        }
-
-        if($information_count) {
-			return $message_txt;
-			// NEWS
-    	} else {
-    		return NULL;
-    	   // no news
-    	}
-        $auth->cur_user= $keep_cur_user;
-        return NULL;
-    }
-	
-	/*
-	* Check if a notification email should be send
-	*/
-	public function checkItemNotification(){
-		if($ip = ItemPerson::getAll(array('notify_if_unchanged_min'=>NOTIFY_1DAY))){
-			foreach($ip as $p){
-				if($i = DbProjectItem::getById($p->item)){
-					$mod_date = $i->modified;
-					$period = '';
-					switch($p->notify_if_unchanged){
-						case NOTIFY_1DAY:
-							$period = 24*60*60;
-							break;
-						case NOTIFY_2DAYS:
-							$period = 2*24*60*60;
-							break;
-						case NOTIFY_3DAYS:
-							$period = 3*24*60*60;
-							break;
-						case NOTIFY_4DAYS:
-							$period = 4*24*60*60;
-							break;
-						case NOTIFY_5DAYS:
-							$period = 5*24*60*60;
-							break;
-						case NOTIFY_1WEEK:
-							$period = 7*24*60*60;
-							break;
-						case NOTIFY_2WEEKS:
-							$period = 2*7*24*60*60;
-							break;
-						case NOTIFY_3WEEKS:
-							$period = 3*7*24*60*60;
-							break;
-						case NOTIFY_1MONTH:
-							$period = 4*7*24*60*60;
-							break;
-						case NOTIFY_2MONTH:
-							$period = 2*4*7*24*60*60;
-							break;
-					}
-					
-					$date = $p->notify_date;
-					
-					if($date != '0000-00-00 00:00:00'){
-						$date = strToGMTime($date) + $period;
-						$date = date('Y-m-d H:i:s',$date);
-						
-						if(($date >= $mod_date) && (strToGMTime($date) <= time())){
-							$diff = strToGMTime($date) - strToGMTime($mod_date);
-							if($diff >= $period){
-								$this->sendReminderOnItem($i, $p->notify_date);
-							}
-						}
-					}
-				}
-			}
-		}
-		else{
-			return NULL;
-		}
-	}
-	
-	public function sendReminderOnItem($item, $date){
-		global $auth;
-		
-		$from_domain = confGet('SELF_DOMAIN');
-		$url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-	
-		/**
-		* remove script name if clean urls.
-		*/
-		if(confGet('USE_MOD_REWRITE')) {
-			$url = str_replace('index.php','',$url);
-		}
-		
-		### gets the name of the item ###
-		$itemname = '';
-		$item_type = $item->type;
-		switch($item_type){
-			case ITEM_TASK:
-				require_once("db/class_task.inc.php");
-				if($task = Task::getVisibleById($item->id)) {
-					$itemname = $task->name;
-				}
-				break;
-
-			case ITEM_COMMENT:
-				require_once("db/class_comment.inc.php");
-				if($comment = Comment::getVisibleById($item->id)) {
-					$itemname = $comment->name;
-				}
-				break;
-
-			case ITEM_PERSON:
-				require_once("db/class_person.inc.php");
-				if($person = Person::getVisibleById($item->id)) {
-					$itemname = $person->name;
-				}
-				break;
-
-			case ITEM_EFFORT:
-				require_once("db/class_effort.inc.php");
-				if($e = Effort::getVisibleById($item->id)) {
-					$itemname = $e->name;
-				}
-				break;
-
-			case ITEM_FILE:
-				require_once("db/class_file.inc.php");
-				if($f = File::getVisibleById($item->id)) {
-					$itemname = $f->org_filename;
-				}
-				break;
-
-			case ITEM_PROJECT:
-				require_once("db/class_project.inc.php");
-				if($prj = Project::getVisibleById($item->id)) {
-					$itemname = $prj->name;
-				}
-				break;
-
-			case ITEM_COMPANY:
-				require_once("db/class_company.inc.php");
-				if($c = Company::getVisibleById($item->id)) {
-					$itemname = $c->name;
-				}
-				break;
-
-			case ITEM_VERSION:
-				require_once("db/class_task.inc.php");
-				if($tsk = Task::getVisibleById($item->id)) {
-					$itemname = $tsk->name;
-				}
-				break;
-
-			default:
-				break;
-		}
-		
-		### diff in days ###
-		$days = round((time() - strToGMTime($date)) / 60 / 60 / 24);
-		
-		### from-address  ###
-		$from = __('Unchanged item','notifcation mail from') . " <do-not-reply@".$from_domain.">";
-		
-		### reply-address ###
-		$reply = "do-not-reply@$from_domain";
-		
-		### to-address ###
-		$to = '';
-		$ok = false;
-		
-		if($p = Person::getById($auth->cur_user->id)){
-			if($p->office_email){
-				$to .= $p->office_email;
-				$ok = true;
-			}
-			else if ($p->personal_email){
-				$to .= $p->personal_email;
-				$ok = true;
-			}
-		}
-		else{
-			new FeedbackMessage(__('No emails sent.'));
-			return;
-		}
-		
-		if($to != ''){
-			### subject ###
-			$subject = sprintf(__('No changes since %s (%s day(s)) on: %s','notification mail subject'), $date, $days, $itemname);
-	
-			### message text ###
-			$message_txt= '';
-			$message_html= '';
-			
-			$message_html.= "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n<html>\r\n"
-					. "<head>\r\n"
-					. "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\r\n"
-					. "<title>$subject</title>\r\n"
-					. "<style>\r\n body {background-color:#ffffff; color:#000000; font-family:\"Trebuchet MS\", Tahoma, Arial, Verdana,sans-serif; font-size:10pt;}\r\n a {color:#163075; text-decoration:none;}\r\n a:hover{color:#ff0000; text-decoration:underline;}\r\n h3 {font-size:12pt;}\r\n h4 {font-size:11pt;}\r\n ul {margin:0; padding:0px 0px 0px 1em;}\r\n</style>\r\n"
-					. "</head>\r\n"
-					. "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
-					. __('The following item is unchanged:', 'notification')
-					. "<li>" .$itemname. "</li>\n"
-					. "<br>\r\n";
-			$message_txt.= __('The following item is unchanged:', 'notification')
-						. "- " .$itemname. ""
-						. "\n";
-						
-			### mail ###
-			if($smtp= confGet('SMTP')) {
-				ini_set('SMTP', $smtp);
-			}
-			
-			/**
-			*
-			* using some t
-			*/
-			if (strtoupper(substr(PHP_OS,0,3)=='WIN')) {
-			  $eol="\r\n";
-			}
-			elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) {
-			  $eol="\r";
-			}
-			else {
-			  $eol="\n";
-			}
-	
-			$boundary= "-streber--------------------------------------";
-			### headers  ###
-			$headers="";
-			$headers .= "Content-Type: multipart/alternative; boundary=\"".$boundary."\"".$eol;
-			$headers .= "From: $from". $eol;
-			$headers .= 'MIME-Version: 1.0'.$eol;
-	
-			$msg     = "Content-Type: multipart/alternative".$eol;
-			$msg    .= "This is a multipart message".$eol
-					. "--".$boundary. $eol
-					. "Content-Type: text/plain; charset=UTF-8". $eol. $eol
-					. $message_txt
-					. $eol
-					. "--".$boundary.$eol
-					. "Content-Type: text/html; charset=UTF-8". $eol
-					. $eol
-					. $message_html
-					. $eol
-					. "--".$boundary."--". $eol.$eol
-					;
-	
-			mail($to, $subject, $msg, $headers);
-		}
-	}
-	
-	/*
-	* If an monitored item get changed
-	*/
-	public function sendNotificationOnItem($item){ 
-		global $auth;
-		
-		$from_domain = confGet('SELF_DOMAIN');
-		$url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-	
-		/**
-		* remove script name if clean urls.
-		*/
-		if(confGet('USE_MOD_REWRITE')) {
-			$url = str_replace('index.php','',$url);
-		}
-		
-		$itemname = $item->name;
-		
-		### from-address  ###
-		$from = __('Notification on changed item','notification mail from') . " <do-not-reply@".$from_domain.">";
-		
-		### reply-address ###
-		$reply = "do-not-reply@$from_domain";
-		
-		### to-address ###
-		$to = '';
-		$ok = false;
-		
-		if($ip = ItemPerson::getPersons($item->id,true)){
-			for($i = 0; $i < count($ip); $i++){
-				if($ip[$i]['person'] != $auth->cur_user->id){
-					if(($i > 0) && ($ok = true)){
-						$to .= ', ';
-					}
-					if($ip[$i]['office_email']){
-						$to .= $ip[$i]['office_email'];
-						$ok = true;
-					}
-					else if ($ip[$i]['personal_email']){
-						$to .= $ip[$i]['personal_email'];
-						$ok = true;
-					}
-					else{
-						$to .= '';
-						$ok = false;
-					}
-				}
-			}
-		}
-		else{
-			new FeedbackMessage(__('No emails sent.'));
-			return;
-		}
-		
-		if($to != ''){
-			### subject ###
-			$subject = sprintf(__('Changes on: %s','notification mail subject'), $itemname);
-	
-			### message text ###
-			$message_txt= '';
-			$message_html= '';
-			
-			$message_html.= "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n<html>\r\n"
-					. "<head>\r\n"
-					. "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\r\n"
-					. "<title>$subject</title>\r\n"
-					. "<style>\r\n body {background-color:#ffffff; color:#000000; font-family:\"Trebuchet MS\", Tahoma, Arial, Verdana,sans-serif; font-size:10pt;}\r\n a {color:#163075; text-decoration:none;}\r\n a:hover{color:#ff0000; text-decoration:underline;}\r\n h3 {font-size:12pt;}\r\n h4 {font-size:11pt;}\r\n ul {margin:0; padding:0px 0px 0px 1em;}\r\n</style>\r\n"
-					. "</head>\r\n"
-					. "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
-					. __('The following item was changed:', 'notification')
-					. "<li>" .$itemname. "</li>\n"
-					. "<br>\r\n";
-			$message_txt.= __('The following item was changed:', 'notification')
-						. "- " .$itemname. ""
-						. "\n";
-						
-			### mail ###
-			if($smtp= confGet('SMTP')) {
-				ini_set('SMTP', $smtp);
-			}
-			
-			/**
-			*
-			* using some t
-			*/
-			if (strtoupper(substr(PHP_OS,0,3)=='WIN')) {
-			  $eol="\r\n";
-			}
-			elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) {
-			  $eol="\r";
-			}
-			else {
-			  $eol="\n";
-			}
-	
-			$boundary= "-streber--------------------------------------";
-			### headers  ###
-			#$headers = "Return-Path: <$reply>\r\n";
-			$headers="";
-			#$headers .= "Content-Type: text/html; charset=UTF-8\r\n"
-			#$headers .= "Content-Type: multipart/related; boundary=\"".$boundary."\"".$eol;
-			$headers .= "Content-Type: multipart/alternative; boundary=\"".$boundary."\"".$eol;
-			#$headers .= "Content-type: multipart/alternative;". $eol
-			#         .  " boundary=\"$boundary\"". $eol;
-			$headers .= "From: $from". $eol;
-			$headers .= 'MIME-Version: 1.0'.$eol;
-	
-			$msg     = "Content-Type: multipart/alternative".$eol;
-			$msg    .= "This is a multipart message".$eol
-					. "--".$boundary. $eol
-					. "Content-Type: text/plain; charset=UTF-8". $eol. $eol
-					. $message_txt
-					. $eol
-					. "--".$boundary.$eol
-					. "Content-Type: text/html; charset=UTF-8". $eol
-					. $eol
-					. $message_html
-					. $eol
-					. "--".$boundary."--". $eol.$eol
-					;
-	
-			mail($to, $subject, $msg, $headers);
-		}
-	}
-	
-	/*
-	* If an monitored item is not changed
-	*/
-	public function sendNotificationOnUnChangedItems(){ 
-		global $auth;
-		
-		$from_domain = confGet('SELF_DOMAIN');
-		$url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-	
-		/**
-		* remove script name if clean urls.
-		*/
-		if(confGet('USE_MOD_REWRITE')) {
-			$url = str_replace('index.php','',$url);
-		}
-		
-		$itemname = $item->name;
-		
-		### from-address  ###
-		$from = __('Notification on changed item','notification mail from') . " <do-not-reply@".$from_domain.">";
-		
-		### reply-address ###
-		$reply = "do-not-reply@$from_domain";
-		
-		### to-address ###
-		$to = '';
-		$ok = false;
-		if($ip = ItemPerson::getPersons($item->id,true)){
-			for($i = 0; $i < count($ip); $i++){
-				if($ip[$i]['person'] != $auth->cur_user->id){
-					if(($i > 0) && ($ok = true)){
-						$to .= ', ';
-					}
-					if($ip[$i]['office_email']){
-						$to .= $ip[$i]['office_email'];
-						$ok = true;
-					}
-					else if ($ip[$i]['personal_email']){
-						$to .= $ip[$i]['personal_email'];
-						$ok = true;
-					}
-					else{
-						$to .= '';
-						$ok = false;
-					}
-				}
-			}
-		}
-		else{
-			new FeedbackMessage(__('No emails sent.'));
-			return;
-		}
-		
-		if($to != ''){
-			### subject ###
-			$subject = sprintf(__('Changes on: %s','notification mail subject'), $itemname);
-	
-			### message text ###
-			$message_txt= '';
-			$message_html= '';
-			
-			$message_html.= "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n<html>\r\n"
-					. "<head>\r\n"
-					. "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\r\n"
-					. "<title>$subject</title>\r\n"
-					. "<style>\r\n body {background-color:#ffffff; color:#000000; font-family:\"Trebuchet MS\", Tahoma, Arial, Verdana,sans-serif; font-size:10pt;}\r\n a {color:#163075; text-decoration:none;}\r\n a:hover{color:#ff0000; text-decoration:underline;}\r\n h3 {font-size:12pt;}\r\n h4 {font-size:11pt;}\r\n ul {margin:0; padding:0px 0px 0px 1em;}\r\n</style>\r\n"
-					. "</head>\r\n"
-					. "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
-					. __('The following item was changed:', 'notification')
-					. "<li>" .$itemname. "</li>\n"
-					. "<br>\r\n";
-			$message_txt.= __('The following item was changed:', 'notification')
-						. "- " .$itemname. ""
-						. "\n";
-						
-			### mail ###
-			if($smtp= confGet('SMTP')) {
-				ini_set('SMTP', $smtp);
-			}
-			
-			/**
-			*
-			* using some t
-			*/
-			if (strtoupper(substr(PHP_OS,0,3)=='WIN')) {
-			  $eol="\r\n";
-			}
-			elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) {
-			  $eol="\r";
-			}
-			else {
-			  $eol="\n";
-			}
-	
-			$boundary= "-streber--------------------------------------";
-			### headers  ###
-			#$headers = "Return-Path: <$reply>\r\n";
-			$headers="";
-			#$headers .= "Content-Type: text/html; charset=UTF-8\r\n"
-			#$headers .= "Content-Type: multipart/related; boundary=\"".$boundary."\"".$eol;
-			$headers .= "Content-Type: multipart/alternative; boundary=\"".$boundary."\"".$eol;
-			#$headers .= "Content-type: multipart/alternative;". $eol
-			#         .  " boundary=\"$boundary\"". $eol;
-			$headers .= "From: $from". $eol;
-			$headers .= 'MIME-Version: 1.0'.$eol;
-	
-			$msg     = "Content-Type: multipart/alternative".$eol;
-			$msg    .= "This is a multipart message".$eol
-					. "--".$boundary. $eol
-					. "Content-Type: text/plain; charset=UTF-8". $eol. $eol
-					. $message_txt
-					. $eol
-					. "--".$boundary.$eol
-					. "Content-Type: text/html; charset=UTF-8". $eol
-					. $eol
-					. $message_html
-					. $eol
-					. "--".$boundary."--". $eol.$eol
-					;
-	
-			mail($to, $subject, $msg, $headers);
-		}
-	}
-
+ 
 }
 
 ?>
