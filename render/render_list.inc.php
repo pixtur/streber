@@ -931,8 +931,8 @@ class ListBlock extends PageBlock
 		global $auth;
 
 		$this->row_count++;
-		$oddeven =($this->row_count %2) 
-		         ? "odd" 
+		$oddeven =($this->row_count %2)
+		         ? "odd"
 		         : "even";
 
 		$style.= " ".$oddeven;
@@ -1156,7 +1156,7 @@ class ListBlock extends PageBlock
 
     					        $tmp2 = preg_replace(array("/\n/si","/\r/si","/\t/si",'/"/',"/`/"),array("\n","","\\t",'',""),$tmp);
 								$tmp2 = str_replace(';', ',', $tmp2);
-								
+
     					        if($tmp2 != $tmp) {
     							    $values[] = '"'. $tmp2 .'"';
     							}
@@ -1199,17 +1199,14 @@ class ListBlock extends PageBlock
             if($list) {
 
                 ### grouping ###
-                if($this->groupings && $this->active_block_function == 'grouped') {
+                if($this->groupings && $this->active_block_function == 'grouped' && $this->groupings->active_grouping_obj) {
                     $last_group= NULL;
                     $gr= $this->groupings->active_grouping_key;
         		    foreach($list as $e) {
-
         		        if($last_group != $e->$gr) {
     		                echo '<tr class=group><td colspan='. count($this->columns) .'>'. $this->groupings->active_grouping_obj->render($e).'</td></tr>';
     		                $last_group = $e->$gr;
-
                		    }
-
             			$this->render_trow($e);
         		    }
         		}
@@ -1218,7 +1215,6 @@ class ListBlock extends PageBlock
             			$this->render_trow($e);
         		    }
     		    }
-
             }
     		$this->render_tfoot();
         }
@@ -1228,21 +1224,22 @@ class ListBlock extends PageBlock
 	}
 
 
+
     function add_col(ListBlockCol $col)
     {
         if(!$col || !($col instanceof ListBlockCol)) {
             trigger_error("add_col requires column-object", E_USER_WARNING);
         }
-        $key=count($this->columns);
-        if($col->key) {
+        $key = count($this->columns);
+        if(isset($col->id)) {
+            $key= $col->id;
+        }
+        else if($col->key) {
             $key= $col->key;
         }
         else if(isset($col->id)){
             $key= strtolower($col->id);
         }
-        #else if(isset($col->name)){
-        #    $key= strtolower($col->name);
-        #}
         $this->columns[$key]=$col;
         $col->parent_block= $this;
     }
@@ -1293,29 +1290,29 @@ class ListBlock extends PageBlock
             $this->show_icons=true;
         }
     }
-    
-    
+
+
     public function getOrderByFromCookie()
-    {    
+    {
         global $PH;
         $s_cookie= "sort_{$PH->cur_page->id}_{$this->id}_{$this->active_block_function}";
         if($sort= get($s_cookie)) {
-            return $sort;            
+            return $sort;
         }
         return;
     }
-    
+
     /**
     * set the query_option for order with default value or from cookie
     */
-    
-    public function initOrderQueryOption($default=NULL)     
+
+    public function initOrderQueryOption($default=NULL)
     {
         if($order= $this->getOrderByFromCookie()) {
-            $this->query_options['order_by']= $order;            
+            $this->query_options['order_by']= $order;
         }
         else if($default) {
-            $this->query_options['order_by']= $default;          
+            $this->query_options['order_by']= $default;
         }
     }
 }

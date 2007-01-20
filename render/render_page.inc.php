@@ -227,6 +227,7 @@ class Page
         	"projects"	=>array(
                 'target'    => $PH->getUrl('projList',array()),
                 'title'     =>__("<span class=accesskey>P</span>rojects"),
+                'html'=> "<span id=projectselector>&nbsp;</span>" . buildProjectSelector(),
                 'tooltip'   =>__('Your projects. Alt-P / Option-P'),
                 'bg'        =>"projects",
                 'accesskey' =>'p'
@@ -269,10 +270,6 @@ class Page
         }
 
         ### put out header, some js-functions and styles for proper error-display
-    }
-    //--- render()---------------------
-    function render() {
-        echo $this->headline;
     }
 
     function __set($nm, $val)   {
@@ -549,10 +546,10 @@ document.my_form." . $this->page->autofocus_field. ".select();";
             . '<script type="text/javascript" src="js/calendar-setup.js"></script>'
             . '<script type="text/javascript" src="js/dragslider.js"></script>';
         }
-        
+
         ### add extra html ###
         $buffer.= $this->page->extra_header_html;
-        
+
         $buffer.= "
         </head>";
         $buffer.='<body ';
@@ -740,6 +737,7 @@ class PageHeader extends PageElement
         $crumbs= new PageHeaderNavigation;                   # breadcrumbs and options
 
         $buffer.=$crumbs->render();
+
 
         #--- write message ---
         global $PH;
@@ -1284,14 +1282,15 @@ class PageFooter extends PageElement
 {
 
 
-    public function __toString() 
+    public function __toString()
     {
         global $TIME_START;
         global $DB_ITEMS_LOADED;
+        global $g_count_db_statements;
         global $time_total;
         global $PH;
         global $auth;
-        
+
         $view= 'NORMAL';
         if(isset($auth) && $auth->cur_user && ($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
             $view = 'ALL';
@@ -1304,11 +1303,11 @@ class PageFooter extends PageElement
 
         $buffer.='<div id="footer">'
             .confGet('APP_NAME') . ' ';
-            
+
 
         if($view != 'GUEST') {
 
-            $buffer.=  confGet('STREBER_VERSION') . ' (' . confGet('STREBER_VERSION_DATE') . ') ';            
+            $buffer.=  confGet('STREBER_VERSION') . ' (' . confGet('STREBER_VERSION_DATE') . ') ';
 
             $TIME_END=microtime(1);
             $time_total= $TIME_END- $TIME_START;
@@ -1320,13 +1319,13 @@ class PageFooter extends PageElement
                 $buffer.= __('memory used').": ".number_format(memory_get_usage(),",",".",".")." B / ";
             }
 
-            $buffer .= __('querrying approx.')." ".$DB_ITEMS_LOADED." ".__('db-fields') . " ";
-            
+            $buffer .= ' ('. sprintf(__('%s queries / %s fields '), $g_count_db_statements, $DB_ITEMS_LOADED ) . ') ';
+
             if($view == 'ALL') {
                 $buffer .= $PH->getLink('systemInfo','system info');
             }
-            
-            
+
+
             $buffer .= "<br/>";
 
             if(confGet('DISPLAY_ERROR_LIST') != 'NONE') {

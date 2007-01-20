@@ -120,6 +120,8 @@ class sql_class implements sql_interface{
     * method execute: execute query
     */
     public function execute($tmp_query){
+        global $g_count_db_statements;
+        $g_count_db_statements++;
 
         if($this->result = @mysql_query($tmp_query)){
             $this->error('Query successful: '.$tmp_query);

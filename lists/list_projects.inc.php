@@ -71,7 +71,7 @@ class ListBlock_projects extends ListBlock
 			'sort'=>0
 		)));
     	$this->add_col( new ListBlockColMethod(array(
-            #'key'=>'company',
+			'id'    =>'company',
 			'key'=>'c.name',
     		'name'=>__("Company"),
     		'tooltip'=>__("Company"),
@@ -85,7 +85,9 @@ class ListBlock_projects extends ListBlock
 			'sort'=>0,
 			'format'=>'<nobr><a href="index.php?go=projView&amp;prj={?id}">{?short}</a></nobr>'
 		)));*/
-   		$this->add_col( new ListBlockColFormat(array(
+        $this->add_col( new ListBlockCol_ProjectName);
+
+   		/*$this->add_col( new ListBlockColFormat(array(
 			'key'=>'name',
 			'name'=>__("Project"),
 			'tooltip'=>__("Task name. More Details as tooltips"),
@@ -93,6 +95,7 @@ class ListBlock_projects extends ListBlock
 			'sort'=>0,
 			'format'=>'<a href="index.php?go=projView&amp;prj={?id}">{?name}</a>'
 		)));
+		*/
 
    		$this->add_col( new ListBlockColFormat(array(
 			'key'=>'status_summary',
@@ -243,7 +246,7 @@ class ListBlock_projects extends ListBlock
         }
 
         $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
-        
+
         $this->initOrderQueryOption();
 
         ### add filter options ###
@@ -331,6 +334,30 @@ class ListBlockCol_ProjectPersons extends ListBlockCol
 
 	}
 }
+
+
+
+
+class ListBlockCol_ProjectName extends ListBlockCol
+{
+    public $id='name';
+
+    function __construct($args= NULL)
+    {
+        parent::__construct($args);
+        if(!$this->name) {
+            $this->name= __('Project', 'column header');
+        }
+    }
+
+	function render_tr(&$project, $style="")
+	{
+	    global $PH;
+		print "<td><b><nobr>". $PH->getLink('projView',asHtml($project->name), array('prj' => $project->id)) ."</b></nobr></td>";
+	}
+}
+
+
 
 class ListBlockCol_ProjectEffortSum extends ListBlockCol{
     public $name='Efforts';

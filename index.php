@@ -119,7 +119,7 @@ measure_stop('authorize');
     measure_start('language');
     if($user && !Auth::isAnonymousUser()) {
         $auth->storeUserCookie();                               # refresh user-cookie
-    
+
         if(isset($auth->cur_user->language)
             && $auth->cur_user->language != ""
             && $auth->cur_user->language != "en"
@@ -130,7 +130,7 @@ measure_stop('authorize');
     else {
         setLang(confGet('DEFAULT_LANGUAGE'));
         build_person_fields();
-    }    
+    }
     measure_stop('language');
 }
 
@@ -144,7 +144,7 @@ require_once( confGet('DIR_STREBER') . "pages/_handles.inc.php");               
 measure_stop('plugins');
 
 if(function_exists('postInitCustomize')) {
-    postInitCustomize();    
+    postInitCustomize();
 }
 
 measure_start('init2');
@@ -173,11 +173,11 @@ $requested_page= $PH->getRequestedPage();
 if($requested_page->http_auth) {
 
     if(!$user) {
-       
+
         if($user= Auth::getUserByHttpAuth()) {
 
             $PH->show($requested_page->id);
-            
+
             exit;
         }
         else {
@@ -207,7 +207,7 @@ if($user) {
     }
 
     $PH->show($requested_page_id);
-    exit;    
+    exit;
 }
 
 ### anonymous pages like Login or License ###
@@ -256,19 +256,22 @@ exit;
 /**
 * start timing for profiler
 */
-function initProfiler() 
+function initProfiler()
 {
     global $TIME_START;
     $TIME_START=microtime(1);
     global $DB_ITEMS_LOADED;
     $DB_ITEMS_LOADED=0;
+
+    global $g_count_db_statements;
+    $g_count_db_statements = 0;
 }
 
 
 /**
 * fix basic php issues and check version
 */
-function initialBasicFixes() 
+function initialBasicFixes()
 {
     /**
     * bypass date & timezone-related warnings with php 5.1
@@ -277,10 +280,10 @@ function initialBasicFixes()
         $tz= @date_default_timezone_get();
         date_default_timezone_set($tz);
     }
-    
+
     ini_set('zend.ze1_compatibility_mode', 0);
     ini_set("pcre.backtrack_limit", -1);                        # fix 5.2.0 prce bug with render_wiki
-    
+
     /**
     * add rough php-version check to at least avoid parsing errors.
     * fine version-check follows further down
@@ -316,12 +319,12 @@ function filterGlobalArrays()
            unset($GLOBALS[$key]);
         }
     }
-    
+
     clearRequestVars();
     addRequestVars($_GET);
     addRequestVars($_POST);
     addRequestVars($_COOKIE);
-    
+
     $_COOKIE= $_GET= $_POST=array();
 }
 

@@ -138,6 +138,8 @@ div.wiki .searchword
 		text-decoration:none;
 	}
 
+
+
     #header #tabs input {       /* seach field */
         width:80px;
         margin-bottom:0px;
@@ -432,7 +434,7 @@ div.edit_functions a {
 
     border:1px solid #8F8F8F;
     background:#E9E9E9 url(layout/bg_button.png);
-    background-position: top left;        
+    background-position: top left;
     cursor:pointer;
 
 }
@@ -710,7 +712,7 @@ div.form {
         padding:2px 20px 1px 20px;
         border:1px solid #8F8F8F;
         background:#E9E9E9 url(layout/bg_button.png);
-        background-position: top left;        
+        background-position: top left;
         cursor:pointer;
     }
 
@@ -980,8 +982,8 @@ div.block {
 
 	}
 
-    
-    
+
+
     /* IE 6.0 */
     div.block.reduced_header h2 {
      	background: url(layout/bg_block_header.png);
@@ -989,7 +991,7 @@ div.block {
      	background-position:top right;
     }
 
-    
+
     /* good browsers */
     div.block.reduced_header > div.extra_top {
 		padding:0.4em 2px 0px 0.4em;
@@ -1354,7 +1356,7 @@ div.block {
     }
 
 
-	/*--- .list_footer --------------------*/	
+	/*--- .list_footer --------------------*/
     .block .footer .items{
         float:left;
         display:inline;
@@ -1394,7 +1396,7 @@ div.block {
         padding:0px;
         margin:0px;
     }
-    
+
     .block div.footer span.links {
         padding-left:1em;
         font-size:   90%;
@@ -1646,7 +1648,7 @@ div.block {
 
     table.list td.by_cur_user span.title a {
         color:#888;
-        
+
     }
 
     table.list td.details {
@@ -1730,7 +1732,7 @@ div.newsTitle h3 a {
     font-size:120%;
     color:#000;
     font-family: "Arial Black";
-    font-weight: normal;    
+    font-weight: normal;
 }
 
 div.newsBlock span.comments {
@@ -1756,7 +1758,7 @@ div.newsBlock span.comments {
     padding-left:2px;
 }
 .block div.docuNavigation ul li a {
-    padding:    0.2em 0.2em 0.2em 1.5em;    
+    padding:    0.2em 0.2em 0.2em 1.5em;
     display:    block;
     background-repeat:  no-repeat;
     background-position:center left;
@@ -2186,7 +2188,7 @@ div.wiki div.frame {
     float:left;
     line-height:120%;
     margin-bottom:1em;
-    
+
 }
 
 div.wiki div.frame img {
@@ -2511,4 +2513,46 @@ body #sideboard {
     padding:0.3em;
 }
 */
+
+
+/**
+* quick project selector in tabs
+*/
+span#projectselector {
+ background-image:  url(layout/marker_context_menu.png);
+ background-repeat: no-repeat;
+ cursor:            pointer;
+ padding-right:     14px;
+ background-position: left center;
+}
+span#projectselector:hover {
+ background-image: url(layout/marker_context_menu_hover.png);
+}
+
+
+span#projectselectorlist {
+ position:          absolute;
+ border:            1px solid #888;
+ background:        #eee;
+ z-index:           5000;
+ padding:           0px;
+ margin             0px;
+ display:           inline;
+ font-size:         90%;
+}
+
+
+#header #tabs span#projectselectorlist a{
+ display:           block;
+ text-align:        left;
+ font-weight:       normal;
+}
+
+#header #tabs span#projectselectorlist > a:hover{
+ display:           block;
+ text-align:        left;
+ background-color:  #008;
+ color:             #fff;
+}
+
 

@@ -32,33 +32,41 @@ class Block_DocuNavigation extends PageBlock
 {
     #public $title          = "bla";
     public  $current_task   = NULL;
-    public  $project        = NULL;     # object
+    public  $project_id     = NULL;     # object
     public  $reduced_header = true;
     private $tasks          = array();
     public  $root           = NULL;
-    
+
 
 
     public function __construct($args=NULL) {
-        $this->title= __("Further Documentation");
+        $this->title= __("Documentation");
         $this->id = 'parent_task';
         parent::__construct($args);
-    }    
+    }
 
-    
+
     private function initStructure()
     {
         $tasks= array();
 
-        ### with parents ###
+        if(!$this->project_id) {
+            if(!$this->current_task) {
+                trigger_error("At least current_task or project required");
+                return;
+            }
+            $this->project_id = $this->current_task->project;
+        }
+
+        ### start from a certain parent (e.g. a task) ###
         if($this->root) {
-            foreach($this->getDocuTasks($this->root->id) as $p) {
+            foreach(Task::getDocuTasks($this->project_id, $this->root->id) as $p) {
                 $p->level = LEVEL_NORMAL;
                 if($p->id == $this->current_task->id && $p->category == TCATEGORY_FOLDER) {
                     $p->view_collapsed = 0;
                     $tasks[]= $p;
 
-                    foreach($this->getDocuTasks($p->id) as $sp) {
+                    foreach(Task::getDocuTasks($this->project_id, $p->id) as $sp) {
                         $sp->level = LEVEL_CHILDREN;
                         $tasks[]= $sp;
                     }
@@ -67,8 +75,16 @@ class Block_DocuNavigation extends PageBlock
                     $p->view_collapsed= 1;
                     $tasks[]= $p;
                 }
-            }            
+            }
         }
+        else if($this->current_task == NULL) {
+            foreach(Task::getDocuTasks($this->project_id, 0) as $sp) {
+                $sp->level = LEVEL_NORMAL;
+                $tasks[]= $sp;
+            }
+
+        }
+        ### with parents ###
         else if($parents= $this->current_task->getFolder()) {
 
             foreach($parents as $pt) {
@@ -76,15 +92,15 @@ class Block_DocuNavigation extends PageBlock
                 $tasks[]= $pt;
             }
             ### current level is children of last parent tasks ###
-            foreach($this->getDocuTasks($pt->id) as $p) {
-                
+            foreach(Task::getDocuTasks($this->project_id, $pt->id) as $p) {
+
                 $p->level = LEVEL_NORMAL;
                 $p->view_collapsed= 1;
                 if($p->id == $this->current_task->id && $p->category == TCATEGORY_FOLDER) {
                     $p->view_collapsed = 0;
                     $tasks[]= $p;
 
-                    foreach($this->getDocuTasks($p->id) as $sp) {
+                    foreach(Task::getDocuTasks($this->project_id, $p->id) as $sp) {
                         $sp->level = LEVEL_CHILDREN;
                         $tasks[]= $sp;
                     }
@@ -97,13 +113,13 @@ class Block_DocuNavigation extends PageBlock
         }
         ### at root level ##
         else {
-            foreach($this->getDocuTasks(0) as $p) {
+            foreach(Task::getDocuTasks($this->project_id, 0) as $p) {
                 $p->level = LEVEL_NORMAL;
                 if($p->id == $this->current_task->id && $p->category == TCATEGORY_FOLDER) {
                     $p->view_collapsed = 0;
                     $tasks[]= $p;
 
-                    foreach($this->getDocuTasks($p->id) as $sp) {
+                    foreach(Task::getDocuTasks($this->project_id, $p->id) as $sp) {
                         $sp->level = LEVEL_CHILDREN;
                         $tasks[]= $sp;
                     }
@@ -118,49 +134,14 @@ class Block_DocuNavigation extends PageBlock
         return;
     }
 
-    private function getDocuTasks($parent_task_id= 0)
-    {
-        $tasks= array();
-        $tmp_options= array(
-            'visible_only'      => true,
-            'use_collapsed'     => true,
-            'order_by'          => 'order_id',
-            'parent_task'       => $parent_task_id,
-            'status_min'        => 0,
-            'status_max'        => 100,
-            'project'           => $this->current_task->project,
-            'category_in'       => array(TCATEGORY_DOCU, TCATEGORY_FOLDER),
-        );
 
-        foreach($pages= Task::getAll($tmp_options) as $p) {
-            ### filter only folders with docu ###
-            if($p->category == TCATEGORY_FOLDER)
-            {
-                $found_docu= false;
-                foreach($subtasks= $p->getSubtasksRecursive() as $subtask) {
-                    if($subtask->category == TCATEGORY_DOCU) {
-                        $found_docu= true;
-                        break;
-                    }
-                }
-                if($found_docu) {
-                    $tasks[]= $p;
-                }
-            }
-            else {
-                $tasks[]= $p;
-            }
-        }
-        return $tasks;
-    }    
-    
-    
+
     public function print_all()
     {
         $this->initStructure();
         $this->render_BlockStart();
         echo "<div class=docuNavigation>";
-        
+
         $state = LEVEL_NONE;
         foreach($this->tasks as $t) {
             switch($state) {
@@ -174,7 +155,7 @@ class Block_DocuNavigation extends PageBlock
                     $state= LEVEL_NORMAL;
                     echo '<ul class=normal>';
                     echo '<li>' . $this->printLink($t). '</li>';
-                    
+
                 }
                 break;
 
@@ -209,11 +190,11 @@ class Block_DocuNavigation extends PageBlock
                     echo '</ul>';
                     $state= LEVEL_NORMAL;
                     echo '</li>';
-                    echo '<li>' . $this->printLink($t)  . '</li>';                    
+                    echo '<li>' . $this->printLink($t)  . '</li>';
                 }
-                break;                
+                break;
             }
-            
+
         }
         switch($state) {
         case LEVEL_NONE:
@@ -231,15 +212,15 @@ class Block_DocuNavigation extends PageBlock
         }
         echo "</div>";
 
-        
+
         $this->render_BlockEnd();
-        
+
     }
-    
+
     /**
     * prints a link to another documentation task
     *
-    * sets style class depending on type and level 
+    * sets style class depending on type and level
     */
     private function printLink($t)
     {
@@ -247,14 +228,14 @@ class Block_DocuNavigation extends PageBlock
         $style= NULL;
         if($t->category == TCATEGORY_FOLDER) {
             $style= 'folder';
-            if($t->id == $this->current_task->id) {
+            if($this->current_task && $t->id == $this->current_task->id) {
                 $style= 'folder current';
             }
         }
-        else if($t->id == $this->current_task->id) {
+        else if($this->current_task && $t->id == $this->current_task->id) {
             $style= 'current';
         }
-        
+
         return $PH->getLink('taskViewAsDocu', $t->name, array('tsk' => $t->id), $style );
     }
 }

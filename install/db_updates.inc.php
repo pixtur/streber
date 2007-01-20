@@ -275,4 +275,13 @@ if($db_version < 0.0782) {
 	$update_queries[]=
 	    "ALTER TABLE `{$db_table_prefix}itemperson` ADD `created` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `comment`;";
 }
+
+if($db_version < 0.0783) {
+    $update_queries[]=
+        "ALTER TABLE `{$db_table_prefix}comment` ADD INDEX ( `comment` ) ;";
+    $update_queries[]=
+        "ALTER TABLE `{$db_table_prefix}comment` ADD INDEX ( `task` ) ;";
+    $update_queries[]=
+        "ALTER TABLE `{$db_table_prefix}effort` ADD INDEX ( `task` );";
+}
 ?>

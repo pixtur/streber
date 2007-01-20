@@ -626,7 +626,7 @@ foreach($filters_str as $fs=>$value) {
                 AND e.id = i.id
                 AND e.task=$this->id    /* only  task-efforts*/
             ";
-        
+
         $sth= $dbh->prepare($query_str);
     	$sth->execute("",1);
     	$tmp= $sth->fetch_row();
@@ -1090,7 +1090,7 @@ foreach($filters_str as $fs=>$value) {
                 " . getOrderByString($order_by);
             }
         }
-        
+
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 
@@ -1577,6 +1577,47 @@ foreach($filters_str as $fs=>$value) {
                         $tasks[]= $st;
                     }
                 }
+            }
+        }
+        return $tasks;
+    }
+
+
+    /**
+    * gets documentation sub tasks and folders of a task
+    *
+    */
+    public static function getDocuTasks($project_id, $parent_task_id= NULL)
+    {
+        $tasks= array();
+        $tmp_options= array(
+            'visible_only'      => true,
+            'use_collapsed'     => true,
+            'order_by'          => 'order_id',
+            'parent_task'       => $parent_task_id,
+            'status_min'        => 0,
+            'status_max'        => 100,
+            'project'           => $project_id,
+            'category_in'       => array(TCATEGORY_DOCU, TCATEGORY_FOLDER),
+        );
+
+        foreach($pages= Task::getAll($tmp_options) as $p) {
+            ### filter only folders with docu ###
+            if($p->category == TCATEGORY_FOLDER)
+            {
+                $found_docu= false;
+                foreach($subtasks= $p->getSubtasksRecursive() as $subtask) {
+                    if($subtask->category == TCATEGORY_DOCU) {
+                        $found_docu= true;
+                        break;
+                    }
+                }
+                if($found_docu) {
+                    $tasks[]= $p;
+                }
+            }
+            else {
+                $tasks[]= $p;
             }
         }
         return $tasks;

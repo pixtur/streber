@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-	'STREBER_VERSION'       => '0.0782',
+	'STREBER_VERSION'       => '0.0783',
 	'STREBER_VERSION_DATE'  => '2007-01-12',
 
     'APP_NAME'              => 'streber',
@@ -56,7 +56,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-	'DB_VERSION_REQUIRED'   => '0.0782',
+	'DB_VERSION_REQUIRED'   => '0.0783',
 
 
     /**
@@ -74,8 +74,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-	'DB_CREATE_VERSION'     => '0.0782',     # sql-dump loaded from /_install/-directory at installation
-	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0782',
+	'DB_CREATE_VERSION'     => '0.0783',     # sql-dump loaded from /_install/-directory at installation
+	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0783',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -169,7 +169,7 @@ $g_config= array(
     /**
     * showing efforts in task list slows down rendering...
     */
-    'TASK_LIST_EFFORT_COLUMN'=>true,
+    'TASK_LIST_EFFORT_COLUMN'=>false,
 
     'LINK_REPORT_BUGS'=> " Please help us by  <a href='http://www.streber-pm.org/2717'>reporting a bug</a>",
 

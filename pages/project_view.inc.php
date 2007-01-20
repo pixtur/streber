@@ -87,7 +87,8 @@ function ProjView()
             'name'      => __('Project')
 
         )));
-		
+
+		/*
 		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$project->id));
 		if((!$item) || ($item[0]->is_bookmark == 0)){
 			$page->add_function(new PageFunction(array(
@@ -104,8 +105,10 @@ function ProjView()
 				'tooltip'   =>__('Remove this bookmark'),
 				'name'      =>__('Remove Bookmark'),
 			)));
-		} 
-			
+		}
+		*/
+
+		/*
 		if($project->state == 1) {
 				$page->add_function(new PageFunction(array(
 					'target'=>'projDelete',
@@ -115,11 +118,13 @@ function ProjView()
 					'name'=>__('Delete')
 				)));
 		}
+		*/
 
 
         $page->add_function(new PageFunctionGroup(array(
             'name'      => __('new:')
         )));
+        /*
         $page->add_function(new PageFunction(array(
             'target'    =>'projAddPerson',
             'params'    =>array('prj'=>$project->id),
@@ -127,6 +132,7 @@ function ProjView()
             'tooltip'   =>__('Add person as team-member to project'),
             'name'      =>__('Team member')
         )));
+        */
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNew',
             'params'    =>array('prj'=>$project->id),
@@ -287,7 +293,7 @@ function ProjView()
 
 
     ### write list of folders ###
-    {
+    /*{
         $list= new ListBlock_tasks(array(
             'use_short_names'=>true,
             'show_summary'  =>false,
@@ -325,7 +331,19 @@ function ProjView()
 
 
         $list->print_automatic($project);
+    }*/
+
+    ### write docu structure ###
+    {
+        require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
+        if(Task::getDocuTasks($project->id,0)) {
+            $list=new Block_docuNavigation(array(
+                'project_id' => $project->id
+            ));
+            $list->print_all();
+        }
     }
+
 
 
     echo(new PageContentNextCol);

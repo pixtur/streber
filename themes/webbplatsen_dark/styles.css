@@ -50,7 +50,7 @@ table .searchword,
 div.wiki .searchword
 {
     background-color:#ff4;
-	padding: 0px 5px 0px 5px;	
+	padding: 0px 5px 0px 5px;
 }
 
 
@@ -60,7 +60,7 @@ div.wiki .searchword
 
 .bg_time 		{background-color:#EDDB8E;}
 .bg_time_shade  {
-    background-color:#AFAFAF; 
+    background-color:#AFAFAF;
 }
 
 .bg_people 		{background-color:#EAE9B4;}
@@ -184,7 +184,7 @@ text-decoration:none;
 	    text-decoration:underline;
 	}
 
-    
+
 
 /*--- sub-navigation (breadcrumbs and options) --------------------------*/
 	div#nav_sub {
@@ -232,7 +232,7 @@ text-decoration:none;
 	div#nav_sub span.breadcrumbs a.current {
         background-color:#999;
         color:#fff;
-        font-weight:bold;		
+        font-weight:bold;
 	}
 
     div#nav_sub span.breadcrumbs a.up {
@@ -264,7 +264,7 @@ text-decoration:none;
         background-color:#999;
         padding-bottom:3px;
         border           :1px solid #333;
-        border-bottom    :0px solid #DFDFDF;        
+        border-bottom    :0px solid #DFDFDF;
 
 	}
 
@@ -325,7 +325,7 @@ p.hint span.type{
     font-style:italic;
 }
 
-    
+
 
 /* ==== headline ==========================================*/
 	#headline {
@@ -415,9 +415,9 @@ p.hint span.type{
         color:#888;
         padding-left:15px;
         padding-right:3px;
-        font-weight   : bold;           
+        font-weight   : bold;
         font-size     : 70%;
-        font-family   : Tahoma, Arial, Verdana,sans-serif;            
+        font-family   : Tahoma, Arial, Verdana,sans-serif;
     }
 
 /* ---- edit functions ----*/
@@ -537,7 +537,7 @@ div.form {
         font-family:verdana;
         -moz-border-radius : 3px;
     }
-    
+
     .form .required {
         background-color:#ff8;
     }
@@ -703,7 +703,7 @@ div.form {
     margin-left   : 15px;
     cursor        : pointer !important;
     cursor        : hand;
-    -moz-border-radius : 0px;      
+    -moz-border-radius : 0px;
     }
 
     div.formbuttons .button:hover{
@@ -718,10 +718,10 @@ div.form {
     }
 
     div.formbuttons .apply {
-        background: #FFF url(img/button_apply_fade.png) no-repeat center left;        
+        background: #FFF url(img/button_apply_fade.png) no-repeat center left;
 
     }
-    
+
     div.formbuttons .cancel{
          background: #FFF url(img/button_cancel_fade.png) no-repeat center left;
     }
@@ -931,7 +931,7 @@ div.block {
 		border-right:1px solid #ddd;
 		border-left:1px solid #ddd;
 	}
-    
+
     /* use selector to hide this from IE6 */
     .block > table.list {
 		/*border-right:2px solid #ddd;
@@ -973,12 +973,12 @@ color: #eee;
 		text-decoration:none;
         color: #eee;
 	}
-    
+
 	table.list th a:hover {
 		text-decoration: none;
         color: #ff8;
 	}
-    
+
 	table.list th img {
 		border:none;
 		padding-right:0px;
@@ -1139,7 +1139,7 @@ color: #eee;
 		text-decoration : none;
 	}
 
-	
+
 	table.list  tr.odd{
 		/*background-color:#f0f0f0;*/
 		background-color:#D8D8D8;
@@ -1152,7 +1152,7 @@ color: #eee;
 	table.list  tr.hover {
 		/*background-color:#e8e8e8;*/
 		background-color:#f2f2f2;
-	}	
+	}
 	table.list   tr.isNewDay td{
         border-top:2px solid #000;
 	}
@@ -2056,4 +2056,44 @@ table.diff td.neutral{
 }
 #b_folders_long a:hover {
    color: #ff8;
+}
+
+/**
+* quick project selector in tabs
+*/
+span#projectselector {
+ background-image:  url(layout/marker_context_menu.png);
+ background-repeat: no-repeat;
+ cursor:            pointer;
+ padding-right:     14px;
+ background-position: left center;
+}
+span#projectselector:hover {
+ background-image: url(layout/marker_context_menu_hover.png);
+}
+
+
+span#projectselectorlist {
+ position:          absolute;
+ border:            1px solid #888;
+ background:        #eee;
+ z-index:           5000;
+ padding:           0px;
+ margin             0px;
+ display:           inline;
+ font-size:         90%;
+}
+
+
+#header #tabs span#projectselectorlist a{
+ display:           block;
+ text-align:        left;
+ font-weight:       normal;
+}
+
+#header #tabs span#projectselectorlist > a:hover{
+ display:           block;
+ text-align:        left;
+ background-color:  #008;
+ color:             #fff;
 }

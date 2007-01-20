@@ -278,7 +278,7 @@ class ListBlock_tasks extends ListBlock
             new ListGroupingPrio(),
             new ListGroupingCreatedBy(),
         );
-        
+
 
         $this->initOrderQueryOption('order_id');
     }

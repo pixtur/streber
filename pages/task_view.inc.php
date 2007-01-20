@@ -89,7 +89,7 @@ function TaskView()
         $page->title= $task->name;
         $page->title_minor_html=$PH->getLink('taskView', sprintf(__('Item-ID %d'), $task->id), array('tsk'=>$task->id));
         if($task->state== -1) {
-            $page->title_minor= sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
+            $page->title_minor_html .= ' ' . sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
         }
 
 
@@ -188,7 +188,7 @@ function TaskView()
                 }
 
             }
-			
+
 			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
 			if((!$item) || ($item[0]->is_bookmark == 0)){
 				$page->add_function(new PageFunction(array(
@@ -205,8 +205,8 @@ function TaskView()
 					'tooltip'   =>__('Remove this bookmark'),
 					'name'      =>__('Remove Bookmark'),
         		)));
-			} 
-			
+			}
+
             if($editable) {
                 if($task->state == 1) {
                     $page->add_function(new PageFunction(array(
@@ -323,21 +323,21 @@ function TaskView()
                 echo "<p><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
                 #echo "<p><label>" . $str_version . "</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
             }
-            
+
         ### get version ###
         {
             require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
             $versions= ItemVersion::getFromItem($task);
             if(count($versions) > 1) {
-                $str_version=     $PH->getLink('itemViewDiff', 
-                                    sprintf(__("View previous %s versions"), count($versions)), 
+                $str_version=     $PH->getLink('itemViewDiff',
+                                    sprintf(__("View previous %s versions"), count($versions)),
                                     array('item' => $task->id)
-                                ); 
+                                );
                 echo "<p><label></label>$str_version</p>";
             }
-        }            
-            
-            
+        }
+
+
         #}
 
         $sum_efforts= $task->getSumEfforts();
@@ -385,7 +385,7 @@ function TaskView()
             'current_task'=> $task,
             'root'          => $task,
         ));
-        
+
         $list->title = __("Further Documentation");
 
 
@@ -465,10 +465,10 @@ function TaskView()
 echo "
 <script type='text/javascript'>
 // <![CDATA[
-onLoadFunctions.push(function() 
+onLoadFunctions.push(function()
 {
     var chapter= $('div.wiki')[0];
-    
+
     $('body.taskView div.edit_functions a.edit_description').editable('index.php?go=itemSaveField&item={$task->id}&field=description', {
         postload:'index.php?go=itemLoadField&item={$task->id}&field=description',
         type:'textarea',
@@ -479,7 +479,7 @@ onLoadFunctions.push(function()
 
     $('div.wiki h1,div.wiki h2').each(function() {
         var chapter= this;
-    
+
         $(this).addClass('edit_chapter');
         var chapter_name=$(this).html();
 
@@ -496,7 +496,7 @@ onLoadFunctions.push(function()
 </script>
 ";
 
-        
+
     }
 
 
@@ -1028,8 +1028,8 @@ function taskViewAsDocu()
 
         $page->title = $task->name;
         $page->title_minor_html=$PH->getLink('taskView', sprintf(__('Item-ID %d'), $task->id), array('tsk'=>$task->id));
-        if($task->state== -1) {
-            $page->title_minor= sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
+        if($task->state == -1) {
+            $page->title_minor_html .= ' ' . sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
         }
 
         ### page functions ###
@@ -1145,21 +1145,21 @@ function taskViewAsDocu()
         if($person_modify= Person::getVisibleById($task->modified_by)) {
             echo "<p><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
         }
-            
+
         ### get version ###
         {
             require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
             $versions= ItemVersion::getFromItem($task);
             if(count($versions) > 1) {
-                $str_version=     $PH->getLink('itemViewDiff', 
-                                    sprintf(__("View previous %s versions"), count($versions)), 
+                $str_version=     $PH->getLink('itemViewDiff',
+                                    sprintf(__("View previous %s versions"), count($versions)),
                                     array('item' => $task->id)
-                                ); 
+                                );
                 echo "<p><label></label>$str_version</p>";
             }
-        }            
-            
-            
+        }
+
+
         ### publish to ###
         global $g_pub_level_names;
         if($task->pub_level != PUB_LEVEL_OPEN && isset($g_pub_level_names[$task->pub_level])) {

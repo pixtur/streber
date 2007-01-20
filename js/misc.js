@@ -35,13 +35,16 @@ function misc()
         {
             myHeadName= this.parentNode.parentNode.id;
             myHead= document.getElementById(this.parentNode.parentNode.id);
-            //alert(myHeadName);
             myBodyName= myHeadName.replace(/_short/, "_long");
-            //alert(myBodyName);
+            myBlockName= myHeadName.replace(/_short/, "");
             myBody= document.getElementById(myBodyName);
             myHead.style.display = 'none';
             myBody.style.display = 'block';
-            /*$(myBody).slideDown("fast");*/
+
+
+    		var date = new Date();
+		    date.setTime(date.getTime()+(-1  *24*60*60*1000));
+            document.cookie=  myBlockName  +"=1;expires="+  date.toGMTString() + ";";
 
             return false;
         }
@@ -54,18 +57,19 @@ function misc()
         {
             myHeadName= this.parentNode.parentNode.id;
             myHead= document.getElementById(this.parentNode.parentNode.id);
-            //alert(myHeadName);
             myBodyName= myHeadName.replace(/_long/, "_short");
-            //alert(myBodyName);
+            myBlockName= myHeadName.replace(/_long/, "");
             myBody= document.getElementById(myBodyName);
             myHead.style.display = 'none';
             myBody.style.display = 'block';
-            /*$(myHead).slideUp("fast");*/
-            //$(myBody).slideDown("fast");
 
+    		var date = new Date();
+		    date.setTime(date.getTime()+(30  *24*60*60*1000));
+            document.cookie=  myBlockName  +"=hidden;expires="+  date.toGMTString()+  ";";
             return false;
         }
     );
+
 
 
 	/*******************************************************
@@ -204,11 +208,18 @@ function misc()
     }
     TaskEditTabs.init();
     $('select#task_category').trigger('change');
-    
+
     /**
-    * call onload functions 
+    * project selector
+    */
+    $('span#projectselector').click(function() {
+        $('span#projectselectorlist').toggle();
+    });
+
+    /**
+    * call onload functions
     */
     for(i=0; i < onLoadFunctions.length; i++) {
-        onLoadFunctions[i]();        
+        onLoadFunctions[i]();
     }
 }

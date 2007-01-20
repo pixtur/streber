@@ -112,7 +112,7 @@ class DB_Mysql implements DB_Connection
     ### enable utf8 encoding
     if(confGet('DB_USE_UTF8_ENCODING')) {
         $sql_obj->execute('SET NAMES utf8;');
-        $sql_obj->execute('SET NAMES SET CHARACTER_SET utf8;');
+        $sql_obj->execute('SET CHARACTER SET utf8;');
     }
   }
 

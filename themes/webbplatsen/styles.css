@@ -50,7 +50,7 @@ table .searchword,
 div.wiki .searchword
 {
     background-color:#ff4;
-	padding: 0px 5px 0px 5px;	
+	padding: 0px 5px 0px 5px;
 }
 
 
@@ -182,7 +182,7 @@ text-decoration:none;
 	    text-decoration:underline;
 	}
 
-    
+
 
 /*--- sub-navigation (breadcrumbs and options) --------------------------*/
 	div#nav_sub {
@@ -229,7 +229,7 @@ text-decoration:none;
 	div#nav_sub span.breadcrumbs a.current {
         background-color:#fff;
         color:#000;
-        font-weight:bold;		
+        font-weight:bold;
 	}
 
     div#nav_sub span.breadcrumbs a.up {
@@ -261,7 +261,7 @@ text-decoration:none;
         background-color:#fff;
         padding-bottom:3px;
         border           :1px solid #7D9AAA;
-        border-bottom    :0px solid #DFDFDF;        
+        border-bottom    :0px solid #DFDFDF;
 
 	}
 
@@ -322,7 +322,7 @@ p.hint span.type{
     font-style:italic;
 }
 
-    
+
 
 /* ==== headline ==========================================*/
 	#headline {
@@ -531,7 +531,7 @@ div.form {
         font-family:verdana;
         -moz-border-radius : 3px;
     }
-    
+
     .form .required {
         background-color:#ff8;
     }
@@ -697,7 +697,7 @@ div.form {
     margin-left   : 15px;
     cursor        : pointer !important;
     cursor        : hand;
-    -moz-border-radius : 0px;      
+    -moz-border-radius : 0px;
     }
 
     div.formbuttons .button:hover{
@@ -712,10 +712,10 @@ div.form {
     }
 
     div.formbuttons .apply {
-        background: #FFF url(items/button_apply.png) no-repeat center left;        
+        background: #FFF url(items/button_apply.png) no-repeat center left;
 
     }
-    
+
     div.formbuttons .cancel{
          background: #FFF url(items/button_cancel.png) no-repeat center left;
     }
@@ -908,7 +908,7 @@ div.block {
 		border-right:1px solid #ddd;
 		border-left:1px solid #ddd;
 	}
-    
+
     /* use selector to hide this from IE6 */
     .block > table.list {
 		/*border-right:2px solid #ddd;
@@ -947,12 +947,12 @@ div.block {
 		text-decoration:none;
         color:#444;
 	}
-    
+
 	table.list th a:hover {
 		text-decoration: none;
         color: #5699C0;
 	}
-    
+
 	table.list th img {
 		border:none;
 		padding-right:0px;
@@ -1012,7 +1012,7 @@ div.block {
     table.list td.done {
         color:#349118;
     }
-	
+
 	/*%%*/
 	table.list tr.not_viewed  {
 		color:#e57700;
@@ -1100,11 +1100,11 @@ div.block {
     table.list tr.isDone a {
 		text-decoration:line-through;
     }
-	
+
 	table.list tr td span.isDone {
 		text-decoration:line-through;
 	}
-	
+
     .list tr td span.isDone a {
 		text-decoration:line-through;
 	}
@@ -1126,7 +1126,7 @@ div.block {
 		text-decoration : none;
 	}
 
-	
+
 	table.list  tr.odd{
 		/*background-color:#f0f0f0;*/
 		background-color:#f8f8f8;
@@ -1139,7 +1139,7 @@ div.block {
 	table.list  tr.hover {
 		/*background-color:#e8e8e8;*/
 		background-color:#f2f2f2;
-	}	
+	}
 	table.list   tr.isNewDay td{
         border-top:2px solid #000;
 	}
@@ -2024,3 +2024,42 @@ table.diff td.neutral{
 }
 
 
+/**
+* quick project selector in tabs
+*/
+span#projectselector {
+ background-image:  url(layout/marker_context_menu.png);
+ background-repeat: no-repeat;
+ cursor:            pointer;
+ padding-right:     14px;
+ background-position: left center;
+}
+span#projectselector:hover {
+ background-image: url(layout/marker_context_menu_hover.png);
+}
+
+
+span#projectselectorlist {
+ position:          absolute;
+ border:            1px solid #888;
+ background:        #eee;
+ z-index:           5000;
+ padding:           0px;
+ margin             0px;
+ display:           inline;
+ font-size:         90%;
+}
+
+
+#header #tabs span#projectselectorlist a{
+ display:           block;
+ text-align:        left;
+ font-weight:       normal;
+}
+
+#header #tabs span#projectselectorlist > a:hover{
+ display:           block;
+ text-align:        left;
+ background-color:  #008;
+ color:             #fff;
+}

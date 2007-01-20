@@ -20,26 +20,33 @@
 class ListBlockCol
 {
     public $width='1%';
-    public $key;
+    public $id;             # name of columne in list's column hash (normally extracted from key)
+    public $key;            # key for sorting (probably obj attributes like name or c.name)
     public $sort;
     public $tooltip;
     public $parent_block;
     public $style='';
     public $name='';
 
-	//--- constructor ------------------
-	function __construct($name_or_arguments=NULL,$key="", $sort=0,$tooltip=false,$width=false) {
+	/**
+	* constructor
+	*/
+	function __construct($name_or_arguments=NULL, $key="", $sort=0,$tooltip=false,$width=false)
+	{
   		if($width) {
             $this->width=$width;
         }
-		if(!$this->key) { $this->key = $key;};
+		if(!$this->key) {
+		    $this->key = $key;
+		};
 		$this->sort= $sort;
 		if($tooltip) {
             $this->tooltip= $tooltip;
         }
         $this->functions=array();
 
-		//--- either define as param-list or hash ----
+
+		#--- either define as param-list or hash ----
 		if(is_string($name_or_arguments)) {
 			$this->name= $name_or_arguments;
 		}
@@ -50,6 +57,9 @@ class ListBlockCol
 		}
 		else {
 			return;
+		}
+		if(NULL == $this->id) {
+		    $this->id = $this->key;
 		}
     }
 

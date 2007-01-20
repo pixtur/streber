@@ -517,7 +517,7 @@ function personView()
             'tooltip'   =>__('Add existing companies to this person'),
             'name'      =>__('Companies'),
         	)));
-						
+
             $page->add_function(new PageFunctionGroup(array(
                 'name'      => __('edit:')
             )));
@@ -528,7 +528,7 @@ function personView()
                 'tooltip'=>__('Edit this person','Tooltip for page function'),
                 'name'=>__('Profile','Page function edit person'),
             )));
-			   
+
             $page->add_function(new PageFunction(array(
                 'target'=>'personEditRights',
                 'params'=>array('person'=>$person->id),
@@ -536,7 +536,7 @@ function personView()
                 'tooltip'=>__('Edit User Rights','Tooltip for page function'),
                 'name'=>__('User Rights','Page function for edit user rights'),
             )));
-			
+
 			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$person->id));
 			if((!$item) || ($item[0]->is_bookmark == 0)){
 				$page->add_function(new PageFunction(array(
@@ -553,8 +553,8 @@ function personView()
 					'tooltip'   =>__('Remove this bookmark'),
 					'name'      =>__('Remove Bookmark'),
         		)));
-			} 
-			
+			}
+
             $page->add_function(new PageFunctionGroup(array(
                 'name'      => __('notification:')
             )));

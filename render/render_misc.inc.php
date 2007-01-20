@@ -328,6 +328,34 @@ function build_project_crumbs($project) {
     return $a;
 }
 
+/**
+* renders the list of open projects that will be display when opening the project selector
+*
+* The opening is done with javascript. Placing the list beside the Project Selector icon
+* is done by css only. This is a little bit tricky, because the Tab-list is already an
+* span which allows only further Spans to be included...
+*
+* read more at #3867
+*/
+function buildProjectSelector()
+{
+
+    $buffer="";
+    $buffer.= "<span style='display:none;' id='projectselectorlist'>";
+
+    global $auth;
+    global $PH;
+    if($projects= Project::getAll(array(
+    ))) {
+        foreach($projects as $p) {
+            $buffer.= $PH->getLink('projView',$p->name, array('prj' => $p->id));
+        }
+    }
+    $buffer.="</span>";
+    return $buffer;
+}
+
+
 
 /**
 * build the navigation-options for project view
@@ -544,7 +572,7 @@ function getUserFormatDate()
     if(!$userFormatDate)
     {
         $userFormatDate = __('%b %e, %Y', 'strftime format string');
-        
+
         // fix %e formatter if not supported (e.g. on Windows)
         if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
             $userFormatDate = str_replace("%e", "%d", $userFormatDate);
@@ -566,7 +594,7 @@ function getUserFormatTimestamp()
     if(!$userFormatTimestamp)
     {
         $userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
-        
+
         // fix %e formatter if not supported (e.g. on Windows)
         if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
             $userFormatTimestamp = str_replace("%e", "%d", $userFormatTimestamp);
@@ -605,7 +633,7 @@ function renderTimestamp($t)
 
 
 
-function renderTimestampHtml($t) 
+function renderTimestampHtml($t)
 {
     if(!$str= renderTimestamp($t)) {
         return "-";
@@ -625,7 +653,7 @@ function renderTimestampHtml($t)
     else {
     */
         return $str;
-    
+
 
 }
 
@@ -752,7 +780,7 @@ function renderDateHtml($t)
         return "<span class='new date' title='$str_tooltip'>$str</span>";
     }
     */
-    
+
     if($str_tooltip){
         return "<span class='date' title='$str_tooltip'>$str</span>";
     }
