@@ -134,9 +134,8 @@ function home() {
 	#--- list tasks -------------------------------------------------------------
    	if($show_tasks = $auth->cur_user->show_tasks_at_home) {
         measure_start('get_tasks');
-
-        $order_str=get('sort_'.$PH->cur_page->id."_tasks");
-
+		
+        $order_str=get('sort_'.$PH->cur_page->id.'_home_tasks');
         $tasks= Task::getHomeTasks($order_str);
 
         measure_stop('get_tasks');
@@ -318,7 +317,7 @@ function home() {
 
 	### list bookmarks ###
 	{
-		require_once(confGet('DIR_STREBER') . 'lists/list_items.inc.php');
+		require_once(confGet('DIR_STREBER') . 'lists/list_bookmarks.inc.php');
 		$list_bookmarks = new ListBlock_bookmarks();
 		$list_bookmarks->print_automatic();
 	}

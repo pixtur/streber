@@ -137,6 +137,7 @@ class ListBlock_persons extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
+		
     }
 
 	/**
@@ -207,6 +208,7 @@ class ListBlock_persons extends ListBlock
 class ListBlockCol_PersonNickname extends ListBlockCol
 {
     public $id='nickname';
+	public $key='nickname';
 
     function __construct($args= NULL)
     {
@@ -228,7 +230,8 @@ class ListBlockCol_PersonNickname extends ListBlockCol
 class ListBlockCol_PersonName extends ListBlockCol
 {
     public $id='name';
-
+	public $key='name';
+	
     function __construct($args= NULL)
     {
         parent::__construct($args);
@@ -240,6 +243,7 @@ class ListBlockCol_PersonName extends ListBlockCol
 	function render_tr(&$person, $style="")
 	{
 	    global $PH;
+				
 		print "<td><b><nobr>". $PH->getLink('personView',asHtml($person->name), array('person' => $person->id)) ."</b></nobr></td>";
 	}
 }
@@ -252,6 +256,7 @@ class ListBlockCol_PersonName extends ListBlockCol
 class ListBlockCol_PersonProfile extends ListBlockCol
 {
     public $id='profile';
+	public $key='profile';
 
     function __construct($args= NULL)
     {
