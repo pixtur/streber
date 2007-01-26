@@ -380,6 +380,11 @@ $g_lang_table= array(
 'Bookmark: "%s"'									     => 'Lesezeichen "%s"',
 'Notify on change'										 => 'Benachrichtigung bei Änderung',
 'Notify if unchanged in'								 => 'Falls keine Änderung, Benachrichtigung nach',
+'no'													 => 'nein',
+'yes'													 => 'ja',
+'Edit %s bookmark(s)'									 => '%s Lesezeichen bearbeiten',
+'%s bookmark(s) could not be added.'					 => '%s Lesezeichen konnte(n) nicht hinzugefügt werden.',
+'Edited %s bookmark(s).'                                 => '%s Lesezeichen wurde(n) bearbeitet.',
 
 ### ../pages/person.inc  ###
 'Bookmark'												 => 'Lesezeichen',	

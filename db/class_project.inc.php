@@ -282,6 +282,7 @@ class Project extends DbProjectItem
         foreach($tmp as $t) {
             $taskpersons[]=new TaskPerson($t);
         }
+		
         return $taskpersons;
     }
 
@@ -739,14 +740,14 @@ class Project extends DbProjectItem
 
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);
-
+		
     	$tmp=$sth->fetchall_assoc();
     	$ppersons=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
             $ppersons[]= $pperson;
         }
-
+	
         return $ppersons;
 	}
 
@@ -918,15 +919,14 @@ class Project extends DbProjectItem
         $str_not_modified_by= $not_modified_by
             ? 'AND i.modified_by != ' . intval($not_modified_by)
             : '';
+		
 
         ### only visibile for current user ###
         if($visible_only) {
             $s_query=
-            "SELECT i.* from
-                                    {$prefix}item i,
-                                    {$prefix}projectperson upp
+            "SELECT i.* from {$prefix}item i, {$prefix}projectperson upp
             WHERE
-                    upp.person = {$auth->cur_user->id}
+                upp.person = {$auth->cur_user->id}
                 AND upp.project = i.project
                 $str_state
                 $str_show_issues
@@ -969,8 +969,7 @@ class Project extends DbProjectItem
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);
     	$tmp=$sth->fetchall_assoc();
-
-
+		
     	$items= array();
         foreach($tmp as $n) {
             $item= new DbProjectItem($n);
@@ -1099,7 +1098,7 @@ class Project extends DbProjectItem
             $str=
                 "SELECT DISTINCT i.*, p.* from {$prefix}project p, {$prefix}projectperson upp, {$prefix}company c, {$prefix}item i
                 WHERE
-                        upp.person = {$auth->cur_user->id}
+                        upp.person = '{$auth->cur_user->id}'
                     AND upp.state = 1
 
                     AND upp.project = p.id
@@ -1131,7 +1130,7 @@ class Project extends DbProjectItem
         }
 
         $projects = self::queryFromDb($str);
-
+		
         return $projects;
     }
 

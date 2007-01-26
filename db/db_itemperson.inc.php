@@ -179,9 +179,17 @@ class ItemPerson extends DbItem
 		    ? "AND item = " . $item .""
 			: "";
 
-		$str_bookmark = $is_bookmark
-		    ? "AND is_bookmark = 1"
-			: "";
+       if(is_null($is_bookmark)){
+	   		$str_bookmark = "";
+	   }
+	   else{
+	       if($is_bookmark){
+		       $str_bookmark = "AND is_bookmark = 1";
+		   }
+		   else{
+		       $str_bookmark = "AND is_bookmark = 0";
+		   }
+	   }
 		
 		if(!is_null($notify_on_change)){
 			$str_notify_on_change = 'AND notify_on_change = ' . $notify_on_change;

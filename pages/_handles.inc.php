@@ -79,6 +79,18 @@ new PageHandleSubm(array('id'=>'itemMonitorEditSubmit',
     'valid_params'=>array(),
 ));
 
+new PageHandleForm(array('id'=>'itemMonitorEditMultiple',
+    'req'=>'pages/item.inc.php',
+    'title'=>__('Edit multiple monitored items'),
+	'valid_params'=>array(),
+    'test'=>'yes',
+    'test_params'=>array('id'=>'_ITEM_',),
+));
+
+new PageHandleSubm(array('id'=>'itemMonitorEditMultipleSubmit',
+    'req'=>'pages/item.inc.php',
+    'valid_params'=>array(),
+));
 
 new PageHandle(array('id'=>'itemViewDiff',
     'req'=>'pages/item.inc.php',
