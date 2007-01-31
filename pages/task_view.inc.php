@@ -441,7 +441,7 @@ function TaskView()
     if($task->description!="") {
 
         echo "<div class=description>";
-        echo  wiki2html($task->description, $project);
+        echo  wiki2html($task->description, $project, $task->id, 'description');
         echo "</div>";
 
 
@@ -462,6 +462,8 @@ function TaskView()
         echo $PH->getLink('taskEditDescription',NULL,array('tsk'=> $task->id),'edit_description');
         echo "</div>";
 
+        echo "<input type=hidden name='item_id' value='$task->id'>";
+
 echo "
 <script type='text/javascript'>
 // <![CDATA[
@@ -477,19 +479,8 @@ onLoadFunctions.push(function()
         cancel:'Cancel'
     });
 
-    $('div.wiki h1,div.wiki h2').each(function() {
-        var chapter= this;
-
-        $(this).addClass('edit_chapter');
-        var chapter_name=$(this).html();
-
-        $(this).editable('index.php?go=itemSaveField&item={$task->id}&field=description&chapter_name=' + chapter_name, {
-            postload:'index.php?go=itemLoadField&item={$task->id}&field=description&chapter_name=' + chapter_name,
-            type:'chapter',
-            submit:'Save3',
-            cancel:'Cancel'
-        });
-    });
+    var item_id= chapter.attributes['item_id'];
+    var field_name= chapter.attributes['field_name'];
 });
 
 // ]]>

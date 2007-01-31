@@ -31,7 +31,7 @@
 /* $Id: jquery.jeditable.js,v 1.32 2007/01/03 20:30:57 tuupola Exp $ */
 
 /**
-  * jQuery inplace editor plugin.  
+  * jQuery inplace editor plugin.
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
@@ -39,14 +39,14 @@
   * @name  jEditable
   * @type  jQuery
   * @param String  url                POST URL to send edited content
-  * @param Hash    options            additional options 
+  * @param Hash    options            additional options
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
   * @param String  options[type]      text or textarea
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto' or height in pixels
-  * @param Mixed   options[width]     'auto' or width in pixels 
+  * @param Mixed   options[width]     'auto' or width in pixels
   * @param String  options[postload]  POST URL to fetch content before editing
   * @param String  options[getload]   GET URL to fetch content before editing
   * @param String  options[data]      Or content given as paramameter.
@@ -56,14 +56,14 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
-  *             
+  *
   */
 
 jQuery.fn.editable = function(url, options) {
 
     /* prevent elem has no properties error */
-    if (jQuery(this).id() == null) { 
-        return false; 
+    if (jQuery(this).id() == null) {
+        return false;
     };
 
     var settings = {
@@ -75,20 +75,21 @@ jQuery.fn.editable = function(url, options) {
         height : 'auto',
         event  : 'click',
         onblur : 'cancel',
-        obj    : false
+        obj    : false,
+        chapter: false
     };
 
     if(options) {
         jQuery.extend(settings, options);
     };
-      
+
     jQuery(this).attr('title', settings.tooltip);
 
     jQuery(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
         var self = this;
-        
+
         if(settings.obj) {
             self= settings.obj;
         }
@@ -99,13 +100,19 @@ jQuery.fn.editable = function(url, options) {
         }
 
         /* figure out how wide and tall we are */
-        var width = 
+        var width =
             ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
-        var height = 
+        var height =
             ('auto' == settings.height) ? jQuery(self).height() : settings.height;
 
         self.editing    = true;
-        self.revert     = jQuery(self).html();
+
+        if(settings.chapter) {
+
+        }
+        else {
+            self.revert     = jQuery(self).html();
+        }
         self.innerHTML  = '';
 
         /* create the form object */
@@ -130,7 +137,7 @@ jQuery.fn.editable = function(url, options) {
                 if (jQuery.iExpander && settings.autoexpand) {
                     jQuery(i).Autoexpand(settings.autoexpand);
                 }
-*/     
+*/
                 break;
             case 'select':
                 i = document.createElement('select');
@@ -143,17 +150,17 @@ jQuery.fn.editable = function(url, options) {
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
-        
+
         /* set input content via POST, GET, given data or existing value */
         var url;
         var type;
-                
+
         if (settings.getload) {
             url = settings.getload;
             type = 'GET';
         } else if (settings.postload) {
             url = settings.postload;
-            type = 'POST';      
+            type = 'POST';
         }
 
         if (url) {
@@ -169,7 +176,7 @@ jQuery.fn.editable = function(url, options) {
             });
         } else if (settings.data) {
             setContent(settings.data);
-        } else { 
+        } else {
             setContent(self.revert);
         }
 
@@ -194,7 +201,7 @@ jQuery.fn.editable = function(url, options) {
         self.appendChild(f);
 
         i.focus();
- 
+
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
             if (e.keyCode == 27) {
@@ -222,14 +229,14 @@ jQuery.fn.editable = function(url, options) {
         }
 
         jQuery(f).submit(function(e) {
-            if (t) { 
+            if (t) {
                 clearTimeout(t);
             }
 
             /* do no submit */
-            e.preventDefault(); 
+            e.preventDefault();
 
-            /* add edited content and id of edited element to POST */           
+            /* add edited content and id of edited element to POST */
             var p = {};
             p[i.name] = jQuery(i).val();
             p[settings.id] = self.id;
@@ -239,10 +246,16 @@ jQuery.fn.editable = function(url, options) {
             jQuery(self).load(settings.url, p, function(str) {
                 self.editing = false;
             });
+            if(self.ajax_edit) {
+                self.ajax_edit.initEditChapters();
+            }
         });
 
         function reset() {
             self.innerHTML = self.revert;
+            if(self.ajax_edit) {
+                self.ajax_edit.initEditChapters();
+            }
             self.editing   = false;
         };
 

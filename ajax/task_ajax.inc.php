@@ -33,7 +33,7 @@ function taskAjax()
 /**
 * get field value of an item for inplace editing
 */
-function itemLoadField() 
+function itemLoadField()
 {
     if(!$item_id=get('item')) {
         return NULL;
@@ -58,17 +58,19 @@ function itemLoadField()
 /**
 * save field value of an item which has been edited inplace
 */
-function itemSaveField() 
+function itemSaveField()
 {
     $value= get('value');
     if(is_null($value)) {
         return;
     }
-    
+
     if(!$item_id=get('item')) {
         print "Failure";
         return;
     }
+    global $g_wiki_project;
+
     if(!$item= DbProjectItem::getEditableById($item_id)) {
         print "Failure";
         return;
@@ -87,9 +89,13 @@ function itemSaveField()
     }
     $object->$field_name = $value;
     $object->update(array($field_name));
+
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
-    
-    print wiki2html($value);
+
+
+
+    #print wiki2html($value);
+    print wiki2purehtml($value);
 }
 
 

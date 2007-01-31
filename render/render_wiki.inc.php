@@ -1759,17 +1759,16 @@ class FormatBlockTable extends FormatBlock
 global $g_wiki_project;
 $g_wiki_project= NULL;                                      # dirty hack to pass project for linking of wiki-pages
 
-function wiki2html($text, $project=NULL, $convert_special_chars= 'AUTO')
+function &wiki2html(&$text, &$project=NULL, $item_id=NULL, $field_name=NULL)
 {
 
     $text_org = $text;
     $text.="\n";
 
     ### use conf ###
-    if($convert_special_chars == 'AUTO') {
-        $text= asHtml($text);
-    }
+    $text= asHtml($text);
 
+    ### convert, if id is given ###
     if(!is_object($project)) {
         $project= Project::getVisibleById($project);
     }
@@ -1777,6 +1776,55 @@ function wiki2html($text, $project=NULL, $convert_special_chars= 'AUTO')
     global $g_wiki_project;
     $g_wiki_project= $project;
 
+    $blocks= wiki2blocks($text);
+
+    $str_item_id= is_null($item_id)
+                ? ''
+                : 'item_id=' . $item_id;
+
+
+    $str_field  = is_null($field_name)
+                ? ''
+                : 'field_name=' . $field_name;
+
+
+    $tmp= array();
+    $tmp[]= "<div class=wiki  $str_item_id $str_field><div class=chapter>";
+
+    foreach($blocks as $b) {
+        if($b instanceof FormatBlockHeadline) {
+            $tmp[]="</div><div class=chapter>";
+        }
+
+        $tmp[]= $b->renderAsHtml();
+    }
+    $tmp[]= '</div>';
+    $tmp[]= '<span class=end> </span></div>';                # end-span to create image-floats
+
+    $out= implode('', $tmp);
+    global $g_wiki_auto_adjusted;
+    $g_wiki_auto_adjusted= '';
+    if(confGet('WIKI_AUTO_INSERT_IDS')) {
+        global $g_replace_list;
+        if(count($g_replace_list)) {
+            foreach($g_replace_list as $org => $new) {
+                $text_org= str_replace('[['.$org.']]', '[['.$new.']]', $text_org);
+            }
+            $g_wiki_auto_adjusted= $text_org;
+        }
+    }
+    return $out;
+}
+
+
+/**
+* do actual parsing of wiki text and conversion into blocks
+*
+* NOTE:
+* - g_wiki_project has to be initialized for this function
+*/
+function &wiki2blocks(&$text)
+{
     #if($convert_special_chars) {
     #    $text= htmlSpecialChars($text);
     #}
@@ -1810,46 +1858,26 @@ function wiki2html($text, $project=NULL, $convert_special_chars= 'AUTO')
     $blocks= FormatBlockEmphasize::parseBlocks($blocks);
     $blocks= FormatBlockLongMinus::parseBlocks($blocks);
 
-    $out= '<div class=wiki>';
-    foreach($blocks as $b) {
-        $out.= $b->renderAsHtml();
-    }
-    $out.= '<span class=end> </span></div>';                # end-span to create image-floats
-
-    global $g_wiki_auto_adjusted;
-    $g_wiki_auto_adjusted= '';
-    if(confGet('WIKI_AUTO_INSERT_IDS')) {
-        global $g_replace_list;
-        if(count($g_replace_list)) {
-            foreach($g_replace_list as $org => $new) {
-                $text_org= str_replace('[['.$org.']]', '[['.$new.']]', $text_org);
-            }
-            $g_wiki_auto_adjusted= $text_org;
-        }
-    }
-
-    return $out;
+    return $blocks;
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+* returns the wikitext without the outer div
+*/
+function wiki2purehtml(&$text, &$project=NULL)
+{
+    $blocks = wiki2blocks($text, $project);
+    $tmp = array();
+    $out='';
+    foreach($blocks as $b) {
+        if($b instanceof FormatBlockHeadline) {
+            $tmp[]="jslkdf";
+        }
+         $tmp[]= $b->renderAsHtml();
+    }
+    return implode('',$tmp);
+}
 
 
 
