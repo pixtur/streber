@@ -107,12 +107,7 @@ jQuery.fn.editable = function(url, options) {
 
         self.editing    = true;
 
-        if(settings.chapter) {
-
-        }
-        else {
-            self.revert     = jQuery(self).html();
-        }
+        self.revert     = jQuery(self).html();
         self.innerHTML  = '';
 
         /* create the form object */
@@ -240,14 +235,24 @@ jQuery.fn.editable = function(url, options) {
             var p = {};
             p[i.name] = jQuery(i).val();
             p[settings.id] = self.id;
-
+            
             /* show the saving indicator */
             jQuery(self).html(options.indicator);
-            jQuery(self).load(settings.url, p, function(str) {
-                self.editing = false;
-            });
-            if(self.ajax_edit) {
-                self.ajax_edit.initEditChapters();
+            if(settings.chapter) {
+                //this.ajax_edit.initEditChapters();
+                jQuery(self).load(settings.url, p, function(str) {
+                    self.editing = false;
+                    var parentNode= this.parentNode;
+                    $(parentNode).html(str);
+                    parentNode.ajax_edit.initEditChapters();
+                });
+
+            }
+            else {
+                jQuery(self).load(settings.url, p, function(str) {
+                    self.editing = false;
+                    self.ajax_edit.initEditChapters();
+                });
             }
         });
 

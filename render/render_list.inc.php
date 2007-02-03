@@ -907,9 +907,13 @@ class ListBlock extends PageBlock
 
     public function render_header()
     {
+        $str_selectable= isset($this->columns['_select_col_'])
+                        ? 'selectable'
+                        : '';
+
         parent::render_blockStart();
 		#--- start table (needs to be closed later)
-        echo "<div class=table_container><table cellpadding=0 cellspacing=0 id=$this->id class='list $this->class'"
+        echo "<div class=table_container><table cellpadding=0 cellspacing=0 id=$this->id class='list $this->class $str_selectable'"
         .">"; # required by Safari  & IE 5.2 MAC)
 
     }

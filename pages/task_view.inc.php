@@ -441,10 +441,14 @@ function TaskView()
     if($task->description!="") {
 
         echo "<div class=description>";
-        echo  wiki2html($task->description, $project, $task->id, 'description');
+        if($editable) {
+            echo  wiki2html($task->description, $project, $task->id, 'description');
+        }
+        else {
+            echo  wiki2html($task->description, $project);
+        }
         echo "</div>";
-
-
+        
         ### update task if relative links have been converted to ids ###
         global $g_wiki_auto_adjusted;
         if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {

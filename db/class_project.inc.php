@@ -1269,6 +1269,9 @@ class Project extends DbProjectItem
         if($auth->cur_user->user_rights & RIGHT_EDITALL) {
             return true;
         }
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+            return true;
+        }
 
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {

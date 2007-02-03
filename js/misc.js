@@ -223,42 +223,39 @@ function misc()
         onLoadFunctions[i]();
     }
 
-
-
     /**
     * init ajaxEdits
-    *
-    * early development version / not stable
-    *
     */
-    /*
     var ajax_edits= new Array();
-    $('div.wiki').each(function() {
-        aj= new ajaxEdit(this);
+    $('div.wiki.editable').each(function() {
+        aj= new AjaxEdit(this);
         ajax_edits.push(aj);
         this.ajax_edit= aj;
-        alert("this="+this.ajax_edit);
     });
-    */
 }
 
 
 /**
 * add inline edit buttons for wiki chapters
 */
-function ajaxEdit(dom_element, item_id, field){
+function AjaxEdit(dom_element, item_id, field){
     this.dom_element    = dom_element;
     this.item_id        = item_id || 0;
     this.field          = field || 0;
-    this.test="bla";
 
     if(!dom_element)
         return;
 
+    if(dom_element.attributes['item_id']) {
+        item_id= dom_element.attributes['item_id'].value;
+    }
 
     this.initEditChapters = function()
     {
-        if(!dom_element) return;
+        if(!dom_element) {
+            alert("no dom element");
+            return;
+        }
 
         var chapter_count= 0;
         $(dom_element).find('div.chapter').each(function() {
@@ -266,29 +263,20 @@ function ajaxEdit(dom_element, item_id, field){
 
             var children= $(this).children();
 
-
-            if(children[0].tagName != 'H2' && children[0].tagName != 'H3') {
-                return;
-            }
-
-
             var chapter_name= chapter_count++;
-
 
             $(this).addClass('edit_chapter');
 
-
-            $(this).editable('index.php?go=itemSaveField&item={$task->id}&field=description&chapter_name=' + chapter_name, {
-                postload:'index.php?go=itemLoadField&item={$task->id}&field=description&chapter_name=' + chapter_name,
+            $(this).editable('index.php?go=itemSaveField&item=' + item_id + '&field=description&chapter=' + chapter_name, {
+                postload:'index.php?go=itemLoadField&item=' + item_id + '&field=description&chapter=' + chapter_name,
                 type:'textarea',
                 submit:'Save3',
-                cancel:'Cancel'
+                cancel:'Cancel',
+                chapter:true
             });
         });
     }
-
     this.initEditChapters();
-
 }
 
 

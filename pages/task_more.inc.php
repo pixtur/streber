@@ -215,9 +215,6 @@ function TaskNew()
         'for_milestone'=>$for_milestone_id,
     ));
 
-
-
-
     ### set a valid create-level ###
     $newtask->pub_level= $project->getCurrentLevelCreate();
 

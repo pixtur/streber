@@ -65,7 +65,7 @@ function listFunctions()
     /**
     * click on rows
     */
-    $('table.list tr').click
+    $('table.list.selectable tr').click
     (
         function(e)
         {

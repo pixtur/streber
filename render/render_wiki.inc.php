@@ -622,7 +622,6 @@ class FormatBlockHeadline extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    #if(preg_match("/^(.*?)\n?([^\n]+)\n===+\s*(\n.*)/s", $text, $matches)) {
                     if(preg_match("/(.*?)\r?==[ \t]*([^\n=]+)==\s*\r?\n[ \t]*(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockHeadline($matches[2],1);
@@ -653,7 +652,6 @@ class FormatBlockHeadline extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    #if(preg_match("/^(.*?)\n?([^\n]+)\n===+\s*(\n.*)/s", $text, $matches)) {
                     if(preg_match("/(.*?)\r?===[ \t]*([^\n=]+)===\s*\n[ \t]*(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockHeadline($matches[2],2);
@@ -685,8 +683,6 @@ class FormatBlockHeadline extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    #if(preg_match("/^(.*?)\n?([^\n]+)\n===+\s*(\n.*)/s", $text, $matches)) {
-                    #if(preg_match("/(.*?)\r?([^\n\r]+)\r?\n===+[ \t]*\r?\n?(.*)/s", $text, $matches)) {
                     if(preg_match("/^(.*?)([^\r\n]+)[\r\n]+===+[ \t]*[\r\n]+(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
 
@@ -1786,10 +1782,14 @@ function &wiki2html(&$text, &$project=NULL, $item_id=NULL, $field_name=NULL)
     $str_field  = is_null($field_name)
                 ? ''
                 : 'field_name=' . $field_name;
+                
+    $str_editable = $item_id 
+                ? 'editable'
+                : '';
 
 
     $tmp= array();
-    $tmp[]= "<div class=wiki  $str_item_id $str_field><div class=chapter>";
+    $tmp[]= "<div class='wiki $str_editable' $str_item_id $str_field><div class=chapter>";
 
     foreach($blocks as $b) {
         if($b instanceof FormatBlockHeadline) {
@@ -1867,17 +1867,74 @@ function &wiki2blocks(&$text)
 */
 function wiki2purehtml(&$text, &$project=NULL)
 {
-    $blocks = wiki2blocks($text, $project);
+    $blocks = wiki2blocks(asHtml($text), $project);
     $tmp = array();
     $out='';
+    $tmp[]= "<div class=chapter>";
+
     foreach($blocks as $b) {
         if($b instanceof FormatBlockHeadline) {
-            $tmp[]="jslkdf";
+            $tmp[]="</div><div class=chapter>";
         }
-         $tmp[]= $b->renderAsHtml();
+
+        $tmp[]= $b->renderAsHtml();
     }
+    $tmp[]= '</div>';
     return implode('',$tmp);
 }
+
+
+/**
+* return a fraction of a wiki text
+* 
+* this is used be inline editing functions with ajax
+*/
+function getOneWikiChapter(&$text, $chapter)
+{
+    $parts= getWikiChapters(&$text);
+    return $parts[$chapter];
+}
+
+
+/**
+* split wiki text into chapters starting with a headline
+*
+* - returns array with chapters. 
+* - First chapter might be empty, if there is no text before the first headline.
+*/
+function &getWikiChapters(&$text, $chapter) 
+{
+    $regex_headlines= array(
+        "/(.*?)(\r?==[ \t]*[^\n=]+==\s*\r?\n[ \t]*)(.*)/s",
+        "/(.*?)(\r?===[ \t]*([^\n=]+)===\s*\n[ \t]*)(.*)/s",
+        "/(.*?)([^\r\n]+[\r\n]+===+[ \t]*[\r\n]+)(.*)/s",
+        "/(.*?)([^\n\r]+\r?\n---+[\t]*[\r\n]+)(.*)/s",
+    );
+  
+  
+    $rest = $text;
+    
+    foreach($regex_headlines as $reg) {
+        $new_buffer= "";
+            
+        while($rest) {
+            if(preg_match($reg, $rest, $matches)) {
+                $new_buffer.= $matches[1]. "__SPLITTER__" . $matches [2];
+                $rest=$matches[3];
+            }
+            else {
+                $new_buffer.= $rest;
+                $rest= "";
+            }
+        }
+        $rest= $new_buffer;
+    }
+    $parts= explode('__SPLITTER__', $rest);
+
+    return $parts;
+}
+
+
 
 
 

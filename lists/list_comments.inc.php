@@ -240,8 +240,27 @@ class ListBlockCol_CommentText extends ListBlockCol
     		$column_text.= "<span class=title>" . $PH->getLink('commentView',$obj->name, array('comment' => $obj->id)) . "</span>";
 
     		require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
-    		$diz= wiki2html($obj->description, Project::getVisibleById($obj->project));
+    		$project= Project::getVisibleById($obj->project);
     		$obj->nowViewedByUser();
+
+
+            ### editable? ###
+            $editable= false;
+    		if($obj->created_by == $auth->cur_user->id) {
+    		    if($pp= $obj->getProjectPerson()) {
+    			    if($pp->level_edit < $obj->pub_level) {
+    				    $editable= true;
+    				}
+    			}
+    		}
+            if($editable) {
+    		    $diz= wiki2html($obj->description, $project, $obj->id, 'description');
+    		}
+    		else {
+    		    $diz= wiki2html($obj->description, $project);
+    		}
+
+
             if($diz) {
 	    	    $column_text.= "<div class=comment_text>$diz</div>";
 	    	}

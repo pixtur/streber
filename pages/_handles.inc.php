@@ -1286,19 +1286,19 @@ new PageHandle(array('id'=>'search',
 * misc pages / ajax etc.
 */
 new PageHandle(array('id'=>'taskAjax',
-    'req'=>'ajax/task_ajax.inc.php',
+    'req'=>'pages/task_ajax.inc.php',
     'title'=>__('Task Test'),
 ));
 
 
 new PageHandle(array('id'=>'itemLoadField',
-    'req'=>'ajax/task_ajax.inc.php',
+    'req'=>'pages/item_ajax.inc.php',
     'title'=>__('Load Field'),
 ));
 
 new PageHandle(array('id'=>'itemSaveField',
-    'req'=>'ajax/task_ajax.inc.php',
-    'title'=>__('Load Field'),
+    'req'=>'pages/item_ajax.inc.php',
+    'title'=>__('Save Field'),
 ));
 
 ?>
