@@ -5,17 +5,23 @@ undefined keys:
 'autodetect'                  =>'',  # line 304
 
 ### ../db/class_task.inc.php   ###
-'Order Id'                    =>'',  # line 165
+'Order Id'                    =>'',  # line 175
 
 ### ../db/db_itemperson.inc.php   ###
 'Comment|form label for items'=>'',  # line 45
 
+### ../lists/list_bookmarks.inc.php   ###
+'State'                       =>'',  # line 718
+
 ### ../pages/search.inc.php   ###
-'Other team members changed nothing since last logout (%s)'=>'',  # line 752
+'Other team members changed nothing since last logout (%s)'=>'',  # line 754
 
 ### ../lists/list_comments.inc.php   ###
 'version %s'                  =>'',  # line 140
 'Publish'                     =>'',  # line 173
+
+### ../pages/project_more.inc.php   ###
+'Documentation'               =>'',  # line 1091
 
 ### ../lists/list_efforts.inc.php   ###
 'View selected Efforts'       =>'',  # line 72
@@ -26,12 +32,9 @@ undefined keys:
 'Summary|Column header'       =>'',  # line 414
 'Thumbnail|Column header'     =>'',  # line 475
 
-### ../lists/list_items.inc.php   ###
-'State'                       =>'',  # line 711
-
 ### ../lists/list_persons.inc.php   ###
-'Nickname|column header'      =>'',  # line 215
-'Name|column header'          =>'',  # line 236
+'Nickname|column header'      =>'',  # line 217
+'Name|column header'          =>'',  # line 239
 
 ### ../lists/list_tasks.inc.php   ###
 'List|List sort mode'         =>'',  # line 240
@@ -43,121 +46,129 @@ undefined keys:
 'Playground'                  =>'',  # line 17
 
 ### ../pages/item.inc.php   ###
-'View item'                   =>'',  # line 557
+'View item'                   =>'',  # line 1004
 
 ### ../pages/_handles.inc.php   ###
 'Set Public Level'            =>'',  # line 37
 'Edit monitored items'        =>'',  # line 71
-
-### ../pages/project_more.inc.php   ###
-'Documentation'               =>'',  # line 1091
-
-### ../pages/_handles.inc.php   ###
-'View Task As Docu'           =>'',  # line 368
-'Mark tasks as Closed'        =>'',  # line 460
+'Edit multiple monitored items'=>'',  # line 84
+'View Project as RSS'         =>'',  # line 169
+'View Task As Docu'           =>'',  # line 391
+'Mark tasks as Closed'        =>'',  # line 479
 
 ### ../render/render_page.inc.php   ###
-'Register'                    =>'',  # line 721
+'Register'                    =>'',  # line 724
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'',  # line 1069
-'Forgot your password?'       =>'',  # line 1129
+'Marks all items viewed'      =>'',  # line 1088
+'Forgot your password?'       =>'',  # line 1148
+'Load Field'                  =>'',  # line 1296
+'Save Field'                  =>'',  # line 1301
 
 ### ../pages/comment.inc.php   ###
-'Delete this comment'         =>'',  # line 105
-'Restore'                     =>'',  # line 97
-'Select some comments to restore'=>'',  # line 552
-'Failed to restore %s comments'=>'',  # line 578
-'Restored %s comments'        =>'',  # line 581
+'Delete this comment'         =>'',  # line 125
+'Restore'                     =>'',  # line 117
+'Select some comments to restore'=>'',  # line 572
+'Failed to restore %s comments'=>'',  # line 598
+'Restored %s comments'        =>'',  # line 601
 
 ### ../std/class_pagehandler.inc.php   ###
-'Export as CSV'               =>'',  # line 829
+'Export as CSV'               =>'',  # line 817
+
+### ../pages/project_view.inc.php   ###
+'News'                        =>'',  # line 160
 
 ### ../pages/custom_projView.inc.php   ###
-'News'                        =>'',  # line 365
 '%s comments'                 =>'',  # line 389
 
 ### ../pages/custom_projViewFiles.inc.php   ###
 'Downloads'                   =>'',  # line 62
 
 ### ../pages/effort.inc.php   ###
-'Created at|label'            =>'',  # line 370
+'Created at|label'            =>'',  # line 388
 
 ### ../pages/file.inc.php   ###
-'Could not access parent task Id:%s'=>'',  # line 52
-'Move this file to another task'=>'',  # line 122
-'Move'                        =>'',  # line 123
+'Could not access parent task Id:%s'=>'',  # line 53
+'Move this file to another task'=>'',  # line 123
+'Move'                        =>'',  # line 124
 
 ### ../pages/item.inc.php   ###
-'Select some items(s) to change pub level'=>'',  # line 60
-'itemsSetPubLevel requires item_pub_level'=>'',  # line 67
-'Made %s items public to %s'  =>'',  # line 85
-'Select one or more bookmark(s)'=>'',  # line 314
-'An error occured'            =>'',  # line 318
-'Edit bookmark: %s|Page title'=>'',  # line 401
-'Bookmark: %s'                =>'',  # line 402
-'Could not get bookmark'      =>'',  # line 456
+'Select some items(s) to change pub level'=>'',  # line 61
+'itemsSetPubLevel requires item_pub_level'=>'',  # line 68
+'Made %s items public to %s'  =>'',  # line 86
+'Select one or more bookmark(s)'=>'',  # line 222
+'An error occured'            =>'',  # line 246
+'Edit bookmark: "%s"|page title'=>'',  # line 365
+'Bookmark: "%s"'              =>'',  # line 366
+'Could not get bookmark'      =>'',  # line 432
+'Edit bookmarks'              =>'',  # line 573
+'Edit multiple bookmarks|page title'=>'',  # line 575
+
+### ../pages/task_more.inc.php   ###
+'-- keep different --'        =>'',  # line 2331
 
 ### ../pages/login.inc.php   ###
-'Continue anonymously'        =>'',  # line 106
-'Password reminder|Page title'=>'',  # line 310
-'Please enter your nickname'  =>'',  # line 322
-'We will then sent you an E-mail with a link to adjust your password.'=>'',  # line 332
-'If you do not know your nickname, please contact your administrator: %s.'=>'',  # line 334
-'A notification mail has been sent.'=>'',  # line 393
+'Continue anonymously'        =>'',  # line 114
+'Password reminder|Page title'=>'',  # line 307
+'Please enter your nickname'  =>'',  # line 319
+'We will then sent you an E-mail with a link to adjust your password.'=>'',  # line 329
+'If you do not know your nickname, please contact your administrator: %s.'=>'',  # line 331
+'A notification mail has been sent.'=>'',  # line 390
 
 ### ../pages/misc.inc.php   ###
 'Could not find request page `%s`'=>'',  # line 47
 
 ### ../pages/person.inc.php   ###
-'Create Note|Tooltip for page function'=>'',  # line 512
-'Note|Page function person'   =>'',  # line 513
-'link existing Company'       =>'',  # line 659
-'no companies related'        =>'',  # line 664
-'Account'                     =>'',  # line 958
-'Options'                     =>'',  # line 1102
-'Time zone|form label'        =>'',  # line 1995
-'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1362
-'Registering is not enabled'  =>'',  # line 1864
-'Please provide information, why you want to register.'=>'',  # line 1869
-'Register as a new user'      =>'',  # line 1877
-'Marked all previous items as viewed.'=>'',  # line 2225
+'Create Note|Tooltip for page function'=>'',  # line 511
+'Note|Page function person'   =>'',  # line 512
+'link existing Company'       =>'',  # line 677
+'no companies related'        =>'',  # line 682
+'Account'                     =>'',  # line 976
+'Options'                     =>'',  # line 1120
+'Time zone|form label'        =>'',  # line 2021
+'Malformed activation url'    =>'',  # line 1225
+'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1388
+'Registering is not enabled'  =>'',  # line 1890
+'Please provide information, why you want to register.'=>'',  # line 1895
+'Register as a new user'      =>'',  # line 1903
+'Marked all previous items as viewed.'=>'',  # line 2251
 
 ### ../pages/project_more.inc.php   ###
 'Create a new page'           =>'',  # line 1111
 
 ### ../pages/task_view.inc.php   ###
-'Page'                        =>'',  # line 1048
+'Page'                        =>'',  # line 1097
 
 ### ../pages/project_more.inc.php   ###
 'Tasks resolved in upcomming version'=>'',  # line 1551
 
 ### ../pages/task_more.inc.php   ###
-'Display'                     =>'',  # line 684
+'Display'                     =>'',  # line 681
 
 ### ../pages/search.inc.php   ###
-'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',  # line 658
-'Sorry, but there is nothing left to search.'=>'',  # line 663
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',  # line 660
+'Sorry, but there is nothing left to search.'=>'',  # line 665
 
 ### ../pages/task_more.inc.php   ###
-'Display as'                  =>'',  # line 357
-'This folder has %s subtasks. Changing category will ungroup them.'=>'',  # line 361
-'-- next released version --' =>'',  # line 394
-'Bug Report'                  =>'',  # line 569
-'Timing'                      =>'',  # line 632
-'Comment has been rejected, because it looks like spam.'=>'',  # line 844
-'Not enough rights to edit task'=>'',  # line 884
-'Milestones may not have sub tasks'=>'',  # line 1150
-'Marked %s tasks to be resolved in this version.'=>'',  # line 1302
-'-- keep different --'        =>'',  # line 2317
-'Category'                    =>'',  # line 2303
-'Publish to|Form label'       =>'',  # line 2971
-'New Project|form label'      =>'',  # line 3055
+'Display as'                  =>'',  # line 354
+'This folder has %s subtasks. Changing category will ungroup them.'=>'',  # line 358
+'-- next released version --' =>'',  # line 391
+'Bug Report'                  =>'',  # line 566
+'Timing'                      =>'',  # line 629
+'Comment has been rejected, because it looks like spam.'=>'',  # line 841
+'Not enough rights to edit task'=>'',  # line 881
+'Milestones may not have sub tasks'=>'',  # line 1147
+'Marked %s tasks to be resolved in this version.'=>'',  # line 1309
+'Category'                    =>'',  # line 2317
+'Publish to|Form label'       =>'',  # line 2986
+'New Project|form label'      =>'',  # line 3070
 
 ### ../pages/task_view.inc.php   ###
-'View previous %s versions'   =>'',  # line 1108
-'Set to Open'                 =>'',  # line 1122
-'Update'                      =>'',  # line 715
+'View previous %s versions'   =>'',  # line 1157
+'Set to Open'                 =>'',  # line 1171
+'Further Documentation'       =>'',  # line 383
+'Update'                      =>'',  # line 764
+'Book Effort'                 =>'',  # line 1109
 
 ### ../pages/version.inc.php   ###
 'Moved %s versions to dumpster'=>'',  # line 251
@@ -167,24 +178,29 @@ undefined keys:
 'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 64
 
 ### ../render/render_misc.inc.php   ###
-'Docu|Project option'         =>'',  # line 351
-'Releases|Project option'     =>'',  # line 366
+'Docu|Project option'         =>'',  # line 380
+'Releases|Project option'     =>'',  # line 395
+'%b %e, %Y|strftime format string'=>'',  # line 579
+'%I:%M%P|strftime format string'=>'',  # line 592
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 601
+'%s min'                      =>'',  # line 696
+'%A, %B %e|strftime format string'=>'',  # line 921
 
 ### ../render/render_page.inc.php   ###
-'Go to parent / alt-U'        =>'',  # line 986
-'rendered in'                 =>'',  # line 1304
-'memory used'                 =>'',  # line 1305
-'querrying approx.'           =>'',  # line 1306
-'db-fields'                   =>'',  # line 1306
+'Go to parent / alt-U'        =>'',  # line 990
+'rendered in'                 =>'',  # line 1316
+'memory used'                 =>'',  # line 1319
+'%s queries / %s fields '     =>'',  # line 1322
 
 ### ../render/render_wiki.inc.php   ###
-'Image details'               =>'',  # line 952
-'Cannot link to item of type %s'=>'',  # line 1030
-'Unknown Item Id'             =>'',  # line 1305
+'Image details'               =>'',  # line 997
+'Cannot link to item of type %s'=>'',  # line 1075
+'Unknown Item Id'             =>'',  # line 1351
 
 ### ../std/class_auth.inc.php   ###
 'Invalid anonymous user'      =>'',  # line 94
 'Anonymous account has been disabled. '=>'',  # line 100
+'Sorry. 	Authentication failed'=>'',  # line 373
 
 ### ../std/common.inc.php   ###
 'Sorry, but the entered number did not match'=>'',  # line 236
@@ -210,14 +226,7 @@ undefined keys:
 'Version|Task Category'       =>'',  # line 219
 
 ### ../std/mail.inc.php   ###
-'Your account at|notification'=>'',  # line 464
-'Your account at %s is still active.|notification'=>'',  # line 481
-'Your login name is|notification'=>'',  # line 482
-'Maybe you want to %s set your password|notification'=>'',  # line 483
-'Unchanged item|notifcation mail from'=>'',  # line 805
-'No emails sent.'             =>'',  # line 1069
-'No changes since %s (%s day(s)) on: %s|notification mail subject'=>'',  # line 831
-'The following item is unchanged:|notification'=>'',  # line 847
-'Notification on changed item|notification mail from'=>'',  # line 1039
-'Changes on: %s|notification mail subject'=>'',  # line 1075
-'The following item was changed:|notification'=>'',  # line 1091
+'Your account at|notification'=>'',  # line 593
+'Your account at %s is still active.|notification'=>'',  # line 610
+'Your login name is|notification'=>'',  # line 611
+'Maybe you want to %s set your password|notification'=>'',  # line 612

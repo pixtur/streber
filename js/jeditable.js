@@ -85,14 +85,16 @@ jQuery.fn.editable = function(url, options) {
 
     jQuery(this).attr('title', settings.tooltip);
 
+
+    /* keep links inside text-blocks alive */
+    $(this).find('a').click(function(e) {
+        e.cancelBubble = true;
+    });
+
     jQuery(this)[settings.event](function(e) {
 
         /* save this to self because this changes when scope changes */
         var self = this;
-
-        if(settings.obj) {
-            self= settings.obj;
-        }
 
         /* prevent throwing an exeption if edit field is clicked again */
         if (self.editing) {
@@ -103,7 +105,7 @@ jQuery.fn.editable = function(url, options) {
         var width =
             ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
         var height =
-            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
+            ('auto' == settings.height) ? (jQuery(self).height()+ 20) : settings.height;
 
         self.editing    = true;
 
@@ -235,7 +237,7 @@ jQuery.fn.editable = function(url, options) {
             var p = {};
             p[i.name] = jQuery(i).val();
             p[settings.id] = self.id;
-            
+
             /* show the saving indicator */
             jQuery(self).html(options.indicator);
             if(settings.chapter) {

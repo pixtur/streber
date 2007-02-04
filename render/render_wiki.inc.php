@@ -1337,6 +1337,7 @@ class FormatBlockItemId extends FormatBlock
                 break;
 
             case ITEM_COMMENT:
+                require_once(confGet('DIR_STREBER') . './db/class_comment.inc.php');
                 if($comment= Comment::getVisibleById(intVal($this->str))) {
                     return $PH->getLink('commentView', $comment->name, array('comment' => $comment->id));
                 }
@@ -1782,8 +1783,8 @@ function &wiki2html(&$text, &$project=NULL, $item_id=NULL, $field_name=NULL)
     $str_field  = is_null($field_name)
                 ? ''
                 : 'field_name=' . $field_name;
-                
-    $str_editable = $item_id 
+
+    $str_editable = $item_id
                 ? 'editable'
                 : '';
 
@@ -1886,7 +1887,7 @@ function wiki2purehtml(&$text, &$project=NULL)
 
 /**
 * return a fraction of a wiki text
-* 
+*
 * this is used be inline editing functions with ajax
 */
 function getOneWikiChapter(&$text, $chapter)
@@ -1899,10 +1900,10 @@ function getOneWikiChapter(&$text, $chapter)
 /**
 * split wiki text into chapters starting with a headline
 *
-* - returns array with chapters. 
+* - returns array with chapters.
 * - First chapter might be empty, if there is no text before the first headline.
 */
-function &getWikiChapters(&$text, $chapter) 
+function &getWikiChapters(&$text, $chapter)
 {
     $regex_headlines= array(
         "/(.*?)(\r?==[ \t]*[^\n=]+==\s*\r?\n[ \t]*)(.*)/s",
@@ -1910,13 +1911,13 @@ function &getWikiChapters(&$text, $chapter)
         "/(.*?)([^\r\n]+[\r\n]+===+[ \t]*[\r\n]+)(.*)/s",
         "/(.*?)([^\n\r]+\r?\n---+[\t]*[\r\n]+)(.*)/s",
     );
-  
-  
+
+
     $rest = $text;
-    
+
     foreach($regex_headlines as $reg) {
         $new_buffer= "";
-            
+
         while($rest) {
             if(preg_match($reg, $rest, $matches)) {
                 $new_buffer.= $matches[1]. "__SPLITTER__" . $matches [2];

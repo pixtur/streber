@@ -985,7 +985,7 @@ div.block {
 
 
     /* IE 6.0 */
-    div.block.reduced_header h2 {
+    div.block.reduced_header > h2 {
      	background: url(layout/bg_block_header.png);
      	background-repeat:no-repeat;
      	background-position:top right;
@@ -2146,6 +2146,7 @@ div.wiki p.code_from span {
 div.wiki h1,div.wiki h2, div.wiki h3,div.wiki h4, div.wiki h5 {
     margin:10px 10px 5px 0px;
     padding:0px;
+    background-image:none;
 }
 div.wiki h1 {
     font-size:140%;

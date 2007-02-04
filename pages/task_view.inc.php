@@ -57,8 +57,11 @@ function TaskView()
         /*
             $page->crumbs= build_task_crumbs($task);
         */
-        if($task->is_milestone) {
+        if($task->category == TCATEGORY_MILESTONE) {
             $page->cur_crumb= 'projViewMilestones';
+        }
+        else if($task->category == TCATEGORY_VERSION) {
+            $page->cur_crumb= 'projViewVersions';
         }
         else if($task->category == TCATEGORY_DOCU) {
             $page->cur_crumb= 'projViewDocu';
@@ -442,7 +445,7 @@ function TaskView()
             echo  wiki2html($task->description, $project);
         }
         echo "</div>";
-        
+
         ### update task if relative links have been converted to ids ###
         global $g_wiki_auto_adjusted;
         if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
@@ -460,7 +463,8 @@ function TaskView()
         echo $PH->getLink('taskEditDescription',NULL,array('tsk'=> $task->id),'edit_description');
         echo "</div>";
 
-        echo "<input type=hidden name='item_id' value='$task->id'>";
+/**
+early development version of inline edit handler.
 
 echo "
 <script type='text/javascript'>
@@ -473,17 +477,17 @@ onLoadFunctions.push(function()
         postload:'index.php?go=itemLoadField&item={$task->id}&field=description',
         type:'textarea',
         obj:chapter,
-        submit:'Save3',
+        submit:'Save',
         cancel:'Cancel'
     });
+    alert('here');
 
-    var item_id= chapter.attributes['item_id'];
-    var field_name= chapter.attributes['field_name'];
 });
 
 // ]]>
 </script>
 ";
+*/
 
 
     }
@@ -581,8 +585,9 @@ onLoadFunctions.push(function()
         $list->print_automatic($project, $task);
 
     }
+
     #--- list milestone-tasks ---------------------------------------------------
-    else if ($task->is_milestone) {
+    if($task->category== TCATEGORY_MILESTONE || $task->category== TCATEGORY_VERSION) {
 
         $list= new ListBlock_tasks(array(
             'active_block_function'=>'tree',
@@ -602,7 +607,44 @@ onLoadFunctions.push(function()
 
     }
 
+    #--- list change log ---------------
+    if ($task->category== TCATEGORY_VERSION)
+    {
 
+        ### get resolved tasks ###
+        if($resolved= Task::getAll(array(
+            'project'               => $task->project,
+            'resolved_version'      => $task->id,
+            'status_min'            => 0,
+            'status_max'            => 200,
+            'order_by'              => 'resolve_reason',
+        ))) {
+            $block=new PageBlock(array(
+                'title'=>__("Resolved tasks","Block title"),
+                'id'=>'resolved_tasks',
+            ));
+            $block->render_blockStart();
+
+            echo "<div class=text>";
+
+            $buffer= "<ul>";
+            foreach($resolved as $r) {
+                if($r->resolve_reason && isset($g_resolve_reason_names[$r->resolve_reason])) {
+                    $reason= $g_resolve_reason_names[$r->resolve_reason] .": ";
+                }
+                else {
+                    $reason= "";
+                }
+                $buffer.='<li>'. $reason . $r->getLink(false) .'</li>';
+            }
+            $buffer.="</ul>";
+            echo $buffer;
+
+            echo "</div>";
+
+            $block->render_blockEnd();
+        }
+    }
 
 
     #--- list comments -------------------------------------------------------------
@@ -1097,17 +1139,17 @@ function taskViewAsDocu()
                     'name'=>__('Page'),
                 )));
             }
-            
+
             if($project->settings & PROJECT_SETTING_EFFORTS) {
                 $page->add_function(new PageFunction(array(
                     'target'=>'effortNew',
                     'params'=>array(
                         'parent_task'=>$task->id,
-                        
+
                     ),
                     'icon'=>'effort',
                     'name'=>__('Book Effort'),
-                )));                
+                )));
             }
 
         }

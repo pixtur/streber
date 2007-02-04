@@ -1,5 +1,35 @@
 streber-version-history
 
+
+v0.079 - rc2 for v0.08 [2007-02-04]
+===================
+
+major:
+- fixed: Anonymous user cannot view tasks #3836
+- added: inplaced editing of wiki chapters (task descriptions/ own comments) #3695
+- added: quick project selector to Project tab #3867
+- more functionality for bookmarks
+- fixed: compatibilty with IE 6.0 (stylesheets, javascript, etc.) Still ugly but better
+- fixed: new users can't editor their own profile #3817
+- added finish and czech translations
+- RSS feeds for project with HTTP authentication #670
+- fixed javascript error when clicking into comment list (checkbox not found)
+- changed: projView  "Folder list" replaced by project documentation box
+- included notification on changed and unchanged items in sendNotifcationForPerson function
+- fixed visibility check for RSS feed when ananymous user 
+- added correct ATOM-Feed link to header 
+- added ~~strike~~ syntax to wiki #2328
+
+minor:
+- removed Delete and Bookmark functions from projView (deleting is no good, Projectselector works better than bookmarking)
+- fixed character setting #3843
+- task list effort column is off by default
+- added counter for num of sql statements 
+- added table indeces to comments and efforts 
+- added note on deleted tasks headline #3671
+
+
+
 v0.078 - rc1 for v0.08 [2007-01-03]
 ====================
 

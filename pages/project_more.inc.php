@@ -1041,8 +1041,8 @@ function ProjViewTasks()
 
         $list->no_items_html=__('No tasks');
         $list->print_automatic($project, NULL, $filter_empty_folders);
-        
-        
+
+
 
 	}
 
@@ -1531,6 +1531,7 @@ function ProjViewVersions()
         $list->reduced_header= true;
 
         $list->query_options['project']= $project->id;
+
 
         $list->print_automatic($project);
 	}
@@ -2550,14 +2551,14 @@ function projDuplicate($org_project_id=NULL)
 
 
 function projViewAsRSS()
-{    
+{
     require_once(confGet('DIR_STREBER') . "std/class_rss.inc.php");
-    
+
     global $PH;
     global $auth;
 
     $project_id= getOnePassedId('prj','projects_*'); # aborts on failure
-    
+
     if(!$project= Project::getVisibleById($project_id)) {
         echo "Project is not readable. Anonymous user active?";
         exit();
@@ -2571,7 +2572,7 @@ function projViewAsRSS()
     }
     readfile_chunked($filepath);
 
-    exit();    
+    exit();
 }
 
 

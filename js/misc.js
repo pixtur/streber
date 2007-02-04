@@ -270,7 +270,7 @@ function AjaxEdit(dom_element, item_id, field){
             $(this).editable('index.php?go=itemSaveField&item=' + item_id + '&field=description&chapter=' + chapter_name, {
                 postload:'index.php?go=itemLoadField&item=' + item_id + '&field=description&chapter=' + chapter_name,
                 type:'textarea',
-                submit:'Save3',
+                submit:'Save',
                 cancel:'Cancel',
                 chapter:true
             });

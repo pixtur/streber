@@ -2,216 +2,79 @@ undefined keys:
 ---------------
 
 ### ../db/class_task.inc.php   ###
-'Order Id'                    =>'',  # line 165
-
-### ../db/db_itemperson.inc.php   ###
-'Comment|form label for items'=>'',  # line 45
+'Order Id'                    =>'',  # line 175
 
 ### ../pages/_handles.inc.php   ###
-'Mark as bookmark'            =>'',  # line 45
+'Edit multiple monitored items'=>'',  # line 84
+'View Project as RSS'         =>'',  # line 169
+'Load Field'                  =>'',  # line 1296
+'Save Field'                  =>'',  # line 1301
 
-### ../lists/list_comments.inc.php   ###
-'version %s'                  =>'',  # line 140
+### ../pages/comment.inc.php   ###
+'Mark this comment as bookmark'=>'',  # line 97
 
-### ../lists/list_efforts.inc.php   ###
-'View selected Efforts'       =>'',  # line 72
-
-### ../lists/list_items.inc.php   ###
-'Your bookmarks'              =>'',  # line 32
-'You have no bookmarks'       =>'',  # line 33
-
-### ../pages/item.inc.php   ###
-'Edit bookmark'               =>'',  # line 399
-
-### ../pages/_handles.inc.php   ###
-'Remove bookmark'             =>'',  # line 52
-
-### ../pages/item.inc.php   ###
-'Notify on change'            =>'',  # line 421
-
-### ../lists/list_items.inc.php   ###
-'Remind'                      =>'',  # line 415
-'in %s day(s)'                =>'',  # line 464
-'since %s day(s)'             =>'',  # line 468
-'State'                       =>'',  # line 711
-'Modified by'                 =>'',  # line 744
-
-### ../lists/list_projectchanges.inc.php   ###
-'Nothing has changed.'        =>'',  # line 33
-
-### ../lists/list_tasks.inc.php   ###
-'Status->Closed'              =>'',  # line 208
-'List|List sort mode'         =>'',  # line 240
-'Tree|List sort mode'         =>'',  # line 251
-'Grouped|List sort mode'      =>'',  # line 262
-'Page name'                   =>'',  # line 1132
-
-### ../pages/_handles.inc.php   ###
-'Playground'                  =>'',  # line 17
-'Send notification'           =>'',  # line 59
-'Remove notification'         =>'',  # line 65
-'Edit monitored items'        =>'',  # line 71
-
-### ../pages/project_more.inc.php   ###
-'Documentation'               =>'',  # line 1091
-
-### ../pages/_handles.inc.php   ###
-'View Task As Docu'           =>'',  # line 368
-'Mark tasks as Closed'        =>'',  # line 460
-
-### ../pages/person.inc.php   ###
-'Link Companies'              =>'',  # line 645
-'Remove companies from person'=>'',  # line 651
-
-### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'',  # line 1069
-'Forgot your password?'       =>'',  # line 1129
-
-### ../std/class_pagehandler.inc.php   ###
-'Export as CSV'               =>'',  # line 829
+### ../pages/version.inc.php   ###
+'Bookmark'                    =>'',  # line 321
+'Remove this bookmark'        =>'',  # line 328
+'Remove Bookmark'             =>'',  # line 329
 
 ### ../pages/company.inc.php   ###
-'Delete this company'         =>'',  # line 510
+'Mark this company as bookmark'=>'',  # line 510
 
-### ../pages/project_view.inc.php   ###
-'Delete this project'         =>'',  # line 96
-
-### ../pages/custom_projView.inc.php   ###
-'News'                        =>'',  # line 365
-'%s comments'                 =>'',  # line 389
-
-### ../pages/custom_projViewFiles.inc.php   ###
-'Downloads'                   =>'',  # line 62
+### ../pages/effort.inc.php   ###
+'Mark this effort as bookmark'=>'',  # line 97
 
 ### ../pages/file.inc.php   ###
-'Could not access parent task Id:%s'=>'',  # line 52
-
-### ../pages/home.inc.php   ###
-'status->Closed|context menu function'=>'',  # line 265
+'Mark this file as bookmark'  =>'',  # line 132
 
 ### ../pages/item.inc.php   ###
-'itemsSetPubLevel requires item_pub_level'=>'',  # line 67
-'No item(s) selected.'        =>'',  # line 283
-'Select one or more bookmark(s)'=>'',  # line 314
-'Removed %s bookmark(s).'     =>'',  # line 183
-'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'',  # line 187
-'An error occured'            =>'',  # line 318
-'Edit bookmark: %s|Page title'=>'',  # line 401
-'Bookmark: %s'                =>'',  # line 402
-'Notify if unchanged in'      =>'',  # line 423
-'Could not get bookmark'      =>'',  # line 456
-
-### ../pages/login.inc.php   ###
-'Continue anonymously'        =>'',  # line 106
-'Password reminder|Page title'=>'',  # line 310
-'Please enter your nickname'  =>'',  # line 322
-'We will then sent you an E-mail with a link to adjust your password.'=>'',  # line 332
-'If you do not know your nickname, please contact your administrator: %s.'=>'',  # line 334
-'A notification mail has been sent.'=>'',  # line 393
+'Edit bookmark: "%s"|page title'=>'',  # line 365
+'Bookmark: "%s"'              =>'',  # line 366
+'Added %s bookmark(s).'       =>'',  # line 813
+'Edit bookmarks'              =>'',  # line 573
+'Edit multiple bookmarks|page title'=>'',  # line 575
+'Edit %s bookmark(s)'         =>'',  # line 576
+'no'                          =>'',  # line 674
+'yes'                         =>'',  # line 675
+'Edited %s bookmark(s).'      =>'',  # line 817
+'%s bookmark(s) could not be added.'=>'',  # line 821
 
 ### ../pages/person.inc.php   ###
-'Add existing companies to this person'=>'',  # line 518
-'link existing Company'       =>'',  # line 659
-'no companies related'        =>'',  # line 664
-'Account'                     =>'',  # line 958
-'Options'                     =>'',  # line 1102
-'Add related companies'       =>'',  # line 2031
-'No companies selected...'    =>'',  # line 2132
-'Company already related to person'=>'',  # line 2108
-'Failed to remove %s companies'=>'',  # line 2172
-'Removed %s companies'        =>'',  # line 2175
-'Marked all previous items as viewed.'=>'',  # line 2225
+'Mark this person as bookmark'=>'',  # line 545
+'Malformed activation url'    =>'',  # line 1225
 
-### ../pages/project_more.inc.php   ###
-'modified by me'              =>'',  # line 284
-'modified by others'          =>'',  # line 309
-'last logout'                 =>'',  # line 334
-'1 week'                      =>'',  # line 352
-'2 weeks'                     =>'',  # line 371
-'Create a new page'           =>'',  # line 1111
+### ../pages/project_view.inc.php   ###
+'Mark this project as bookmark'=>'',  # line 97
 
 ### ../pages/task_view.inc.php   ###
-'Page'                        =>'',  # line 1048
+'Mark this task as bookmark'  =>'',  # line 197
+'Further Documentation'       =>'',  # line 383
+'Book Effort'                 =>'',  # line 1109
 
-### ../pages/task_more.inc.php   ###
-'Display'                     =>'',  # line 684
-
-### ../pages/search.inc.php   ###
-'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',  # line 658
-'Sorry, but there is nothing left to search.'=>'',  # line 663
-
-### ../pages/task_more.inc.php   ###
-'Display as'                  =>'',  # line 357
-'This folder has %s subtasks. Changing category will ungroup them.'=>'',  # line 361
-'Bug Report'                  =>'',  # line 569
-'Timing'                      =>'',  # line 632
-'Comment has been rejected, because it looks like spam.'=>'',  # line 844
-'Milestones may not have sub tasks'=>'',  # line 1150
-'Select some task(s) to mark as closed'=>'',  # line 1792
-'Marked %s tasks as closed.'  =>'',  # line 1812
-'Not enough rights to close %s tasks.'=>'',  # line 1814
-'Category'                    =>'',  # line 2303
-'select person'               =>'',  # line 2463
-'Also assigned to'            =>'',  # line 2464
-
-### ../pages/task_view.inc.php   ###
-'View previous %s versions'   =>'',  # line 1108
-'Update'                      =>'',  # line 715
-
-### ../render/render_form.inc.php   ###
-'Please copy the text'        =>'',  # line 62
-'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 64
+### ../pages/version.inc.php   ###
+'Mark this version as bookmark'=>'',  # line 320
 
 ### ../render/render_misc.inc.php   ###
-'Docu|Project option'         =>'',  # line 351
-'Releases|Project option'     =>'',  # line 366
+'%b %e, %Y|strftime format string'=>'',  # line 579
+'%I:%M%P|strftime format string'=>'',  # line 592
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 601
+'%s min'                      =>'',  # line 696
+'%A, %B %e|strftime format string'=>'',  # line 921
 
 ### ../render/render_page.inc.php   ###
-'Go to parent / alt-U'        =>'',  # line 986
-'rendered in'                 =>'',  # line 1304
-'memory used'                 =>'',  # line 1305
-'querrying approx.'           =>'',  # line 1306
-'db-fields'                   =>'',  # line 1306
+'%s queries / %s fields '     =>'',  # line 1322
 
 ### ../render/render_wiki.inc.php   ###
-'Image details'               =>'',  # line 952
+'Image details'               =>'',  # line 997
+
+### ../std/class_auth.inc.php   ###
+'Sorry. 	Authentication failed'=>'',  # line 373
 
 ### ../std/common.inc.php   ###
-'Sorry, but the entered number did not match'=>'',  # line 236
-
-### ../std/constant_names.inc.php   ###
-'Enable Efforts|Project setting'=>'',  # line 74
-'Enable Milestones|Project setting'=>'',  # line 75
-'Enable Versions|Project setting'=>'',  # line 76
-'Only PM may close tasks|Project setting'=>'',  # line 77
-'Task|Task Category'          =>'',  # line 213
-'Bug|Task Category'           =>'',  # line 214
-'Documentation|Task Category' =>'',  # line 215
-'Event|Task Category'         =>'',  # line 216
-'Folder|Task Category'        =>'',  # line 217
-'Milestone|Task Category'     =>'',  # line 218
-'Version|Task Category'       =>'',  # line 219
-'never|notification period'   =>'',  # line 225
-'one day|notification period' =>'',  # line 226
-'two days|notification period'=>'',  # line 227
-'three days|notification period'=>'',  # line 228
-'four days|notification period'=>'',  # line 229
-'five days|notification period'=>'',  # line 230
-'one week|notification period'=>'',  # line 231
-'two weeks|notification period'=>'',  # line 232
-'three weeks|notification period'=>'',  # line 233
-'one month|notification period'=>'',  # line 234
-'two months|notification period'=>'',  # line 235
+'en_US.utf8,en_US,enu|list of locales'=>'',  # line 482
 
 ### ../std/mail.inc.php   ###
-'Your account at|notification'=>'',  # line 464
-'Your account at %s is still active.|notification'=>'',  # line 481
-'Your login name is|notification'=>'',  # line 482
-'Maybe you want to %s set your password|notification'=>'',  # line 483
-'Unchanged item|notifcation mail from'=>'',  # line 805
-'No emails sent.'             =>'',  # line 1069
-'No changes since %s (%s day(s)) on: %s|notification mail subject'=>'',  # line 831
-'The following item is unchanged:|notification'=>'',  # line 847
-'Notification on changed item|notification mail from'=>'',  # line 1039
-'Changes on: %s|notification mail subject'=>'',  # line 1075
-'The following item was changed:|notification'=>'',  # line 1091
+'Changed monitored items:|notification'=>'',  # line 229
+'%s edited > %s'              =>'',  # line 239
+'Unchanged monitored items:|notification'=>'',  # line 267
+'%s (not touched since %s day(s))'=>'',  # line 322

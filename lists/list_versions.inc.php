@@ -114,6 +114,7 @@ class ListBlock_versions extends ListBlock
         $this->query_options['is_released_min']= RELEASED_UPCOMMING;
         $this->query_options['status_min']= 0;
         $this->query_options['status_max']= 200;
+        $this->query_options['order_by']= 'created DESC';
     }
 
 
@@ -204,26 +205,23 @@ class ListBlockCol_VersionName extends ListBlockCol
     		. $html_link
     		. '<br>';
 
+    		$editable= false;
+    		if(Task::getEditableById($task->id)) {
+    		    $editable= true;
+    		}
 
-            ### get resolved tasks ###
-            $resolved= Task::getAll(array(
-                'project'               => $task->project,
-                'resolved_version'      => $task->id,
-                'status_min'            => 0,
-                'status_max'            => 200,
-                'order_by'              => 'resolve_reason',
-            ));
-            $buffer.= "<ul>";
-            foreach($resolved as $r) {
-                if($r->resolve_reason && isset($g_resolve_reason_names[$r->resolve_reason])) {
-                    $reason= $g_resolve_reason_names[$r->resolve_reason] .": ";
-                }
-                else {
-                    $reason= "";
-                }
-                $buffer.='<li>'. $reason . $r->getLink(false) .'</li>';
+            $buffer.= "<div class=description>";
+            if($editable) {
+                $buffer.=  wiki2html($task->description, $project, $task->id, 'description');
             }
-            $buffer.="</ul>";
+            else {
+                $buffer.=  wiki2html($task->description, $project);
+            }
+            $buffer.= "</div>";
+
+
+
+
    		}
         echo '<td>'. $buffer .'</td>';
    	}

@@ -282,7 +282,7 @@ class Project extends DbProjectItem
         foreach($tmp as $t) {
             $taskpersons[]=new TaskPerson($t);
         }
-		
+
         return $taskpersons;
     }
 
@@ -740,14 +740,14 @@ class Project extends DbProjectItem
 
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);
-		
+
     	$tmp=$sth->fetchall_assoc();
     	$ppersons=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
             $ppersons[]= $pperson;
         }
-	
+
         return $ppersons;
 	}
 
@@ -919,7 +919,7 @@ class Project extends DbProjectItem
         $str_not_modified_by= $not_modified_by
             ? 'AND i.modified_by != ' . intval($not_modified_by)
             : '';
-		
+
 
         ### only visibile for current user ###
         if($visible_only) {
@@ -969,7 +969,7 @@ class Project extends DbProjectItem
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);
     	$tmp=$sth->fetchall_assoc();
-		
+
     	$items= array();
         foreach($tmp as $n) {
             $item= new DbProjectItem($n);
@@ -1096,7 +1096,7 @@ class Project extends DbProjectItem
         ### only assigned projects ###
         if($visible_only) {
             $str=
-                "SELECT DISTINCT i.*, p.* from {$prefix}project p, {$prefix}projectperson upp, {$prefix}company c, {$prefix}item i
+                "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, {$prefix}project p left join {$prefix}company c on p.company = c.id
                 WHERE
                         upp.person = '{$auth->cur_user->id}'
                     AND upp.state = 1
@@ -1116,13 +1116,14 @@ class Project extends DbProjectItem
         ### all projects ###
         else {
 			$str=
-                "SELECT DISTINCT i.*, p.* from {$prefix}project p, {$prefix}company c,  {$prefix}item i
+			    "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}project p left join {$prefix}company c on p.company = c.id
+
                 WHERE
                        p.status <= ".intval($status_max)."
                    AND p.status >= ".intval($status_min)."
                    AND p.state = 1
                    AND i.id = p.id
-				   AND (p.company = c.id OR p.company = 0)
+				   AND (p.company = 0 OR p.company = c.id)
                   $AND_company
                   $AND_match
 				  $AND_id
@@ -1130,7 +1131,6 @@ class Project extends DbProjectItem
         }
 
         $projects = self::queryFromDb($str);
-		
         return $projects;
     }
 
