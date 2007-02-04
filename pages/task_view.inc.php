@@ -262,12 +262,6 @@ function TaskView()
         ### normal tasks ###
         else {
 
-            if($task->parent_task) {
-                if($parent_task= Task::getVisibleById($task->parent_task)) {
-                    echo "<p><label>".__("Part of","Label in Task summary")."</label>".$PH->getLink('taskView',$parent_task->name,array('tsk'=>$task->parent_task))."</p>";
-                }
-            }
-
             if($task->for_milestone) {
                 if($milestone= Task::getVisibleById($task->for_milestone)) {
                     echo "<p><label>".__("For Milestone","Label in Task summary")."</label>".$milestone->getLink(false)."</p>";
@@ -1103,6 +1097,19 @@ function taskViewAsDocu()
                     'name'=>__('Page'),
                 )));
             }
+            
+            if($project->settings & PROJECT_SETTING_EFFORTS) {
+                $page->add_function(new PageFunction(array(
+                    'target'=>'effortNew',
+                    'params'=>array(
+                        'parent_task'=>$task->id,
+                        
+                    ),
+                    'icon'=>'effort',
+                    'name'=>__('Book Effort'),
+                )));                
+            }
+
         }
 
     	### render title ###
@@ -1221,7 +1228,12 @@ function taskViewAsDocu()
     if($task->description!="") {
 
         echo "<div class=description>";
-        echo  wiki2html($task->description, $project);
+        if($editable) {
+            echo  wiki2html($task->description, $project, $task->id, 'description');
+        }
+        else {
+            echo  wiki2html($task->description, $project);
+        }
         echo "</div>";
 
 
