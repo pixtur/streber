@@ -227,7 +227,7 @@ class Page
         	"projects"	=>array(
                 'target'    => $PH->getUrl('projList',array()),
                 'title'     =>__("<span class=accesskey>P</span>rojects"),
-                'html'=> "<span id=projectselector>&nbsp;</span>" . buildProjectSelector(),
+                'html'=>   buildProjectSelector(),
                 'tooltip'   =>__('Your projects. Alt-P / Option-P'),
                 'bg'        =>"projects",
                 'accesskey' =>'p'

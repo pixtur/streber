@@ -340,18 +340,23 @@ function build_project_crumbs($project) {
 function buildProjectSelector()
 {
 
-    $buffer="";
-    $buffer.= "<span style='display:none;' id='projectselectorlist'>";
-
     global $auth;
+    if(!$auth->cur_user || !$auth->cur_user->id) {
+        return "";
+    }
+    $buffer= "";
+
     global $PH;
     if($projects= Project::getAll(array(
     ))) {
+        $buffer.="<span id=projectselector>&nbsp;</span>";    
+        $buffer.= "<span style='display:none;' id='projectselectorlist'>";
+
         foreach($projects as $p) {
             $buffer.= $PH->getLink('projView',$p->name, array('prj' => $p->id));
         }
+        $buffer.="</span>";
     }
-    $buffer.="</span>";
     return $buffer;
 }
 
