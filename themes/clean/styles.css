@@ -2316,8 +2316,13 @@ div.wiki table th {
     margin:0px;
     line-height:130%;
 }
+div.wiki .edit_chapter{
+    padding: 0px 0px 0px 3px;
+    border-width:0px;
+}
+
 div.wiki .edit_chapter:hover {
-    background-color:#ee8;
+    background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
 }
 
 /*----------- diff table -----------------------------------*/
