@@ -1897,40 +1897,94 @@ function getOneWikiChapter(&$text, $chapter)
 }
 
 
+class ChapterBlock {
+    public $str="";
+    
+    public function __construct(&$str) 
+    {
+        $this->str= $str;
+    }
+}
+class ChapterBlockCode extends ChapterBlock{
+}
+    
+
 /**
 * split wiki text into chapters starting with a headline
 *
 * - returns array with chapters.
 * - First chapter might be empty, if there is no text before the first headline.
 */
-function &getWikiChapters(&$text, $chapter)
+function &getWikiChapters(&$text)
 {
     $regex_headlines= array(
         "/(.*?)(\r?==[ \t]*[^\n=]+==\s*\r?\n[ \t]*)(.*)/s",
         "/(.*?)(\r?===[ \t]*([^\n=]+)===\s*\n[ \t]*)(.*)/s",
         "/(.*?)([^\r\n]+[\r\n]+===+[ \t]*[\r\n]+)(.*)/s",
         "/(.*?)([^\n\r]+\r?\n---+[\t]*[\r\n]+)(.*)/s",
+        #"/(.*?)(\[code(\s*[^\]]*)\](.*?)\[\/code\]\r?\n?)(.*)$/s",
     );
 
+    $blocks= array();
+    
 
+    ### split into codeblocks ###
     $rest = $text;
-
-    foreach($regex_headlines as $reg) {
-        $new_buffer= "";
-
-        while($rest) {
-            if(preg_match($reg, $rest, $matches)) {
-                $new_buffer.= $matches[1]. "__SPLITTER__" . $matches [2];
-                $rest=$matches[3];
+    
+    while($rest) {
+        ### ignore code blocks ###
+        if(preg_match("/(.*?)(\[code\s*[^\]]*\].*?\[\/code\]\r?\n?)(.*)$/s", $rest, $matches)) {
+            if($matches[1]) {
+                $blocks[]= new ChapterBlock($matches[1]);
             }
-            else {
-                $new_buffer.= $rest;
-                $rest= "";
-            }
+            $blocks[]= new ChapterBlockCode($matches[2]);
+            $rest= $matches[3];
         }
-        $rest= $new_buffer;
+        ### indented code ###
+        else if(preg_match("/\A(.*?)(\r?\n[ \t]*\r?\n((?:[ \t]+[^\n]*\n)+)\r?\n?)(.*)/s", $rest, $matches)) {
+            if($matches[1]) {
+                $blocks[]= new ChapterBlock($matches[1]);
+            }
+            $blocks[]= new ChapterBlockCode($matches[2]);
+            $rest= $matches[4];
+        }
+        else {
+            $blocks[]= new ChapterBlock($rest);
+            $rest= "";
+        }
     }
-    $parts= explode('__SPLITTER__', $rest);
+
+    foreach($blocks as $b) {
+        if ($b instanceof ChapterBlockCode) {
+            continue;
+        }
+        $rest= $b->str;
+        
+        foreach($regex_headlines as $reg) {
+            $new_buffer= "";
+    
+            while($rest) {
+                if(preg_match($reg, $rest, $matches)) {
+                    $new_buffer.= $matches[1]. "__SPLITTER__" . $matches [2];
+                    $rest=$matches[3];
+                }
+                else {
+                    $new_buffer.= $rest;
+                    $rest= "";
+                }
+            }
+            $rest= $new_buffer;
+        }
+        $b->str= $rest;
+    }
+    
+    $tmp= array();
+    foreach($blocks as $b) {
+        $tmp[]= $b->str;
+    }
+    $buffer= implode("",$tmp);
+    $parts= explode('__SPLITTER__', $buffer);
+    
 
     return $parts;
 }

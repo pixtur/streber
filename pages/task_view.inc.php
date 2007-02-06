@@ -452,9 +452,6 @@ function TaskView()
             $task->description= $g_wiki_auto_adjusted;
             $task->update(array('description'),false);
         }
-
-        #$block->render_blockEnd();
-
     }
 
     ### edit description button ###

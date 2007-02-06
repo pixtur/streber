@@ -16,7 +16,6 @@
 
 
 require_once(confGet('DIR_STREBER') . "render/render_misc.inc.php");
-require_once(confGet('DIR_STREBER') . "render/render_block.inc.php");
 
 /**
 * pagefunctions for editing the currently displayed obj (eg. Delete a task)

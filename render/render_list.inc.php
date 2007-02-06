@@ -12,6 +12,8 @@
  * @usedby:     most pages
  */
 
+
+require_once(confGet('DIR_STREBER') . "render/render_block.inc.php");
 require_once(confGet('DIR_STREBER') . "render/render_list_column.inc.php");
 require_once(confGet('DIR_STREBER') . "render/render_list_column_special.inc.php");
 require_once(confGet('DIR_STREBER') . "std/export.inc.php");

@@ -37,11 +37,11 @@ class RSS
 
         ### get all the changes (array of history items) ##
         $changes= Project::getChanges(array(
-            'project'           => $project->id;				# query only this project history
-            'alive_only'        => false;					# get deleted entries
-            'visible_only'      => false;					# ignore user viewing rights
-            'limit'             =>20;							# show only last 20 entries in rss feed
-            'show_assignments'  => false;				# ignore simple assignment events        
+            'project'           => $project->id,				# query only this project history
+            'alive_only'        => false,					# get deleted entries
+            'visible_only'      => false,					# ignore user viewing rights
+            'limit'             =>20,							# show only last 20 entries in rss feed
+            'show_assignments'  => false,				# ignore simple assignment events        
         ));		                    
 
         $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');	# url part of the link to the task

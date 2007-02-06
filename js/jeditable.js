@@ -243,8 +243,12 @@ jQuery.fn.editable = function(url, options) {
             if(settings.chapter) {
                 //this.ajax_edit.initEditChapters();
                 jQuery(self).load(settings.url, p, function(str) {
+                    
+                    $(this).html();
                     self.editing = false;
                     var parentNode= this.parentNode;
+                    
+                    
                     $(parentNode).html(str);
                     parentNode.ajax_edit.initEditChapters();
                 });
