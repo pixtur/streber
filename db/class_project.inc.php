@@ -874,6 +874,7 @@ class Project extends DbProjectItem
         $modified_by        = NULL;
         $not_modified_by    = NULL;
         $show_issues        = false;
+        $limit              = NULL;
 
         ### filter params ###
         if($args) {
@@ -920,6 +921,9 @@ class Project extends DbProjectItem
             ? 'AND i.modified_by != ' . intval($not_modified_by)
             : '';
 
+        $str_limit= $limit
+                ? " LIMIT $limit"
+                : "";
 
         ### only visibile for current user ###
         if($visible_only) {
@@ -941,7 +945,9 @@ class Project extends DbProjectItem
                       OR
                       i.created_by = {$auth->cur_user->id}
                 )
-            " . getOrderByString($order_by);
+                
+            " . getOrderByString($order_by) 
+            . $str_limit;
         }
 
         ### all including deleted ###
@@ -959,7 +965,8 @@ class Project extends DbProjectItem
             $str_date_min
             $str_date_max
 
-            " . getOrderByString($order_by);
+            " . getOrderByString($order_by)
+            . $str_limit;
         }
         require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
 

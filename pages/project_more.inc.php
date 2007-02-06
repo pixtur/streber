@@ -432,9 +432,9 @@ function ProjViewChanges()
                     $list->filters[]= new ListFilter_status_min(array(
                         'value'=>$f_settings['min'],
                     ));
-                    $list->filters[]= new ListFilter_status_max(array(
-                        'value'=>$f_settings['max'],
-                    ));
+                    #$list->filters[]= new ListFilter_status_max(array(
+                    #    'value'=>$f_settings['max'],
+                    #));
                     break;
 				case 'modified_by':
 					$list->filters[]= new ListFilter_modified_by(array(
@@ -455,17 +455,17 @@ function ProjViewChanges()
 					$list->filters[]= new ListFilter_min_week(array(
 						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
 					));
-					$list->filters[]= new ListFilter_max_week(array(
-						'value'=>$f_settings['value'],
-					));
+					#$list->filters[]= new ListFilter_max_week(array(
+					#	'value'=>$f_settings['value'],
+					#));
 					break;
 				case 'last_two_weeks':
 					$list->filters[]= new ListFilter_min_week(array(
 						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
 					));
-					$list->filters[]= new ListFilter_max_week(array(
-						'value'=>$f_settings['value'],
-					));
+					#$list->filters[]= new ListFilter_max_week(array(
+					#	'value'=>$f_settings['value'],
+					#));
 					break;
 				default:
 					trigger_error("Unknown filter setting $f_name", E_USER_WARNING);

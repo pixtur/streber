@@ -157,6 +157,7 @@ function url2linkMail($url,$show=false, $maxlen=32) {
 function build_task_crumbs(&$task, &$project=NULL) {
     $crumbs=array();
 
+
     if(!$project) {
         $project= Project::getVisibleById($task->project);
     }
@@ -347,6 +348,9 @@ function buildProjectSelector()
     $buffer= "";
 
     global $PH;
+    
+    require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
+    
     if($projects= Project::getAll(array(
     ))) {
         $buffer.="<span id=projectselector>&nbsp;</span>";    

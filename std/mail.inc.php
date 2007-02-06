@@ -221,7 +221,7 @@ class Notifier
 							   'notify_on_change'=>1,
 							   'person'=>$person->id));
 							   
-			if(monitored_items){
+			if($monitored_items){
 				$changes_headline_html = "<h3>"
                      . __('Changed monitored items:','notification')
                      . "</h3>"

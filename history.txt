@@ -1,5 +1,12 @@
 streber-version-history
 
+v0.0791 [2007-02-05]
+====================
+hotfixed:
+- fixed: ajax editing with code blocks and complex texts
+- fixed: error in RSS feed
+- fixed: block dependencies after upgrade
+
 
 v0.079 - rc2 for v0.08 [2007-02-04]
 ===================
