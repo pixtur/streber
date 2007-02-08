@@ -258,7 +258,7 @@ class Notifier
 							           'notify_if_unchanged_min'=>NOTIFY_1DAY,
 							           'person'=>$person->id));
 							   
-			if(monitored_items_unchanged){
+			if($monitored_items_unchanged){
 				
 				$unchanged_headline_html = "<h3>"
                      . __('Unchanged monitored items:','notification')

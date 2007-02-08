@@ -120,6 +120,12 @@ function ProjView()
             'name'      =>__('Bug'),
         )));
 
+        $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));
+
+        $page->extra_header_html.=
+                '<link rel="alternate" type="application/rss+xml" title="' .asHtml($project->name) .' '. __("News")  . '"'
+                .' href="' . $url . '" />';
+
     	### render title ###
         echo(new PageHeader);
     }
@@ -375,7 +381,7 @@ function ProjView()
             
             $count = 0;
             foreach($news as $n) {
-                if($count++ > 5) {
+                if($count++ > 3) {
                     break;
                 };
                 echo "<div class='newsBlock'>";

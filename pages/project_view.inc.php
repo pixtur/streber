@@ -154,8 +154,8 @@ function ProjView()
             'tooltip'   =>__('Book effort for this project'),
             'name'      =>__('Effort'),
         )));
+        
         $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));
-
         $page->extra_header_html.=
                 '<link rel="alternate" type="application/rss+xml" title="' .asHtml($project->name) .' '. __("News")  . '"'
                 .' href="' . $url . '" />';

@@ -284,4 +284,9 @@ if($db_version < 0.0783) {
     $update_queries[]=
         "ALTER TABLE `{$db_table_prefix}effort` ADD INDEX ( `task` );";
 }
+
+if($db_version < 0.793) {
+    $update_queries[]="ALTER TABLE `{$db_table_prefix}person` CHANGE `ip_address` `ip_address` VARCHAR( 15 )  DEFAULT '' NOT NULL ;";
+}
+
 ?>

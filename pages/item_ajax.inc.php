@@ -14,6 +14,7 @@ require_once("db/class_project.inc.php");
 */
 function itemLoadField()
 {
+    header("Content-type: text/html; charset=utf-8");
     if(!$item_id=get('item')) {
         return NULL;
     }
@@ -40,6 +41,7 @@ function itemLoadField()
         print $object->$field_name;        
     }
     else {
+        
         print getOneWikiChapter($object->$field_name, $chapter);
     }
 }
@@ -50,6 +52,7 @@ function itemLoadField()
 */
 function itemSaveField()
 {
+    header("Content-type: text/html; charset=utf-8");
     $value= get('value');
     if(is_null($value)) {
         return;

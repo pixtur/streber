@@ -366,6 +366,9 @@ function step_02_proceed()
                     $streber_version_required= $row['version_streber_required'];
                     $count++;
                 }
+                /**
+                * there should be excactly one row with updated == NULL. Otherwise we a have a problem
+                */
                 if( $count!=1 ) {
                     print_testResult(RESULT_FAILED,"could not get propper db-version table entry. Please view ".getStreberWikiLink('installation','Installation Guide')." on hints how to proceed.");
                     return false;
@@ -374,7 +377,7 @@ function step_02_proceed()
 
                     ### update ###
                     print_testResult(RESULT_PROBLEM,"version is $db_version. Upgrading...");
-                    ## TODO.... Function upgrade
+
                     $result= upgrade(array(
                         'db_type'       => $f_db_type,
                         'hostname'      => $f_hostname,
@@ -382,6 +385,7 @@ function step_02_proceed()
                         'db_password'   => $f_db_password,
                         'db_table_prefix'=> $f_db_table_prefix,
                         'db_name'       => $f_db_name,
+                        'db_version'    => $db_version,                    # autodetect
                         'continue_on_sql_errors'=>$f_continue_on_sql_errors,
                     ));
                     return $result;
@@ -572,9 +576,6 @@ function step_02_proceed()
 }
 
 
-
-
-
 /**
 * upgrades
 */
@@ -588,7 +589,7 @@ function upgrade($args=NULL) {
     $db_table_prefix=   $args['db_table_prefix'];
     $db_name=           $args['db_name'];
     $flag_continue_on_sql_errors= $args['continue_on_sql_errors'];
-    $db_version=        $args['db_version'];
+    $db_version=        $args['db_version'];            # set to NULL if autodetect
 
     require_once(dirname(__FILE__)."/../db/db_".$db_type."_class.php");
 
@@ -689,9 +690,9 @@ function upgrade($args=NULL) {
 
 
     ### create new db-version ###
-    $db_version= confGet('DB_CREATE_VERSION');
+    $db_version_new= confGet('DB_CREATE_VERSION');
     $streber_version_required= confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
-    $str_query= "INSERT into {$db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version','$streber_version_required',NOW() )";
+    $str_query= "INSERT into {$db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version_new','$streber_version_required',NOW() )";
     if(!$sql_obj->execute($str_query)) {
         print_testResult(RESULT_FAILED,"SQL-Error:<pre>".$sql_obj -> error."</pre>Query was:<pre>$str_query</pre>");
         return false;

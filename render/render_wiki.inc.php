@@ -1319,7 +1319,7 @@ class FormatBlockItemId extends FormatBlock
             case ITEM_TASK:
                 if($task= Task::getVisibleById(intVal($this->str))) {
                     $style='';
-                    if($task->status >= STATUS_COMPLETED) {
+                    if(($task->category == TCATEGORY_TASK || $task->category == TCATEGORY_BUG) && $task->status >= STATUS_COMPLETED) {
                         $style='isDone';
                     }
                     return $PH->getLink('taskView', $task->name, array('tsk' => $task->id),$style);
@@ -1881,7 +1881,8 @@ function wiki2purehtml(&$text, &$project=NULL)
         $tmp[]= $b->renderAsHtml();
     }
     $tmp[]= '</div>';
-    return implode('',$tmp);
+    $result= implode('',$tmp);
+    return $result;
 }
 
 
