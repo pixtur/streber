@@ -54,6 +54,9 @@ $g_lang_table= array(
 
 #--- home -----------------------------------------------------------------------
 'Today'             =>'Heute',
+'Yesterday'         =>'Gestern',
+'today'             =>'heute',
+'yesterday'         =>'gestern',
 'Discussions'       =>'Discussionen',
 'At Home'           =>'Zu Hause',
 'F, jS'            =>'F, jS',          # format date headline home
@@ -781,6 +784,11 @@ $g_lang_table= array(
 '(on comment)'                =>'(an Kommentar)',
 '(on task)'                   =>'(an Aufgabe)',
 '(on project)'                =>'(an Projekt)',
+
+### ../lists/list_changes.inc ###
+'(on task: %s)'                   =>'(zu Aufgabe: %s)',
+'(on comment: %s)'                =>'(zu Kommentar: %s)',
+'(on project: %s)'                =>'(zu Projekt: %s)',
 
 ### ../pages/_handles.inc   ###
 'Create Template'             =>'Vorlage erstellen',

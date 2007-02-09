@@ -10,7 +10,13 @@ new PageHandle(array('id'=>'home',
     'cleanurl'=>'home',
 
 ));
-
+new PageHandle(array('id'=>'homeAllChanges',
+    'req'=>'pages/home.inc.php',
+    'title'=>__('Changes'),
+    'test'=>'yes',
+	
+    'valid_for_crawlers'=>false,
+));
 
 new PageHandle(array('id'=>'playground',
     'req'=>'pages/playground.inc.php',

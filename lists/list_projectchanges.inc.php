@@ -13,6 +13,14 @@
  * @usedby:
  *
  */
+require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_issue.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_file.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_employment.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
 
 class ListBlock_projectchanges extends ListBlock
 {
@@ -360,6 +368,13 @@ class ListBlockCol_ChangesItemName extends ListBlockCol
         $str_name="";
         $str_addon="";
         switch($obj->type) {
+			case ITEM_PROJECT:
+				if($project= Project::getVisibleById($obj->id)) {
+                    $str_name= asHtml($project->name);
+                    $str_url= $PH->getUrl('projView',array('prj'=>$project->id));
+                }
+                break;
+				
             case ITEM_TASK:
                 if($task= Task::getVisibleById($obj->id)) {
                     $str_name= asHtml($task->name);
@@ -368,7 +383,6 @@ class ListBlockCol_ChangesItemName extends ListBlockCol
                 break;
 
             case ITEM_COMMENT:
-                require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
                 if($comment= Comment::getVisibleById($obj->id)) {
                     $str_name= asHtml($comment->name);
                     if($comment->comment) {
@@ -388,7 +402,21 @@ class ListBlockCol_ChangesItemName extends ListBlockCol
                     }
                 }
                 break;
-
+			
+			case ITEM_COMPANY:
+				if($c = Company::getVisibleById($obj->id)) {
+                    $str_name= asHtml($c->name);
+                    $str_url= $PH->getUrl('companyView',array('company'=>$c->id));
+                }
+                break;
+				
+			case ITEM_PERSON:
+				if($person= Person::getVisibleById($obj->id)) {
+                    $str_name= asHtml($person->name);
+                    $str_url= $PH->getUrl('personView',array('person'=>$person->id));
+                }
+                break;
+				
             case ITEM_PROJECTPERSON:
                 if($pp= ProjectPerson::getVisibleById($obj->id)) {
                     if(!$person= new Person($pp->person)) {
@@ -399,22 +427,55 @@ class ListBlockCol_ChangesItemName extends ListBlockCol
 
                 }
                 break;
-
+			
+			case ITEM_EMPLOYMENT:
+                if($emp= Employment::getById($obj->id)) {
+                    if($person= Person::getVisibleById($emp->person)) {
+						$str_name= asHtml($person->name);
+						$str_url= $PH->getUrl('personView',array('person'=>$person->id));
+                	}
+					if($company = Company::getVisibleById($emp->company)){
+						$str_addon= "(". asHtml($company->name) .")";
+					}
+                }
+                break;
+				
             case ITEM_EFFORT:
-                require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
                 if($e= Effort::getVisibleById($obj->id)) {
                     $str_name= asHtml($e->name);
                     $str_url= $PH->getUrl('effortEdit',array('effort'=>$e->id));
 
                 }
                 break;
+				
             case ITEM_FILE:
-                require_once(confGet('DIR_STREBER') . 'db/class_file.inc.php');
                 if($f= File::getVisibleById($obj->id)) {
                     $str_name= asHtml($f->org_filename);
                     $str_url= $PH->getUrl('fileView',array('file'=>$f->id));
                 }
-
+				break;
+				
+			 case ITEM_ISSUE:
+                if($i= Issue::getVisibleById($obj->id)) {
+					if($t = Task::getVisibleById($i->task)){
+                    	$str_name= asHtml($t->name);
+                    	$str_url= $PH->getUrl('taskView',array('tsk'=>$t->id));
+					}
+                }
+				break;
+				
+			case ITEM_TASKPERSON:
+				if($tp= TaskPerson::getVisibleById($obj->id)) {
+					if($person= Person::getVisibleById($tp->person)){
+						$str_name= asHtml($person->name);
+						$str_url= $PH->getUrl('personView',array('person'=>$person->id));
+					}
+					if($task= Task::getVisibleById($tp->task)){
+						$str_addon= "(". asHtml($task->name) .")";
+					}
+				}
+				break;
+				
             default:
                 break;
 

@@ -312,6 +312,41 @@ class ListFilter_last_logout extends ListFilter
     }
 }
 
+class ListFilter_today extends ListFilter
+{
+	public $id = 'today';
+	public $today = NULL;
+
+	public function initValue($value= NULL)
+    {
+        parent::initValue($value);
+
+        /**
+        * get logout date and reset the value variable
+        */
+        if(!$this->today) {
+			$date = date('Y-m-d', time());
+			$dt = $date . " 00:00:01";
+            $this->today = $dt;
+        }
+
+        return $this->value;
+    }
+
+	public function getQuerryAttributes()
+    {
+        $a = array();
+        if($this->active) {
+            $name= $this->sql_querry_attribute
+                 ? $this->sql_querry_attribute
+                 : $this->id;
+            $a[$name]= $this->today;
+        }
+        return $a;
+    }
+
+}
+
 class ListFilter_min_week extends ListFilter
 {
 	public $id = 'date_min';
@@ -328,7 +363,8 @@ class ListFilter_min_week extends ListFilter
         if(!$this->min_date) {
 			$date = date('Y-m-d', (time()-($this->factor*24*60*60)));
 			$time = getGMTString();
-			$dt = $date . " " . renderTime($time);
+			#$dt = $date . " " . renderTime($time);
+			$dt = $date . " 00:00:01";
             $this->min_date = $dt;
         }
 
@@ -364,7 +400,8 @@ class ListFilter_max_week extends ListFilter
         if(!$this->max_date) {
 			$date = gmdate("Y-m-d", time());
 			$time = getGMTString();
-			$dt = $date . " " . renderTime($time);
+			#$dt = $date . " " . renderTime($time);
+			$dt = $date . " 23:59:59";
             $this->max_date = $dt;
         }
 
@@ -906,7 +943,7 @@ class ListBlock extends PageBlock
 
 
 	}
-
+	
     public function render_header()
     {
         $str_selectable= isset($this->columns['_select_col_'])
@@ -923,7 +960,7 @@ class ListBlock extends PageBlock
 	function render_thead() {
 		echo "<thead>";
 		echo "<tr>";
-
+	
 		foreach($this->columns as $c) {
 			$c->render_th();
 		}

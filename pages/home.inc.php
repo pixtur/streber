@@ -15,9 +15,25 @@
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
+require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
+require_once(confGet('DIR_STREBER') . 'lists/list_project_team.inc.php');
+require_once(confGet('DIR_STREBER') . 'lists/list_changes.inc.php');
 
+function build_home_options()
+{
+    return array(
 
+        new NaviOption(array(
+                'target_id'=>'home',
+                'name'=>__('Today')
+            )),
+            new NaviOption(array(
+                'target_id'     =>'homeAllChanges',
+                'name'=>__('Changes'),
+            ))
+    );
+}
 
 #---------------------------------------------------------------------------
 # home
@@ -26,9 +42,6 @@ function home() {
     global $PH;
     global $auth;
 
-
-
-
     ### create from handle ###
     $PH->defineFromHandle(array());
 
@@ -36,19 +49,7 @@ function home() {
     {
         $page= new Page();
     	$page->cur_tab='home';
-    	$page->options=array(
-            new NaviOption(array(
-                'target_id'=>'home',
-                'name'=>__('Today')
-            )),
-            #new NaviOption(array(
-            #    'target_id'     =>'personViewEfforts',
-            #    'target_params' =>array('person' =>  $auth->cur_user->id),
-            #    'name'=>__('Personal Efforts'),
-            #
-            #)),
-
-    	);
+    	$page->options=build_home_options();
 
         $page->title=__("Today"); # $auth->cur_user->name;
         $page->type=__("At Home");
@@ -321,12 +322,230 @@ function home() {
 		$list_bookmarks = new ListBlock_bookmarks();
 		$list_bookmarks->print_automatic();
 	}
-
-
-
+	
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);
-
+	
 }
+
+function homeAllChanges()
+{
+	global $PH;
+    global $auth;
+
+    ### create from handle ###
+    $PH->defineFromHandle();
+	
+	### sets the presets ###
+	$presets= array(
+		## last logout ##
+		'last_logout' => array(
+            'name'=> __('last logout'),
+            'filters'=> array(
+                'last_logout'   => array(
+                    'id'        => 'last_logout',
+                    'visible'   => true,
+                    'active'    => true,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## today ##
+		'today' => array(
+            'name'=> __('today'),
+            'filters'=> array(
+                'today'   => array(
+                    'id'        => 'today',
+                    'visible'   => true,
+                    'active'    => true,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## yesterday ##
+		'yesterday' => array(
+            'name'=> __('yesterday'),
+            'filters'=> array(
+                'yesterday'   => array(
+                    'id'        => 'yesterday',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 1,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## 1 week ##
+		'last_week' => array(
+            'name'=> __('1 week'),
+            'filters'=> array(
+                'last_week'   => array(
+                    'id'        => 'last_week',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 7,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## 2 weeks ##
+		'last_two_weeks' => array(
+            'name'=> __('2 weeks'),
+            'filters'=> array(
+                'last_two_weeks'   => array(
+                    'id'        => 'last_two_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 14,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        )
+    );
+	
+	## set preset location ##
+	$preset_location = 'homeAllChanges';
+	
+	 ### get preset-id ###
+    {
+        $preset_id = 'last_two_weeks';                           # default value
+        if($tmp_preset_id = get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id = $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_homeAllChanges_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id = get('STREBER_homeAllChanges_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id = $tmp_preset_id;
+            }
+        }
+    }
+	
+	### create from handle ###
+    $PH->defineFromHandle(array('preset_id'=>$preset_id));
+	
+    ### set up page ####
+    
+	$page= new Page();
+	
+	$list = new ListBlock_AllChanges();
+
+	$list->filters[] = new ListFilter_changes();
+	{
+		$preset = $presets[$preset_id];
+		foreach($preset['filters'] as $f_name=>$f_settings) {
+			switch($f_name) {
+				case 'last_logout':
+					$list->filters[]= new ListFilter_last_logout(array(
+						'value'=>$f_settings['value'],
+					));
+					break;
+				case 'today':
+					$list->filters[]= new ListFilter_today(array(
+						'value'=>$f_settings['value'],
+					));
+					break;
+				case 'yesterday':
+					$list->filters[]= new ListFilter_min_week(array(
+						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+					));
+					$list->filters[]= new ListFilter_max_week(array(
+						'value'=>$f_settings['value'],
+					));
+					break;
+				case 'last_week':
+					$list->filters[]= new ListFilter_min_week(array(
+						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+					));
+					$list->filters[]= new ListFilter_max_week(array(
+						'value'=>$f_settings['value'],
+					));
+					break;
+				case 'last_two_weeks':
+					$list->filters[]= new ListFilter_min_week(array(
+						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+					));
+					$list->filters[]= new ListFilter_max_week(array(
+						'value'=>$f_settings['value'],
+					));
+					break;
+				default:
+					trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+					break;
+			}
+		}
+
+		$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+							  ? true
+							  : NULL;
+	}
+	
+	
+	
+	$page->cur_tab = 'homeAllChanges';
+	$page->options = build_home_options();
+
+	$page->title = __("Changes"); 
+	$page->type = __('List','page type');
+	$page->title_minor = renderTitleDate(time());
+	
+	echo(new PageHeader);
+	echo (new PageContentOpen);
+	
+	$page->print_presets(array(
+	'target' => $preset_location,
+	'project_id' => '',
+	'preset_id' => $preset_id,
+	'presets' => $presets));
+
+	#echo(new PageContentNextCol);
+
+	
+	$list->print_automatic();
+	
+	echo (new PageContentClose);
+	echo (new PageHtmlEnd);
+		
+}
+
 
 ?>
