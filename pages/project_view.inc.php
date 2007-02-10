@@ -154,7 +154,7 @@ function ProjView()
             'tooltip'   =>__('Book effort for this project'),
             'name'      =>__('Effort'),
         )));
-        
+
         $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));
         $page->extra_header_html.=
                 '<link rel="alternate" type="application/rss+xml" title="' .asHtml($project->name) .' '. __("News")  . '"'
@@ -392,19 +392,6 @@ function ProjView()
     measure_stop('changes');
 
 
-    #--- list changes (old style-----------------------------------------------------------
-    /*
-    measure_start('changes');
-    {
-        require_once(confGet('DIR_STREBER') . './lists/list_projectchanges.inc.php');
-
-        $list= new ListBlock_projectchanges();
-        $list->query_options['date_min']= $auth->cur_user->last_logout;
-        $list->query_options['not_modified_by']= $auth->cur_user->id;
-        $list->print_automatic($project);
-    }
-    measure_stop('changes');
-    */
 
 
 

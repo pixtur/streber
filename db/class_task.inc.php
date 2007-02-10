@@ -440,35 +440,30 @@ foreach($filters_str as $fs=>$value) {
         return array_reverse($folder);
     }
 
-    #----------------------------
-    # get folder as Links
-    #----------------------------
-    # returns array of tasks
-    function getFolderLinks($shortnames=true) {
+
+    /**
+    * render links to parent objects (including project, if given)
+    */
+    function getFolderLinks($shortnames=true, $project= NULL)
+    {
         measure_start('col_TaskFolderlinks');
         global $PH;
-        $folder=$this->getFolder();
-        $buffer="";
-        $delimiter='';
-        foreach($folder as $f) {
-            $buffer.=$delimiter;
+        $link_list= array();
+
+        if($project) {
+            $link_list[]= "<b>". $project->getLink() . "</b>";
+        }
+
+        foreach($this->getFolder() as $f) {
             if($shortnames) {
-                $buffer.=$PH->getLink('taskView',$f->getShort(),array('tsk'=>$f->id));
+                $link_list[]= $PH->getLink('taskView',$f->getShort(),array('tsk'=>$f->id));
             }
             else {
-                $buffer.=$PH->getLink('taskView',$f->name,array('tsk'=>$f->id));
+                $link_list[]= $PH->getLink('taskView',$f->name,array('tsk'=>$f->id));
             }
-
-            $delimiter='<em> &gt; </em>';
         }
         measure_stop('col_TaskFolderlinks');
-        if($buffer) {
-            # return "<nobr>$buffer</nobr>";  ### madlyr - removed <nobr> for folders - try to see task list with folders on 3rd level
-            return $buffer;
-        }
-        else {
-            return NULL;
-        }
+        return implode('<em> &gt; </em>', $link_list);
     }
 
     #------------------------------------------------------------------------------------------------
@@ -494,42 +489,6 @@ foreach($filters_str as $fs=>$value) {
         return count($tasks);
     }
 
-    /**
-    * sort task as intended list
-    *
-    * NOTE: this function is really slow (in long is may take more than 50%
-    * of complete computation time!) Sooner or later this should be optimized.
-    */
-/*    public static function &sortHierarchical(&$taskfolders) {
-
-        # sort taskfolders #
-        $tmp_folder_list=array();
-        foreach($taskfolders as $f) {
-            if(!$f->parent_task) {
-                $tmp_folder_list[]=$f;
-                self::sort_folders(&$taskfolders, &$f, 1,&$tmp_folder_list);
-            }
-            else {
-                $dummy=true;;
-            }
-        }
-        return $tmp_folder_list;
-    }*/
-
-
-    /*private static function sort_folders(&$taskfolders, Task &$task,$level,&$tmp_folder_list) {
-        for($i=0; $i< count($taskfolders); $i++) {
-            $f2= $taskfolders[$i];
-            if($f2->parent_task == $task->id) {
-                $f2->level= $level;
-                $tmp_folder_list[]=$f2;
-                self::sort_folders(&$taskfolders, $f2,$level+1, &$tmp_folder_list);
-            }
-            else {
-                $dummy=true;
-            }
-        }
-    }*/
 
     #----------------------------------------------------
     # getComments()

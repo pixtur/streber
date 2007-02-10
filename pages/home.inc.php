@@ -18,7 +18,6 @@ require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_project_team.inc.php');
-require_once(confGet('DIR_STREBER') . 'lists/list_changes.inc.php');
 
 function build_home_options()
 {
@@ -135,7 +134,7 @@ function home() {
 	#--- list tasks -------------------------------------------------------------
    	if($show_tasks = $auth->cur_user->show_tasks_at_home) {
         measure_start('get_tasks');
-		
+
         $order_str=get('sort_'.$PH->cur_page->id.'_home_tasks');
         $tasks= Task::getHomeTasks($order_str);
 
@@ -322,11 +321,12 @@ function home() {
 		$list_bookmarks = new ListBlock_bookmarks();
 		$list_bookmarks->print_automatic();
 	}
-	
+
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);
-	
 }
+
+
 
 function homeAllChanges()
 {
@@ -335,7 +335,7 @@ function homeAllChanges()
 
     ### create from handle ###
     $PH->defineFromHandle();
-	
+
 	### sets the presets ###
 	$presets= array(
 		## last logout ##
@@ -432,10 +432,10 @@ function homeAllChanges()
             ),
         )
     );
-	
+
 	## set preset location ##
 	$preset_location = 'homeAllChanges';
-	
+
 	 ### get preset-id ###
     {
         $preset_id = 'last_two_weeks';                           # default value
@@ -459,15 +459,22 @@ function homeAllChanges()
             }
         }
     }
-	
+
 	### create from handle ###
     $PH->defineFromHandle(array('preset_id'=>$preset_id));
-	
+
     ### set up page ####
-    
+
 	$page= new Page();
-	
-	$list = new ListBlock_AllChanges();
+
+	#$list = new ListBlock_AllChanges();
+    require_once(confGet('DIR_STREBER') . 'lists/list_changes.inc.php');
+	$list = new ListBlock_Changes();
+	#$list->query_options['']
+    #require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
+
+    #$list= new ListBlock_changes();
+
 
 	$list->filters[] = new ListFilter_changes();
 	{
@@ -518,19 +525,19 @@ function homeAllChanges()
 							  ? true
 							  : NULL;
 	}
-	
-	
-	
-	$page->cur_tab = 'homeAllChanges';
+
+
+
+	$page->cur_tab = 'home';
 	$page->options = build_home_options();
 
-	$page->title = __("Changes"); 
+	$page->title = __("Changes");
 	$page->type = __('List','page type');
 	$page->title_minor = renderTitleDate(time());
-	
+
 	echo(new PageHeader);
 	echo (new PageContentOpen);
-	
+
 	$page->print_presets(array(
 	'target' => $preset_location,
 	'project_id' => '',
@@ -539,12 +546,12 @@ function homeAllChanges()
 
 	#echo(new PageContentNextCol);
 
-	
+
 	$list->print_automatic();
-	
+
 	echo (new PageContentClose);
 	echo (new PageHtmlEnd);
-		
+
 }
 
 

@@ -137,7 +137,7 @@ class ListBlock_persons extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
-		
+
     }
 
 	/**
@@ -231,7 +231,7 @@ class ListBlockCol_PersonName extends ListBlockCol
 {
     public $id='name';
 	public $key='name';
-	
+
     function __construct($args= NULL)
     {
         parent::__construct($args);
@@ -243,7 +243,7 @@ class ListBlockCol_PersonName extends ListBlockCol
 	function render_tr(&$person, $style="")
 	{
 	    global $PH;
-				
+
 		print "<td><b><nobr>". $PH->getLink('personView',asHtml($person->name), array('person' => $person->id)) ."</b></nobr></td>";
 	}
 }
@@ -359,9 +359,10 @@ class ListBlockCol_PersonChanges extends ListBlockCol
 		global $csv_args;
 		global $csv_count;
 
-		$changes= Project::getChanges(array(
-            'modified_by'=>$person->id,
-            'date_min'=>$auth->cur_user->last_logout,
+		$changes= DbProjectItem::getAll(array(
+            'modified_by'   => $person->id,
+            'date_min'      => $auth->cur_user->last_logout,
+            'not_modified_by'=> $auth->cur_user->id,
         ));
 
 		if($format == 'csv'){

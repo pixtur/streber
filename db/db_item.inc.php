@@ -1233,7 +1233,7 @@ class DbProjectItem extends DbItem
             if($log_changed_fields) {
                 require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
                 foreach($log_changed_fields as $name) {
-    
+
                     /**
                     * keep changes in itemchange table
                     */
@@ -1312,7 +1312,7 @@ class DbProjectItem extends DbItem
 
     /**
     * bruteforce delete from database
-    * 
+    *
     * this should only be used in critical situations which would
     * otherwise lead to database inconsistencies.
     */
@@ -1466,6 +1466,144 @@ class DbProjectItem extends DbItem
         return true;
     }
 
+
+
+    /**
+    * get list of items from database
+    *
+    * This function is used for getting changed items for projects or by user, etc.
+    */
+    static function &getAll($args=array())
+    {
+        global $auth;
+		$prefix = confGet('DB_TABLE_PREFIX');
+
+        ### default params ###
+        $project            = NULL;
+        $order_by           = "modified DESC";
+        $status_min         = STATUS_UNDEFINED;
+        $status_max         = STATUS_CLOSED;
+        $visible_only       = true;       # use project rights settings
+        $alive_only         = true;       # hide deleted
+        $date_min           = NULL;
+        $date_max           = NULL;
+        $modified_by        = NULL;
+        $not_modified_by    = NULL;
+        $show_issues        = false;
+        $limit              = NULL;
+
+        ### filter params ###
+        if($args) {
+            foreach($args as $key=>$value) {
+                if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                    trigger_error("unknown parameter",E_USER_NOTICE);
+                }
+                else {
+                    $$key= $value;
+                }
+            }
+        }
+
+        $str_show_issues= $show_issues
+            ? ''
+            : 'AND i.type != '. ITEM_ISSUE;
+
+
+        $str_project= $project
+            ? 'AND i.project=' . intval($project)
+            : '';
+
+        $str_project2= $project
+            ? 'AND upp.project='. intval($project)
+            : '';
+
+        $str_state= $alive_only
+            ? 'AND i.state='. ITEM_STATE_OK
+            : '';
+
+        $str_date_min= $date_min
+            ? "AND i.modified >= '" . asCleanString($date_min) . "'"
+            : '';
+
+        $str_date_max= $date_max
+            ? "AND i.modified <= '" . asCleanString($date_max) . "'"
+            : '';
+
+        $str_modified_by= $modified_by
+            ? 'AND i.modified_by=' . intval($modified_by)
+            : '';
+
+        $str_not_modified_by= $not_modified_by
+            ? 'AND i.modified_by != ' . intval($not_modified_by)
+            : '';
+
+        $str_limit= $limit
+                ? " LIMIT $limit"
+                : "";
+
+        ### only visibile for current user ###
+        if($visible_only) {
+            $s_query=
+            "SELECT i.* from {$prefix}item i, {$prefix}projectperson upp
+            WHERE
+                upp.person = {$auth->cur_user->id}
+                AND upp.project = i.project
+                $str_state
+                $str_show_issues
+                $str_project
+                $str_project2
+                $str_modified_by
+                $str_not_modified_by
+                $str_date_min
+                $str_date_max
+
+                AND ( i.pub_level >= upp.level_view
+                      OR
+                      i.created_by = {$auth->cur_user->id}
+                )
+
+            " . getOrderByString($order_by)
+            . $str_limit;
+        }
+
+        ### all including deleted ###
+        else {
+            $s_query=
+            "SELECT i.*  from
+                                {$prefix}item i
+            WHERE 1
+
+            $str_state
+            $str_project
+            $str_show_issues
+            $str_modified_by
+            $str_not_modified_by
+            $str_date_min
+            $str_date_max
+
+            " . getOrderByString($order_by)
+            . $str_limit;
+        }
+        require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
+
+
+        $dbh = new DB_Mysql;
+
+        $sth= $dbh->prepare($s_query);
+    	$sth->execute("",1);
+    	$tmp=$sth->fetchall_assoc();
+
+    	$items= array();
+        foreach($tmp as $n) {
+            $item= new DbProjectItem($n);
+            $items[]= $item;
+        }
+        return $items;
+    }
+
+
+
+/*
 	static function &getChanges($args=array())
 	{
 		global $auth;
@@ -1478,7 +1616,7 @@ class DbProjectItem extends DbItem
         $date_min           = NULL;
         $date_max           = NULL;
 		$today              = NULL;
-		
+
         ### filter params ###
         if($args) {
             foreach($args as $key=>$value) {
@@ -1490,19 +1628,19 @@ class DbProjectItem extends DbItem
                 }
             }
         }
-		
+
 		if($auth->cur_user->user_rights & RIGHT_EDITALL) {
             $visible_only = false;
         }
-		
+
 		$str_state = $alive_only
 			? 'AND i.state = '. ITEM_STATE_OK
 			: '';
-		
+
 		$str_today = $today
 			? "AND i.modified >= '" . asCleanString($today) . "'"
 			: '';
-			
+
 		$str_date_min = $date_min
 			? "AND i.modified >= '" . asCleanString($date_min) . "'"
 			: '';
@@ -1510,13 +1648,13 @@ class DbProjectItem extends DbItem
 		$str_date_max = $date_max
 			? "AND i.modified <= '" . asCleanString($date_max) . "'"
 			: '';
-		
+
 
         ### only visibile for current user ###
         if($visible_only) {
             $s_query =
             "SELECT i.* from {$prefix}item i, {$prefix}projectperson upp
-            WHERE 
+            WHERE
             upp.person = {$auth->cur_user->id}
             AND upp.project = i.project
             $str_state
@@ -1540,13 +1678,13 @@ class DbProjectItem extends DbItem
             $str_date_max
             " . getOrderByString($order_by);
         }
-       
+
         $dbh = new DB_Mysql;
 
         $sth = $dbh->prepare($s_query);
     	$sth->execute("",1);
     	$tmp = $sth->fetchall_assoc();
-		
+
     	$items = array();
         foreach($tmp as $n) {
             $item = new DbProjectItem($n);
@@ -1554,71 +1692,74 @@ class DbProjectItem extends DbItem
         }
         return $items;
 	}
+
+	*/
+
     /**
     * returns visible object of correct type by an itemId
     *
-    * this is useful, eg. if you when to access common parameters like name, 
+    * this is useful, eg. if you when to access common parameters like name,
     * regardless of the object's type.
     *
     * DbProjectItem::getById() would only load to basic fields. Getting the
     * complete date required check for type.
-    */ 
+    */
     public static function getObjectById($id)
     {
     	if(!$item = DbProjectItem::getById($id)) {
     	    return NULL;
         }
-    	
+
     	if($type = $item->type){
     		switch($type) {
     			case ITEM_TASK:
     				require_once("db/class_task.inc.php");
     				$item_full = Task::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_COMMENT:
     				require_once("db/class_comment.inc.php");
     				$item_full = Comment::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_PERSON:
     				require_once("db/class_person.inc.php");
     				$item_full = Person::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_EFFORT:
     				require_once("db/class_effort.inc.php");
     				$item_full = Effort::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_FILE:
     				require_once("db/class_file.inc.php");
     				$item_full = File::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_PROJECT:
     				require_once("db/class_project.inc.php");
     				$item_full = Project::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_COMPANY:
     				require_once("db/class_company.inc.php");
     				$item_full = Company::getVisibleById($item->id);
     				break;
-    
+
     			case ITEM_VERSION:
     				require_once("db/class_task.inc.php");
     				$item_full = Task::getVisibleById($item->id);
     				break;
-    
+
     			default:
     				$item_full = NULL;
-    
+
     		}
     		return $item_full;
-        }    
+        }
     }
-    
+
 
 
 }

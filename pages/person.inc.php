@@ -418,7 +418,6 @@ function personListDeleted()
 
 		$list= new ListBlock_persons();
 		$list->reduced_header= true;
-		require_once(confGet('DIR_STREBER') . 'lists/list_projectchanges.inc.php');
 		$list->add_col( new listBlockColDate(array(
 			'key'=>'modified',
 			'name'=>__('deleted')

@@ -84,11 +84,11 @@ $g_config= array(
     'DB_VERSION'            =>'',           # current version (set to DB_CREATE_VERSION at install) / validated at startup to complain for upgrade
 
     /**
-    * if not null, is set on startup. Suggested setting for development is
+    * if not null, is set on startup. Suggested setting for development with mysql5 is
     *
     * "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
     */
-    'SQL_MODE'              =>NULL,         
+    'SQL_MODE'              =>NULL,
     /**
     * in some situations (when upgrading with mysql4) you might have to disable this options
     * to avoid invalid display of characters
@@ -518,7 +518,7 @@ $g_language_names= array_keys($g_languages);
 */
 function confGet($var) {
 	global $g_config;
-	if(isset($g_config[$var])) {
+	if(isset($g_config[$var]) || @$g_config[$var] === NULL) {
 		return $g_config[$var];
 	}
 	else {

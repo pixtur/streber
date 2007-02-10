@@ -289,6 +289,23 @@ class BaseObject
 
 
 
+/**
+* inserts a number if key=>values into the first list, but does not overwrite existing values
+*
+* $a= array('x'=>1, 'z'=>2);
+* $b= array('x'=>5, 'y'=>2);
+* fillMissingValues($a,$b)      # set $b to ['x'=>1, 'y'=>2, 'z'=>2]
+*
+* Does not return the list!!!
+*/
+function fillMissingValues(&$list, $settings)
+{
+    foreach($settings as $key => $value){
+        if(!array_key_exists($key, $list)) {
+            $list[$key]= $value;
+        }
+    }
+}
 
 
 
@@ -468,7 +485,7 @@ function setLang($lang) {
     }
 
     $locale = confGet('FORCE_LOCALE');
-    
+
     if($locale != 'C') {
         // setlocale() is used to set the proper locale for date formatting
         // As locale identifiers are platform dependent, PHP allows to specify more than one,
@@ -477,12 +494,12 @@ function setLang($lang) {
         // locales are listed, the more compatible the code will be.
         // Please refer to documentation of function setlocale() for details.
         // TODO: should we set the locale also for LC_CTYPE and/or LC_COLLATE?
-        
+
         if($locale == '')
             $locale = __('en_US.utf8,en_US,enu', 'list of locales');
-            
+
         $res = setlocale(LC_TIME, explode(',', $locale));
-        
+
         // this warning might be annoying, but we need a way to detect that setlocale failed
         // eventually the list of locales will be long enough to include all supported platforms
         if($res === FALSE)

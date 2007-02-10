@@ -241,8 +241,6 @@ function ProjListTemplates()
 
 
 
-
-
 /**
 * list changes
 */
@@ -419,9 +417,10 @@ function ProjViewChanges()
     $PH->defineFromHandle(array('prj'=>$project->id, 'preset_id'=>$preset_id));
 
 	## init known filters for preset ##
-	require_once(confGet('DIR_STREBER') . './lists/list_projectchanges.inc.php');
+	require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
 	$page= new Page();
-	$list = new ListBlock_projectchanges();
+	$list = new ListBlock_changes();
+	$list->query_options['project']= $project->id;
 
 	$list->filters[] = new ListFilter_changes();
 	{
@@ -513,26 +512,10 @@ function ProjViewChanges()
 
     #--- list changes --------------------------------------------------------------------------
     {
-        #$list->query_options['date_min']= $auth->cur_user->last_logout;
         $list->print_automatic($project);
     }
 
-    #--- list items --------------------------------------------------------------------------
-    /*{
-        require_once(confGet('DIR_STREBER') . "lists/list_projectchanges.inc.php");
 
-        $order_str=get("sort_".$PH->cur_page->id ."_changes");
-
-        $items= Project::getChanges(array(
-            'order_by'=> $order_str,
-        ));
-
-        $list=new ListBlock_projectchanges();
-        $list->title= __("changed project-items");
-        $list->no_items_html= __("no changes yet");
-        $list->render_list(&$items);
-
-	}*/
 
     ### HACKING: 'add new task'-field ###
     $PH->go_submit='taskNew';
