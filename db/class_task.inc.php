@@ -121,11 +121,10 @@ class Task extends DbProjectItem
             new FieldPercentage(array('name'=>'completion',
                 'title'=>__('Completion'),
                 'view_in_forms'=>true,
-                'default'=>FINIT_NEVER,
+                'default'       =>0,
             )),
             new FieldInternal(  array('name'=>'parent_task',
                 'view_in_forms'=>true,
-                'default'=>0,
                 'log_changes'   => true,
             )),
             /**

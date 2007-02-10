@@ -657,6 +657,11 @@ function upgrade($args=NULL) {
     print_testStart("doing " .count($update_queries). " changes to database...");
     foreach($update_queries as $q) {
 
+        ### strict mode for development ###
+        #if($result= $sql_obj->prepare('SET session sql_mode = "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"')) {
+        #  $result->execute();
+        #}
+
         if(!$result=$sql_obj->execute($q)){
             if(function_exists('mysql_error') && mysql_error()) {
                 $mysql_error= mysql_error();

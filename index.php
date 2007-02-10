@@ -98,7 +98,10 @@ require_once( confGet('DIR_STREBER') . 'std/class_pagehandler.inc.php');
 
 ### trigger db request ###
 $dbh = new DB_Mysql;
-if($result = $dbh->prepare('SELECT NOW()')) {
+if(!is_null(confGet('SQL_MODE'))) {
+    $dbh->prepare('SET sql_mode = "'. confGet('SQL_MODE') .'"')->execute();
+}
+if ($result = $dbh->prepare('SELECT NOW()')) {
   $result->execute();
 }
 

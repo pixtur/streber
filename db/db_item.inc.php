@@ -1552,8 +1552,6 @@ class DbProjectItem extends DbItem
             $item = new DbProjectItem($n);
             $items[] = $item;
         }
-		
-		
         return $items;
 	}
     /**

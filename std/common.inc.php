@@ -726,7 +726,12 @@ function isSpam($str) {
             $count+= $tmp * $value;
         }
     }
-    $rate= $count * $count_matched_words/ str_word_count($str) / count(confGet('SPAM_WORDS'));
+    if(str_word_count($str)) {
+        $rate= $count * $count_matched_words/ str_word_count($str) / count(confGet('SPAM_WORDS'));
+    }
+    else {
+        $rate= 0;
+    }
     return $rate;
 }
 

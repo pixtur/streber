@@ -83,7 +83,12 @@ $g_config= array(
     'DB_TABLE_PREFIX'       =>'',
     'DB_VERSION'            =>'',           # current version (set to DB_CREATE_VERSION at install) / validated at startup to complain for upgrade
 
-
+    /**
+    * if not null, is set on startup. Suggested setting for development is
+    *
+    * "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+    */
+    'SQL_MODE'              =>NULL,         
     /**
     * in some situations (when upgrading with mysql4) you might have to disable this options
     * to avoid invalid display of characters

@@ -855,7 +855,7 @@ class Project extends DbProjectItem
 
     /**
     * get changes
-    * - if no project provided ALL changes will be show
+    * - if no project provided ALL changes will be shown
     */
     static function &getChanges($args=array())
     {
