@@ -2458,9 +2458,6 @@ table.diff td.neutral{
 }
 
 
-
-
-
 table.list tr.selected td{
     background-color:#5761E2;
     color:#fff;
@@ -2475,8 +2472,10 @@ table.list tr.selected td span{
 }
 
 
-/*
-body #outer {
+/**
+* styles for ajax driven sideboard
+*/
+#outer.sideboardOn {
     margin:0px;
     padding:0px;
     top:0px;
@@ -2488,10 +2487,10 @@ body #outer {
 
     position:fixed;
     overflow:auto;
-
 }
 
-body #sideboard {
+
+#sideboard.sideboardOn {
     margin:0px;
     margin-right:0px;
     margin-left:auto;
@@ -2517,7 +2516,6 @@ body #sideboard {
 #sideboard div {
     padding:0.3em;
 }
-*/
 
 
 /**
@@ -2559,5 +2557,3 @@ span#projectselectorlist {
  background-color:  #008;
  color:             #fff;
 }
-
-

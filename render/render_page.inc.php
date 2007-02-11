@@ -490,7 +490,16 @@ class PageHtmlStart extends PageElement {
 		<script type="text/javascript" src="js/jeditable.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
 		<script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
 		<script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>
-		<script type="text/javascript">
+		<script type="text/javascript">';
+		
+        if(confGet('TASKDETAILS_IN_SIDEBOARD')) {
+            $buffer.="var g_enable_sideboard= true;";                    
+        }
+        else {
+            $buffer.="var g_enable_sideboard= false;";                    
+        }
+		
+		$buffer.='
         <!--
 
             //------ on load -------
@@ -518,6 +527,7 @@ document.my_form." . $this->page->autofocus_field. ".select();";
 	                    $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
 	                }
 	            }
+
 
 	            $buffer.= "misc();
 	                       listFunctions();

@@ -160,6 +160,29 @@ function listFunctions()
 
                     selected_rows= new Array(this);
                 }
+                /**
+                * show sideboard
+                */
+                if(g_enable_sideboard) {
+                    arr= /\btasks_(\d+)_chk\b/.exec(this.checkbox_obj.id);
+                    if(arr) {
+                        id=1*arr[1];
+    
+                        $.post('index.php?go=taskAjax',{
+                            go: 'taskAjax',
+                            tsk: id
+                        }, function(str) {
+                            $('#sideboard').html(str);
+                            $('#sideboard').addClass('sideboardOn');                        
+                            $('#outer').addClass('sideboardOn');
+                            $('#sideboard div.wiki.editable').each(function() {
+                                aj= new AjaxEdit(this);
+                                ajax_edits.push(aj);
+                                this.ajax_edit= aj;
+                            });
+                        });
+                    }
+                }
             }
         }
     );
@@ -218,31 +241,5 @@ function listFunctions()
         }
     );
 
-
-    /**
-    * Early debug stages for lazy loading of tasks details...
-    *
-    *
-    $('table.list td').click(function(e) {
-
-        id_str = this.parentNode.id;
-        re=/\btasks_(\d+)\b/;
-        arr=re.exec(id_str);
-        if(arr) {
-            id=1*arr[1];
-
-            $('#sideboard div').load('index.php?go=taskAjax',{
-                go: 'taskAjax',
-                tsk: id
-            });
-
-            $('table tr.current').removeClass('current');
-            //$(this.parentNode).css({background:"this.parentNode.style.background"});
-            $(this.parentNode).addClass('current');
-            $(this.parentNode).css({background:"#f2f2f2"});
-
-        }
-        return false;
-    });*/
 
 }

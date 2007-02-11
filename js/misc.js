@@ -10,15 +10,14 @@
  * @usedby:
  */
 
+/**
+* global variables
+*/
 var onLoadFunctions= new Array();
+var ajax_edits= new Array();
 
 function misc()
 {
-
-    $("#sideboard").click(function(){
-      $(this).hide("slow");
-      return false;
-    });
 
     /**
     * visual effects
@@ -226,7 +225,6 @@ function misc()
     /**
     * init ajaxEdits
     */
-    var ajax_edits= new Array();
     $('div.wiki.editable').each(function() {
         aj= new AjaxEdit(this);
         ajax_edits.push(aj);

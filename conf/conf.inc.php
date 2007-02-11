@@ -330,6 +330,15 @@ $g_config= array(
     *   0.1    - loose
     */
     'REJECT_SPAM_CONTENT' => 0.1,
+    
+    
+    /**
+    * enables the sideboard, which is been been displayed on the
+    * right side of the screen after a row in a task list has been
+    * selected. Currenty only displays description and allows quick wiki 
+    * editing.   
+    */
+    'TASKDETAILS_IN_SIDEBOARD' => false,
 );
 
 

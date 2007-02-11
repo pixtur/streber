@@ -1013,11 +1013,14 @@ function ProjViewTasks()
         * for a clean version of this list with a AJAX-driven side board
         * following columns should be hidden:
         */
-        #unset($list->columns['assigned_to']);
-        #unset($list->columns['for_milestone']);
-        #unset($list->columns['estimate_complete']);
-        #unset($list->columns['pub_level']);
-        #unset($list->columns['_select_col_']);
+        if(confGet('TASKDETAILS_IN_SIDEBOARD')) {
+            unset($list->columns['assigned_to']);
+            unset($list->columns['for_milestone']);
+            unset($list->columns['estimate_complete']);
+            unset($list->columns['pub_level']);
+            #unset($list->columns['_select_col_']);
+            unset($list->columns['label']);
+        }
         if(!confGet('TASK_LIST_EFFORT_COLUMN')) {
             unset($list->columns['efforts']);
         }
@@ -1131,16 +1134,6 @@ function ProjViewDocu()
         $list->columns= $c_new;
         $list->add_col( new ListBlockCol_TaskAsDocu());
 
-        /**
-        * NOTE: pixtur 2006-10-13
-        * for a clean version of this list with a AJAX-driven side board
-        * following columns should be hidden:
-        */
-        #unset($list->columns['assigned_to']);
-        #unset($list->columns['for_milestone']);
-        #unset($list->columns['estimate_complete']);
-        #unset($list->columns['pub_level']);
-        #unset($list->columns['_select_col_']);
         unset($list->functions['taskNew']);
         unset($list->functions['taskNewBug']);
         unset($list->functions['tasksCompleted']);

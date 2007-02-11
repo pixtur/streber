@@ -210,7 +210,7 @@ class ChangeLine extends BaseObject {
                     }
 
                     $html_details= '';
-                    if($tmp= $task->getFolderLinks()) {
+                    if($tmp= $task->getFolderLinks(true, $project)) {
                         $html_details .=__('in', 'very short for IN folder...'). ' '. $tmp;
                     }
 
@@ -434,7 +434,7 @@ class ChangeLine extends BaseObject {
 
 
                     $html_details= '';
-                    if($tmp= $task->getFolderLinks()) {
+                    if($tmp= $task->getFolderLinks(true, $project)) {
                         $html_details .=__('in', 'very short for IN folder...'). ' '. $tmp;
                     }
 
