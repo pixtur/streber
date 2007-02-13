@@ -4,6 +4,7 @@
 
 class MysqlException extends Exception {
   public $backtrace;
+
   public function __construct($message=false, $code=false) {
 	global $sql_obj;
     $this->message="";
@@ -24,8 +25,8 @@ class MysqlException extends Exception {
     if(function_exists('mysql_error') && mysql_error()) {
         $mysql_error= mysql_error();
     }
-    else if(function_exists('mysqli_error') && mysqli_error()) {
-        $mysql_error= mysql_error();
+    else if(confGet('DB_TYPE') == 'mysqli' && $sql_obj && function_exists('mysqli_error') && $sql_obj->getConnect() && mysqli_error($sql_obj->getConnect())) {
+        $mysql_error= mysqli_error($sql_obj->getConnect());
     }
     else {
         $mysql_error = $sql_obj->error;

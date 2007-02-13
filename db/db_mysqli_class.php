@@ -83,6 +83,15 @@ class sql_class implements sql_interface{
     }
 
     /**
+    * accessing connect for MySQLiError output
+    */
+    public function getConnect() 
+    {
+        return $this->connect;
+    }
+    
+    
+    /**
     * method error: Set error msg
     */
     private function error($msg=false){

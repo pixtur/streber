@@ -792,6 +792,12 @@ function companyEdit($company=NULL)
     }
     echo (new PageContentOpen);
 
+    $block=new PageBlock(array(
+        'id'    =>'edit',
+        'reduced_header' => true,
+    ));
+    $block->render_blockStart();
+
     ### write form #####
     {
 		global $g_ccategory_names;
@@ -834,6 +840,8 @@ function companyEdit($company=NULL)
 
         echo "<input type=hidden name='company' value='$company->id'>";
     }
+    $block->render_blockEnd();
+
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);
 

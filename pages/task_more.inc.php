@@ -746,7 +746,6 @@ function taskEdit($task=NULL)
 
         $block->render_blockEnd();
 
-
         #@@@ passing project-id is an security-issue, because it might allow to add tasks to unverified projects.
         # Double-checking project-rights in taskEditSubmit() required
     }

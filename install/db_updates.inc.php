@@ -242,7 +242,7 @@ if($db_version < 0.0709){
 
 if($db_version < 0.0710){
 	$update_queries[]="
-        ALTER TABLE `{$db_table_prefix}itemperson`
+        ALTER TABLE `{$db_table_prefix}itemperson`        
         CHANGE `remember_unchanged` `notify_if_unchanged` INT( 11 ) DEFAULT NULL ;";
 
 	$update_queries[]="
@@ -285,8 +285,21 @@ if($db_version < 0.0783) {
         "ALTER TABLE `{$db_table_prefix}effort` ADD INDEX ( `task` );";
 }
 
-if($db_version < 0.793) {
+if($db_version < 0.0793) {
     $update_queries[]="ALTER TABLE `{$db_table_prefix}person` CHANGE `ip_address` `ip_address` VARCHAR( 15 )  DEFAULT '' NOT NULL ;";
+}
+
+if($db_version < 0.0794) {
+    $update_queries[]=" ALTER TABLE `{$db_table_prefix}person` 
+                        CHANGE `ip_address` `ip_address` VARCHAR( 15 )  DEFAULT '' NOT NULL ;";
+
+    $update_queries[]=" ALTER TABLE `{$db_table_prefix}itemperson` 
+                        CHANGE `notify_if_unchanged` `notify_if_unchanged` INT( 11 )  DEFAULT 0 NOT NULL ;";
+
+    $update_queries[]=" ALTER TABLE `{$db_table_prefix}person` 
+                        CHANGE `date_highlight_changes` `date_highlight_changes` DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL";
+
+
 }
 
 ?>

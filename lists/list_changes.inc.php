@@ -99,6 +99,8 @@ class ChangeLine extends BaseObject {
         * get list of items touched by other persons
         */
         $changed_items= DbProjectItem::getAll($query_options);
+        
+        
 
         /**
         * go through list
@@ -371,11 +373,11 @@ class ChangeLine extends BaseObject {
                         $html_attached=__("attached").": ";
                         $t_timestamp='';
                         foreach($files as $f) {
-                            if($person->id != $f->modified_by) {
+                            #if($person->id != $f->modified_by) {
                                 $t_timestamp= $f->created;
                                 $count_attached_files++;
                                 $html_attached.= $PH->getLink('fileView', $f->name, array('file'=>$f->id));
-                            }
+                            #}
                         }
                         if($count_attached_files) {
                             $html_what= __('attached file to');

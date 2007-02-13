@@ -1,48 +1,22 @@
 <?php
 
 /**
-* use this file for translating streber into new languages
-*
-* Some hints:
-*
-* - This file should be edited with a utf8 capable editor.
-* - Insert the translation into the '' .
-* - Avoid...
-*   - quotes inside strings
-*   - linebreaks inside strings
-* - Characters behind the pipe ('|') are just for clarifying the context.
-*   Do not translate them!
-* - Rename this file into "??.inc" where as "??" being the apache-shortcut of the language (like "en").
-* - Add the language definition to "conf/conf.inc" (search for $g_languages)
-*
-* - With each new version of streber, there will be a "??.inc.changes" file with new phrases that needs
-*   to be translated. Copy and paste the contense of those files into the language-files.
-* - run "perl scanLanguages.pl" from this directory to check for completeness.
-*/
-
-/**
-* translation into: Spanish
+* translated into: Spanish
 *
 *    translated by: Cristhian Vivanco	
+                    cvivanco@aerocardal.com
 *
 *             date: 10- OCt 2006
+              2nd update 10-01-07
+			  3rd update 12-02-07
 *
-*  streber version: 0.684
+*  streber version: 0.0792
 *
 *         comments:
-//acentos:
-// á = &aacute;
-// é = é
-// í = &iacute;
-// ó = &oacute;
-// ú = &uacute;
-// ñ = ñ
-
 */
 
 global $g_lang_table;
 $g_lang_table= array(
-
 
 
 ### ../lists/list_projectchanges.inc.php   ###
@@ -437,8 +411,6 @@ $g_lang_table= array(
 'Delete person'               =>'Eliminar persona',  # line 113
 'Create new person'           =>'Crear nueva persona',  # line 119
 'Profile|column header'       =>'Perfil|column header',  # line 141
-'Account settings for user (do not confuse with project rights)'=>'',  # line 143
-'(adjusted)'                  =>'',  # line 160
 'Active Projects|column header'=>'Proyectos Activos',  # line 180
 
 ### ../render/render_list_column_special.inc.php   ###
@@ -529,7 +501,6 @@ $g_lang_table= array(
 
 ### ../lists/list_taskfolders.inc.php   ###
 'Number of subtasks'          =>'# de subtareas',  # line 84
-'Create new folder under selected task'=>'',  # line 105
 'Move selected to folder'     =>'Mover a carpeta',  # line 110
 
 ### ../lists/list_tasks.inc.php   ###
@@ -562,7 +533,7 @@ $g_lang_table= array(
 ### ../lists/list_tasks.inc.php   ###
 'Name, Comments'              =>'Nombre, Comentarios',  # line 852
 'has %s comments'             =>'tiene %s comentarios',  # line 882
-'Task has %s attachments'     =>'Tareas tiene %s attachments',  # line 895
+'Task has %s attachments'     =>'Esta tarea tiene %s archivo(s)',  # line 895
 '- no name -|in task lists'   =>'- sin nombre -|en lista de tareas',  # line 913
 'number of subtasks'          =>'cantidad de subtareas',  # line 935
 'Sum of all booked efforts (including subtasks)'=>'Total de todas las colaboraciones (incl. subtareas)',  # line 966
@@ -570,11 +541,10 @@ $g_lang_table= array(
 'Days until planned start'    =>'Días para el inicio estipulado',  # line 989
 'Due|column header, days until planned start'=>'Cumplimiento',  # line 990
 'planned for %s|a certain date'=>'planificado para %s|a certain date',  # line 1019
-'Est/Compl'                   =>'',  # line 1035
 'Estimated time / completed'  =>'Tiempo estimado / Completado',  # line 1037
 'estimated %s hours'          =>'%s horas estimadas',  # line 1059
-'estimated %s days'           =>'$s dias estimados',  # line 1064
-'estimated %s weeks'          =>'$s semanas estimadas',  # line 1069
+'estimated %s days'           =>'%s dias estimados',  # line 1064
+'estimated %s weeks'          =>'%s semanas estimadas',  # line 1069
 '%2.0f%% completed'           =>'%2.0f%% completedo',  # line 1075
 
 ### ../pages/_handles.inc.php   ###
@@ -834,7 +804,7 @@ $g_lang_table= array(
 'New File|page title'         =>'Nuevo Archivo',  # line 389
 'Could not get file'          =>'No se pudo obtener archivo',  # line 504
 'Could not get project of file'=>'No se pudo obtener proyecto de archivo',  # line 511
-'Please enter a proper filename'=>'Porfavor ingrese un nombre de archivo correcto',  # line 548
+'Please enter a proper filename'=>'Por favor ingrese un nombre de archivo correcto',  # line 548
 'Select some files to delete' =>'Seleccione algunos archivos para borrar',  # line 596
 'WARNING: Failed to delete %s files'=>'AVISO: No se pudo borrar archivo',  # line 615
 'Moved %s files to dumpster'  =>'Archivo movido al basurero',  # line 618
@@ -895,7 +865,7 @@ $g_lang_table= array(
 
 ### ../pages/login.inc.php   ###
 'Welcome to streber|Page title'=>'Bienvenido a streber',  # line 73
-'please login'                =>'porfavor logearse',  # line 74
+'please login'                =>'Ingreso de Usuario',  # line 74
 'Nickname|label in login form'=>'Nick',  # line 93
 'Password|label in login form'=>'Contraseña',  # line 94
 'I forgot my password.|label in login form'=>'Olvidé mi Contraseña',  # line 95
@@ -908,7 +878,7 @@ $g_lang_table= array(
 'If you remember your name, please enter it and try again.'=>'Si recuerda su nombre, ingresélo y pruebe nuevamente',  # line 142
 'Supposed a user with this name existed a notification mail has been sent.'=>'Si un usuario con este nombre existiera una notificación ha sido enviada ',  # line 165
 'invalid login|message when login failed'=>'login invalido',  # line 216
-'Welcome %s. Please adjust your profile and insert a good password to activate your account.'=>'Bievenido. Porfavor ajuste su perfil e ingrese una buena cotraseña para activar su cuenta ',  # line 275
+'Welcome %s. Please adjust your profile and insert a good password to activate your account.'=>'Bievenido. Por favor ajuste su perfil e ingrese una buena cotraseña para activar su cuenta ',  # line 275
 'Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.'=>'Lo sentimos, pero este codigo de activació ya no es valido. Si Ud. ya tiene una cuenta, puede ingresar su nombre y utilizar el enlace<b>Olvido su Contraseña</b> abajo.',  # line 281
 'License|page title'          =>'Licencia',  # line 304
 
@@ -926,8 +896,6 @@ $g_lang_table= array(
 'loaded extensions'           =>'extensiones cargadas',  # line 287
 'include path'                =>'ruta incluida',  # line 289
 'register globals'            =>'registrar globales',  # line 291
-'magic quotes gpc'            =>'',  # line 293
-'magic quotes runtime'        =>'',  # line 295
 'safe mode'                   =>'modo seguro',  # line 297
 
 ### ../pages/person.inc.php   ###
@@ -963,7 +931,7 @@ $g_lang_table= array(
 'E-Mail|label for person personal email'=>'',  # line 314
 'Adress Personal|Label'       =>'Dirección Personal',  # line 319
 'Adress Office|Label'         =>'Dirección Oficina',  # line 326
-'Birthdate|Label'             =>'Fecha de Nacimiento',  # line 333
+'Birthdate|Label'             =>'Cumpleaños',  # line 333
 'works for|List title'        =>'trabaja para',  # line 348
 'not related to a company'    =>'no relacionada a una compañia',  # line 354
 'works in Projects|list title for person projects'=>'trabaja en Proyectos',  # line 378
@@ -1190,7 +1158,7 @@ $g_lang_table= array(
 'Expected result|label in issue-reports'=>'Resultado esperado',  # line 380
 'Suggested Solution|label in issue-reports'=>'Solución sugerida',  # line 384
 'No project selected?'        =>'Ningun proyecto seleccionado',  # line 485
-'Please select only one item as parent'=>'Porfavor seleccione solo un item como matriz',  # line 536
+'Please select only one item as parent'=>'Por favor seleccione solo un item como matriz',  # line 536
 'Insufficient rights for parent item.'=>'Derechos insuficientes para item matriz',  # line 539
 'could not find project'      =>'no se pudo encontrar proyecto',  # line 557
 'I guess you wanted to create a folder...'=>'Creo que querias crear una carpeta',  # line 591
@@ -1270,7 +1238,7 @@ $g_lang_table= array(
 'Select a task to edit description'=>'Seleccione una tarea para editar descripción',  # line 2097
 
 ### ../render/render_form.inc.php   ###
-'Please use Wiki format'      =>'Porfavor utilize formato Wiki',  # line 310
+'Please use Wiki format'      =>'Por favor utilize formato Wiki',  # line 310
 'Submit'                      =>'Enviar',  # line 423
 'Cancel'                      =>'Cancelar',  # line 447
 'Apply'                       =>'Aplicar',  # line 457
@@ -1314,8 +1282,7 @@ $g_lang_table= array(
 'Your related Companies'      =>'Sus compañías relacionadas',  # line 241
 'Calendar'                    =>'Calendario',  # line 246
 '<span class=accesskey>S</span>earch:&nbsp;'=>'Buscar',  # line 251
-'Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`'=>'',  # line 254
-'This page requires java-script to be enabled. Please adjust your browser-settings.'=>'Esta pagina requiere java-script habilitado. Porfavor adjuste la configuración de su navegador.',  # line 549
+'This page requires java-script to be enabled. Please adjust your browser-settings.'=>'Esta pagina requiere java-script habilitado. Por favor adjuste la configuración de su navegador.',  # line 549
 'Add Now'                     =>'Agregar Ahora',  # line 588
 'you are'                     =>'ud. es',  # line 635
 'Return to normal view'       =>'Volver a vista normal',  # line 649
@@ -1342,7 +1309,7 @@ $g_lang_table= array(
 ### ../std/class_auth.inc.php   ###
 'Fresh login...'              =>'Login fresco...',  # line 45
 'Cookie is no longer valid for this computer.'=>'La cookie ya no es valida para este computador',  # line 52
-'Your IP-Address changed. Please relogin.'=>'Su dirección IP ha camiado. Porfavor relogeese.',  # line 58
+'Your IP-Address changed. Please relogin.'=>'Su dirección IP ha camiado. Por favor ingrese nuevamente.',  # line 58
 'Your account has been disabled. '=>'Su cuenta ha sido deshabilitada',  # line 64
 'Could not set cookie.'       =>'No se pudo crear cookie',  # line 205
 
@@ -1350,7 +1317,6 @@ $g_lang_table= array(
 'WARNING: operation aborted (%s)'=>'AVISO: Operación abortada',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'FATAL: Operación abortada con error fatal ',  # line 594
 'Error: Insuffient rights'    =>'ERROR: Derechos insuficientes',  # line 597
-'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',  # line 600
 'NOTE: %s|Message when operation aborted'=>'NOTA: %s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'ERROR: &s',  # line 606
 
@@ -1380,8 +1346,6 @@ $g_lang_table= array(
 'int|short for public level internal'=>'init',  # line 49
 'pub|short for public level client'=>'pub',  # line 51
 'PUB|short for public level client edit'=>'PUB',  # line 52
-'A|short for public level assigned'=>'',  # line 53
-'O|short for public level owned'=>'',  # line 54
 'Create projects|a user right'=>'Crear proyectos',  # line 62
 'Edit projects|a user right'  =>'Editar proyectos',  # line 63
 'Delete projects|a user right'=>'Borrar proyectos',  # line 64
@@ -1407,7 +1371,6 @@ $g_lang_table= array(
 'Employment'                  =>'Empleo',  # line 103
 'Issue'                       =>'Problema',  # line 104
 'Task assignment'             =>'Asignación de tareas',  # line 109
-'Nitpicky|severity'           =>'',  # line 116
 'Feature|severity'            =>'Función',  # line 117
 'Trivial|severity'            =>'Trivial',  # line 118
 'Text|severity'               =>'Texto',  # line 119
@@ -1431,13 +1394,13 @@ $g_lang_table= array(
 'since %s'                    =>'desde %s',  # line 123
 'following happened at %s |notification'=>'lo siguiente ha ocurrido %s',  # line 126
 'Your account has been created.|notification'=>'Su cuenta ha sido creada.',  # line 133
-'Please set password to activate it.|notification'=>'Porfavor cree contraseña para activarla',  # line 135
+'Please set password to activate it.|notification'=>'Por favor cree contraseña para activarla',  # line 135
 'You have been assigned to projects:|notification'=>'Ha sido asignado a proyectos:',  # line 144
 'Project Updates'             =>'Actualizaciones de Proyecto',  # line 174
 'If you do not want to get further notifications feel free to|notification'=>'Si no quiere recibir notificaciones sientase libre de',  # line 221
 'adjust your profile|notification'=>'ajuste su perfil',  # line 223
 'Thanks for your time|notication'=>'Gracias por su tiempo',  # line 228
-'the management|notication'   =>'los administradores',  # line 229
+'the management|notication'   =>'La administración',  # line 229
 'No news for <b>%s</b>'       =>'Sin noticias para <b>%s</b>',  # line 275
 
 
@@ -1467,10 +1430,6 @@ $g_lang_table= array(
 
 ### ../db/db.inc.php   ###
 'Database exception. Please read %s next steps on database errors.%s'=>'Database exception. Por favor lea la siguientes %s pasos en errores de bases de datos.%s',  # line 38
-
-### ../db/db_item.inc.php   ###
-'Unknown'                     =>'',  # line 1298
-'Item has been modified during your editing by %s (%s minutes ago). Your changes can not be submitted.'=>'',  # line 1303
 
 ### ../lists/list_comments.inc.php   ###
 'New Comment'                 =>'Nuevo Comentario',  # line 39
@@ -1505,7 +1464,7 @@ $g_lang_table= array(
 'Move files'                  =>'Mover archivos',  # line 119
 'File|Column header'          =>'Archivo',  # line 297
 'in|... folder'               =>'en',  # line 334
-'ID %s'                       =>'ID $s',  # line 450
+'ID %s'                       =>'ID %s',  # line 450
 'Show Details'                =>'Mostrar Detalles',  # line 452
 'Attached to|Column header'   =>'Adjunto a ',  # line 376
 'Summary|Column header'       =>'Resumen',  # line 407
@@ -1646,7 +1605,7 @@ $g_lang_table= array(
 '- no -'                      =>'- no -',  # line 969
 'Assigne to project|form label'=>'Asignar a proyecto',  # line 978
 'autodetect'                  =>'autodetectar',  # line 1019
-'Time zone|form label'        =>'Huso horario',  # line 1052
+'Time zone|form label'        =>'Zona horaria',  # line 1052
 
 ### ../pages/task_more.inc.php   ###
 'Invalid checksum for hidden form elements'=>'Invalid checksum for hidden form elements',  # line 790
@@ -1681,7 +1640,7 @@ $g_lang_table= array(
 'needs approval'              =>'necesita aprobación',  # line 863
 'without milestone'           =>'sin hitos',  # line 887
 'Released Versions'           =>'Versiones Creadas',  # line 1553
-'New released Milestone'      =>'Nuevos hitos creados',  # line 1571
+'New released Milestone'      =>'Nuevos hitos liberados',  # line 1571
 'Tasks resolved in upcomming version'=>'Tareas resueltas para próxima versión',  # line 1605
 'Failed to delete %s projects'=>'Fallo al eliminar el proyecto %s',  # line 1913
 'Moved %s projects to trash'  =>'Se enviaron %s proyectos a la basura',  # line 1916
@@ -1711,9 +1670,8 @@ $g_lang_table= array(
 ### ../pages/task_more.inc.php   ###
 'Parent task not found.'      =>'Tarea superior no pudo ser encontrada',  # line 162
 'Select some task(s) to edit' =>'Seleccione una tarea para editar!',  # line 367
-'You do not have enough rights to edit this task'=>'',  # line 375
 'New milestone'               =>'Nuevo Hito',  # line 407
-'-- next released version --' =>'-- nueva versión para liberar --',  # line 457
+'-- next released version --' =>'-- nueva versión liberada --',  # line 457
 'Release as version|Form label, attribute of issue-reports'=>'Liberar como versión',  # line 605
 'Reproducibility|Form label, attribute of issue-reports'=>'Cómo reproducir',  # line 719
 'Create another task after submit'=>'Crear otra tarea luego de enviar',  # line 743
@@ -1778,7 +1736,7 @@ $g_lang_table= array(
 'ERROR: could not get assigned persons'=>'Error: no se pudo traer a la persona asignada',  # line 3230
 'Assigne to'                  =>'Asignar a',  # line 3247
 'Also assigne to'             =>'También asignar a',  # line 3264
-'Book effort after submit'    =>'Programa una colaboración después de enviar',  # line 3268
+'Book effort after submit'    =>'Programar una colaboración después de enviar',  # line 3268
 'ERROR: could not get task'   =>'Error: no se pudo traer la tarea',  # line 3308
 'Note requires project'       =>'La nota requiere de un proyecto',  # line 3360
 'Note requires assigned person(s)'=>'La nota requiere de asignar una persona',  # line 3364
@@ -1854,7 +1812,6 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 '<span class=accesskey>H</span>ome'=>'<span class=accesskey>H</span>ome',  # line 219
 '<span class=accesskey>P</span>rojects'=>'<span class=accesskey>P</span>royectos',  # line 226
-'Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`'=>'',  # line 253
 
 ### ../render/render_wiki.inc.php   ###
 'from'                        =>'de',  # line 318
@@ -1870,7 +1827,6 @@ $g_lang_table= array(
 'Operation aborted with an fatal error (%s).'=>'Operación abortada con error fatal (%s)',  # line 690
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operación abortada con error fatal (%s) provocado por un error de programación',  # line 693
 'Insuffient rights'           =>'Permisos insuficientes',  # line 702
-'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',  # line 706
 
 ### ../std/common.inc.php   ###
 'only one item expected.'     =>'Solo se esperaba un item.',  # line 345
@@ -1886,14 +1842,13 @@ $g_lang_table= array(
 'Guest|profile name'          =>'Invitado',  # line 40
 'A|short for public level assigned'=>'A',  # line 68
 'O|short for public level owned'=>'P',  # line 69
-'Nitpicky|severity'           =>'',  # line 131
 'done|resolve reason'         =>'hecho',  # line 154
 'fixed|resolve reason'        =>'arreglado',  # line 155
 'works_for_me|resolve reason' =>'trabaja_para_mi',  # line 156
 'duplicate|resolve reason'    =>'duplicado',  # line 157
 'bogus|resolve reason'        =>'con errores',  # line 158
 'rejected|resolve reason'     =>'rechazado',  # line 159
-'deferred|resolve reason'     =>'',  # line 160
+'deferred|resolve reason'     =>'Diferido',  # line 160
 'Not defined|release type'    =>'Sin definir',  # line 166
 'Not planned|release type'    =>'Sin planificar',  # line 167
 'Upcomming|release type'      =>'Próximo',  # line 168
@@ -1943,6 +1898,350 @@ $g_lang_table= array(
 ### ../std/constant_names.inc.php   ###
 'Nitpicky|severity'           =>'Nitpicky',  # line 131
 'deferred|resolve reason'     =>'Diferido',  # line 160
+
+
+### ../pages/task_view.inc.php   ###
+'For Milestone'               =>'Para el Hito',  # line 741
+'Resolve reason'              =>'Solución',  # line 747
+
+### ../db/class_task.inc.php   ###
+'Order Id'                    =>'ID de Orden',  # line 165
+
+### ../db/db_itemperson.inc.php   ###
+'Comment|form label for items'=>'Comentario',  # line 45
+
+### ../pages/_handles.inc.php   ###
+'Mark as bookmark'            =>'Agregar a Favoritos',  # line 45
+
+### ../lists/list_comments.inc.php   ###
+'version %s'                  =>'versión %s',  # line 140
+'Publish'                     =>'Publicar',  # line 173
+
+### ../lists/list_efforts.inc.php   ###
+'View selected Efforts'       =>'Ver Colaboraciones',  # line 72
+
+### ../lists/list_items.inc.php   ###
+'Your bookmarks'              =>'Tus Favoritos',  # line 32
+'You have no bookmarks'       =>'No tienes favoritos',  # line 33
+
+### ../pages/item.inc.php   ###
+'Edit bookmark'               =>'Editar Favorito',  # line 399
+
+### ../pages/_handles.inc.php   ###
+'Remove bookmark'             =>'Eliminar Favorito',  # line 52
+
+### ../pages/item.inc.php   ###
+'Notify on change'            =>'Notificar cambios',  # line 421
+
+### ../lists/list_items.inc.php   ###
+'Remind'                      =>'Recordar',  # line 415
+'in %s day(s)'                =>'en %s día(s)',  # line 464
+'since %s day(s)'             =>'desde hace %s día(s)',  # line 468
+'State'                       =>'Estado',  # line 711
+'Modified by'                 =>'Modificado por',  # line 744
+
+### ../lists/list_persons.inc.php   ###
+'Nickname|column header'      =>'Nick',  # line 215
+'Name|column header'          =>'Nombre',  # line 236
+
+### ../lists/list_projectchanges.inc.php   ###
+'Nothing has changed.'        =>'No hay cambios',  # line 33
+
+### ../lists/list_tasks.inc.php   ###
+'Status->Closed'              =>'Estado->Cerrado',  # line 208
+'List|List sort mode'         =>'Lista',  # line 240
+'Tree|List sort mode'         =>'Arbol',  # line 251
+'Grouped|List sort mode'      =>'Agrupado',  # line 262
+'Page name'                   =>'Nombre de la página',  # line 1132
+
+### ../pages/_handles.inc.php   ###
+'Playground'                  =>'Playground',  # line 17
+
+### ../pages/item.inc.php   ###
+'View item'                   =>'Ver Item',  # line 557
+
+### ../pages/_handles.inc.php   ###
+'Set Public Level'            =>'Fijar Nivel Público',  # line 37
+'Send notification'           =>'Enviar Notificación',  # line 59
+'Remove notification'         =>'Eliminar Notificación',  # line 65
+'Edit monitored items'        =>'Editar itemes monitoreados',  # line 71
+
+### ../pages/project_more.inc.php   ###
+'Documentation'               =>'Documentación',  # line 1091
+
+### ../pages/_handles.inc.php   ###
+'View Task As Docu'           =>'Ver Tarea como Documento',  # line 368
+'Mark tasks as Closed'        =>'Marcar tarea como cerrada',  # line 460
+
+### ../render/render_page.inc.php   ###
+'Register'                    =>'Registrarse',  # line 721
+
+### ../pages/person.inc.php   ###
+'Link Companies'              =>'Linkear Empresas',  # line 645
+'Remove companies from person'=>'Eliminar Empresas de la persona',  # line 651
+
+### ../pages/_handles.inc.php   ###
+'Marks all items viewed'      =>'Marcar todos los ítemes como vistos',  # line 1069
+'Forgot your password?'       =>'Olvidé mi contraseña',  # line 1129
+
+### ../pages/comment.inc.php   ###
+'Delete this comment'         =>'Eliminar este comentario',  # line 105
+'Restore'                     =>'Restaurar',  # line 97
+'Select some comments to restore'=>'Selecciona algún comentario para restaurar',  # line 552
+'Failed to restore %s comments'=>'Fallo al restaurar %s comentarios',  # line 578
+'Restored %s comments'        =>'%s comentarios restaurados',  # line 581
+
+### ../std/class_pagehandler.inc.php   ###
+'Export as CSV'               =>'Exportar a CSV',  # line 829
+
+### ../pages/company.inc.php   ###
+'Delete this company'         =>'Eliminar esta Empresa',  # line 510
+
+### ../pages/project_view.inc.php   ###
+'Delete this project'         =>'Eliminar este proyecto',  # line 96
+
+### ../pages/custom_projView.inc.php   ###
+'News'                        =>'Noticias',  # line 365
+'%s comments'                 =>'%s comentarios',  # line 389
+
+### ../pages/custom_projViewFiles.inc.php   ###
+'Downloads'                   =>'Descargas',  # line 62
+
+### ../pages/file.inc.php   ###
+'Could not access parent task Id:%s'=>'No se pudo acceder la tares madre ID:%s',  # line 52
+
+### ../pages/home.inc.php   ###
+'status->Closed|context menu function'=>'estado->Cerrado',  # line 265
+
+### ../pages/item.inc.php   ###
+'Select some items(s) to change pub level'=>'Selecciona algunos item(es) para modificar nivel público',  # line 60
+'Made %s items public to %s'  =>'Definir %s item(es) públicos a %s',  # line 85
+'No item(s) selected.'        =>'No hay ítemes seleccionados.',  # line 283
+'Select one or more bookmark(s)'=>'Selecciona uno o más favoritos',  # line 314
+'Removed %s bookmark(s).'     =>'%s favoritos eliminados',  # line 183
+'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'ERROR: No se pudo eliminar %s favorito',  # line 187
+'An error occured'            =>'Ocurrió un error',  # line 318
+'Edit bookmark: %s|Page title'=>'Editar Favorito: %s',  # line 401
+'Bookmark: %s'                =>'Favorito: %s',  # line 402
+'Notify if unchanged in'      =>'Notificar si no hay modificaciones en',  # line 423
+'Could not get bookmark'      =>'No se pudo obtener favorito',  # line 456
+
+### ../pages/login.inc.php   ###
+'Continue anonymously'        =>'Seguir como anónimo',  # line 106
+'Password reminder|Page title'=>'Recordar Contraseña',  # line 310
+'Please enter your nickname'  =>'Usuario',  # line 322
+'We will then sent you an E-mail with a link to adjust your password.'=>'Le enviaremos un email con un link para configurar su password',  # line 332
+'If you do not know your nickname, please contact your administrator: %s.'=>'Si no conoce su nombre de usuario, por favor contacte a su administrador: %s',  # line 334
+'A notification mail has been sent.'=>'Ha sido enviado un correo de notificación',  # line 393
+
+### ../pages/misc.inc.php   ###
+'Could not find request page `%s`'=>'No se ha encontrado la página solicitada `%s` ',  # line 47
+
+### ../pages/person.inc.php   ###
+'Add existing companies to this person'=>'Agregar Empresas a esta persona',  # line 518
+'link existing Company'       =>'Linkear Empresa existente',  # line 659
+'no companies related'        =>'sin empresas relacionadas',  # line 664
+'Account'                     =>'Cuenta',  # line 958
+'Options'                     =>'Opciones',  # line 1102
+'Registering is not enabled'  =>'No está permitido registrarse',  # line 1864
+'Please provide information, why you want to register.'=>'Por favor indíquenos por qué desea registrarse.',  # line 1869
+'Register as a new user'      =>'Registrarse como nuevo usuario',  # line 1877
+'Add related companies'       =>'Agregar Empresas relacionadas',  # line 2031
+'No companies selected...'    =>'Ninguna Empresa seleccionada...',  # line 2132
+'Company already related to person'=>'Esta empresa ya está vinculada a esta persona',  # line 2108
+'Failed to remove %s companies'=>'Fallo al eliminar %s empresas',  # line 2172
+'Removed %s companies'        =>'%s Empresas eliminadas',  # line 2175
+'Marked all previous items as viewed.'=>'Todos los ítemes anteriores fueron marcadas como leídos',  # line 2225
+
+### ../pages/project_more.inc.php   ###
+'modified by me'              =>'modificado por mí',  # line 284
+'modified by others'          =>'modificado por otros',  # line 309
+'last logout'                 =>'última salida',  # line 334
+'1 week'                      =>'1 semana',  # line 352
+'2 weeks'                     =>'2 semanas',  # line 371
+'Create a new page'           =>'Crear una nueva página',  # line 1111
+
+### ../pages/task_view.inc.php   ###
+'Page'                        =>'Página',  # line 1048
+
+### ../pages/task_more.inc.php   ###
+'Display'                     =>'Mostrar',  # line 684
+
+### ../pages/project_more.inc.php   ###
+'Found no persons to add. Go to `People` to create some.'=>'No se encontraron personas para agregar. Debe crearlas primero en `Personas`',  # line 2060
+'Failed to insert new project person. Data structure might have been corrupted'=>'Fallo al ingresar nueva persona al proyecto. Puede haber una corrupción de datos',  # line 2350
+
+### ../pages/search.inc.php   ###
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'Debido a limitaciones de MySQL, las siguiente palabras no se pueden buscar y han sido ignoradas: %s',  # line 658
+'Sorry, but there is nothing left to search.'=>'Disculpa, pero no hay nada más para buscar',  # line 663
+'Sorry. Could not find anything.'=>'Disculpa, no se pudo encontrar lo solicitado',  # line 717
+
+### ../pages/task_more.inc.php   ###
+'Display as'                  =>'Mostrar como',  # line 357
+'This folder has %s subtasks. Changing category will ungroup them.'=>'Esta carpeta tiene %s subtareas, si cambias de categoría éstas serán separadas',  # line 361
+
+### ../pages/task_view.inc.php   ###
+'Also assign to|Form label'   =>'También asignar a',  # line 803
+'Resolved in'                 =>'Resuelto en',  # line 744
+
+### ../pages/task_more.inc.php   ###
+'Bug Report'                  =>'Reporte de Discrepancia',  # line 569
+'Timing'                      =>'Timing',  # line 632
+'Comment has been rejected, because it looks like spam.'=>'Este comentario fue rechazado ya que fue considerado como Spam',  # line 844
+
+### ../pages/_handles.inc.php   ###
+'Edit multiple monitored items'=>'Editar múltiples itemes monitoreados',  # line 84
+'View Project as RSS'         =>'Ver Proyecto como RSS',  # line 169
+'Load Field'                  =>'Cargar Campo',  # line 1296
+'Save Field'                  =>'Guardar Campo',  # line 1301
+
+### ../pages/comment.inc.php   ###
+'Mark this comment as bookmark'=>'Marcar este comentario como favorito',  # line 97
+
+### ../pages/version.inc.php   ###
+'Bookmark'                    =>'Favoritos',  # line 321
+'Remove this bookmark'        =>'Eliminar este Favorito',  # line 328
+'Remove Bookmark'             =>'Eliminar Favorito',  # line 329
+
+### ../pages/company.inc.php   ###
+'Mark this company as bookmark'=>'Marcar esta Empresa como Favorito',  # line 510
+
+### ../pages/effort.inc.php   ###
+'Mark this effort as bookmark'=>'Marcar esta colaboración como Favorito',  # line 97
+
+### ../pages/file.inc.php   ###
+'Mark this file as bookmark'  =>'Marcar este archivo como Favorito',  # line 132
+
+### ../pages/item.inc.php   ###
+'itemsSetPubLevel requires item_pub_level'=>'itemsSetPubLevel necesita item_pub_level',  # line 68
+'Edit bookmark: %s|page title'=>'Editar Favorito: %s',  # line 365
+'Bookmark: %s'              =>'Favorito: %s',  # line 366
+'Added %s bookmark(s).'       =>'Favorito %s añadido',  # line 813
+'Edit bookmarks'              =>'Editar Favoritos',  # line 573
+'Edit multiple bookmarks|page title'=>'Editar múltiples Favoritos',  # line 575
+'Edit %s bookmark(s)'         =>'Editar Favorito %s',  # line 576
+'no'                          =>'no',  # line 674
+'yes'                         =>'si',  # line 675
+'Edited %s bookmark(s).'      =>'Favorito %s editado',  # line 817
+'%s bookmark(s) could not be added.'=>'%s favorito(s) no pudieron ser agregados',  # line 821
+
+### ../pages/person.inc.php   ###
+'Mark this person as bookmark'=>'Marcar persona como favorito',  # line 545
+'Malformed activation url'    =>'Error en el URL de activación',  # line 1225
+
+### ../pages/project_view.inc.php   ###
+'Mark this project as bookmark'=>'Marcar este proyecto como Favorito',  # line 97
+
+### ../pages/task_more.inc.php   ###
+'Not enough rights to edit task'=>'No tienes suficientes privilegios para editar esta tarea',  # line 881
+'Milestones may not have sub tasks'=>'Los hitos pueden no tener sub tareas',  # line 1147
+'Moved %s tasks to trash'     =>'%s tareas envidas a la papelera',  # line 1579
+'Select some task(s) to mark as closed'=>'Seleccione alguna tarea para marcar como cerrada',  # line 1804
+'Marked %s tasks as closed.'  =>'%s tareas marcadas como cerradas.',  # line 1825
+'Not enough rights to close %s tasks.'=>'No tienes suficientes privilegios para cerrar %s tareas.',  # line 1827
+'Category'                    =>'Categoría',  # line 2317
+'select person'               =>'seleccione una persona',  # line 2477
+'Also assigned to'            =>'También asignado a',  # line 2478
+'Also assign to'              =>'También asignar a ',  # line 3123
+
+### ../pages/task_view.inc.php   ###
+'Mark this task as bookmark'  =>'Marcar esta tarea como favorito',  # line 200
+'View previous %s versions'   =>'Ver %s versiones anteriores',  # line 1196
+'Logged effort|Label in task-summary'=>'Colaboraciones informadas',  # line 342
+'Set to Open'                 =>'Dejar abierto',  # line 1210
+'Further Documentation'       =>'Documentación Adicional',  # line 386
+'Resolved tasks|Block title'  =>'Tareas solucionadas',  # line 620
+'Update'                      =>'Actualizar',  # line 803
+'Book Effort'                 =>'Programar una colaboración',  # line 1148
+
+### ../pages/version.inc.php   ###
+'Mark this version as bookmark'=>'Marcar esta versión como favorito',  # line 320
+
+### ../render/render_form.inc.php   ###
+'Please copy the text'        =>'Por favor copie el texto',  # line 62
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Disculpe. Para reducir la posibilidad de Spam, los invitados deben copiar el texto',  # line 64
+
+### ../render/render_misc.inc.php   ###
+'Docu|Project option'         =>'Docu',  # line 384
+'Releases|Project option'     =>'Lanzamientos',  # line 399
+'%b %e, %Y|strftime format string'=>'',  # line 583
+'%I:%M%P|strftime format string'=>'',  # line 596
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 605
+'%s min'                      =>'',  # line 700
+'%A, %B %e|strftime format string'=>'',  # line 925
+
+### ../render/render_page.inc.php   ###
+'Go to parent / alt-U'        =>'Ir a superior / alt-U',  # line 989
+'rendered in'                 =>'renderizado en',  # line 1315
+'memory used'                 =>'memoria utilizada',  # line 1318
+'%s queries / %s fields '     =>'%s queris / %s campos',  # line 1321
+
+### ../render/render_wiki.inc.php   ###
+'Image details'               =>'Detalles de la imagen',  # line 997
+
+### ../std/class_auth.inc.php   ###
+'Invalid anonymous user'      =>'Usuario anónimo no válido',  # line 94
+'Anonymous account has been disabled. '=>'La cuenta de usuario anónimo fue deshabilitada',  # line 100
+'Sorry. 	Authentication failed'=>'Disculpe.  Error en la autenticación',  # line 373
+
+### ../std/common.inc.php   ###
+'Sorry, but the entered number did not match'=>'Disculpe, el número ingresado no corresponde',  # line 236
+'en_US.utf8,en_US,enu|list of locales'=>'esn',  # line 482
+
+### ../std/constant_names.inc.php   ###
+'Enable Efforts|Project setting'=>'Habilitar Colaboraciones',  # line 74
+'Enable Milestones|Project setting'=>'Habilitar Hitos',  # line 75
+'Enable Versions|Project setting'=>'Habilitar Versiones',  # line 76
+'Only PM may close tasks|Project setting'=>'Solamente un ADP (administrador de proyecto) puede cerrar tareas',  # line 77
+'done|Resolve reason'         =>'listo',  # line 160
+'fixed|Resolve reason'        =>'arreglado',  # line 161
+'works_for_me|Resolve reason' =>'trabaja_para_mi',  # line 162
+'duplicate|Resolve reason'    =>'duplicar',  # line 163
+'bogus|Resolve reason'        =>'con errores',  # line 164
+'rejected|Resolve reason'     =>'rechazado',  # line 165
+'Task|Task Category'          =>'Tarea',  # line 213
+'Bug|Task Category'           =>'Discrepancia',  # line 214
+'Documentation|Task Category' =>'Documentación',  # line 215
+'Event|Task Category'         =>'Evento',  # line 216
+'Folder|Task Category'        =>'Carpeta',  # line 217
+'Milestone|Task Category'     =>'Hito',  # line 218
+'Version|Task Category'       =>'Versión',  # line 219
+'never|notification period'   =>'nunca',  # line 225
+'one day|notification period' =>'un día',  # line 226
+'two days|notification period'=>'dos días',  # line 227
+'three days|notification period'=>'tres días',  # line 228
+'four days|notification period'=>'cuatro días',  # line 229
+'five days|notification period'=>'cinco días',  # line 230
+'one week|notification period'=>'una semana',  # line 231
+'two weeks|notification period'=>'dos semanas',  # line 232
+'three weeks|notification period'=>'tres semanas',  # line 233
+'one month|notification period'=>'un mes',  # line 234
+'two months|notification period'=>'dos meses',  # line 235
+
+### ../std/mail.inc.php   ###
+'Changed monitored items:|notification'=>'Monitoreo de ítemes modificado',  # line 229
+'%s edited > %s'              =>'editado %s',  # line 239
+'Unchanged monitored items:|notification'=>'El Monitoreo de ítemes no ha sido modificado',  # line 267
+'%s (not touched since %s day(s))'=>'%s (no ha sido modificado desde hace %s día(s))',  # line 322
+'Your account at|notification'=>'Su cuenta de',  # line 593
+'Your account at %s is still active.|notification'=>'Su cuenta de usuario de %s ha sido activada.',  # line 610
+'Your login name is|notification'=>'Su nombre de usuario es',  # line 611
+'Maybe you want to %s set your password|notification'=>'Usted puede %s configurar su contraseña',  # line 612
+
+### ../render/render_misc.inc.php   ###
+'%b %e, %Y|strftime format string'=>'%e %b %Y',  # line 583
+'%I:%M%P|strftime format string'=>'%H:%M hrs',  # line 596
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'%a %e %b del %Y a las %H:%M hrs',  # line 605
+'%s min'                      =>'% minutos',  # line 700
+'%A, %B %e|strftime format string'=>'',  # line 925
+
+### ../std/constant_names.inc.php   ###
+'deferred|Resolve reason'     =>'diferido',  # line 166
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
 );
 
 ?>

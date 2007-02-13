@@ -448,6 +448,12 @@ function fileEdit($file=NULL)
     }
     echo (new PageContentOpen);
 
+    $block=new PageBlock(array(
+        'id'    =>'edit',
+        'reduced_header' => true,
+    ));
+    $block->render_blockStart();
+
     ### write form #####
     {
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
@@ -500,6 +506,8 @@ function fileEdit($file=NULL)
 
         $PH->go_submit='fileEditSubmit';
     }
+    $block->render_blockEnd();
+
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);
 }
@@ -639,7 +647,10 @@ function fileEditSubmit()
         $file->update();
     }
 
-
+    ### update date of parent items ? ###
+    if($item= DbProjectItem::getEditableById($file->parent_item)) {
+        $item->update(array());        
+    }
 
     ### display taskView ####
     if(!$PH->showFromPage()) {

@@ -73,8 +73,8 @@ jQuery.fn.editable = function(url, options) {
         type   : 'text',
         width  : 'auto',
         height : 'auto',
-        event  : 'click',
-        onblur : 'cancel',
+        event  : 'dblclick',
+        onblur : 'ignore',
         obj    : false,
         chapter: false
     };
@@ -193,6 +193,9 @@ jQuery.fn.editable = function(url, options) {
             b.value = settings.cancel;
             f.appendChild(b);
         }
+        $(b).click(function(e) {
+            reset();
+        });
 
         /* add created form to self */
         self.appendChild(f);

@@ -207,6 +207,7 @@ function build_person_fields()
         new FieldDatetime(array(    'name'=>'date_highlight_changes',
     		'view_in_forms' =>false,
             'log_changes'=>false,
+            'default'   =>FINIT_NOW
         )),
 
         /**
@@ -221,15 +222,16 @@ function build_person_fields()
         new FieldDatetime(array(    'name'=>'last_login',
     		'view_in_forms' =>false,
             'log_changes'=>false,
+            'default'=> FINIT_NEVER
         )),
 
         /**
         * used for highlighting modified items
         */
         new FieldDatetime(array(    'name'=>'last_logout',
-            'default'=>FINIT_NOW,
     		'view_in_forms' =>false,
             'log_changes'=>false,
+            'default'=>FINIT_NEVER,
         )),
 
         /**

@@ -197,7 +197,7 @@ define('PROJECT_SETTING_EFFORTS',           1<<1);
 define('PROJECT_SETTING_MILESTONES',        1<<2);
 define('PROJECT_SETTING_VERSIONS',          1<<3);
 define('PROJECT_SETTING_ONLY_PM_MAY_CLOSE', 1<<4);
-define('PROJECT_SETTING_ALL',               0xfffffff);
+define('PROJECT_SETTING_ALL',               0x7f);
 
 define('USER_SETTING_NOTIFICATIONS',                1<<1);  #
 define('USER_SETTING_HTML_MAIL',                    1<<2);  # obsolete
