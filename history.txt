@@ -1,5 +1,19 @@
 streber-version-history
 
+v0.0794 [2007-02-14]
+=================
+minor:
+- fixed creation of project with strict mysql settings #3213
+- fixed installation / upgrade with strict mysql settings #3952
+- inline wiki editing is not caused by double click
+- added strict sql_mode settings to installation
+- fixed minor problem with updated files
+- fixed display of task location in list_changes
+- changed layout of project "history" 
+- added additional headers to ajax content to fix #3965
+- wiki links to releases are no longer striked 
+
+
 v0.0791 [2007-02-05]
 ====================
 hotfixed:
