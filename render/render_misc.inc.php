@@ -348,12 +348,12 @@ function buildProjectSelector()
     $buffer= "";
 
     global $PH;
-    
+
     require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
-    
+
     if($projects= Project::getAll(array(
     ))) {
-        $buffer.="<span id=projectselector>&nbsp;</span>";    
+        $buffer.="<span id=projectselector>&nbsp;</span>";
         $buffer.= "<span style='display:none;' id='projectselectorlist'>";
 
         foreach($projects as $p) {
@@ -730,13 +730,13 @@ function renderDate($t, $smartnames= true) {
     }
 
 
-    if($smartnames && gmdate('Y-m-d') == gmdate('Y-m-d', $t)) {
+    if($smartnames && gmdate('Y-m-d', GMTToClientTime(time())) == gmdate('Y-m-d', GMTToClientTime($t))) {
         $str= __('Today');
         if(gmdate('H:i:s',$t) !== '00:00:00') {
             $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
         }
     }
-    else if($smartnames && gmdate('Y-m-d') == gmdate('Y-m-d', $t + 60*60*24)) {
+    else if($smartnames && gmdate('Y-m-d', GMTToClientTime(time())) == gmdate('Y-m-d', GMTToClientTime($t + 60*60*24))) {
         $str= __('Yesterday');
         if(gmdate('H:i:s',$t) !== '00:00:00') {
             $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
