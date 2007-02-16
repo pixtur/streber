@@ -2,13 +2,13 @@ undefined keys:
 ---------------
 
 ### ../db/class_task.inc.php   ###
-'Order Id'                    =>'',  # line 175
+'Order Id'                    =>'',  # line 174
 
 ### ../pages/_handles.inc.php   ###
-'Edit multiple monitored items'=>'',  # line 84
-'View Project as RSS'         =>'',  # line 169
-'Load Field'                  =>'',  # line 1296
-'Save Field'                  =>'',  # line 1301
+'Edit multiple monitored items'=>'',  # line 90
+'View Project as RSS'         =>'',  # line 175
+'Load Field'                  =>'',  # line 1302
+'Save Field'                  =>'',  # line 1307
 
 ### ../pages/comment.inc.php   ###
 'Mark this comment as bookmark'=>'',  # line 97
@@ -27,6 +27,10 @@ undefined keys:
 ### ../pages/file.inc.php   ###
 'Mark this file as bookmark'  =>'',  # line 132
 
+### ../pages/home.inc.php   ###
+'today'                       =>'',  # line 361
+'yesterday'                   =>'',  # line 379
+
 ### ../pages/item.inc.php   ###
 'Edit bookmark: "%s"|page title'=>'',  # line 365
 'Bookmark: "%s"'              =>'',  # line 366
@@ -40,29 +44,30 @@ undefined keys:
 '%s bookmark(s) could not be added.'=>'',  # line 821
 
 ### ../pages/person.inc.php   ###
-'Mark this person as bookmark'=>'',  # line 545
-'Malformed activation url'    =>'',  # line 1225
+'Mark this person as bookmark'=>'',  # line 544
+'Malformed activation url'    =>'',  # line 1224
 
 ### ../pages/project_view.inc.php   ###
 'Mark this project as bookmark'=>'',  # line 97
 
 ### ../pages/task_view.inc.php   ###
-'Mark this task as bookmark'  =>'',  # line 197
-'Further Documentation'       =>'',  # line 383
-'Book Effort'                 =>'',  # line 1109
+'Mark this task as bookmark'  =>'',  # line 200
+'Further Documentation'       =>'',  # line 386
+'Resolved tasks|Block title'  =>'',  # line 620
+'Book Effort'                 =>'',  # line 1148
 
 ### ../pages/version.inc.php   ###
 'Mark this version as bookmark'=>'',  # line 320
 
 ### ../render/render_misc.inc.php   ###
-'%b %e, %Y|strftime format string'=>'',  # line 579
-'%I:%M%P|strftime format string'=>'',  # line 592
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 601
-'%s min'                      =>'',  # line 696
-'%A, %B %e|strftime format string'=>'',  # line 921
+'%b %e, %Y|strftime format string'=>'',  # line 583
+'%I:%M%P|strftime format string'=>'',  # line 596
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 605
+'%s min'                      =>'',  # line 700
+'%A, %B %e|strftime format string'=>'',  # line 925
 
 ### ../render/render_page.inc.php   ###
-'%s queries / %s fields '     =>'',  # line 1322
+'%s queries / %s fields '     =>'',  # line 1331
 
 ### ../render/render_wiki.inc.php   ###
 'Image details'               =>'',  # line 997
@@ -71,7 +76,7 @@ undefined keys:
 'Sorry. 	Authentication failed'=>'',  # line 373
 
 ### ../std/common.inc.php   ###
-'en_US.utf8,en_US,enu|list of locales'=>'',  # line 482
+'en_US.utf8,en_US,enu|list of locales'=>'',  # line 499
 
 ### ../std/mail.inc.php   ###
 'Changed monitored items:|notification'=>'',  # line 229

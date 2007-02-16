@@ -1,9 +1,6 @@
 undefined keys:
 ---------------
 
-### ../conf/defines.inc.php   ###
-'autodetect'                  =>'',  # line 304
-
 ### ../db/class_task.inc.php   ###
 'Order Id'                    =>'',  # line 174
 
@@ -38,23 +35,12 @@ undefined keys:
 
 ### ../lists/list_comments.inc.php   ###
 'version %s'                  =>'',  # line 140
-'Publish'                     =>'',  # line 173
 
 ### ../pages/project_more.inc.php   ###
 'Documentation'               =>'',  # line 1077
 
 ### ../lists/list_efforts.inc.php   ###
 'View selected Efforts'       =>'',  # line 72
-
-### ../lists/list_files.inc.php   ###
-'ID %s'                       =>'',  # line 457
-'Show Details'                =>'',  # line 459
-'Summary|Column header'       =>'',  # line 414
-'Thumbnail|Column header'     =>'',  # line 475
-
-### ../lists/list_persons.inc.php   ###
-'Nickname|column header'      =>'',  # line 217
-'Name|column header'          =>'',  # line 239
 
 ### ../lists/list_tasks.inc.php   ###
 'Status->Closed'              =>'',  # line 208
@@ -65,12 +51,6 @@ undefined keys:
 
 ### ../pages/_handles.inc.php   ###
 'Playground'                  =>'',  # line 23
-
-### ../pages/item.inc.php   ###
-'View item'                   =>'',  # line 1004
-
-### ../pages/_handles.inc.php   ###
-'Set Public Level'            =>'',  # line 43
 'Send notification'           =>'',  # line 65
 'Remove notification'         =>'',  # line 71
 'Edit monitored items'        =>'',  # line 77
@@ -78,11 +58,6 @@ undefined keys:
 'View Project as RSS'         =>'',  # line 175
 'View Task As Docu'           =>'',  # line 397
 'Mark tasks as Closed'        =>'',  # line 485
-'Create Note'                 =>'',  # line 625
-'Edit Note'                   =>'',  # line 639
-
-### ../render/render_page.inc.php   ###
-'Register'                    =>'',  # line 733
 
 ### ../pages/person.inc.php   ###
 'Link Companies'              =>'',  # line 662
@@ -101,13 +76,6 @@ undefined keys:
 'Bookmark'                    =>'',  # line 321
 'Remove this bookmark'        =>'',  # line 328
 'Remove Bookmark'             =>'',  # line 329
-
-### ../pages/comment.inc.php   ###
-'Delete this comment'         =>'',  # line 125
-'Restore'                     =>'',  # line 117
-'Select some comments to restore'=>'',  # line 572
-'Failed to restore %s comments'=>'',  # line 598
-'Restored %s comments'        =>'',  # line 601
 
 ### ../std/class_pagehandler.inc.php   ###
 'Export as CSV'               =>'',  # line 817
@@ -131,11 +99,10 @@ undefined keys:
 
 ### ../pages/file.inc.php   ###
 'Could not access parent task Id:%s'=>'',  # line 53
-'Move this file to another task'=>'',  # line 123
-'Move'                        =>'',  # line 124
 'Mark this file as bookmark'  =>'',  # line 132
 
 ### ../pages/home.inc.php   ###
+'Select lines to use functions at end of list'=>'',  # line 172
 'status->Closed|context menu function'=>'',  # line 264
 
 ### ../pages/project_more.inc.php   ###
@@ -150,9 +117,7 @@ undefined keys:
 '2 weeks'                     =>'',  # line 369
 
 ### ../pages/item.inc.php   ###
-'Select some items(s) to change pub level'=>'',  # line 61
 'itemsSetPubLevel requires item_pub_level'=>'',  # line 68
-'Made %s items public to %s'  =>'',  # line 86
 'No item(s) selected.'        =>'',  # line 916
 'Select one or more bookmark(s)'=>'',  # line 222
 'Removed %s bookmark(s).'     =>'',  # line 197
@@ -178,27 +143,41 @@ undefined keys:
 'We will then sent you an E-mail with a link to adjust your password.'=>'',  # line 329
 'If you do not know your nickname, please contact your administrator: %s.'=>'',  # line 331
 'A notification mail has been sent.'=>'',  # line 390
+'Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.'=>'',  # line 417
 
 ### ../pages/misc.inc.php   ###
 'Could not find request page `%s`'=>'',  # line 47
+'Select some items to restore'=>'',  # line 216
+'Item %s does not need to be restored'=>'',  # line 228
+'Failed to restore %s items'  =>'',  # line 241
+'Restored %s items'           =>'',  # line 244
+'Admin|top navigation tab'    =>'',  # line 269
+'System information'          =>'',  # line 275
+'Admin'                       =>'',  # line 276
+'Database Type'               =>'',  # line 334
+'Error-Log'                   =>'',  # line 345
+'PHP Version'                 =>'',  # line 347
+'extension directory'         =>'',  # line 350
+'loaded extensions'           =>'',  # line 352
+'include path'                =>'',  # line 354
+'register globals'            =>'',  # line 356
+'magic quotes gpc'            =>'',  # line 358
+'magic quotes runtime'        =>'',  # line 360
+'safe mode'                   =>'',  # line 362
+'hide'                        =>'',  # line 479
 
 ### ../pages/person.inc.php   ###
-'Create Note|Tooltip for page function'=>'',  # line 510
-'Note|Page function person'   =>'',  # line 511
 'Add existing companies to this person'=>'',  # line 516
 'Mark this person as bookmark'=>'',  # line 544
 'link existing Company'       =>'',  # line 676
 'no companies related'        =>'',  # line 681
 'Account'                     =>'',  # line 975
-'- no -'                      =>'',  # line 1056
-'Assigne to project|form label'=>'',  # line 1065
 'Options'                     =>'',  # line 1119
-'Time zone|form label'        =>'',  # line 2020
 'Malformed activation url'    =>'',  # line 1224
-'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1387
-'Registering is not enabled'  =>'',  # line 1889
+'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 1660
+'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 1665
+'Please consider that activating login-accounts might trigger security-issues.'=>'',  # line 1786
 'Please provide information, why you want to register.'=>'',  # line 1894
-'Register as a new user'      =>'',  # line 1902
 'Add related companies'       =>'',  # line 2056
 'No companies selected...'    =>'',  # line 2157
 'Company already related to person'=>'',  # line 2133
@@ -217,12 +196,16 @@ undefined keys:
 ### ../pages/task_more.inc.php   ###
 'Display'                     =>'',  # line 681
 
+### ../pages/project_more.inc.php   ###
+'Found no persons to add. Go to `People` to create some.'=>'',  # line 2037
+
 ### ../pages/project_view.inc.php   ###
 'Mark this project as bookmark'=>'',  # line 97
 
 ### ../pages/search.inc.php   ###
 'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',  # line 660
 'Sorry, but there is nothing left to search.'=>'',  # line 665
+'Due to limitations of MySQL fulltext search, searching will not work for...<br>- words with 3 or less characters<br>- Lists with less than 3 entries<br>- words containing special charaters'=>'',  # line 720
 
 ### ../pages/task_more.inc.php   ###
 'Display as'                  =>'',  # line 354
@@ -230,7 +213,6 @@ undefined keys:
 'Bug Report'                  =>'',  # line 566
 'Timing'                      =>'',  # line 629
 'Comment has been rejected, because it looks like spam.'=>'',  # line 840
-'Not enough rights to edit task'=>'',  # line 880
 'Milestones may not have sub tasks'=>'',  # line 1146
 'Select some task(s) to mark as closed'=>'',  # line 1803
 'Marked %s tasks as closed.'  =>'',  # line 1824
@@ -238,39 +220,16 @@ undefined keys:
 'Category'                    =>'',  # line 2316
 'select person'               =>'',  # line 2476
 'Also assigned to'            =>'',  # line 2477
-'ERROR: could not get Person' =>'',  # line 2929
-'Select a note to edit'       =>'',  # line 2920
-'Note'                        =>'',  # line 2947
-'Create new note'             =>'',  # line 2950
-'New Note on %s, %s'          =>'',  # line 2956
-'Publish to|Form label'       =>'',  # line 2985
-'ERROR: could not get project'=>'',  # line 3263
-'Assigned Projects'           =>'',  # line 3018
-'- no assigend projects'      =>'',  # line 3014
-'Company Projects'            =>'',  # line 3040
-'- no company projects'       =>'',  # line 3030
-'All other Projects'          =>'',  # line 3058
-'- no other projects'         =>'',  # line 3055
-'For Project|form label'      =>'',  # line 3064
-'New Project|form label'      =>'',  # line 3069
-'Project name|form label'     =>'',  # line 3070
-'ERROR: could not get assigned persons'=>'',  # line 3086
-'Book effort after submit'    =>'',  # line 3126
-'ERROR: could not get task'   =>'',  # line 3164
-'Note requires project'       =>'',  # line 3216
-'Note requires assigned person(s)'=>'',  # line 3220
 
 ### ../pages/task_view.inc.php   ###
 'Mark this task as bookmark'  =>'',  # line 200
 'View previous %s versions'   =>'',  # line 1196
-'Set to Open'                 =>'',  # line 1210
 'Further Documentation'       =>'',  # line 386
 'Resolved tasks|Block title'  =>'',  # line 620
 'Update'                      =>'',  # line 803
 'Book Effort'                 =>'',  # line 1148
 
 ### ../pages/version.inc.php   ###
-'Moved %s versions to dumpster'=>'',  # line 251
 'Mark this version as bookmark'=>'',  # line 320
 
 ### ../render/render_form.inc.php   ###
@@ -287,6 +246,8 @@ undefined keys:
 '%A, %B %e|strftime format string'=>'',  # line 925
 
 ### ../render/render_page.inc.php   ###
+'Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`'=>'',  # line 256
+'This page requires java-script to be enabled. Please adjust your browser-settings.'=>'',  # line 574
 'Go to parent / alt-U'        =>'',  # line 999
 'rendered in'                 =>'',  # line 1325
 'memory used'                 =>'',  # line 1328
@@ -294,12 +255,8 @@ undefined keys:
 
 ### ../render/render_wiki.inc.php   ###
 'Image details'               =>'',  # line 997
-'Cannot link to item of type %s'=>'',  # line 1075
-'Unknown Item Id'             =>'',  # line 1351
 
 ### ../std/class_auth.inc.php   ###
-'Invalid anonymous user'      =>'',  # line 94
-'Anonymous account has been disabled. '=>'',  # line 100
 'Sorry. 	Authentication failed'=>'',  # line 373
 
 ### ../std/common.inc.php   ###
@@ -311,13 +268,6 @@ undefined keys:
 'Enable Milestones|Project setting'=>'',  # line 75
 'Enable Versions|Project setting'=>'',  # line 76
 'Only PM may close tasks|Project setting'=>'',  # line 77
-'done|Resolve reason'         =>'',  # line 160
-'fixed|Resolve reason'        =>'',  # line 161
-'works_for_me|Resolve reason' =>'',  # line 162
-'duplicate|Resolve reason'    =>'',  # line 163
-'bogus|Resolve reason'        =>'',  # line 164
-'rejected|Resolve reason'     =>'',  # line 165
-'deferred|Resolve reason'     =>'',  # line 166
 'Task|Task Category'          =>'',  # line 213
 'Bug|Task Category'           =>'',  # line 214
 'Documentation|Task Category' =>'',  # line 215

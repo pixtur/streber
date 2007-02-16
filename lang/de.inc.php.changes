@@ -5,7 +5,7 @@ undefined keys:
 'autodetect'                  =>'',  # line 304
 
 ### ../db/class_task.inc.php   ###
-'Order Id'                    =>'',  # line 175
+'Order Id'                    =>'',  # line 174
 
 ### ../db/db_itemperson.inc.php   ###
 'Comment|form label for items'=>'',  # line 45
@@ -21,7 +21,7 @@ undefined keys:
 'Publish'                     =>'',  # line 173
 
 ### ../pages/project_more.inc.php   ###
-'Documentation'               =>'',  # line 1091
+'Documentation'               =>'',  # line 1077
 
 ### ../lists/list_efforts.inc.php   ###
 'View selected Efforts'       =>'',  # line 72
@@ -43,27 +43,27 @@ undefined keys:
 'Page name'                   =>'',  # line 1132
 
 ### ../pages/_handles.inc.php   ###
-'Playground'                  =>'',  # line 17
+'Playground'                  =>'',  # line 23
 
 ### ../pages/item.inc.php   ###
 'View item'                   =>'',  # line 1004
 
 ### ../pages/_handles.inc.php   ###
-'Set Public Level'            =>'',  # line 37
-'Edit monitored items'        =>'',  # line 71
-'Edit multiple monitored items'=>'',  # line 84
-'View Project as RSS'         =>'',  # line 169
-'View Task As Docu'           =>'',  # line 391
-'Mark tasks as Closed'        =>'',  # line 479
+'Set Public Level'            =>'',  # line 43
+'Edit monitored items'        =>'',  # line 77
+'Edit multiple monitored items'=>'',  # line 90
+'View Project as RSS'         =>'',  # line 175
+'View Task As Docu'           =>'',  # line 397
+'Mark tasks as Closed'        =>'',  # line 485
 
 ### ../render/render_page.inc.php   ###
-'Register'                    =>'',  # line 724
+'Register'                    =>'',  # line 733
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'',  # line 1088
-'Forgot your password?'       =>'',  # line 1148
-'Load Field'                  =>'',  # line 1296
-'Save Field'                  =>'',  # line 1301
+'Marks all items viewed'      =>'',  # line 1094
+'Forgot your password?'       =>'',  # line 1154
+'Load Field'                  =>'',  # line 1302
+'Save Field'                  =>'',  # line 1307
 
 ### ../pages/comment.inc.php   ###
 'Delete this comment'         =>'',  # line 125
@@ -79,7 +79,7 @@ undefined keys:
 'News'                        =>'',  # line 160
 
 ### ../pages/custom_projView.inc.php   ###
-'%s comments'                 =>'',  # line 389
+'%s comments'                 =>'',  # line 395
 
 ### ../pages/custom_projViewFiles.inc.php   ###
 'Downloads'                   =>'',  # line 62
@@ -105,7 +105,7 @@ undefined keys:
 'Edit multiple bookmarks|page title'=>'',  # line 575
 
 ### ../pages/task_more.inc.php   ###
-'-- keep different --'        =>'',  # line 2331
+'-- keep different --'        =>'',  # line 2330
 
 ### ../pages/login.inc.php   ###
 'Continue anonymously'        =>'',  # line 114
@@ -119,28 +119,28 @@ undefined keys:
 'Could not find request page `%s`'=>'',  # line 47
 
 ### ../pages/person.inc.php   ###
-'Create Note|Tooltip for page function'=>'',  # line 511
-'Note|Page function person'   =>'',  # line 512
-'link existing Company'       =>'',  # line 677
-'no companies related'        =>'',  # line 682
-'Account'                     =>'',  # line 976
-'Options'                     =>'',  # line 1120
-'Time zone|form label'        =>'',  # line 2021
-'Malformed activation url'    =>'',  # line 1225
-'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1388
-'Registering is not enabled'  =>'',  # line 1890
-'Please provide information, why you want to register.'=>'',  # line 1895
-'Register as a new user'      =>'',  # line 1903
-'Marked all previous items as viewed.'=>'',  # line 2251
+'Create Note|Tooltip for page function'=>'',  # line 510
+'Note|Page function person'   =>'',  # line 511
+'link existing Company'       =>'',  # line 676
+'no companies related'        =>'',  # line 681
+'Account'                     =>'',  # line 975
+'Options'                     =>'',  # line 1119
+'Time zone|form label'        =>'',  # line 2020
+'Malformed activation url'    =>'',  # line 1224
+'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1387
+'Registering is not enabled'  =>'',  # line 1889
+'Please provide information, why you want to register.'=>'',  # line 1894
+'Register as a new user'      =>'',  # line 1902
+'Marked all previous items as viewed.'=>'',  # line 2250
 
 ### ../pages/project_more.inc.php   ###
-'Create a new page'           =>'',  # line 1111
+'Create a new page'           =>'',  # line 1097
 
 ### ../pages/task_view.inc.php   ###
-'Page'                        =>'',  # line 1097
+'Page'                        =>'',  # line 1136
 
 ### ../pages/project_more.inc.php   ###
-'Tasks resolved in upcomming version'=>'',  # line 1551
+'Tasks resolved in upcomming version'=>'',  # line 1528
 
 ### ../pages/task_more.inc.php   ###
 'Display'                     =>'',  # line 681
@@ -155,20 +155,21 @@ undefined keys:
 '-- next released version --' =>'',  # line 391
 'Bug Report'                  =>'',  # line 566
 'Timing'                      =>'',  # line 629
-'Comment has been rejected, because it looks like spam.'=>'',  # line 841
-'Not enough rights to edit task'=>'',  # line 881
-'Milestones may not have sub tasks'=>'',  # line 1147
-'Marked %s tasks to be resolved in this version.'=>'',  # line 1309
-'Category'                    =>'',  # line 2317
-'Publish to|Form label'       =>'',  # line 2986
-'New Project|form label'      =>'',  # line 3070
+'Comment has been rejected, because it looks like spam.'=>'',  # line 840
+'Not enough rights to edit task'=>'',  # line 880
+'Milestones may not have sub tasks'=>'',  # line 1146
+'Marked %s tasks to be resolved in this version.'=>'',  # line 1308
+'Category'                    =>'',  # line 2316
+'Publish to|Form label'       =>'',  # line 2985
+'New Project|form label'      =>'',  # line 3069
 
 ### ../pages/task_view.inc.php   ###
-'View previous %s versions'   =>'',  # line 1157
-'Set to Open'                 =>'',  # line 1171
-'Further Documentation'       =>'',  # line 383
-'Update'                      =>'',  # line 764
-'Book Effort'                 =>'',  # line 1109
+'View previous %s versions'   =>'',  # line 1196
+'Set to Open'                 =>'',  # line 1210
+'Further Documentation'       =>'',  # line 386
+'Resolved tasks|Block title'  =>'',  # line 620
+'Update'                      =>'',  # line 803
+'Book Effort'                 =>'',  # line 1148
 
 ### ../pages/version.inc.php   ###
 'Moved %s versions to dumpster'=>'',  # line 251
@@ -178,19 +179,19 @@ undefined keys:
 'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 64
 
 ### ../render/render_misc.inc.php   ###
-'Docu|Project option'         =>'',  # line 380
-'Releases|Project option'     =>'',  # line 395
-'%b %e, %Y|strftime format string'=>'',  # line 579
-'%I:%M%P|strftime format string'=>'',  # line 592
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 601
-'%s min'                      =>'',  # line 696
-'%A, %B %e|strftime format string'=>'',  # line 921
+'Docu|Project option'         =>'',  # line 384
+'Releases|Project option'     =>'',  # line 399
+'%b %e, %Y|strftime format string'=>'',  # line 583
+'%I:%M%P|strftime format string'=>'',  # line 596
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 605
+'%s min'                      =>'',  # line 700
+'%A, %B %e|strftime format string'=>'',  # line 925
 
 ### ../render/render_page.inc.php   ###
-'Go to parent / alt-U'        =>'',  # line 990
-'rendered in'                 =>'',  # line 1316
-'memory used'                 =>'',  # line 1319
-'%s queries / %s fields '     =>'',  # line 1322
+'Go to parent / alt-U'        =>'',  # line 999
+'rendered in'                 =>'',  # line 1325
+'memory used'                 =>'',  # line 1328
+'%s queries / %s fields '     =>'',  # line 1331
 
 ### ../render/render_wiki.inc.php   ###
 'Image details'               =>'',  # line 997

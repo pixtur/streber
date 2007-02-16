@@ -25,10 +25,10 @@
 *
 * translated by: Radoslaw Sliwinski
 *
-* date: 2006-11-30
+* date: 2007-02-16
 *
-* streber version: 0.0705
-* streber revision: 210
+* streber version: 0.0794
+* streber revision: 285
 *
 * comments: Full translation. Places marked as XX - I'm not shure translation.
 *
@@ -2068,6 +2068,84 @@ $g_lang_table= array(
 ### ../render/render_wiki.inc.php   ###
 'Image details'               =>'Szczgóły obrazka',  # line 952
 
+### ../render/render_misc.inc.php   ###
+'%b %e, %Y|strftime format string'=>'%Y-%m-%d',  # line 579
+'%I:%M%P|strftime format string'=>'%H:%M',  # line 592
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'%Y-%m-%d %H:%M',  # line 601
+'%s min'                      =>'%s min',  # line 696
+'%A, %B %e|strftime format string'=>'%Y-%m-%d',  # line 921
+
+### ../std/common.inc.php   ###
+'en_US.utf8,en_US,enu|list of locales'=>'pl_PL.utf8,pl_PL,plk',  # line 482
+
+### ../pages/_handles.inc.php   ###
+'Edit multiple monitored items'=>'Edycja wielu monitorowanych pozycji',  # line 84
+'View Project as RSS'         =>'Wyświetlenie projektu jako kanał RSS',  # line 169
+'Load Field'                  =>'Załadowanie pola',  # line 1296
+'Save Field'                  =>'Zapisanie pola',  # line 1301
+
+### ../pages/comment.inc.php   ###
+'Mark this comment as bookmark'=>'Utwórz zakładkę do tego komentarza',  # line 97
+
+### ../pages/version.inc.php   ###
+'Bookmark'                    =>'Zakładka',  # line 321
+'Remove this bookmark'        =>'Usuń tę zakładkę',  # line 328
+'Remove Bookmark'             =>'Usuń zakładkę',  # line 329
+
+### ../pages/company.inc.php   ###
+'Mark this company as bookmark'=>'Utwórz zakładkę do tej firmy',  # line 510
+
+### ../pages/effort.inc.php   ###
+'Mark this effort as bookmark'=>'Utwórz zakładkę do tego wysiłku',  # line 97
+
+### ../pages/file.inc.php   ###
+'Mark this file as bookmark'  =>'Utwórz zakladkę do tego pliku',  # line 132
+
+### ../pages/item.inc.php   ###
+'Edit bookmark: "%s"|page title'=>'Edycja zakładki: "%s"',  # line 365
+'Bookmark: "%s"'              =>'Zakładka: "%s"',  # line 366
+'Added %s bookmark(s).'       =>'Liczba dodanych zakładek: %s',  # line 813
+'Edit bookmarks'              =>'Edycja zakładek',  # line 573
+'Edit multiple bookmarks|page title'=>'Edycja wielu zakładek',  # line 575
+'Edit %s bookmark(s)'         =>'Edycja %s zakładki/zakładek',  # line 576
+'no'                          =>'nie',  # line 674
+'yes'                         =>'tak',  # line 675
+'Edited %s bookmark(s).'      =>'%s zakładek zostało wyedytowanych',  # line 817
+'%s bookmark(s) could not be added.'=>'Liczba zakładek, których nie można było dodać: %s',  # line 821
+
+### ../pages/person.inc.php   ###
+'Mark this person as bookmark'=>'Utwórz zakładkę do tej osoby',  # line 545
+'Malformed activation url'    =>'Nieprawidłowy url aktywacyjny',  # line 1225
+
+### ../pages/project_view.inc.php   ###
+'Mark this project as bookmark'=>'Utwórz zakładkę do tego projektu',  # line 97
+
+### ../pages/task_view.inc.php   ###
+'Mark this task as bookmark'  =>'Utwórz zakładkę do tego zadania',  # line 197
+'Further Documentation'       =>'Dalsza dokumentacja',  # line 383
+'Book Effort'                 =>'Zarejestruj wysiłek',  # line 1109
+
+### ../pages/version.inc.php   ###
+'Mark this version as bookmark'=>'Utwórz zakładkę do tej wersji',  # line 320
+
+### ../render/render_page.inc.php   ###
+'%s queries / %s fields '     =>'%s zapytań / %s pól',  # line 1322
+
+### ../std/class_auth.inc.php   ###
+'Sorry. 	Authentication failed'=>'Niestety autentyfikacja nieprawidłowa.',  # line 373
+
+### ../std/mail.inc.php   ###
+'Changed monitored items:|notification'=>'Zmienione pozycje monitorowane:',  # line 229
+'%s edited > %s'              =>'%s edytowanych > %s',  # line 239
+'Unchanged monitored items:|notification'=>'Nie zmienione monitorowane pozycje:',  # line 267
+'%s (not touched since %s day(s))'=>'%s (nie modyfikowane od %s dni)',  # line 322
+
+### ../pages/home.inc.php   ###
+'today'                       =>'dzisiaj',  # line 361
+'yesterday'                   =>'wczoraj',  # line 379
+
+### ../pages/task_view.inc.php   ###
+'Resolved tasks|Block title'  =>'Zrealizowane zadania',  # line 620
 
 );
 
