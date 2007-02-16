@@ -16,6 +16,7 @@
 require_once(confGet('DIR_STREBER') . "db/class_task.inc.php");
 require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
 require_once(confGet('DIR_STREBER') . "db/class_projectperson.inc.php");
+require_once(confGet('DIR_STREBER') . "db/class_person.inc.php");
 require_once(confGet('DIR_STREBER') . "db/db_itemperson.inc.php");
 require_once(confGet('DIR_STREBER') . "render/render_list.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_taskfolders.inc.php");
@@ -506,7 +507,8 @@ function ProjViewChanges()
 	    'target' => $preset_location,
 		'project_id' => $project->id,
 		'preset_id' => $preset_id,
-		'presets' => $presets));
+		'presets' => $presets,
+		'person_id' => ''));
 
     #echo(new PageContentNextCol);
 
@@ -953,7 +955,8 @@ function ProjViewTasks()
 			'target'=> $preset_location,
 			'project_id'=> $project->id,
 			'preset_id'=> $preset_id,
-			'presets'=> $presets));
+			'presets'=> $presets,
+			'person_id' => ''));
 	 }
     /*if($page->format != FORMAT_CSV) {
         echo "<div class=presets>";
@@ -1368,10 +1371,162 @@ function ProjViewEfforts()
         $PH->abortWarning("invalid project-id");
 		return;
 	}
+	
+	$presets= array(
+        ### all ###
+        'all_efforts' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
 
-    ### create from handle ###
-    $PH->defineFromHandle(array('prj'=>$project->id));
+        ### new efforts ###
+        'new_efforts' => array(
+            'name'=> __('new'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_NEW,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### open efforts ###
+        'open_efforts' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_OPEN,
+                    'max'       => EFFORT_STATUS_OPEN,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### discounted efforts ###
+        'discounted_efforts' => array(
+            'name'=> __('discounted'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_DISCOUNTED,
+                    'max'       => EFFORT_STATUS_DISCOUNTED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### not chargeable efforts ###
+        'notchargeable_efforts' => array(
+            'name'=> __('not chargeable'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NOTCHARGEABLE,
+                    'max'       => EFFORT_STATUS_NOTCHARGEABLE,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### balanced efforts ###
+        'balanced_efforts' => array(
+            'name'=> __('balanced'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_BALANCED,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
 
+	## set preset location ##
+	$preset_location = 'projViewEfforts';
+	
+	### get preset-id ###
+    {
+        $preset_id= 'all_efforts';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_projViewEfforts_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_projViewEfforts_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+
+	### create from handle ###
+	$PH->defineFromHandle(array(
+		'prj'      =>$project->id,
+		'preset_id' =>$preset_id
+	));
+    
     ### set up page ####
     {
         $page= new Page();
@@ -1420,8 +1575,36 @@ function ProjViewEfforts()
 
         ));
         $list= new ListBlock_efforts();
-        $list->reduced_header= true;
-
+        //$list->reduced_header= true;
+		
+		$list->filters[] = new ListFilter_efforts();
+		{
+			$preset = $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+					case 'effort_status':
+						$list->filters[]= new ListFilter_effort_status_min(array(
+							'value'=>$f_settings['min'],
+						));
+						$list->filters[]= new ListFilter_effort_status_max(array(
+							'value'=>$f_settings['max'],
+						));
+						break;
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								  ? true
+								  : NULL;
+		}
+		
+		
+		
+		
+		
 		### Link to start cvs export ###
     	$format = get('format');
     	if($format == FORMAT_HTML || $format == ''){
@@ -1430,8 +1613,17 @@ function ProjViewEfforts()
 
 
         unset($list->columns['p.name']);
-
-        $list->render_list(&$efforts);
+		
+		$page->print_presets(array(
+		'target' => $preset_location,
+		'project_id' => $project->id,
+		'preset_id' => $preset_id,
+		'presets' => $presets,
+		'person_id' => ''));
+		$list->query_options['order_by'] = $order_by;
+		$list->query_options['project'] = $project->id;
+		$list->print_automatic();
+        //$list->render_list(&$efforts);
 
 	}
 
@@ -2018,10 +2210,13 @@ function projAddPerson()
             }
 
             ### filter already added persons ###
-            $persons= array();
-            foreach(Person::getPersons() as $p) {
-                if(!isset($pp_hash[$p->id])) {
-                    $persons[]=$p;
+            $persons = array();
+		if($pers = Person::getPersons())
+            {
+                foreach($pers as $p) {
+                    if(!isset($pp_hash[$p->id])) {
+                         $persons[]=$p;
+                    }
                 }
             }
 

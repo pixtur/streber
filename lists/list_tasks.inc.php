@@ -148,10 +148,10 @@ class ListBlock_tasks extends ListBlock
 		$this->add_col( new ListBlockCol_Milestone);
 		$this->add_col( new ListBlockCol_EstimatedComplete);
 		$this->add_col( new ListBlockCol_DaysLeft);
+		$this->add_col( new ListBlockCol_TaskSumEfforts());
+		$this->add_col( new ListBlockCol_TaskRelationEfforts);
         $this->add_col( new ListBlockColPubLevel());
-        $this->add_col( new ListBlockCol_TaskSumEfforts());
-
-
+        
         ### functions ###
         $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('taskEdit')->id,
@@ -232,6 +232,7 @@ class ListBlock_tasks extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
+		
 
         ### block style functions ###
         $this->add_blockFunction(new BlockFunction(array(
@@ -1060,7 +1061,9 @@ class ListBlockCol_TaskName extends ListBlockCol
                 $attachments='<img title="' . sprintf(__('Task has %s attachments'), count($files))  . '" src="' . getThemeFile("items/item_attachment.png"). '">';
             }
          }
-
+		
+		
+		 
         ### task with zero-id is project-root ###
         if(!$task->id) {
             $link=$PH->getLink('projView',"...project...",array('prj'=>$task->project));
@@ -1191,6 +1194,50 @@ class ListBlockCol_TaskSumEfforts extends ListBlockCol
 	}
 }
 
+class ListBlockCol_TaskRelationEfforts extends ListBlockCol
+{
+
+    public function __construct($args=NULL) {
+        parent::__construct($args);
+        $this->name=__('Estimated/Booked (Diff.)');
+        $this->id='efforts_estimated';
+        $this->tooltip=__("Relation between estimated time and booked efforts");
+    }
+
+
+	function render_tr(&$obj, $style="nowrap")
+	{
+	    global $PH;
+		if(!isset($obj) || !$obj instanceof Task) {
+   			return;
+		}
+		$diff_str = '';
+		$estimated_str = '';
+		
+        $sum = $obj->getSumTaskEfforts();
+		
+		$estimated = $obj->estimated;
+		$estimated_max = $obj->estimated_max;
+		
+		if($estimated_max){
+			$estimated_str = round($estimated_max/60/60,1) . "h";
+			$diff = $estimated_max - $sum;
+		}
+		else{
+			$estimated_str = round($estimated/60/60,1) . "h";
+			$diff = $estimated - $sum;
+		}
+		
+		if($diff){
+			$diff_str = "(" .round($diff/60/60,1). "h)";
+		}
+		
+        $str =  $PH->getLink('taskViewEfforts', $estimated_str . " / " . round($sum/60/60,1) . "h {$diff_str}", array('task'=>$obj->id));
+		$percent = __('Completion:') . " " . $obj->completion . "%";
+		
+		print "<td class=nowrap title='" .__("Relation between estimated time and booked efforts") . "'>$str<br><span class='sub who'>$percent</span></td>";
+	}
+}
 
 
 class ListBlockCol_DaysLeft extends ListBlockCol
@@ -1257,7 +1304,7 @@ class ListBlockCol_EstimatedComplete extends ListBlockCol
 		}
 
         $str= renderEstimationGraph($obj->estimated, $obj->estimated_max, $obj->completion );
-
+				
 		print "<td>$str</td>";
 	}
 }

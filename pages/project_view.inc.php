@@ -388,7 +388,8 @@ function ProjView()
         $list->query_options['date_min']= $auth->cur_user->last_logout;
         $list->query_options['not_modified_by']= $auth->cur_user->id;
         $list->query_options['project']= $project->id;
-        $list->print_automatic($project);
+        //$list->print_automatic($project);
+		$list->print_automatic();
     }
     measure_stop('changes');
 

@@ -97,8 +97,8 @@ class ChangeLine extends BaseObject {
 
         /**
         * get list of items touched by other persons
-        */
-        $changed_items= DbProjectItem::getAll($query_options);
+        */       
+		$changed_items= DbProjectItem::getAll($query_options);
         
         
 
@@ -509,6 +509,7 @@ class ListBlock_changes extends ListBlock
         $this->add_col( new ListBlockCol_ChangesDate());
         $this->add_col( new ListBlockCol_ChangesWhat());
         $this->add_col( new ListBlockCol_ChangesDetails());
+		
     }
 
 
@@ -517,15 +518,20 @@ class ListBlock_changes extends ListBlock
     {
         global $PH;
         global $auth;
-
+				
         ### add filter options ###
         foreach($this->filters as $f) {
             foreach($f->getQuerryAttributes() as $k=>$v) {
-
-                $this->query_options[$k]= $v;
+			    $this->query_options[$k]= $v;
             }
         }
-
+				
+		if($auth->cur_user->user_rights & RIGHT_VIEWALL){
+			$this->query_options['visible_only'] = false;
+		}
+		else{
+			$this->query_options['visible_only'] = true;
+		}
         #$changes= ChangeLine::getChangeLinesForPerson($auth->cur_user, NULL);
         #$this->query_options['not_modified_by']= $auth->cur_user->id;
         $changes= ChangeLine::getChangeLines($this->query_options);
@@ -557,8 +563,8 @@ class ListBlock_changes extends ListBlock
             ### render table lines ###
             $this->render_thead();
 
-
             $last_group= NULL;
+			
             foreach($changes as $c) {
 
                 $this->render_trow(&$c,$style);

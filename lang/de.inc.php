@@ -407,6 +407,18 @@ $g_lang_table= array(
 ### ../pages/project_view.inc  ###
 'Mark this project as bookmark'                          => 'Dieses Projekt als Lesezeichen markieren',
 
+### ../pages/project_more.inc  ### 
+'new|effort status'                                      => 'neu',
+'open|effort status'                                     => 'offen',
+'discounted|effort status'                               => 'abgerechnet',
+'balanced|effort status'                                 => 'bezahlt',
+'not chargeable|effort status'                           => 'nicht abrechenbar',
+'new'                                                    => 'neu',
+'open'                                                   => 'offen',
+'discounted'                                             => 'abgerechnet',
+'balanced'                                               => 'bezahlt',
+'not chargeable'                                         => 'nicht abrechenbar',
+
 ### ../pages/file.inc  ###
 'Mark this file as bookmark'                             => 'Diese Datei als Lesezeichen markieren',
 
@@ -1161,7 +1173,6 @@ $g_lang_table= array(
 'created by %s'               =>'Erstellt von %s',
 'created by unknown'          =>'Erstellt von unbekannt',
 
-
 ### ../std/constant_names.inc   ###
 'template|status name'        =>'Vorlage',
 'undefined|status_name'       =>'undefiniert',
@@ -1219,6 +1230,10 @@ $g_lang_table= array(
 'three weeks|notification period'=>'drei Wochen',
 'one month|notification period'=>'einem Monat',
 'two months|notification period'=>'zwei Monaten',
+'new|effort status'             =>'neu',
+'open|effort status'            =>'offen',
+'discounted|effort status'      =>'abgerechnet',
+'balanced|effort status'        =>'bezahlt',
 
 ### ../std/mail.inc   ###
 '<br>- You have been assigned to projects:<br><br>'=>'<br>- Sie wurden Projekten zugewiesen:<br><br>',
@@ -1458,7 +1473,7 @@ $g_lang_table= array(
 'Daygraph|columnheader'       =>'Tagesgrafik',
 
 ### ../lists/list_projectchanges.inc   ###
-'new'                         =>'new',
+'new'                         =>'neu',
 'Type|Column header'          =>'Typ',
 
 
@@ -1677,6 +1692,9 @@ $g_lang_table= array(
 'estimated %s days'           =>'%s Tage geschätzt',
 'estimated %s weeks'          =>'%s Wochen geschätzt',
 '%2.0f%% completed'           =>'%2.0f%% fertig',
+'Estimated/Booked (Diff.)'    =>'Geschätzt/Gebucht (Diff.)',
+'Completion:'                 =>'Fertigstellung:',
+'Relation between estimated time and booked efforts' =>'Verhältnis zwischen geschätzter und gebuchter Arbeitszeit',
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Neuer Meilenstein',

@@ -302,4 +302,7 @@ if($db_version < 0.0794) {
 
 }
 
+if($db_version < 0.795) {
+    $update_queries[]="ALTER TABLE `{$db_table_prefix}effort` ADD `status` TINYINT( 4 )  DEFAULT '1' NOT NULL ;";
+}
 ?>

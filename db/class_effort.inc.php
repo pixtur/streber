@@ -56,6 +56,11 @@
                 new FieldInternal(array(    'name'=>'as_duration',
                     'default'=>0,
                 )),
+				new FieldOption   (array(    'name'=>'status',
+                    'title'=>__('Status'),
+                    'view_in_forms'=>true,
+                    'default'=>1,
+                )),
 
             ) as $f) {
                 $effort_fields[$f->name]=$f;
@@ -188,7 +193,8 @@ class Effort extends DbProjectItem
         $date_min           = NULL;
         $date_max           = NULL;
 		$search				= NULL;		  # search query
-
+		$effort_status_min  = NULL;
+		$effort_status_max  = NULL;
 
         ### filter params ###
         if($args) {
@@ -223,6 +229,14 @@ class Effort extends DbProjectItem
 
         $str_date_max= $date_max
             ? "AND i.modified <= ' ". asCleanString($date_max) . "'"
+            : '';
+			
+		$str_status_min = $effort_status_min
+            ? "AND e.status >= '" . asCleanString($effort_status_min) . "'"
+            : '';
+
+        $str_status_max = $effort_status_max
+            ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
             : '';
 
 
@@ -271,6 +285,8 @@ class Effort extends DbProjectItem
                  $str_task
                  $str_date_max
                  $str_date_min
+				 $str_status_max
+                 $str_status_min
 				 $str_match
 
             ". getOrderByString($order_by)

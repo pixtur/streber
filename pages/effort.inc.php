@@ -155,8 +155,8 @@ function effortView()
 				echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
 			}
 			else {
-				echo "<p><label>" . __('Time start','label') . "</label>" . renderDateHtml($effort->time_start) . " " . renderTime($effort->time_start) . "</p>";
-				echo "<p><label>" . __('Time end','label') . "</label>" . renderDateHtml($effort->time_end) . " " . renderTime($effort->time_end) . "</p>";
+				echo "<p><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</p>";
+				echo "<p><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</p>";
 				echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
 			}
 		}
@@ -324,8 +324,8 @@ function effortViewMultiple()
 
 		$time = Effort::getMinMaxTime($content);
 		if($time) {
-			$line = "<p><label>" . __('from','time label') . "</label>" . renderDateHtml($time[0]) . /*" " . renderTime($time[0]) . */"</p>";
-			$line .= "<p><label>" . __('to','time label') . "</label>" . renderDateHtml($time[1]) . /*" " . renderTime($time[1]) . */"</p>";
+			$line = "<p><label>" . __('from','time label') . "</label>" . renderDateHtml($time[0]) . "</p>";
+			$line .= "<p><label>" . __('to','time label') . "</label>" . renderDateHtml($time[1]) . "</p>";
 			echo $line;
 		}
 		else {
@@ -389,8 +389,8 @@ function effortViewMultiple()
 					echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
 				}
 				else {
-					echo "<p><label>" . __('Time start','label') . "</label>" . renderDateHtml($effort->time_start) . " " . renderTime($effort->time_start) . "</p>";
-					echo "<p><label>" . __('Time end','label') . "</label>" . renderDateHtml($effort->time_end) . " " . renderTime($effort->time_end) . "</p>";
+					echo "<p><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</p>";
+					echo "<p><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</p>";
 					echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
 				}
 			}
@@ -561,6 +561,7 @@ function effortNew()
 #=====================================================================================================
 function effortEdit($effort=NULL) {
     global $PH;
+	global $g_effort_status_names;
 
     if(!$effort) {
         $id= getOnePassedId('effort','efforts_*');   # WARNS if multiple; ABORTS if no id found
@@ -647,7 +648,7 @@ function effortEdit($effort=NULL) {
             $form->add($effort->fields['time_end']->getFormElement(&$effort));
         }
         $form->add($effort->fields['description']->getFormElement(&$effort));
-
+		$form->add(new Form_Dropdown("effort_status", __('Status'), array_flip($g_effort_status_names), $effort->status));
 
         ### get meta-tasks / folders ###
         #$folders= $project->getFolders();
@@ -797,7 +798,11 @@ function effortEditSubmit()
         #}
         $effort->pub_level = $pub_level;
     }
-
+	
+	## effort status ##
+	if($effort_status = get('effort_status')){
+		$effort->status = $effort_status;
+	}
 
     ### link to task ###
     if($task_id = get('effort_task')) {

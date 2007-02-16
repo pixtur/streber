@@ -352,23 +352,27 @@ class Page
         $fn->parent_block= $this;
     }
 
-	function print_presets($args=NULL){
+	function print_presets($args=NULL)
+	{
 		global $PH;
-
-		if(isset($args) && count($args) == 4){
+		
+		$pvalue = '';
+		
+		if(isset($args) && count($args) == 5){
 			$preset_location = $args['target'];
 			$project_id = $args['project_id'];
 			$preset_id = $args['preset_id'];
 			$presets = $args['presets'];
-
+			$person_id = $args['person_id'];
+			
 			echo "<div class=\"presets\">";
 			#echo __("Filter-Preset:");
 			foreach($presets as $p_id=>$p_settings) {
 				if($p_id == $preset_id) {
-					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id),'current');
+					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id),'current');
 				}
 				else {
-					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id));
+					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id));
 				}
 			}
 			echo "</div>";
@@ -422,7 +426,6 @@ class PageElement extends BaseObject
             return $this->__toString();
         }
     }
-
 
     public function add(PageElement $child)
     {

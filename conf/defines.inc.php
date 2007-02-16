@@ -279,6 +279,13 @@ define('NOTIFY_2WEEKS', 11);
 define('NOTIFY_3WEEKS', 12);
 define('NOTIFY_1MONTH', 20);
 define('NOTIFY_2MONTH', 21);
+
+define('EFFORT_STATUS_NEW', 1);
+define('EFFORT_STATUS_OPEN', 2);
+define('EFFORT_STATUS_DISCOUNTED', 3);
+define('EFFORT_STATUS_NOTCHARGEABLE', 4);
+define('EFFORT_STATUS_BALANCED', 5);
+
 /**
 * default-initialisation of fields...
 *

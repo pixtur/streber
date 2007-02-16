@@ -334,7 +334,7 @@ function homeAllChanges()
     global $auth;
 
     ### create from handle ###
-    $PH->defineFromHandle();
+    //$PH->defineFromHandle();
 
 	### sets the presets ###
 	$presets= array(
@@ -486,8 +486,16 @@ function homeAllChanges()
 						'value'=>$f_settings['value'],
 					));
 					break;
-				case 'today':
+				/*case 'today':
 					$list->filters[]= new ListFilter_today(array(
+						'value'=>$f_settings['value'],
+					));
+					break;*/
+				case 'today':
+					$list->filters[]= new ListFilter_min_week(array(
+						'value'=>$f_settings['value'], 'factor'=>0
+					));
+					$list->filters[]= new ListFilter_max_week(array(
 						'value'=>$f_settings['value'],
 					));
 					break;
@@ -542,7 +550,8 @@ function homeAllChanges()
 	'target' => $preset_location,
 	'project_id' => '',
 	'preset_id' => $preset_id,
-	'presets' => $presets));
+	'presets' => $presets,
+	'person_id' => ''));
 
 	#echo(new PageContentNextCol);
 

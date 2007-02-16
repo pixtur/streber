@@ -175,6 +175,18 @@ class ListFilter_changes extends ListFilter
     }
 }
 
+class ListFilter_efforts extends ListFilter
+{
+	public $id = 'efforts';
+	public $sql_querry_attribute = 'visible_only';
+    public $default = true;
+
+	public function __construct($args=NULL)
+    {
+        parent::__construct($args);
+    }
+}
+
 class ListFilter_for_milestone extends ListFilter
 {
     public $id          = 'for_milestone';
@@ -259,6 +271,48 @@ class ListFilter_status_max extends ListFilter
     }
 }
 
+class ListFilter_effort_status_min extends ListFilter
+{
+    public $id          = 'effort_status_min';
+    public $default     = EFFORT_STATUS_NEW;
+
+    public function render()
+    {
+        global $g_effort_status_names;
+
+        if($this->active && !$this->hidden) {
+
+            $min=   isset($g_effort_status_names[$this->value])
+                        ? $g_effort_status_names[$this->value]
+                        : '';
+
+            return $min;
+        }
+        return '';
+    }
+}
+
+
+class ListFilter_effort_status_max extends ListFilter
+{
+    public $id          = 'effort_status_max';
+    public $default     = EFFORT_STATUS_BALANCED;
+
+    public function render()
+    {
+        global $g_effort_status_names;
+
+        if($this->active && !$this->hidden) {
+
+            $max=   isset($g_effort_status_names[$this->value])
+                        ? $g_effort_status_names[$this->value]
+                        : '';
+
+            return $max;
+        }
+        return '';
+    }
+}
 
 class ListFilter_assigned_to extends ListFilter
 {
@@ -707,6 +761,30 @@ class ListGroupingStatus extends ListGrouping
     }
 }
 
+class ListGroupingEffortStatus extends ListGrouping
+{
+
+    public function __construct($args=NULL) {
+        $this->id = 'status';
+        parent::__construct($args);
+    }
+
+    /**
+    * render separating row
+    */
+    public function render(&$item)
+    {
+        if(isset($item->status)) {
+            global $g_effort_status_names;
+            return $g_effort_status_names[$item->status];
+        }
+        else {
+            trigger_error("can't group for status",E_USER_NOTICE);
+            return "---";
+        }
+    }
+}
+
 
 
 
@@ -760,6 +838,29 @@ class ListGroupingCreatedBy extends ListGrouping
     }
 }
 
+class ListGroupingTask extends ListGrouping
+{
+
+    public function __construct($args=NULL) {
+        $this->id = 'task';
+        parent::__construct($args);
+    }
+
+    /**
+    * render separating row
+    */
+    public function render(&$item)
+    {
+		require_once(confGet('DIR_STREBER') . "db/class_task.inc.php");
+		if($task = Task::getVisibleById($item->task)){
+        	$name = $task->name;
+		}
+		else{
+			$name=__("unknown");
+		}
+        return $name;
+    }
+}
 
 
 class ListGroupingModifiedBy extends ListGrouping
@@ -1239,8 +1340,8 @@ class ListBlock extends PageBlock
 		$this->render_header();
         if($list || !$this->no_items_html) {
     		$this->render_thead();
+			
             if($list) {
-
                 ### grouping ###
                 if($this->groupings && $this->active_block_function == 'grouped' && $this->groupings->active_grouping_obj) {
                     $last_group= NULL;

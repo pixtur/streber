@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-	'STREBER_VERSION'       => '0.0794',
+	'STREBER_VERSION'       => '0.0795',
 	'STREBER_VERSION_DATE'  => '2007-02-10',
 
     'APP_NAME'              => 'streber',
@@ -56,7 +56,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-	'DB_VERSION_REQUIRED'   => '0.0794',
+	'DB_VERSION_REQUIRED'   => '0.0795',
 
 
     /**
@@ -74,8 +74,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-	'DB_CREATE_VERSION'     => '0.0794',     # sql-dump loaded from /_install/-directory at installation
-	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0794',
+	'DB_CREATE_VERSION'     => '0.0795',     # sql-dump loaded from /_install/-directory at installation
+	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0795',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -156,7 +156,7 @@ $g_config= array(
     * value must be a comma-delimited list of locale names, see function setLang() for details
     * use value 'C' to disable locales entirely, useful if your system doesn't have proper locale support
     */
-    'FORCE_LOCALE'          =>'',
+    'FORCE_LOCALE'          =>'de_DE@euro,de_DE,deu_deu,de.utf8,deu,german',
 
 
     /**
@@ -315,6 +315,7 @@ $g_config= array(
     * use mod_rewrite clean urls
     */
     'USE_MOD_REWRITE'=>false,
+
 
     /**
     * posts by anonymous users are rejected, if they contain any of these keys.

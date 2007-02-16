@@ -600,6 +600,42 @@ foreach($filters_str as $fs=>$value) {
         }
         return $sum;
     }
+	
+	function &getSumTaskEfforts()
+    {
+        global $auth;
+        $sum=0;
+
+		$prefix= confGet('DB_TABLE_PREFIX');
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+        $dbh = new DB_Mysql;
+        $query_str=
+
+            "SELECT SUM(unix_timestamp(e.time_end) - unix_timestamp(e.time_start)) from {$prefix}item i, {$prefix}effort e
+            WHERE
+                    i.type = '".ITEM_EFFORT."'
+                AND i.state=1
+                AND i.project = $this->project
+                AND e.id = i.id
+                AND e.task=$this->id    /* only  task-efforts*/
+            ";
+
+        $sth= $dbh->prepare($query_str);
+    	$sth->execute("",1);
+    	$tmp= $sth->fetch_row();
+    	if($tmp) {
+    	    $sum+= $tmp[0];
+    	}
+
+        ### recursively go through sub-tasks ###
+        if($subtasks=$this->getSubtasks()) {
+            foreach($subtasks as $st){
+                # $sum+= $st->getSumEfforts2();
+                $sum+= $st->getSumEfforts();
+            }
+        }
+        return $sum;
+    }
 
 
 

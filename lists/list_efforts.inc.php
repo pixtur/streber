@@ -15,6 +15,9 @@
  */
 class ListBlock_efforts extends ListBlock
 {
+	public $bg_style = "bg_time";
+	public $filters = array();
+	
     public function __construct($args=NULL)
     {
 		parent::__construct($args);
@@ -38,6 +41,7 @@ class ListBlock_efforts extends ListBlock
 			'func'=>'getPersonLink'
 		)));
 		$this->add_col( new ListBlockCol_EffortTask);
+		$this->add_col( new ListBlockCol_EffortStatus);
 		$this->add_col( new ListBlockCol_EffortName);
 		$this->add_col( new ListBlockCol_EffortDate);
 		$this->add_col( new ListBlockCol_EffortDateEnd);
@@ -79,8 +83,95 @@ class ListBlock_efforts extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
-    }
+		
+		### block style functions ###
+		$this->add_blockFunction(new BlockFunction(array(
+			'target'=>'changeBlockStyle',
+			'key'=>'list',
+			'name'=>'List',
+			'params'=>array(
+				'style'=>'list',
+				'block_id'=>$this->id,
+				'page_id'=>$PH->cur_page->id,
+			 ),
+			 //'default'=>true,
+		)));
+		$this->groupings= new BlockFunction_grouping(array(
+			'target'=>'changeBlockStyle',
+			'key'=>'grouped',
+		     'name'=>'Grouped',
+		     'params'=>array(
+			   'style'=>'grouped',
+			   'block_id'=>$this->id,
+			   'page_id'=>$PH->cur_page->id,
+		   ),
+	   ));
+	   $this->add_blockFunction($this->groupings);
 
+        ### list groupings ###
+        $this->groupings->groupings= array(
+            new ListGroupingEffortStatus(),
+            new ListGroupingCreatedBy(),
+			new ListGroupingTask(),
+        );
+		
+    }
+	
+	public function print_automatic()
+    {
+        global $PH;
+		
+		if(!$this->active_block_function=$this->getBlockStyleFromCookie()) {
+            $this->active_block_function = 'list';
+        }
+
+        $this->query_options['alive_only'] = false;
+
+        $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
+
+        $s_cookie= "sort_{$PH->cur_page->id}_{$this->id}_{$this->active_block_function}";
+        if($sort= get($s_cookie)) {
+            $this->query_options['order_by']= $sort;
+        }
+		
+        ### add filter options ###
+        foreach($this->filters as $f) {
+            foreach($f->getQuerryAttributes() as $k=>$v) {
+                $this->query_options[$k]= $v;
+            }
+        }
+		
+		### grouped view ###
+        if($this->active_block_function == 'grouped') {
+
+            /**
+            * @@@ later use only once...
+            *
+            *   $this->columns= filterOptions($this->columns,"CURPAGE.BLOCKS[{$this->id}].STYLE[{$this->active_block_function}].COLUMNS");
+            */
+            if(isset($this->columns[ $this->group_by ])) {
+                unset($this->columns[$this->group_by]);
+            }
+
+	        ### prepend key to sorting ###
+	        if(isset($this->query_options['order_by'])) {
+	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+
+	        }
+	        else {
+	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+	        }
+        }
+        ### list view ###
+        else {
+            $pass= true;
+        }
+		
+		$efforts = Effort::getAll($this->query_options);
+
+        $this->render_list(&$efforts);
+    }
+	
     /**
     * render complete
     */
@@ -106,25 +197,52 @@ class ListBlock_efforts extends ListBlock
         else {
 
     		$this->render_thead();
-            $sum=0.0;
-
+			
+			$sum=0.0;
             $day_last=0;
-    		foreach($efforts as $e) {
-                $sum +=(strToClientTime( $e->time_end) - strToClientTime(  $e->time_start) )/60/60 * 1.0;
-
-                /**
-                * separate new days with style
-                */
-                $day= gmdate('z',strToClientTime( $e->time_end ) )*1;
-                if($day != $day_last) {
-                    $day_last= $day;
-    			    $this->render_trow(&$e,'isNewDay');
-                }
-                else {
-    			    $this->render_trow(&$e);
-                }
-            }
-               		#$this->render_trow(&$t);
+			
+			### grouping ###
+			if($this->groupings && $this->active_block_function == 'grouped' && $this->groupings->active_grouping_obj) {
+				$last_group= NULL;
+				$gr= $this->groupings->active_grouping_key;
+				foreach($efforts as $e) {
+					if($last_group != $e->$gr) {
+						echo '<tr class=group><td colspan='. count($this->columns) .'>'. $this->groupings->active_grouping_obj->render($e).'</td></tr>';
+						$last_group = $e->$gr;
+					}
+					$sum +=(strToClientTime( $e->time_end) - strToClientTime(  $e->time_start) )/60/60 * 1.0;
+	
+					/**
+					* separate new days with style
+					*/
+					$day= gmdate('z',strToClientTime( $e->time_end ) )*1;
+					if($day != $day_last) {
+						$day_last= $day;
+						$this->render_trow(&$e,'isNewDay');
+					}
+					else {
+						$this->render_trow(&$e);
+					}
+				}
+			}
+			else {
+				foreach($efforts as $e) {
+					$sum +=(strToClientTime( $e->time_end) - strToClientTime(  $e->time_start) )/60/60 * 1.0;
+	
+					/**
+					* separate new days with style
+					*/
+					$day= gmdate('z',strToClientTime( $e->time_end ) )*1;
+					if($day != $day_last) {
+						$day_last= $day;
+						$this->render_trow(&$e,'isNewDay');
+					}
+					else {
+						$this->render_trow(&$e);
+					}
+				}
+			}
+            
             $sum=round($sum,1);
             $this->summary= sprintf(__("%s effort(s) with %s hours"), count($efforts), $sum);
     		$this->render_tfoot();
@@ -175,6 +293,28 @@ class ListBlockCol_EffortTask extends ListBlockCol
             if($task= Task::getById($obj->task)) {
                 $str= $PH->getLink('taskView',$task->getShort(),array('tsk'=>$task->id));
     		}
+		}
+	    print "<td><nobr>$str</nobr></td>";
+
+	}
+}
+
+class ListBlockCol_EffortStatus extends ListBlockCol
+{
+    public $key = 'status';
+
+    public function __construct($args=NULL) {
+        parent::__construct($args);
+        $this->name = __('Status','column header');
+    }
+	function render_tr(&$obj, $style="")
+	{
+	    global $PH;
+		global $g_effort_status_names;
+	    $str = "";
+
+        if(isset($obj->status)) {
+            $str = $g_effort_status_names[$obj->status];
 		}
 	    print "<td><nobr>$str</nobr></td>";
 
@@ -251,9 +391,6 @@ class ListBlockCol_EffortAmount extends ListBlockCol
 		print "<td>$value</td>";
 	}
 }
-
-
-
 
 class ListBlockCol_DayGraph extends ListBlockCol
 {

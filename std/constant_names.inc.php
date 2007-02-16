@@ -234,4 +234,13 @@ NOTIFY_3WEEKS    => __('three weeks','notification period'),
 NOTIFY_1MONTH    => __('one month','notification period'),
 NOTIFY_2MONTH    => __('two months','notification period'),
 );
+
+global $g_effort_status_names;
+$g_effort_status_names = array(
+EFFORT_STATUS_NEW          => __('new','effort status'),
+EFFORT_STATUS_OPEN         => __('open','effort status'),
+EFFORT_STATUS_DISCOUNTED   => __('discounted','effort status'),
+EFFORT_STATUS_NOTCHARGEABLE=> __('not chargeable','effort status'),
+EFFORT_STATUS_BALANCED     => __('balanced','effort status')
+);
 ?>

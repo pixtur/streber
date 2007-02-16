@@ -785,16 +785,166 @@ function personView()
 function personViewEfforts()
 {
     global $PH;
-
+	
 	### get current project ###
     $id=getOnePassedId('person','persons_*');
+	
     if(!$person= Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
 		return;
 	}
+	
+	$presets= array(
+        ### all ###
+        'all_efforts' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
 
+        ### new efforts ###
+        'new_efforts' => array(
+            'name'=> __('new'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_NEW,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### open efforts ###
+        'open_efforts' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_OPEN,
+                    'max'       => EFFORT_STATUS_OPEN,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### discounted efforts ###
+        'discounted_efforts' => array(
+            'name'=> __('discounted'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_DISCOUNTED,
+                    'max'       => EFFORT_STATUS_DISCOUNTED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### not chargeable efforts ###
+        'notchargeable_efforts' => array(
+            'name'=> __('not chargeable'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NOTCHARGEABLE,
+                    'max'       => EFFORT_STATUS_NOTCHARGEABLE,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### balanced efforts ###
+        'balanced_efforts' => array(
+            'name'=> __('balanced'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_BALANCED,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
+
+	## set preset location ##
+	$preset_location = 'personViewEfforts';
+	
+	### get preset-id ###
+    {
+        $preset_id= 'all_efforts';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_personViewEfforts_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_personViewEfforts_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
     ### create from handle ###
-    $PH->defineFromHandle(array('person'=>$person->id));
+    $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
 
     ### set up page ####
     {
@@ -807,9 +957,6 @@ function personViewEfforts()
         $page->crumbs = build_person_crumbs($person);
         $page->options= build_person_options($person);
 
-
-
-
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -821,18 +968,54 @@ function personViewEfforts()
         $order_by=get('sort_'.$PH->cur_page->id."_efforts");
 
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
-        $efforts= Effort::getAll(array(
+        /*$efforts= Effort::getAll(array(
             'person'    => $person->id,
             'order_by'  => $order_by,
-        ));
+        ));*/
 
         $list= new ListBlock_efforts();
         unset($list->functions['effortNew']);
         unset($list->functions['effortNew']);
         $list->no_items_html= __('no efforts yet');
-        $list->render_list(&$efforts);
+		
+		$list->filters[] = new ListFilter_efforts();
+		{
+			$preset = $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+					case 'effort_status':
+						$list->filters[]= new ListFilter_effort_status_min(array(
+							'value'=>$f_settings['min'],
+						));
+						$list->filters[]= new ListFilter_effort_status_max(array(
+							'value'=>$f_settings['max'],
+						));
+						break;
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								  ? true
+								  : NULL;
+		}
+		
+		$page->print_presets(array(
+		'target' => $preset_location,
+		'project_id' => '',
+		'preset_id' => $preset_id,
+		'presets' => $presets,
+		'person_id' => $person->id));
+		
+		$list->query_options['order_by'] = $order_by;
+		$list->query_options['person'] = $person->id;
+		$list->print_automatic();
+		
+        //$list->render_list(&$efforts);
 	}
-
+	
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
 
     echo (new PageContentClose);
@@ -958,6 +1141,7 @@ function personEdit($person=NULL)
 
         $form->add($person->fields['name']->getFormElement(&$person));
 
+		
         ### profile and login ###
         if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
             /**
@@ -1249,6 +1433,8 @@ function personEditSubmit()
 			$person->category = $pcategory;
 		}
 	}
+
+	
 
 	### validate rights ###
 	if(
