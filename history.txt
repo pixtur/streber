@@ -1,5 +1,18 @@
 streber-version-history
 
+v0.0795 [2007-02-19]
+====================
+minor:
+- new states for efforts (also db change -> new attribute)
+- filter functionality for efforts
+- fixed project view changes 
+- fixed smart display of dates like "Today", "Yesterday"
+- fixed display of attached files in list_changes 
+- fixed default list style in projViewEfforts #3748
+- added date to list of attached files taskView 
+- partly fixed display of context menu #4117
+
+
 v0.0794 [2007-02-14]
 =================
 minor:

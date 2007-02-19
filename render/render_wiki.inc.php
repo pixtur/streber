@@ -1894,7 +1894,12 @@ function wiki2purehtml(&$text, &$project=NULL)
 function getOneWikiChapter(&$text, $chapter)
 {
     $parts= getWikiChapters(&$text);
-    return $parts[$chapter];
+    if(isset($parts[$chapter])) {
+        return $parts[$chapter];
+    }
+    else {
+        return __("Warning: Could not find wiki chapter");
+    }
 }
 
 

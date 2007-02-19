@@ -40,8 +40,7 @@ function itemLoadField()
     if(is_null($chapter)) {
         print $object->$field_name;        
     }
-    else {
-        
+    else {        
         print getOneWikiChapter($object->$field_name, $chapter);
     }
 }
