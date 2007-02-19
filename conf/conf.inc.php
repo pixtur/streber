@@ -175,6 +175,7 @@ $g_config= array(
     * showing efforts in task list slows down rendering...
     */
     'TASK_LIST_EFFORT_COLUMN'=>false,
+    'TASK_LIST_EFFORT_RELATION_COLUMN'=>false,
 
     'LINK_REPORT_BUGS'=> " Please help us by  <a href='http://www.streber-pm.org/2717'>reporting a bug</a>",
 

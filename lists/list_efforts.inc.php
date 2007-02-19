@@ -84,10 +84,12 @@ class ListBlock_efforts extends ListBlock
             'context_menu'=>'submit',
         )));
 		
+
 		### block style functions ###
 		$this->add_blockFunction(new BlockFunction(array(
 			'target'=>'changeBlockStyle',
 			'key'=>'list',
+			'default'=>true,
 			'name'=>'List',
 			'params'=>array(
 				'style'=>'list',

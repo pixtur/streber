@@ -1962,6 +1962,7 @@ div.newsBlock span.comments {
     visibility:hidden;
     padding:0px;
     -moz-border-radius:0px 6px 6px 6px;
+    z-index:9000;
 }
 .menuItem {
     cursor:pointer;

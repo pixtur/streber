@@ -149,7 +149,9 @@ class ListBlock_tasks extends ListBlock
 		$this->add_col( new ListBlockCol_EstimatedComplete);
 		$this->add_col( new ListBlockCol_DaysLeft);
 		$this->add_col( new ListBlockCol_TaskSumEfforts());
-		$this->add_col( new ListBlockCol_TaskRelationEfforts);
+		if(confget('TASK_LIST_EFFORT_RELATION_COLUMN')) {
+		    $this->add_col( new ListBlockCol_TaskRelationEfforts);
+		}
         $this->add_col( new ListBlockColPubLevel());
         
         ### functions ###
@@ -1196,7 +1198,6 @@ class ListBlockCol_TaskSumEfforts extends ListBlockCol
 
 class ListBlockCol_TaskRelationEfforts extends ListBlockCol
 {
-
     public function __construct($args=NULL) {
         parent::__construct($args);
         $this->name=__('Estimated/Booked (Diff.)');

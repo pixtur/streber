@@ -372,11 +372,13 @@ class ChangeLine extends BaseObject {
                         $count_attached_files= 0;
                         $html_attached=__("attached").": ";
                         $t_timestamp='';
+                        $separator= '';
                         foreach($files as $f) {
                             #if($person->id != $f->modified_by) {
                                 $t_timestamp= $f->created;
                                 $count_attached_files++;
-                                $html_attached.= $PH->getLink('fileView', $f->name, array('file'=>$f->id));
+                                $html_attached.= $separator . $PH->getLink('fileView', $f->name, array('file'=>$f->id));
+                                $separator= ', ';
                             #}
                         }
                         if($count_attached_files) {

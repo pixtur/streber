@@ -351,7 +351,6 @@ class ListBlockCol_FileName extends ListBlockCol
                     . sprintf(__("ID %s"), $file->id)
                     . ' / '
                     . "<span class=sub>" . $PH->getLink('fileView', __('Show Details'), array('file'=>$file->id)). "</span>"
-
                     ."<br/>";
 
 
@@ -444,7 +443,7 @@ class ListBlockCol_FileSummary extends ListBlockCol
                    .        asHtml($file->name)
                    .      "</a>"
                    . "<br>"
-                   . "<span class=sub>" . $file->filesize ." bytes" ." / ". sprintf(__("ID %s"), $file->id) . "</span>"
+                   . "<span class=sub>" . $file->filesize ." bytes" ." / ". sprintf(__("ID %s"), $file->id)  ." / ".  renderDateHtml($file->created) .    "</span>"
                    . "<br>"
                    . $PH->getLink('fileView', __('Show Details'), array('file'=>$file->id))
                    . "</span>";
@@ -454,7 +453,7 @@ class ListBlockCol_FileSummary extends ListBlockCol
 		else {
             $buffer.= "<b>" . $PH->getLink('fileDownload',$file->name, array('file'=>$file->id)). "</b>"
                . "<br>"
-               . "<span class=sub>" . $file->filesize ." bytes" ." / ". sprintf(__("ID %s"), $file->id) . "</span>"
+               . "<span class=sub>" . $file->filesize ." bytes" ." / ". sprintf(__("ID %s"), $file->id) ." / " .  renderDateHtml($file->created) .  "</span>"
                . "<br>"
                . "<span class=sub>" . $PH->getLink('fileView', __('Show Details'), array('file'=>$file->id)). "</span>"
                ;
