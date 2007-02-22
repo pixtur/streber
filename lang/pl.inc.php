@@ -2147,6 +2147,30 @@ $g_lang_table= array(
 ### ../pages/task_view.inc.php   ###
 'Resolved tasks|Block title'  =>'Zrealizowane zadania',  # line 620
 
+### ../lists/list_efforts.inc.php   ###
+'Status|column header'        =>'Status',  # line 310
+
+### ../lists/list_tasks.inc.php   ###
+'Estimated/Booked (Diff.)'    =>'Przewidywane/Zareestrowane (różnica)',  # line 1203
+'Relation between estimated time and booked efforts'=>'Strosunek wysiłków przewidywanych do zarejestrowanych',  # line 1239
+'Completion:'                 =>'Stopień ukończenia:',  # line 1237
+
+### ../pages/project_more.inc.php   ###
+'discounted'                  =>'upust',  # line 1438
+'not chargeable'              =>'nie obsiążający',  # line 1458
+'balanced'                    =>'obciążający',  # line 1478
+
+### ../render/render_wiki.inc.php   ###
+'Warning: Could not find wiki chapter'=>'Uwaga: Nie można znaleźć rozdziału wiki',  # line 1901
+
+### ../std/constant_names.inc.php   ###
+'new|effort status'           =>'nowy',  # line 240
+'open|effort status'          =>'otwarty',  # line 241
+'discounted|effort status'    =>'upust',  # line 242
+'not chargeable|effort status'=>'nie obciążający',  # line 243
+'balanced|effort status'      =>'obciążający',  # line 244
+
+
 );
 
 
