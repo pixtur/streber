@@ -688,6 +688,21 @@ new PageHandleSubm(array('id'=>'effortEditSubmit',
     'req'=>'pages/effort.inc.php',
 
 ));
+new PageHandleForm(array('id'=>'effortEditMultiple',
+    'req'=>'pages/effort.inc.php',
+    'title'=>__('Edit multiple efforts'),
+
+    'test'=>'yes',
+    'test_params'=>array('effort'=>'_effortEdit_',),
+));
+new PageHandleSubm(array('id'=>'effortEditMultipleSubmit',
+    'req'=>'pages/effort.inc.php',
+	'title'=>__('Edit multiple efforts'),
+
+    'test'=>'yes',
+    'test_params'=>array('tsk'=>'_effortEdit_',),
+
+));
 new PageHandleFunc(array('id'=>'effortsDelete',
     'req'=>'pages/effort.inc.php',
 ));

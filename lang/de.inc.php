@@ -142,6 +142,7 @@ $g_lang_table= array(
 'Edit Note'					  =>'Notiz bearbeiten',
 'Link Companies'              =>'mit Firmen verknüpfen',
 'Remove companies from person'=>'Firmen entfernen',
+'Edit multiple efforts'       =>'Mehrere Aufwände bearbeiten',
 
 ### ../db/class_company.inc   ###
 'Optional'                    =>'Optional',
@@ -530,6 +531,10 @@ $g_lang_table= array(
 'to|time label'			      =>'bis',
 'len'						  =>'Dauer',
 'Export efforts'			  =>'Aufwandsliste exportieren',
+'Select some efforts(s) to edit' => 'Bitte wählen Sie einen oder meherer Aufwände aus.',
+'Edited %s effort(s).'        =>'%s Aufwände bearbeitet.',
+'Error while editing %s effort(s).' => '%s  Fehler trat(en) während der Bearbeitung auf.',
+'Edit %s efforts'             =>'%s Aufwände bearbeiten',
 
 ### ../pages/error.inc   ###
 'Unknown Page'                =>'Unbekannte Seite',

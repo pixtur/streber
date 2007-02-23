@@ -423,6 +423,22 @@ class Effort extends DbProjectItem
 			return NULL;
 		}
 	}
+	
+	public function getLink($short_name= true)
+    {
+
+        $style_isdone= $this->status >= EFFORT_STATUS_BALANCED
+                    ? 'isDone'
+                    : '';
+
+        global $PH;
+        if($short_name) {
+            return '<span  title="'.asHtml($this->name).'" class="item task">'.$PH->getLink('effortView',$this->getShort(),array('effort'=>$this->id),$style_isdone).'</span>';
+        }
+        else {
+            return '<span  class="item task">'.$PH->getLink('effortView',$this->name,array('effort'=>$this->id),$style_isdone).'</span>';
+        }
+    }
 }
 
 ?>

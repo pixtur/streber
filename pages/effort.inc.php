@@ -17,6 +17,7 @@ require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
+require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
 
 #=====================================================================================================
 # effortView
@@ -564,8 +565,17 @@ function effortEdit($effort=NULL) {
 	global $g_effort_status_names;
 
     if(!$effort) {
-        $id= getOnePassedId('effort','efforts_*');   # WARNS if multiple; ABORTS if no id found
-        if(!$effort= Effort::getEditableById($id)) {
+        $ids = getPassedIds('effort','efforts_*');   
+		
+		if(!$ids) {
+            $PH->abortWarning(__("Select some efforts(s) to edit"), ERROR_NOTE);
+            return;
+        }
+        else if(count($ids) > 1) {
+            $PH->show('effortEditMultiple');
+            exit;
+        }
+        else if(!$effort = Effort::getEditableById($ids[0])) {
             $PH->abortWarning("ERROR: could not get Effort");
             return;
         }
@@ -842,6 +852,262 @@ function effortEditSubmit()
     }
 }
 
+function effortEditMultiple()
+{
+	global $PH;
+	global $g_effort_status_names;
+
+    $effort_ids = getPassedIds('effort','efforts_*');
+
+    if(!$effort_ids) {
+        $PH->abortWarning(__("Select some efforts(s) to edit"));
+        exit;
+    }
+	
+	$efforts = array();
+	$different_fields=array();
+	
+	$edit_fields = array(
+        'status',
+		'pub_level',
+		'task'
+    );
+	
+	foreach($effort_ids as $id){
+		if($effort = Effort::getEditableById($id)) {
+		
+			$efforts[] = $effort;
+			
+			### check project for first task
+            if(count($efforts) == 1) {
+
+                ### make sure all are of same project ###
+                if(!$project = Project::getVisibleById($effort->project)) {
+                    $PH->abortWarning('could not get project');
+                }
+            }
+            else {
+                if($effort->project != $efforts[0]->project) {
+                    $PH->abortWarning(__("For editing all efforts must be of same project."));
+                }
+				
+				foreach($edit_fields as $field_name) {
+					if($effort->$field_name != $efforts[0]->$field_name) {
+						$different_fields[$field_name] = true;
+					}
+				}
+			}
+		}
+	}
+	
+	### set up page and write header ####
+    {
+        $page = new Page(array('use_jscalendar'=>true,'autofocus_field'=>'effort_name'));
+    	$page->cur_tab = 'projects';
+
+
+    	#$page->crumbs=build_task_crumbs($task,$project);
+    	$page->options[] = new naviOption(array(
+    	    'target_id'     =>'effortEdit',
+    	));
+
+        $page->type = __("Edit multiple efforts","Page title");
+        $page->title = sprintf(__("Edit %s efforts","Page title"), count($efforts));
+
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+	
+	{
+		echo "<ol>";
+			foreach($efforts as $e) {
+				echo "<li>" . $e->getLink(false). "</li>";
+			}
+		echo "</ol>";
+		
+		$block = new PageBlock(array('id'=>'functions','reduced_header' => true,));
+		$block->render_blockStart();
+			
+		$form = new PageForm();
+		$form->button_cancel = true;
+		
+		### status ###
+		{
+			$st = array();
+			foreach($g_effort_status_names as $key=>$value) {
+					$st[$key] = $value;
+			}
+			if(isset($different_fields['status'])) {
+				$st[-1]= ('-- ' . __('keep different'). ' --');
+				$form->add(new Form_Dropdown('effort_status',__("Status"),array_flip($st),  -1));
+			}
+			else {
+				$form->add(new Form_Dropdown('effort_status',__("Status"),array_flip($st),  $efforts[0]->status));
+			}
+		}
+		
+		### get meta-tasks / folders ###
+        $folders= Task::getAll(array(
+            'sort_hierarchical'=>true,
+            'parent_task'=> 0,
+            'show_folders'=>true,
+            'folders_only'=>false,
+            'status_min'=> STATUS_UPCOMING,
+            'status_max'=> STATUS_CLOSED,
+            'project'=> $project->id,
+
+        ));
+        if($folders) {
+            $folder_list = array("undefined"=>"0");
+
+            if($effort->task) {
+                if($task = Task::getVisibleById($effort->task)) {
+                    ### add, if normal task (folders will added below) ###
+                    if(! $task->category == TCATEGORY_FOLDER) {
+                        $folder_list[$task->name] = $task->id;
+                    }
+                }
+            }
+
+            foreach($folders as $f) {
+                $str = '';
+                foreach($f->getFolder() as $pf) {
+                    $str.=$pf->getShort(). " > ";
+                }
+                $str .= $f->name;
+
+                $folder_list[$str] = $f->id;
+
+            }
+			
+			if(isset($different_fields['task'])) {
+				$folder_list[('-- ' . __('keep different'). ' --')] = -1;
+				$form->add(new Form_Dropdown('effort_task',__("For task"),$folder_list,  -1));
+			}
+			else {
+				$form->add(new Form_Dropdown('effort_task',__("For task"),$folder_list, $efforts[0]->task));
+			}
+
+        }
+		
+		### public level ###
+		{
+			if(($pub_levels = $effort->getValidUserSetPublevel()) && count($pub_levels)>1) {
+				if(isset($different_fields['pub_level'])) {
+					$pub_levels[('-- ' . __('keep different'). ' --')] = -1;
+					$form->add(new Form_Dropdown('effort_pub_level',__("Publish to"),$pub_levels,  -1));
+				}
+				else {
+					$form->add(new Form_Dropdown('effort_pub_level',__("Publish to"),$pub_levels,$efforts[0]->pub_level));
+				}
+        	}
+		}
+		
+		$number = 0;
+		foreach($efforts as $e){
+			$form->add(new Form_HiddenField("effort_id_{$number}",'',$e->id));
+			$number++;
+		}
+		
+		$form->add(new Form_HiddenField("number",'',$number));
+		
+		echo($form);
+		
+		$block->render_blockEnd();
+		
+		$PH->go_submit = 'effortEditMultipleSubmit';
+		if($return = get('return')) {
+			echo "<input type=hidden name='return' value='$return'>";
+		}
+	}
+	
+	echo (new PageContentClose);
+	echo (new PageHtmlEnd);
+
+    exit;
+
+}
+
+function effortEditMultipleSubmit()
+{
+	global $PH;
+    global $auth;
+	
+	$ids = array();
+	$count = 0;
+	$error = 0;
+	$changes = false;
+	
+    ### cancel ? ###
+    if(get('form_do_cancel')) {
+        if(!$PH->showFromPage()) {
+            $PH->show('home',array());
+        }
+        exit;
+    }
+	
+	$number = get('number');
+	
+	for($i = 0; $i < $number; $i++){
+		$effort_id = get('effort_id_'.$i);
+		$ids[] = $effort_id;
+	}
+
+    if(!$ids) {
+        $PH->abortWarning(__("Select some efforts(s) to edit"), ERROR_NOTE);
+        return;
+    }
+	
+	foreach($ids as $id){
+		if($effort =  Effort::getEditableById($id)){
+		
+			$status = get('effort_status');
+			if(!is_null($status) && $status != -1 && $status != $effort->status){
+				$effort->status = $status;
+				$changes = true;
+			}
+			
+			$task_id = get('effort_task');
+			if(!is_null($task_id) && $task_id != -1 && $task_id != $effort->task) {
+				if($task = Task::getVisibleById($task_id)) {
+					$effort->task = $task->id;
+					$changes = true;
+				}
+			}
+			
+			$pub_level = get('effort_pub_level');
+			if(!is_null($pub_level) && $pub_level != -1 && $pub_level != $effort->pub_level){
+				if($pub_level > $effort->getValidUserSetPublevel() ) {
+					 $PH->abortWarning('invalid data',ERROR_RIGHTS);
+				}
+				$effort->pub_level = $pub_level;
+				$changes = true;
+			}
+		}
+		else{
+			$error++;
+		}
+		
+		if($changes){
+			$effort->update();
+			$effort->nowChangedByUser();
+			$count++;
+		}
+	}
+	
+	if($count){
+		new FeedbackMessage(sprintf(__("Edited %s effort(s)."),$count));
+	}
+	
+	if($error){
+		new FeedbackWarning(sprintf(__('Error while editing %s effort(s).'), $error));
+	}
+	
+	### return to from-page? ###
+    if(!$PH->showFromPage()) {
+        $PH->show('home');
+    }
+}
 
 #=====================================================================================================
 # effortsDelete
