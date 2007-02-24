@@ -707,7 +707,7 @@ class PageHeader extends PageElement
         			   . "<b>".$PH->getLink('loginForm',__('Login'),array()). "</b>";
                 if(confGet('REGISTER_NEW_USERS')) {
     			   $buffer  .= "<em>|</em>"
-    			            .  $PH->getLink('loginForm',__('Register'),array());
+    			            .  $PH->getLink('personRegister',__('Register'),array());
     			}
                 $buffer.= "</span>"
             	       .  "</div>";

@@ -1842,7 +1842,7 @@ undefined keys:
 'Delete Persons|a user right' =>'',  # line 92
 'View all Persons|a user right'=>'',  # line 93
 'Edit User Rights|a user right'=>'',  # line 94
-'Edit Own Profil|a user right'=>'',  # line 95
+'Edit own profile|a user right'=>'',  # line 95
 'Create Companies|a user right'=>'',  # line 97
 'Edit Companies|a user right' =>'',  # line 98
 'Delete Companies|a user right'=>'',  # line 99

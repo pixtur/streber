@@ -109,6 +109,7 @@ class ListBlock_milestones extends ListBlock
             $last_group= NULL;
     		foreach($tasks as $t) {
 
+
                 ### get subtasks if expanded
                 $this->tasks_open= Task::getAll(array(
                     'for_milestone' => $t->id,
@@ -288,6 +289,7 @@ class ListBlockCol_MilestoneName extends ListBlockCol
 		}
 		### expanded view ###
 		else {
+
     		$buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"" . getThemeFile("img/toggle_folder_open.gif") . "\">",array('tsk'=>$task->id),NULL, true)
     		. $html_link
     		. '<br>'
@@ -423,14 +425,14 @@ class ListBlockCol_MilestoneTasksGraph extends ListBlockCol
             if(!$obj->view_collapsed) {
                  echo $PH->getLink('projViewTasks', $this->parent_block->num_closed." ". __("closed"),
                             array(
-                                'prj'          =>$obj->project,
+                                'prj'          => $obj->project,
                                 'for_milestone'=>$obj->id,
                                 'preset'       =>'closed_tasks',
                             ))
                      . " / "
                      . $PH->getLink('projViewTasks', ($this->parent_block->num_open - $this->parent_block->num_completed)." ". __("open"),
                             array(
-                                'prj'          =>$obj->project,
+                                'prj'          => $obj->project,
                                 'for_milestone'=>$obj->id,
                                 'preset'       =>'next_milestone',
                             ))

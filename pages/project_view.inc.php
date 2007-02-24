@@ -39,8 +39,13 @@ function ProjView()
 
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
-    $project= Project::getVisibleById($id);
-	if(!$project || !$project->id) {
+    if($project= Project::getEditableById($id)) {
+        $editable= true;        
+    }
+    else if ($project= Project::getVisibleById($id)) {
+        $editable= false;        
+    }
+    else {
         $PH->abortWarning(__("invalid project-id"));
 		return;
 	}
@@ -76,17 +81,20 @@ function ProjView()
         }
 
         ### page functions ###
-        $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('edit:')
-        )));
-        $page->add_function(new PageFunction(array(
-            'target'    =>'projEdit',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'edit',
-            'tooltip'   =>__('Edit this project'),
-            'name'      => __('Project')
-
-        )));
+        
+        if($editable) {
+            $page->add_function(new PageFunctionGroup(array(
+                'name'      => __('edit:')
+            )));
+            $page->add_function(new PageFunction(array(
+                'target'    =>'projEdit',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'edit',
+                'tooltip'   =>__('Edit this project'),
+                'name'      => __('Project')
+    
+            )));
+        }
 
 		/*
 		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$project->id));
@@ -363,9 +371,19 @@ function ProjView()
         #echo $str;
 
 
-        echo "<div class=text>";
+        echo "<div class=description>";
+        if($editable) {
+            echo  wiki2html($project->description, $project, $project->id, 'description');
+        }
+        else {
+            echo  wiki2html($project->description, $project);
+        }
+        echo "</div>";
 
-        echo wiki2html($project->description, $project);
+
+        #echo "<div class=text>";
+
+        #echo wiki2html($project->description, $project);
 
         ### update task if relative links have been converted to ids ###
         global $g_wiki_auto_adjusted;
@@ -374,7 +392,7 @@ function ProjView()
             $project->update(array('description'),false);
         }
 
-        echo "</div>";
+        #echo "</div>";
 
         $block->render_blockEnd();
     }

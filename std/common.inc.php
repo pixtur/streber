@@ -41,7 +41,7 @@ function clearRequestVars() {
 
 
 /**
-* filter request vars
+* filter request vars given as assoc. array
 * - we don't want to trust any extern data therefore
 *   strip weird size & remove weird characters
 */

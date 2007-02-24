@@ -289,8 +289,12 @@ $g_config= array(
     */
     'ANONYMOUS_USER'    => false,
 
+    /**
+    * Allow anonymous users to register for new accounts.
+    * If you allow this, you should also give the id of a project to which they are assigned
+    */
     'REGISTER_NEW_USERS'=> false,
-
+    'REGISTER_NEW_USERS_TO_PROJECT'=> 0,
 
     'SMTP'              =>'',
     'WORKHOURS_PER_DAY' =>10,

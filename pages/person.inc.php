@@ -48,38 +48,38 @@ function personListAccounts()
     ### create from handle ###
     $PH->defineFromHandle();
 
-	### set up page and write header ####
-	{
-		$page= new Page();
-		$page->cur_tab='people';
-		$page->title=__("Active People");
-		if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-			$page->title_minor=sprintf(__('relating to %s','page title add on listing pages relating to current user'), $page->title_minor=$auth->cur_user->name);
-		}
-		else {
-			$page->title_minor=__("admin view");
-		}
-		#$page->type=__("List");
-		$page->type=__('List','page type');
+    ### set up page and write header ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=__("Active People");
+        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
+            $page->title_minor=sprintf(__('relating to %s','page title add on listing pages relating to current user'), $page->title_minor=$auth->cur_user->name);
+        }
+        else {
+            $page->title_minor=__("admin view");
+        }
+        #$page->type=__("List");
+        $page->type=__('List','page type');
 
-		### page functions ###
-		$page->add_function(new PageFunction(array(
-			'target'    =>'personNew',
-			'params'    =>array(),
-			'icon'      =>'new',
-			'tooltip'   =>__('New Person'),
-		)));
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target'    =>'personNew',
+            'params'    =>array(),
+            'icon'      =>'new',
+            'tooltip'   =>__('New Person'),
+        )));
 
-		$page->options=build_personList_options();
+        $page->options=build_personList_options();
 
 
-		### render title ###
-		echo(new PageHeader);
-	}
-	echo (new PageContentOpen);
+        ### render title ###
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
 
-	#--- list persons --------------------------------------------------------
-	{
+    #--- list persons --------------------------------------------------------
+    {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
@@ -87,34 +87,34 @@ function personListAccounts()
             $order_by='name';
         }
 
-		$persons=Person::getPersons(array('order_by'=>$order_by,'can_login'=>true));
+        $persons=Person::getPersons(array('order_by'=>$order_by,'can_login'=>true));
 
-		$list= new ListBlock_persons();
+        $list= new ListBlock_persons();
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML|| $format == ''){
-		    $list->footer_links[]= $PH->getCSVLink();
-		}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML|| $format == ''){
+            $list->footer_links[]= $PH->getCSVLink();
+        }
 
-		$list->reduced_header= true;
-		$list->title= __("People/Project Overview");
-		unset($list->columns['office_phone']);
-		unset($list->columns['tagline']);
-		unset($list->columns['personal_phone']);
-		unset($list->columns['companies']);
+        $list->reduced_header= true;
+        $list->title= __("People/Project Overview");
+        unset($list->columns['office_phone']);
+        unset($list->columns['tagline']);
+        unset($list->columns['personal_phone']);
+        unset($list->columns['companies']);
 
-		if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-			$list->no_items_html=$PH->getLink('personNew','');
-		}
-		else {
-			$list->no_items_html=__("no related persons");
-		}
-		$list->print_automatic(&$persons);
-	}
+        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
+            $list->no_items_html=$PH->getLink('personNew','');
+        }
+        else {
+            $list->no_items_html=__("no related persons");
+        }
+        $list->print_automatic(&$persons);
+    }
 
-	echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageContentClose);
+    echo(new PageHtmlEnd);
 }
 
 #=====================================================================================================
@@ -128,39 +128,39 @@ function personList()
     ### create from handle ###
     $PH->defineFromHandle();
 
-	### set up page and write header ####
-	{
-		$page= new Page();
-		$page->cur_tab='people';
-		$page->title=__('Persons','Pagetitle for person list');
-		if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-			$page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
-		}
-		else {
-			$page->title_minor=__("admin view","Page title add on if admin");
-		}
-		#$page->type="List";
-		$page->type=__('List','page type');
+    ### set up page and write header ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=__('Persons','Pagetitle for person list');
+        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
+            $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
+        }
+        else {
+            $page->title_minor=__("admin view","Page title add on if admin");
+        }
+        #$page->type="List";
+        $page->type=__('List','page type');
 
-		$page->options=build_personList_options();
-
-
-		### page functions ###
-		$page->add_function(new PageFunction(array(
-			'target'    =>'personNew',
-			'params'    =>array(),
-			'icon'      =>'new',
-			'tooltip'   =>__('New Person'),
-		)));
+        $page->options=build_personList_options();
 
 
-		### render title ###
-		echo(new PageHeader);
-	}
-	echo (new PageContentOpen);
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target'    =>'personNew',
+            'params'    =>array(),
+            'icon'      =>'new',
+            'tooltip'   =>__('New Person'),
+        )));
 
-	#--- list persons --------------------------------------------------------
-	{
+
+        ### render title ###
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+
+    #--- list persons --------------------------------------------------------
+    {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
@@ -168,38 +168,38 @@ function personList()
             $order_by='name';
         }
 
-		$persons=Person::getPersons(array(
-			'order_by'=>$order_by,
-			'can_login'=>false
-		));
+        $persons=Person::getPersons(array(
+            'order_by'=>$order_by,
+            'can_login'=>false
+        ));
 
-		$list= new ListBlock_persons();
-		$list->reduced_header= true;
-		$list->title= $page->title;
-		unset($list->columns['profile']);
-		unset($list->columns['projects']);
-		unset($list->columns['last_login']);
-		unset($list->columns['changes']);
+        $list= new ListBlock_persons();
+        $list->reduced_header= true;
+        $list->title= $page->title;
+        unset($list->columns['profile']);
+        unset($list->columns['projects']);
+        unset($list->columns['last_login']);
+        unset($list->columns['changes']);
 
-		if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-			$list->no_items_html=$PH->getLink('personNew','');
-		}
-		else {
-			$list->no_items_html=__("no related persons");
-		}
-		#$list->render_list(&$persons);
-		$list->print_automatic(&$persons);
+        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
+            $list->no_items_html=$PH->getLink('personNew','');
+        }
+        else {
+            $list->no_items_html=__("no related persons");
+        }
+        #$list->render_list(&$persons);
+        $list->print_automatic(&$persons);
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML || $format == ''){
-			#echo "<div class=description>" . $PH->getLink('personList', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
-		    echo $PH->getCSVLink();
-		}
-	}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            #echo "<div class=description>" . $PH->getLink('personList', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
+            echo $PH->getCSVLink();
+        }
+    }
 
-	echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageContentClose);
+    echo(new PageHtmlEnd);
 
 }
 
@@ -214,37 +214,37 @@ function personListEmployee()
     ### create from handle ###
     $PH->defineFromHandle();
 
-	### set up page and write header ####
-	{
-		$page= new Page();
-		$page->cur_tab='people';
-		$page->title=__('Employees','Pagetitle for person list');
-		if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-			$page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
-		}
-		else {
-			$page->title_minor=__("admin view","Page title add on if admin");
-		}
-		#$page->type="List";
-		$page->type=__('List','page type');
+    ### set up page and write header ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=__('Employees','Pagetitle for person list');
+        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
+            $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
+        }
+        else {
+            $page->title_minor=__("admin view","Page title add on if admin");
+        }
+        #$page->type="List";
+        $page->type=__('List','page type');
 
-		$page->options=build_personList_options();
+        $page->options=build_personList_options();
 
-		### page functions ###
-		$page->add_function(new PageFunction(array(
-			'target'    =>'personNew',
-			'params'    =>array('perscat'=>PCATEGORY_STAFF),
-			'icon'      =>'new',
-			'tooltip'   =>__('New Person'),
-		)));
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target'    =>'personNew',
+            'params'    =>array('perscat'=>PCATEGORY_STAFF),
+            'icon'      =>'new',
+            'tooltip'   =>__('New Person'),
+        )));
 
-		### render title ###
-		echo(new PageHeader);
-	}
-	echo (new PageContentOpen);
+        ### render title ###
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
 
-	#--- list persons --------------------------------------------------------
-	{
+    #--- list persons --------------------------------------------------------
+    {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
@@ -252,38 +252,38 @@ function personListEmployee()
             $order_by='name';
         }
 
-		$persons=Person::getPersons(array(
-			'order_by'=>$order_by,
-			'perscat'=>PCATEGORY_EMPLOYEE
-		));
+        $persons=Person::getPersons(array(
+            'order_by'=>$order_by,
+            'perscat'=>PCATEGORY_EMPLOYEE
+        ));
 
-		$list= new ListBlock_persons();
-		$list->reduced_header= true;
-		$list->title= $page->title;
-		unset($list->columns['profile']);
-		unset($list->columns['projects']);
-		unset($list->columns['last_login']);
-		unset($list->columns['changes']);
+        $list= new ListBlock_persons();
+        $list->reduced_header= true;
+        $list->title= $page->title;
+        unset($list->columns['profile']);
+        unset($list->columns['projects']);
+        unset($list->columns['last_login']);
+        unset($list->columns['changes']);
 
-		if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-			$list->no_items_html=$PH->getLink('personNew','');
-		}
-		else {
-			$list->no_items_html=__("no related persons");
-		}
-		#$list->render_list(&$persons);
-		$list->print_automatic(&$persons);
+        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
+            $list->no_items_html=$PH->getLink('personNew','');
+        }
+        else {
+            $list->no_items_html=__("no related persons");
+        }
+        #$list->render_list(&$persons);
+        $list->print_automatic(&$persons);
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML || $format == ''){
-			#echo "<div class=description>" . $PH->getLink('personListEmployee', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
-		    echo $PH->getCSVLink();
-		}
-	}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            #echo "<div class=description>" . $PH->getLink('personListEmployee', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
+            echo $PH->getCSVLink();
+        }
+    }
 
-	echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageContentClose);
+    echo(new PageHtmlEnd);
 }
 
 #=====================================================================================================
@@ -297,38 +297,38 @@ function personListContact()
     ### create from handle ###
     $PH->defineFromHandle();
 
-	### set up page and write header ####
-	{
-		$page= new Page();
-		$page->cur_tab='people';
-		$page->title=__('Contact Persons','Pagetitle for person list');
-		if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-			$page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
-		}
-		else {
-			$page->title_minor=__("admin view","Page title add on if admin");
-		}
-		#$page->type="List";
-		$page->type=__('List','page type');
+    ### set up page and write header ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=__('Contact Persons','Pagetitle for person list');
+        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
+            $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
+        }
+        else {
+            $page->title_minor=__("admin view","Page title add on if admin");
+        }
+        #$page->type="List";
+        $page->type=__('List','page type');
 
-		$page->options=build_personList_options();
+        $page->options=build_personList_options();
 
-		### page functions ###
-		$page->add_function(new PageFunction(array(
-			'target'    =>'personNew',
-			'params'    =>array('perscat'=>PCATEGORY_CLIENT),
-			'icon'      =>'new',
-			'tooltip'   =>__('New Person'),
-		)));
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target'    =>'personNew',
+            'params'    =>array('perscat'=>PCATEGORY_CLIENT),
+            'icon'      =>'new',
+            'tooltip'   =>__('New Person'),
+        )));
 
 
-		### render title ###
-		echo(new PageHeader);
-	}
-	echo (new PageContentOpen);
+        ### render title ###
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
 
-	#--- list persons --------------------------------------------------------
-	{
+    #--- list persons --------------------------------------------------------
+    {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
@@ -336,38 +336,38 @@ function personListContact()
             $order_by='name';
         }
 
-		$persons=Person::getPersons(array(
-			'order_by'=>$order_by,
-			 'perscat'=>PCATEGORY_CONTACT
-		));
+        $persons=Person::getPersons(array(
+            'order_by'=>$order_by,
+             'perscat'=>PCATEGORY_CONTACT
+        ));
 
-		$list= new ListBlock_persons();
-		$list->reduced_header= true;
-		$list->title= $page->title;
-		unset($list->columns['profile']);
-		unset($list->columns['projects']);
-		unset($list->columns['last_login']);
-		unset($list->columns['changes']);
+        $list= new ListBlock_persons();
+        $list->reduced_header= true;
+        $list->title= $page->title;
+        unset($list->columns['profile']);
+        unset($list->columns['projects']);
+        unset($list->columns['last_login']);
+        unset($list->columns['changes']);
 
-		if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-			$list->no_items_html=$PH->getLink('personNew','');
-		}
-		else {
-			$list->no_items_html=__("no related persons");
-		}
-		#$list->render_list(&$persons);
-		$list->print_automatic(&$persons);
+        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
+            $list->no_items_html=$PH->getLink('personNew','');
+        }
+        else {
+            $list->no_items_html=__("no related persons");
+        }
+        #$list->render_list(&$persons);
+        $list->print_automatic(&$persons);
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML || $format == ''){
-			#echo "<div class=description>" . $PH->getLink('personListContact', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
-		    echo $PH->getCSVLink();
-		}
-	}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            #echo "<div class=description>" . $PH->getLink('personListContact', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
+            echo $PH->getCSVLink();
+        }
+    }
 
-	echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageContentClose);
+    echo(new PageHtmlEnd);
 }
 
 #=====================================================================================================
@@ -381,29 +381,29 @@ function personListDeleted()
     ### create from handle ###
     $PH->defineFromHandle();
 
-	### set up page and write header ####
-	{
-		$page= new Page();
-		$page->cur_tab='people';
-		$page->title=__("Deleted People");
-		if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-			$page->title_minor=sprintf(__('relating to %s','page title add on listing pages relating to current user'), $page->title_minor=$auth->cur_user->name);
-		}
-		else {
-			$page->title_minor=__("admin view");
-		}
-		#$page->type=__("List");
-		$page->type=__('List','page type');
+    ### set up page and write header ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=__("Deleted People");
+        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
+            $page->title_minor=sprintf(__('relating to %s','page title add on listing pages relating to current user'), $page->title_minor=$auth->cur_user->name);
+        }
+        else {
+            $page->title_minor=__("admin view");
+        }
+        #$page->type=__("List");
+        $page->type=__('List','page type');
 
-		$page->options=build_personList_options();
+        $page->options=build_personList_options();
 
-		### render title ###
-		echo(new PageHeader);
-	}
-	echo (new PageContentOpen);
+        ### render title ###
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
 
-	#--- list persons --------------------------------------------------------
-	{
+    #--- list persons --------------------------------------------------------
+    {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
@@ -411,50 +411,48 @@ function personListDeleted()
             $order_by='name';
         }
 
-		$persons=Person::getPersons(array(
-			'order_by'=>$order_by,
-			'is_alive'=>false,
-		));
+        $persons=Person::getPersons(array(
+            'order_by'=>$order_by,
+            'is_alive'=>false,
+        ));
 
-		$list= new ListBlock_persons();
-		$list->reduced_header= true;
-		$list->add_col( new listBlockColDate(array(
-			'key'=>'modified',
-			'name'=>__('deleted')
-		)));
+        $list= new ListBlock_persons();
+        $list->reduced_header= true;
+        $list->add_col( new listBlockColDate(array(
+            'key'=>'modified',
+            'name'=>__('deleted')
+        )));
 
-		$list->add_col( new ListBlockCol_ChangesByPerson());
-		$list->add_col( new ListBlockCol_ChangesItemState());
+        #$list->add_col( new ListBlockCol_ChangesByPerson());
+        #$list->add_col( new ListBlockCol_ChangesItemState());
 
+        $list->title= __("People/Project Overview");
+        unset($list->columns['office_phone']);
+        unset($list->columns['tagline']);
+        unset($list->columns['personal_phone']);
+        unset($list->columns['companies']);
+        unset($list->columns['changes']);
 
-		$list->title= __("People/Project Overview");
-		unset($list->columns['office_phone']);
-		unset($list->columns['tagline']);
-		unset($list->columns['personal_phone']);
-		unset($list->columns['companies']);
-		unset($list->columns['changes']);
+        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
+            $list->no_items_html=$PH->getLink('personNew','');
+        }
+        else {
+            $list->no_items_html=__("no related persons");
+        }
+        #$list->render_list(&$persons);
+        $list->print_automatic(&$persons);
 
-		if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-			$list->no_items_html=$PH->getLink('personNew','');
-		}
-		else {
-			$list->no_items_html=__("no related persons");
-		}
-		#$list->render_list(&$persons);
-		$list->print_automatic(&$persons);
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            #echo "<div class=description>" . $PH->getLink('personListDeleted', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
+            echo $PH->getCSVLink();
+        }
+    }
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML || $format == ''){
-			#echo "<div class=description>" . $PH->getLink('personListDeleted', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
-		    echo $PH->getCSVLink();
-		}
-	}
-
-	echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageContentClose);
+    echo(new PageHtmlEnd);
 }
-
 
 
 function personView()
@@ -462,24 +460,24 @@ function personView()
     global $PH;
     global $auth;
 
-	### get current person ###
+    ### get current person ###
     $id=getOnePassedId('person','persons_*');
     if(!$person= Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array('person'=>$person->id));
 
-	## is viewed by user ##
-	$person->nowViewedByUser();
+    ## is viewed by user ##
+    $person->nowViewedByUser();
 
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='people';
-    	if($person->can_login) {
+        $page->cur_tab='people';
+        if($person->can_login) {
             $page->title= $person->nickname;
             $page->title_minor= $person->name;
         }
@@ -501,21 +499,21 @@ function personView()
         if($edit= Person::getEditableById($person->id)) {
 
             ### page functions ###
-			$page->add_function(new PageFunctionGroup(array(
+            $page->add_function(new PageFunctionGroup(array(
                 'name'      => __('new:')
             )));
-			$page->add_function(new PageFunction(array(
+            $page->add_function(new PageFunction(array(
                 'target'=>'taskNoteOnPersonNew',
                 'params'=>array('person'=>$person->id),
                 'tooltip'=>__('Create Note','Tooltip for page function'),
                 'name'=>__('Note','Page function person'),
             )));
-			$page->add_function(new PageFunction(array(
+            $page->add_function(new PageFunction(array(
             'target'    =>'personLinkCompanies',
             'params'    =>array('person'=>$person->id),
             'tooltip'   =>__('Add existing companies to this person'),
             'name'      =>__('Companies'),
-        	)));
+            )));
 
             $page->add_function(new PageFunctionGroup(array(
                 'name'      => __('edit:')
@@ -536,23 +534,23 @@ function personView()
                 'name'=>__('User Rights','Page function for edit user rights'),
             )));
 
-			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$person->id));
-			if((!$item) || ($item[0]->is_bookmark == 0)){
-				$page->add_function(new PageFunction(array(
-					'target'    =>'itemsAsBookmark',
-					'params'    =>array('person'=>$person->id),
-					'tooltip'   =>__('Mark this person as bookmark'),
-					'name'      =>__('Bookmark'),
-        		)));
-			}
-			else{
-				$page->add_function(new PageFunction(array(
-					'target'    =>'itemsRemoveBookmark',
-					'params'    =>array('person'=>$person->id),
-					'tooltip'   =>__('Remove this bookmark'),
-					'name'      =>__('Remove Bookmark'),
-        		)));
-			}
+            $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$person->id));
+            if((!$item) || ($item[0]->is_bookmark == 0)){
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsAsBookmark',
+                    'params'    =>array('person'=>$person->id),
+                    'tooltip'   =>__('Mark this person as bookmark'),
+                    'name'      =>__('Bookmark'),
+                )));
+            }
+            else{
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsRemoveBookmark',
+                    'params'    =>array('person'=>$person->id),
+                    'tooltip'   =>__('Remove this bookmark'),
+                    'name'      =>__('Remove Bookmark'),
+                )));
+            }
 
             $page->add_function(new PageFunctionGroup(array(
                 'name'      => __('notification:')
@@ -570,7 +568,7 @@ function personView()
         }
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen_Columns);
@@ -643,7 +641,7 @@ function personView()
     #--- list companies -----------------------------------
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_companies.inc.php');
-    	$companies = $person->getCompanies();
+        $companies = $person->getCompanies();
         $list = new ListBlock_companies();
         $list->title = __('works for','List title');
         unset($list->columns['short']);
@@ -652,7 +650,7 @@ function personView()
         unset($list->functions['companyDelete']);
         #unset($list->functions['companyNew']);
 
-		/**
+        /**
         * @@@NOTE: we should provide a list-function to link more
         * people to this company. But therefore we would need to
         * pass the company's id, which is not possible right now...
@@ -663,7 +661,7 @@ function personView()
             'id'    =>'personLinkCompanies',
             'icon'  =>'add',
         )));
-		$list->add_function(new ListFunction(array(
+        $list->add_function(new ListFunction(array(
             'target'=>$PH->getPage('personCompaniesDelete')->id,
             'name'  =>__('Remove companies from person'),
             'id'    =>'personCompaniesDelete',
@@ -721,8 +719,8 @@ function personView()
 
         require_once(confGet('DIR_STREBER') . 'lists/list_projects.inc.php');
 
-    	$projects= $person->getProjects($order_by);
-    	if($projects || $person->can_login) {
+        $projects= $person->getProjects($order_by);
+        if($projects || $person->can_login) {
 
             $list=new ListBlock_projects();
 
@@ -768,14 +766,14 @@ function personView()
         $list->print_automatic();
     }
 
-	### add company-id ###
+    ### add company-id ###
     # note: some pageFunctions like personNew can use this for automatical linking
     #
     echo "<input type='hidden' name='person' value='$person->id'>";
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -785,16 +783,16 @@ function personView()
 function personViewEfforts()
 {
     global $PH;
-	
-	### get current project ###
+    
+    ### get current project ###
     $id=getOnePassedId('person','persons_*');
-	
+    
     if(!$person= Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
-		return;
-	}
-	
-	$presets= array(
+        return;
+    }
+    
+    $presets= array(
         ### all ###
         'all_efforts' => array(
             'name'=> __('all'),
@@ -834,8 +832,8 @@ function personViewEfforts()
                 )
             )
         ),
-		
-		### open efforts ###
+        
+        ### open efforts ###
         'open_efforts' => array(
             'name'=> __('open'),
             'filters'=> array(
@@ -854,8 +852,8 @@ function personViewEfforts()
                 )
             )
         ),
-		
-		### discounted efforts ###
+        
+        ### discounted efforts ###
         'discounted_efforts' => array(
             'name'=> __('discounted'),
             'filters'=> array(
@@ -874,8 +872,8 @@ function personViewEfforts()
                 )
             )
         ),
-		
-		### not chargeable efforts ###
+        
+        ### not chargeable efforts ###
         'notchargeable_efforts' => array(
             'name'=> __('not chargeable'),
             'filters'=> array(
@@ -894,8 +892,8 @@ function personViewEfforts()
                 )
             )
         ),
-		
-		### balanced efforts ###
+        
+        ### balanced efforts ###
         'balanced_efforts' => array(
             'name'=> __('balanced'),
             'filters'=> array(
@@ -916,10 +914,10 @@ function personViewEfforts()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'personViewEfforts';
-	
-	### get preset-id ###
+    ## set preset location ##
+    $preset_location = 'personViewEfforts';
+    
+    ### get preset-id ###
     {
         $preset_id= 'all_efforts';                           # default value
         if($tmp_preset_id= get('preset')) {
@@ -949,7 +947,7 @@ function personViewEfforts()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='people';
+        $page->cur_tab='people';
         $page->title=$person->name;
         $page->title_minor=__('Efforts','Page title add on');
         $page->type=__("Person");
@@ -977,49 +975,49 @@ function personViewEfforts()
         unset($list->functions['effortNew']);
         unset($list->functions['effortNew']);
         $list->no_items_html= __('no efforts yet');
-		
-		$list->filters[] = new ListFilter_efforts();
-		{
-			$preset = $presets[$preset_id];
-			foreach($preset['filters'] as $f_name=>$f_settings) {
-				switch($f_name) {
-					case 'effort_status':
-						$list->filters[]= new ListFilter_effort_status_min(array(
-							'value'=>$f_settings['min'],
-						));
-						$list->filters[]= new ListFilter_effort_status_max(array(
-							'value'=>$f_settings['max'],
-						));
-						break;
-					default:
-						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-						break;
-				}
-			}
-	
-			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-								  ? true
-								  : NULL;
-		}
-		
-		$page->print_presets(array(
-		'target' => $preset_location,
-		'project_id' => '',
-		'preset_id' => $preset_id,
-		'presets' => $presets,
-		'person_id' => $person->id));
-		
-		$list->query_options['order_by'] = $order_by;
-		$list->query_options['person'] = $person->id;
-		$list->print_automatic();
-		
+        
+        $list->filters[] = new ListFilter_efforts();
+        {
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'effort_status':
+                        $list->filters[]= new ListFilter_effort_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $list->filters[]= new ListFilter_effort_status_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
+        }
+        
+        $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => '',
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => $person->id));
+        
+        $list->query_options['order_by'] = $order_by;
+        $list->query_options['person'] = $person->id;
+        $list->print_automatic();
+        
         //$list->render_list(&$efforts);
-	}
-	
+    }
+    
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -1070,7 +1068,7 @@ function personNew() {
 function personEdit($person=NULL)
 {
     global $PH;
-	global $auth;
+    global $auth;
 
 
     ### new object not in database ###
@@ -1082,44 +1080,44 @@ function personEdit($person=NULL)
         }
     }
 
-	### validate rights ###
+    ### validate rights ###
 
-	if(
-		(
-		 $auth->cur_user->id == $person->id
-		 &&
-		 $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
-		)
-		||
-		($auth->cur_user->user_rights & RIGHT_PERSON_EDIT)
-		||
-		(($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
-		 &&
-		 $person->id == 0
+    if(
+        (
+         $auth->cur_user->id == $person->id
+         &&
+         $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
+        )
+        ||
+        ($auth->cur_user->user_rights & RIGHT_PERSON_EDIT)
+        ||
+        (($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
+         &&
+         $person->id == 0
 
-		)
-	) {
-	    $pass= true;
-	}
-	else {
-		$PH->abortWarning(__("not allowed to edit"),ERROR_RIGHTS);
+        )
+    ) {
+        $pass= true;
+    }
+    else {
+        $PH->abortWarning(__("not allowed to edit"),ERROR_RIGHTS);
 
-	}
+    }
 
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'person_name'));
-    	$page->cur_tab='people';
+        $page->cur_tab='people';
         $page->type=__('Edit Person','Page type');
         $page->title=$person->name;
         $page->title_minor='';
 
-       	$page->crumbs= build_person_crumbs($person);
-       	$page->options=array(
-       	    new NaviOption(array(
-       	        'target_id' => 'personEdit',
-       	    )),
-       	);
+        $page->crumbs= build_person_crumbs($person);
+        $page->options=array(
+            new NaviOption(array(
+                'target_id' => 'personEdit',
+            )),
+        );
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -1134,14 +1132,14 @@ function personEdit($person=NULL)
     ### write form #####
     {
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
-		global $g_pcategory_names;
+        global $g_pcategory_names;
 
         $form=new PageForm();
         $form->button_cancel=true;
 
         $form->add($person->fields['name']->getFormElement(&$person));
 
-		
+        
         ### profile and login ###
         if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
             /**
@@ -1163,22 +1161,22 @@ function personEdit($person=NULL)
             }
             $tab->add($fnick);
 
-    		### show password-fields if can_login ###
-    		/**
-    		* since the password as stored as md5-hash, we can initiate current password,
-    		* but have have to make sure the it is not changed on submit
-    		*/
-    		$fpw1=new Form_password('person_password1',__('Password','form label'),"__dont_change__", $person->fields['password']->tooltip);
-    		if($person->can_login) {
-    		    $fpw1->required= true;
-    		}
-        	$tab->add($fpw1);
+            ### show password-fields if can_login ###
+            /**
+            * since the password as stored as md5-hash, we can initiate current password,
+            * but have have to make sure the it is not changed on submit
+            */
+            $fpw1=new Form_password('person_password1',__('Password','form label'),"__dont_change__", $person->fields['password']->tooltip);
+            if($person->can_login) {
+                $fpw1->required= true;
+            }
+            $tab->add($fpw1);
 
-        	$fpw2=new Form_password('person_password2',__('confirm Password','form label'),"__dont_change__",  $person->fields['password']->tooltip);
-        	if($person->can_login) {
-        	    $fpw2->required= true;
-        	}
-        	$tab->add($fpw2);
+            $fpw2=new Form_password('person_password2',__('confirm Password','form label'),"__dont_change__",  $person->fields['password']->tooltip);
+            if($person->can_login) {
+                $fpw2->required= true;
+            }
+            $tab->add($fpw2);
 
 
             ### profile and login ###
@@ -1231,26 +1229,26 @@ function personEdit($person=NULL)
             }
 
 
-    		## assigne to project ##
-    		{
-    			if($person->id == 0){
-    				$prj_num = '-1';
+            ## assigne to project ##
+            {
+                if($person->id == 0){
+                    $prj_num = '-1';
 
-    				$prj_names = array();
-    				$prj_names['-1'] = __('- no -');
+                    $prj_names = array();
+                    $prj_names['-1'] = __('- no -');
 
-    				## get all projects ##
-    				if($projects = Project::getAll()){
-        				foreach($projects as $p){
-        					$prj_names[$p->id] = $p->name;
-        				}
+                    ## get all projects ##
+                    if($projects = Project::getAll()){
+                        foreach($projects as $p){
+                            $prj_names[$p->id] = $p->name;
+                        }
 
-        				## assigne new person to ptoject ##
-        				$tab->add(new Form_Dropdown('assigned_prj', __('Assigne to project','form label'), array_flip($prj_names), $prj_num));
-        			}
-    			}
+                        ## assigne new person to ptoject ##
+                        $tab->add(new Form_Dropdown('assigned_prj', __('Assigne to project','form label'), array_flip($prj_names), $prj_num));
+                    }
+                }
 
-    		}
+            }
 
         }
 
@@ -1261,14 +1259,14 @@ function personEdit($person=NULL)
         {
             $tab_group->add($tab=new Page_Tab("details",__("Details")));
 
-    		### category ###
-    		if($p= get('perscat')){
-    			$perscat = $p;
-    		}
-    		else {
-    			$perscat = $person->category;
-    		}
-    		$tab->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
+            ### category ###
+            if($p= get('perscat')){
+                $perscat = $p;
+            }
+            else {
+                $perscat = $person->category;
+            }
+            $tab->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
 
 
             $tab->add($person->fields['office_email']->getFormElement(&$person));
@@ -1369,7 +1367,7 @@ function personEdit($person=NULL)
     $block->render_blockEnd();
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -1416,50 +1414,50 @@ function personEditSubmit()
 
     $person->validateEditRequestTime();
 
-	### person category ###
-	$pcategory = get('pcategory');
-	if($pcategory != NULL)
-	{
-		if($pcategory == -1)
-		{
-			$person->category = PCATEGORY_STAFF;
-		}
-		else if ($pcategory == -2)
-		{
-			$person->category = PCATEGORY_CUSTOMER;
-		}
-		else
-		{
-			$person->category = $pcategory;
-		}
-	}
+    ### person category ###
+    $pcategory = get('pcategory');
+    if($pcategory != NULL)
+    {
+        if($pcategory == -1)
+        {
+            $person->category = PCATEGORY_STAFF;
+        }
+        else if ($pcategory == -2)
+        {
+            $person->category = PCATEGORY_CUSTOMER;
+        }
+        else
+        {
+            $person->category = $pcategory;
+        }
+    }
 
-	
+    
 
-	### validate rights ###
-	if(
-		(
-		 $auth->cur_user->id == $person->id
-		 &&
-		 $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
-		)
-		||
-		($auth->cur_user->user_rights & RIGHT_PERSON_EDIT)
-		||
-		(($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
-		 &&
-		 $person->id == 0
+    ### validate rights ###
+    if(
+        (
+         $auth->cur_user->id == $person->id
+         &&
+         $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
+        )
+        ||
+        ($auth->cur_user->user_rights & RIGHT_PERSON_EDIT)
+        ||
+        (($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
+         &&
+         $person->id == 0
 
-		)
-	) {
+        )
+    ) {
         $pass= true;
-	}
-	else {
-		$PH->abortWarning(__("not allowed to edit"),ERROR_RIGHTS);
-	}
+    }
+    else {
+        $PH->abortWarning(__("not allowed to edit"),ERROR_RIGHTS);
+    }
 
 
-	$flag_ok=true;      # update valid?
+    $flag_ok=true;      # update valid?
 
     # retrieve all possible values from post-data
     # NOTE:
@@ -1628,11 +1626,11 @@ function personEditSubmit()
         }
     }
 
-	### password entered? ###
+    ### password entered? ###
     $t_password1= get('person_password1');
     $t_password2= get('person_password2');
     $flag_password_ok=true;
-	if(($t_password1 || $t_password2) && $t_password1!="__dont_change__") {
+    if(($t_password1 || $t_password2) && $t_password1!="__dont_change__") {
 
         ### check if password match ###
         if($t_password1 !== $t_password2) {
@@ -1644,7 +1642,7 @@ function personEditSubmit()
         }
 
         ### check if password is good enough ###
-    	if($person->can_login) {
+        if($person->can_login) {
             $password_length= strlen($t_password1);
             $password_count_numbers= strlen(preg_replace('/[^\d]/','',$t_password1));
             $password_count_special= strlen(preg_replace('/[^\wd]/','',$t_password1));
@@ -1655,16 +1653,16 @@ function personEditSubmit()
                 $flag_ok= false;
                 $flag_password_ok = false;
             }
-    	}
+        }
 
         if($flag_password_ok) {
-	        $person->password= md5($t_password1);
-	    }
-	}
+            $person->password= md5($t_password1);
+        }
+    }
 
 
-	if($flag_ok && $person->can_login) {
-	    if(!$person->nickname) {
+    if($flag_ok && $person->can_login) {
+        if(!$person->nickname) {
             new FeedbackWarning(__("Login-accounts require a unique nickname"));
             $person->fields['nickname']->required=true;
             $person->fields['nickname']->invalid=true;
@@ -1674,17 +1672,17 @@ function personEditSubmit()
     }
 
 
-	### repeat form if invalid data ###
-	if(!$flag_ok) {
+    ### repeat form if invalid data ###
+    if(!$flag_ok) {
         $PH->show('personEdit',NULL,$person);
 
-		exit;
-	}
+        exit;
+    }
 
-	/**
-	* store indentifier-string for login from notification & reminder - mails
-	*/
-	$person->identifier= $person->calcIdentifierString();
+    /**
+    * store indentifier-string for login from notification & reminder - mails
+    */
+    $person->identifier= $person->calcIdentifierString();
 
     ### insert new object ###
     if($person->id == 0) {
@@ -1715,22 +1713,22 @@ function personEditSubmit()
                 }
             }
 
-			## assigne to project ##
-			require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
-			$prj_num = get('assigned_prj');
+            ## assigne to project ##
+            require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
+            $prj_num = get('assigned_prj');
 
-			if(isset($prj_num)){
-				if($prj_num != -1){
-					if($p= Project::getVisibleById($prj_num)){
-						$prj_person = new ProjectPerson(array(
-								'person' => $person->id,
-								'project' => $p->id,
-								'name' => $g_user_profile_names[$person->profile],
-								));
-						$prj_person->insert();
-					}
-				}
-			}
+            if(isset($prj_num)){
+                if($prj_num != -1){
+                    if($p= Project::getVisibleById($prj_num)){
+                        $prj_person = new ProjectPerson(array(
+                                'person' => $person->id,
+                                'project' => $p->id,
+                                'name' => $g_user_profile_names[$person->profile],
+                                ));
+                        $prj_person->insert();
+                    }
+                }
+            }
             new FeedbackMessage(sprintf(__('Person %s created'), $person->getLink()));
         }
         else {
@@ -1743,8 +1741,8 @@ function personEditSubmit()
         $person->update();
     }
 
-	### notify on change ###
-	$person->nowChangedByUser();
+    ### notify on change ###
+    $person->nowChangedByUser();
 
     ### store cookie, if accountActivation ###
     if(get('tuid')) {
@@ -1948,14 +1946,14 @@ function personEditRights($person=NULL)
     ### set up page and write header ####
     {
         $page= new Page(array('autofocus_field'=>'person_nickname'));
-    	$page->cur_tab='people';
+        $page->cur_tab='people';
 
-       	$page->crumbs= build_person_crumbs($person);
-       	$page->options=array(
-       	    new NaviOption(array(
-       	        'target_id' => 'personEditRights',
-       	    )),
-       	);
+        $page->crumbs= build_person_crumbs($person);
+        $page->options=array(
+            new NaviOption(array(
+                'target_id' => 'personEditRights',
+            )),
+        );
 
         $page->type=__('Edit Person','page type');
         $page->title= $person->name;
@@ -1987,7 +1985,7 @@ function personEditRights($person=NULL)
 
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -2069,7 +2067,7 @@ function personEditRightsSubmit()
 function personRegister($person=NULL)
 {
     global $PH;
-	global $auth;
+    global $auth;
 
     if(!confGet('REGISTER_NEW_USERS')) {
         $PH->abortWarning(__("Registering is not enabled"));
@@ -2077,23 +2075,23 @@ function personRegister($person=NULL)
     }
     $person=new Person(array(
         'id'=>0,
-        'description'=>__('Please provide information, why you want to register.'),
+        'description'=>__('Because we are afraid of spam bots, please provide some information about you and why you want to register.'),
     ));
 
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'person_name'));
-    	$page->cur_tab='people';
+        $page->cur_tab='people';
         $page->type=__('Edit Person','Page type');
         $page->title= __("Register as a new user");
         $page->title_minor='';
 
-       	$page->crumbs= build_person_crumbs($person);
-       	$page->options=array(
-       	    new NaviOption(array(
-       	        'target_id' => 'personEdit',
-       	    )),
-       	);
+        $page->crumbs= build_person_crumbs($person);
+        $page->options=array(
+            new NaviOption(array(
+                'target_id' => 'personEdit',
+            )),
+        );
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -2101,7 +2099,7 @@ function personRegister($person=NULL)
     ### write form #####
     {
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
-		global $g_pcategory_names;
+        global $g_pcategory_names;
 
         $form=new PageForm();
         $form->button_cancel=true;
@@ -2109,63 +2107,63 @@ function personRegister($person=NULL)
         $form->add($person->fields['name']->getFormElement(&$person));
 
         $f= $person->fields['office_email']->getFormElement(&$person);
-         $f->required= true;
-         $form->add($f);
+        $f->required= true;
+        $form->add($f);
 
-        $form->add($person->fields['mobile_phone']->getFormElement(&$person));
-        $form->add($person->fields['office_phone']->getFormElement(&$person));
-        $form->add($person->fields['office_fax']->getFormElement(&$person));
-        $form->add($person->fields['office_street']->getFormElement(&$person));
-        $form->add($person->fields['office_zipcode']->getFormElement(&$person));
-        $form->add($person->fields['office_homepage']->getFormElement(&$person));
+        #$form->add($person->fields['mobile_phone']->getFormElement(&$person));
+        #$form->add($person->fields['office_phone']->getFormElement(&$person));
+        #$form->add($person->fields['office_fax']->getFormElement(&$person));
+        #$form->add($person->fields['office_street']->getFormElement(&$person));
+        #$form->add($person->fields['office_zipcode']->getFormElement(&$person));
+        #$form->add($person->fields['office_homepage']->getFormElement(&$person));
 
-        $form->add($person->fields['personal_email']->getFormElement(&$person));
-        $form->add($person->fields['personal_phone']->getFormElement(&$person));
-        $form->add($person->fields['personal_fax']->getFormElement(&$person));
-        $form->add($person->fields['personal_street']->getFormElement(&$person));
-        $form->add($person->fields['personal_zipcode']->getFormElement(&$person));
-        $form->add($person->fields['personal_homepage']->getFormElement(&$person));
+        #$form->add($person->fields['personal_email']->getFormElement(&$person));
+        #$form->add($person->fields['personal_phone']->getFormElement(&$person));
+        #$form->add($person->fields['personal_fax']->getFormElement(&$person));
+        #$form->add($person->fields['personal_street']->getFormElement(&$person));
+        #$form->add($person->fields['personal_zipcode']->getFormElement(&$person));
+        #$form->add($person->fields['personal_homepage']->getFormElement(&$person));
 
-        $form->add($person->fields['birthdate']->getFormElement(&$person));
+        #$form->add($person->fields['birthdate']->getFormElement(&$person));
 
-        $form->add($person->fields['description']->getFormElement(&$person));
 
         ### profile and login ###
-        if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
-            /**
-            * if checkbox not rendered, submit might reset $person->can_login.
-            * ...be sure the user_rights match
-            */
-            $form->add(new Form_checkbox("person_can_login",__('Person with account (can login)','form label'),$person->can_login));
 
-        }
+        #if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
+        #    /**
+        #    * if checkbox not rendered, submit might reset $person->can_login.
+        #    * ...be sure the user_rights match
+        #    */
+        #    $form->add(new Form_checkbox("person_can_login",__('Person with account (can login)','form label'),$person->can_login));
+#
+        #}
 
 
         $fnick=$person->fields['nickname']->getFormElement(&$person);
         $fnick->required= true;
         $form->add($fnick);
 
-		### show password-fields if can_login ###
-		/**
-		* since the password as stored as md5-hash, we can initiate current password,
-		* but have have to make sure the it is not changed on submit
-		*/
-		$fpw1=new Form_password('person_password1',__('Password','form label'),"__dont_change__", $person->fields['password']->tooltip);
-		$fpw1->required= true;
-    	$form->add($fpw1);
+        ### show password-fields if can_login ###
+        /**
+        * since the password as stored as md5-hash, we can initiate current password,
+        * but have have to make sure the it is not changed on submit
+        */
+        $fpw1=new Form_password('person_password1',__('Password','form label'),"", $person->fields['password']->tooltip);
+        $fpw1->required= true;
+        $form->add($fpw1);
 
-    	$fpw2=new Form_password('person_password2',__('confirm Password','form label'),"__dont_change__",  $person->fields['password']->tooltip);
-    	$fpw2->required= true;
-    	$form->add($fpw2);
+        $fpw2=new Form_password('person_password2',__('confirm Password','form label'),"",  $person->fields['password']->tooltip);
+        $fpw2->required= true;
+        $form->add($fpw2);
 
-		### dropdown menu for person category ###
-		if($p= get('perscat')){
-			$perscat = $p;
-		}
-		else {
-			$perscat = $person->category;
-		}
-		$form->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
+        ### dropdown menu for person category ###
+        if($p= get('perscat')){
+            $perscat = $p;
+        }
+        else {
+            $perscat = $person->category;
+        }
+        $form->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
 
         ### notification ###
         {
@@ -2206,10 +2204,14 @@ function personRegister($person=NULL)
             $form->add(new Form_Dropdown('person_time_zone', __("Time zone","form label"), $g_time_zones, $person->time_zone));
 
         }
+        $form->add($person->fields['description']->getFormElement(&$person));
+
+        $form->addCaptcha();
 
         echo ($form);
 
         $PH->go_submit= 'personRegisterSubmit';
+
 
         ### pass company-id? ###
         if($c= get('company')) {
@@ -2217,8 +2219,308 @@ function personRegister($person=NULL)
         }
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
+
+
+
+function personRegisterSubmit()
+{
+    global $PH;
+    global $auth;
+
+    ### cancel ? ###
+    if(get('form_do_cancel')) {
+        if(!$PH->showFromPage()) {
+            $PH->show('home',array());
+        }
+        exit;
+    }
+
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
+
+
+    $person= new Person(array('id'=>0));
+    $person->user_rights= RIGHT_PERSON_EDIT_SELF;
+
+    ### person category ###
+    $pcategory = get('pcategory');
+    if($pcategory != NULL)
+    {
+        if($pcategory == -1)
+        {
+            $person->category = PCATEGORY_STAFF;
+        }
+        else if ($pcategory == -2)
+        {
+            $person->category = PCATEGORY_CUSTOMER;
+        }
+        else
+        {
+            $person->category = $pcategory;
+        }
+    }
+    
+
+    $flag_ok=true;      # update valid?
+
+    # retrieve all possible values from post-data
+    # NOTE:
+    # - this could be an security-issue.
+    # - TODO: as some kind of form-edit-behaviour to field-definition
+    foreach($person->fields as $f) {
+        $name=$f->name;
+        $f->parseForm(&$person);
+    }
+
+    $person->can_login= 1;
+
+    ### notifications ###
+    {
+        $period= get('person_notification_period');
+
+        ### turn off ###
+        if($period === 0 || $period === "0") {
+            $person->settings &= USER_SETTING_NOTIFICATIONS ^ RIGHT_ALL;
+            $person->notification_period= 0;
+        }
+        else {
+            $person->settings |= USER_SETTING_NOTIFICATIONS;
+
+            $person->notification_period= $period;
+
+            if($person->can_login && !$person->personal_email && !$person->office_email) {
+                $flag_ok = false;
+                $person->fields['office_email']->required=true;
+                $person->fields['personal_email']->required=true;
+                new FeedbackWarning(__("Sending notifactions requires an email-address."));
+            }
+
+        }
+
+        if(get('person_html_mail')) {
+            $person->settings |= USER_SETTING_HTML_MAIL;
+
+        }
+        else {
+            $person->settings &= USER_SETTING_HTML_MAIL ^ RIGHT_ALL;
+        }
+    }
+
+
+    ### time zone ###
+    {
+        $zone= get('person_time_zone');
+        if($zone != NULL && $person->time_zone != (1.0 * $zone)) {
+            $person->time_zone = 1.0 * $zone;
+
+            if($zone == TIME_OFFSET_AUTO) {
+                new FeedbackMessage(__("Using auto detection of time zone requires this user to relogin."));
+            }
+            else{
+                $person->time_offset= $zone * 60.0 * 60.0;
+                if($person->id == $auth->cur_user->id) {
+                    $auth->cur_user->time_offset= $zone * 60.0 * 60.0;
+                }
+            }
+        }
+    }
+
+    ### theme and lanuage ###
+    {
+        $theme= get('person_theme');
+        if($theme != NULL) {
+            $person->theme= $theme;
+
+            ### update immediately / without page-reload ####
+            if($person->id == $auth->cur_user->id) {
+                $auth->cur_user->theme = $theme;
+            }
+        }
+
+        $language= get('person_language');
+        global $g_languages;
+        if(isset($g_languages[$language])) {
+            $person->language= $language;
+
+            ### update immediately / without page-reload ####
+            if($person->id == $auth->cur_user->id) {
+                $auth->cur_user->language =$language;
+                setLang($language);
+            }
+        }
+    }
+
+    if(!$person->name) {
+        new FeedbackWarning(__("Login-accounts require a full name."));
+        $person->fields['name']->required=true;
+        $person->fields['name']->invalid=true;
+        $flag_ok=false;
+        
+    }
+
+
+
+    if(!$person->office_email) {
+        new FeedbackWarning(__("Please enter an e-mail address."));
+        $person->fields['office_email']->required=true;
+        $person->fields['office_email']->invalid=true;
+        $flag_ok=false;        
+    }
+
+
+    $t_nickname= get('person_nickname');
+    if(!$person->nickname) {
+        new FeedbackWarning(__("Login-accounts require a unique nickname"));
+        $person->fields['nickname']->required=true;
+        $person->fields['nickname']->invalid=true;
+
+        $flag_ok=false;
+    }
+
+
+    ### check if changed nickname is unique
+    if($person->can_login || $person->nickname != "") {
+
+        /**
+        * @@@ actually this should be mb_strtolower, but this is not installed by default
+        */
+        if($person->nickname != strtolower($person->nickname)) {
+            new FeedbackMessage(__("Nickname has been converted to lowercase"));
+            $person->nickname = strtolower($person->nickname);
+        }
+
+        if($p2= Person::getByNickname($t_nickname)) { # another person with this nick?
+            if($p2->id != $person->id) {
+                new FeedbackWarning(__("Nickname has to be unique"));
+                $person->fields['nickname']->required=true;
+                $flag_ok = false;
+            }
+        }
+    }
+
+    ### password entered? ###
+    $t_password1= get('person_password1');
+    $t_password2= get('person_password2');
+    $flag_password_ok=true;
+
+    
+    if(($t_password1 || $t_password2) && $t_password1!="__dont_change__") {
+
+        ### check if password match ###
+        if($t_password1 !== $t_password2) {
+            new FeedbackWarning(__("Passwords do not match"));
+            $person->fields['password']->required=true;
+            $flag_ok = false;
+            $flag_password_ok = false;
+            $person->cookie_string= $auth->cur_user->calcCookieString();
+        }
+    }
+    
+
+    ### check if password is good enough ###
+    $password_length= strlen($t_password1);
+    $password_count_numbers= strlen(preg_replace('/[^\d]/','',$t_password1));
+    $password_count_special= strlen(preg_replace('/[^\wd]/','',$t_password1));
+
+    $password_value= -7 + $password_length + $password_count_numbers*2 + $password_count_special*4;
+    if($password_value < confGet('CHECK_PASSWORD_LEVEL')){
+        new FeedbackWarning(__("Password is too weak (please add numbers, special chars or length)"));
+        $flag_ok= false;
+        $flag_password_ok = false;
+    }
+
+    if($flag_password_ok) {
+        $person->password= md5($t_password1);
+    }
+
+
+    if(! validateFormCaptcha()) {
+        new FeedbackWarning(__("Please copy the text from the image."));
+        $flag_ok=false;
+    }
+
+
+
+    ### repeat form if invalid data ###
+    if(!$flag_ok) {
+        $PH->show('personRegister',NULL,$person);
+        exit;
+    }
+    
+    /**
+    * store indentifier-string for login from notification & reminder - mails
+    */
+    $person->identifier= $person->calcIdentifierString();
+
+    ### insert new object ###
+
+    if(($person->settings & USER_SETTING_NOTIFICATIONS) && $person->can_login) {
+        $person->settings |= USER_SETTING_SEND_ACTIVATION;
+        new FeedbackHint(sprintf(__("A notification / activation  will be mailed to <b>%s</b> when you log out."), $person->name). " " . sprintf(__("Read more about %s."), $PH->getWikiLink('notifications')));
+    }
+
+    $person->notification_last = getGMTString(time() - $person->notification_period * 60*60*24 - 1);
+
+    $person->cookie_string= $person->calcCookieString();
+
+    if($person->insert()) {
+        new FeedbackHint(__("Thank you for registration! After your request has been approved by a moderator, you will can an email."));
+        ### link to a company ###
+        if($c_id= get('company')) {
+            require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
+
+            if($c= Company::getVisibleById($c_id)) {
+                require_once(confGet('DIR_STREBER') . 'db/class_employment.inc.php');
+                $e= new Employment(array(
+                    'id'=>0,
+                    'person'=>$person->id,
+                    'company'=>$c->id
+                ));
+                $e->insert();
+            }
+        }
+
+        ## assigne to project ##
+        require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
+        $prj_num = confGet('REGISTER_NEW_USERS_TO_PROJECT');
+
+        global $g_user_profile_names;
+        if(isset($prj_num)){
+            if($prj_num != -1){
+                if($p= Project::getVisibleById($prj_num)){
+                    $prj_person = new ProjectPerson(array(
+                            'person' => $person->id,
+                            'project' => $p->id,
+                            'name' => $g_user_profile_names[$person->profile],
+                            ));
+                    $prj_person->insert();
+                }
+            }
+        }
+        new FeedbackMessage(sprintf(__('Person %s created'), $person->getLink()));
+
+        ### automatically login ###
+        $foo= array(
+            'login_name' => $person->nickname,
+            'login_password_md5' => $person->password,
+        );
+        addRequestVars($foo);
+        $PH->show('loginFormSubmit',array());
+        exit;
+    }
+    else {
+        new FeedbackError(__("Could not insert object"));
+    }
+
+    ### display fromPage ####
+    if(!$PH->showFromPage()) {
+        $PH->show('home',array());
+    }
+}
+
 
 #=====================================================================================================
 # Link companies to person
@@ -2236,16 +2538,16 @@ function personLinkCompanies() {
     ### set up page and write header ####
     {
         $page = new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'company_name'));
-    	$page->cur_tab = 'people';
+        $page->cur_tab = 'people';
         $page->type = __("Edit Person");
         $page->title = sprintf(__("Edit %s"),$person->name);
         $page->title_minor = __("Add related companies");
 
 
-    	$page->crumbs = build_person_crumbs($person);
-    	$page->options[] = new NaviOption(array(
-    	    'target_id'     => 'personLinkCompanies',
-    	));
+        $page->crumbs = build_person_crumbs($person);
+        $page->options[] = new NaviOption(array(
+            'target_id'     => 'personLinkCompanies',
+        ));
 
         echo(new PageHeader);
     }
@@ -2269,7 +2571,7 @@ function personLinkCompanies() {
 
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 
 }
 
@@ -2330,9 +2632,9 @@ function personLinkCompaniesSubmit()
 #=====================================================================================================
 function personCompaniesDelete()
 {
-	global $PH;
+    global $PH;
 
-	$id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','persons_*');
     $person = Person::getEditableById($id);
     if(!$person) {
         $PH->abortWarning("Could not get object...");
@@ -2343,52 +2645,52 @@ function personCompaniesDelete()
         $PH->abortWarning(__("No companies selected..."));
     }
 
-	$employments = $person->getEmployments();
+    $employments = $person->getEmployments();
 
-	$counter = 0;
-	$errors = 0;
-	foreach($company_ids as $cid) {
+    $counter = 0;
+    $errors = 0;
+    foreach($company_ids as $cid) {
         if(!$company = Company::getEditableById($cid)) {
             $PH->abortWarning("Could not access company by id");
         }
 
-		$assigned_to = false;
+        $assigned_to = false;
         foreach($employments as $e) {
             if($e->company == $company->id) {
                 $assigned_to = true;
-				$e_id = $e->id;
+                $e_id = $e->id;
 
-				if($assigned_to){
-					$e_remove = Employment::getEditableById($e_id);
-					if(!$e_remove) {
-						 $PH->abortWarning("Could not access employment by id");
-					}
-					else {
-						if($e_remove->delete()) {
-							$counter++;
-						}
-						else {
-							$errors++;
-						}
-					}
-				}
-				else {
-					$PH->abortWarning("Company isn't related to this person");
-				}
+                if($assigned_to){
+                    $e_remove = Employment::getEditableById($e_id);
+                    if(!$e_remove) {
+                         $PH->abortWarning("Could not access employment by id");
+                    }
+                    else {
+                        if($e_remove->delete()) {
+                            $counter++;
+                        }
+                        else {
+                            $errors++;
+                        }
+                    }
+                }
+                else {
+                    $PH->abortWarning("Company isn't related to this person");
+                }
             }
         }
-	}
+    }
 
-	if($errors) {
+    if($errors) {
         new FeedbackWarning(sprintf(__("Failed to remove %s companies"),$errors));
     }
     else {
         new FeedbackMessage(sprintf(__("Removed %s companies"), $counter));
     }
 
-	if(!$PH->showFromPage()) {
-		$PH->show('personView',array('person'=>$person->id));
-	}
+    if(!$PH->showFromPage()) {
+        $PH->show('personView',array('person'=>$person->id));
+    }
 }
 
 
@@ -2403,11 +2705,11 @@ function personCompaniesDelete()
 */
 function personAllItemsViewed()
 {
-	global $PH;
-	global $auth;
+    global $PH;
+    global $auth;
 
-	$id = intval(getOnePassedId('person','persons_*'));
-	if($id) {
+    $id = intval(getOnePassedId('person','persons_*'));
+    if($id) {
         $person = Person::getEditableById($id);
         if(!$person) {
             $PH->abortWarning("Could not get object...");
@@ -2435,9 +2737,9 @@ function personAllItemsViewed()
 
     new FeedbackMessage(sprintf(__("Marked all previous items as viewed.")));
 
-	if(!$PH->showFromPage()) {
-		$PH->show('personView',array('person'=>$person->id));
-	}
+    if(!$PH->showFromPage()) {
+        $PH->show('personView',array('person'=>$person->id));
+    }
 }
 
 

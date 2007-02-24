@@ -1756,7 +1756,7 @@ class FormatBlockTable extends FormatBlock
 global $g_wiki_project;
 $g_wiki_project= NULL;                                      # dirty hack to pass project for linking of wiki-pages
 
-function &wiki2html(&$text, &$project=NULL, $item_id=NULL, $field_name=NULL)
+function &wiki2html(&$text, $project=NULL, $item_id=NULL, $field_name=NULL)
 {
 
     $text_org = $text;

@@ -180,8 +180,14 @@ function loginFormSubmit()
 
     ### get formdata ####
     $name= get('login_name');
-    $password_md5= md5(get('login_password'));
-
+    
+    if(!is_null(get('login_password'))) {
+        $password_md5= md5(get('login_password'));
+    }
+    
+    else if(!is_null(get('login_password_md5'))) {                  # required for auto login
+        $password_md5= get('login_password_md5');
+    }
 
     /**
     * try to login with nickname / password
@@ -191,8 +197,6 @@ function loginFormSubmit()
 
     ) {
         $PH->messages= array();
-
-
 
         $auth->storeUserCookie();
 

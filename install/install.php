@@ -658,8 +658,9 @@ function upgrade($args=NULL) {
     foreach($update_queries as $q) {
 
         ### strict mode for development ###
-        if($result= $sql_obj->execute('SET session sql_mode = "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"')){
-        }
+        #if($result= $sql_obj->execute('SET session sql_mode = "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"')){
+        #  }
+        #}
 
         if(!$result=$sql_obj->execute($q)){
             if(function_exists('mysql_error') && mysql_error()) {

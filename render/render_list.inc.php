@@ -1087,6 +1087,7 @@ class ListBlock extends PageBlock
             $style.=" pub_".$g_pub_level_names[$level];
 		}
 
+
 		if(isset($this->id) && isset($obj->id)) {
             if( $obj->isChangedForUser() ) {
 				echo "<tr class='$style changed'>";

@@ -231,7 +231,7 @@ function build_person_fields()
         new FieldDatetime(array(    'name'=>'last_logout',
     		'view_in_forms' =>false,
             'log_changes'=>false,
-            'default'=>FINIT_NEVER,
+            'default'=>FINIT_NOW,
         )),
 
         /**

@@ -998,7 +998,13 @@ class DbProjectItem extends DbItem
     {
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
         if($i= DbProjectItem::getById($id)) {
-            if($p= Project::getById($i->project)) {
+            if($i->type == ITEM_PROJECT) {
+                global $auth;
+                if($auth->cur_user->user_rights & RIGHT_PROJECT_EDIT) {
+                    return $i;
+                }
+            }
+            else if($p= Project::getById($i->project)) {
                 if($p->validateEditItem($i)) {
                     return $i;
                 }
