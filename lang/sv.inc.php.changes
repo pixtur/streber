@@ -4,11 +4,20 @@ undefined keys:
 ### ../db/class_task.inc.php   ###
 'Order Id'                    =>'',  # line 174
 
+### ../lists/list_efforts.inc.php   ###
+'Status|column header'        =>'',  # line 313
+
+### ../lists/list_tasks.inc.php   ###
+'Estimated/Booked (Diff.)'    =>'',  # line 1203
+'Relation between estimated time and booked efforts'=>'',  # line 1239
+'Completion:'                 =>'',  # line 1237
+
 ### ../pages/_handles.inc.php   ###
 'Edit multiple monitored items'=>'',  # line 90
 'View Project as RSS'         =>'',  # line 175
-'Load Field'                  =>'',  # line 1302
-'Save Field'                  =>'',  # line 1307
+'Edit multiple efforts'       =>'',  # line 700
+'Load Field'                  =>'',  # line 1324
+'Save Field'                  =>'',  # line 1329
 
 ### ../pages/comment.inc.php   ###
 'Mark this comment as bookmark'=>'',  # line 97
@@ -22,7 +31,13 @@ undefined keys:
 'Mark this company as bookmark'=>'',  # line 510
 
 ### ../pages/effort.inc.php   ###
-'Mark this effort as bookmark'=>'',  # line 97
+'Mark this effort as bookmark'=>'',  # line 98
+'Select some efforts(s) to edit'=>'',  # line 1057
+'For editing all efforts must be of same project.'=>'',  # line 891
+'Edit multiple efforts|Page title'=>'',  # line 914
+'Edit %s efforts|Page title'  =>'',  # line 915
+'Edited %s effort(s).'        =>'',  # line 1099
+'Error while editing %s effort(s).'=>'',  # line 1103
 
 ### ../pages/file.inc.php   ###
 'Mark this file as bookmark'  =>'',  # line 132
@@ -32,23 +47,35 @@ undefined keys:
 'yesterday'                   =>'',  # line 379
 
 ### ../pages/item.inc.php   ###
-'Edit bookmark: "%s"|page title'=>'',  # line 365
-'Bookmark: "%s"'              =>'',  # line 366
-'Added %s bookmark(s).'       =>'',  # line 813
-'Edit bookmarks'              =>'',  # line 573
-'Edit multiple bookmarks|page title'=>'',  # line 575
-'Edit %s bookmark(s)'         =>'',  # line 576
-'no'                          =>'',  # line 674
-'yes'                         =>'',  # line 675
-'Edited %s bookmark(s).'      =>'',  # line 817
-'%s bookmark(s) could not be added.'=>'',  # line 821
+'Edit bookmark: "%s"|page title'=>'',  # line 367
+'Bookmark: "%s"'              =>'',  # line 368
+'Added %s bookmark(s).'       =>'',  # line 815
+'Edit bookmarks'              =>'',  # line 575
+'Edit multiple bookmarks|page title'=>'',  # line 577
+'Edit %s bookmark(s)'         =>'',  # line 578
+'no'                          =>'',  # line 676
+'yes'                         =>'',  # line 677
+'Edited %s bookmark(s).'      =>'',  # line 819
+'%s bookmark(s) could not be added.'=>'',  # line 823
 
 ### ../pages/person.inc.php   ###
-'Mark this person as bookmark'=>'',  # line 544
-'Malformed activation url'    =>'',  # line 1224
+'Mark this person as bookmark'=>'',  # line 542
+
+### ../pages/project_more.inc.php   ###
+'discounted'                  =>'',  # line 1438
+'not chargeable'              =>'',  # line 1458
+'balanced'                    =>'',  # line 1478
+
+### ../pages/person.inc.php   ###
+'Malformed activation url'    =>'',  # line 1406
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2078
+'Login-accounts require a full name.'=>'',  # line 2357
+'Please enter an e-mail address.'=>'',  # line 2367
+'Please copy the text from the image.'=>'',  # line 2441
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 2470
 
 ### ../pages/project_view.inc.php   ###
-'Mark this project as bookmark'=>'',  # line 97
+'Mark this project as bookmark'=>'',  # line 105
 
 ### ../pages/task_view.inc.php   ###
 'Mark this task as bookmark'  =>'',  # line 200
@@ -67,16 +94,24 @@ undefined keys:
 '%A, %B %e|strftime format string'=>'',  # line 925
 
 ### ../render/render_page.inc.php   ###
-'%s queries / %s fields '     =>'',  # line 1331
+'%s queries / %s fields '     =>'',  # line 1337
 
 ### ../render/render_wiki.inc.php   ###
 'Image details'               =>'',  # line 997
+'Warning: Could not find wiki chapter'=>'',  # line 1901
 
 ### ../std/class_auth.inc.php   ###
 'Sorry. 	Authentication failed'=>'',  # line 373
 
 ### ../std/common.inc.php   ###
 'en_US.utf8,en_US,enu|list of locales'=>'',  # line 499
+
+### ../std/constant_names.inc.php   ###
+'new|effort status'           =>'',  # line 240
+'open|effort status'          =>'',  # line 241
+'discounted|effort status'    =>'',  # line 242
+'not chargeable|effort status'=>'',  # line 243
+'balanced|effort status'      =>'',  # line 244
 
 ### ../std/mail.inc.php   ###
 'Changed monitored items:|notification'=>'',  # line 229

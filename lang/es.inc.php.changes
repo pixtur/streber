@@ -1,13 +1,55 @@
 undefined keys:
 ---------------
 
+### ../lists/list_efforts.inc.php   ###
+'Status|column header'        =>'',  # line 313
+
+### ../lists/list_tasks.inc.php   ###
+'Estimated/Booked (Diff.)'    =>'',  # line 1203
+'Relation between estimated time and booked efforts'=>'',  # line 1239
+'Completion:'                 =>'',  # line 1237
+
+### ../pages/_handles.inc.php   ###
+'Edit multiple efforts'       =>'',  # line 700
+
+### ../pages/effort.inc.php   ###
+'Select some efforts(s) to edit'=>'',  # line 1057
+'For editing all efforts must be of same project.'=>'',  # line 891
+'Edit multiple efforts|Page title'=>'',  # line 914
+'Edit %s efforts|Page title'  =>'',  # line 915
+'Edited %s effort(s).'        =>'',  # line 1099
+'Error while editing %s effort(s).'=>'',  # line 1103
+
 ### ../pages/home.inc.php   ###
 'today'                       =>'',  # line 361
 'yesterday'                   =>'',  # line 379
 
 ### ../pages/item.inc.php   ###
-'Edit bookmark: "%s"|page title'=>'',  # line 365
-'Bookmark: "%s"'              =>'',  # line 366
+'Edit bookmark: "%s"|page title'=>'',  # line 367
+'Bookmark: "%s"'              =>'',  # line 368
+
+### ../pages/project_more.inc.php   ###
+'discounted'                  =>'',  # line 1438
+'not chargeable'              =>'',  # line 1458
+'balanced'                    =>'',  # line 1478
+
+### ../pages/person.inc.php   ###
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2078
+'Login-accounts require a full name.'=>'',  # line 2357
+'Please enter an e-mail address.'=>'',  # line 2367
+'Please copy the text from the image.'=>'',  # line 2441
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 2470
 
 ### ../render/render_misc.inc.php   ###
 '%A, %B %e|strftime format string'=>'',  # line 925
+
+### ../render/render_wiki.inc.php   ###
+'Warning: Could not find wiki chapter'=>'',  # line 1901
+
+### ../std/constant_names.inc.php   ###
+'Edit own profile|a user right'=>'',  # line 95
+'new|effort status'           =>'',  # line 240
+'open|effort status'          =>'',  # line 241
+'discounted|effort status'    =>'',  # line 242
+'not chargeable|effort status'=>'',  # line 243
+'balanced|effort status'      =>'',  # line 244

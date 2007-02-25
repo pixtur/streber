@@ -609,8 +609,8 @@ $g_lang_table= array(
 'Add new Task'                =>'Dodanie nowego zadania',  # line 160
 'Report new Bug'              =>'Zgłoszenie nowego błędu',  # line 167
 'Add comment'                 =>'Dodanie komentarza',  # line 175
-'Status->Completed'           =>'Status->Zakończony',  # line 188
-'Status->Approved'            =>'Status->Zaakceptowany',  # line 195
+'Status->Completed'           =>'Status->Zakończone?',  # line 188
+'Status->Approved'            =>'Status->Zaakceptowane',  # line 195
 'Move tasks'                  =>'Przeniesienie zadań',  # line 202
 'Latest Comment'              =>'Ostatni komentarz',  # line 426
 'by'                          =>'przez',  # line 428
@@ -916,8 +916,8 @@ $g_lang_table= array(
 'Modified|column header'      =>'Zmodyfikowane',  # line 277
 'Est.|column header estimated time'=>'Przew.',  # line 285
 'Edit|context menu function'  =>'Edycja',  # line 304
-'status->Completed|context menu function'=>'status->Zakończony',  # line 311
-'status->Approved|context menu function'=>'status->Zaakceptowany',  # line 319
+'status->Completed|context menu function'=>'status->Zakończone?',  # line 311
+'status->Approved|context menu function'=>'status->Zaakceptowane',  # line 319
 'Delete|context menu function'=>'Usunięcie',  # line 328
 'Log hours for select tasks|context menu function'=>'Rejestracja czasu dla zaznaczonego zadania',  # line 336
 '%s tasks with estimated %s hours of work'=>'%s zadań o przewidywanym czasie pracy %s godzin',  # line 364
@@ -1947,7 +1947,7 @@ $g_lang_table= array(
 'State'                       =>'Stan',  # line 299
 
 ### ../lists/list_tasks.inc.php   ###
-'Status->Closed'              =>'Status->zamknięte',  # line 208
+'Status->Closed'              =>'Status->Zamknięte',  # line 208
 
 ### ../pages/_handles.inc.php   ###
 'Mark tasks as Closed'        =>'Zmień status zadań na Zamknięte',  # line 447
@@ -2169,6 +2169,24 @@ $g_lang_table= array(
 'discounted|effort status'    =>'upust',  # line 242
 'not chargeable|effort status'=>'nie obciążający',  # line 243
 'balanced|effort status'      =>'obciążający',  # line 244
+
+### ../pages/_handles.inc.php   ###
+'Edit multiple efforts'       =>'Edycja wielu wysiłków',  # line 700
+
+### ../pages/effort.inc.php   ###
+'Select some efforts(s) to edit'=>'Zaznacz wysiłki do edycji',  # line 1057
+'For editing all efforts must be of same project.'=>'Aby wyedytować wiele wysiłków, wszystkie muszą być z tego samego projektu',  # line 891
+'Edit multiple efforts|Page title'=>'Edycja wielu wysiłków',  # line 914
+'Edit %s efforts|Page title'  =>'Edycja %s wysiłku / wysiłków',  # line 915
+'Edited %s effort(s).'        =>'Liczba wyedytowanych wysiłków: %s',  # line 1099
+'Error while editing %s effort(s).'=>'Wystąpił błąd podczas edycji %s wysiłku / wysiłków',  # line 1103
+
+### ../pages/person.inc.php   ###
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Ponieważ unikamy działań spam botów, proszę podaj informacje o sobie oraz dlaczego chcesz się zarejestrować.',  # line 2078
+'Login-accounts require a full name.'=>'Konta z loginem wymagają pełnej nazwy.',  # line 2357
+'Please enter an e-mail address.'=>'Proszę podaj adres e-mail.',  # line 2367
+'Please copy the text from the image.'=>'Proszę skopiuj tekst z obrazka.',  # line 2441
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Dziękujemy za rejstrację! Po zaakceptowaniu Twojej prośby przez moderatora otrzymasz mail powiadamiający.',  # line 2470
 
 
 );
