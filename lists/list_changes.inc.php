@@ -690,7 +690,7 @@ class ListBlockCol_ChangesDetails extends ListBlockCol
                     $str_task= '<span class=isDone>'. $str_task.'</span>';
                 }
 
-                if($change_line->person_by == $auth->cur_user->id) {
+                if($change_line->person_by != $auth->cur_user->id) {
                     $str_task= '<b' . $str_task . '</b>';
                 }
             }

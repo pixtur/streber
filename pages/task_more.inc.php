@@ -2239,7 +2239,7 @@ function TaskEditMultiple()
                 }
 
                 foreach($edit_fields as $field_name) {
-                    if($task->$field_name != $tasks[0]->$field_name) {
+                    if($task->$field_name !== $tasks[0]->$field_name) {
                         $different_fields[$field_name]= true;
                     }
                 }
@@ -2309,7 +2309,7 @@ function TaskEditMultiple()
                 $a[$s]=$n;
             }
             if(isset($different_fields['category'])) {
-                $st[('-- ' . __('keep different'). ' --')]= __('-- keep different --');
+                $a['__dont_change__']= ('-- ' . __('keep different'). ' --');
                 $form->add(new Form_Dropdown('task_category',__("Category"),array_flip($a),  '__dont_change__'));
             }
             else {
@@ -2321,13 +2321,14 @@ function TaskEditMultiple()
         ### status ###
         {
             $st=array();
-            foreach($g_status_names as $s=>$n) {
+            foreach($g_status_names as $s => $n) {
                 if($s >= STATUS_NEW) {
                     $st[$s]=$n;
                 }
             }
             if(isset($different_fields['status'])) {
-                $st[('-- ' . __('keep different'). ' --')]= __('-- keep different --');
+                $st['__dont_change__']= ('-- ' . __('keep different'). ' --');
+                #$st[('-- ' . __('keep different'). ' --')]=  '__dont_change__';
                 $form->add(new Form_Dropdown('task_status',__("Status"),array_flip($st),  '__dont_change__'));
             }
             else {
@@ -2387,6 +2388,8 @@ function TaskEditMultiple()
             if($milestones= Task::getAll(array(
                 'is_milestone'  =>1,
                 'project'       => $tasks[0]->project,
+                'status_min'    => 0,
+                'status_max'    => 100,
             ))) {
                 $tmp_milestonelist= array('0' => ('-- ' . __('none') . ' --'));
 

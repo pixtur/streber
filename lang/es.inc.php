@@ -2035,7 +2035,7 @@ $g_lang_table= array(
 'A notification mail has been sent.'=>'Ha sido enviado un correo de notificación',  # line 393
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'No se ha encontrado la página solicitada `%s` ',  # line 47
+'Could not find requested page `%s`'=>'No se ha encontrado la página solicitada `%s` ',  # line 47
 
 ### ../pages/person.inc.php   ###
 'Add existing companies to this person'=>'Agregar Empresas a esta persona',  # line 518

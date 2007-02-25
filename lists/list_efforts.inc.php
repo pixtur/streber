@@ -135,6 +135,9 @@ class ListBlock_efforts extends ListBlock
         if($sort= get($s_cookie)) {
             $this->query_options['order_by']= $sort;
         }
+        else {
+            $this->query_options['order_by']= 'time_end DESC';
+        }
 		
         ### add filter options ###
         foreach($this->filters as $f) {

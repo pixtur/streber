@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-	'STREBER_VERSION'       => '0.0795',
-	'STREBER_VERSION_DATE'  => '2007-02-10',
+	'STREBER_VERSION'       => '0.0796',
+	'STREBER_VERSION_DATE'  => '2007-02-23',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -74,8 +74,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-	'DB_CREATE_VERSION'     => '0.0795',     # sql-dump loaded from /_install/-directory at installation
-	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0795',
+	'DB_CREATE_VERSION'     => '0.0796',     # sql-dump loaded from /_install/-directory at installation
+	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0796',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -396,9 +396,9 @@ if(!confGet('EMAIL_ADMINISTRATOR') && isset($_SERVER["HTTP_HOST"])) {
 */
 $g_themes=array(
 	'clean'         => 'Clean',
-	'webbplatsen'   => 'webbplatsen',
+	#'webbplatsen'   => 'webbplatsen',
     'custom'        => 'Custom',
-	'webbplatsen_dark'=> 'webbplatsen_dark',
+	#'webbplatsen_dark'=> 'webbplatsen_dark',
 #    'default'=>'Default',
 #    'forclients' =>'Client Theme',
 #    'classic' =>'Classic Theme',

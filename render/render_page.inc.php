@@ -183,8 +183,8 @@ class Page
     public  $autofocus_field=false;
     public  $functions      =array();
     public  $content_columns=false;
-	public  $format         = FORMAT_HTML;
-	public  $extra_header_html = '';
+    public  $format         = FORMAT_HTML;
+    public  $extra_header_html = '';
 
     #--- constructor ---------------------------
     public function __construct($args=NULL)
@@ -195,7 +195,7 @@ class Page
         global $auth;
         global $PH;
         if(isset($_PAGE) && is_object($_PAGE)) {
-        	trigger_error("'page' global var already defined!", E_USER_NOTICE);
+            trigger_error("'page' global var already defined!", E_USER_NOTICE);
         }
         $_PAGE= $this;
 
@@ -207,12 +207,12 @@ class Page
             ? 'value="'. asHtml($sq). '"'
             : '';
 
-		if(get('format') && get('format') != ''){
-		    $this->format = get('format');
-		}
+        if(get('format') && get('format') != ''){
+            $this->format = get('format');
+        }
 
         $this->tabs=array(
-        	"home"		=>array(
+            "home"      =>array(
                 'target'=>$PH->getUrl('home'),
                 'title'=>isset($auth->cur_user->nickname)
                        ? $auth->cur_user->nickname
@@ -223,7 +223,7 @@ class Page
                 'accesskey'=>'h',
                 'tooltip'=>__('Go to your home. Alt-h / Option-h')
             ),
-        	"projects"	=>array(
+            "projects"  =>array(
                 'target'    => $PH->getUrl('projList',array()),
                 'title'     =>__("<span class=accesskey>P</span>rojects"),
                 'html'=>   buildProjectSelector(),
@@ -231,24 +231,24 @@ class Page
                 'bg'        =>"projects",
                 'accesskey' =>'p'
             ),
-        	"people"    =>array(
+            "people"    =>array(
                 'target'    =>$PH->getUrl('personListAccounts',array()),
                 'title'     =>__("People"),
                 'tooltip'   =>__('Your related People'),
                 'bg'        =>"people"
             ),
-        	"companies"  =>array(
+            "companies"  =>array(
                 'target'    =>$PH->getUrl('companyList',array()),
                 'title'     =>__("Companies"),
                 'tooltip'   =>__('Your related Companies'),
                 'bg'        =>"people"
             ),
-        	#"calendar"=>array(
+            #"calendar"=>array(
             #    'target'    =>"index.php?go=error",
             #    'title'     =>__("Calendar"),
             #    'bg'        =>"time"
             #),
-           	"search"    =>array(
+            "search"    =>array(
                 'target'    =>'javascript:document.my_form.go.value=\'search\';document.my_form.submit();',
                 'title'     =>__("<span class=accesskey>S</span>earch:&nbsp;"),
                 'html'      =>'<input accesskey=s '.$old_search_query.' name=search_query onFocus=\'document.my_form.go.value="search";\'>',
@@ -352,35 +352,38 @@ class Page
         $fn->parent_block= $this;
     }
 
-	function print_presets($args=NULL)
-	{
-		global $PH;
-		
-		$pvalue = '';
-		
-		if(isset($args) && count($args) == 5){
-			$preset_location = $args['target'];
-			$project_id = $args['project_id'];
-			$preset_id = $args['preset_id'];
-			$presets = $args['presets'];
-			$person_id = $args['person_id'];
-			
-			echo "<div class=\"presets\">";
-			#echo __("Filter-Preset:");
-			foreach($presets as $p_id=>$p_settings) {
-				if($p_id == $preset_id) {
-					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id),'current');
-				}
-				else {
-					echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id));
-				}
-			}
-			echo "</div>";
-		}
-		else{
-			trigger_error("cannot get arguments", E_USER_NOTICE);
-		}
-	}
+    function print_presets($args=NULL)
+    {
+        if(get('format') == FORMAT_CSV) {
+            return;
+        }
+        global $PH;
+        
+        $pvalue = '';
+        
+        if(isset($args) && count($args) == 5){
+            $preset_location = $args['target'];
+            $project_id = $args['project_id'];
+            $preset_id = $args['preset_id'];
+            $presets = $args['presets'];
+            $person_id = $args['person_id'];
+            
+            echo "<div class=\"presets\">";
+            #echo __("Filter-Preset:");
+            foreach($presets as $p_id=>$p_settings) {
+                if($p_id == $preset_id) {
+                    echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id),'current');
+                }
+                else {
+                    echo $PH->getLink($preset_location, $p_settings['name'], array('prj'=>$project_id,'preset'=>$p_id, 'person'=>$person_id));
+                }
+            }
+            echo "</div>";
+        }
+        else{
+            trigger_error("cannot get arguments", E_USER_NOTICE);
+        }
+    }
 }
 
 #========================================================================================
@@ -489,25 +492,25 @@ class PageHtmlStart extends PageElement {
 
 
         $buffer.='
-		<script type="text/javascript" src="js/jquery.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-		<script type="text/javascript" src="js/jeditable.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-		<script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-		<script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>
-		<script type="text/javascript">';
-		
+        <script type="text/javascript" src="js/jquery.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/jeditable.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript">';
+        
         if(confGet('TASKDETAILS_IN_SIDEBOARD')) {
             $buffer.="var g_enable_sideboard= true;";                    
         }
         else {
             $buffer.="var g_enable_sideboard= false;";                    
         }
-		
-		$buffer.='
+        
+        $buffer.='
         <!--
 
             //------ on load -------
             //$(document).ready(function(){
-			window.onload = function()
+            window.onload = function()
             {';
 
         if($this->page->autofocus_field) {
@@ -519,27 +522,27 @@ document.my_form." . $this->page->autofocus_field. ".select();";
         $buffer.='initContextMenus();
                 ';
 
-	            if($q=get('q')) {
-	                $q= asCleanString($q);
-	                if($ar = explode(" ",$q)) {
-	                    foreach($ar as $q) {
+                if($q=get('q')) {
+                    $q= asCleanString($q);
+                    if($ar = explode(" ",$q)) {
+                        foreach($ar as $q) {
                             $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
-	                    }
-	                }
-	                else {
-	                    $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
-	                }
-	            }
+                        }
+                    }
+                    else {
+                        $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
+                    }
+                }
 
 
-	            $buffer.= "misc();
-	                       listFunctions();
+                $buffer.= "misc();
+                           listFunctions();
 
-			}
+            }
 
         //-->
-		</script>
-		<script type=\"text/javascript\" src=\"js/contextMenus.js\"></script>
+        </script>
+        <script type=\"text/javascript\" src=\"js/contextMenus.js\"></script>
         <script type=\"text/javascript\" src=\"js/searchhi.js\"></script>
         <script type=\"text/javascript\">
             cMenu.menus=new Object();
@@ -594,26 +597,26 @@ class PageHtmlEnd extends PageElement {
 
     public function __toString()
     {
-		switch($this->page->format){
-			case FORMAT_CSV:
-				$buffer = '';
-				break;
+        switch($this->page->format){
+            case FORMAT_CSV:
+                $buffer = '';
+                break;
 
-			default:
-				$buffer = $this->PageHtmlEndAsHTML();
-				break;
-		}
+            default:
+                $buffer = $this->PageHtmlEndAsHTML();
+                break;
+        }
 
-		return $buffer;
+        return $buffer;
 
     }
 
-	private function PageHtmlEndAsHTML()
-	{
+    private function PageHtmlEndAsHTML()
+    {
         $buffer="";
         $footer= new PageFooter;
         $buffer.= $footer->render();
-    	$buffer.= "</div><div id=\"sideboard\"><div></div></div></body></html>";
+        $buffer.= "</div><div id=\"sideboard\"><div></div></div></body></html>";
         return $buffer;
     }
 }
@@ -661,19 +664,19 @@ class PageHeader extends PageElement
 
     public function __toString()
     {
-		switch($this->page->format){
-			case FORMAT_CSV:
-				$buffer = '';
-				break;
-			default:
-				$buffer = $this->PageHeaderAsHTML();
-				break;
-		}
+        switch($this->page->format){
+            case FORMAT_CSV:
+                $buffer = '';
+                break;
+            default:
+                $buffer = $this->PageHeaderAsHTML();
+                break;
+        }
 
-		return $buffer;
-	}
+        return $buffer;
+    }
 
-	private function PageHeaderAsHTML(){
+    private function PageHeaderAsHTML(){
         global $PH;
         global $auth;
 
@@ -689,13 +692,13 @@ class PageHeader extends PageElement
 
         $buffer= '<form name="my_form" action="'. $submit_url .'" method="post" enctype="multipart/form-data" >';
         $buffer.="\n<div id=\"header\">
-            	<div id=\"logo\">";
-    	$buffer.="<div class=\"text\">"
+                <div id=\"logo\">";
+        $buffer.="<div class=\"text\">"
                 ."<a title=\"" . confGet('APP_NAME') ." - free web based project management\" href=\"$app_url\">"
                 .confGet('APP_TITLE_HEADER')
                 ."</a>"
                 ."</div>".
-            	"</div>";
+                "</div>";
 
         ### account if logged in ###
         if($auth->cur_user) {
@@ -703,14 +706,14 @@ class PageHeader extends PageElement
             ### login / register if anonymous user ###
             if($auth->cur_user->id == confGet('ANONYMOUS_USER')) {
                 $buffer.="<div id=\"user_functions\">"
-            		   ."<span class=\"features\">"
-        			   . "<b>".$PH->getLink('loginForm',__('Login'),array()). "</b>";
+                       ."<span class=\"features\">"
+                       . "<b>".$PH->getLink('loginForm',__('Login'),array()). "</b>";
                 if(confGet('REGISTER_NEW_USERS')) {
-    			   $buffer  .= "<em>|</em>"
-    			            .  $PH->getLink('personRegister',__('Register'),array());
-    			}
+                   $buffer  .= "<em>|</em>"
+                            .  $PH->getLink('personRegister',__('Register'),array());
+                }
                 $buffer.= "</span>"
-            	       .  "</div>";
+                       .  "</div>";
 
             }
 
@@ -719,31 +722,31 @@ class PageHeader extends PageElement
                 $link_home= $PH->getLink('personView',$auth->cur_user->name,array('person'=>$auth->cur_user->id),'name');;
 
                 $buffer.="<div id=\"user_functions\">"
-        			   . "<span class=\"user\">". __("you are"). " </span>"
-        			   . $link_home
-        			   ."<em>|</em>"
-            		   ."<span class=\"features\">"
+                       . "<span class=\"user\">". __("you are"). " </span>"
+                       . $link_home
+                       ."<em>|</em>"
+                       ."<span class=\"features\">"
                       #. $PH->getLink('personEdit',__('Profile'),array('person'=>$auth->cur_user->id))
                       #. "<em> | </em>"
                       . "<a href=\"$logout_url\">" . __("Logout") ."</a>"
                       . "</span>"
-            	      . "</div>";
+                      . "</div>";
             }
         }
         else if(confGet('REGISTER_NEW_USERS')) {
                 $buffer.="<div id=\"user_functions\">"
-            		   ."<span class=\"features\">"
-        			   ."<b>". $PH->getLink('personRegister',__('Register'),array()) . "</b>"
+                       ."<span class=\"features\">"
+                       ."<b>". $PH->getLink('personRegister',__('Register'),array()) . "</b>"
                       . "</span>"
-            	      . "</div>";
+                      . "</div>";
 
         }
 
-    	$tabs= new PageHeaderTabs;
+        $tabs= new PageHeaderTabs;
 
         $buffer.= $tabs->render();
         #echo(new PageHeaderTabs);
-    	$buffer.="</div>";
+        $buffer.="</div>";
 
 
         $crumbs= new PageHeaderNavigation;                   # breadcrumbs and options
@@ -784,11 +787,11 @@ class PageHeaderTabs extends PageElement {
 
     public function __toString()
     {
-    #	global $tabs, $cur_tab, $str, $header_cur_tab_bg;
+    #   global $tabs, $cur_tab, $str, $header_cur_tab_bg;
 
-    	$buffer= '<ul id="tabs">';
+        $buffer= '<ul id="tabs">';
 
-    	$tab_found=false;
+        $tab_found=false;
         if(!isset($this->page->tabs) || !is_array($this->page->tabs)) {
             trigger_error("tabs not defined", E_USER_WARNING);
             return;
@@ -797,37 +800,37 @@ class PageHeaderTabs extends PageElement {
         $page=$this->page;
         foreach($page->tabs  as $tab=>$values){
 
-      		$bg=	isset($values['bg'])
+            $bg=    isset($values['bg'])
                 ? $values['bg']
                 : "misc";
-    		$active="";
+            $active="";
 
             /**
             * ignore tabs with out target (e.g. disable links)
             */
-    		$target= isset($values['target'])
-    		       ? $values['target']
-    		       : '';
-    		if(!$target) {
-    		    continue;
-    		}
+            $target= isset($values['target'])
+                   ? $values['target']
+                   : '';
+            if(!$target) {
+                continue;
+            }
 
-    		#--- current tab ----
-    		if($tab === $this->page->cur_tab) {
-    			$active="current";
-    			$page->section_scheme= $bg;
+            #--- current tab ----
+            if($tab === $this->page->cur_tab) {
+                $active="current";
+                $page->section_scheme= $bg;
                 $tab_found=true;
-    		}
-    		else {
+            }
+            else {
                 $bg.= "_shade"; # shade non-active tabs
-    		}
-    		$bg= "bg_$bg";
+            }
+            $bg= "bg_$bg";
 
             $accesskey= isset($values['accesskey'])
                 ? $accesskey='accesskey="'.$values['accesskey'].'" '
                 : "";
 
-    		$tooltip= isset($values['tooltip'])
+            $tooltip= isset($values['tooltip'])
                 ? 'title="'. asHtml($values['tooltip']).'" '
                 : "";
 
@@ -841,8 +844,8 @@ class PageHeaderTabs extends PageElement {
             $buffer.= $values['title'];
             $buffer.= '</a>';
             $buffer.= $html;
-    	}
-    	$buffer.= '</ul>';
+        }
+        $buffer.= '</ul>';
         if(!$tab_found) {
             trigger_error("Could not find tab '{$this->page->cur_tab}' in list...", E_USER_NOTICE);
         }
@@ -901,10 +904,10 @@ class PageHeaderNavigation extends PageElement
             }
         }
 
-    	if($this->page->crumbs) {
+        if($this->page->crumbs) {
 
             ### breadcrumbs ###
-    		$buffer.= '<span class="breadcrumbs">';
+            $buffer.= '<span class="breadcrumbs">';
 
             ### go up ###
             $count=count($this->page->crumbs)-2;
@@ -933,18 +936,18 @@ class PageHeaderNavigation extends PageElement
             }
 
             if($this->page->options) {
-        	    $buffer.= $sep_crumbs;
+                $buffer.= $sep_crumbs;
             }
-    		$buffer.= "</span>";
-    	}
+            $buffer.= "</span>";
+        }
 
-    	### options ###
-    	if($this->page->options) {
-    		$buffer.= '<span class="options">';
+        ### options ###
+        if($this->page->options) {
+            $buffer.= '<span class="options">';
             $page= $this->page;
             $tmp_counter=0;                 # HACK! just to highlight a dummy breadcrump to test GUI-style
 
-			$sep_options= "";
+            $sep_options= "";
             foreach($page->options as $option) {
 
                 $tmp_counter++;
@@ -963,11 +966,11 @@ class PageHeaderNavigation extends PageElement
                 }
                 $sep_options ="<em>|</em>";
             }
-    		$buffer.= "</span>";
-    	}
+            $buffer.= "</span>";
+        }
 
-    	### wiki link ###
-		$buffer .='<span class="help">'
+        ### wiki link ###
+        $buffer .='<span class="help">'
                 .'<a href="'
                 .confGet('STREBER_WIKI_URL') . $PH->cur_page_id
                 .'" title="' .__('Documentation and Discussion about this page')
@@ -1025,16 +1028,16 @@ class PageHeaderCrumbs extends PageElement
                     $sign="<em>&gt;</em>";
                 }
             }
-    		$buffer.= "</span>";
-    	}
+            $buffer.= "</span>";
+        }
 
-    	### options ###
-    	if(@$this->page->options) {
-    		$buffer.= '<span class="options">';
+        ### options ###
+        if(@$this->page->options) {
+            $buffer.= '<span class="options">';
             $page= $this->page;
             $tmp_counter=0;                 # HACK! just to highlight a dummy breadcrump to test GUI-style
 
-			$sep= "";
+            $sep= "";
             foreach($page->options as $option) {
                 $tmp_counter++;
 
@@ -1061,8 +1064,8 @@ class PageHeaderCrumbs extends PageElement
                 }
                 */
             }
-    		$buffer.= "</span>";
-    	}
+            $buffer.= "</span>";
+        }
         $buffer.="</div>";
     #    $buffer.= "</div>";
     #    $buffer.= "<div id=\"nav_sub\" class=\"$this->page->header_cur_tab_bg\"> ";
@@ -1081,19 +1084,19 @@ class PageTitle extends PageElement {
     public function __toString() {
         $buffer="";
 
-       	$buffer.= '<div id="headline">';
-    	if($this->page->type) {
-    		$buffer.= '<div class="type">'. $this->page->type. '</div>';
-    	}
-    	$buffer.= '<h1 class="title">'. asHtml($this->page->title);
-    	if($this->page->title_minor_html) {
-    		$buffer.= '<span class="minor"> / '. $this->page->title_minor_html. '</span>';
-    	}
-    	else if($this->page->title_minor) {
-    		$buffer.= '<span class="minor"> / '. asHtml($this->page->title_minor). '</span>';
-    	}
-    	$buffer.= "</h1>";
-    	$buffer.= "</div>";
+        $buffer.= '<div id="headline">';
+        if($this->page->type) {
+            $buffer.= '<div class="type">'. $this->page->type. '</div>';
+        }
+        $buffer.= '<h1 class="title">'. asHtml($this->page->title);
+        if($this->page->title_minor_html) {
+            $buffer.= '<span class="minor"> / '. $this->page->title_minor_html. '</span>';
+        }
+        else if($this->page->title_minor) {
+            $buffer.= '<span class="minor"> / '. asHtml($this->page->title_minor). '</span>';
+        }
+        $buffer.= "</h1>";
+        $buffer.= "</div>";
 
 
         return $buffer;
@@ -1125,18 +1128,18 @@ class PageFunctions extends PageElement {
                 }
                 else {
                     if($fn->tooltip) {
-                	    $buffer.="<a $class_last href=\"$fn->url\" title=\"$fn->tooltip\">";
+                        $buffer.="<a $class_last href=\"$fn->url\" title=\"$fn->tooltip\">";
                     }
                     else {
-                	    $buffer.="<a $class_last href=\"$fn->url\">";
+                        $buffer.="<a $class_last href=\"$fn->url\">";
                     }
 
 
-                	#if($fn->icon) {
-                	#    $buffer.="<img src=\"". getThemeFile("/icons/". $fn->icon . ".gif") . "\">";
-                	#}
+                    #if($fn->icon) {
+                    #    $buffer.="<img src=\"". getThemeFile("/icons/". $fn->icon . ".gif") . "\">";
+                    #}
 
-                	$buffer.="$fn->name</a>";
+                    $buffer.="$fn->name</a>";
                 }
             }
         }
@@ -1154,21 +1157,21 @@ class PageContentOpen extends PageElement
 
     public function __toString()
     {
-		switch($this->page->format){
-			case FORMAT_CSV:
-				$buffer = '';
-				break;
+        switch($this->page->format){
+            case FORMAT_CSV:
+                $buffer = '';
+                break;
 
-			default:
-				$buffer = $this->PageContentOpenAsHTML();
-				break;
-		}
+            default:
+                $buffer = $this->PageContentOpenAsHTML();
+                break;
+        }
 
-		return $buffer;
+        return $buffer;
     }
 
-	private function PageContentOpenAsHTML()
-	{
+    private function PageContentOpenAsHTML()
+    {
         global $PH;
 
         if($this->page->content_open) {
@@ -1238,20 +1241,20 @@ class PageContentClose extends PageElement
 
     public function __toString()
     {
-		switch($this->page->format){
-			case FORMAT_CSV:
-				$buffer = '';
-				break;
+        switch($this->page->format){
+            case FORMAT_CSV:
+                $buffer = '';
+                break;
 
-			default:
-				$buffer = $this->PageContentCloseAsHTML();
-				break;
-		}
+            default:
+                $buffer = $this->PageContentCloseAsHTML();
+                break;
+        }
 
-		return $buffer;
-	}
+        return $buffer;
+    }
 
-	private function PageContentCloseAsHTML(){
+    private function PageContentCloseAsHTML(){
         global $PH;
         if(!$this->page->content_open) {
             trigger_error("No content-table to close. Wrong HTML-structure?", E_USER_NOTICE);

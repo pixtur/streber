@@ -23,9 +23,6 @@ require_once(confGet('DIR_STREBER') . "lists/list_project_team.inc.php");
 
 
 
-
-
-
 #---------------------------------------------------------------------------
 # view Project
 #---------------------------------------------------------------------------
@@ -181,177 +178,6 @@ function ProjView()
         
     }
 
-
-    #--- write info-block ------------
-    if(0) {
-        $block=new PageBlock(array('title'=>__('Details','block title'),'id'=>'summary'));
-        $block->render_blockStart();
-        echo "<div class=text>";
-        /*
-        if($project->description) {
-        	$diz= wiki2html($project->description, $project);
-            #$diz=preg_replace("/\n\r/","<br>#",$project->description);
-            echo "$diz";
-        }
-        */
-
-        if($project->company) {
-            require_once(confGet('DIR_STREBER') . "db/class_company.inc.php");
-            if( $company= Company::getVisibleById($project->company)) {
-                echo "<p><label>".__('Client','label')."</label>". $project->getCompanyLink(true) ."</p>";
-                if($company->phone) {
-                    echo "<p><label>" . __('Phone','label') . "</label>". asHtml($company->phone)."</p>";
-                }
-                if($company->email) {
-                    echo "<p><label>" . __('E-Mail','label') . "</label>". url2LinkMail($company->email)."</p>";
-                }
-            }
-            echo "<br>";
-        }
-
-
-        global $g_status_names;
-        if($status=$g_status_names[$project->status]) {
-            $ssummary= $project->status_summary
-                     ? ' ('. asHtml($project->status_summary).')'
-                     : '';
-
-            echo "<p><label>".__("Status","Label in summary").'</label>'. asHtml($status) . $ssummary. '</p>';
-        }
-
-
-        if($project->wikipage) {
-	        echo "<p><label>".__("Wikipage","Label in summary")."</label>".url2linkExtern($project->wikipage)."</p>";
-	    }
-
-        if($project->projectpage) {
-	        echo "<p><label>".__("Projectpage","Label in summary")."</label>".url2linkExtern($project->projectpage)."</p>";
-	    }
-
-
-        if($project->date_start !="0000-00-00") {
-	        echo "<p><label>".__("Opened","Label in summary")."</label>".renderDateHtml($project->date_start)."</p>";
-	    }
-
-
-        if($project->date_closed !="0000-00-00") {
-            echo "<p><label>".__("Closed","Label in summary")."</label>".renderDateHtml($project->date_closed)."</p>";
-        }
-
-        if($person_creator= Person::getVisibleById($project->created_by)) {
-            echo "<p><label>".__("Created by","Label in summary")."</label>".$person_creator->getLink()."</p>" ;
-        }
-
-        if($project->modified_by != $project->created_by) {
-            if($person_modify= Person::getVisibleById($project->modified_by)) {
-                echo "<p><label>".__("Last modified by","Label in summary")."</label>".$person_modify->getLink()."</p>" ;
-            }
-        }
-
-
-        $sum_efforts= $project->getEffortsSum();
-        if($sum_efforts) {
-            echo "<p><label>" . __("Logged effort") . "</label>"
-                .$PH->getLink('projViewEfforts',round($sum_efforts/60/60,1),array('prj'=>$project->id))
-                ." ".__("hours")."</p>" ;
-        }
-
-        $sum_progress= $project->getProgressSum();
-        if($sum_progress) {
-            echo "<p><label>" . __("Completed") . "</label><b>"
-                .$PH->getLink('projViewTasks',number_format($sum_progress, 1, ',', ''),array('prj'=>$project->id))
-                ."%</b></p>" ;
-        }
-        $num_tasks= $project->getNumTasks();
-        if($num_tasks) {
-            echo "<p><label>" . __("Tasks") . "</label>"
-                .$PH->getLink('projViewTasks',$num_tasks,array('prj'=>$project->id))
-                ."</p>" ;
-        }
-
-
-
-
-        echo "</div>";
-
-        $block->render_blockEnd();
-    }
-
-    measure_stop('info');
-
-
-    /**
-    * list folders has become obsolete, since
-    * moving tasks is done by separate dialog
-    */
-    /*
-    measure_start('folders');
-
-    #--- list folders -----------------------------------------------------------
-    $list= new ListBlock_taskFolders($project);
-    $list->render();
-
-    measure_stop('folders');
-    */
-    measure_start('team');
-    
-    global $g_wiki_project;
-    $g_wiki_project= $project;
-
-    #--- list team -----------------------------------------------------------
-    if(0) {
-
-        $list= new ListBlock_projectTeam();
-        $list->title= __('Team members');
-        $list->show_icons=true;
-		$list->active_block_function = 'list';
-		$list->print_automatic($project);
-    }
-
-
-
-    ### write list of folders ###
-    if(0) {
-        $list= new ListBlock_tasks(array(
-            'use_short_names'=>true,
-            'show_summary'  =>false,
-        ));
-        $list->title=__('Folders');
-        $list->query_options['show_folders']= true;
-        $list->query_options['folders_only']= true;
-        $list->query_options['project']= $project->id;
-        $list->groupings= NULL;
-        $list->block_functions= NULL;
-        $list->id= 'folders';
-        $list->show_functions=false;
-        unset($list->columns['status']);
-        unset($list->columns['date_start']);
-        unset($list->columns['days_left']);
-        unset($list->columns['created_by']);
-        unset($list->columns['label']);
-        unset($list->columns['project']);
-        unset($list->columns['modified']);
-        unset($list->columns['assigned_to']);
-        unset($list->columns['planned_start']);
-        unset($list->columns['pub_level']);
-        unset($list->columns['prio']);
-        unset($list->columns['for_milestone']);
-        unset($list->columns['estimate_complete']);
-        unset($list->columns['efforts']);
-
-        unset($list->functions['tasksDelete']);
-        unset($list->functions['tasksCompleted']);
-        unset($list->functions['taskEdit']);
-
-        #$list->functions= array();
-
-        $list->active_block_function = 'tree';
-
-
-        $list->print_automatic($project);
-    }
-
-
     echo(new PageContentNextCol);
     measure_stop('team');
 
@@ -391,12 +217,15 @@ function ProjView()
                 echo "<div class=newsTitle><h3>".$PH->getLink('taskViewAsDocu', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
                 echo wiki2html($n->description, $project);
                 
+                echo "<span class=comments>";
                 if($comments= $n->getComments()) {
-                    echo "<span class=comments>" . $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id)) . "</span>";
+                     echo  $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id));
                 }
+                echo " | ";
+                echo $PH->getLink("commentNew", __("Add comment"), array('parent_task' => $n->id) );
+                echo "</span>";
                 
-                echo "</div>";
-                
+                echo "</div>";                
             }   
             echo "</div>";
     

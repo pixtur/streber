@@ -1212,7 +1212,7 @@ undefined keys:
 'License|page title'          =>'',  # line 440
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'',  # line 47
+'Could not find requested page `%s`'=>'',  # line 47
 'Select some items to restore'=>'',  # line 216
 'Item %s does not need to be restored'=>'',  # line 228
 'Failed to restore %s items'  =>'',  # line 241

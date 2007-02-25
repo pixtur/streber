@@ -311,7 +311,7 @@ class Project extends DbProjectItem
         $sum=0;
         if($tasknum = $this->getNumTasks()) {
 			if($tasksum = $this->getSumTasksProgress()) {
-			$sum=$tasknum*100/$tasksum;
+                    $sum=($tasksum/$tasknum*100)/100;
 			}
         }
         return $sum;

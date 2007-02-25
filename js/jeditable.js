@@ -90,6 +90,10 @@ jQuery.fn.editable = function(url, options) {
     $(this).find('a').click(function(e) {
         e.cancelBubble = true;
     });
+    
+    $(this).click(function(e) {
+        e.cancelBubble = true;
+    });    
 
     jQuery(this)[settings.event](function(e) {
 

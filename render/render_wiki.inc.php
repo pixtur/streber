@@ -176,7 +176,7 @@ class FormatBlockBold extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/^(.*?)\*([^\*\s][^\*\+\/]+[^\*\s])\*(.*)/s", $text, $matches)) {
+                    if(preg_match("/^(.*?)\*([^\*\s][^\*\+\/]*[^\*\s])\*(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockBold($matches[2]);
                         $text= $matches[3];

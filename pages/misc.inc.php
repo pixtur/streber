@@ -44,7 +44,7 @@ function globalView()
         }
     }
 
-    $PH->abortWarning(sprintf(__("Could not find request page `%s`"), $id));
+    $PH->abortWarning(sprintf(__("Could not find requested page `%s`"), $id));
 }
 
 

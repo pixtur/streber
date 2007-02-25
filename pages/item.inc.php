@@ -13,7 +13,9 @@ require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 function itemView()
 {
     global $PH;
-    $id= intval(get('item'));
+    if(!$id= intval(get('item'))) {
+        $id= intval(get('id'));        
+    }
 
     if($item= DbProjectItem::getVisibleById($id)) {
         switch($item->type) {

@@ -1791,7 +1791,7 @@ $g_lang_table= array(
 'Made %s items public to %s'  =>'Ustanowiono %s pozycję/pozycji publicznych do %s',  # line 84
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'Nie można znaleźć strony wysyłającej żądanie `%s`',  # line 37
+'Could not find requested page `%s`'=>'Nie można znaleźć strony wysyłającej żądanie `%s`',  # line 37
 'Failed to restore %s items'  =>'Odyzskanie %s pozycji nie powiodło się',  # line 231
 'Error-Log'                   =>'Log błędów',  # line 335
 'hide'                        =>'ukryj',  # line 468

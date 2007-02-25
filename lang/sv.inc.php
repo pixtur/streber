@@ -2112,7 +2112,7 @@ $g_lang_table= array(
 'Made %s items public to %s'  =>'%s poster publika till %s',  # line 84
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'Det gick inte att hitta sidan `%s`',  # line 37
+'Could not find requested page `%s`'=>'Det gick inte att hitta sidan `%s`',  # line 37
 
 ### ../pages/person.inc.php   ###
 'Registering is not enabled'  =>'Registrering är inte aktiverat',  # line 1755

@@ -1269,14 +1269,20 @@ foreach($filters_str as $fs=>$value) {
         if($this->is_folder) {
             return __('Folder');
         }
-        else if($this->is_milestone) {
-            if($this->is_released >= RELEASED_UPCOMMING) {
-                return __('Released Milestone');
-            }
-            else {
-                return __('Milestone');
-            }
+        else if($this->category == TCATEGORY_MILESTONE) {
+            return __('Milestone');
+            
         }
+        else if ($this->category == TCATEGORY_VERSION) {
+            return __('Released Milestone');
+        }
+        else if ($this->category == TCATEGORY_DOCU) {
+            return __('Documentation');
+        }
+        else if ($this->category == TCATEGORY_BUG) {
+            return __('Bug');
+        }
+
         else if($this->label) {
             if(!$project= Project::getById($this->project)) {
                 trigger_error("task without project?", E_USER_WARNING);

@@ -27,35 +27,35 @@ class ListBlock_versions extends ListBlock
 
     public function __construct($args=NULL)
     {
-		parent::__construct($args);
+        parent::__construct($args);
 
         $this->id='tasks';
         $this->bg_style='bg_projects';
-		$this->title="Versions";
+        $this->title="Versions";
 
 
         $this->add_col( new ListBlockColSelect());
-		#$this->add_col( new ListBlockColPrio());
-		#$this->add_col( new ListBlockColStatus());
-		$this->add_col( new ListBlockCol_VersionName());
-		$this->add_col( new ListBlockCol_TimeReleased());
+        #$this->add_col( new ListBlockColPrio());
+        #$this->add_col( new ListBlockColStatus());
+        $this->add_col( new ListBlockCol_VersionName());
+        $this->add_col( new ListBlockCol_TimeReleased());
 
 
-   		/*$this->add_col( new ListBlockColFormat(array(
-			'key'=>'short',
-			'name'=>"Name Short",
-			'tooltip'=>"Shortnames used in other lists",
-			'sort'=>0,
-			'format'=>'<nobr><a href="index.php?go=projView&amp;prj={?id}">{?short}</a></nobr>'
-		)));*/
-   		/*$this->add_col( new ListBlockColFormat(array(
-			'key'=>'name',
-			'name'=>__("Version"),
-			'tooltip'=>__("Task name. More Details as tooltips"),
-			'width'=>'30%',
-			'sort'=>0,
-			'format'=>'<a href="index.php?go=projView&amp;prj={?id}">{?name}</a>'
-		)));*/
+        /*$this->add_col( new ListBlockColFormat(array(
+            'key'=>'short',
+            'name'=>"Name Short",
+            'tooltip'=>"Shortnames used in other lists",
+            'sort'=>0,
+            'format'=>'<nobr><a href="index.php?go=projView&amp;prj={?id}">{?short}</a></nobr>'
+        )));*/
+        /*$this->add_col( new ListBlockColFormat(array(
+            'key'=>'name',
+            'name'=>__("Version"),
+            'tooltip'=>__("Task name. More Details as tooltips"),
+            'width'=>'30%',
+            'sort'=>0,
+            'format'=>'<a href="index.php?go=projView&amp;prj={?id}">{?name}</a>'
+        )));*/
 
 
         #---- functions ------------------------
@@ -69,7 +69,7 @@ class ListBlock_versions extends ListBlock
             'icon'  =>'edit',
             'context_menu'=>'submit',
         )));
-		$this->add_function(new ListFunction(array(
+        $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('itemsAsBookmark')->id,
             'name'  =>__('Mark as bookmark'),
             'id'    =>'itemsAsBookmark',
@@ -153,14 +153,14 @@ class ListBlock_versions extends ListBlock
                 unset($this->columns[$this->group_by]);
             }
 
-	        ### prepend key to sorting ###
-	        if(isset($this->query_options['order_by'])) {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            ### prepend key to sorting ###
+            if(isset($this->query_options['order_by'])) {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
 
-	        }
-	        else {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
-	        }
+            }
+            else {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+            }
         }
 
         $versions= Task::getAll($this->query_options);
@@ -182,49 +182,50 @@ class ListBlockCol_VersionName extends ListBlockCol
         $this->id='name';
     }
 
-	function render_tr(&$task, $style="")
-	{
+    function render_tr(&$task, $style="")
+    {
 
         global $PH;
         global $g_resolve_reason_names;
-		if(!isset($task) || !is_object($task)) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($task) || !is_object($task)) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
         $buffer='';
 
         ### collapsed view ###
         $html_link= '<b>'. $task->getLink(false) .'</b>';
-		if($task->view_collapsed) {
-    		$buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"". getThemeFile("img/toggle_folder_closed.gif") ."\">",array('tsk'=>$task->id),NULL, true)
-    		        . $html_link;
-		}
-		### detailed view with change log ###
-		else {
-    		$buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"".getThemeFile("img/toggle_folder_open.gif") ."\">",array('tsk'=>$task->id),NULL, true)
-    		. $html_link
-    		. '<br>';
+        if($task->view_collapsed) {
+            $buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"". getThemeFile("img/toggle_folder_closed.gif") ."\">",array('tsk'=>$task->id),NULL, true)
+                    . $html_link;
+        }
+        ### detailed view with change log ###
+        else {
+            $buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"".getThemeFile("img/toggle_folder_open.gif") ."\">",array('tsk'=>$task->id),NULL, true)
+            . $html_link
+            . '<br>';
 
-    		$editable= false;
-    		if(Task::getEditableById($task->id)) {
-    		    $editable= true;
-    		}
+            $editable= false;
+            if(Task::getEditableById($task->id)) {
+                $editable= true;
+            }
+                
 
             $buffer.= "<div class=description>";
             if($editable) {
-                $buffer.=  wiki2html($task->description, $project, $task->id, 'description');
+                $buffer.=  wiki2html($task->description, $task->project, $task->id, 'description');
             }
             else {
-                $buffer.=  wiki2html($task->description, $project);
+                $buffer.=  wiki2html($task->description, $task->project);
             }
             $buffer.= "</div>";
 
 
 
 
-   		}
+        }
         echo '<td>'. $buffer .'</td>';
-   	}
+    }
 }
 
 
@@ -239,14 +240,14 @@ class ListBlockCol_TimeReleased extends ListBlockCol
         $this->id='time_released';
     }
 
-	function render_tr(&$task, $style="")
-	{
+    function render_tr(&$task, $style="")
+    {
 
         global $PH;
-		if(!isset($task) || !is_object($task)) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($task) || !is_object($task)) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
 
 
         $buffer = renderDateHtml($task->time_released);
@@ -262,7 +263,7 @@ class ListBlockCol_TimeReleased extends ListBlockCol
         #}
 
         echo '<td class=nowrap>'. $buffer .'</td>';
-   	}
+    }
 }
 
 

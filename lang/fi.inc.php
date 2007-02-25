@@ -1013,7 +1013,7 @@ $g_lang_table= array(
 'License|page title'          =>'Lisenssi',  # line 343
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'',  # line 37
+'Could not find requested page `%s`'=>'',  # line 37
 'Select some items to restore'=>'',  # line 206
 'Item %s does not need to be restored'=>'',  # line 218
 'Failed to restore %s items'  =>'',  # line 231

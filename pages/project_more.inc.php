@@ -1142,8 +1142,8 @@ function ProjViewDocu()
         unset($list->functions['tasksCompleted']);
         unset($list->functions['tasksApproved']);
         unset($list->functions['tasksClosed']);
-        unset($list->functions['effortNew']);
-        unset($list->functions['commentNew']);
+        #unset($list->functions['effortNew']);
+        #unset($list->functions['commentNew']);
 
 
         $list->no_items_html=__('No tasks');
@@ -1615,11 +1615,13 @@ function ProjViewEfforts()
         unset($list->columns['p.name']);
 		
 		$page->print_presets(array(
-		'target' => $preset_location,
-		'project_id' => $project->id,
-		'preset_id' => $preset_id,
-		'presets' => $presets,
-		'person_id' => ''));
+		    'target' => $preset_location,
+		    'project_id' => $project->id,
+		    'preset_id' => $preset_id,
+		    'presets' => $presets,
+		    'person_id' => ''));
+		    
+		    
 		$list->query_options['order_by'] = $order_by;
 		$list->query_options['project'] = $project->id;
 		$list->print_automatic();

@@ -1926,7 +1926,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Made %s items public to %s'  =>'%s diventati pubblici a %s',  # line 84
 
 ### ../pages/misc.inc.php   ###
-'Could not find request page `%s`'=>'Non è stato possibile trovare la pagina richiesta',  # line 37
+'Could not find requested page `%s`'=>'Non è stato possibile trovare la pagina richiesta',  # line 37
 
 ### ../pages/person.inc.php   ###
 'Registering is not enabled'  =>'La Registrazione non è abilitata',  # line 1755

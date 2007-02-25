@@ -2327,6 +2327,13 @@ div.wiki .edit_chapter:hover {
     background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
 }
 
+table.list tr.selected div.wiki .edit_chapter:hover {
+    background-color:#5761E2;
+}
+div.edit_chapter form textarea{
+    display:block;
+}
+
 /*----------- diff table -----------------------------------*/
 div.diff h2 {
     font-size:100%;
