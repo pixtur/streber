@@ -254,6 +254,17 @@ $g_lang_table= array(
 ### ../lists/list_efforts.inc   ###
 'S'                           =>'S',
 
+### ../lists/list_effortsperson.inc   ###
+'no efforts booked yet'        =>'Keine Aufwände gebucht',
+'Efforts on team member'       =>'Aufwände pro Teammitglied',
+'Role|columnheader'            =>'Rolle',
+'Sum|columnheader'             =>'Summe',
+'Effortgraph|columnheader'     =>'Aufwandsgrafik',
+'Total effort sum: %s hours'   =>'Gesamtesumme Aufwände: %s Stunden',
+
+### ../lists/list_effortstask.inc   ###
+'Efforts on task'       =>'Aufwände pro Aufgabe',
+
 ### ../lists/list_persons.inc   ###
 'Name Short'                  =>'Abkürzung',
 'Shortnames used in other lists'=>'Abkürzungen werden in Listen verwendet',

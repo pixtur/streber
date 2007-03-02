@@ -77,6 +77,7 @@ class Effort extends DbProjectItem
 {
     public $level;              # level if child of parent-tasks
     public $type;
+	public $effort_status;
 
 	//=== constructor ================================================
 	function __construct ($id_or_array=NULL)
@@ -260,11 +261,10 @@ class Effort extends DbProjectItem
 		$str_match= $search
             ? "AND MATCH (e.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
         : '';
-
+				
         /**
         * note: project p required for sorting
         */
-
         if($visible_only) {
             $str_query=
             "SELECT DISTINCT i.*, e.* from {$prefix}item i, {$prefix}effort e, {$prefix}project p, {$prefix}projectperson upp
@@ -318,6 +318,7 @@ class Effort extends DbProjectItem
 
     	$sth->execute("",1);
     	$tmp=$sth->fetchall_assoc();
+		
     	$files=array();
         foreach($tmp as $t) {
             $effort=new Effort($t);
@@ -325,9 +326,196 @@ class Effort extends DbProjectItem
         }
         return $efforts;
     }
+	
+	static function &getSumEfforts($args=NULL)
+	{
+		global $auth;
+		$sum = 0.0;
 
+		$prefix= confGet('DB_TABLE_PREFIX');
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+        $dbh = new DB_Mysql;
+		
+		$project = NULL;
+		$person = NULL;
+		$task = NULL;
+		$status = false;
+		
+		### filter params ###
+        if($args) {
+            foreach($args as $key=>$value) {
+                if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                    trigger_error("unknown parameter",E_USER_NOTICE);
+                }
+                else {
+                    $$key= $value;
+                }
+            }
+        }
+		
+		$str_person = $person
+		            ? "AND e.person = " . $person
+					: "";
+					
+		if(!is_null($task)){
+		    $str_task = "AND e.task = " . $task;
+		}
+		else{
+			$str_task = "";
+		}
+		
+		$str_status = $status
+		            ? "AND e.status = ' ". asCleanString($status) . "'"
+					: "";
+								  				  
+		if(!is_null($project))
+		 {
+			 $query_str = "SELECT SUM(unix_timestamp(e.time_end) - unix_timestamp(e.time_start)) as sum_efforts
+						   FROM {$prefix}item i, {$prefix}effort e
+						   WHERE e.project = $project
+						   $str_person
+						   $str_task
+						   $str_status
+						   AND i.type = '".ITEM_EFFORT."'
+						   AND e.id = i.id
+						   AND i.state = '". ITEM_STATE_OK ."'"; 
+			$sth = $dbh->prepare($query_str);
+			$sth->execute("",1);
+			$tmp = $sth->fetch_row();
+			if($tmp) {
+				$sum += $tmp[0];
+    		}
+			return $sum;
+		}
+		
+		return sum;
+	}
+	
+	static function &getEffortPersons($args=NULL)
+	{
+		$prefix= confGet('DB_TABLE_PREFIX');
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+		require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
+        $dbh = new DB_Mysql;
+		
+		$project = NULL;
+		$effort_status_min = EFFORT_STATUS_NEW;
+		$effort_status_max = EFFORT_STATUS_BALANCED;
+		
+		### filter params ###
+        if($args) {
+            foreach($args as $key=>$value) {
+                if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                    trigger_error("unknown parameter",E_USER_NOTICE);
+                }
+                else {
+                    $$key= $value;
+                }
+            }
+        }
+		
+		$str_status_min = $effort_status_min
+            ? "AND e.status >= '" . asCleanString($effort_status_min) . "'"
+            : '';
 
+        $str_status_max = $effort_status_max
+            ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
+            : '';
+		
+		if($effort_status_min != $effort_status_max){
+			$str_st = "";
+		}
+		else{
+			$str_st = ", e.status";
+		}
+		
+		 if(!is_null($project))
+		 {
+			 $query_str = "SELECT DISTINCT e.person, e.project {$str_st}
+						   FROM {$prefix}item i, {$prefix}effort e
+						   WHERE e.project = {$project}
+						   AND i.type = '".ITEM_EFFORT."'
+						   AND e.id = i.id
+						   $str_status_min
+						   $str_status_max
+						   AND i.state = '". ITEM_STATE_OK ."';"; 
+			$sth = $dbh->prepare($query_str);
+			$sth->execute("",1);
+			$tmp=$sth->fetchall_assoc();
+			$efforts=array();
+			foreach($tmp as $t) {
+				$effort=new Effort($t);
+				$efforts[]=$effort;
+			}
+			return $efforts;
+		}
+		
+		return NULL;
+	}
+	
+	static function &getEffortTasks($args=NULL)
+	{
+		$prefix= confGet('DB_TABLE_PREFIX');
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+		require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
+        $dbh = new DB_Mysql;
+		
+		$project = NULL;
+		$effort_status_min = EFFORT_STATUS_NEW;
+		$effort_status_max = EFFORT_STATUS_BALANCED;
+		
+		### filter params ###
+        if($args) {
+            foreach($args as $key=>$value) {
+                if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                    trigger_error("unknown parameter",E_USER_NOTICE);
+                }
+                else {
+                    $$key= $value;
+                }
+            }
+        }
+		
+		$str_status_min = $effort_status_min
+            ? "AND e.status >= '" . asCleanString($effort_status_min) . "'"
+            : '';
 
+        $str_status_max = $effort_status_max
+            ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
+            : '';
+			
+		if($effort_status_min != $effort_status_max){
+			$str_st = "";
+		}
+		else{
+			$str_st = ", e.status";
+		}
+		
+		 if(!is_null($project))
+		 {
+			 $query_str = "SELECT DISTINCT e.task, e.project {$str_st}
+						   FROM {$prefix}item i, {$prefix}effort e
+						   WHERE e.project = {$project}
+						   AND i.type = '".ITEM_EFFORT."'
+						   AND e.id = i.id
+						   $str_status_min
+						   $str_status_max
+						   AND i.state = '". ITEM_STATE_OK ."';"; 
+			$sth = $dbh->prepare($query_str);
+			$sth->execute("",1);
+			$tmp=$sth->fetchall_assoc();
+			$efforts=array();
+			foreach($tmp as $t) {
+				$effort=new Effort($t);
+				$efforts[]=$effort;
+			}
+			
+			return $efforts;
+		}
+		
+		return NULL;
+	}
+		
     function getProject()
     {
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
@@ -439,6 +627,17 @@ class Effort extends DbProjectItem
             return '<span  class="item task">'.$PH->getLink('effortView',$this->name,array('effort'=>$this->id),$style_isdone).'</span>';
         }
     }
+	
+	function setStatus($status=NULL)
+	{
+		$this->effort_status = $status;
+	}
+	
+	function getStatus()
+	{
+		return $this->effort_status;
+	}
+		
 }
 
 ?>

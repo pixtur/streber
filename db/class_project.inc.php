@@ -665,6 +665,7 @@ class Project extends DbProjectItem
 		$order_by=NULL;
 		$alive_only=true;
 		$visible_only=true;
+		$person_id = NULL;
 
 		### filter parameter ###
         if($args) {
@@ -681,6 +682,10 @@ class Project extends DbProjectItem
 		$s_alive_only= $alive_only
             ? "AND i.state=1"
             : "";
+		
+		$s_person = $person_id
+		          ? "AND person.id = " . $person_id
+				  : "";
 
         ### all users ###
         if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
@@ -692,6 +697,7 @@ class Project extends DbProjectItem
                 $s_alive_only
                 AND pp.id = i.id
                 AND person.id = pp.person
+				$s_person
                 ". getOrderByString($order_by, 'person.name')
                 ;
         }
@@ -716,6 +722,7 @@ class Project extends DbProjectItem
                       pp.person =  {$auth->cur_user->id}
                 )
                 AND person.id = pp.person
+				$s_person
                 ". getOrderByString($order_by, 'person.name')
                 ;
         }
@@ -730,6 +737,7 @@ class Project extends DbProjectItem
                 $s_alive_only
                 AND i.id = pp.id
                 AND person.id = pp.person
+				$s_person
 				". getOrderByString($order_by, 'person.name')
                 ;
         }
@@ -750,8 +758,8 @@ class Project extends DbProjectItem
 
         return $ppersons;
 	}
-
-
+	
+	
     /**
     * get projectAssigments (not persons but their assigments to the current project)
     *
@@ -1150,8 +1158,8 @@ class Project extends DbProjectItem
 
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {
-                $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
-                exit;
+               $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
+               exit;
             }
             return false;
         }

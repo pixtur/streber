@@ -23,7 +23,7 @@ require_once(confGet('DIR_STREBER') . "lists/list_taskfolders.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_comments.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_tasks.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_project_team.inc.php");
-
+//require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
 
 
 /**
@@ -1364,7 +1364,9 @@ function ProjViewEfforts()
     global $PH;
 
     require_once(confGet('DIR_STREBER') . "lists/list_efforts.inc.php");
-
+	require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
+	require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
+	
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
@@ -1586,9 +1588,11 @@ function ProjViewEfforts()
 						$list->filters[]= new ListFilter_effort_status_min(array(
 							'value'=>$f_settings['min'],
 						));
+						$val1 = $f_settings['min'];
 						$list->filters[]= new ListFilter_effort_status_max(array(
 							'value'=>$f_settings['max'],
 						));
+						$val2 = $f_settings['max'];
 						break;
 					default:
 						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
@@ -1628,7 +1632,27 @@ function ProjViewEfforts()
         //$list->render_list(&$efforts);
 
 	}
-
+	
+	
+	#--- list effort summary on team members --------------------------------------------------------------------
+	{
+		$list_effort_person = new ListBlock_effortsPerson();
+		$list_effort_person->query_options['project'] = &$project->id;
+		if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
+		if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
+		$list_effort_person->print_automatic();
+	}
+	
+	#--- list effort summary on tasks --------------------------------------------------------------------
+	{
+		$list_effort_tasks = new ListBlock_effortsTask();
+		$list_effort_tasks->query_options['project'] = &$project->id;
+		if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
+		if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
+		$list_effort_tasks->print_automatic();
+	}
+	
+	
 	### 'add new task'-field ###
 	$PH->go_submit='taskNew';
 	echo '<input type="hidden" name="prj" value="'.$id.'">';
