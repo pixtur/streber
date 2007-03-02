@@ -128,6 +128,7 @@ measure_stop('authorize');
             && $auth->cur_user->language != "en"
         ) {
             setLang($auth->cur_user->language);
+            build_person_fields();
         }
     }
     else {
@@ -286,6 +287,10 @@ function initialBasicFixes()
 
     ini_set('zend.ze1_compatibility_mode', 0);
     ini_set("pcre.backtrack_limit", -1);                        # fix 5.2.0 prce bug with render_wiki
+    if(function_exists('mb_internal_encoding')) {
+        mb_internal_encoding("UTF-8");
+    }
+    #ini_set("mbstring.func_overload", 2);
 
     /**
     * add rough php-version check to at least avoid parsing errors.

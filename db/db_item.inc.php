@@ -530,11 +530,13 @@ abstract class DbItem {
             $length= confGet('STRING_LENGTH_SHORT');
         }
         if(isset($this->name) && $this->name !="") {
-            ereg("(.{0,$length})(.*)",$this->name,$matches);
-            if(!$matches[2]) {
-                return $matches[1];
+            if(strlen($this->name) > $length) {
+                if(function_exists('mb_substr')) {
+                    return mb_substr($this->name, 0 ,$length) . "...";
+                }
+                return substr($this->name, 0 ,$length) . "...";
             }
-            return $matches[1]."...";
+            return $this->name;
         }
         else {
             return __("unnamed");
@@ -900,7 +902,13 @@ class DbProjectItem extends DbItem
                         * @@@Pixtur: one strip slashes should be sufficient...
                         *            only tested with myslq5 / xampp
                         */
-                        $this->_values_org[$attr]= $this->$attr = stripslashes($value);
+                        #if(get_magic_quotes_gpc()) {
+                        #    $this->_values_org[$attr]= $this->$attr = stripslashes($value);
+                        #}
+                        #else {
+                        
+                        $this->_values_org[$attr]= $this->$attr = $value;
+                        #}
                     }
                 }
 
@@ -1157,6 +1165,7 @@ class DbProjectItem extends DbItem
                 if($update_fields && !isset($update_fields[$name])) {
                     continue;
                 }
+                
                 if(isset($this->_values_org[$name])) {
                     if(!isset($this->$name) && $this->$name!=NULL) {
                         trigger_error("$name is not a member of $this and can't be passed to db", E_USER_WARNING);
@@ -1221,9 +1230,7 @@ class DbProjectItem extends DbItem
                         }
                     }
                     global $sql_obj;
-                    #$t_pairs[]= $name.'='."'".$this->$name."'";
-                    #$t_pairs[]= $name.'='."'".mysql_real_escape_string($this->$name)."'";
-                    $t_pairs[]= $name.'='."'". asSecureString($this->$name)."'";
+                    $t_pairs[]= $bla= $name.'='."'". asSecureString($this->$name)."'";
                 }
             }
             if(count($t_pairs)) {

@@ -47,7 +47,9 @@ function itemLoadField()
 
 /**
 * save field value of an item which has been edited inplace
-* and return formatted html code
+* and return formatted html code.
+* 
+* If only a chapter has been edited,  number defined in "chapter"
 */
 function itemSaveField()
 {
@@ -83,16 +85,8 @@ function itemSaveField()
 
     $chapter= get('chapter');
     
-    ### replace complete field ###
-    if(is_null($chapter)) {
-        $object->$field_name = $value;
-        $object->update(array($field_name));
-
-        print wiki2purehtml($object->$field_name); 
-    }
-    
     ### only replace chapter ###
-    else {
+    if(! is_null($chapter)) {
 
         require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
         
@@ -100,21 +94,38 @@ function itemSaveField()
         * split originial wiki block into chapters
         * start with headline and belonging text
         */
-        $parts= getWikiChapters($object->$field_name);
         
+        $org= $object->$field_name;
+        $org= str_replace("\\", "\\\\", $org);
+
+        $parts= getWikiChapters($org);
+                
+        ### replace last line return (added by textarea) ###
         if(!preg_match("/\n$/",$value)) {
             $value.="\n";
         }
-        $parts[$chapter]= $value;
+        $value= str_replace("\\'", "'", $value);
+        $value= str_replace('\\"', "\"", $value);
         
-        $new_wiki_text= implode('', $parts);
+        $parts[$chapter]= $value;
 
+        $new_wiki_text= implode('', $parts);
+        
         $object->$field_name = $new_wiki_text;
         $object->update(array($field_name));
 
-        print wiki2purehtml($new_wiki_text);
+        $new_wiki_text =stripslashes($new_wiki_text);
+
+        $result= wiki2purehtml($new_wiki_text);
+        print $result;
     }
+    ### replace complete field ###
+    else {
+
+        $object->$field_name = $value;
+        $object->update(array($field_name));
+
+        print wiki2purehtml($object->$field_name); 
+    }    
 }
-
-
 ?>

@@ -98,7 +98,7 @@ class ChangeLine extends BaseObject {
         /**
         * get list of items touched by other persons
         */       
-		$changed_items= DbProjectItem::getAll($query_options);
+        $changed_items= DbProjectItem::getAll($query_options);
         
         
 
@@ -361,25 +361,27 @@ class ChangeLine extends BaseObject {
                     }
 
                     /**
-                    * any recents attachments ?
+                    * any recents attachments by last editor ?
                     */
                     require_once "db/class_file.inc.php";
                     if($files= File::getAll(array(
                         'parent_item'      => $task->id,
                         'project'   => $task->project,
                         'date_min'  => $date_compare,
+                        'created_by' => $task->modified_by,
                     ))) {
                         $count_attached_files= 0;
                         $html_attached=__("attached").": ";
                         $t_timestamp='';
                         $separator= '';
+
                         foreach($files as $f) {
-                            #if($person->id != $f->modified_by) {
+                            if($task->modified_by == $f->modified_by) {
                                 $t_timestamp= $f->created;
                                 $count_attached_files++;
                                 $html_attached.= $separator . $PH->getLink('fileView', $f->name, array('file'=>$f->id));
                                 $separator= ', ';
-                            #}
+                            }
                         }
                         if($count_attached_files) {
                             $html_what= __('attached file to');
@@ -389,6 +391,8 @@ class ChangeLine extends BaseObject {
                             }
                         }
                     }
+
+
 
                     if(count($changed_fields_hash)){
                         $html_details.=" / ". $PH->getLink('itemViewDiff',NULL, array('item'=>$task->id, 'date1' => $date_compare, 'date2' => gmdate("Y-m-d H:i:s")));
@@ -490,7 +494,7 @@ class ChangeLine extends BaseObject {
 class ListBlock_changes extends ListBlock
 {
     private  $list_changes_newer_than= '';                      # timestamp
-	public   $filters = array();
+    public   $filters = array();
 
     public function __construct($args=NULL)
     {
@@ -511,7 +515,7 @@ class ListBlock_changes extends ListBlock
         $this->add_col( new ListBlockCol_ChangesDate());
         $this->add_col( new ListBlockCol_ChangesWhat());
         $this->add_col( new ListBlockCol_ChangesDetails());
-		
+        
     }
 
 
@@ -520,20 +524,20 @@ class ListBlock_changes extends ListBlock
     {
         global $PH;
         global $auth;
-				
+                
         ### add filter options ###
         foreach($this->filters as $f) {
             foreach($f->getQuerryAttributes() as $k=>$v) {
-			    $this->query_options[$k]= $v;
+                $this->query_options[$k]= $v;
             }
         }
-				
-		if($auth->cur_user->user_rights & RIGHT_VIEWALL){
-			$this->query_options['visible_only'] = false;
-		}
-		else{
-			$this->query_options['visible_only'] = true;
-		}
+                
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL){
+            $this->query_options['visible_only'] = false;
+        }
+        else{
+            $this->query_options['visible_only'] = true;
+        }
         #$changes= ChangeLine::getChangeLinesForPerson($auth->cur_user, NULL);
         #$this->query_options['not_modified_by']= $auth->cur_user->id;
         $changes= ChangeLine::getChangeLines($this->query_options);
@@ -566,7 +570,7 @@ class ListBlock_changes extends ListBlock
             $this->render_thead();
 
             $last_group= NULL;
-			
+            
             foreach($changes as $c) {
 
                 $this->render_trow(&$c,$style);
@@ -761,63 +765,63 @@ class ListBlockCol_ChangesDatePerson extends ListBlockCol
 class ListBlock_AllChanges extends ListBlock
 {
     public $bg_style = "bg_time";
-	public $filters = array();
+    public $filters = array();
 
-	public function __construct($args=NULL)
+    public function __construct($args=NULL)
     {
-		parent::__construct($args);
+        parent::__construct($args);
 
-		global $PH;
-		global $auth;
+        global $PH;
+        global $auth;
 
-		$this->id = 'allchanges';
+        $this->id = 'allchanges';
 
-		$this->title = __("Changes");
-		$this->id = "allchanges";
-		$this->no_items_html = __('Nothing has changed.');
+        $this->title = __("Changes");
+        $this->id = "allchanges";
+        $this->no_items_html = __('Nothing has changed.');
 
-		$this->add_col( new ListBlockColSelect());
-		## from list_projectchanages.inc.php ##
-		$this->add_col(new ListBlockCol_ChangesByPerson());
-		$this->add_col(new ListBlockCol_ChangesEditType());
-		$this->add_col(new ListBlockCol_ChangesItemType());
-		$this->add_col(new ListBlockCol_AllChangesItemName());
-		$this->add_col( new listBlockColDate(array(
-			'key'=>'modified',
-			'name'=>__('modified')
-		)));
-
-
-	   ### block style functions ###
-		$this->add_blockFunction(new BlockFunction(array(
-			'target'=>'changeBlockStyle',
-			'key'=>'list',
-			'name'=>'List',
-			'params'=>array(
-				'style'=>'list',
-				'block_id'=>$this->id,
-				'page_id'=>$PH->cur_page->id,
-			 ),
-			 'default'=>true,
-		)));
-		$this->groupings= new BlockFunction_grouping(array(
-			'target'=>'changeBlockStyle',
-			'key'=>'grouped',
-		     'name'=>'Grouped',
-		     'params'=>array(
-			   'style'=>'grouped',
-			   'block_id'=>$this->id,
-			   'page_id'=>$PH->cur_page->id,
-		   ),
-	   ));
-	   $this->add_blockFunction($this->groupings);
+        $this->add_col( new ListBlockColSelect());
+        ## from list_projectchanages.inc.php ##
+        $this->add_col(new ListBlockCol_ChangesByPerson());
+        $this->add_col(new ListBlockCol_ChangesEditType());
+        $this->add_col(new ListBlockCol_ChangesItemType());
+        $this->add_col(new ListBlockCol_AllChangesItemName());
+        $this->add_col( new listBlockColDate(array(
+            'key'=>'modified',
+            'name'=>__('modified')
+        )));
 
 
-	   ### list groupings ###
-	   $this->groupings->groupings= array(
-		   new ListGroupingModifiedBy(),
-		   new ListGroupingItemType(),
-	   );
+       ### block style functions ###
+        $this->add_blockFunction(new BlockFunction(array(
+            'target'=>'changeBlockStyle',
+            'key'=>'list',
+            'name'=>'List',
+            'params'=>array(
+                'style'=>'list',
+                'block_id'=>$this->id,
+                'page_id'=>$PH->cur_page->id,
+             ),
+             'default'=>true,
+        )));
+        $this->groupings= new BlockFunction_grouping(array(
+            'target'=>'changeBlockStyle',
+            'key'=>'grouped',
+             'name'=>'Grouped',
+             'params'=>array(
+               'style'=>'grouped',
+               'block_id'=>$this->id,
+               'page_id'=>$PH->cur_page->id,
+           ),
+       ));
+       $this->add_blockFunction($this->groupings);
+
+
+       ### list groupings ###
+       $this->groupings->groupings= array(
+           new ListGroupingModifiedBy(),
+           new ListGroupingItemType(),
+       );
    }
 
     public function print_automatic()
@@ -856,14 +860,14 @@ class ListBlock_AllChanges extends ListBlock
                 unset($this->columns[$this->group_by]);
             }
 
-	        ### prepend key to sorting ###
-	        if(isset($this->query_options['order_by'])) {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            ### prepend key to sorting ###
+            if(isset($this->query_options['order_by'])) {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
 
-	        }
-	        else {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
-	        }
+            }
+            else {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+            }
         }
         ### list view ###
         else {
@@ -885,16 +889,16 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
         $this->name = __('Name');
     }
 
-	function render_tr(&$obj, $style="")
-	{
-	    global $PH;
+    function render_tr(&$obj, $style="")
+    {
+        global $PH;
 
         $str_url="";
         $str_name="";
         $str_addon="";
         switch($obj->type) {
-			case ITEM_PROJECT:
-				if($project = Project::getVisibleById($obj->id)) {
+            case ITEM_PROJECT:
+                if($project = Project::getVisibleById($obj->id)) {
                     $str_name = asHtml($project->name);
                     $str_url = $PH->getUrl('projView',array('prj'=>$project->id));
                 }
@@ -904,47 +908,47 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
                 if($task = Task::getVisibleById($obj->id)) {
                     $str_name = asHtml($task->name);
                     $str_url = $PH->getUrl('taskView',array('tsk'=>$task->id));
-					if($project = Project::GetVisibleById($task->project)){
-						$str_addon = "(".$project->getLink(false).")";
-					}
+                    if($project = Project::GetVisibleById($task->project)){
+                        $str_addon = "(".$project->getLink(false).")";
+                    }
                 }
                 break;
 
             case ITEM_COMMENT:
                 if($comment = Comment::getVisibleById($obj->id)) {
-					if($comment->name == ''){
-						$str_name = "-";
-					}
-					else{
-                    	$str_name = asHtml($comment->name);
-					}
+                    if($comment->name == ''){
+                        $str_name = "-";
+                    }
+                    else{
+                        $str_name = asHtml($comment->name);
+                    }
                     $str_url = $PH->getUrl('taskView',array('tsk'=>$comment->task));
-					$str_addon .= "(";
-					if($task = Task::getVisibleById($comment->task)){
-						if($project = Project::getVisibleById($task->project)){
-							$str_addon .= $project->getLink(false) . " > ";
-						}
-						$str_addon .= $task->getLink(false);
-						if($comment->comment){
-							if($comm = Comment::getVisibleById($comment->comment)){
-								$str_addon .= " > " . $comm->name;
-							}
-						}
-					}
-					$str_addon .= ")";
+                    $str_addon .= "(";
+                    if($task = Task::getVisibleById($comment->task)){
+                        if($project = Project::getVisibleById($task->project)){
+                            $str_addon .= $project->getLink(false) . " > ";
+                        }
+                        $str_addon .= $task->getLink(false);
+                        if($comment->comment){
+                            if($comm = Comment::getVisibleById($comment->comment)){
+                                $str_addon .= " > " . $comm->name;
+                            }
+                        }
+                    }
+                    $str_addon .= ")";
 
                 }
                 break;
 
-			case ITEM_COMPANY:
-				if($c = Company::getVisibleById($obj->id)) {
+            case ITEM_COMPANY:
+                if($c = Company::getVisibleById($obj->id)) {
                     $str_name = asHtml($c->name);
                     $str_url = $PH->getUrl('companyView',array('company'=>$c->id));
                 }
                 break;
 
-			case ITEM_PERSON:
-				if($person = Person::getVisibleById($obj->id)) {
+            case ITEM_PERSON:
+                if($person = Person::getVisibleById($obj->id)) {
                     $str_name = asHtml($person->name);
                     $str_url = $PH->getUrl('personView',array('person'=>$person->id));
                 }
@@ -957,22 +961,22 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
                     }
                     $str_name = asHtml($person->name);
                     $str_url = $PH->getUrl('personView',array('person'=>$person->id));
-					if($project = Project::getVisibleById($pp->project)){
-						$str_addon = "(" . $project->getLink(false) .")";
-					}
+                    if($project = Project::getVisibleById($pp->project)){
+                        $str_addon = "(" . $project->getLink(false) .")";
+                    }
 
                 }
                 break;
 
-			case ITEM_EMPLOYMENT:
+            case ITEM_EMPLOYMENT:
                 if($emp= Employment::getById($obj->id)) {
                     if($person= Person::getVisibleById($emp->person)) {
-						$str_name= asHtml($person->name);
-						$str_url= $PH->getUrl('personView',array('person'=>$person->id));
-                	}
-					if($company = Company::getVisibleById($emp->company)){
-						$str_addon= "(". $company->getLink(false) .")";
-					}
+                        $str_name= asHtml($person->name);
+                        $str_url= $PH->getUrl('personView',array('person'=>$person->id));
+                    }
+                    if($company = Company::getVisibleById($emp->company)){
+                        $str_addon= "(". $company->getLink(false) .")";
+                    }
                 }
                 break;
 
@@ -980,12 +984,12 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
                 if($e= Effort::getVisibleById($obj->id)) {
                     $str_name= asHtml($e->name);
                     $str_url= $PH->getUrl('effortEdit',array('effort'=>$e->id));
-					if($task = Task::getVisibleById($e->task)){
-						if($project = Project::getVisibleById($task->project)){
-							$str_addon .= "(". $project->getLink(false) ;
-							$str_addon .= " > ". $task->getLink(false) .")";
-						}
-					}
+                    if($task = Task::getVisibleById($e->task)){
+                        if($project = Project::getVisibleById($task->project)){
+                            $str_addon .= "(". $project->getLink(false) ;
+                            $str_addon .= " > ". $task->getLink(false) .")";
+                        }
+                    }
 
                 }
                 break;
@@ -994,50 +998,50 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
                 if($f= File::getVisibleById($obj->id)) {
                     $str_name= asHtml($f->org_filename);
                     $str_url= $PH->getUrl('fileView',array('file'=>$f->id));
-					$str_addon .= "(";
-					if($p = Project::getVisibleById($f->project)){
-						$str_addon .= $p->getLink(false) ;
-					}
-					if($t = Task::getVisibleById($f->parent_item)){
-						$str_addon .= " > " . $t->getLink(false) ;
-					}
-					$str_addon .= ")";
+                    $str_addon .= "(";
+                    if($p = Project::getVisibleById($f->project)){
+                        $str_addon .= $p->getLink(false) ;
+                    }
+                    if($t = Task::getVisibleById($f->parent_item)){
+                        $str_addon .= " > " . $t->getLink(false) ;
+                    }
+                    $str_addon .= ")";
                 }
-				break;
+                break;
 
-			 case ITEM_ISSUE:
+             case ITEM_ISSUE:
                 if($i = Issue::getVisibleById($obj->id)) {
-					if($t = Task::getVisibleById($i->task)){
-                    	$str_name = asHtml($t->name);
-                    	$str_url = $PH->getUrl('taskView',array('tsk'=>$t->id));
-						if($p = Project::getVisibleById($t->project)){
-							$str_addon .= "(". $p->getLink(false) .")";
-						}
-					}
+                    if($t = Task::getVisibleById($i->task)){
+                        $str_name = asHtml($t->name);
+                        $str_url = $PH->getUrl('taskView',array('tsk'=>$t->id));
+                        if($p = Project::getVisibleById($t->project)){
+                            $str_addon .= "(". $p->getLink(false) .")";
+                        }
+                    }
                 }
-				break;
+                break;
 
-			case ITEM_TASKPERSON:
-				if($tp = TaskPerson::getVisibleById($obj->id)) {
-					if($person = Person::getVisibleById($tp->person)){
-						$str_name = asHtml($person->name);
-						$str_url = $PH->getUrl('personView',array('person'=>$person->id));
-					}
-					if($task = Task::getVisibleById($tp->task)){
-						if($project = Project::getVisibleById($task->project)){
-							$str_addon .= "(". $project->getLink(false) ;
-							$str_addon .= " > ". $task->getLink(false) .")";
-						}
-					}
-				}
-				break;
+            case ITEM_TASKPERSON:
+                if($tp = TaskPerson::getVisibleById($obj->id)) {
+                    if($person = Person::getVisibleById($tp->person)){
+                        $str_name = asHtml($person->name);
+                        $str_url = $PH->getUrl('personView',array('person'=>$person->id));
+                    }
+                    if($task = Task::getVisibleById($tp->task)){
+                        if($project = Project::getVisibleById($task->project)){
+                            $str_addon .= "(". $project->getLink(false) ;
+                            $str_addon .= " > ". $task->getLink(false) .")";
+                        }
+                    }
+                }
+                break;
 
             default:
                 break;
 
         }
-		print "<td><a href='$str_url'>$str_name</a><span class='sub who'> $str_addon</span></td>";
-	}
+        print "<td><a href='$str_url'>$str_name</a><span class='sub who'> $str_addon</span></td>";
+    }
 }
 
 ?>

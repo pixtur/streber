@@ -1866,8 +1866,18 @@ function &wiki2blocks(&$text)
 /**
 * returns the wikitext without the outer div
 */
-function wiki2purehtml(&$text, &$project=NULL)
+function wiki2purehtml($text, $project=NULL)
 {
+
+    ### convert, if id is given ###
+    if(!is_object($project)) {
+        $project= Project::getVisibleById($project);
+    }
+
+    global $g_wiki_project;
+    $g_wiki_project= $project;
+
+
     $blocks = wiki2blocks(asHtml($text), $project);
     $tmp = array();
     $out='';

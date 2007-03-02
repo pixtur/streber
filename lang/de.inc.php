@@ -13,6 +13,8 @@ $g_lang_table= array(
 'en_US.utf8,en_US,enu|list of locales'=>'de.utf8,deu,german',
 
 #--- top navigation tabs -------------------------------------------------------
+'Office E-Mail'               =>'Büro E-Mail',
+
 
 '<span class=accesskey>H</span>ome'
                     =>'<span class=accesskey>H</span>ome',
@@ -1264,7 +1266,6 @@ $g_lang_table= array(
 'Comments|form label for company'=>'Anmerkungen',
 
 ### ../db/class_person.inc   ###
-'Office E-Mail'               =>'Büro E-Mail',
 'Optional:  Private (eg. Poststreet 28)'=>'Optional (z.b. Poststraße 28)',
 'Theme|Formlabel'             =>'Thema',
 

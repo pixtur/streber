@@ -167,7 +167,7 @@ class Notifier
         ### recently assigned to projects ###
         $projects= array();
         {
-            $headline_html= "<h3>/r/n"
+            $headline_html= "<h3>\r\n"
                      . __('You have been assigned to projects:','notification')
                      . "</h3>\r\n"
                      . "<ul>\r\n";

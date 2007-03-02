@@ -764,8 +764,6 @@ function taskEditSubmit()
     global $auth;
     require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 
-
-
     /**
     * keep a list of items linking to this task, task is new
     * we have to change the linking id after(!) inserting the task

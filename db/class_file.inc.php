@@ -208,6 +208,7 @@ class File extends DbProjectItem
         $date_max           = NULL;
         $org_file           = NULL;
 		$id			        = NULL;
+	    $created_by     = NULL;
 
         ### filter params ###
         if($args) {
@@ -250,6 +251,10 @@ class File extends DbProjectItem
             ? 'AND f.is_latest!=0'
             : '';
 
+        $str_created_by= $created_by
+            ? 'AND i.modified_by ='. intval($created_by)
+            : '';
+
         $str_parent_item= !is_null($parent_item)
             ? 'AND f.parent_item=' . intval($parent_item)
             : '';
@@ -288,6 +293,7 @@ class File extends DbProjectItem
 
                 AND i.id = f.id
 				 $str_id
+                 $str_created_by
                  $str_is_image
                  $str_parent_item
                  $str_org_file
@@ -311,6 +317,7 @@ class File extends DbProjectItem
 
             AND i.id = f.id
 			 $str_id
+             $str_created_by
              $str_parent_item
              $str_latest_only
              AND f.status >= $status_min
@@ -336,11 +343,6 @@ class File extends DbProjectItem
         }
         return $files;
     }
-
-
-
-
-
 
     /**
     * returns the original version of a file (could be itself)
@@ -508,9 +510,9 @@ class File extends DbProjectItem
         }
 
         ### create project directory ###
-        $this->tmp_dir= "prj{$this->project}/";
+        $this->tmp_dir= "prj{$this->project}";
         if(! file_exists(confGet('DIR_FILES') . $this->tmp_dir)) {
-            if(  !mkdir(confGet('DIR_FILES') . $this->tmp_dir)) {
+            if(  !mkdir(confGet('DIR_FILES') . $this->tmp_dir, 0777)) {
                 trigger_error("could not create target directory for uploaded file '" .confGet('DIR_FILES') . $this->tmp_dir. "'", E_USER_WARNING);
                 return NULL;
             }

@@ -156,7 +156,8 @@ $g_config= array(
     * value must be a comma-delimited list of locale names, see function setLang() for details
     * use value 'C' to disable locales entirely, useful if your system doesn't have proper locale support
     */
-    'FORCE_LOCALE'          =>'de_DE@euro,de_DE,deu_deu,de.utf8,deu,german',
+    #'FORCE_LOCALE'          =>'de_DE@euro,de_DE,deu_deu,de.utf8,deu,german',
+    'FORCE_LOCALE'          =>'C',
 
 
     /**
@@ -522,6 +523,7 @@ $g_languages=array(
     'it'=>'Italian',
     'es'=>'Spanish',
     'fi'=>'Finish',
+    'ru'=> 'Russian',
 );
 $g_language_names= array_keys($g_languages);
 

@@ -500,7 +500,7 @@ function personView()
 
             ### page functions ###
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('new:')
+                'name'      => __('new') . ": "
             )));
             $page->add_function(new PageFunction(array(
                 'target'=>'taskNoteOnPersonNew',
@@ -516,7 +516,7 @@ function personView()
             )));
 
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('edit:')
+                'name'      => __('edit').  ': '
             )));
             $page->add_function(new PageFunction(array(
                 'target'=>'personEdit',

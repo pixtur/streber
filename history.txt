@@ -1,5 +1,25 @@
 streber-version-history
 
+version: v0.0796 [2007-02-25]
+==============================
+
+major:
+- fixed open tasks for milestone --> invalid project_id #4078
+- fixed Multiedit tasks - bad initial values #2744
+- fixed csv-export of efforts (was broken because of presets)
+
+minor:
+- fixed disabled both Webbplatsen themes #4145
+- fixed Invalid renderDateHtml after midnight #4081
+- fixed Label of Documation pages 
+- fixed minor issues with AjaxEditing inside selectable list rows 
+- fixed sorting of efforts #4036
+- added "add comment" to news in custom_projView.inc.php 
+- fixed id parameter in itemView #4132
+- added "book effort" function for docu pages #3772
+- improved csv-exporting of lists (added names of persons, tasks and projects)
+- fixed wiki text with less than 3 characters doesn't appear bold #4107
+
 v0.0795 [2007-02-19]
 ====================
 minor:
