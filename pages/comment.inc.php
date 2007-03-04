@@ -1,16 +1,9 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
- * pages relating to comments
- *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
- */
+/**\file  pages relating to comments  */
 
 
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
@@ -20,6 +13,11 @@ require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_misc.inc.php');
 
 
+/**
+* View a comment
+* 
+* @ingroup pages
+*/
 function commentView(){
     global $PH;
 	global $auth;
@@ -177,10 +175,13 @@ function commentView(){
 
 
 
-#=====================================================================================================
-# commentNew
-# - requires comment or task or comments_* - param
-#=====================================================================================================
+/**
+* Create new comment 
+* 
+* @ingroup pages
+*
+*  - requires comment or task or comments_* - param
+*/
 function commentNew() {
     global $PH;
     global $COMMENTTYPE_VALUES;
@@ -286,9 +287,11 @@ function commentNew() {
 }
 
 
-#=====================================================================================================
-# comment edit
-#=====================================================================================================
+/**
+* Edit a comment 
+*
+* @ingroup pages
+*/
 function commentEdit($comment=NULL)
 {
     global $PH;
@@ -407,9 +410,9 @@ function commentEdit($comment=NULL)
 }
 
 
-#=====================================================================================================
-# commentEditSubmit
-#=====================================================================================================
+/**
+* Submit changes to a comment @ingroup pages
+*/
 function commentEditSubmit(){
     global $PH;
     global $auth;
@@ -419,7 +422,7 @@ function commentEditSubmit(){
         if(!$PH->showFromPage()) {
             $PH->show('home');
         }
-        exit;
+        exit();
     }
 
 
@@ -505,7 +508,9 @@ function commentEditSubmit(){
 }
 
 
-
+/**
+* Delete comments @ingroup pages
+*/
 function commentsDelete()
 {
     global $PH;
@@ -560,7 +565,9 @@ function commentsDelete()
 
 
 
-
+/**
+* Restore deleted comments @ingroup pages
+*/
 function commentsUndelete()
 {
     global $PH;
@@ -608,14 +615,9 @@ function commentsUndelete()
 }
 
 
-
-
-
-
-
-
-
-
+/**
+* Toggle comment collapsing @ingroup pages
+*/
 function commentToggleViewCollapsed()
 {
     global $PH;
@@ -641,6 +643,11 @@ function commentToggleViewCollapsed()
 }
 
 
+/**
+* Collapse comment view
+* 
+* @ingroup pages
+*/
 function commentsCollapseView()
 {
     global $PH;
@@ -795,7 +802,7 @@ function commentsMoveToFolder()
         if(!$PH->showFromPage()) {
             $PH->show('home');
         }
-        exit;
+        exit();
     }
 
 

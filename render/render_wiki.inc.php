@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
@@ -9,7 +9,7 @@
  * the idea of this parser is splitting the tags until all text-tags are atoms or other tags
  *
  *
- * @author: Thomas Mann
+ * @author Thomas Mann
  * @uses:
  * @usedby:
  *
@@ -1085,7 +1085,7 @@ class FormatBlockLink extends FormatBlock
                     * nobody will read this hint...
                     */
                     new FeedbackHint(sprintf(__('Wiki-format: <b>%s</b> is not a valid link-type'), $type)
-                        . " " . sprintf(__("Read more about %s."), $PH->getWikiLink('Wiki Syntax')));
+                        . " " . sprintf(__("Read more about %s."), $PH->getWikiLink('WikiSyntax')));
             }
         }
         /**

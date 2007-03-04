@@ -1,117 +1,14 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
  * file object
  *
- * @includedby:     *
- *
- * @author:         Thomas Mann
- * @uses:           DbProjectList
- * @usedby:
- *
+ * @author         Thomas Mann
  */
 
 
-/**
-*  setup the database fields for file-object as global assoc-array
-*/
-    global $g_file_fields;
-    $g_file_fields= array();
-    addProjectItemFields(&$g_file_fields);
-
-    foreach(array(
-        new FieldInternal(array(    'name'=>'id',
-            'default'=>0,
-            'in_db_object'=>1,
-            'in_db_item'=>1,
-        )),
-            new FieldString(array(      'name'=>'name',
-                'title'=>__('Name'),
-                'view_in_forms'=>true
-            )),
-            new FieldString(array(      'name'=>'org_filename',
-                'view_in_forms'=>false
-            )),
-
-            /**
-            * filepath and name under which file is stored on server
-            * - relative to DIR_FILES
-            * - cleaned from special chars
-            * - with appended_version_number
-            *
-            * e.g. prj321/bla.gif
-            *      prj321/bla.gif.1
-            */
-            new FieldString(array(      'name'=>'tmp_filename',
-                'view_in_forms'=>false
-            )),
-
-            new FieldString(array(      'name'=>'tmp_dir',
-                'view_in_forms'=>false
-            )),
-
-            new FieldString(array(      'name'=>'mimetype',
-                'view_in_forms'=>false
-            )),
-            new FieldInternal(array(    'name'=>'status',
-                'view_in_forms'=>false
-            )),
-            new FieldInt(array(         'name'=>'filesize',
-                'view_in_forms'=>false
-            )),
-            new FieldInt(array(         'name'=>'version',
-                'view_in_forms'=>false,
-                'default'=>1,
-            )),
-
-            /**
-            * DEPRECIATED: if true, a thumbnail will be displayed in wiki-texts
-            * 
-            * The filetype is taken from mimetype
-            */
-            new FieldBool(array(         'name'=>'is_image',
-                'view_in_forms' =>false,
-                'default'       =>0
-            )),
-
-            /**
-            * if several versions of a file with the same filenames are uploaded,
-            * the current / recent version is marked with this flag
-            */
-            new FieldBool(array(         'name'=>'is_latest',
-                'view_in_forms' =>false,
-                'default'       =>1
-            )),
-
-            /**
-            * if a thumbnail has been created this is the absolute
-            * path
-            */
-            new FieldString(array(      'name'=>'thumbnail',
-                'view_in_forms'=>false
-            )),
-
-            new FieldInternal(array(      'name'=>'parent_item',
-                'view_in_forms'=>false
-            )),
-
-            /**
-            * if this is not zero file is and update of file with this id
-            */
-            new FieldInternal(array(      'name'=>'org_file',
-                'view_in_forms'=>false
-            )),
-
-
-            new FieldText(array(        'name'=>'description',
-                'title'=>__('Description'),
-
-            )),
-    ) as $f) {
-        $g_file_fields[$f->name]=$f;
-    }
 
 
 /**
@@ -133,6 +30,107 @@ class File extends DbProjectItem
         }
    	}
 
+    /**
+    *  setup the database fields for file-object as global assoc-array
+    */
+    static function initFields() 
+    {
+        global $g_file_fields;
+        $g_file_fields= array();
+        addProjectItemFields(&$g_file_fields);
+    
+        foreach(array(
+            new FieldInternal(array(    'name'=>'id',
+                'default'=>0,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+                new FieldString(array(      'name'=>'name',
+                    'title'=>__('Name'),
+                    'view_in_forms'=>true
+                )),
+                new FieldString(array(      'name'=>'org_filename',
+                    'view_in_forms'=>false
+                )),
+    
+                /**
+                * filepath and name under which file is stored on server
+                * - relative to DIR_FILES
+                * - cleaned from special chars
+                * - with appended_version_number
+                *
+                * e.g. prj321/bla.gif
+                *      prj321/bla.gif.1
+                */
+                new FieldString(array(      'name'=>'tmp_filename',
+                    'view_in_forms'=>false
+                )),
+    
+                new FieldString(array(      'name'=>'tmp_dir',
+                    'view_in_forms'=>false
+                )),
+    
+                new FieldString(array(      'name'=>'mimetype',
+                    'view_in_forms'=>false
+                )),
+                new FieldInternal(array(    'name'=>'status',
+                    'view_in_forms'=>false
+                )),
+                new FieldInt(array(         'name'=>'filesize',
+                    'view_in_forms'=>false
+                )),
+                new FieldInt(array(         'name'=>'version',
+                    'view_in_forms'=>false,
+                    'default'=>1,
+                )),
+    
+                /**
+                * DEPRECIATED: if true, a thumbnail will be displayed in wiki-texts
+                * 
+                * The filetype is taken from mimetype
+                */
+                new FieldBool(array(         'name'=>'is_image',
+                    'view_in_forms' =>false,
+                    'default'       =>0
+                )),
+    
+                /**
+                * if several versions of a file with the same filenames are uploaded,
+                * the current / recent version is marked with this flag
+                */
+                new FieldBool(array(         'name'=>'is_latest',
+                    'view_in_forms' =>false,
+                    'default'       =>1
+                )),
+    
+                /**
+                * if a thumbnail has been created this is the absolute
+                * path
+                */
+                new FieldString(array(      'name'=>'thumbnail',
+                    'view_in_forms'=>false
+                )),
+    
+                new FieldInternal(array(      'name'=>'parent_item',
+                    'view_in_forms'=>false
+                )),
+    
+                /**
+                * if this is not zero file is and update of file with this id
+                */
+                new FieldInternal(array(      'name'=>'org_file',
+                    'view_in_forms'=>false
+                )),
+    
+    
+                new FieldText(array(        'name'=>'description',
+                    'title'=>__('Description'),
+    
+                )),
+        ) as $f) {
+            $g_file_fields[$f->name]=$f;
+        }
+    }
 
 
     /**
@@ -702,10 +700,7 @@ class File extends DbProjectItem
             log_message("file::viewAsImage($this->id) can not find file '$filepath'",LOG_MESSAGE_MISSING_FILES);
         }
     }
-
-
-
 }
-
+File::initFields();
 
 ?>

@@ -1,16 +1,8 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php based project management system
-# Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
-# Distributed under the terms and conditions of the GPL as stated in docs/license.txt
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
- * pages relating to company
- *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
- */
+/**\file  pages relating to company */
 
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
@@ -18,8 +10,11 @@ require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_companies.inc.php');
 
+
 /**
 * companyList
+*
+* @ingroup pages
 *
 * - requires prj or task or tsk_*
 */
@@ -106,9 +101,11 @@ function companyList() {
 
 }
 
-#=====================================================================================================
-# companyListClient (all clients)
-#=====================================================================================================
+/**
+* List companies in Client category
+*
+* @ingroup pages
+*/
 function companyListClient()
 {
 	global $PH;
@@ -194,9 +191,10 @@ function companyListClient()
 
 }
 
-#=====================================================================================================
-# companyListProsClient (all prospective clients)
-#=====================================================================================================
+/**
+* List all prospective clients
+* @ingroup pages
+*/
 function companyListProsClient()
 {
 	global $PH;
@@ -280,9 +278,10 @@ function companyListProsClient()
 	echo(new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# companyListSupplier (all supplier)
-#=====================================================================================================
+/**
+* list all supplier
+* @ingroup pages
+*/
 function companyListSupplier()
 {
 	global $PH;
@@ -366,9 +365,11 @@ function companyListSupplier()
 
 }
 
-#=====================================================================================================
-# companyListPartner (all partner)
-#=====================================================================================================
+/**
+* List all partner companies
+*
+* @ingroup pages
+*/
 function companyListPartner()
 {
 	global $PH;
@@ -451,6 +452,11 @@ function companyListPartner()
 	echo(new PageHtmlEnd);
 }
 
+/**
+* View a company 
+*
+* @ingroup pages
+*/
 function companyView()
 {
 
@@ -627,7 +633,7 @@ function companyView()
         unset($list->functions['personEditRights']);
 
         /**
-        * @@@NOTE: we should provide a list-function to link more
+        * \NOTE We should provide a list-function to link more
         * people to this company. But therefore we would need to
         * pass the company's id, which is not possible right now...
         */
@@ -728,10 +734,12 @@ function companyView()
 }
 
 
-#=====================================================================================================
-# companyNew
-# - requires prj or task or tsk_*
-#=====================================================================================================
+/**
+* create a new company
+*
+* @ingroup pages
+* - requires prj or task or tsk_*
+*/
 function companyNew() {
     global $PH;
 
@@ -758,9 +766,10 @@ function companyNew() {
 }
 
 
-#=====================================================================================================
-# company edit
-#=====================================================================================================
+/**
+* Edit a company
+* @ingroup pages
+*/
 function companyEdit($company=NULL)
 {
     global $PH;
@@ -847,9 +856,11 @@ function companyEdit($company=NULL)
 
 }
 
-#=====================================================================================================
-# companyEditSubmit
-#=====================================================================================================
+/**
+* Submit change to a company
+*
+* @ingroup pages
+*/
 function companyEditSubmit()
 {
     global $PH;
@@ -860,7 +871,7 @@ function companyEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     ### get company ####
@@ -920,7 +931,7 @@ function companyEditSubmit()
         ### show 'create another' -form
         if(get('create_another')) {
             $PH->show('companyNew',array());
-            exit;
+            exit();
         }
     }
     else {
@@ -936,9 +947,11 @@ function companyEditSubmit()
     }
 }
 
-#=====================================================================================================
-# Link Persons to company
-#=====================================================================================================
+/**
+* Link Persons to company
+*
+* @ingroup pages
+*/
 function companyLinkPersons() {
     global $PH;
 
@@ -992,9 +1005,11 @@ function companyLinkPersons() {
 
 
 
-#=====================================================================================================
-# companyLinkPersonsSubmit
-#=====================================================================================================
+/**
+* Submit linked persons to a company
+*
+* @ingroup pages 
+*/
 function companyLinkPersonsSubmit()
 {
     global $PH;
@@ -1044,9 +1059,11 @@ function companyLinkPersonsSubmit()
     }
 }
 
-#=====================================================================================================
-# companyPersonsDelete
-#=====================================================================================================
+/**
+* Remove persons from a company 
+*
+* @ingroup pages
+*/
 function companyPersonsDelete()
 {
 	global $PH;
@@ -1110,9 +1127,11 @@ function companyPersonsDelete()
 	}
 }
 
-#=====================================================================================================
-# companyDelete
-#=====================================================================================================
+/**
+* Delete a company 
+*
+* @ingroup pages
+*/
 function companyDelete()
 {
     global $PH;
@@ -1150,5 +1169,7 @@ function companyDelete()
     ### display companyList ####
 	$PH->show('companyList');
 }
+
+/** @} */
 
 ?>

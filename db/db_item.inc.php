@@ -1,13 +1,13 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
 
 require_once(confGet('DIR_STREBER') . "db/db.inc.php");
-#
-
-
 require_once(confGet('DIR_STREBER') . "render/render_fields.inc.php");
 
-
+/**\file
+* Abstract classes for storing information and storing them to an SQL database
+*
+*/
 
 
 
@@ -708,66 +708,9 @@ abstract class DbItem {
 }
 
 
-global $g_item_fields;
-$g_item_fields=array();
-foreach(array(
-            ### internal fields ###
-            new FieldInternal  (array('name'=>'id',
-                'default'=>0,
-                'log_changes'=>false,
-            )),
-            new FieldInternal  (array('name'=>'type',
-                'default'=>0,
-                'log_changes'=>false,
-            )),
-            new FieldUser     (array('name'=>'created_by',
-                'default'=> FINIT_CUR_USER,
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-            )),
-            new FieldDatetime( array('name'=>'created',
-                'default'=>FINIT_NOW,
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-            )),
-            new FieldUser     (array('name'=>'modified_by',
-                'default'=> FINIT_CUR_USER,
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-            )),
-            new FieldDate     (array('name'=>'modified',
-                'default'=>FINIT_NOW,
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-            )),
-            new FieldUser     (array('name'=>'deleted_by',
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-                'default'=>0,
-            )),
-            new FieldDate     (array('name'=>'deleted',
-                'default'=>FINIT_NEVER,
-                'view_in_forms'=>false,
-                'log_changes'=>false,
-            )),
-            new FieldInternal(array(    'name'=>'pub_level',
-                'view_in_forms'=>false,
-                'default'=>PUB_LEVEL_OPEN,
-                'log_changes'=>true,
 
-            )),
-            new FieldInternal  (array('name'=>'state',
-                'log_changes'=>true,
-                'default'=>1,
-            )),
-            new FieldInternal  (array('name'=>'project',
-                'default'=>0,
-                'log_changes'=>false,
-            )),
+DbProjectItem::initItemFields();
 
-       ) as $f) {
-            $g_item_fields[$f->name]=$f;
-       }
 
 function addProjectItemFields(&$ref_fields) {
     global $g_item_fields;
@@ -791,8 +734,7 @@ function addProjectItemFields(&$ref_fields) {
 *   item-table those are directly derived from DbItem.
 *
 */
-class DbProjectItem extends DbItem
-{
+class DbProjectItem extends DbItem {
 
     public $fields_project;
     private $_values_org=array();
@@ -930,6 +872,73 @@ class DbProjectItem extends DbItem
             return NULL;
         }
     }
+    
+    static function initItemFields() {
+        global $g_item_fields;
+        $g_item_fields=array();
+        
+        foreach(array(
+                    ### internal fields ###
+                    new FieldInternal  (array('name'=>'id',
+                        'default'=>0,
+                        'log_changes'=>false,
+                    )),
+                    new FieldInternal  (array('name'=>'type',
+                        'default'=>0,
+                        'log_changes'=>false,
+                    )),
+                    new FieldUser     (array('name'=>'created_by',
+                        'default'=> FINIT_CUR_USER,
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                    )),
+                    new FieldDatetime( array('name'=>'created',
+                        'default'=>FINIT_NOW,
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                    )),
+                    new FieldUser     (array('name'=>'modified_by',
+                        'default'=> FINIT_CUR_USER,
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                    )),
+                    new FieldDate     (array('name'=>'modified',
+                        'default'=>FINIT_NOW,
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                    )),
+                    new FieldUser     (array('name'=>'deleted_by',
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                        'default'=>0,
+                    )),
+                    new FieldDate     (array('name'=>'deleted',
+                        'default'=>FINIT_NEVER,
+                        'view_in_forms'=>false,
+                        'log_changes'=>false,
+                    )),
+                    new FieldInternal(array(    'name'=>'pub_level',
+                        'view_in_forms'=>false,
+                        'default'=>PUB_LEVEL_OPEN,
+                        'log_changes'=>true,
+        
+                    )),
+                    new FieldInternal  (array('name'=>'state',
+                        'log_changes'=>true,
+                        'default'=>1,
+                    )),
+                    new FieldInternal  (array('name'=>'project',
+                        'default'=>0,
+                        'log_changes'=>false,
+                    )),
+        
+               ) as $f) {
+                    $g_item_fields[$f->name]=$f;
+               }
+            }
+        
+
+    
 
 
     /**

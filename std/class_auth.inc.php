@@ -1,12 +1,12 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
  * classes related to user authentication
  *
  *
- * @author: Thomas Mann
+ * @author Thomas Mann
  * @uses
  * @usedby
  *
@@ -371,7 +371,7 @@ class Auth
            header('WWW-Authenticate: Basic realm="blabl"');
            header('HTTP/1.0 401 Unauthorized');
            echo __('Sorry. 	Authentication failed');
-           exit;
+           exit();
         }
 
         $username= '';

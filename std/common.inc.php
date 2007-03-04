@@ -1,4 +1,4 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
 /**
  * function different purposes relating to:
@@ -8,7 +8,7 @@
  *
  * included from:index.php, install.php
  *
- * @author: Thomas Mann
+ * @author Thomas Mann
  * @uses:
  * @usedby: everything
  *

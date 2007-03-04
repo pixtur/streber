@@ -1,15 +1,13 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
+/**\file
  * pages relating to persons
  *
- * @author: Thomas Mann
- * @uses:
- * @usedby:
+ * @author Thomas Mann
  *
  */
 
@@ -37,9 +35,9 @@ function build_person_options(&$person) {
 }
 
 
-#=====================================================================================================
-# personList active (people with account)
-#=====================================================================================================
+/**
+* personList active (people with account) @ingroup pages
+*/
 function personListAccounts()
 {
     global $PH;
@@ -117,9 +115,9 @@ function personListAccounts()
     echo(new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# personList active (people without account)
-#=====================================================================================================
+/**
+* personList active (people without account) @ingroup pages
+*/
 function personList()
 {
     global $PH;
@@ -203,9 +201,9 @@ function personList()
 
 }
 
-#=====================================================================================================
-# personListEmployee (all kinds of employees)
-#=====================================================================================================
+/**
+* personListEmployee (all kinds of employees) @ingroup pages
+*/
 function personListEmployee()
 {
     global $PH;
@@ -286,9 +284,10 @@ function personListEmployee()
     echo(new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# personListContact (all contact persons)
-#=====================================================================================================
+
+/**
+* personListContact (all contact persons)  @ingroup pages
+*/
 function personListContact()
 {
     global $PH;
@@ -370,9 +369,9 @@ function personListContact()
     echo(new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# personListDeleted (all deleted persons)
-#=====================================================================================================
+/**
+* personListDeleted (all deleted persons)  @ingroup pages
+*/
 function personListDeleted()
 {
     global $PH;
@@ -455,6 +454,9 @@ function personListDeleted()
 }
 
 
+/**
+* Person View @ingroup pages
+*/
 function personView()
 {
     global $PH;
@@ -651,7 +653,7 @@ function personView()
         #unset($list->functions['companyNew']);
 
         /**
-        * @@@NOTE: we should provide a list-function to link more
+        * \todo We should provide a list-function to link more
         * people to this company. But therefore we would need to
         * pass the company's id, which is not possible right now...
         */
@@ -709,11 +711,11 @@ function personView()
     ### list projects ###
     {
         /**
-        *  @@@note: passing colum to person->getProject is not simple...
+        *  \Note: passing colum to person->getProject is not simple...
         *  the sql-querry currently just querry project-persons, which do not contain anything usefull
-        *   possible solution:
-        *       1. rewrite the querry-string
-        *       2. rewrite all order-keys to something like company.name
+        *  Possible solutions:
+        *   - rewrite the querry-string
+        *   - rewrite all order-keys to something like company.name
         */
         $order_by= get('sort_'.$PH->cur_page->id."_projects");
 
@@ -778,7 +780,7 @@ function personView()
 
 
 /**
-* display efforts for person...
+* display efforts for person...  @ingroup pages
 */
 function personViewEfforts()
 {
@@ -1023,10 +1025,9 @@ function personViewEfforts()
 
 
 
-#=====================================================================================================
-# personNew
-# - requires prj or task or tsk_*
-#=====================================================================================================
+/**
+* Create a new person  @ingroup pages
+*/
 function personNew() {
     global $PH;
     global $auth;
@@ -1062,8 +1063,7 @@ function personNew() {
 
 
 /**
-* personEdit
-*
+* Edit a person  @ingroup pages
 */
 function personEdit($person=NULL)
 {
@@ -1372,7 +1372,9 @@ function personEdit($person=NULL)
 
 
 
-
+/**
+* Submit changes to a person @ingroup pages
+*/
 function personEditSubmit()
 {
     global $PH;
@@ -1383,7 +1385,7 @@ function personEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     if(!validateFormCrc()) {
@@ -1676,7 +1678,7 @@ function personEditSubmit()
     if(!$flag_ok) {
         $PH->show('personEdit',NULL,$person);
 
-        exit;
+        exit();
     }
 
     /**
@@ -1768,9 +1770,9 @@ function personEditSubmit()
 }
 
 
-#=====================================================================================================
-# personDelete
-#=====================================================================================================
+/**
+* Delete a person
+*/
 function personDelete()
 {
     global $PH;
@@ -1820,7 +1822,9 @@ function personDelete()
 }
 
 
-
+/**
+* Send activation mail to a person @ingroup pages
+*/
 function personSendActivation()
 {
     global $PH;
@@ -1830,24 +1834,24 @@ function personSendActivation()
 
     if(!$person = Person::getEditableById($person_id)) {
         $PH->abortWarning(__("Insufficient rights"));
-        exit;
+        exit();
     }
 
 
     if(!$person->office_email && !$person->personal_email) {
         $PH->abortWarning(__("Sending notifactions requires an email-address."));
-        exit;
+        exit();
     }
 
 
     if(! ($person->user_rights & RIGHT_PERSON_EDIT_SELF)) {
         $PH->abortWarning(__("Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense."), ERROR_NOTE);
-        exit;
+        exit();
     }
 
     if(! $person->can_login) {
         $PH->abortWarning(__("Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile."), ERROR_NOTE);
-        exit;
+        exit();
     }
 
     $person->settings |= USER_SETTING_NOTIFICATIONS;
@@ -1872,7 +1876,9 @@ function personSendActivation()
 }
 
 
-
+/**
+* Send notication mail for one person right now @ingroup pages
+*/
 function personsFlushNotifications()
 {
     global $PH;
@@ -1919,8 +1925,10 @@ function personsFlushNotifications()
 }
 
 
-/*************************************************************************************
-* edit user rights
+/**
+* edit user rights of a person 
+*
+* @ingroup pages
 *
 * the user-rights-validation is checked by pageHandler (requires RIGHT_PERSON_EDIT_RIGHTS)
 */
@@ -1991,8 +1999,10 @@ function personEditRights($person=NULL)
 
 
 
-/****************************************************************************************
-* personEditRightsSubmit - submit entered login information
+/**
+* Submit changes to user rights of a person
+*
+* @ingroup pages
 *
 * the user-rights-validation is checked by pageHandler (requires RIGHT_PERSON_EDIT_RIGHTS)
 */
@@ -2007,7 +2017,7 @@ function personEditRightsSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     ### get person ####
@@ -2061,7 +2071,7 @@ function personEditRightsSubmit()
 
 
 /**
-* @@@pixtur 2006-10-24: This function is still under development!
+* Register a new Person @ingroup pages
 *
 */
 function personRegister($person=NULL)
@@ -2224,6 +2234,9 @@ function personRegister($person=NULL)
 
 
 
+/**
+* Submit data of a newly registered person @ingroup pages
+*/
 function personRegisterSubmit()
 {
     global $PH;
@@ -2234,7 +2247,7 @@ function personRegisterSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     if(!validateFormCrc()) {
@@ -2385,7 +2398,7 @@ function personRegisterSubmit()
     if($person->can_login || $person->nickname != "") {
 
         /**
-        * @@@ actually this should be mb_strtolower, but this is not installed by default
+        * \todo actually this should be mb_strtolower, but this is not installed by default
         */
         if($person->nickname != strtolower($person->nickname)) {
             new FeedbackMessage(__("Nickname has been converted to lowercase"));
@@ -2447,7 +2460,7 @@ function personRegisterSubmit()
     ### repeat form if invalid data ###
     if(!$flag_ok) {
         $PH->show('personRegister',NULL,$person);
-        exit;
+        exit();
     }
     
     /**
@@ -2509,7 +2522,7 @@ function personRegisterSubmit()
         );
         addRequestVars($foo);
         $PH->show('loginFormSubmit',array());
-        exit;
+        exit();
     }
     else {
         new FeedbackError(__("Could not insert object"));
@@ -2522,9 +2535,9 @@ function personRegisterSubmit()
 }
 
 
-#=====================================================================================================
-# Link companies to person
-#=====================================================================================================
+/**
+* Link companies to person @ingroup pages
+*/
 function personLinkCompanies() {
     global $PH;
 
@@ -2575,9 +2588,9 @@ function personLinkCompanies() {
 
 }
 
-#=====================================================================================================
-# companyLinkPersonsSubmit
-#=====================================================================================================
+/**
+* companyLinkPersonsSubmit @ingroup pages
+*/
 function personLinkCompaniesSubmit()
 {
     global $PH;
@@ -2627,9 +2640,9 @@ function personLinkCompaniesSubmit()
     }
 }
 
-#=====================================================================================================
-# companyPersonsDelete
-#=====================================================================================================
+/**
+* Unlink a person from a company @ingroup pages
+*/
 function personCompaniesDelete()
 {
     global $PH;
@@ -2699,6 +2712,8 @@ function personCompaniesDelete()
 
 
 /**
+* Mark all items of a person as been viewed @ingroup pages
+*
 * if an item is viewed (not changed) depends on two facts:
 * 1. item_person item exists
 * 2. item.modfied < person.date_highlight_changes

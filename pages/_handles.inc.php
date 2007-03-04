@@ -1,5 +1,17 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
+/**\file 
+* Define pages and there options
+* 
+* read more at...
+* - http://www.streber-pm.org/3391
+* - http://www.streber-pm.org/3392
+*/
+
+/**\defgroup pages Pages
+*
+* The framework splits user interaction into Pages which are defined as PageHandles in _handles.inc.php
+*/
 
 
 new PageHandle(array('id'=>'home',
@@ -852,7 +864,7 @@ new PageHandleSubm(array('id'=>'fileEditSubmit',
     'req'=>'pages/file.inc.php',
 
 ));
-new PageHandleFunc(array('id'=>'fileDelete',
+new PageHandleFunc(array('id'=>'filesDelete',
     'req'=>'pages/file.inc.php',
 ));
 new PageHandleFunc(array('id'=>'filesMoveToFolder',
@@ -1144,14 +1156,6 @@ new PageHandleFunc(array('id'=>'imageRenderCaptcha',
 ));
 
 
-
-
-/**
-* quick new
-*/
-new PageHandleFunc(array('id'=>'quickNew',
-    'req'=>'pages/quicknew.inc.php',
-));
 
 
 /**

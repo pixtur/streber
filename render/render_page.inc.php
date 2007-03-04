@@ -1,17 +1,18 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
  * classes related to rendering html output
  *
- * called from:
+ * @author Thomas Mann
  *
+ */
+ 
+ /**
+ * @defgroup render Render
  *
- * @author: Thomas Mann
- * @uses:
- * @usedby:
- *
+ * This group collects classes and function related to renderin html or csv output
  */
 
 
@@ -19,7 +20,7 @@ require_once(confGet('DIR_STREBER') . "render/render_misc.inc.php");
 
 /**
 * pagefunctions for editing the currently displayed obj (eg. Delete a task)
-*
+* @ingroup render
 */
 class PageFunction extends BaseObject
 {
@@ -36,6 +37,8 @@ class PageFunction extends BaseObject
 
 /**
 * group page function with keyword like "*new:* *status:*" etc.
+*
+* @ingroup render
 */
 class PageFunctionGroup extends PageFunction
 {
@@ -45,6 +48,8 @@ class PageFunctionGroup extends PageFunction
 
 /**
 * link in TopNavigation
+*
+* @ingroup render
 */
 abstract class NaviLink
 {
@@ -93,6 +98,11 @@ abstract class NaviLink
     }
 }
 
+/**
+* Handles informaion about the parents of a rendered Page
+*
+* @ingroup render
+*/
 class NaviCrumb extends NaviLink
 {
 
@@ -129,6 +139,11 @@ class NaviCrumb extends NaviLink
     }
 }
 
+/**
+* Handles information about alternative Pages for a displayed Pages 
+*
+* @ingroup render
+*/
 class NaviOption extends NaviLink
 {
     public $separated;
@@ -161,7 +176,11 @@ class NaviOption extends NaviLink
 }
 
 
-
+/**
+* A page to be rendered
+*
+* @ingroup render
+*/
 class Page
 {
 
@@ -386,11 +405,14 @@ class Page
     }
 }
 
-#========================================================================================
-# PageElement
-#========================================================================================
-# - all other elements of a page extend this class
-# - maps the global var $page
+/**
+* Element inside a page 
+*
+* @ingroup render
+*
+* - all other elements of a page extend this class
+* - maps the global var $page
+*/
 class PageElement extends BaseObject
 {
     public $page;
@@ -442,10 +464,11 @@ class PageElement extends BaseObject
 }
 
 
-#========================================================================================
-# HTML Start
-#
-#========================================================================================
+/**
+* Class for rendering the beginning or an Page in html 
+*
+* @ingroup render
+*/
 class PageHtmlStart extends PageElement {
 
     public function __toString()
@@ -590,9 +613,11 @@ document.my_form." . $this->page->autofocus_field. ".select();";
 
 
 
-#========================================================================================
-# HTML End
-#========================================================================================
+/**
+* HTML End
+*
+* @ingroup render
+*/
 class PageHtmlEnd extends PageElement {
 
     public function __toString()
@@ -621,44 +646,11 @@ class PageHtmlEnd extends PageElement {
     }
 }
 
-#========================================================================================
-# Quick new
-#========================================================================================
-class PageQuickNew extends PageElement {
-
-    public function __toString() {
-        $buffer=
-            '<div id="quicknew" title="Add to selected task(s). Shortcut:ALT-N">'
-            .'<input type="hidden" name="noedit" value="0">'
-            .'<input type="hidden" name="newtype" value="task">'
-            .'<label><span class="accesskey">n</span>ew </label>'
-            .'<select name="type">'
-            .'<option value="task" selected>' . __("Task") . '</option>'
-            .'<option value="effort">' . __("Effort") .      '</option>'
-            .'<option value="comment">'. __("Comment") .     '</option>'
-            .'</select>'
-            .'<input class="inp" accesskey="n" size="50" name="new_name">'
-            .'<input class="button" type="button" value ="'. __("Add Now") .'" onclick="javascript:document.my_form.go.value=\'quickNew\';document.my_form.noedit.value=\'1\';document.my_form.submit();">'
-            .'<input class="button" type="button" value ="'. __("Edit") . '" onclick="javascript:document.my_form.go.value=\'quickNew\';document.my_form.submit();">'
-            #."<span class=help><a href=''>help</a></span>"
-            .'<span class="hint">E.g. <b>BUG: application crashes on IE !! 4h in 5 days</b>  (Creates task labeled \'bug\', prio1, with estimated 4 hours and due in 4 days)</span>'
-            .'</div>'
-            ;
-        global $PH;
-        $PH->go_submit='quickNew';
 
 
-        return $buffer;
-    }
-
-}
-
-
-
-
-#========================================================================================
-# Header
-#========================================================================================
+/**
+* Render Header @ingroup render
+*/
 class PageHeader extends PageElement
 {
 
@@ -780,9 +772,11 @@ class PageHeader extends PageElement
 }
 
 
-#========================================================================================
-# Header >> Tabs
-#========================================================================================
+/**
+* Section elements in a page header
+*
+* @ingroup render
+*/
 class PageHeaderTabs extends PageElement {
 
     public function __toString()
@@ -852,11 +846,14 @@ class PageHeaderTabs extends PageElement {
 
         return $buffer;
     }
-}   # end of PageHeaderTabs
+}  
 
-#========================================================================================
-# PageHeaderCrumbs
-#========================================================================================
+
+/**
+* Navigation structure of a Page (crumbs and options)
+*
+* @ingroup render
+*/
 class PageHeaderNavigation extends PageElement
 {
     public function __toString() {
@@ -985,6 +982,11 @@ class PageHeaderNavigation extends PageElement
 
 }
 
+/**
+* Rendering the parent pages of a page
+*
+* @ingroup render
+*/
 class PageHeaderCrumbs extends PageElement
 {
 
@@ -1075,9 +1077,11 @@ class PageHeaderCrumbs extends PageElement
 
 
 
-#========================================================================================
-# PageTitle
-#========================================================================================
+/**
+* Rendering the Title of page
+*
+* @ingroup render
+*/
 class PageTitle extends PageElement {
 
 
@@ -1104,9 +1108,11 @@ class PageTitle extends PageElement {
 }
 
 
-#========================================================================================
-# PageFunctions
-#========================================================================================
+/**
+* Rendering page functions (normally in the upper right of a page)
+*
+* @ingroup render
+*/
 class PageFunctions extends PageElement {
 
 
@@ -1149,9 +1155,11 @@ class PageFunctions extends PageElement {
 }
 
 
-#===========================================================================================
-# PageContentStart
-#===========================================================================================
+/**
+* Renders the beginning of a new content block
+*
+* @ingroup render
+*/
 class PageContentOpen extends PageElement
 {
 
@@ -1197,9 +1205,11 @@ class PageContentOpen extends PageElement
     }
 }
 
-#===========================================================================================
-# PageContentStart_Columns
-#===========================================================================================
+/**
+* Renderings the beginning of a multiple columne view
+*
+* @ingroup render
+*/
 class PageContentOpen_Columns extends PageElement
 {
 
@@ -1233,9 +1243,11 @@ class PageContentOpen_Columns extends PageElement
     }
 }
 
-#===========================================================================================
-# PageContentClose
-#===========================================================================================
+/**
+* Closes the content area
+*
+* @ingroup render
+*/
 class PageContentClose extends PageElement
 {
 
@@ -1280,6 +1292,11 @@ class PageContentClose extends PageElement
     }
 }
 
+/**
+* Renders the beginning of the next column
+*
+* @ingroup render
+*/
 class PageContentNextCol extends PageElement {
     public function __toString() {
         if(!$this->page->content_open) {
@@ -1292,7 +1309,11 @@ class PageContentNextCol extends PageElement {
     }
 }
 
-
+/**
+* Renders the footage of a page
+*
+* @ingroup render
+*/
 class PageFooter extends PageElement
 {
 

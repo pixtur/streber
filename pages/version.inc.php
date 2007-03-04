@@ -3,13 +3,10 @@
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
+/**\file
  * pages relating to versions
  *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
+ * @author         Thomas Mann
  */
 
 
@@ -18,10 +15,10 @@ require_once("db/class_project.inc.php");
 require_once("db/class_version.inc.php");
 require_once("render/render_list.inc.php");
 
-#=====================================================================================================
-# versionNew
-# - requires prj
-#=====================================================================================================
+/**
+* versionNew @ingroup pages
+* - requires prj
+*/
 function versionNew()
 {
     global $PH;
@@ -54,9 +51,9 @@ function versionNew()
 }
 
 
-#=====================================================================================================
-# version edit
-#=====================================================================================================
+/**
+* version edit @ingroup pages
+*/
 function versionEdit($version=NULL) {
     global $PH;
 
@@ -131,6 +128,9 @@ function versionEdit($version=NULL) {
 }
 
 
+/**
+* Submitting changes to version @ingroup pages
+*/
 function versionEditSubmit()
 {
     global $PH;
@@ -217,7 +217,9 @@ function versionEditSubmit()
 }
 
 
-
+/**
+* Deleting version(s) @ingroup pages
+*/
 function versionsDelete()
 {
     global $PH;
@@ -257,7 +259,9 @@ function versionsDelete()
 }
 
 
-
+/**
+* view details of a version @ingroup pages
+*/
 function versionView(){
     global $PH;
 	global $auth;

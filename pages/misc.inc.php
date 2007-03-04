@@ -1,20 +1,19 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
+/**\file
  * miscellenious functions (sorting, toggling etc.)
  *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
+ * @author         Thomas Mann
  */
 
 
 /**
-* in clean url we have a mapping of
+* resolve mapping for clean SEF Urls @ingroup pages
+*
+* This page is only been requested by .htaccess file if mod_rewrite option is enabled
 */
 function globalView()
 {
@@ -49,6 +48,9 @@ function globalView()
 
 
 
+/**
+* Change the sorting of a table @ingroup pages
+*/
 function changeSort()
 {
     global $PH;
@@ -126,7 +128,7 @@ function changeSort()
 
 
 /**
-* change current task-list-view (tree, list, grouped, etc.)
+* change current task-list-view (tree, list, grouped, etc.) @ingroup pages
 */
 function changeBlockStyle()
 {
@@ -164,7 +166,7 @@ function changeBlockStyle()
 }
 
 /**
-* change current task-list-view (tree, list, grouped, etc.)
+* change current task-list-view (tree, list, grouped, etc.) @ingroup pages
 */
 function changeBlockGrouping()
 {
@@ -203,7 +205,7 @@ function changeBlockGrouping()
 
 
 /**
-* restoring items
+* Restoring (i.e. undelete) items @ingroup pages
 */
 function itemsRestore()
 {
@@ -252,7 +254,7 @@ function itemsRestore()
 
 
 /**
-* show system information
+* show system information @ingroup pages
 */
 function systemInfo()
 {
@@ -314,7 +316,7 @@ function systemInfo()
 
 
 /**
-* assemble system information in assoc array
+* assemble system information in assoc array @ingroup pages
 */
 function getSysInfo() {
     global $PH;
@@ -383,7 +385,9 @@ function getSysInfo() {
 
 
 /**
-* is displaying this a security issue?
+* Render page info @ingroup pages
+*
+* Because this function is a potential security risk, it is only available for admins
 */
 function showPhpInfo()
 {
@@ -391,7 +395,9 @@ function showPhpInfo()
 }
 
 /**
+* Send notification mails to all users @ingroup pages
 *
+* This page is normally requested by Cron jobs. Read more at http://www.streber-pm.org/2211
 */
 function triggerSendNotifications()
 {
@@ -412,6 +418,9 @@ function triggerSendNotifications()
 }
 
 
+/**
+* Show error log @ingroup pages
+*/
 function showLog()
 {
     global $PH;
@@ -491,6 +500,9 @@ function showLog()
     fclose($handle);
 }
 
+/**
+* Delete error log file @ingroup pages
+*/
 function deleteLog()
 {
     global $PH;
@@ -498,7 +510,7 @@ function deleteLog()
     if(file_exists($filepath)) {
         if(unlink($filepath)) {
             if($FO = fopen(dirname(__FILE__)."/../_tmp/errors.log.php", "w")) {
-                fputs($FO,'<? header("Location: ../index.php");exit; ?>');
+                fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
             }
             new FeedbackMessage('errors.log.php deleted');
         }
@@ -519,7 +531,7 @@ function deleteLog()
 
 
 /**
-* generates an image with a number that is computed as:
+* generates an image with a number that is computed as: @ingroup pages
 *
 *  substr(md5( $key . $auth->cur_user->identifier ), 0, 5)
 *

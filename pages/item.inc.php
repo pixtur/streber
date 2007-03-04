@@ -1,4 +1,12 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
+
+/**\file 
+* pages relating to Items 
+*/
+
+
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
@@ -9,7 +17,12 @@ require_once(confGet('DIR_STREBER') . 'lists/list_comments.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 
 
-
+/**
+* Channels the view an item to correct page @ingroup pages
+*
+* This Page is required for SEF-Urls. With the ID it get the request Item from the database and depending
+* on its type it renders the appropriate view page.
+*/
 function itemView()
 {
     global $PH;
@@ -96,6 +109,10 @@ function itemsSetPubLevel()
     }
 }
 
+
+/**
+* add some items to bookmarks of current user @ingroup pages
+*/
 function itemsAsBookmark()
 {
 	global $PH;
@@ -138,6 +155,9 @@ function itemsAsBookmark()
 	}
 }
 
+/**
+* Remove some items from bookmarks of current user @ingroup pages
+*/
 function itemsRemoveBookmark()
 {
 	global $PH;
@@ -209,6 +229,9 @@ function itemsRemoveBookmark()
 	}
 }
 
+/**
+* Edit one bookmarks @ingroup pages
+*/
 function itemMonitorEdit($bookmark=NULL)
 {
 	global $PH;
@@ -226,7 +249,7 @@ function itemMonitorEdit($bookmark=NULL)
 		}
 		elseif(count($ids) > 1) {
 			$PH->show('itemMonitorEditMultiple');
-			exit;
+			exit();
 		}
 		
 		if(!$bookmark = ItemPerson::getAll(array('item'=>$ids[0], 'person'=>$auth->cur_user->id, 'is_bookmark'=>1))) {
@@ -252,7 +275,7 @@ function itemMonitorEdit($bookmark=NULL)
 		{
 			## not a nice solution with 'bookmark'=>$ids[0], but the more important value is the '$ids' value ##
 			$PH->show('itemMonitorEditMultiple', array('bookmark'=>$bookmark[0]), $bookmark);
-			exit;
+			exit();
 		}
 				
 		if($bookmarkitem = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$bookmark[0], 'is_bookmark'=>0))){
@@ -405,6 +428,9 @@ function itemMonitorEdit($bookmark=NULL)
 
 }
 
+/**
+* submit changes to one bookmark @ingroup pages
+*/
 function itemMonitorEditSubmit()
 {
 	global $PH;
@@ -415,7 +441,7 @@ function itemMonitorEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     ### get bookmark ####
@@ -497,6 +523,9 @@ function itemMonitorEditSubmit()
 	}
 }
 
+/**
+* edit several bookmarks @ingroup pages
+*/
 function itemMonitorEditMultiple($thebookmarks=NULL)
 {
 	global $PH;
@@ -720,6 +749,9 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
 	}
 }
 
+/**
+* submit changes to several bookmarks @ingroup pages
+*/
 function itemMonitorEditMultipleSubmit()
 {
 	global $PH;
@@ -730,7 +762,7 @@ function itemMonitorEditMultipleSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 	
 	$count = 0;
@@ -828,6 +860,9 @@ function itemMonitorEditMultipleSubmit()
 	}
 }
 
+/**
+* send immediate notification of an monitored item has been edited @ingroup pages
+*/
 function itemsSendNotification()
 {
 	global $PH;
@@ -884,6 +919,9 @@ function itemsSendNotification()
 	}
 }
 
+/**
+* remove items from user's notification list @ingroup pages
+*/
 function itemsRemoveNotification()
 {
 	global $PH;
@@ -935,7 +973,7 @@ function itemsRemoveNotification()
 
 
 /**
-* renders a comparision between two versions of an item
+* renders a comparision between two versions of an item @ingroup pages
 */
 function itemViewDiff()
 {

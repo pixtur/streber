@@ -1,4 +1,4 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 require_once("db/class_task.inc.php");
 require_once("db/class_project.inc.php");
 

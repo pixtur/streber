@@ -1,17 +1,12 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
-/**
+/**\file
  * project
  *
- * @includedby:     *
- *
- * @author:         Thomas Mann
- * @uses:           DbProjectItem
- * @usedby:
- *
+ * @author         Thomas Mann
  */
 
 
@@ -26,91 +21,6 @@ global $g_cache_projects;
 $g_cache_projects=array();
 
 
-
-global $g_project_fields;
-$g_project_fields=array();
-addProjectItemFields(&$g_project_fields);
-
-foreach(array(
-    new FieldInternal(array(    'name'=>'id',
-        'default'=>0,
-        'in_db_object'=>1,
-        'in_db_item'=>1,
-    )),
-    new FieldInternal(array(    'name'=>'state',    ### cached in project-table to speed up queries ###
-        'default'=>1,
-        'in_db_object'=>1,
-        'in_db_item'=>1,
-    )),
-    new FieldString(array(      'name'=>'name',
-        'title'=>__('Name'),
-        'required'=>true,
-    )),
-    new FieldString(array(      'name'=>'short',
-        'title'=>__('Short'),
-    )),
-    new FieldString(array(      'name'=>'status_summary',
-        'title'=>__('Status summary'),
-    )),
-    new FieldString(array(      'name'=>'color',
-        'title'=>__('Color'),
-    )),
-    new FieldDate(array(        'name'=>'date_start',
-        'title'=>__('Date start'),
-        'default'=>FINIT_TODAY
-    )),
-    new FieldDate(array(        'name'=>'date_closed',
-        'title'=>__('Date closed'),
-        'default'=>FINIT_NEVER
-    )),
-    new FieldOption(array(      'name'=>'status',
-        'title'=>__('Status'),
-        'default'=>3
-    )),
-    new FieldString(array(      'name'=>'projectpage',
-        'title'=>__('Project page'),
-    )),
-    new FieldString(array(      'name'=>'wikipage',
-        'title'=>__('Wiki page'),
-    )),
-    new FieldInt(array(         'name'=>'prio',
-        'title'=>__('Priority'),
-        'default'=>3
-    )),     # @@@ todo: default-status and prio should be project-setting!
-    new FieldText(array(        'name'=>'description',
-        'title'=>__('Description'),
-    )),
-    new FieldInt(array(         'name'=>'company',
-        'title'=>__('Company'),
-    )),
-    new FieldBool(array(        'name'=>'show_in_home',
-        'default'=>1,
-        'title'=>__('show tasks in home'),
-    )),
-
-    /**
-    * bit-field of user-rights. See "std/auth.inc.php"
-    */
-    new FieldInternal(array(    'name'=>'settings',
-        'default'=>    confGet('PROJECT_DEFAULT_SETTINGS'),
-		'log_changes'=>true,
-    )),
-
-
-    /**
-    * labels for newly created projects
-    */
-    new FieldHidden(array(      'name'=>'labels',
-        'default'=>  confGet("PROJECT_DEFAULT_LABELS"),
-    )),
-
-    new FieldInternal(array(    'name'=>'default_pub_level',    # level of new items
-        'view_in_forms'=>false,
-        'default'=>PUB_LEVEL_OPEN,
-    )),
-) as $f) {
-    $g_project_fields[$f->name]=$f;
-}
 
 
 
@@ -131,6 +41,96 @@ class Project extends DbProjectItem
         parent::__construct($id_or_array);
         $this->type= ITEM_PROJECT;
    	}
+
+
+    static function initFields() 
+    {
+            
+        global $g_project_fields;
+        $g_project_fields=array();
+        addProjectItemFields(&$g_project_fields);
+        
+        foreach(array(
+            new FieldInternal(array(    'name'=>'id',
+                'default'=>0,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+            new FieldInternal(array(    'name'=>'state',    ### cached in project-table to speed up queries ###
+                'default'=>1,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+            new FieldString(array(      'name'=>'name',
+                'title'=>__('Name'),
+                'required'=>true,
+            )),
+            new FieldString(array(      'name'=>'short',
+                'title'=>__('Short'),
+            )),
+            new FieldString(array(      'name'=>'status_summary',
+                'title'=>__('Status summary'),
+            )),
+            new FieldString(array(      'name'=>'color',
+                'title'=>__('Color'),
+            )),
+            new FieldDate(array(        'name'=>'date_start',
+                'title'=>__('Date start'),
+                'default'=>FINIT_TODAY
+            )),
+            new FieldDate(array(        'name'=>'date_closed',
+                'title'=>__('Date closed'),
+                'default'=>FINIT_NEVER
+            )),
+            new FieldOption(array(      'name'=>'status',
+                'title'=>__('Status'),
+                'default'=>3
+            )),
+            new FieldString(array(      'name'=>'projectpage',
+                'title'=>__('Project page'),
+            )),
+            new FieldString(array(      'name'=>'wikipage',
+                'title'=>__('Wiki page'),
+            )),
+            new FieldInt(array(         'name'=>'prio',
+                'title'=>__('Priority'),
+                'default'=>3
+            )),     # @@@ todo: default-status and prio should be project-setting!
+            new FieldText(array(        'name'=>'description',
+                'title'=>__('Description'),
+            )),
+            new FieldInt(array(         'name'=>'company',
+                'title'=>__('Company'),
+            )),
+            new FieldBool(array(        'name'=>'show_in_home',
+                'default'=>1,
+                'title'=>__('show tasks in home'),
+            )),
+        
+            /**
+            * bit-field of user-rights. See "std/auth.inc.php"
+            */
+            new FieldInternal(array(    'name'=>'settings',
+                'default'=>    confGet('PROJECT_DEFAULT_SETTINGS'),
+        		'log_changes'=>true,
+            )),
+        
+        
+            /**
+            * labels for newly created projects
+            */
+            new FieldHidden(array(      'name'=>'labels',
+                'default'=>  confGet("PROJECT_DEFAULT_LABELS"),
+            )),
+        
+            new FieldInternal(array(    'name'=>'default_pub_level',    # level of new items
+                'view_in_forms'=>false,
+                'default'=>PUB_LEVEL_OPEN,
+            )),
+        ) as $f) {
+            $g_project_fields[$f->name]=$f;
+        }
+    }
 
     /**
     * query from db
@@ -1133,8 +1133,6 @@ class Project extends DbProjectItem
     * - by default returns to previous page with error
     * - if abort_on_error is false, return with "false"
     * - to check for rights to create new items, use project->getCurrentLevelCreate();
-    *
-    * @@@ may grand admin access to anything
     */
     public function validateViewItem($item=NULL, $abort_on_error=false)
     {
@@ -1144,7 +1142,7 @@ class Project extends DbProjectItem
         if(!$item) {
             if($abort_on_error) {
                 $PH->abortWarning(__("validating invalid item"),ERROR_BUG);
-                exit;
+                exit();
             }
             return false;
         }
@@ -1158,8 +1156,8 @@ class Project extends DbProjectItem
 
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {
-               $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
-               exit;
+                $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
+                exit();
             }
             return false;
         }
@@ -1168,11 +1166,11 @@ class Project extends DbProjectItem
         if($item->created_by == $pp->person) {
             $l= PUB_LEVEL_OWNED;
         }
-        # @@@ check different items-types here...
+        # \TODO check different items-types here...
         if($l < $pp->level_view) {
             if($abort_on_error) {
                 $PH->abortWarning(__("insuffient rights"),ERROR_RIGHTS);
-                exit;
+                exit();
             }
             return false;
         }
@@ -1187,7 +1185,6 @@ class Project extends DbProjectItem
     * - if abort_on_error is false, return with "false"
     * - to check for rights to create new items, use project->getCurrentLevelCreate();
     *
-    * @@@ may grand admin access to anything
     */
     public function validateEditItem($item=NULL, $abort_on_error=true)
     {
@@ -1197,7 +1194,7 @@ class Project extends DbProjectItem
         if(!$item) {
             if($abort_on_error) {
                 $PH->abortWarning(__("validating invalid item"),ERROR_BUG);
-                exit;
+                exit();
             }
             return false;
         }
@@ -1209,7 +1206,7 @@ class Project extends DbProjectItem
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {
                 $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
-                exit;
+                exit();
             }
             return false;
         }
@@ -1220,11 +1217,11 @@ class Project extends DbProjectItem
             $l= PUB_LEVEL_OWNED;
         }
 
-        # @@@ check different items-types here...
+        # \TODO check different items-types here...
         if($item->id != 0 && $l < $pp->level_edit) {
             if($abort_on_error) {
                 $PH->abortWarning(__("insuffient rights"),ERROR_RIGHTS);
-                exit;
+                exit();
             }
 		    return false;
         }
@@ -1338,7 +1335,7 @@ class Project extends DbProjectItem
     }
 }
 
-
+Project::initFields();
 
 
 function cmp_comments($a,$b) {

@@ -1,8 +1,8 @@
 <?php
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
 * Welcome to the source-code. This is a good point to start reading.
 *
 * This is index.php - the master-control-page. There are NO other php-pages, except from
@@ -16,16 +16,10 @@
 * - authenticate the user
 * - render a page (which means calling a function defined in a file at pages/*.inc)
 *
-* If you want to read more source-code try...
-*
-* - pages/_pagehandles.inc  - a list of definiation of all posibible pages, it's required rights, etc.
-* - pages/home.inc          - example, how a normal page looks like
-* - pages/effort.inc        - example, how a form-workflow looks like
-* - lists/list_efforts.inc  - example for listing objects
-* - db/class_effort.inc     - exampel for back-end definition of object-types
-* - render/page.inc         - rending of html-code
 *
 */
+
+
 error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT |E_PARSE|E_CORE_ERROR|E_CORE_WARNING|E_COMPILE_ERROR);
 
 
@@ -52,7 +46,7 @@ if(file_exists(confGet('DIR_SETTINGS').confGet('FILE_DB_SETTINGS'))) {
 }
 else {
     header("location:install/install.php");
-    exit;
+    exit();
 }
 
 ### user-settings ##
@@ -107,9 +101,9 @@ if ($result = $dbh->prepare('SELECT NOW()')) {
 
 measure_stop( confGet('DIR_STREBER') . 'core_includes');
 
-/********************************************************************************
+/**
 * authenticate user by cookie / start translation
-********************************************************************************/
+*/
 measure_start('authorize');
 if(!$user = $auth->setCurUserByCookie()) {
     $user = $auth->setCurUserAsAnonymous();
@@ -117,7 +111,7 @@ if(!$user = $auth->setCurUserByCookie()) {
 measure_stop('authorize');
 
 
-### set language as early as here to start translation... ###
+/** set language as early as here to start translation... */
 {
     measure_start('language');
     if($user && !Auth::isAnonymousUser()) {
@@ -128,19 +122,17 @@ measure_stop('authorize');
             && $auth->cur_user->language != "en"
         ) {
             setLang($auth->cur_user->language);
-            build_person_fields();
+            Person::initFields();
         }
     }
     else {
         setLang(confGet('DEFAULT_LANGUAGE'));
-        build_person_fields();
+        Person::initFields();
     }
     measure_stop('language');
 }
 
-/********************************************************************************
-* include framework
-********************************************************************************/
+/** include framework */
 measure_start('plugins');
 require_once( confGet('DIR_STREBER') . "std/constant_names.inc.php");
 require_once( confGet('DIR_STREBER') . "render/render_page.inc.php");
@@ -182,11 +174,11 @@ if($requested_page->http_auth) {
 
             $PH->show($requested_page->id);
 
-            exit;
+            exit();
         }
         else {
            echo __('Sorry. 	Authentication failed');
-           exit;
+           exit();
         }
     }
 }
@@ -207,17 +199,17 @@ if($user) {
             new FeedbackMessage(confGet('MESSAGE_WELCOME_HOME'));
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
 
     $PH->show($requested_page_id);
-    exit;
+    exit();
 }
 
 ### anonymous pages like Login or License ###
 if($requested_page_id && $requested_page && $requested_page->valid_for_anonymous) {
     $PH->show($requested_page_id);
-    exit;
+    exit();
 }
 
 ### identified by tuid (email notification, etc.)
@@ -238,7 +230,7 @@ if(get('tuid') && $requested_page && $requested_page->valid_for_tuid) {
 
         ### render target page ###
         $PH->show($requested_page_id);
-        exit;
+        exit();
     }
     else {
         new FeedbackWarning(__("Sorry, but this activation code is no longer valid. If you already have an account, you could enter you name and use the <b>forgot password link</b> below."));
@@ -249,7 +241,7 @@ if(get('tuid') && $requested_page && $requested_page->valid_for_tuid) {
 
 ### all other request lead to login-form ###
 $PH->show('loginForm');
-exit;
+exit();
 
 
 
@@ -273,7 +265,7 @@ function initProfiler()
 
 
 /**
-* fix basic php issues and check version
+* Fix basic php issues and check version
 */
 function initialBasicFixes()
 {
@@ -298,26 +290,25 @@ function initialBasicFixes()
     */
     if(phpversion() < "5.0.0") {
         echo "Sorry, but Streber requires php5 or higher.";
-        exit;
+        exit();
     }
 }
 
 
 /**
-* filter get and post-vars
+* Filter get and post-vars
 *
-* We don't not distinguish security between post-,get- and cookie-vars
-* because any of them can be easily forged. We create a joined assoc array
-* and filter for too long variables and html-tags. Additional security-checks
-* should be done later in db- and field-classes.
+* - We don't not distinguish security between post-,get- and cookie-vars
+*   because any of them can be easily forged. We create a joined assoc array
+*   and filter for too long variables and html-tags. Additional security-checks
+*   should be done later in db- and field-classes.
 *
-* passed parames should always be accessed like;
+* - passed parames should always be accessed like;
 *
-*  $f_person_name= get('person_name');
+*    $f_person_name= get('person_name');
 *
-* You CAN NOT access $_GET, $_POST and $_COOKIE-vars directly (because they are cleared)!
-*
-* for additional information see std/common.inc
+* - You CAN NOT access $_GET, $_POST and $_COOKIE-vars directly (because they are cleared)!
+* - for additional information see std/common.inc
 */
 function filterGlobalArrays()
 {

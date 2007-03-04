@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
@@ -662,7 +662,7 @@ class PageHandler extends BaseObject
             {
                 new FeedbackWarning("As an anonymous user you have not enough rights to view page '$id'");
                 $this->show('loginForm');
-                exit;
+                exit();
             }
         }
 
@@ -782,7 +782,7 @@ class PageHandler extends BaseObject
                 $this->show('home');
             }
         }
-        exit;
+        exit();
     }
 
     public function getWikiLink($page=NULL, $alt_title=NULL) {

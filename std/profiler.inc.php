@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
@@ -8,7 +8,7 @@
  * called from: index.php
  *
  *
- * @author: Thomas Mann
+ * @author Thomas Mann
  * @uses:
  * @usedby:
  *

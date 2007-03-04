@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
@@ -7,11 +7,14 @@
  *
  * included by: @render_page
  *
- * @author:     Thomas Mann
- * @uses:
- * @usedby:     most pages
+ * @author     Thomas Mann
  */
 
+/**
+* @defgroup render_lists Render Lists
+*
+* Because most information in streber is display as lists, this is a major task for rendering.
+*/
 
 require_once(confGet('DIR_STREBER') . "render/render_block.inc.php");
 require_once(confGet('DIR_STREBER') . "render/render_list_column.inc.php");

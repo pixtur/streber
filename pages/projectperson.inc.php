@@ -1,12 +1,10 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
-/**
-*
-* editing persons in project
-*
+/**\file
+* editing team members
 */
 
 
@@ -16,7 +14,9 @@ require_once(confGet('DIR_STREBER') . "db/class_projectperson.inc.php");
 require_once(confGet('DIR_STREBER') . "render/render_list.inc.php");
 
 
-
+/**
+* Edit a team member @ingroup pages
+*/
 function projectPersonEdit($pp= NULL)
 {
     global $PH;
@@ -147,6 +147,9 @@ function projectPersonEdit($pp= NULL)
 }
 
 
+/**
+* Submit changes to a team member @ingroup pages
+*/
 function projectPersonEditSubmit()
 {
     global $PH;
@@ -156,7 +159,7 @@ function projectPersonEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('projView',array('prj'=>$pp->project));
         }
-        exit;
+        exit();
     }
 
     if(!validateFormCrc()) {
@@ -260,6 +263,9 @@ function projectPersonEditSubmit()
 }
 
 
+/**
+* Remove a teammember from a project @ingroup pages
+*/
 function projectPersonDelete()
 {
     global $PH;

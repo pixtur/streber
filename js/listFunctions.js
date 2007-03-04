@@ -5,7 +5,7 @@
  *
  * included by:
  *
- * @author:     Tino Beirau
+ * @author     Tino Beirau
  * @uses:
  * @usedby:     lists
  */

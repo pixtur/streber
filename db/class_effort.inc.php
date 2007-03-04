@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
@@ -7,64 +7,12 @@
  *
  * @includedby:     *
  *
- * @author:         Thomas Mann
+ * @author         Thomas Mann
  * @uses:           DbProjectList
  * @usedby:
  *
  */
 
-/**
-*  setup the database fields for effort-object as global assoc-array
-*/
-
-    global $effort_fields;
-    $effort_fields=array();
-    addProjectItemFields(&$effort_fields);
-
-            foreach(array(
-                new FieldInternal(array(    'name'=>'id',
-                    'default'=>0,
-                    'in_db_object'=>1,
-                    'in_db_item'=>1,
-                )),
-                new FieldInternal(array(    'name'=>'project',
-                    'default'=>0,
-                    'in_db_object'=>1,
-                    'in_db_item'=>1,
-                )),
-                new FieldString(array(      'name'=>'name',
-                    'title'=>__('Summary'),
-                    'tooltip'=>__('optional if tasks linked to this effort'),
-                )),
-
-                new FieldInternal(array(      'name'=>'task',
-                )),
-
-                new FieldDatetime(array(    'name'=>'time_start',
-                    'title'=> __('Time Start'),
-                    'default'=>FINIT_NOW
-                )),
-                new FieldDatetime(array(    'name'=>'time_end',
-                    'title'=> __('Time End'),
-                    'default'=>FINIT_NOW
-                )),
-                new FieldInternal(array(    'name'=>'person',
-                )),
-                new FieldText(array(        'name'=>'description',
-                    'title'=>__('Description'),
-                )),
-                new FieldInternal(array(    'name'=>'as_duration',
-                    'default'=>0,
-                )),
-				new FieldOption   (array(    'name'=>'status',
-                    'title'=>__('Status'),
-                    'view_in_forms'=>true,
-                    'default'=>1,
-                )),
-
-            ) as $f) {
-                $effort_fields[$f->name]=$f;
-            }
 
 
 
@@ -91,6 +39,60 @@ class Effort extends DbProjectItem
         }
    	}
 
+    /**
+    *  setup the database fields for effort-object as global assoc-array
+    */
+    static function initFields()
+    {
+        global $effort_fields;
+        $effort_fields=array();
+        addProjectItemFields(&$effort_fields);
+    
+                foreach(array(
+                    new FieldInternal(array(    'name'=>'id',
+                        'default'=>0,
+                        'in_db_object'=>1,
+                        'in_db_item'=>1,
+                    )),
+                    new FieldInternal(array(    'name'=>'project',
+                        'default'=>0,
+                        'in_db_object'=>1,
+                        'in_db_item'=>1,
+                    )),
+                    new FieldString(array(      'name'=>'name',
+                        'title'=>__('Summary'),
+                        'tooltip'=>__('optional if tasks linked to this effort'),
+                    )),
+    
+                    new FieldInternal(array(      'name'=>'task',
+                    )),
+    
+                    new FieldDatetime(array(    'name'=>'time_start',
+                        'title'=> __('Time Start'),
+                        'default'=>FINIT_NOW
+                    )),
+                    new FieldDatetime(array(    'name'=>'time_end',
+                        'title'=> __('Time End'),
+                        'default'=>FINIT_NOW
+                    )),
+                    new FieldInternal(array(    'name'=>'person',
+                    )),
+                    new FieldText(array(        'name'=>'description',
+                        'title'=>__('Description'),
+                    )),
+                    new FieldInternal(array(    'name'=>'as_duration',
+                        'default'=>0,
+                    )),
+    				new FieldOption   (array(    'name'=>'status',
+                        'title'=>__('Status'),
+                        'view_in_forms'=>true,
+                        'default'=>1,
+                    )),
+    
+                ) as $f) {
+                    $effort_fields[$f->name]=$f;
+                }
+    }
 
     /**
     * query from db
@@ -639,5 +641,6 @@ class Effort extends DbProjectItem
 	}
 		
 }
+Effort::initFields();
 
 ?>

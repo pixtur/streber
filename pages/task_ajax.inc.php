@@ -1,9 +1,18 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
+
 require_once("db/class_task.inc.php");
 require_once("db/class_project.inc.php");
 
+
+/**\file
+* pages relating to AJAX interacting with tasks
+*/
+
+
 /**
-* test function for development
+* test function for development @ingroup pages
 *
 * the output of this function could be requested with jquery like:
 *

@@ -1,17 +1,13 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
 * task_person / jointable between company and person
 *
 * assigning tasks to persons
 *
-* @includedby:     *
-*
-* @author:         Thomas Mann
-* @uses:           DbProjectList
-* @usedby:
+* @author         Thomas Mann
 *
 */
 
@@ -20,36 +16,16 @@ define('ASSIGNTYPE_INITIAL', 1);
 define('ASSIGNTYPE_CHANGED', 2);
 define('ASSIGNTYPE_ADDED', 3);
 
-global $g_task_person_fields;
-$g_task_person_fields=array();
-addProjectItemFields(&$g_task_person_fields);
 
-foreach(array(
-    new FieldInternal(array(    'name'=>'id',               # add id to both tables for caching
-        'default'=>0,
-        'in_db_object'=>1,
-        'in_db_item'=>1,
-    )),
-    new FieldInternal(array(    'name'=>'task',             # id task
-    )),
-    new FieldInternal(array(    'name'=>'person',           # id of assigned person
-    )),
-    new FieldString(array(      'name'=>'comment',
-    )),
-    new FieldInternal(array(    'name'=>'assigntype',
-        'default'=>ASSIGNTYPE_INITIAL,
-    )),
-
-) as $f) {
-    $g_task_person_fields[$f->name]=$f;
-}
 
 class TaskPerson extends DbProjectItem {
     public $name;
     public $project;
 
-	//=== constructor ================================================
-	function __construct ($id_or_array=NULL)
+    /**
+    * constructor
+    */
+    function __construct ($id_or_array=NULL)
     {
         global $g_task_person_fields;
         $this->fields= &$g_task_person_fields;
@@ -58,8 +34,34 @@ class TaskPerson extends DbProjectItem {
         if(!$this->type) {
             $this->type= ITEM_TASKPERSON;
         }
-   	}
+    }
 
+    static function initFields()
+    {
+        global $g_task_person_fields;
+        $g_task_person_fields=array();
+        addProjectItemFields(&$g_task_person_fields);
+        
+        foreach(array(
+            new FieldInternal(array(    'name'=>'id',               # add id to both tables for caching
+                'default'=>0,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+            new FieldInternal(array(    'name'=>'task',             # id task
+            )),
+            new FieldInternal(array(    'name'=>'person',           # id of assigned person
+            )),
+            new FieldString(array(      'name'=>'comment',
+            )),
+            new FieldInternal(array(    'name'=>'assigntype',
+                'default'=>ASSIGNTYPE_INITIAL,
+            )),
+        
+        ) as $f) {
+            $g_task_person_fields[$f->name]=$f;
+        }
+    }
 
     /**
     * query from db
@@ -115,7 +117,7 @@ class TaskPerson extends DbProjectItem {
     static function &getTaskPersons( $args=NULL)
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $date_min           = NULL;
@@ -165,7 +167,7 @@ class TaskPerson extends DbProjectItem {
 
         ### show all ###
         $str_query=
-        	"SELECT tp.*, i.* from {$prefix}taskperson tp, {$prefix}item i
+            "SELECT tp.*, i.* from {$prefix}taskperson tp, {$prefix}item i
              WHERE
             i.type = '".ITEM_TASKPERSON."'
             $str_project
@@ -180,17 +182,19 @@ class TaskPerson extends DbProjectItem {
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$tps=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $tps=array();
         foreach($tmp as $t) {
             $c=new TaskPerson($t);
             $tps[]=$c;
         }
         return $tps;
     }
-
-
 }
+
+TaskPerson::initFields();
+
+
 
 ?>

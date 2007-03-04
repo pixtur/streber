@@ -1,4 +1,4 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
@@ -66,7 +66,7 @@ class ListGroupingParentItem extends ListGrouping
  *
  * @includedby:     pages/*
  *
- * @author:         Thomas Mann
+ * @author         Thomas Mann
  * @uses:           ListBlock
  * @usedby:
  *
@@ -109,9 +109,9 @@ class ListBlock_files extends ListBlock
             'context_menu'=>'submit',
         )));
         $this->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('fileDelete')->id,
+            'target'=>$PH->getPage('filesDelete')->id,
             'name'  =>__('Delete'),
-            'id'    =>'fileDelete',
+            'id'    =>'filesDelete',
             'icon'  =>'delete',
             'context_menu'=>'submit',
         )));

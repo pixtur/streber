@@ -855,69 +855,6 @@ div.form {
     }
 
 
-/*--- quick new -------------------------------*/
-#quicknew {
-    background-color:#f1f5d2;
-    padding:2px 10px 2px 10px;
-    border:1px solid #e8ee87;
-    text-align:left;
-    font-size:100%;
-    -moz-border-radius:5px;
-}
-
-    #quicknew label {
-        font-size:90%;
-        float:left;
-        text-align:right;
-        padding:2px 5px 4px 2px;
-
-    }
-
-    #quicknew select {
-        font-size:60%;
-    }
-
-    #quicknew .inp {
-        width:60%;
-        margin-left:5px;
-        margin-right:10px;
-        border:1px solid #bbb;
-        padding:1px 2px 1px 3px;
-        font-size:100%;
-        font-family:verdana;
-        -moz-border-radius:4px;
-    }
-    #quicknew .help {
-        text-align:right;
-        padding-left:10px;
-        font-size:70%;
-    }
-
-    #quicknew .button{
-        border:1px solid #fff;
-        background-color:#888;
-        color:#444;
-        font-weight:bold;
-        font-size:90%;
-        -moz-border-radius:4px;
-        padding:1px 5px 1px 5px;
-		cursor:pointer;
-    }
-    #quicknew .button:hover{
-        background-color:#ccc;
-    }
-
-    #quicknew span.hint {
-        display:block;
-        font-size:60%;
-        color:#888;
-        padding-left:10%;
-    }
-
-    #quicknew span.hint b{
-        font-style:italic;
-    }
-
 
 
 

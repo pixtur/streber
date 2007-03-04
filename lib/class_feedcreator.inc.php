@@ -1,6 +1,13 @@
 <?php
-/***************************************************************************
+/**
+* \defgroup  feedcreator 
+*/
+/*
+* \file  
+*/
 
+
+/** \file
 FeedCreator class v1.7.8
 originally (c) Kai Blankenhorn
 www.bitfolge.de
@@ -116,9 +123,7 @@ v1.0    06-24-03
 
 
 
-***************************************************************************/
-
-/*** GENERAL USAGE *********************************************************
+GENERAL USAGE 
 
 include("feedcreator.class.php"); 
 
@@ -181,7 +186,15 @@ echo $rss->saveFeed("RSS1.0", "news/feed.xml");
 //to generate "on-the-fly"
 $rss->outputFeed("RSS1.0");
 
+*/
 
+/** @defgroup feedcreator
+* Anything related to creation of rss feeds
+*  @{
+*/
+
+
+/**
 ***************************************************************************
 *          A little setup                                                 *
 **************************************************************************/
@@ -2034,5 +2047,9 @@ echo $rss->saveFeed("RSS0.91", "feed.xml");
 
 
 ***************************************************************************/
+
+/**
+@}
+*/
 
 ?>

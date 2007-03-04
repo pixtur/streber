@@ -1,26 +1,28 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
- * pages relating to files
- *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
- */
+/**\file
+* pages relating to files
+*
+* @author         Thomas Mann
+*/
+
+
 
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_file.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 
+/**
+* View details of a file (versions, etc) @ingroup pages
+*/
 function fileView()
 {
     global $PH;
-	global $auth;
+    global $auth;
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
     ### get object ####
@@ -57,13 +59,13 @@ function fileView()
     ### create from handle ###
     $from_handle= $PH->defineFromHandle(array('file'=>$file->id));
 
-	## is viewed by user ##
-	$file->nowViewedByUser();
+    ## is viewed by user ##
+    $file->nowViewedByUser();
 
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
 
         $page->cur_crumb= 'projViewFiles';
@@ -72,22 +74,22 @@ function fileView()
 
 
 /*        if($parent_task) {
-    	    $page->crumbs=build_task_crumbs($parent_task);
+            $page->crumbs=build_task_crumbs($parent_task);
         }
         else {
-    	    $page->crumbs=build_project_crumbs($project);
-    	}
-    	$page->crumbs[]=new NaviCrumb(array(
-    	    'target_id' => 'projViewFiles',
-    	    'target_params'=>array('prj'=>$project->id),
-    	));
-    	$page->crumbs[]=new NaviCrumb(array(
-    	    'target_id' => 'fileView',
-    	    'target_params'=>array('file'=>$file->id),
-    	    'name'=>$file->name,
+            $page->crumbs=build_project_crumbs($project);
+        }
+        $page->crumbs[]=new NaviCrumb(array(
+            'target_id' => 'projViewFiles',
+            'target_params'=>array('prj'=>$project->id),
+        ));
+        $page->crumbs[]=new NaviCrumb(array(
+            'target_id' => 'fileView',
+            'target_params'=>array('file'=>$file->id),
+            'name'=>$file->name,
 
-    	));
-    	*/
+        ));
+        */
 
 
         $page->type= __('File');
@@ -123,27 +125,27 @@ function fileView()
             'tooltip'=>__('Move this file to another task'),
             'name'=>__('Move')
         )));
-		
-		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$file->id));
-		if((!$item) || ($item[0]->is_bookmark == 0)){
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsAsBookmark',
-				'params'    =>array('file'=>$file->id),
-				'tooltip'   =>__('Mark this file as bookmark'),
-				'name'      =>__('Bookmark'),
-			)));
-		}
-		else{
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsRemoveBookmark',
-				'params'    =>array('file'=>$file->id),
-				'tooltip'   =>__('Remove this bookmark'),
-				'name'      =>__('Remove Bookmark'),
-			)));
-		} 
+        
+        $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$file->id));
+        if((!$item) || ($item[0]->is_bookmark == 0)){
+            $page->add_function(new PageFunction(array(
+                'target'    =>'itemsAsBookmark',
+                'params'    =>array('file'=>$file->id),
+                'tooltip'   =>__('Mark this file as bookmark'),
+                'name'      =>__('Bookmark'),
+            )));
+        }
+        else{
+            $page->add_function(new PageFunction(array(
+                'target'    =>'itemsRemoveBookmark',
+                'params'    =>array('file'=>$file->id),
+                'tooltip'   =>__('Remove this bookmark'),
+                'name'      =>__('Remove Bookmark'),
+            )));
+        } 
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -155,8 +157,8 @@ function fileView()
         $block->render_blockStart();
 
         echo "<div class=text>";
-		echo '<input type="hidden" name="MAX_FILE_SIZE" value="'. confGet('FILE_UPLOAD_SIZE_MAX'). '" />';
-		echo '<input id="userfile" name="userfile" type="file" size="40" accept="*" />';
+        echo '<input type="hidden" name="MAX_FILE_SIZE" value="'. confGet('FILE_UPLOAD_SIZE_MAX'). '" />';
+        echo '<input id="userfile" name="userfile" type="file" size="40" accept="*" />';
         echo '<input type="submit" value="'.__('Upload').'" />';
         echo '</div>';
 
@@ -286,11 +288,15 @@ function fileView()
     #echo '<input type="hidden" name="parent_task" value="'.$task->id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
-
+/**
+* Upload a new version of a file @ingroup pages
+*
+* read more at http://www.streber-pm.org/3658
+*/
 function fileUpdate()
 {
     global $PH;
@@ -338,7 +344,11 @@ function fileUpdate()
 }
 
 
-
+/**
+* Upload files @ingroup pages
+*
+* read more at http://www.streber-pm.org/3658
+*/
 function filesUpload()
 {
     global $PH;
@@ -403,6 +413,11 @@ function filesUpload()
 
 
 
+/**
+* Edit meta information of a file
+*
+* read more at http://www.streber-pm.org/3658
+*/
 function fileEdit($file=NULL)
 {
     global $PH;
@@ -424,7 +439,7 @@ function fileEdit($file=NULL)
 
 
         $page= new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'file_name'));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type=__('Edit File','page type');
         $page->title=$file->name;
 
@@ -509,11 +524,15 @@ function fileEdit($file=NULL)
     $block->render_blockEnd();
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
-
+/**
+* Submit information to a file @ingroup pages
+*
+* read more at http://www.streber-pm.org/3658
+*/
 function fileEditSubmit()
 {
     global $PH;
@@ -524,7 +543,7 @@ function fileEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('projView',array('prj'=>$file->project));
         }
-        exit;
+        exit();
     }
 
     $id=getOnePassedId('file');
@@ -617,7 +636,7 @@ function fileEditSubmit()
 
     if($failure) {
         $PH->show('fileEdit',NULL,$file);
-        exit;
+        exit();
     }
 
     ### write to db ###
@@ -659,8 +678,10 @@ function fileEditSubmit()
 }
 
 
-
-function fileDelete()
+/**
+* Delete some files @ingroup pages
+*/
+function filesDelete()
 {
     global $PH;
 
@@ -700,7 +721,7 @@ function fileDelete()
 
 
 /**
-* downloads a file
+* downloads a file @ingroup pages
 *
 */
 function fileDownload()
@@ -718,7 +739,7 @@ function fileDownload()
 }
 
 /**
-* downloads a file
+* downloads a file as image @ingroup pages
 *
 */
 function fileDownloadAsImage()
@@ -769,7 +790,7 @@ function FilesMoveToFolder()
 
     if(!$file_ids) {
         $PH->abortWarning(__("Select some files to move"));
-        exit;
+        exit();
     }
 
 
@@ -830,7 +851,7 @@ function FilesMoveToFolder()
         if(!$PH->showFromPage()) {
             $PH->show('home');
         }
-        exit;
+        exit();
     }
     #else if($target_id != -1) {
     #    $PH->abortWarning(__("insufficient rights to edit any of the selected items"));
@@ -856,7 +877,7 @@ function FilesMoveToFolder()
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'company_name'));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type= __("Edit files");
         $page->title="$project->name";
         $page->title_minor=__("Select folder to move files into");
@@ -920,7 +941,7 @@ function FilesMoveToFolder()
 
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 
 }
 

@@ -1,13 +1,9 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-
-# streber - a php based project management system
-# Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
-# Distributed under the terms and conditions of the GPL as stated in docs/license.txt
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
-* Customized project for www.streber-pm.org
-*
-*
+* Customized project view for www.streber-pm.org
 */
 
 require_once(confGet('DIR_STREBER') . "db/class_task.inc.php");

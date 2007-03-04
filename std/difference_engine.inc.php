@@ -13,7 +13,6 @@ define('MAX_DIFF_XREF_LENGTH',5000);
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffOp {
@@ -37,7 +36,6 @@ class _DiffOp {
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffOp_Copy extends _DiffOp {
@@ -58,7 +56,6 @@ class _DiffOp_Copy extends _DiffOp {
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffOp_Delete extends _DiffOp {
@@ -77,7 +74,6 @@ class _DiffOp_Delete extends _DiffOp {
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffOp_Add extends _DiffOp {
@@ -96,7 +92,6 @@ class _DiffOp_Add extends _DiffOp {
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffOp_Change extends _DiffOp {
@@ -134,7 +129,6 @@ class _DiffOp_Change extends _DiffOp {
  *
  * @author Geoffrey T. Dairiki, Tim Starling
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _DiffEngine
@@ -536,7 +530,6 @@ class _DiffEngine
  * Class representing a 'diff' between two sequences of strings.
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class Diff
@@ -675,7 +668,6 @@ class Diff
  * FIXME: bad name.
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class MappedDiff extends Diff
@@ -740,7 +732,6 @@ define('NBSP', '&#160;');			// iso-8859-x non-breaking space.
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class _HWLDF_WordAccumulator {
@@ -799,7 +790,6 @@ class _HWLDF_WordAccumulator {
 /**
  * @todo document
  * @access private
- * @package MediaWiki
  * @subpackage DifferenceEngine
  */
 class WordLevelDiff extends MappedDiff

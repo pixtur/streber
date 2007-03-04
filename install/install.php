@@ -1,5 +1,5 @@
 <?php
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
@@ -194,7 +194,7 @@ function step_01_checkEvironment() {
         else {
             print_testResult(RESULT_GOOD,"does not exists. Fresh installation");
             if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) {
-                fputs($FO,'<? header("Location: ../index.php");exit; ?>');
+                fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
             }
             
         }

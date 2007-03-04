@@ -1,15 +1,13 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**
+/**\file
  * pages relating to listing and modifying projects
  *
- * @author: Thomas Mann
- * @uses:
- * @usedby:
+ * @author Thomas Mann
  *
  */
 
@@ -23,11 +21,10 @@ require_once(confGet('DIR_STREBER') . "lists/list_taskfolders.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_comments.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_tasks.inc.php");
 require_once(confGet('DIR_STREBER') . "lists/list_project_team.inc.php");
-//require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
 
 
 /**
-* list active projects
+* list active projects @ingroup pages
 */
 function projList()
 {
@@ -110,9 +107,9 @@ function projList()
 }
 
 
-#---------------------------------------------------------------------------
-# listProjects (closed)
-#---------------------------------------------------------------------------
+/**
+* List closed Projects @ingroup pages
+*/
 function ProjListClosed()
 {
     require_once(confGet('DIR_STREBER') . "lists/list_projects.inc.php");
@@ -175,9 +172,10 @@ function ProjListClosed()
 
 }
 
-#---------------------------------------------------------------------------
-# listProjects (Templates)
-#---------------------------------------------------------------------------
+
+/**
+* List project templates @ingroup pages
+*/
 function ProjListTemplates()
 {
     require_once(confGet('DIR_STREBER') . "lists/list_projects.inc.php");
@@ -243,7 +241,7 @@ function ProjListTemplates()
 
 
 /**
-* list changes
+* list changes of a project @ingroup pages
 */
 function ProjViewChanges()
 {
@@ -523,16 +521,16 @@ function ProjViewChanges()
     $PH->go_submit='taskNew';
     echo '<input type="hidden" name="prj" value="'.$id.'">';
 
-    #echo (new PageQuickNew);
-
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
 	echo (new PageHtmlEnd());
 }
 
 
-
-function ProjViewTasks()
+/**
+* list tasks of a project @ingroup pages
+*/
+function projViewTasks()
 {
     global $PH;
     global $auth;
@@ -1043,14 +1041,9 @@ function ProjViewTasks()
 }
 
 
-
-
-
-
-
-
-
-
+/**
+* list documentation of a project @ingroup pages
+*/
 function ProjViewDocu()
 {
     global $PH;
@@ -1162,17 +1155,8 @@ function ProjViewDocu()
 
 
 
-
-
-
-
-
-
-
-
 /**
-* list files attached to project
-*
+* list files attached to project @ingroup pages
 */
 function ProjViewFiles()
 {
@@ -1267,9 +1251,8 @@ function ProjViewFiles()
 
 
 
-
 /**
-* project roadmap (list milestones)
+* project roadmap (list milestones) @ingroup pages
 *
 */
 function ProjViewMilestones()
@@ -1358,7 +1341,9 @@ function ProjViewMilestones()
 
 
 
-
+/**
+* List efforts booked for a Project  @ingroup pages
+*/
 function ProjViewEfforts()
 {
     global $PH;
@@ -1662,7 +1647,9 @@ function ProjViewEfforts()
 }
 
 
-
+/**
+* List released versions of a project @ingroup pages
+*/
 function ProjViewVersions()
 {
     global $PH;
@@ -1772,7 +1759,9 @@ function ProjViewVersions()
 
 
 
-
+/**
+* Create a new project @ingroup pages
+*/
 function projNew() {
     global $PH;
 
@@ -1792,7 +1781,9 @@ function projNew() {
 }
 
 
-
+/**
+* Edit a project @ingroup pages
+*/
 function projEdit($project=NULL)
 {
     global $PH;
@@ -1946,9 +1937,9 @@ function projEdit($project=NULL)
 
 
 
-#---------------------------------------------------------------------------
-# projEditSubmit
-#---------------------------------------------------------------------------
+/**
+* Submit changes to a project @ingroup pages
+*/
 function projEditSubmit()
 {
     global $PH;
@@ -1959,7 +1950,7 @@ function projEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('projView',array('prj'=>$project->id));
         }
-        exit;
+        exit();
     }
 
     log_message("projEditSubmit()", LOG_MESSAGE_DEBUG);
@@ -2072,11 +2063,11 @@ function projEditSubmit()
         ### create another person ###
         if(get('create_another')) {
             $PH->show('projNew');
-            exit;
+            exit();
         }
         else {
             $PH->show('projView',array('prj'=>$project->id));
-            exit;
+            exit();
         }
     }
     ### otherwise return to from-page
@@ -2089,9 +2080,9 @@ function projEditSubmit()
 }
 
 
-#=====================================================================================================
-# project delete
-#=====================================================================================================
+/**
+* Delete a project @ingroup pages
+*/
 function projDelete()
 {
     global $PH;
@@ -2131,7 +2122,7 @@ function projDelete()
 }
 
 /**
-* project Change status
+* Change status of a project @ingroup pages
 *
 * actually toggles status between open /closed
 */
@@ -2185,11 +2176,11 @@ function projChangeStatus()
 }
 
 /**
-* select new people from a list
+* select new people from a list @ingroup pages
 *
 * userRights have been validated by pageHandler()
 *
-* @@@ add additional project-specific check here?
+* \TODO add additional project-specific check here?
 */
 function projAddPerson()
 {
@@ -2276,6 +2267,9 @@ function projAddPerson()
 }
 
 
+/**
+* Submit new teammember to a project @ingroup pages
+*/
 function projAddPersonSubmit()
 {
     global $PH;
@@ -2360,7 +2354,7 @@ function projAddPersonSubmit()
 
 
 /**
-* create template from existing project
+* create template from existing project @ingroup pages
 *
 * - duplicates all projects items
 * - adjusts..
@@ -2398,7 +2392,7 @@ function projCreateTemplate() {
 
 
 /**
-* create normal project from template
+* create normal project from template @ingroup pages
 *
 * - duplicates all projects items
 * - adjusts..
@@ -2443,7 +2437,7 @@ function projNewFromTemplate() {
 
 
 /**
-* duplicate a project including all belonging items (tasks, efforts, etc.)
+* duplicate a project including all belonging items (tasks, efforts, etc.) @ingroup pages
 *
 * - This function is a massive database-process and should be protected
 *   from parallel database accesses. Failure of this procedure can lead to
@@ -2747,6 +2741,9 @@ function projDuplicate($org_project_id=NULL)
 
 
 
+/**
+* Show an RSS Feed of the latest changes on a project @ingroup pages
+*/
 function projViewAsRSS()
 {
     require_once(confGet('DIR_STREBER') . "std/class_rss.inc.php");

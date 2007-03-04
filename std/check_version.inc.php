@@ -1,4 +1,4 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 /**
 * check the current version of php, mysql and streber
 *
@@ -21,13 +21,13 @@ function validateEnvironment()
 
         echo confGet('MESSAGE_OFFLINE');
         echo $result;
-        exit;
+        exit();
     }
 
     if(($result= testDbConnection()) !== true) {
         echo confGet('MESSAGE_OFFLINE');
         echo $result;
-        exit;
+        exit();
     }
 
     #if(($result= testInstallDirectoryExists()) != true) {

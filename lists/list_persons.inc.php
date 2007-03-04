@@ -1,4 +1,4 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
@@ -8,12 +8,11 @@
  *
  * @includedby:     pages/company.inc, pages/person.inc, pages/proj.inc
  *
- * @author:         Thomas Mann
+ * @author         Thomas Mann
  * @uses:           ListBlock
  * @usedby:
  *
  */
-
 class ListBlock_persons extends ListBlock
 {
 

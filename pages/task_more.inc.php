@@ -1,4 +1,9 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
+
+/**\file   pages for working with tasks */
+
 require_once(confGet('DIR_STREBER') . 'db/class_issue.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
@@ -10,7 +15,13 @@ require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
-function TaskNewBug()
+
+/**
+* Create a task as bug
+*
+* @ingroup pages
+*/
+function taskNewBug()
 {
     $foo=array(
         'add_issue'=>1,
@@ -21,6 +32,11 @@ function TaskNewBug()
 	exit();
 }
 
+/**
+* Create a new milestone
+*
+* @ingroup pages
+*/
 function TaskNewMilestone()
 {
     global $PH;
@@ -46,6 +62,11 @@ function TaskNewMilestone()
 }
 
 
+/**
+* Create a task as Version
+*
+* @ingroup pages
+*/
 function TaskNewVersion()
 {
     global $PH;
@@ -77,6 +98,8 @@ function TaskNewVersion()
 
 /**
 * create new folder
+*
+* @ingroup pages
 */
 function TaskNewFolder()
 {
@@ -123,6 +146,8 @@ function TaskNewFolder()
 /**
 * start taskEdit-form with a new task
 * - figure out prio,label and estimated time from name
+*
+* @ingroup pages
 */
 function TaskNew()
 {
@@ -234,6 +259,11 @@ function TaskNew()
 }
 
 
+/**
+* Edit a task
+*
+* @ingroup pages
+*/
 function taskEdit($task=NULL)
 {
     global $PH;
@@ -251,7 +281,7 @@ function taskEdit($task=NULL)
         }
         else if(count($ids) > 1) {
             $PH->show('taskEditMultiple');
-            exit;
+            exit();
         }
         else if(!$task= Task::getEditableById($ids[0])) {
             $PH->abortWarning(__("You do not have enough rights to edit this task"), ERROR_RIGHTS);
@@ -756,7 +786,9 @@ function taskEdit($task=NULL)
 
 
 /**
-* taskEditSubmit
+* Submit changes to a task
+*
+* @ingroup pages
 */
 function taskEditSubmit()
 {
@@ -795,7 +827,7 @@ function taskEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('taskView',array('tsk'=>$task->id));
         }
-        exit;
+        exit();
     }
 
 
@@ -872,7 +904,7 @@ function taskEditSubmit()
             if(!$PH->showFromPage()) {
                 $PH->show('home',array());
             }
-            exit;
+            exit();
         }
         else {
             $PH->abortWarning(__("Not enough rights to edit task"));
@@ -1128,7 +1160,7 @@ function taskEditSubmit()
 	### repeat form if invalid data ###
 	if(!$is_ok) {
         $PH->show('taskEdit',NULL,$task);
-		exit;
+		exit();
 	}
 
 	#--- write to database -----------------------------------------------------------------------
@@ -1343,6 +1375,8 @@ function taskEditSubmit()
 /**
 * to tasks to folder...
 *
+* @ingroup pages
+*
 * NOTE: this works either...
 * - directly by passing a target folder in 'folder' or 'folders_*'
 * - in two steps, whereas
@@ -1360,7 +1394,7 @@ function TasksMoveToFolder()
 
     if(!$task_ids) {
         $PH->abortWarning(__("Select some tasks to move"));
-        exit;
+        exit();
     }
 
 
@@ -1435,7 +1469,7 @@ function TasksMoveToFolder()
         if(!$PH->showFromPage()) {
             $PH->show('home');
         }
-        exit;
+        exit();
     }
 
     /**
@@ -1525,7 +1559,9 @@ function TasksMoveToFolder()
 /**
 * tasksDelete
 *
-* note sub-tasks of tasks are not deleted but ungrouped
+* @ingroup pages
+*
+* \NOTE sub-tasks of tasks are not deleted but ungrouped
 */
 function TasksDelete()
 {
@@ -1592,9 +1628,11 @@ function TasksDelete()
     }
 }
 
-#---------------------------------------------------------------------------
-# taskUndelete
-#---------------------------------------------------------------------------
+/**
+* Restore deleted task
+*
+* @ingroup pages
+*/
 function TasksUndelete()
 {
     global $PH;
@@ -1681,9 +1719,11 @@ function TasksUndelete()
 }
 
 
-#---------------------------------------------------------------------------
-# taskComplete
-#---------------------------------------------------------------------------
+/**
+* Mark tasks as being completed
+*
+* @ingroup pages
+*/
 function TasksComplete()
 {
     global $PH;
@@ -1745,9 +1785,11 @@ function TasksComplete()
     }
 }
 
-#---------------------------------------------------------------------------
-# tasksApproved
-#---------------------------------------------------------------------------
+/**
+* Create a task as being approved
+*
+* @ingroup pages
+*/
 function TasksApproved()
 {
     global $PH;
@@ -1788,9 +1830,11 @@ function TasksApproved()
 }
 
 
-#---------------------------------------------------------------------------
-# tasksClosed
-#---------------------------------------------------------------------------
+/**
+* Create a task as closed
+*
+* @ingroup pages
+*/
 function TasksClosed()
 {
     global $PH;
@@ -1830,6 +1874,11 @@ function TasksClosed()
     }
 }
 
+/**
+* Reopen tasks
+*
+* @ingroup pages
+*/
 function TasksReopen()
 {
     global $PH;
@@ -1870,7 +1919,11 @@ function TasksReopen()
 
 
 
-
+/**
+* Toggle task folders
+*
+* @ingroup pages
+*/
 function TaskToggleViewCollapsed()
 {
     global $PH;
@@ -1920,6 +1973,8 @@ function TaskToggleViewCollapsed()
 
 /**
 * add an issue-report to an existing task
+*
+* @ingroup pages
 */
 function TaskAddIssueReport()
 {
@@ -1931,7 +1986,7 @@ function TaskAddIssueReport()
     if($task= Task::getEditableById($id)) {
         if($task->issue_report) {
             $PH->abortWarning(__("Task already has an issue-report"));
-            exit;
+            exit();
         }
 
         ### check user-rights ###
@@ -1942,7 +1997,7 @@ function TaskAddIssueReport()
         $task->issue_report= -1;
         new FeedbackHint(__("Adding issue-report to task"));
         $PH->show('taskEdit',array('tsk'=>$task->id),$task);
-        exit;
+        exit();
 
     }
     else {
@@ -1956,7 +2011,11 @@ function TaskAddIssueReport()
 }
 
 
-
+/**
+* Edit description of a task
+*
+* @ingroup pages
+*/
 function taskEditDescription($task=NULL)
 {
     global $PH;
@@ -2027,6 +2086,11 @@ function taskEditDescription($task=NULL)
 
 }
 
+/**
+* Submit changes to the description of a task
+*
+* @ingroup pages
+*/
 function taskEditDescriptionSubmit()
 {
     global $PH;
@@ -2036,7 +2100,7 @@ function taskEditDescriptionSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('taskView',array('tsk'=>$task->id));
         }
-        exit;
+        exit();
     }
 
     if(!$task = Task::getEditableById(intval(get('task_id')))) {
@@ -2063,7 +2127,7 @@ function taskEditDescriptionSubmit()
 	if(!$task->name) {
         $PH->show('taskEditDescription',NULL,$task);
 
-		exit;
+		exit();
 	}
 
 
@@ -2079,6 +2143,11 @@ function taskEditDescriptionSubmit()
 
 
 
+/**
+* View efforts for a task
+*
+* @ingroup pages
+*/
 function TaskViewEfforts()
 {
     global $PH;
@@ -2153,13 +2222,11 @@ function TaskViewEfforts()
 
 
 
-
-
-
-
-
-
-
+/**
+* Edit multiple tasks
+*
+* @ingroup pages
+*/
 function TaskEditMultiple()
 {
     global $PH;
@@ -2168,7 +2235,7 @@ function TaskEditMultiple()
 
     if(!$task_ids) {
         $PH->abortWarning(__("Select some tasks to move"));
-        exit;
+        exit();
     }
 
     $count  = 0;
@@ -2496,11 +2563,16 @@ function TaskEditMultiple()
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);
 
-    exit;
+    exit();
 }
 
 
 
+/**
+* Submit changes to multiple tasks
+*
+* @ingroup pages
+*/
 function taskEditMultipleSubmit()
 {
     global $PH;
@@ -2521,7 +2593,7 @@ function taskEditMultipleSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home');
         }
-        exit;
+        exit();
     }
 
     foreach($ids as $id) {
@@ -2795,6 +2867,11 @@ function taskEditMultipleSubmit()
 
 
 
+/**
+* Collapse all comments of a tasks
+*
+* @ingroup pages
+*/
 function taskCollapseAllComments()
 {
     global $PH;
@@ -2836,6 +2913,11 @@ function taskCollapseAllComments()
     }
 }
 
+/**
+* Expand all comments of a task
+*
+* @ingroup pages
+*/
 function taskExpandAllComments()
 {
     global $PH;
@@ -2885,6 +2967,8 @@ function taskExpandAllComments()
 
 /**
 * create new note on person
+*
+* @ingroup pages
 */
 function taskNoteOnPersonNew()
 {
@@ -2907,6 +2991,11 @@ function taskNoteOnPersonNew()
 	$PH->show('taskNoteOnPersonEdit',array('tsk'=>$task_new->id, 'person'=>$person->id), $task_new);
 }
 
+/**
+* Edit note on person
+*
+* @ingroup pages
+*/
 function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 {
 	global $PH;
@@ -3138,6 +3227,12 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 	echo (new PageHtmlEnd);
 }
 
+
+/**
+* Submit changes to notes on a person
+*
+* @ingroup pages
+*/
 function taskNoteOnPersonEditSubmit()
 {
 	global $PH;
@@ -3149,7 +3244,7 @@ function taskNoteOnPersonEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('personView',array('person'=>getOnePassedId('person_id')));
         }
-        exit;
+        exit();
     }
 
 	### temporary object or from database? ###
@@ -3231,7 +3326,7 @@ function taskNoteOnPersonEditSubmit()
 
 	if(!$is_ok) {
         $PH->show('taskNoteOnPersonEdit',array('tsk'=>$task->id, 'person'=>$person_id), $task);
-		exit;
+		exit();
 	}
 
 	## new project
@@ -3445,7 +3540,7 @@ function taskNoteOnPersonEditSubmit()
 			)
 		);
 		$PH->show('effortEdit',array('effort'=>$newEffort->id),$newEffort);
-        exit;
+        exit();
     }
 
 	### display personList ####
@@ -3454,5 +3549,7 @@ function taskNoteOnPersonEditSubmit()
 	}
 
 }
+
+/** @} */
 
 ?>

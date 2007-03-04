@@ -1,33 +1,29 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
  * pages relating login and account-handling
  *
- * @author: Thomas Mann
- * @uses:
- * @usedby:
- *
+ * @author Thomas Mann
  */
 
 
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
-
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 
 
 global $g_tabs_login;
 $g_tabs_login= array(
-        	"login"	=>array(
+            "login" =>array(
                 'target'=>"index.php?go=loginForm",
                 'title'=>__('Login','tab in top navigation'),
                 'bg'=>"misc"       ,
                 'tooltip'=>__('Go to your home. Alt-h / Option-h'),
             ),
-        	"license"	=>array(
+            "license"   =>array(
                 'target'=>"index.php?go=helpLicense",
                 'title'=>__('License','tab in top navigation'),
                 'tooltip'=>__('Your projects. Alt-P / Option-P'),
@@ -45,9 +41,11 @@ $g_tabs_login= array(
 global $g_valid_login_params;
 $g_valid_login_params= array('prj','task','tsk','comment','effort','person','client');
 
-#=====================================================================================================
-# loginForm
-#=====================================================================================================
+/**
+* Render login form 
+*
+* @ingroup pages
+*/
 function loginForm() {
     global $PH;
     global $auth;
@@ -57,17 +55,16 @@ function loginForm() {
         $auth->cur_user=NULL;
     }
 
-    #-------------------------------------------------------------------
-    # note: this page should not create a from-handle, because
-    # the last stored from-handle still contains the recently view site
-    #-------------------------------------------------------------------
-
+    /**
+    * \TODO this page should not create a from-handle, because
+    * the last stored from-handle still contains the recently view site
+    */
 
     ### warn if install-dir present ###
-	if(file_exists('install')) {
-		new FeedbackWarning("<b>Install-directory still present.</b> This is a massive security issue (<a href='".confGet('STREBER_WIKI_URL')."installation'>read more</a>)"
-    		.'<ul><li><a href="install/remove_install_dir.php">remove install directory now.</a></ul>');
-	}
+    if(file_exists('install')) {
+        new FeedbackWarning("<b>Install-directory still present.</b> This is a massive security issue (<a href='".confGet('STREBER_WIKI_URL')."installation'>read more</a>)"
+            .'<ul><li><a href="install/remove_install_dir.php">remove install directory now.</a></ul>');
+    }
 
 
     ### set up page and write header ###
@@ -76,7 +73,7 @@ function loginForm() {
         global $g_tabs_login;
         $page->tabs= $g_tabs_login;
 
-    	$page->cur_tab='login';
+        $page->cur_tab='login';
         $page->type="";
         $page->title=__('Welcome to streber','Page title');
         #$page->title_minor=__('please login');
@@ -154,7 +151,7 @@ function loginForm() {
         $PH->go_submit='loginFormSubmit';
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 
 }
 
@@ -167,7 +164,8 @@ global $g_time_offset;  # in seconds
 $g_time_offset = 0;
 
 /**
-* login form submit
+* Submit login data
+* @ingroup pages
 * - check login / password
 * - probably send notification-mail
 */
@@ -206,7 +204,7 @@ function loginFormSubmit()
 
         ### display taskView ####
         $projects=$auth->cur_user->getProjects();
-				
+                
         ### if go-parameter was present before logging in
         if($go_after= get('go_after')) {
             $params=array();
@@ -237,7 +235,7 @@ function loginFormSubmit()
 
 
 /**
-* logout
+* Logout the current user and remove cookies @ingroup pages
 */
 function logout(){
     global $PH;
@@ -288,7 +286,9 @@ function logout(){
 
 
 
-
+/**
+* Display forgot password page @ingroup pages
+*/
 function loginForgotPassword()
 {
     global $PH;
@@ -306,7 +306,7 @@ function loginForgotPassword()
         global $g_tabs_login;
         $page->tabs= $g_tabs_login;
 
-    	$page->cur_tab='login';
+        $page->cur_tab='login';
         $page->type="";
         $page->title=__('Password reminder','Page title');
 
@@ -347,13 +347,15 @@ function loginForgotPassword()
         $PH->go_submit='loginForgotPasswordSubmit';
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
 
 
-
+/**
+* submit Forgot password data @ingroup pages
+*/
 function loginForgotPasswordSubmit()
 {
     global $PH;
@@ -365,13 +367,13 @@ function loginForgotPasswordSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('loginForm');
         }
-        exit;
+        exit();
     }
 
     if(!$name= get('login_name')) {
         $PH->messages[]=__('If you remember your name, please enter it and try again.');
         $PH->show('loginForgotPassword');
-        exit;
+        exit();
     }
     else {
         if($person=Person::getByNickname(get('login_name'))) {
@@ -393,7 +395,7 @@ function loginForgotPasswordSubmit()
 
         $PH->messages[]=__('A notification mail has been sent.');
         $PH->show('loginForm');
-        exit;
+        exit();
     }
 }
 
@@ -401,7 +403,7 @@ function loginForgotPasswordSubmit()
 
 
 /**
-* target after notification mail
+* Activate account from notification mail @ingroup pages
 */
 function activateAccount()
 {
@@ -415,7 +417,7 @@ function activateAccount()
             $PH->messages[]=sprintf(__("Welcome %s. Please adjust your profile and insert a good password to activate your account."), asHtml($user->name));
             global $g_person_fields;
             $PH->show('personEdit',array('person'=>$user->id));
-            exit;
+            exit();
         }
     }
     $PH->messages[]=__("Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.");
@@ -426,6 +428,9 @@ function activateAccount()
 
 
 
+/**
+* Display license @ingroup pages
+*/
 function helpLicense()
 {
     global $PH;
@@ -439,7 +444,7 @@ function helpLicense()
         global $g_tabs_login;
         $page->tabs=$g_tabs_login;
 
-    	$page->cur_tab='license';
+        $page->cur_tab='license';
         $page->type="";
         $page->title=__('License','page title');
 
@@ -450,7 +455,7 @@ function helpLicense()
     require_once(confGet('DIR_STREBER') . 'lang/license.html');
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 ?>

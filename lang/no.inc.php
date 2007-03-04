@@ -1,6 +1,6 @@
 <?php
 
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 /**
 * language-table for Norwegian translation (C) Arne Christian Riis / ac.riis@systemizer.no

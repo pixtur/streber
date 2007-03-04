@@ -1,4 +1,7 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
+
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
@@ -6,9 +9,15 @@ require_once(confGet('DIR_STREBER') . 'lists/list_taskfolders.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_comments.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 
+/**\file
+* Pages related to displaying Tasks
+*
+* \NOTE additional Pages for tasks are placed in task_more.inc.php
+*/
 
-
-
+/**
+* view a task @ingroup pages
+*/
 function TaskView()
 {
     global $PH;
@@ -33,7 +42,7 @@ function TaskView()
 
     if($task->category == TCATEGORY_DOCU) {
         TaskViewAsDocu($task, $editable);
-        exit;
+        exit();
     }
 
     if(!$project= Project::getVisibleById($task->project)) {
@@ -413,7 +422,7 @@ function TaskView()
         unset($list->block_functions['list']);
         unset($list->block_functions['grouped']);
         unset($list->functions['fileEdit']);
-        unset($list->functions['fileDelete']);
+        unset($list->functions['filesDelete']);
 
         $list->reduced_header= false;
         $list->title=__('Attached files');
@@ -713,12 +722,7 @@ onLoadFunctions.push(function()
 /**
 * Renders a quick edit form for one task
 *
-* @includedby:     pages/task_view.inc.php
-*
-* @author:         Tino Beirau
-* @uses:           ListBlock
-* @usedby:
-*
+* @author         Tino Beirau
 */
 class Block_task_quickedit extends PageBlock
 {
@@ -993,11 +997,9 @@ class Block_task_quickedit extends PageBlock
 	}
 }
 
-
-
-?>
-<?php
-
+/**
+* view task a documentation page @ingroup pages
+*/
 function taskViewAsDocu()
 {
     global $PH;
@@ -1243,7 +1245,7 @@ function taskViewAsDocu()
         unset($list->block_functions['list']);
         unset($list->block_functions['grouped']);
         unset($list->functions['fileEdit']);
-        unset($list->functions['fileDelete']);
+        unset($list->functions['filesDelete']);
 
         $list->reduced_header= false;
         $list->title=__('Attached files');

@@ -1,5 +1,5 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
@@ -8,63 +8,12 @@
  *
  * @includedby:     *
  *
- * @author:         Thomas Mann
+ * @author         Thomas Mann
  * @uses:
  * @usedby:
  *
  */
 
-
-global $g_issue_fields;
-$g_issue_fields=array();
-
-global $REPRODUCIBILITY_VALUES;
-global $SEVERITY_VALUES;
-
-
-addProjectItemFields(&$g_issue_fields);
-
-foreach(array(
-    new FieldInternal(array(    'name'=>'id',
-        'default'=>0,
-        'in_db_object'=>1,
-        'in_db_item'=>1,
-    )),
-    new FieldInternal(array(    'name'=>'task',             # backlink to task item
-        'default'=>0,
-    )),
-
-    new FieldInt(array(      'name'=>'reproducibility',
-        'default'=> REPRODUCIBILITY_HAVE_NOT_TRIED,
-        'view_in_forms'=>false,
-    )),
-    new FieldInt(array(      'name'=>'severity',
-        'default'=> SEVERITY_MINOR,
-        'view_in_forms'=>false,
-    )),
-    new FieldString(array(      'name'=>'plattform',
-    )),
-    new FieldString(array(      'name'=>'os',
-        'view_in_forms'=>false,
-    )),
-    new FieldString(array(      'name'=>'version',
-    )),
-    new FieldString(array(      'name'=>'production_build',
-        'title'=>__('Production build'),
-        'view_in_forms'=>true,
-    )),
-    new FieldText(array(      'name'=>'steps_to_reproduce',
-        'title'=>__('Steps to reproduce'),
-    )),
-    new FieldText(array(      'name'=>'expected_result',
-        'title'=>__('Expected result'),
-    )),
-    new FieldText(array(      'name'=>'suggested_solution',
-        'title'=>__('Suggested Solution'),
-    )),
-) as $f) {
-    $g_issue_fields[$f->name]=$f;
-}
 
 
 
@@ -82,6 +31,59 @@ class Issue extends DbProjectItem {
         }
    	}
 
+    static function initFields() 
+    {
+        global $g_issue_fields;
+        $g_issue_fields=array();
+        
+        global $REPRODUCIBILITY_VALUES;
+        global $SEVERITY_VALUES;
+        
+        
+        addProjectItemFields(&$g_issue_fields);
+        
+        foreach(array(
+            new FieldInternal(array(    'name'=>'id',
+                'default'=>0,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+            new FieldInternal(array(    'name'=>'task',             # backlink to task item
+                'default'=>0,
+            )),
+        
+            new FieldInt(array(      'name'=>'reproducibility',
+                'default'=> REPRODUCIBILITY_HAVE_NOT_TRIED,
+                'view_in_forms'=>false,
+            )),
+            new FieldInt(array(      'name'=>'severity',
+                'default'=> SEVERITY_MINOR,
+                'view_in_forms'=>false,
+            )),
+            new FieldString(array(      'name'=>'plattform',
+            )),
+            new FieldString(array(      'name'=>'os',
+                'view_in_forms'=>false,
+            )),
+            new FieldString(array(      'name'=>'version',
+            )),
+            new FieldString(array(      'name'=>'production_build',
+                'title'=>__('Production build'),
+                'view_in_forms'=>true,
+            )),
+            new FieldText(array(      'name'=>'steps_to_reproduce',
+                'title'=>__('Steps to reproduce'),
+            )),
+            new FieldText(array(      'name'=>'expected_result',
+                'title'=>__('Expected result'),
+            )),
+            new FieldText(array(      'name'=>'suggested_solution',
+                'title'=>__('Suggested Solution'),
+            )),
+        ) as $f) {
+            $g_issue_fields[$f->name]=$f;
+        }
+    }
 
 
 
@@ -267,6 +269,7 @@ class Issue extends DbProjectItem {
     }
 
 }
+Issue::initFields();
 
 
 ?>

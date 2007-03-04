@@ -1,17 +1,12 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 
-/**
- * person
+/**\file
+ * person object
  *
- * @includedby:     *
- *
- * @author:         Thomas Mann
- * @uses:           DbProjectItem
- * @usedby:
- *
+ * @author         Thomas Mann
  */
 
 /**
@@ -25,341 +20,18 @@ global $g_cache_persons;
 $g_cache_persons=array();
 
 
+
 /**
-* build translated fields for person class
-*
-* NOTE: This is called twice, because it might be translated AFTER a
-*       the current user has been created.
+* Persons
 */
-function build_person_fields()
-{
-    global $g_person_fields;
-    $g_person_fields=array();
-    addProjectItemFields(&$g_person_fields);
-
-    foreach(array(
-        new FieldInternal(array(    'name'=>'id',
-            'default'=>0,
-            'in_db_object'=>1,
-            'in_db_item'=>1,
-            'log_changes'=>false,
-
-        )),
-        new FieldInternal(array(    'name'=>'state',    ### cached in project-table to speed up queries ###
-            'default'=>1,
-            'in_db_object'=>1,
-            'in_db_item'=>1,
-        )),
-        new FieldString(array(      'name'=>'name',
-            'title'     =>__('Full name'),
-            'tooltip'   =>__('Required. Full name like (e.g. Thomas Mann)'),
-            'required'=>true,
-        )),
-        new FieldString(array(      'name'=>'nickname',
-            'title'     =>__('Nickname'),
-            'tooltip'   =>__('only required if user can login (e.g. pixtur)'),
-        )),
-        new FieldString(array(      'name'=>'tagline',
-            'title'     =>__('Tagline'),
-            'tooltip'   =>__('Optional: Additional tagline (eg. multimedia concepts)'),
-        )),
-        new FieldString(array(      'name'=>'mobile_phone',
-            'title'     =>__('Mobile Phone'),
-            'tooltip'   =>__('Optional: Mobile phone (eg. +49-172-12345678)'),
-        )),
-
-        ### office stuff ###
-        new FieldString(array(      'name'=>'office_phone',
-            'title'     =>__('Office Phone'),
-            'tooltip'   =>__('Optional: Office Phone (eg. +49-30-12345678)'),
-        )),
-        new FieldString(array(      'name'=>'office_fax',
-            'title'     =>__('Office Fax'),
-            'tooltip'   =>__('Optional: Office Fax (eg. +49-30-12345678)'),
-        )),
-        new FieldString(array(      'name'=>'office_street',
-            'title'     =>__('Office Street'),
-            'tooltip'   =>__('Optional: Official Street and Number (eg. Poststreet 28)'),
-        )),
-        new FieldString(array(      'name'=>'office_zipcode',
-            'title'     =>__('Office Zipcode'),
-            'tooltip'   =>__('Optional: Official Zip-Code and City (eg. 12345 Berlin)'),
-        )),
-        new FieldString(array(      'name'=>'office_homepage',
-            'title'     =>__('Office Page'),
-            'tooltip'   =>__('Optional: (eg. www.pixtur.de)'),
-        )),
-        new FieldString(array(      'name'=>'office_email',
-            'title'     =>__('Office E-Mail'),
-            'tooltip'   =>__('Optional: (eg. thomas@pixtur.de)'),
-        )),
-
-
-        ### personal stuff ###
-        new FieldString(array(      'name'=>'personal_phone',
-            'title'     =>__('Personal Phone'),
-            'tooltip'   =>__('Optional: Private Phone (eg. +49-30-12345678)'),
-        )),
-        new FieldString(array(      'name'=>'personal_fax',
-            'title'     =>__('Personal Fax'),
-            'tooltip'   =>__('Optional: Private Fax (eg. +49-30-12345678)'),
-        )),
-        new FieldString(array(      'name'=>'personal_street',
-            'title'     =>__('Personal Street'),
-            'tooltip'   =>__('Optional:  Private (eg. Poststreet 28)'),
-        )),
-        new FieldString(array(      'name'=>'personal_zipcode',
-            'title'     =>__('Personal Zipcode'),
-            'tooltip'   =>__('Optional: Private (eg. 12345 Berlin)'),
-        )),
-        new FieldString(array(      'name'=>'personal_homepage',
-            'title'     =>__('Personal Page'),
-            'tooltip'   =>__('Optional: (eg. www.pixtur.de)'),
-        )),
-        new FieldString(array(      'name'=>'personal_email',
-            'title'     =>__('Personal E-Mail'),
-            'tooltip'   =>__('Optional: (eg. thomas@pixtur.de)'),
-        )),
-        new FieldDate(array(      'name'=>'birthdate',
-            'title'     =>__('Birthdate'),
-            'tooltip'   =>__('Optional')
-        )),
-
-        new FieldString(array(      'name'=>'color',
-            'title'     =>__('Color'),
-            'tooltip'   =>__('Optional: Color for graphical overviews (e.g. #FFFF00)'),
-    		'view_in_forms'=>false,
-        )),
-
-        new FieldText(array(        'name'=>'description',
-            'title'     =>__('Comments'),
-            'tooltip'   =>'Optional'
-        )),
-        new FieldPassword(array(    'name'=>'password',
-    		'view_in_forms'=>false,
-            'title'     =>__('Password'),
-            'tooltip'   =>__('Only required if user can login','tooltip'),
-            'log_changes'=>false,
-        )),
-
-        /**
-        * reservated
-        */
-        new FieldInternal(array(    'name'=>'security_question',
-    		'view_in_forms' =>false,
-    		'export'        =>false,
-        )),
-
-        new FieldInternal(array(    'name'=>'security_answer',
-    		'view_in_forms'=>false,
-    		'export'        =>false,
-        )),
-
-        /**
-        * used for...
-        * - initializing project-member-roles
-        * - custimizing the interface (like hiding advance options to clients)
-        */
-        new FieldInternal(array(    'name'=>'profile',
-            'title'         =>__('Profile'),
-    		'view_in_forms'=>false,
-    		'default'=>3,
-    		'log_changes'=>true,
-        )),
-
-        /**
-        * theme
-        */
-        new FieldInternal(array(
-            'name'          =>'theme',
-            'title'         =>__('Theme','Formlabel'),
-    		'view_in_forms' =>false,
-    		'default'       => confGet('THEME_DEFAULT'),
-    		'log_changes'   =>true,
-    		'export'        =>false,
-        )),
-
-        /**
-        * language
-        */
-        new FieldInternal(array(
-            'name'          =>'language',
-    		'view_in_forms' =>false,
-    		'default'       => confGet('DEFAULT_LANGUAGE'),
-    		'log_changes'=>true,
-        )),
-
-        /**
-        * at home show assigned only, unassigned, all open
-        *
-        * OBSOLETE
-        */
-        new FieldInternal(array(
-            'name'          =>'show_tasks_at_home',
-    		'view_in_forms' =>false,
-    		'default'       => confGet('SHOW_TASKS_AT_HOME_DEFAULT'),
-        )),
-
-
-        /**
-        * all items modified after this date will be highlighted if changed
-        */
-        new FieldDatetime(array(    'name'=>'date_highlight_changes',
-    		'view_in_forms' =>false,
-            'log_changes'=>false,
-            'default'   =>FINIT_NOW
-        )),
-
-        /**
-        * flag if person has an account
-        */
-        new FieldInternal(array(    'name'=>'can_login',
-    		'view_in_forms' =>false,
-    		'log_changes'=>true,
-        )),
-
-
-        new FieldDatetime(array(    'name'=>'last_login',
-    		'view_in_forms' =>false,
-            'log_changes'=>false,
-            'default'=> FINIT_NEVER
-        )),
-
-        /**
-        * used for highlighting modified items
-        */
-        new FieldDatetime(array(    'name'=>'last_logout',
-    		'view_in_forms' =>false,
-            'log_changes'=>false,
-            'default'=>FINIT_NOW,
-        )),
-
-        /**
-        * bit-field of user-rights. See "std/auth.inc.php"
-        */
-        new FieldInternal(array(    'name'=>'user_rights',
-            'tooltip'=>'Optional',
-    		'log_changes'   =>true,
-    		'export'        =>false,
-        )),
-
-        /**
-        * md5 random-identifier for validating login
-        */
-        new FieldInternal(array(    'name'=>'cookie_string',
-            'log_changes'   =>false,
-    		'export'        =>false,
-        )),
-
-        /**
-        * ip-address of last valid login
-        * - is checked if 'CHECK_IP_ADDRESS' is true
-        */
-        new FieldInternal(array(    'name'=>'ip_address',
-    		'log_changes'   =>false,
-    		'export'        =>false,
-        )),
-
-        /**
-        * random-identifier for securitry
-        *
-        * - initialized on creation
-        * - used for identifaction without password (like change password notification emails)
-        */
-        new FieldInternal(array(    'name'=>'identifier',
-            'default'       =>FINIT_RAND_MD5,
-    		'log_changes'   =>false,
-    		'export'        =>false,
-        )),
-
-        /**
-        * bit-field of misc settings
-        */
-        new FieldInternal(array(    'name'=>'settings',
-            'default'=> (
-                         USER_SETTING_HTML_MAIL
-                         | USER_SETTING_NOTIFY_ASSIGNED_TO_PROJECT),
-    		'log_changes'   =>false,
-    		'export'        =>false,
-
-        )),
-
-        new FieldInternal(array(    'name'=>'notification_last',
-            'default'       => FINIT_NEVER,
-    		'log_changes'   =>false,
-    		'export'        =>false,
-        )),
-
-        /**
-        * notification are off by default
-        */
-        new FieldInternal(array(    'name'=>'notification_period',
-            'default'   => 0,
-    		'log_changes'=>false,
-        )),
-
-
-        /**
-        * time zone
-        * - client's time zone setting.
-        * - TIME_OFFSET_AUTO will use javascript to detect client's time zone
-        */
-        new FieldInternal(array(    'name'=>'time_zone',
-    		'default'   =>TIME_OFFSET_AUTO,
-    		'export'    =>false,
-        )),
-
-        /**
-        * time offset in seconds
-        */
-        new FieldInternal(array(    'name'=>'time_offset',
-    		'default'   =>0,
-    		'export'    =>false,
-        )),
-
-        /**
-        * reservated for non-project public-level (is not implemented / used)
-        */
-        new FieldInternal(array(    'name'=>'user_level_create',
-    		'log_changes'=>false,
-    		'export'        =>false,
-        )),
-        new FieldInternal(array(    'name'=>'user_level_view',
-    		'log_changes'=>false,
-    		'export'        =>false,
-        )),
-        new FieldInternal(array(    'name'=>'user_level_edit',
-    		'log_changes'=>false,
-    		'export'        =>false,
-        )),
-        new FieldInternal(array(    'name'=>'user_level_reduce',
-    		'log_changes'=>false,
-    		'export'        =>false,
-        )),
-
-		/* person category */
-		new FieldInternal(array(	'name'=>'category',
-			'view_in_forms' =>false,
-			'default'       =>0,
-			'log_changes'   =>true,
-		)),
-
-    ) as $f) {
-        $g_person_fields[$f->name]=$f;
-    }
-}
-
-build_person_fields();
-
-//====================================================================
-// Persons
-//====================================================================
 class Person extends DbProjectItem {
     public $name;
     public $project;
 
-	//=== constructor ================================================
-	function __construct ($id_or_array)
+    /**
+    * constructor
+    */
+    function __construct ($id_or_array)
     {
         global $g_person_fields;
         $this->fields= &$g_person_fields;
@@ -368,7 +40,332 @@ class Person extends DbProjectItem {
         if(!$this->type) {
             $this->type= ITEM_PERSON;
         }
-   	}
+    }
+
+    /**
+    * build translated fields for person class
+    *
+    * NOTE: This is called twice, because it might be translated AFTER a
+    *       the current user has been created.
+    */
+    static function initFields()
+    {
+        global $g_person_fields;
+        $g_person_fields=array();
+        addProjectItemFields(&$g_person_fields);
+    
+        foreach(array(
+            new FieldInternal(array(    'name'=>'id',
+                'default'=>0,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+                'log_changes'=>false,
+    
+            )),
+            new FieldInternal(array(    'name'=>'state',    ### cached in project-table to speed up queries ###
+                'default'=>1,
+                'in_db_object'=>1,
+                'in_db_item'=>1,
+            )),
+            new FieldString(array(      'name'=>'name',
+                'title'     =>__('Full name'),
+                'tooltip'   =>__('Required. Full name like (e.g. Thomas Mann)'),
+                'required'=>true,
+            )),
+            new FieldString(array(      'name'=>'nickname',
+                'title'     =>__('Nickname'),
+                'tooltip'   =>__('only required if user can login (e.g. pixtur)'),
+            )),
+            new FieldString(array(      'name'=>'tagline',
+                'title'     =>__('Tagline'),
+                'tooltip'   =>__('Optional: Additional tagline (eg. multimedia concepts)'),
+            )),
+            new FieldString(array(      'name'=>'mobile_phone',
+                'title'     =>__('Mobile Phone'),
+                'tooltip'   =>__('Optional: Mobile phone (eg. +49-172-12345678)'),
+            )),
+    
+            ### office stuff ###
+            new FieldString(array(      'name'=>'office_phone',
+                'title'     =>__('Office Phone'),
+                'tooltip'   =>__('Optional: Office Phone (eg. +49-30-12345678)'),
+            )),
+            new FieldString(array(      'name'=>'office_fax',
+                'title'     =>__('Office Fax'),
+                'tooltip'   =>__('Optional: Office Fax (eg. +49-30-12345678)'),
+            )),
+            new FieldString(array(      'name'=>'office_street',
+                'title'     =>__('Office Street'),
+                'tooltip'   =>__('Optional: Official Street and Number (eg. Poststreet 28)'),
+            )),
+            new FieldString(array(      'name'=>'office_zipcode',
+                'title'     =>__('Office Zipcode'),
+                'tooltip'   =>__('Optional: Official Zip-Code and City (eg. 12345 Berlin)'),
+            )),
+            new FieldString(array(      'name'=>'office_homepage',
+                'title'     =>__('Office Page'),
+                'tooltip'   =>__('Optional: (eg. www.pixtur.de)'),
+            )),
+            new FieldString(array(      'name'=>'office_email',
+                'title'     =>__('Office E-Mail'),
+                'tooltip'   =>__('Optional: (eg. thomas@pixtur.de)'),
+            )),
+    
+    
+            ### personal stuff ###
+            new FieldString(array(      'name'=>'personal_phone',
+                'title'     =>__('Personal Phone'),
+                'tooltip'   =>__('Optional: Private Phone (eg. +49-30-12345678)'),
+            )),
+            new FieldString(array(      'name'=>'personal_fax',
+                'title'     =>__('Personal Fax'),
+                'tooltip'   =>__('Optional: Private Fax (eg. +49-30-12345678)'),
+            )),
+            new FieldString(array(      'name'=>'personal_street',
+                'title'     =>__('Personal Street'),
+                'tooltip'   =>__('Optional:  Private (eg. Poststreet 28)'),
+            )),
+            new FieldString(array(      'name'=>'personal_zipcode',
+                'title'     =>__('Personal Zipcode'),
+                'tooltip'   =>__('Optional: Private (eg. 12345 Berlin)'),
+            )),
+            new FieldString(array(      'name'=>'personal_homepage',
+                'title'     =>__('Personal Page'),
+                'tooltip'   =>__('Optional: (eg. www.pixtur.de)'),
+            )),
+            new FieldString(array(      'name'=>'personal_email',
+                'title'     =>__('Personal E-Mail'),
+                'tooltip'   =>__('Optional: (eg. thomas@pixtur.de)'),
+            )),
+            new FieldDate(array(      'name'=>'birthdate',
+                'title'     =>__('Birthdate'),
+                'tooltip'   =>__('Optional')
+            )),
+    
+            new FieldString(array(      'name'=>'color',
+                'title'     =>__('Color'),
+                'tooltip'   =>__('Optional: Color for graphical overviews (e.g. #FFFF00)'),
+                'view_in_forms'=>false,
+            )),
+    
+            new FieldText(array(        'name'=>'description',
+                'title'     =>__('Comments'),
+                'tooltip'   =>'Optional'
+            )),
+            new FieldPassword(array(    'name'=>'password',
+                'view_in_forms'=>false,
+                'title'     =>__('Password'),
+                'tooltip'   =>__('Only required if user can login','tooltip'),
+                'log_changes'=>false,
+            )),
+    
+            /**
+            * reservated
+            */
+            new FieldInternal(array(    'name'=>'security_question',
+                'view_in_forms' =>false,
+                'export'        =>false,
+            )),
+    
+            new FieldInternal(array(    'name'=>'security_answer',
+                'view_in_forms'=>false,
+                'export'        =>false,
+            )),
+    
+            /**
+            * used for...
+            * - initializing project-member-roles
+            * - custimizing the interface (like hiding advance options to clients)
+            */
+            new FieldInternal(array(    'name'=>'profile',
+                'title'         =>__('Profile'),
+                'view_in_forms'=>false,
+                'default'=>3,
+                'log_changes'=>true,
+            )),
+    
+            /**
+            * theme
+            */
+            new FieldInternal(array(
+                'name'          =>'theme',
+                'title'         =>__('Theme','Formlabel'),
+                'view_in_forms' =>false,
+                'default'       => confGet('THEME_DEFAULT'),
+                'log_changes'   =>true,
+                'export'        =>false,
+            )),
+    
+            /**
+            * language
+            */
+            new FieldInternal(array(
+                'name'          =>'language',
+                'view_in_forms' =>false,
+                'default'       => confGet('DEFAULT_LANGUAGE'),
+                'log_changes'=>true,
+            )),
+    
+            /**
+            * at home show assigned only, unassigned, all open
+            *
+            * OBSOLETE
+            */
+            new FieldInternal(array(
+                'name'          =>'show_tasks_at_home',
+                'view_in_forms' =>false,
+                'default'       => confGet('SHOW_TASKS_AT_HOME_DEFAULT'),
+            )),
+    
+    
+            /**
+            * all items modified after this date will be highlighted if changed
+            */
+            new FieldDatetime(array(    'name'=>'date_highlight_changes',
+                'view_in_forms' =>false,
+                'log_changes'=>false,
+                'default'   =>FINIT_NOW
+            )),
+    
+            /**
+            * flag if person has an account
+            */
+            new FieldInternal(array(    'name'=>'can_login',
+                'view_in_forms' =>false,
+                'log_changes'=>true,
+            )),
+    
+    
+            new FieldDatetime(array(    'name'=>'last_login',
+                'view_in_forms' =>false,
+                'log_changes'=>false,
+                'default'=> FINIT_NEVER
+            )),
+    
+            /**
+            * used for highlighting modified items
+            */
+            new FieldDatetime(array(    'name'=>'last_logout',
+                'view_in_forms' =>false,
+                'log_changes'=>false,
+                'default'=>FINIT_NOW,
+            )),
+    
+            /**
+            * bit-field of user-rights. See "std/auth.inc.php"
+            */
+            new FieldInternal(array(    'name'=>'user_rights',
+                'tooltip'=>'Optional',
+                'log_changes'   =>true,
+                'export'        =>false,
+            )),
+    
+            /**
+            * md5 random-identifier for validating login
+            */
+            new FieldInternal(array(    'name'=>'cookie_string',
+                'log_changes'   =>false,
+                'export'        =>false,
+            )),
+    
+            /**
+            * ip-address of last valid login
+            * - is checked if 'CHECK_IP_ADDRESS' is true
+            */
+            new FieldInternal(array(    'name'=>'ip_address',
+                'log_changes'   =>false,
+                'export'        =>false,
+            )),
+    
+            /**
+            * random-identifier for securitry
+            *
+            * - initialized on creation
+            * - used for identifaction without password (like change password notification emails)
+            */
+            new FieldInternal(array(    'name'=>'identifier',
+                'default'       =>FINIT_RAND_MD5,
+                'log_changes'   =>false,
+                'export'        =>false,
+            )),
+    
+            /**
+            * bit-field of misc settings
+            */
+            new FieldInternal(array(    'name'=>'settings',
+                'default'=> (
+                             USER_SETTING_HTML_MAIL
+                             | USER_SETTING_NOTIFY_ASSIGNED_TO_PROJECT),
+                'log_changes'   =>false,
+                'export'        =>false,
+    
+            )),
+    
+            new FieldInternal(array(    'name'=>'notification_last',
+                'default'       => FINIT_NEVER,
+                'log_changes'   =>false,
+                'export'        =>false,
+            )),
+    
+            /**
+            * notification are off by default
+            */
+            new FieldInternal(array(    'name'=>'notification_period',
+                'default'   => 0,
+                'log_changes'=>false,
+            )),
+    
+    
+            /**
+            * time zone
+            * - client's time zone setting.
+            * - TIME_OFFSET_AUTO will use javascript to detect client's time zone
+            */
+            new FieldInternal(array(    'name'=>'time_zone',
+                'default'   =>TIME_OFFSET_AUTO,
+                'export'    =>false,
+            )),
+    
+            /**
+            * time offset in seconds
+            */
+            new FieldInternal(array(    'name'=>'time_offset',
+                'default'   =>0,
+                'export'    =>false,
+            )),
+    
+            /**
+            * reservated for non-project public-level (is not implemented / used)
+            */
+            new FieldInternal(array(    'name'=>'user_level_create',
+                'log_changes'=>false,
+                'export'        =>false,
+            )),
+            new FieldInternal(array(    'name'=>'user_level_view',
+                'log_changes'=>false,
+                'export'        =>false,
+            )),
+            new FieldInternal(array(    'name'=>'user_level_edit',
+                'log_changes'=>false,
+                'export'        =>false,
+            )),
+            new FieldInternal(array(    'name'=>'user_level_reduce',
+                'log_changes'=>false,
+                'export'        =>false,
+            )),
+    
+            /* person category */
+            new FieldInternal(array(    'name'=>'category',
+                'view_in_forms' =>false,
+                'default'       =>0,
+                'log_changes'   =>true,
+            )),
+    
+        ) as $f) {
+            $g_person_fields[$f->name]=$f;
+        }
+    }
+
 
     /**
     * query from db
@@ -437,15 +434,15 @@ class Person extends DbProjectItem {
             return NULL;
         }
         global $auth;
-    	if(
-    		(
-    		 $auth->cur_user->id == $id
-    		 &&
-    		 $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
-    		)
-    		||
-    		$auth->cur_user->user_rights & RIGHT_PERSON_EDIT
-    	) {
+        if(
+            (
+             $auth->cur_user->id == $id
+             &&
+             $auth->cur_user->user_rights & RIGHT_PERSON_EDIT_SELF
+            )
+            ||
+            $auth->cur_user->user_rights & RIGHT_PERSON_EDIT
+        ) {
             $persons= Person::getPersons(array(
                 'id'=>$id
             ));
@@ -481,9 +478,9 @@ class Person extends DbProjectItem {
 
         $sth= $dbh->prepare($query_string);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$persons=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $persons=array();
         foreach($tmp as $t) {
             $person=new Person($t);
             $persons[]=$person;
@@ -500,7 +497,7 @@ class Person extends DbProjectItem {
     public static function &getPersons($args=NULL)
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $order_by           = 'name';
@@ -512,7 +509,7 @@ class Person extends DbProjectItem {
         $identifier         = NULL;
         $cookie_string      = NULL;
         $is_alive           = true;
-		$perscat			= NULL;
+        $perscat            = NULL;
 
         ### filter params ###
         if($args) {
@@ -561,32 +558,32 @@ class Person extends DbProjectItem {
                 : "AND pers.state=-1";
         }
 
-		if(is_null($perscat))
-		{
-			$str_perscat = "";
-		}
-		else
-		{
-			if($perscat == PCATEGORY_EMPLOYEE)
-			{
-				$str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_STAFF . " AND " . PCATEGORY_EXEMPLOYEE . ")";
-			}
-			else if($perscat == PCATEGORY_CONTACT)
-			{
-				$str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_CLIENT . " AND " . PCATEGORY_PARTNER . ")";
-			}
-			else
-			{
-				$str_perscat = "";
-			}
-		}
+        if(is_null($perscat))
+        {
+            $str_perscat = "";
+        }
+        else
+        {
+            if($perscat == PCATEGORY_EMPLOYEE)
+            {
+                $str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_STAFF . " AND " . PCATEGORY_EXEMPLOYEE . ")";
+            }
+            else if($perscat == PCATEGORY_CONTACT)
+            {
+                $str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_CLIENT . " AND " . PCATEGORY_PARTNER . ")";
+            }
+            else
+            {
+                $str_perscat = "";
+            }
+        }
 
         ### all persons ###
         if(!$visible_only) {
             $str=
                 "SELECT i.*, pers.* from {$prefix}person pers, {$prefix}item i
                 WHERE 1
-					$str_perscat
+                    $str_perscat
                     $str_alive
                     $str_id
                     $str_can_login
@@ -621,51 +618,51 @@ class Person extends DbProjectItem {
                     $str_alive
                     $str_id
                     $str_can_login
-					$str_perscat
+                    $str_perscat
                     $AND_match
                     AND pers.id = ipers.id
 
                ". getOrderByString($order_by);
         }
-    	$persons = self::queryFromDb($str);                 # store in variable to pass by reference
+        $persons = self::queryFromDb($str);                 # store in variable to pass by reference
 
-		/**
-		* be sure that the current user is listed
-		* NOTE:
-		* - constructing a query that insures the visibility of the current user
-		*   is very complex because this does not depend on existing projects
-		*/
-		if( !$search
-		    &&
-		    $auth && $auth->cur_user && $auth->cur_user->id
-		    &&
-		    (!$id || $id == $auth->cur_user->id)
-		    &&
-		    $is_alive !== false
-		    ) {
+        /**
+        * be sure that the current user is listed
+        * NOTE:
+        * - constructing a query that insures the visibility of the current user
+        *   is very complex because this does not depend on existing projects
+        */
+        if( !$search
+            &&
+            $auth && $auth->cur_user && $auth->cur_user->id
+            &&
+            (!$id || $id == $auth->cur_user->id)
+            &&
+            $is_alive !== false
+            ) {
 
-			$flag_user_found = false;
-			foreach($persons as $p) {
-				if($p->id == $auth->cur_user->id) {
-					$flag_user_found= true;
-					break;
-				}
-			}
-			if(!$flag_user_found) {
-				$persons[]= $auth->cur_user;
-			}
-		}
+            $flag_user_found = false;
+            foreach($persons as $p) {
+                if($p->id == $auth->cur_user->id) {
+                    $flag_user_found= true;
+                    break;
+                }
+            }
+            if(!$flag_user_found) {
+                $persons[]= $auth->cur_user;
+            }
+        }
 
-  	    return $persons;
+        return $persons;
     }
 
     #------------------------------------------------------------
     # get person by nickname
     #------------------------------------------------------------
     public static function getByNickname($nickname)
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
-  	    $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE nickname='" . asCleanString($nickname) . "'");
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
+        $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE nickname='" . asCleanString($nickname) . "'");
         if(!$tmp || count($tmp)!=1) {
             return false;
         }
@@ -676,11 +673,11 @@ class Person extends DbProjectItem {
     # get person by cookie_string (md5)
     #------------------------------------------------------------
     public static function getByCookieString($f_cookie_string)
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
 
 
-  	    $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE cookie_string='".asAlphaNumeric($f_cookie_string)."'");
+        $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE cookie_string='".asAlphaNumeric($f_cookie_string)."'");
         if(!$tmp || count($tmp)!=1) {
             return false;
         }
@@ -691,10 +688,10 @@ class Person extends DbProjectItem {
     # get person by identifer_string (md5)
     #------------------------------------------------------------
     public static function getByIdentifierString($f_identifier_string)
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
 
-  	    $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE identifier='".asAlphaNumeric($f_identifier_string)."'");
+        $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE identifier='".asAlphaNumeric($f_identifier_string)."'");
         if(!$tmp || count($tmp)!=1) {
             return false;
         }
@@ -706,7 +703,7 @@ class Person extends DbProjectItem {
     #---------------------------
     function getEmployments()
     {
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_employment.inc.php');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("
@@ -716,8 +713,8 @@ class Person extends DbProjectItem {
             AND     i.id = em.id
             AND     em.person = \"$this->id\"
             " );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $es=array();
         foreach($tmp as $t) {
             $es[]=new Employment($t);
@@ -730,7 +727,7 @@ class Person extends DbProjectItem {
     */
     function &getProjectPersons($f_order_by=NULL,$alive_only=true,$visible_only= true)
     {
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         global $auth;
 
         $AND_state= $alive_only
@@ -780,9 +777,9 @@ class Person extends DbProjectItem {
                 ". getOrderByString($f_order_by, "name desc")
             );
         }
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$ppersons=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $ppersons=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
             $ppersons[]= $pperson;
@@ -798,9 +795,9 @@ class Person extends DbProjectItem {
     public function getProjects($f_order_by=NULL, $f_status_min=STATUS_UPCOMING, $f_status_max= STATUS_COMPLETED)
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
-		$status_min= intval($f_status_min);
-		$status_max= intval($f_status_max);
+        $prefix= confGet('DB_TABLE_PREFIX');
+        $status_min= intval($f_status_min);
+        $status_max= intval($f_status_max);
 
         ### all projects ###
         if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
@@ -841,16 +838,16 @@ class Person extends DbProjectItem {
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str);
         $sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $tmp=$sth->fetchall_assoc();
 
-    	$projects=array();
+        $projects=array();
         foreach($tmp as $n_array) {
             require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
-			if($n_array['id']){
-				if($proj = Project::getById($n_array['id'])){
-					$projects[] = $proj;
-				}
-			}
+            if($n_array['id']){
+                if($proj = Project::getById($n_array['id'])){
+                    $projects[] = $proj;
+                }
+            }
         }
         return $projects;
     }
@@ -864,7 +861,7 @@ class Person extends DbProjectItem {
     {
         /*
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
 
         $dbh = new DB_Mysql;
@@ -888,8 +885,8 @@ class Person extends DbProjectItem {
                     AND p.id= i.project
                 ". getOrderByString($f_order_by, 'time_end DESC')
         );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $efforts=array();
         foreach($tmp as $t) {
             $efforts[]=new Effort($t);
@@ -912,7 +909,7 @@ class Person extends DbProjectItem {
     function getTaskAssignments()
     {
         $dbh = new DB_Mysql;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         $sth= $dbh->prepare(
 
@@ -924,8 +921,8 @@ class Person extends DbProjectItem {
                        AND itp.state = 1
         ");
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $taskpersons=array();
         require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 
@@ -1004,5 +1001,7 @@ class Person extends DbProjectItem {
         return  md5($this->name .$this->nickname. $this->password);
     }
 }
+
+Person::initFields();
 
 ?>

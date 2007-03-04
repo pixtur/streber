@@ -1,21 +1,16 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php based project management system
-# Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
-# Distributed under the terms and conditions of the GPL as stated in docs/license.txt
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
+
+/**\file  pages relating to error output */
 
 /**
- * pages relating to error
- *
- * @author:         Thomas Mann
- * @uses:           ListBlock
- * @usedby:
- *
- */
-
-/**
-* shown, if unknown page-id requested.
-* @@@ this should only trigger an error and relay to home
-* @@@ removing this function would make renderBacktrace() obsolete, too
+* Shown, if unknown page-id requested
+*
+* @ingroup pages
+*
+* \TODO this should only trigger an error and relay to home
+* \TODO removing this function would make renderBacktrace() obsolete, too
 */
 function error()
 {
@@ -27,7 +22,7 @@ function error()
         $page= new Page();
 
         $page->tabs['error']=  array('target'=>"index.php?go=error",     'title'=>__('Error','top navigation tab'), 'bg'=>"error");
-    	$page->cur_tab='error';
+        $page->cur_tab='error';
 
         $page->title=__("Unknown Page");
         $page->type=__("Error");
@@ -62,7 +57,7 @@ function error()
 
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 

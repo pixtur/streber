@@ -1,15 +1,11 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php based project management system
-# Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
-# Distributed under the terms and conditions of the GPL as stated in docs/license.txt
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
+# Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
  * pages relating to efforts
  *
- * @author:   Thomas Mann
- * @uses:     ListBlock
- * @usedby:
- *
+ * @author   Thomas Mann
  */
 
 
@@ -19,9 +15,10 @@ require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
 
-#=====================================================================================================
-# effortView
-#=====================================================================================================
+
+/**
+* show details of an Effort @ingroup pages
+*/
 function effortView()
 {
     global $PH;
@@ -37,7 +34,7 @@ function effortView()
     }
     else if(count($ids) > 1) {
         $PH->show('effortViewMultiple');
-        exit;
+        exit();
     }
     else if(!$effort= Effort::getEditableById($ids[0])) {
         $PH->abortWarning(__("You do not have enough rights"), ERROR_RIGHTS);
@@ -203,9 +200,9 @@ function effortView()
     echo (new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# effortViewMultiple
-#=====================================================================================================
+/**
+* Edit several efforts @ingroup pages
+*/
 function effortViewMultiple()
 {
     global $PH;
@@ -439,10 +436,10 @@ function effortViewMultiple()
     echo (new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# effortNew
-# - requires prj or task or tsk_*
-#=====================================================================================================
+
+/**
+* create a new effort @ingroup pages
+*/
 function effortNew()
 {
     global $PH;
@@ -557,10 +554,11 @@ function effortNew()
 }
 
 
-#=====================================================================================================
-# effort edit
-#=====================================================================================================
-function effortEdit($effort=NULL) {
+/**
+* Edit an effort @ingroup pages
+*/
+function effortEdit($effort=NULL) 
+{
     global $PH;
     global $g_effort_status_names;
 
@@ -573,7 +571,7 @@ function effortEdit($effort=NULL) {
         }
         else if(count($ids) > 1) {
             $PH->show('effortEditMultiple');
-            exit;
+            exit();
         }
         else if(!$effort = Effort::getEditableById($ids[0])) {
             $PH->abortWarning("ERROR: could not get Effort");
@@ -718,9 +716,9 @@ function effortEdit($effort=NULL) {
     echo (new PageHtmlEnd);
 }
 
-#=====================================================================================================
-# effortEditSubmit
-#=====================================================================================================
+/**
+* Submit changes to an effort  @ingroup pages
+*/
 function effortEditSubmit()
 {
     global $PH;
@@ -745,7 +743,7 @@ function effortEditSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('projView',array('prj'=>$effort->project));
         }
-        exit;
+        exit();
     }
 
     ### get project ###
@@ -834,7 +832,7 @@ function effortEditSubmit()
     }
     if($failure) {
         $PH->show('effortEdit',NULL,$effort);
-        exit;
+        exit();
     }
 
 
@@ -852,6 +850,9 @@ function effortEditSubmit()
     }
 }
 
+/**
+* Edit several efforts @ingroup pages
+*/
 function effortEditMultiple()
 {
     global $PH;
@@ -861,7 +862,7 @@ function effortEditMultiple()
 
     if(!$effort_ids) {
         $PH->abortWarning(__("Select some efforts(s) to edit"));
-        exit;
+        exit();
     }
     
     $efforts = array();
@@ -1024,10 +1025,13 @@ function effortEditMultiple()
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
 
-    exit;
+    exit();
 
 }
 
+/**
+* Submit changes to several efforts @ingroup pages
+*/
 function effortEditMultipleSubmit()
 {
     global $PH;
@@ -1043,7 +1047,7 @@ function effortEditMultipleSubmit()
         if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
-        exit;
+        exit();
     }
     
     $number = get('number');
@@ -1109,9 +1113,9 @@ function effortEditMultipleSubmit()
     }
 }
 
-#=====================================================================================================
-# effortsDelete
-#=====================================================================================================
+/**
+* Delete several efforts @ingroup pages
+*/
 function effortsDelete()
 {
     global $PH;
@@ -1149,5 +1153,6 @@ function effortsDelete()
         $PH->show('home');
     }
 }
+
 
 ?>

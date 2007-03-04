@@ -1,17 +1,12 @@
-<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit;}
-# streber - a php5 based project management system  (c) 2005 Thomas Mann / thomas@pixtur.de
+<?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
+# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-/**
+/**\file
  * playground for development
  *
  * There is no direct link to this page, but it can be requested
  * with url http://your.domain.com/playground. Use this to play with rendering etc.
- *
- * @author: Thomas Mann
- * @uses:
- * @usedby:
- *
  */
 
 
@@ -32,7 +27,7 @@ require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
    header('WWW-Authenticate: Basic realm="My Realm"');
    header('HTTP/1.0 401 Unauthorized');
    echo 'Text to send if user hits Cancel button';
-   exit;
+   exit();
 } else {
    echo "<p>Hello {$_SERVER['PHP_AUTH_USER']}.</p>";
    echo "<p>You entered {$_SERVER['PHP_AUTH_PW']} as your password.</p>";
@@ -45,7 +40,7 @@ require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 
 
 
-/**
+/*
 
 some questions
 
@@ -122,9 +117,9 @@ This does not cover all possible situations:
 */
 
 
-#---------------------------------------------------------------------------
-# home
-#---------------------------------------------------------------------------
+/**
+* playground @ingroup pages
+*/
 function playground() {
     global $PH;
     global $auth;
@@ -143,7 +138,7 @@ function playground() {
     print("<pre>");
     print_r($_SERVER);
     print("</pre>");
-       exit;
+       exit();
 
     }
     else {
