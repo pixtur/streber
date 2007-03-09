@@ -16,7 +16,7 @@
 
 class ListBlock_companies extends ListBlock
 {
-
+	public $filters = array();
 	public $format;
 
     public function __construct($args=NULL)
@@ -112,6 +112,26 @@ class ListBlock_companies extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
+		
+    }
+	
+	public function print_automatic()
+    {
+        global $PH;
+
+        $this->active_block_function = 'list';
+      
+        $pass= true;
+    		
+		### add filter options ###
+        foreach($this->filters as $f) {
+            foreach($f->getQuerryAttributes() as $k=>$v) {
+                $this->query_options[$k]= $v;
+            }
+        }
+		
+		$companies=Company::getAll($this->query_options);
+        $this->render_list(&$companies);
     }
 }
 
@@ -136,9 +156,9 @@ class ListBlockCol_CompanyName extends ListBlockCol
 		if(!isset($obj) || !$obj instanceof Company) {
    			return;
 		}
-
+				
 		$str= $PH->getLink('companyView',asHtml($obj->name), array('company'=>$obj->id),'item company',true);
-		print "<td>$str</td>";
+		print "<td>{$str}</td>";
 	}
 }
 

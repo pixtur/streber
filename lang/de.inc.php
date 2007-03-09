@@ -493,11 +493,19 @@ $g_lang_table= array(
 
 ### ../pages/person.inc   ###
 'Person'                      =>'Person',
+'without account'             =>'ohne Account',
+'with account'				  =>'mit Account',
+'employees'                   =>'Mitarbeiter',
+'contact persons'             =>'Ansprechpartner',	 
 
 ### ../pages/company.inc   ###
 'Create new project for this company'=>'Neues Projekt für Firma',
 'Add existing persons to this company'=>'Existierende Person mit Firma verbinden',
 'Persons'                     =>'Personen',
+'clients'                     =>'Kunden',
+'prospective clients'         =>'Interessenten',
+'supplier'                    =>'Lieferanten',
+'partner'                     =>'Partner',
 
 ### ../pages/person.inc   ###
 'Summary'                     =>'Zusammenfassung',

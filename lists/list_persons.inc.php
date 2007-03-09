@@ -15,7 +15,8 @@
  */
 class ListBlock_persons extends ListBlock
 {
-
+	public $filters = array();
+	
     public function __construct($args=NULL)
     {
 		parent::__construct($args);
@@ -149,7 +150,7 @@ class ListBlock_persons extends ListBlock
     * - get objects from database
     *
     */
-    public function print_automatic($persons)
+    public function print_automatic()
     {
         global $PH;
 
@@ -164,13 +165,6 @@ class ListBlock_persons extends ListBlock
         if($sort= get($s_cookie)) {
             $this->query_options['order_by']= $sort;
         }
-
-        ### add filter options ###
-        #foreach($this->filters as $f) {
-        #    foreach($f->getQuerryAttributes() as $k=>$v) {
-        #        $this->query_options[$k]= $v;
-        #     }
-        #}
 
         ### grouped view ###
         if($this->active_block_function == 'grouped') {
@@ -197,7 +191,15 @@ class ListBlock_persons extends ListBlock
         else {
             $pass= true;
         }
-
+		
+		### add filter options ###
+        foreach($this->filters as $f) {
+            foreach($f->getQuerryAttributes() as $k=>$v) {
+                $this->query_options[$k]= $v;
+            }
+        }
+		
+		$persons = Person::getPersons($this->query_options);
         $this->render_list(&$persons);
     }
 }

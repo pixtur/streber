@@ -38,7 +38,7 @@ function build_person_options(&$person) {
 /**
 * personList active (people with account) @ingroup pages
 */
-function personListAccounts()
+/*function personListAccounts()
 {
     global $PH;
     global $auth;
@@ -113,23 +113,164 @@ function personListAccounts()
 
     echo(new PageContentClose);
     echo(new PageHtmlEnd);
-}
+}*/
 
 /**
-* personList active (people without account) @ingroup pages
+* personList active @ingroup pages
 */
 function personList()
 {
     global $PH;
     global $auth;
+	
+	$presets= array(
+        ### all ###
+        'all_persons' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'person_category'=> array(
+                    'id'        => 'person_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => PCATEGORY_UNDEFINED,
+                    'max'       => PCATEGORY_PARTNER,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+        ### without account ###
+        'persons_without_account' => array(
+            'name'=> __('without account'),
+            'filters'=> array(
+                'can_login'=> array(
+                    'id'        => 'can_login',
+					'value'     => '0',
+                    'visible'   => true,
+                    'active'    => true,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        ### with account ###
+        'persons_with_account' => array(
+            'name'=> __('with account'),
+            'filters'=> array(
+                'can_login'=> array(
+                    'id'        => 'can_login',
+					'value'     => '1', 
+                    'visible'   => true,
+                    'active'    => true,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+        ### employee ###
+        'person_employee' => array(
+            'name'=> __('employees'),
+            'filters'=> array(
+                'person_category'=> array(
+                    'id'        => 'person_category',
+                    'visible'   => false,
+                    'active'    => true,
+                    'min'       => PCATEGORY_STAFF,
+                    'max'       => PCATEGORY_EXEMPLOYEE,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+        ### contact persons ###
+        'person_contact' => array(
+            'name'=> __('contact persons'),
+            'filters'=> array(
+                'person_category'=> array(
+                    'id'        => 'person_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => PCATEGORY_CLIENT,
+                    'max'       => PCATEGORY_PARTNER,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        ### deleted persons ###
+        'deleted_persons' => array(
+            'name'=> __('deleted'),
+            'filters'=> array(
+                'person_is_alive'=> array(
+                    'id'        => 'person_is_alive',
+					'value'     => false,
+                    'visible'   => true,
+                    'active'    => true,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
 
+	## set preset location ##
+	$preset_location = 'personList';
+
+    ### get preset-id ###
+    {
+        $preset_id= 'person_list';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_personList_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_personList_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+	
     ### create from handle ###
-    $PH->defineFromHandle();
+	$PH->defineFromHandle(array('preset_id'=>$preset_id));
 
     ### set up page and write header ####
     {
         $page= new Page();
-        $page->cur_tab='people';
+		$page->cur_tab='people';
         $page->title=__('Persons','Pagetitle for person list');
         if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
             $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
@@ -137,7 +278,7 @@ function personList()
         else {
             $page->title_minor=__("admin view","Page title add on if admin");
         }
-        #$page->type="List";
+     
         $page->type=__('List','page type');
 
         $page->options=build_personList_options();
@@ -155,8 +296,9 @@ function personList()
         ### render title ###
         echo(new PageHeader);
     }
+	
     echo (new PageContentOpen);
-
+	
     #--- list persons --------------------------------------------------------
     {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
@@ -166,11 +308,6 @@ function personList()
             $order_by='name';
         }
 
-        $persons=Person::getPersons(array(
-            'order_by'=>$order_by,
-            'can_login'=>false
-        ));
-
         $list= new ListBlock_persons();
         $list->reduced_header= true;
         $list->title= $page->title;
@@ -178,20 +315,62 @@ function personList()
         unset($list->columns['projects']);
         unset($list->columns['last_login']);
         unset($list->columns['changes']);
-
+		
+		$list->filters[] = new ListFilter_persons();
+		{
+			$preset = $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+					case 'person_category':
+						$list->filters[]= new ListFilter_person_category_min(array(
+							'value'=>$f_settings['min'],
+						));
+						$list->filters[]= new ListFilter_person_category_max(array(
+							'value'=>$f_settings['max'],
+						));
+						break;
+					case 'can_login':
+						$list->filters[]= new ListFilter_can_login(array(
+							'value'=>$f_settings['value'],
+						));
+						break;
+					case 'person_is_alive':
+						$list->filters[]= new ListFilter_is_alive(array(
+							'value'=>$f_settings['value'],
+						));
+						break;
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								  ? true
+								  : NULL;
+		}
+		
         if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
             $list->no_items_html=$PH->getLink('personNew','');
         }
         else {
             $list->no_items_html=__("no related persons");
         }
-        #$list->render_list(&$persons);
-        $list->print_automatic(&$persons);
-
+		
+		$page->print_presets(array(
+		    'target' => $preset_location,
+		    'project_id' => '',
+		    'preset_id' => $preset_id,
+		    'presets' => $presets,
+		    'person_id' => ''));
+			
+        
+		$list->query_options['order_by'] = $order_by;
+		$list->print_automatic();
+		
         ## Link to start cvs export ##
         $format = get('format');
         if($format == FORMAT_HTML || $format == ''){
-            #echo "<div class=description>" . $PH->getLink('personList', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
             echo $PH->getCSVLink();
         }
     }
@@ -204,7 +383,7 @@ function personList()
 /**
 * personListEmployee (all kinds of employees) @ingroup pages
 */
-function personListEmployee()
+/*function personListEmployee()
 {
     global $PH;
     global $auth;
@@ -282,13 +461,13 @@ function personListEmployee()
 
     echo(new PageContentClose);
     echo(new PageHtmlEnd);
-}
+}*/
 
 
 /**
 * personListContact (all contact persons)  @ingroup pages
 */
-function personListContact()
+/*function personListContact()
 {
     global $PH;
     global $auth;
@@ -367,12 +546,12 @@ function personListContact()
 
     echo(new PageContentClose);
     echo(new PageHtmlEnd);
-}
+}*/
 
 /**
 * personListDeleted (all deleted persons)  @ingroup pages
 */
-function personListDeleted()
+/*function personListDeleted()
 {
     global $PH;
     global $auth;
@@ -451,7 +630,7 @@ function personListDeleted()
 
     echo(new PageContentClose);
     echo(new PageHtmlEnd);
-}
+}*/
 
 
 /**
@@ -1138,7 +1317,8 @@ function personEdit($person=NULL)
         $form->button_cancel=true;
 
         $form->add($person->fields['name']->getFormElement(&$person));
-
+		
+		
         
         ### profile and login ###
         if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
@@ -1434,7 +1614,7 @@ function personEditSubmit()
         }
     }
 
-    
+   
 
     ### validate rights ###
     if(
@@ -1817,7 +1997,7 @@ function personDelete()
     }
 
     ### display personList ####
-    $PH->show('personListAccounts');
+    $PH->show('personList');
 
 }
 

@@ -22,10 +22,133 @@ function companyList() {
     global $PH;
     global $auth;
 
+    $presets= array(
+        ### all ###
+        'all_companies' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'company_category'=> array(
+                    'id'        => 'company_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => CCATEGORY_UNDEFINED,
+                    'max'       => CCATEGORY_PARTNER,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+        ### clients ###
+        'clients' => array(
+            'name'=> __('clients'),
+            'filters'=> array(
+                'company_category'=> array(
+                    'id'        => 'company_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => CCATEGORY_CLIENT,
+                    'max'       => CCATEGORY_CLIENT,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+        ### prospective clients ###
+        'pros_clients' => array(
+            'name'=> __('prospective clients'),
+            'filters'=> array(
+                'company_category'=> array(
+                    'id'        => 'company_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => CCATEGORY_PROSCLIENT,
+                    'max'       => CCATEGORY_PROSCLIENT,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+        ### supplier ###
+        'supplier' => array(
+            'name'=> __('supplier'),
+            'filters'=> array(
+                'company_category'=> array(
+                    'id'        => 'company_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => CCATEGORY_SUPPLIER,
+                    'max'       => CCATEGORY_SUPPLIER,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+        ### partner ###
+        'partner' => array(
+            'name'=> __('partner'),
+            'filters'=> array(
+                'company_category'=> array(
+                    'id'        => 'company_category',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => CCATEGORY_PARTNER,
+                    'max'       => CCATEGORY_PARTNER,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+    );
 
+	## set preset location ##
+	$preset_location = 'companyList';
 
+    ### get preset-id ###
+    {
+        $preset_id= 'company_list';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_companyList_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_companyList_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+	
     ### create from handle ###
-    $PH->defineFromHandle();
+	$PH->defineFromHandle(array('preset_id'=>$preset_id));
 
 	### set up page and write header ####
 	{
@@ -40,9 +163,6 @@ function companyList() {
 		}
 		$page->type=__("List");
 
-		/*$page->crumbs[]= new NaviCrumb(array(
-			'target_id'     => 'companyList',
-		));*/
 		$page->options=build_companyList_options();
 
 
@@ -67,10 +187,32 @@ function companyList() {
 
 	#--- list projects --------------------------------------------------------
 	{
-
-
 		$list= new ListBlock_companies();
-
+		
+		$list->filters[] = new ListFilter_companies();
+		{
+			$preset = $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+					case 'company_category':
+						$list->filters[]= new ListFilter_company_category_min(array(
+							'value'=>$f_settings['min'],
+						));
+						$list->filters[]= new ListFilter_company_category_max(array(
+							'value'=>$f_settings['max'],
+						));
+						break;
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								  ? true
+								  : NULL;
+		}
+		
 		### may user create companies? ###
 		if($auth->cur_user->user_rights & RIGHT_COMPANY_CREATE) {
 			$list->no_items_html=$PH->getLink('companyNew','',array('person'=>$auth->cur_user->id));
@@ -81,17 +223,24 @@ function companyList() {
 
 
 		$order_str= get("sort_".$PH->cur_page->id."_".$list->id);
-
 		$order_str= str_replace(",",", ", $order_str);
-		$companies=Company::getAll(array('order_str'=>$order_str));
-
+		
+		$list->query_options['order_str'] = $order_str;
+				
 		$list->title= $page->title;
-		$list->render_list(&$companies);
+		
+		$page->print_presets(array(
+		    'target' => $preset_location,
+		    'project_id' => '',
+		    'preset_id' => $preset_id,
+		    'presets' => $presets,
+		    'person_id' => ''));
+			
+		$list->print_automatic();
 
 		### Link to start cvs export ###
 		$format = get('format');
 		if($format == FORMAT_HTML || $format == ''){
-			#echo "<div class=description>" . $PH->getLink('companyList', __('Export as CSV'),array('format'=>FORMAT_CSV)) . "</div>";
 			echo $PH->getCSVLink();
 		}
 	}
@@ -106,7 +255,7 @@ function companyList() {
 *
 * @ingroup pages
 */
-function companyListClient()
+/*function companyListClient()
 {
 	global $PH;
     global $auth;
@@ -189,13 +338,13 @@ function companyListClient()
 	echo(new PageContentClose);
 	echo(new PageHtmlEnd);
 
-}
+}*/
 
 /**
 * List all prospective clients
 * @ingroup pages
 */
-function companyListProsClient()
+/*function companyListProsClient()
 {
 	global $PH;
     global $auth;
@@ -276,13 +425,13 @@ function companyListProsClient()
 
 	echo(new PageContentClose);
 	echo(new PageHtmlEnd);
-}
+}*/
 
 /**
 * list all supplier
 * @ingroup pages
 */
-function companyListSupplier()
+/*function companyListSupplier()
 {
 	global $PH;
     global $auth;
@@ -363,14 +512,14 @@ function companyListSupplier()
 	echo(new PageContentClose);
 	echo(new PageHtmlEnd);
 
-}
+}*(
 
 /**
 * List all partner companies
 *
 * @ingroup pages
 */
-function companyListPartner()
+/*function companyListPartner()
 {
 	global $PH;
     global $auth;
@@ -450,7 +599,7 @@ function companyListPartner()
 
 	echo(new PageContentClose);
 	echo(new PageHtmlEnd);
-}
+}*/
 
 /**
 * View a company 
@@ -938,7 +1087,7 @@ function companyEditSubmit()
         $company->update();
     }
 
-	### notify on change ###
+	### notify on change/unchange ###
 	$company->nowChangedByUser();
 
     ### display taskView ####

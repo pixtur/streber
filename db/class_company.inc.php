@@ -276,7 +276,10 @@ class Company extends DbProjectItem
 		$order_str=NULL;
 		$has_id=NULL;
 		$search=NULL;
-		$comcat=NULL;
+		$visible_only = NULL;
+		#$comcat=NULL;
+		$ccategory_min = CCATEGORY_UNDEFINED;
+		$ccategory_max = CCATEGORY_PARTNER;
 
 		### filter parameter ###
         if($args) {
@@ -290,9 +293,7 @@ class Company extends DbProjectItem
             }
         }
 
-		#$has_id= intval($has_id);
-
-        $str_has_id= $has_id
+		$str_has_id= $has_id
                 ? ('AND c.id='.intval($has_id))
                 : '';
 
@@ -304,13 +305,20 @@ class Company extends DbProjectItem
             $AND_match= '';
         }
 
-		if(is_null($comcat))
+		/*if(is_null($comcat))
 		{
 			$str_comcat = '';
 		}
 		else
 		{
 			$str_comcat = 'AND c.category=' .intval($comcat);
+		}*/
+		
+		if(!is_null($ccategory_min) && !is_null($ccategory_max)){
+			$str_ccategory = "AND (c.category BETWEEN " . $ccategory_min . " AND " . $ccategory_max . ")";
+		}
+		else{
+			$str_ccategory = '';
 		}
 
 		### show all ###
@@ -322,7 +330,7 @@ class Company extends DbProjectItem
                       $str_has_id
                       AND c.id = ic.id
                       $AND_match
-					  $str_comcat "
+					  $str_ccategory "
                 . getOrderByString($order_str, 'c.name');
         }
 
@@ -341,13 +349,14 @@ class Company extends DbProjectItem
 
 
                       $AND_match
-					  $str_comcat "
+					  $str_ccategory "
                 . getOrderByString($order_str, 'c.name');
         }
 
 
   	    $companies = self::queryFromDb($str);               # store in variable to return by reference
-  	    return $companies;
+  	   
+		return $companies;
 
 	}
 

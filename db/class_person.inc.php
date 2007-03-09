@@ -353,7 +353,7 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
-    
+    		
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,
@@ -509,8 +509,10 @@ class Person extends DbProjectItem {
         $identifier         = NULL;
         $cookie_string      = NULL;
         $is_alive           = true;
-        $perscat            = NULL;
-
+        #$perscat            = NULL;
+		$pcategory_min       = PCATEGORY_UNDEFINED;
+		$pcategory_max       = PCATEGORY_PARTNER;
+		
         ### filter params ###
         if($args) {
             foreach($args as $key=>$value) {
@@ -524,9 +526,12 @@ class Person extends DbProjectItem {
         }
 
         if(!is_null($can_login)) {
-            $str_can_login= $can_login
-             ?"AND pers.can_login=1"
-             :"AND pers.can_login=0";
+			if($can_login == '0'){
+				 $str_can_login = "AND pers.can_login = 0";
+			}
+			else{
+				$str_can_login = "AND pers.can_login = 1";
+			}
         }
         else {
             $str_can_login = '';
@@ -558,7 +563,7 @@ class Person extends DbProjectItem {
                 : "AND pers.state=-1";
         }
 
-        if(is_null($perscat))
+        /*if(is_null($perscat))
         {
             $str_perscat = "";
         }
@@ -576,17 +581,24 @@ class Person extends DbProjectItem {
             {
                 $str_perscat = "";
             }
-        }
-
+        }*/
+		
+		if(!is_null($pcategory_min) && !is_null($pcategory_max)){
+			$str_pcategory = "AND (pers.category BETWEEN " . $pcategory_min . " AND " . $pcategory_max . ")";
+		}
+		else{
+			$str_pcategory = '';
+		}
+		
         ### all persons ###
         if(!$visible_only) {
             $str=
                 "SELECT i.*, pers.* from {$prefix}person pers, {$prefix}item i
                 WHERE 1
-                    $str_perscat
                     $str_alive
                     $str_id
                     $str_can_login
+					$str_pcategory
                     AND i.id = pers.id
                     $AND_match
 
@@ -618,14 +630,14 @@ class Person extends DbProjectItem {
                     $str_alive
                     $str_id
                     $str_can_login
-                    $str_perscat
+					$str_pcategory
                     $AND_match
                     AND pers.id = ipers.id
 
                ". getOrderByString($order_by);
         }
         $persons = self::queryFromDb($str);                 # store in variable to pass by reference
-
+		
         /**
         * be sure that the current user is listed
         * NOTE:

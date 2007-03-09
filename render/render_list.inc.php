@@ -190,6 +190,30 @@ class ListFilter_efforts extends ListFilter
     }
 }
 
+class ListFilter_persons extends ListFilter
+{
+    public $id = 'persons';
+    public $sql_querry_attribute = 'visible_only';
+    public $default = true;
+
+    public function __construct($args=NULL)
+    {
+        parent::__construct($args);
+    }
+}
+
+class ListFilter_companies extends ListFilter
+{
+    public $id = 'company';
+	public $sql_querry_attribute = 'visible_only';
+    public $default = true;
+
+    public function __construct($args=NULL)
+    {
+        parent::__construct($args);
+    }
+}
+
 class ListFilter_for_milestone extends ListFilter
 {
     public $id          = 'for_milestone';
@@ -567,8 +591,129 @@ class ListFilter_not_modified_by extends ListFilter
     }
 }
 
+class ListFilter_person_category_min extends ListFilter
+{
+    public $id          = 'pcategory_min';
+    public $default     = PCATEGORY_UNDEFINED;
+
+    public function render()
+    {
+        global $g_pcategory_names;
+
+        if($this->active && !$this->hidden) {
+
+            $min=   isset($g_pcategory_names[$this->value])
+                        ? $g_pcategory_names[$this->value]
+                        : '';
+
+            return $min;
+        }
+        return '';
+    }
+}
 
 
+class ListFilter_person_category_max extends ListFilter
+{
+    public $id          = 'pcategory_max';
+    public $default     = PCATEGORY_PARTNER;
+
+    public function render()
+    {
+        global $g_pcategory_names;
+
+        if($this->active && !$this->hidden) {
+
+            $max=   isset($g_pcategory_names[$this->value])
+                        ? $g_pcategory_names[$this->value]
+                        : '';
+
+            return $max;
+        }
+        return '';
+    }
+}
+
+class ListFilter_can_login extends ListFilter
+{
+    public $id = 'can_login';
+
+    public function getQuerryAttributes()
+    {
+        $a = array();
+        if($this->active) {
+            $name= $this->sql_querry_attribute
+                 ? $this->sql_querry_attribute
+                 : $this->id;
+			if(!is_null($this->value)){
+            	$a['can_login']= $this->value;
+			}
+        }
+        return $a;
+    }
+}
+
+class ListFilter_is_alive extends ListFilter
+{
+    public $id = 'is_alive';
+
+    public function getQuerryAttributes()
+    {
+        $a = array();
+        if($this->active) {
+            $name= $this->sql_querry_attribute
+                 ? $this->sql_querry_attribute
+                 : $this->id;
+			if(!is_null($this->value)){
+            	$a['is_alive']= $this->value;
+			}
+        }
+        return $a;
+    }
+}
+
+class ListFilter_company_category_min extends ListFilter
+{
+    public $id          = 'ccategory_min';
+    public $default     = CCATEGORY_UNDEFINED;
+
+    public function render()
+    {
+        global $g_ccategory_names;
+
+        if($this->active && !$this->hidden) {
+
+            $min=   isset($g_ccategory_names[$this->value])
+                        ? $g_ccategory_names[$this->value]
+                        : '';
+
+            return $min;
+        }
+        return '';
+    }
+}
+
+
+class ListFilter_company_category_max extends ListFilter
+{
+    public $id          = 'ccategory_max';
+    public $default     = CCATEGORY_PARTNER;
+
+    public function render()
+    {
+        global $g_ccategory_names;
+
+        if($this->active && !$this->hidden) {
+
+            $max=   isset($g_ccategory_names[$this->value])
+                        ? $g_ccategory_names[$this->value]
+                        : '';
+
+            return $max;
+        }
+        return '';
+    }
+}
 
 /**
 * blockfunction for grouping lists

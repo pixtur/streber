@@ -204,19 +204,11 @@ function build_task_crumbs(&$task, &$project=NULL) {
 function build_person_crumbs(&$person) {
     $crumbs=array();
 
-    if($person->can_login) {
-        $crumbs[]= new NaviCrumb(array(
-            'target_id'     =>'personListAccounts',
-            'name'          =>__('With Account','page option'),
-        ));
-    }
-    else {
-        $crumbs[]= new NaviCrumb(array(
-            'target_id'     =>'personList',
-            'name'          =>__('Other Persons','page option'),
-        ));
-    }
-
+	$crumbs[]= new NaviCrumb(array(
+		'target_id'     =>'personList',
+		'name'          =>__('Other Persons','page option'),
+	));
+    
     $crumbs[]= new NaviCrumb(array(
         'target_id'     => 'personView',
         'target_params' => array('person'=> $person->id),
@@ -229,48 +221,9 @@ function build_person_crumbs(&$person) {
 function build_company_crumbs(&$company) {
     $crumbs=array();
 
-	if($company->id == 0)
-	{
-		$crumbs[]= new NaviCrumb(array(
-            'target_id'     => 'companyList',
-    	));
-	}
-	else
-	{
-		switch($company->category)
-		{
-			case 0:
-				$crumbs[]= new NaviCrumb(array(
-					'target_id'     =>'companyListClient',
-					'name'          =>__('Clients','page option'),
-				));
-				break;
-			case 1:
-				$crumbs[]= new NaviCrumb(array(
-					'target_id'     =>'companyListProsClient',
-					'name'          =>__('Prospective Clients','page option'),
-				));
-				break;
-			case 2:
-				$crumbs[]= new NaviCrumb(array(
-					'target_id'     =>'companyListSupplier',
-					'name'          =>__('Suppliers','page option'),
-				));
-				break;
-			case 3:
-				$crumbs[]= new NaviCrumb(array(
-					'target_id'     =>'companyListPartner',
-					'name'          =>__('Partners','page option'),
-				));
-				break;
-			default:
-				$crumbs[]= new NaviCrumb(array(
-					'target_id'     =>'companyList',
-					'name'          =>__('Companies','page option'),
-				));
-				break;
-    	}
-	}
+	$crumbs[]= new NaviCrumb(array(
+		'target_id'     => 'companyList',
+	));
 
     $crumbs[]= new NaviCrumb(array(
             'target_id'     => 'companyView',
@@ -279,17 +232,6 @@ function build_company_crumbs(&$company) {
     ));
 
   	return $crumbs;
-
-	/*return array(
-        new NaviCrumb(array(
-            'target_id'     => 'companyList',
-        )),
-        new NaviCrumb(array(
-            'target_id'     => 'companyView',
-            'name'          => $company->name,
-            'target_params' => array('company'=>$company->id),
-        )),
-	);*/
 }
 
 
@@ -428,26 +370,9 @@ function build_projView_options($project)
 function build_personList_options()
 {
     return array(
-
-        new NaviOption(array(
-            'target_id'=>'personListAccounts',
-            'name'=>__('With Account','page option')
-        )),
         new NaviOption(array(
             'target_id'=>'personList',
-            'name'=>__('Other Persons', 'page option')
-        )),
-		new NaviOption(array(
-            'target_id'=>'personListEmployee',
-            'name'=>__('Employees','page option')
-        )),
-		new NaviOption(array(
-            'target_id'=>'personListContact',
-            'name'=>__('Contact Persons','page option')
-        )),
-        new NaviOption(array(
-            'target_id'=>'personListDeleted',
-            'name'=>__('Deleted','page option')
+            'name'=>__('Persons', 'page option')
         ))
     );
 }
@@ -455,27 +380,10 @@ function build_personList_options()
 function build_companyList_options()
 {
     return array(
-
         new NaviOption(array(
             'target_id'=>'companyList',
-            'name'=>__('All Companies', 'page option')
+            'name'=>__('Companies', 'page option')
         )),
-        new NaviOption(array(
-            'target_id'=>'companyListClient',
-            'name'=>__('Clients', 'page option')
-        )),
-        new NaviOption(array(
-            'target_id'=>'companyListProsClient',
-            'name'=>__('Prospective Clients', 'page option')
-        )),
-		new NaviOption(array(
-            'target_id'=>'companyListSupplier',
-            'name'=>__('Suppliers', 'page option')
-        )),
-		new NaviOption(array(
-            'target_id'=>'companyListPartner',
-            'name'=>__('Partners', 'page option')
-        ))
     );
 }
 
@@ -1046,6 +954,4 @@ function &arrayAsHtml($strings)
     $buffer= str_replace("  ", "  ", $buffer);
     return $buffer;
 }
-
-
 ?>

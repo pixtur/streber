@@ -250,8 +250,8 @@ class Page
                 'bg'        =>"projects",
                 'accesskey' =>'p'
             ),
-            "people"    =>array(
-                'target'    =>$PH->getUrl('personListAccounts',array()),
+			"people"    =>array(
+                'target'    =>$PH->getUrl('personList',array()),
                 'title'     =>__("People"),
                 'tooltip'   =>__('Your related People'),
                 'bg'        =>"people"

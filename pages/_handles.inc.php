@@ -890,37 +890,11 @@ new PageHandleFunc(array('id'=>'filesMoveToFolder',
 new PageHandle(array('id'=>'companyList',
     'req'=>'pages/company.inc.php',
     'title'=>__('List Companies'),
-
     'test'=>'yes',
     'valid_for_crawlers'=>false,
 
 ));
-new PageHandle(array('id'=>'companyListClient',
-    'req'=>'pages/company.inc.php',
-    'title'=>__('List Clients'),
-    'test'=>'yes',
-    'valid_for_crawlers'=>false,
-));
-new PageHandle(array('id'=>'companyListProsClient',
-    'req'=>'pages/company.inc.php',
-    'title'=>__('List Prospective Clients'),
-    'test'=>'yes',
-    'valid_for_crawlers'=>false,
-));
 
-new PageHandle(array('id'=>'companyListSupplier',
-    'req'=>'pages/company.inc.php',
-    'title'=>__('List Suppliers'),
-    'test'=>'yes',
-    'valid_for_crawlers'=>false,
-));
-
-new PageHandle(array('id'=>'companyListPartner',
-    'req'=>'pages/company.inc.php',
-    'title'=>__('List Partners'),
-    'test'=>'yes',
-    'valid_for_crawlers'=>false,
-));
 new PageHandle(array('id'=>'companyView',
     'req'=>'pages/company.inc.php',
     'title'=>__('View Company'),
@@ -986,35 +960,10 @@ new PageHandleFunc(array('id'=>'companyPersonsDelete',
 new PageHandle(array('id'=>'personList',
     'req'=>'pages/person.inc.php',
     'title'=>__('List Persons'),
-
     'test'=>'yes',
 
 ));
-new PageHandle(array('id'=>'personListAccounts',
-    'req'=>'pages/person.inc.php',
-    'title'=>__('List Persons'),
 
-    'test'=>'yes',
-    'cleanurl'=>'personsActive',
-));
-new PageHandle(array('id'=>'personListEmployee',
-    'req'=>'pages/person.inc.php',
-    'title'=>__('List Employees'),
-
-    'test'=>'yes',
-));
-
-new PageHandle(array('id'=>'personListContact',
-    'req'=>'pages/person.inc.php',
-    'title'=>__('List Persons'),
-
-    'test'=>'yes',
-));
-new PageHandle(array('id'=>'personListDeleted',
-    'req'=>'pages/person.inc.php',
-    'title'=>__('List Deleted Persons'),
-    'test'=>'yes',
-));
 
 new PageHandle(array('id'=>'personView',
     'req'=>'pages/person.inc.php',
