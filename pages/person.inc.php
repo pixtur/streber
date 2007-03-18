@@ -242,7 +242,7 @@ function personList()
 
     ### get preset-id ###
     {
-        $preset_id= 'person_list';                           # default value
+        $preset_id= 'persons_with_account';                           # default value
         if($tmp_preset_id= get('preset')) {
             if(isset($presets[$tmp_preset_id])) {
                 $preset_id= $tmp_preset_id;
@@ -318,6 +318,7 @@ function personList()
 		
 		$list->filters[] = new ListFilter_persons();
 		{
+		    
 			$preset = $presets[$preset_id];
 			foreach($preset['filters'] as $f_name=>$f_settings) {
 				switch($f_name) {

@@ -51,7 +51,7 @@ class Field
     public      $export      = true;        # may be exported as csv or xml (should be false for passwords, etc)
 
 
-	public      $export_csv = false;
+    public      $export_csv = false;
     /**
     * constructor
     *
@@ -61,7 +61,7 @@ class Field
     {
         #--- set parameters ------
         if(!$args) {
-        	trigger_error("Can't construct a field without name parameters", E_USER_ERROR);
+            trigger_error("Can't construct a field without name parameters", E_USER_ERROR);
         }
         foreach($args as $key=>$value) {
             empty($this->$key);     # cause php-notification if undefined property
@@ -351,7 +351,7 @@ abstract class DbItem {
         }
 
         if($id === 0) {
-            return NULL;	# this is probably a failure...
+            return NULL;    # this is probably a failure...
         }
 
         if($id === false) {
@@ -369,7 +369,7 @@ abstract class DbItem {
                 $delimiter=',';
             }
         }
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $query = "SELECT $download_fields from {$prefix}$this->_type WHERE id = 1";
 
         $data = $dbh->prepare($query)->execute($id)->fetch_assoc();
@@ -392,7 +392,7 @@ abstract class DbItem {
         if(!$this->id) {
           trigger_error("Deleting requires id",E_USER_ERROR);
         }
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $query = "DELETE FROM {$prefix}{$this->_type} WHERE id = {$this->id}";
         $dbh = new DB_Mysql;
         $dbh->prepare($query)->execute($this->id);
@@ -408,9 +408,9 @@ abstract class DbItem {
     public function delete()
     {
         if(!$this->id) {
-        	trigger_error("Deleting requires id", E_USER_ERROR);
+            trigger_error("Deleting requires id", E_USER_ERROR);
         }
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $query= "update {$prefix}{$this->_type} SET state=-1 WHERE id= $this->id";
         $dbh = new DB_Mysql;
         $dbh->prepare($query)->execute();
@@ -441,7 +441,7 @@ abstract class DbItem {
 
         #--- build query-string like "update users SET firstname=:1, lastname=:2 where id=:3" --
         #--- build value-array ----
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $query = "UPDATE {$prefix}{$this->_type} SET  ";
         $values=array();
         $counter=1;
@@ -486,7 +486,7 @@ abstract class DbItem {
 
         #--- build query-string like "INSERT INTO users (firstname, lastname) VALUES(:1, :2)" --
         #--- build value-array ----
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $t_values= array();
         $t_fields= array();
         foreach($this->field_states as $m_key => $m_state) {
@@ -508,7 +508,7 @@ abstract class DbItem {
 
         $sth= $dbh->prepare($str_query);
 
-    	$sth->execute("",1);
+        $sth->execute("",1);
 
          #$statement->execute($values);
         $this->id =  $dbh->lastId();
@@ -527,14 +527,18 @@ abstract class DbItem {
             return $this->short;
         }
         if(!$length) {
-            $length= confGet('STRING_LENGTH_SHORT');
+            $length= confGet('STRING_LENGTH_SHORT')  ;
         }
         if(isset($this->name) && $this->name !="") {
-            if(strlen($this->name) > $length) {
-                if(function_exists('mb_substr')) {
+            if(function_exists('mb_strlen')) {
+                if((mb_strlen($this->name) > $length  )  && ! (mb_strlen($this->name) < $length + 3 )  ) {
                     return mb_substr($this->name, 0 ,$length) . "...";
                 }
-                return substr($this->name, 0 ,$length) . "...";
+            }
+            else {
+                if((strlen($this->name) > $length  )  && ! (strlen($this->name) < $length + 3 )  ) {
+                    return substr($this->name, 0 ,$length) . "...";
+                }
             }
             return $this->name;
         }
@@ -569,30 +573,30 @@ abstract class DbItem {
 
 
     static function getItemType($id)
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT  type FROM {$prefix}item i
             WHERE
                   i.id = $id
             " );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['type'];
     }
 
 
 
-	static function getItemState($id)
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    static function getItemState($id)
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT state FROM {$prefix}item i
             WHERE
                   i.id = $id
             " );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['state'];
     }
 
@@ -600,37 +604,37 @@ abstract class DbItem {
     /**
     *
     */
-	public function nowViewedByUser($user=NULL)
-	{
-		global $auth;
+    public function nowViewedByUser($user=NULL)
+    {
+        global $auth;
 
-		if(is_null($user)){
-			if($auth->cur_user){
-				$user = $auth->cur_user;
-			}
-			else{
-				return NULL;
-			}
-		}
+        if(is_null($user)){
+            if($auth->cur_user){
+                $user = $auth->cur_user;
+            }
+            else{
+                return NULL;
+            }
+        }
 
-		require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
-		if($view = ItemPerson::getAll(array('person'=>$user->id, 'item'=>$this->id))){
-			$view[0]->viewed        = true;
-			$view[0]->viewed_last   = getGMTString();
-			$view[0]->update();
-		}
-		else{
-			$new_view = new ItemPerson(array(
-			'item'          =>$this->id,
-			'person'        =>$user->id,
-		    'viewed'        =>1,
-			'viewed_last'   =>getGMTString(),
-			'is_bookmark'   =>0,
-			'notify_on_change'=>0));
-			$new_view->insert();
-		}
-	}
+        if($view = ItemPerson::getAll(array('person'=>$user->id, 'item'=>$this->id))){
+            $view[0]->viewed        = true;
+            $view[0]->viewed_last   = getGMTString();
+            $view[0]->update();
+        }
+        else{
+            $new_view = new ItemPerson(array(
+            'item'          =>$this->id,
+            'person'        =>$user->id,
+            'viewed'        =>1,
+            'viewed_last'   =>getGMTString(),
+            'is_bookmark'   =>0,
+            'notify_on_change'=>0));
+            $new_view->insert();
+        }
+    }
 
 
 
@@ -642,41 +646,41 @@ abstract class DbItem {
     {
         global $auth;
 
-	    ### ignore, if too old
-	    if($this->modified < $auth->cur_user->date_highlight_changes) {
-	        return false;
-	    }
+        ### ignore, if too old
+        if($this->modified < $auth->cur_user->date_highlight_changes) {
+            return false;
+        }
 
-	    ### ignore self edited items ###
-	    if($this->modified_by == $auth->cur_user->id) {
-	        return false;
-	    }
+        ### ignore self edited items ###
+        if($this->modified_by == $auth->cur_user->id) {
+            return false;
+        }
 
-	    require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
-		if($item_persons = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item' => $this->id))) {
-		    $ip= $item_persons[0];
-		    if($ip->viewed_last < $this->modified) {
-		        return true;
-		    }
-		    else {
-		        return false;
-		    }
-		}
-		return true;
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+        if($item_persons = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item' => $this->id))) {
+            $ip= $item_persons[0];
+            if($ip->viewed_last < $this->modified) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
     }
 
-	public function nowChangedByUser()
-	{
-		require_once('std/mail.inc.php');
-		require_once('db/db_itemperson.inc.php');
-		### if notify_if_unchanges is set ###
-		if ($ip = ItemPerson::getAll(array('item'=>$this->id,'notify_if_unchanged_min'=>NOTIFY_1DAY))){
-			if(isset($ip)){
-				$ip[0]->notify_date = date('Y-m-d H:i:s', time());
-				$ip[0]->update();
-			}
-		}
-	}
+    public function nowChangedByUser()
+    {
+        require_once('std/mail.inc.php');
+        require_once('db/db_itemperson.inc.php');
+        ### if notify_if_unchanges is set ###
+        if ($ip = ItemPerson::getAll(array('item'=>$this->id,'notify_if_unchanged_min'=>NOTIFY_1DAY))){
+            if(isset($ip)){
+                $ip[0]->notify_date = date('Y-m-d H:i:s', time());
+                $ip[0]->update();
+            }
+        }
+    }
 
 
 
@@ -767,10 +771,10 @@ class DbProjectItem extends DbItem {
         */
         if(is_array($id_or_array)) {
             parent::__construct();
-			foreach($id_or_array as $key => $value) {
-				is_null($this->$key); ### cause E_NOTICE on undefined properties
-				$this->_values_org[$key]= $this->$key=$value;
-			}
+            foreach($id_or_array as $key => $value) {
+                is_null($this->$key); ### cause E_NOTICE on undefined properties
+                $this->_values_org[$key]= $this->$key=$value;
+            }
         }
 
         /**
@@ -798,7 +802,7 @@ class DbProjectItem extends DbItem {
                     $str_download_fields.= $str_delimiter . $f->name;
                     $str_delimiter=',';
                 }
-				$prefix= confGet('DB_TABLE_PREFIX');
+                $prefix= confGet('DB_TABLE_PREFIX');
                 $query = "SELECT $str_download_fields from {$prefix}item WHERE id = $id";
                 $data = $dbh->prepare($query)->execute()->fetch_assoc();
                 if($data) {
@@ -832,7 +836,7 @@ class DbProjectItem extends DbItem {
                         $str_delimiter=',';
                     }
                 }
-				$prefix= confGet('DB_TABLE_PREFIX');
+                $prefix= confGet('DB_TABLE_PREFIX');
                 $query = "SELECT $str_download_fields from {$prefix}$this->_type WHERE id = $id";
                 $data = $dbh->prepare($query)->execute()->fetch_assoc();
                 if($data) {
@@ -848,6 +852,7 @@ class DbProjectItem extends DbItem {
                         #    $this->_values_org[$attr]= $this->$attr = stripslashes($value);
                         #}
                         #else {
+                        #$this->_values_org[$attr]= $this->$attr = stripslashes($value);
                         
                         $this->_values_org[$attr]= $this->$attr = $value;
                         #}
@@ -1073,14 +1078,14 @@ class DbProjectItem extends DbItem {
                 $t_fields[]=$name;
                 $t_values[]="'".asSecureString($this->$name)."'";
             }
-			$prefix= confGet('DB_TABLE_PREFIX');
+            $prefix= confGet('DB_TABLE_PREFIX');
             $str_query= 'INSERT INTO '
                         .$prefix.'item '
                               . '(' . join(', ', $t_fields )   .')'
                         .' VALUES(' . join(', ', $t_values) .')';
 
             $sth= $dbh->prepare($str_query);
-        	$sth->execute("",1);
+            $sth->execute("",1);
         }
 
         #--- extract the id of last inserted item ---
@@ -1114,7 +1119,7 @@ class DbProjectItem extends DbItem {
 
 
             $sth= $dbh->prepare($str_query);
-        	$sth->execute("",1);
+            $sth->execute("",1);
         }
         return true;
     }
@@ -1190,8 +1195,8 @@ class DbProjectItem extends DbItem {
 
                 $t_pairs[]= $name."='".asSecureString($this->$name)."'";
             }
-			$prefix= confGet('DB_TABLE_PREFIX');
-			if(count($t_pairs)) {
+            $prefix= confGet('DB_TABLE_PREFIX');
+            if(count($t_pairs)) {
                 $str_query= 'UPDATE '
                             .$prefix.'item '
                             .'SET ' . join(', ', $t_pairs)
@@ -1200,7 +1205,7 @@ class DbProjectItem extends DbItem {
                 $dbh = new DB_Mysql;
 
                 $sth= $dbh->prepare($str_query);
-            	$sth->execute("",1);
+                $sth->execute("",1);
             }
         }
 
@@ -1239,7 +1244,7 @@ class DbProjectItem extends DbItem {
                         }
                     }
                     global $sql_obj;
-                    $t_pairs[]= $bla= $name.'='."'". asSecureString($this->$name)."'";
+                    $t_pairs[]= $name.'='."'". asSecureString($this->$name)."'";
                 }
             }
             if(count($t_pairs)) {
@@ -1343,7 +1348,7 @@ class DbProjectItem extends DbItem {
         if(!$this->id) {
           trigger_error("Deleting requires id",E_USER_ERROR);
         }
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         $query = "DELETE FROM {$prefix}{$this->_type} WHERE id = {$this->id}";
         $dbh = new DB_Mysql;
@@ -1366,7 +1371,7 @@ class DbProjectItem extends DbItem {
     public function getProjectPerson() {
         global $auth;
 
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         #--- get the belonging project-person ---
         $dbh = new DB_Mysql;
@@ -1381,8 +1386,8 @@ class DbProjectItem extends DbItem {
                     AND i.type = '".ITEM_PROJECTPERSON."'
                     AND i.id = upp.id
                 ");
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 
         ### return nothing if no rights ###
         if(count($tmp) != 1) {
@@ -1498,7 +1503,7 @@ class DbProjectItem extends DbItem {
     static function &getAll($args=array())
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $project            = NULL;
@@ -1612,10 +1617,10 @@ class DbProjectItem extends DbItem {
         $dbh = new DB_Mysql;
 
         $sth= $dbh->prepare($s_query);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 
-    	$items= array();
+        $items= array();
         foreach($tmp as $n) {
             $item= new DbProjectItem($n);
             $items[]= $item;
@@ -1626,10 +1631,10 @@ class DbProjectItem extends DbItem {
 
 
 /*
-	static function &getChanges($args=array())
-	{
-		global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+    static function &getChanges($args=array())
+    {
+        global $auth;
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $order_by           = "modified DESC";
@@ -1637,7 +1642,7 @@ class DbProjectItem extends DbItem {
         $alive_only         = true;       # hide deleted
         $date_min           = NULL;
         $date_max           = NULL;
-		$today              = NULL;
+        $today              = NULL;
 
         ### filter params ###
         if($args) {
@@ -1651,25 +1656,25 @@ class DbProjectItem extends DbItem {
             }
         }
 
-		if($auth->cur_user->user_rights & RIGHT_EDITALL) {
+        if($auth->cur_user->user_rights & RIGHT_EDITALL) {
             $visible_only = false;
         }
 
-		$str_state = $alive_only
-			? 'AND i.state = '. ITEM_STATE_OK
-			: '';
+        $str_state = $alive_only
+            ? 'AND i.state = '. ITEM_STATE_OK
+            : '';
 
-		$str_today = $today
-			? "AND i.modified >= '" . asCleanString($today) . "'"
-			: '';
+        $str_today = $today
+            ? "AND i.modified >= '" . asCleanString($today) . "'"
+            : '';
 
-		$str_date_min = $date_min
-			? "AND i.modified >= '" . asCleanString($date_min) . "'"
-			: '';
+        $str_date_min = $date_min
+            ? "AND i.modified >= '" . asCleanString($date_min) . "'"
+            : '';
 
-		$str_date_max = $date_max
-			? "AND i.modified <= '" . asCleanString($date_max) . "'"
-			: '';
+        $str_date_max = $date_max
+            ? "AND i.modified <= '" . asCleanString($date_max) . "'"
+            : '';
 
 
         ### only visibile for current user ###
@@ -1680,10 +1685,10 @@ class DbProjectItem extends DbItem {
             upp.person = {$auth->cur_user->id}
             AND upp.project = i.project
             $str_state
-			$str_today
+            $str_today
             $str_date_min
             $str_date_max
-			AND ( i.pub_level >= upp.level_view
+            AND ( i.pub_level >= upp.level_view
                   OR
                   i.created_by = {$auth->cur_user->id}
                 )
@@ -1695,7 +1700,7 @@ class DbProjectItem extends DbItem {
             "SELECT i.*  from {$prefix}item i
             WHERE 1
             $str_state
-			$str_today
+            $str_today
             $str_date_min
             $str_date_max
             " . getOrderByString($order_by);
@@ -1704,18 +1709,18 @@ class DbProjectItem extends DbItem {
         $dbh = new DB_Mysql;
 
         $sth = $dbh->prepare($s_query);
-    	$sth->execute("",1);
-    	$tmp = $sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp = $sth->fetchall_assoc();
 
-    	$items = array();
+        $items = array();
         foreach($tmp as $n) {
             $item = new DbProjectItem($n);
             $items[] = $item;
         }
         return $items;
-	}
+    }
 
-	*/
+    */
 
     /**
     * returns visible object of correct type by an itemId
@@ -1728,57 +1733,57 @@ class DbProjectItem extends DbItem {
     */
     public static function getObjectById($id)
     {
-    	if(!$item = DbProjectItem::getById($id)) {
-    	    return NULL;
+        if(!$item = DbProjectItem::getById($id)) {
+            return NULL;
         }
 
-    	if($type = $item->type){
-    		switch($type) {
-    			case ITEM_TASK:
-    				require_once("db/class_task.inc.php");
-    				$item_full = Task::getVisibleById($item->id);
-    				break;
+        if($type = $item->type){
+            switch($type) {
+                case ITEM_TASK:
+                    require_once("db/class_task.inc.php");
+                    $item_full = Task::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_COMMENT:
-    				require_once("db/class_comment.inc.php");
-    				$item_full = Comment::getVisibleById($item->id);
-    				break;
+                case ITEM_COMMENT:
+                    require_once("db/class_comment.inc.php");
+                    $item_full = Comment::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_PERSON:
-    				require_once("db/class_person.inc.php");
-    				$item_full = Person::getVisibleById($item->id);
-    				break;
+                case ITEM_PERSON:
+                    require_once("db/class_person.inc.php");
+                    $item_full = Person::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_EFFORT:
-    				require_once("db/class_effort.inc.php");
-    				$item_full = Effort::getVisibleById($item->id);
-    				break;
+                case ITEM_EFFORT:
+                    require_once("db/class_effort.inc.php");
+                    $item_full = Effort::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_FILE:
-    				require_once("db/class_file.inc.php");
-    				$item_full = File::getVisibleById($item->id);
-    				break;
+                case ITEM_FILE:
+                    require_once("db/class_file.inc.php");
+                    $item_full = File::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_PROJECT:
-    				require_once("db/class_project.inc.php");
-    				$item_full = Project::getVisibleById($item->id);
-    				break;
+                case ITEM_PROJECT:
+                    require_once("db/class_project.inc.php");
+                    $item_full = Project::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_COMPANY:
-    				require_once("db/class_company.inc.php");
-    				$item_full = Company::getVisibleById($item->id);
-    				break;
+                case ITEM_COMPANY:
+                    require_once("db/class_company.inc.php");
+                    $item_full = Company::getVisibleById($item->id);
+                    break;
 
-    			case ITEM_VERSION:
-    				require_once("db/class_task.inc.php");
-    				$item_full = Task::getVisibleById($item->id);
-    				break;
+                case ITEM_VERSION:
+                    require_once("db/class_task.inc.php");
+                    $item_full = Task::getVisibleById($item->id);
+                    break;
 
-    			default:
-    				$item_full = NULL;
+                default:
+                    $item_full = NULL;
 
-    		}
-    		return $item_full;
+            }
+            return $item_full;
         }
     }
 

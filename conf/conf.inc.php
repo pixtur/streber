@@ -15,18 +15,18 @@
 global $g_config;
 $g_config= array(
 
-	'STREBER_VERSION'       => '0.0796',
-	'STREBER_VERSION_DATE'  => '2007-02-23',
+    'STREBER_VERSION'       => '0.07971',
+    'STREBER_VERSION_DATE'  => '2007-03-18',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
-	'PHP_VERSION_REQUIRED'	=>	'5.0.0',
-	'INCLUDE_PATH'		    => ".",
-	'DIR_STREBER'           => "./",
-	'DIR_TEMP'              => "./_tmp/",
-	'DIR_FILES'             => "./_files/",
+    'PHP_VERSION_REQUIRED'  =>  '5.0.0',
+    'INCLUDE_PATH'          => ".",
+    'DIR_STREBER'           => "./",
+    'DIR_TEMP'              => "./_tmp/",
+    'DIR_FILES'             => "./_files/",
     'DIR_SETTINGS'          => "./_settings/",
-	'FILE_DB_SETTINGS'      => 'db_settings.php',
+    'FILE_DB_SETTINGS'      => 'db_settings.php',
 
 
     /**
@@ -48,7 +48,7 @@ $g_config= array(
     /**
     * title diplay in header
     */
-	'APP_TITLE_HEADER'      => "streber<span class=extend>PM</span>",
+    'APP_TITLE_HEADER'      => "streber<span class=extend>PM</span>",
 
     /**
     * - the database version is stored in the db-table inside the row with updated=NULL
@@ -56,26 +56,26 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-	'DB_VERSION_REQUIRED'   => '0.0795',
+    'DB_VERSION_REQUIRED'   => '0.0795',
 
 
     /**
     * url to online-help
     */
-	'STREBER_WIKI_URL'      => 'http://www.streber-pm.org/index.php?go=search&search_query=',
+    'STREBER_WIKI_URL'      => 'http://www.streber-pm.org/index.php?go=search&search_query=',
 
     /**
     * version of databases created by installation
-	*
-	* this fields are overwritten by settings/db_settings.inc which is
-	* been created by "install/install.php"
-	*
+    *
+    * this fields are overwritten by settings/db_settings.inc which is
+    * been created by "install/install.php"
+    *
     */
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-	'DB_CREATE_VERSION'     => '0.0796',     # sql-dump loaded from /_install/-directory at installation
-	'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0796',
+    'DB_CREATE_VERSION'     => '0.0796',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0797',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -95,22 +95,22 @@ $g_config= array(
     */
     'DB_USE_UTF8_ENCODING'  =>true,
 
-	/**
-	* minium required length/complexity of entered password
-	*
-	* numbers and special-chars weight more than normal chars, so values above 8 are ok
-	*/
-	'CHECK_PASSWORD_LEVEL'  => 8,
-	'PERSON_PROFILE_DEFAULT'=> PROFILE_DEVELOPER,
+    /**
+    * minium required length/complexity of entered password
+    *
+    * numbers and special-chars weight more than normal chars, so values above 8 are ok
+    */
+    'CHECK_PASSWORD_LEVEL'  => 8,
+    'PERSON_PROFILE_DEFAULT'=> PROFILE_DEVELOPER,
 
-	/**
-	* this will measure the microtimes for some rendering and db-processes.
-	* For those you explicitly have to add measure_start(id) and measure_stop(id)
-	* functions.
-	*
-	* see std/profile.inc
-	*/
-	'USE_PROFILER'          =>false,
+    /**
+    * this will measure the microtimes for some rendering and db-processes.
+    * For those you explicitly have to add measure_start(id) and measure_stop(id)
+    * functions.
+    *
+    * see std/profile.inc
+    */
+    'USE_PROFILER'          =>false,
 
     /**
     * Display error-output, which would have been written to error.log as html.
@@ -140,16 +140,16 @@ $g_config= array(
     */
     'LOG_LEVEL'     => LOG_MESSAGE_LOGIN_FAILURE|LOG_MESSAGE_LOGIN_SUCCESS|LOG_MESSAGE_LOGOUT|LOG_MESSAGE_HACKING_ALERT|LOG_MESSAGE_MISSING_FILES,
 
-	/**
-	* list undefined language-keys in the page-footer
-	* - this is just for nagging. Better use lang/scan_language.pl
-	*/
-	'LIST_UNDEFINED_LANG_KEYS'=>false,
+    /**
+    * list undefined language-keys in the page-footer
+    * - this is just for nagging. Better use lang/scan_language.pl
+    */
+    'LIST_UNDEFINED_LANG_KEYS'=>false,
 
     /**
     * NUMBER in theme-list
     */
-	'THEME_DEFAULT'         =>0,
+    'THEME_DEFAULT'         =>0,
 
     /**
     * change this to override the automatic selection of the locale based on the current language
@@ -164,7 +164,7 @@ $g_config= array(
     * additional message displayed at login-page
     * useful for display public accounts
     */
-	'LOGIN_MESSAGE'         =>"",
+    'LOGIN_MESSAGE'         =>"",
 
     /**
     * size short names are truncated to
@@ -327,7 +327,7 @@ $g_config= array(
     * posts by anonymous users are rejected, if they contain any of these keys.
     * The value is an indicator for spam probability.
     */
-	'SPAM_WORDS'=>array('viagra'=>10, 'cialis'=>10, 'porn'=>10, 'sex'=>2, 'free'=>1, 'href'=>2, 'online'=>1, 'casino'=>3, 'buy'=>1,'order'=>2,'levitra'=>5,'softtabs'=>5, 'spam'=>1, 'site'=>2),
+    'SPAM_WORDS'=>array('viagra'=>10, 'cialis'=>10, 'porn'=>10, 'sex'=>2, 'free'=>1, 'href'=>2, 'online'=>1, 'casino'=>3, 'buy'=>1,'order'=>2,'levitra'=>5,'softtabs'=>5, 'spam'=>1, 'site'=>2),
 
     /**
     * if not 0 try to match SPAM_WORDS on comments and descriptions.
@@ -380,7 +380,7 @@ if(!confGet('SELF_PROTOCOL')) {
 * get domain for email-address
 */
 if(!confGet('SELF_DOMAIN') && isset($_SERVER["HTTP_HOST"])) {
-	confChange('SELF_DOMAIN', $_SERVER["HTTP_HOST"]);
+    confChange('SELF_DOMAIN', $_SERVER["HTTP_HOST"]);
 }
 
 /**
@@ -396,10 +396,10 @@ if(!confGet('EMAIL_ADMINISTRATOR') && isset($_SERVER["HTTP_HOST"])) {
 * maps directory name => Title in person profile
 */
 $g_themes=array(
-	'clean'         => 'Clean',
-	#'webbplatsen'   => 'webbplatsen',
+    'clean'         => 'Clean',
+    #'webbplatsen'   => 'webbplatsen',
     'custom'        => 'Custom',
-	#'webbplatsen_dark'=> 'webbplatsen_dark',
+    #'webbplatsen_dark'=> 'webbplatsen_dark',
 #    'default'=>'Default',
 #    'forclients' =>'Client Theme',
 #    'classic' =>'Classic Theme',
@@ -534,14 +534,14 @@ $g_language_names= array_keys($g_languages);
 * @@@put this function somewhere else
 */
 function confGet($var) {
-	global $g_config;
-	if(isset($g_config[$var]) || @$g_config[$var] === NULL) {
-		return $g_config[$var];
-	}
-	else {
-	    trigger_error("requesting undefined config variable '$var'",E_USER_NOTICE);
-	}
-	return NULL;
+    global $g_config;
+    if(isset($g_config[$var]) || @$g_config[$var] === NULL) {
+        return $g_config[$var];
+    }
+    else {
+        trigger_error("requesting undefined config variable '$var'",E_USER_NOTICE);
+    }
+    return NULL;
 }
 
 
@@ -551,11 +551,11 @@ function confGet($var) {
 * @@@put this function somewhere else
 */
 function confChange($var,$value) {
-	global $g_config;
-	if(!isset($g_config[$var]) && !is_null($g_config[$var])) {
-	    trigger_error("confChange set undefined variable '$var' to '$value'",E_USER_NOTICE);
+    global $g_config;
+    if(!isset($g_config[$var]) && !is_null($g_config[$var])) {
+        trigger_error("confChange set undefined variable '$var' to '$value'",E_USER_NOTICE);
 
-	}
+    }
     $g_config[$var]= $value;
     return true;
 }
@@ -568,18 +568,18 @@ function confChange($var,$value) {
 * - variable is not an array (it will be converted into array with two elements)
 */
 function confAppendToValue($var,$value) {
-	global $g_config;
-	if(!isset($g_config[$var]) && !is_null($g_config[$var])) {
-	    trigger_error("confChange set undefined variable '$var' to array('$value')",E_USER_NOTICE);
-	    $g_config[$var]= array($value);
-	    return true;
-	}
-	else if(!is_array($g_config[$var])) {
-	    trigger_error("confChange converting '$var' to array('$value')",E_USER_NOTICE);
-	    $g_config[$var]=array($g_config[$var], $value);
-	    return true;
-	}
-	else {
+    global $g_config;
+    if(!isset($g_config[$var]) && !is_null($g_config[$var])) {
+        trigger_error("confChange set undefined variable '$var' to array('$value')",E_USER_NOTICE);
+        $g_config[$var]= array($value);
+        return true;
+    }
+    else if(!is_array($g_config[$var])) {
+        trigger_error("confChange converting '$var' to array('$value')",E_USER_NOTICE);
+        $g_config[$var]=array($g_config[$var], $value);
+        return true;
+    }
+    else {
         $g_config[$var][]= $value;
     }
     return true;
@@ -594,7 +594,7 @@ function confAppendToValue($var,$value) {
 */
 function getStreberWikiLink($pagename=NULL,$displayname=NULL) {
     if(!$pagename) {
-	    trigger_error("getStreberWikiLink() requires pagename",E_USER_NOTICE);
+        trigger_error("getStreberWikiLink() requires pagename",E_USER_NOTICE);
 
     }
     if(!$displayname) {

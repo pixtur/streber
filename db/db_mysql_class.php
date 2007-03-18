@@ -165,7 +165,7 @@ class sql_class implements sql_interface{
     * method secure: secure variable
     */
     public function secure($var){
-        return mysql_real_escape_string($var);
+        return mysql_real_escape_string(addSlashes($var));
     }
 
     /**

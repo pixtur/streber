@@ -114,7 +114,7 @@ function itemSaveField()
         $object->$field_name = $new_wiki_text;
         $object->update(array($field_name));
 
-        $new_wiki_text =stripslashes($new_wiki_text);
+        #$new_wiki_text =stripslashes($new_wiki_text);
 
         $result= wiki2purehtml($new_wiki_text);
         print $result;

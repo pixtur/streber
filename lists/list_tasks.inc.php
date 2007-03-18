@@ -282,8 +282,7 @@ class ListBlock_tasks extends ListBlock
             new ListGroupingCreatedBy(),
         );
 
-
-        $this->initOrderQueryOption('order_id');
+        $this->initOrderQueryOption('order_id, status, prio');
     }
 
     /**
@@ -711,9 +710,8 @@ class ListBlock_tasks extends ListBlock
                             : NULL;
 
             $t_order_by= isset($this->query_options['order_by'])
-                       ?     $this->query_options['order_by']
-                       : 'order_id,name';
-
+                       ?     $this->query_options['order_by'] .  ",order_id,status,prio"
+                       : 'order_id,status,prio';
 
             $tmp_options= array(
                 'visible_only'      => true,
@@ -725,8 +723,6 @@ class ListBlock_tasks extends ListBlock
                 'status_min'       => STATUS_NEW,
                 'status_max'       => STATUS_CLOSED,
             );
-            #if(isset($this->query_options['status_min'])) { $tmp_options['status_min']= $this->query_options['status_min'];};
-            #if(isset($this->query_options['status_max'])) { $tmp_options['status_max']= $this->query_options['status_max'];};
 
 
 
@@ -909,7 +905,6 @@ class ListBlockCol_TaskLabel extends ListBlockCol
                 ? "class=label$obj->label"
                 : '';
     		print "<td class=label><span {$class_label}>$str_label</span></td>";
-
         }
         else {
             print "<td></td>";

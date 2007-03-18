@@ -125,7 +125,7 @@ function companyList() {
 
     ### get preset-id ###
     {
-        $preset_id= 'company_list';                           # default value
+        $preset_id= 'all_companies';                           # default value
         if($tmp_preset_id= get('preset')) {
             if(isset($presets[$tmp_preset_id])) {
                 $preset_id= $tmp_preset_id;

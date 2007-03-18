@@ -91,10 +91,11 @@ function addRequestVars(&$referred_vars)
                 default:
                     trigger_error("unknown setting for CLEAN_REFERRED_VARS: '".confGet('CLEAN_REFERRED_VARS')."'",E_USER_WARNING);
             }
-
-            ### add slashes ###
-    		#$value= addslashes($value);             #@@@ this collides with real_escape_string
-
+            
+            ### remove slashes if magic quotes
+            if(get_magic_quotes_gpc()) {
+                $value= stripslashes($value);
+            }
 
             ### strip length ###
     		$value= substr( $value,0,confGet('STRING_SIZE_MAX'));

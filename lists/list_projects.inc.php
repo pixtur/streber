@@ -51,83 +51,83 @@ class ListBlock_projects extends ListBlock
 
     public function __construct($args=NULL)
     {
-		parent::__construct($args);
+        parent::__construct($args);
 
         $this->id       = 'projects';
         $this->bg_style = 'bg_projects';
-		$this->title    = "related Projects";
+        $this->title    = "related Projects";
 
         $this->add_col( new ListBlockColSelect());
-		$this->add_col( new ListBlockColPrio(array(
-			'key'=>'prio',
-			'name'=>"P",
-			'tooltip'=>__("Project priority (the icons have tooltips, too)"),
-			'sort'=>1,
-		)));
-		$this->add_col( new ListBlockColStatus(array(
-			'key'=>'status',
-			'name'=>"S",
-			'tooltip'=>__("Task-Status"),
-			'sort'=>0
-		)));
-    	$this->add_col( new ListBlockColMethod(array(
-			'id'    =>'company',
-			'key'=>'c.name',
-    		'name'=>__("Company"),
-    		'tooltip'=>__("Company"),
-    		'func'=>'getCompanyLink',
-    	)));
+        $this->add_col( new ListBlockColPrio(array(
+            'key'=>'prio',
+            'name'=>"P",
+            'tooltip'=>__("Project priority (the icons have tooltips, too)"),
+            'sort'=>1,
+        )));
+        $this->add_col( new ListBlockColStatus(array(
+            'key'=>'status',
+            'name'=>"S",
+            'tooltip'=>__("Task-Status"),
+            'sort'=>0
+        )));
+            $this->add_col( new ListBlockColMethod(array(
+                'id'    =>'company',
+                'key'=>'c.name',
+                'name'=>__("Company"),
+                'tooltip'=>__("Company"),
+                'func'=>'getCompanyLink',
+            )));
 
-   		/*$this->add_col( new ListBlockColFormat(array(
-			'key'=>'short',
-			'name'=>"Name Short",
-			'tooltip'=>"Shortnames used in other lists",
-			'sort'=>0,
-			'format'=>'<nobr><a href="index.php?go=projView&amp;prj={?id}">{?short}</a></nobr>'
-		)));*/
+        /*$this->add_col( new ListBlockColFormat(array(
+            'key'=>'short',
+            'name'=>"Name Short",
+            'tooltip'=>"Shortnames used in other lists",
+            'sort'=>0,
+            'format'=>'<nobr><a href="index.php?go=projView&amp;prj={?id}">{?short}</a></nobr>'
+        )));*/
         $this->add_col( new ListBlockCol_ProjectName);
 
-   		/*$this->add_col( new ListBlockColFormat(array(
-			'key'=>'name',
-			'name'=>__("Project"),
-			'tooltip'=>__("Task name. More Details as tooltips"),
-			'width'=>'30%',
-			'sort'=>0,
-			'format'=>'<a href="index.php?go=projView&amp;prj={?id}">{?name}</a>'
-		)));
-		*/
+        /*$this->add_col( new ListBlockColFormat(array(
+            'key'=>'name',
+            'name'=>__("Project"),
+            'tooltip'=>__("Task name. More Details as tooltips"),
+            'width'=>'30%',
+            'sort'=>0,
+            'format'=>'<a href="index.php?go=projView&amp;prj={?id}">{?name}</a>'
+        )));
+        */
 
-   		$this->add_col( new ListBlockColFormat(array(
-			'key'=>'status_summary',
-			'name'=>__("Status Summary"),
-			'tooltip'=>__("Short discription of the current status"),
-			'format'=>'{?status_summary}'
-		)));
+        $this->add_col( new ListBlockColFormat(array(
+            'key'=>'status_summary',
+            'name'=>__("Status Summary"),
+            'tooltip'=>__("Short discription of the current status"),
+            'format'=>'{?status_summary}'
+        )));
 
         $this->add_col( new ListBlockCol_ProjectPersons);
 
         $this->add_col( new ListBlockCol_ProjectEffortSum);
 
-    	$this->add_col( new ListBlockColMethod(array(
-    		'name'=>__("Tasks"),
-    		'tooltip'=>__("Number of open Tasks"),
-    		'sort'=>0,
-    		'func'=>'getNumTasks',
+        $this->add_col( new ListBlockColMethod(array(
+            'name'=>__("Tasks"),
+            'tooltip'=>__("Number of open Tasks"),
+            'sort'=>0,
+            'func'=>'getNumTasks',
             'style' =>'right',
             'id'    =>'tasks',
-    	)));
-   		$this->add_col( new ListBlockColDate(array(
-			'key'=>'date_start',
-			'name'=>__("Opened"),
-			'tooltip'=>__("Day the Project opened"),
-			'sort'=>0,
-		)));
-   		$this->add_col( new ListBlockColDate(array(
-			'key'=>'date_closed',
-			'name'=>__("Closed"),
-			'tooltip'=>__("Day the Project state changed to closed"),
-			'sort'=>0,
-		)));
+        )));
+        $this->add_col( new ListBlockColDate(array(
+            'key'=>'date_start',
+            'name'=>__("Opened"),
+            'tooltip'=>__("Day the Project opened"),
+            'sort'=>0,
+        )));
+        $this->add_col( new ListBlockColDate(array(
+            'key'=>'date_closed',
+            'name'=>__("Closed"),
+            'tooltip'=>__("Day the Project state changed to closed"),
+            'sort'=>0,
+        )));
 
         #---- functions ------------------------
         global $PH;
@@ -184,7 +184,7 @@ class ListBlock_projects extends ListBlock
             'dropdown_menu'=>true,
 
         )));
-		$this->add_function(new ListFunction(array(
+        $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('itemsAsBookmark')->id,
             'name'  =>__('Mark as bookmark'),
             'id'    =>'itemsAsBookmark',
@@ -268,14 +268,14 @@ class ListBlock_projects extends ListBlock
                 unset($this->columns[$this->group_by]);
             }
 
-	        ### prepend key to sorting ###
-	        if(isset($this->query_options['order_by'])) {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            ### prepend key to sorting ###
+            if(isset($this->query_options['order_by'])) {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
 
-	        }
-	        else {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
-	        }
+            }
+            else {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+            }
 
 
         }
@@ -311,28 +311,28 @@ class ListBlockCol_ProjectPersons extends ListBlockCol
     }
 
 
-	function render_tr(&$project, $style="")
-	{
-	    global $PH;
+    function render_tr(&$project, $style="")
+    {
+        global $PH;
 
-		print "<td>";
-		if($pps= $project->getProjectPersons()) {
+        print "<td>";
+        if($pps= $project->getProjectPersons()) {
 
-			$str_delimiter="";
-			foreach($pps as $pp){
-				### ###
-				if( $person= Person::getVisibleById($pp->person)) {
-					$link= $PH->getLink('personView',$person->getShort(),array('person'=>$person->id));
-					print  $str_delimiter . $link;
+            $str_delimiter="";
+            foreach($pps as $pp){
+                ### ###
+                if( $person= Person::getVisibleById($pp->person)) {
+                    $link= $PH->getLink('personView',$person->getShort(),array('person'=>$person->id));
+                    print  $str_delimiter . $link;
 
-					$str_delimiter=", ";
-				}
+                    $str_delimiter=", ";
+                }
 
-			}
-		}
-		print "</td>";
+            }
+        }
+        print "</td>";
 
-	}
+    }
 }
 
 
@@ -350,11 +350,11 @@ class ListBlockCol_ProjectName extends ListBlockCol
         }
     }
 
-	function render_tr(&$project, $style="")
-	{
-	    global $PH;
-		print "<td><b><nobr>". $PH->getLink('projView',asHtml($project->name), array('prj' => $project->id)) ."</b></nobr></td>";
-	}
+    function render_tr(&$project, $style="")
+    {
+        global $PH;
+        print "<td><b><nobr>". $PH->getLink('projView', $project->name, array('prj' => $project->id)) ."</b></nobr></td>";
+    }
 }
 
 
@@ -367,21 +367,21 @@ class ListBlockCol_ProjectEffortSum extends ListBlockCol{
     public function __construct($args=NULL) {
         parent::__construct($args);
     }
-	function render_tr(&$project, $style="") {
+    function render_tr(&$project, $style="") {
 
-		if(!isset($project) || !$project instanceof Project) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($project) || !$project instanceof Project) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
 
-		$value= round($project->getEffortsSum()/60/60,1);
-		if($value) {
-			print "<td>{$value}h</td>";
-		}
-		else {
-			print "<td></td>";
-		}
-	}
+        $value= round($project->getEffortsSum()/60/60,1);
+        if($value) {
+            print "<td>{$value}h</td>";
+        }
+        else {
+            print "<td></td>";
+        }
+    }
 }
 
 
