@@ -353,7 +353,22 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
-    		
+    		new FieldInternal(array(    'name'=>'option1',
+                'view_in_forms'=>false,
+                'export'        =>false,
+            )),
+			new FieldInternal(array(    'name'=>'option2',
+                'view_in_forms'=>false,
+                'export'        =>false,
+            )),
+			new FieldInternal(array(    'name'=>'option3',
+                'view_in_forms'=>false,
+                'export'        =>false,
+            )),
+			new FieldInternal(array(    'name'=>'option4',
+                'view_in_forms'=>false,
+                'export'        =>false,
+            )),
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,
@@ -970,14 +985,22 @@ class Person extends DbProjectItem {
     {
         $cs= $this->getCompanies();
         $buffer= '';
-        $sep= '';
+        $sep= ', ';
         $num=0;
+		$count = count($cs);
+		$counter = 1;
         foreach($cs as $c) {
+			if($counter == $count){
+            	$sep=" ";
+			}
+			
             $buffer.= $c->getLink().$sep;
+			
             if(++$num>$show_max_number) {
                 break;
             }
-            $sep=", ";
+			
+			$counter++;
         }
         return $buffer;
     }
