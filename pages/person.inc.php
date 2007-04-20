@@ -17,6 +17,8 @@ require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_persons.inc.php');
+require_once(confGet('DIR_STREBER') . 'lists/list_projects.inc.php');
+require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_efforts.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
@@ -26,9 +28,24 @@ require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 function build_person_options(&$person) {
 
     return array(
+		new NaviOption(array(
+            'target_id'=>'personViewProjects',
+            'name'=>__('Projects'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+		new NaviOption(array(
+            'target_id'=>'personViewTasks',
+            'name'=>__('Tasks'),
+            'target_params'=>array('person'=>$person->id )
+        )),
         new NaviOption(array(
             'target_id'=>'personViewEfforts',
             'name'=>__('Efforts'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+		new NaviOption(array(
+            'target_id'=>'personViewChanges',
+            'name'=>__('Changes'),
             'target_params'=>array('person'=>$person->id )
         )),
     );
@@ -313,7 +330,9 @@ function personList()
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
-        unset($list->columns['last_login']);
+		if(!confGet('PERSON_LAST_LOGIN')){
+        	unset($list->columns['last_login']);
+		}
         unset($list->columns['changes']);
 		
 		$list->filters[] = new ListFilter_persons();
@@ -812,7 +831,11 @@ function personView()
         if($person->birthdate && $person->birthdate != "0000-00-00") {
             echo "<p><label>" . __('Birthdate','Label'). "</label>".renderDateHtml($person->birthdate)."</p>";
         }
-
+		
+		if($person->last_login) {
+			echo "<p><label>" . __('Last login','Label'). '</label>'. renderDateHtml($person->last_login) .'</p>';
+		}
+		
 
         ### functions ####
         echo "</div>";
@@ -955,6 +978,446 @@ function personView()
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
+    echo (new PageHtmlEnd());
+}
+
+/**
+* display projects for person...  @ingroup pages
+*/
+function personViewProjects()
+{
+	global $PH;
+    
+    ### get current project ###
+    $id = getOnePassedId('person','persons_*');
+    
+    if(!$person = Person::getVisibleById($id)) {
+        $PH->abortWarning("invalid person-id");
+        return;
+    }
+	
+	$presets= array(
+        ### all ###
+        'all_related_projects' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'project_status'=> array(
+                    'id'        => 'project_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_UNDEFINED,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+        ### open projects ###
+        'open_related_projects' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'project_status'=> array(
+                    'id'        => 'project_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_UNDEFINED,
+                    'max'       => STATUS_OPEN,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        
+        ### closed projects ###
+        'closed_related_projects' => array(
+            'name'=> __('closed'),
+            'filters'=> array(
+                'project_status'=> array(
+                    'id'        => 'project_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_BLOCKED,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+	);
+	
+	## set preset location ##
+    $preset_location = 'personViewProjects';
+    
+    ### get preset-id ###
+    {
+        $preset_id = 'all_related_projects';                           # default value
+        if($tmp_preset_id = get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id = $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_personViewProjects_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id = get('STREBER_personViewProjects_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+
+                $preset_id = $tmp_preset_id;
+            }
+        }
+    }
+    ### create from handle ###
+    $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
+	
+	### set up page ####
+    {
+        $page = new Page();
+        $page->cur_tab = 'people';
+        $page->title = $person->name;
+        $page->title_minor = __('Projects','Page title add on');
+        $page->type = __("Person");
+
+        $page->crumbs = build_person_crumbs($person);
+        $page->options = build_person_options($person);
+
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+	
+	#--- list projects --------------------------------------------------------------------------
+    {
+        $order_by = get('sort_'.$PH->cur_page->id."_projects");
+
+        require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
+        
+        $list= new ListBlock_projects();
+		unset($list->functions['effortNew']);
+        unset($list->functions['projNew']);
+        unset($list->functions['projNewFromTemplate']);
+        $list->no_items_html= __('no projects yet');
+        
+        $list->filters[] = new ListFilter_projects();
+        {
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'project_status':
+                        $list->filters[]= new ListFilter_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $list->filters[]= new ListFilter_status_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
+        }
+        
+        $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => '',
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => $person->id));
+        
+        $list->query_options['order_by'] = $order_by;
+        $list->query_options['person'] = $person->id;
+        $list->print_automatic();
+        
+        //$list->render_list(&$efforts);
+    }
+    
+    echo '<input type="hidden" name="person" value="'.$person->id.'">';
+	
+	echo (new PageContentClose);
+    echo (new PageHtmlEnd());
+}
+
+function personViewTasks()
+{
+	global $PH;
+	global $auth;
+    
+    ### get current project ###
+    $id = getOnePassedId('person','persons_*');
+    
+    if(!$person = Person::getVisibleById($id)) {
+        $PH->abortWarning("invalid person-id");
+        return;
+    }
+	
+	$presets= array(
+        ### all ###
+        'all_tasks' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+		### open tasks ###
+        'new_tasks' => array(
+            'name'=> __('new'),
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_NEW,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+        ### open tasks ###
+        'open_tasks' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_OPEN,
+                    'max'       => STATUS_OPEN,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		
+        ### blocked tasks ###
+        'blocked_tasks' => array(
+            'name'=> __('blocked'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_BLOCKED,
+                    'max'       => STATUS_BLOCKED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+
+        ### to be approved ###
+        'approve_tasks' => array(
+            'name'=> __('needs approval'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_COMPLETED,
+                    'max'       => STATUS_COMPLETED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+        ### closed tasks ###
+        'closed_tasks' => array(
+            'name'=> __('closed'),
+            'filter_empty_folders'=>false,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_APPROVED, STATUS_CLOSED),
+                    'min'       => STATUS_APPROVED,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
+
+	## set preset location ##
+	$preset_location = 'personViewTasks';
+
+    ### get preset-id ###
+    {
+        $preset_id= 'all_tasks';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_personViewTasks_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_personViewTasks_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+
+    ### create from handle ###
+    $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
+	
+	### set up page ####
+    {
+        $page = new Page();
+        $page->cur_tab = 'people';
+        $page->title = $person->name;
+        $page->title_minor = __('Tasks','Page title add on');
+        $page->type = __("Person");
+
+        $page->crumbs = build_person_crumbs($person);
+        $page->options = build_person_options($person);
+
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+	
+	#--- list projects --------------------------------------------------------------------------
+    {
+        $order_by = get('sort_'.$PH->cur_page->id."_tasks");
+
+        require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
+        
+		$list= new ListBlock_tasks(array(
+            'active_block_function'=>'list'
+        ));
+
+        unset($list->columns['created_by']);
+        unset($list->columns['planned_start']);
+        unset($list->columns['assigned_to']);
+		//unset($list->columns['efforts_estimated']);
+        $list->no_items_html= __('no tasks yet');
+        
+        $list->filters[] = new ListFilter_tasks();
+        {
+
+        	$preset= $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+	
+					case 'task_status':
+						$list->filters[]= new ListFilter_status_min(array(
+							'value'=>$f_settings['min'],
+						));
+						$list->filters[]= new ListFilter_status_max(array(
+							'value'=>$f_settings['max'],
+						));
+						break;
+	
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders=  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								 ? true
+								 : NULL;
+		}
+
+    
+        
+        $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => '',
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => $person->id));
+        
+        
+		$list->query_options['assigned_to_person']= $person->id;
+		$list->query_options['person'] = $person->id;
+        $list->print_automatic(NULL, NULL, true);
+        
+    }
+    
+    echo '<input type="hidden" name="person" value="'.$person->id.'">';
+	
+	echo (new PageContentClose);
     echo (new PageHtmlEnd());
 }
 
@@ -1148,10 +1611,6 @@ function personViewEfforts()
         $order_by=get('sort_'.$PH->cur_page->id."_efforts");
 
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
-        /*$efforts= Effort::getAll(array(
-            'person'    => $person->id,
-            'order_by'  => $order_by,
-        ));*/
 
         $list= new ListBlock_efforts();
         unset($list->functions['effortNew']);
@@ -1192,8 +1651,6 @@ function personViewEfforts()
         $list->query_options['order_by'] = $order_by;
         $list->query_options['person'] = $person->id;
         $list->print_automatic();
-        
-        //$list->render_list(&$efforts);
     }
     
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
@@ -1202,7 +1659,213 @@ function personViewEfforts()
     echo (new PageHtmlEnd());
 }
 
+function personViewChanges()
+{
+	global $PH;
+    global $auth;
+	
+    ### get current project ###
+    $id = getOnePassedId('person','persons_*');
+    
+    if(!$person = Person::getVisibleById($id)) {
+        $PH->abortWarning("invalid person-id");
+        return;
+    }
+	
+	### sets the presets ###
+	$presets = array(
+        ### all ###
+        'all_changes' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+			    'task_status'   =>  array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'    =>  STATUS_UNDEFINED,
+					'max'    =>  STATUS_CLOSED,
+                ),
+			),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+		## last logout ##
+		'last_logout' => array(
+            'name'=> __('last logout'),
+            'filters'=> array(
+                'last_logout'   => array(
+                    'id'        => 'last_logout',
+                    'visible'   => true,
+                    'active'    => true,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## 1 week ##
+		'last_week' => array(
+            'name'=> __('1 week'),
+            'filters'=> array(
+                'last_week'   => array(
+                    'id'        => 'last_week',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 7,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		## 2 week ##
+		'last_two_weeks' => array(
+            'name'=> __('2 weeks'),
+            'filters'=> array(
+                'last_two_weeks'   => array(
+                    'id'        => 'last_two_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 14,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+    );
 
+	## set preset location ##
+	$preset_location = 'personViewChanges';
+
+    ### get preset-id ###
+    {
+        $preset_id= 'last_two_weeks';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_personViewChanges_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_personViewChanges_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+
+	### create from handle ###
+    $PH->defineFromHandle(array('person'=>$person->id, 'preset_id'=>$preset_id));
+	
+	### set up page ####
+    {
+        $page= new Page();
+        $page->cur_tab='people';
+        $page->title=$person->name;
+        $page->title_minor=__('Changes','Page title add on');
+        $page->type=__("Person");
+
+        $page->crumbs = build_person_crumbs($person);
+        $page->options= build_person_options($person);
+
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+	
+	#--- list efforts --------------------------------------------------------------------------
+    {
+        require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
+        
+
+        $list= new ListBlock_changes();
+        $list->no_items_html= __('no changes yet');
+        
+        $list->filters[] = new ListFilter_changes();
+		{
+			$preset = $presets[$preset_id];
+			foreach($preset['filters'] as $f_name=>$f_settings) {
+				switch($f_name) {
+					case 'task_status':
+						$list->filters[]= new ListFilter_status_min(array(
+							'value'=>$f_settings['min'],
+						));
+						#$list->filters[]= new ListFilter_status_max(array(
+						#    'value'=>$f_settings['max'],
+						#));
+						break;
+					case 'last_logout':
+						$list->filters[]= new ListFilter_last_logout(array(
+							'value'=>$f_settings['value'],
+						));
+						break;
+					case 'last_week':
+						$list->filters[]= new ListFilter_min_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+						#$list->filters[]= new ListFilter_max_week(array(
+						#	'value'=>$f_settings['value'],
+						#));
+						break;
+					case 'last_two_weeks':
+						$list->filters[]= new ListFilter_min_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+						#$list->filters[]= new ListFilter_max_week(array(
+						#	'value'=>$f_settings['value'],
+						#));
+						break;
+					default:
+						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+						break;
+				}
+			}
+	
+			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+								  ? true
+								  : NULL;
+        }
+        
+        $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => '',
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => $person->id));
+        
+        $list->query_options['modified_by'] = $person->id;
+        $list->print_automatic();
+    }
+    
+    echo '<input type="hidden" name="person" value="'.$person->id.'">';
+
+    echo (new PageContentClose);
+    echo (new PageHtmlEnd());
+	
+}
 
 
 /**
@@ -1319,8 +1982,7 @@ function personEdit($person=NULL)
 
         $form->add($person->fields['name']->getFormElement(&$person));
 		
-		
-        
+		        
         ### profile and login ###
         if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
             /**
@@ -1513,7 +2175,14 @@ function personEdit($person=NULL)
 
             $tab->add(new Form_Dropdown('person_effort_style',  __("Log Efforts as"), $effort_styles, $effort_style));
         }
-
+		
+		## internal area ##
+		{
+			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
+				$tab->add($person->fields['salary_per_hour']->getFormElement(&$person));
+			}
+		}
 
         ### temp uid for account activation ###
         if($tuid = get('tuid')) {
@@ -1614,8 +2283,6 @@ function personEditSubmit()
             $person->category = $pcategory;
         }
     }
-
-   
 
     ### validate rights ###
     if(

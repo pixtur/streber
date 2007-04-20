@@ -30,8 +30,9 @@ $g_cache_projects=array();
 */
 class Project extends DbProjectItem
 {
-    public  $_visible_team=NULL;    # assoc array for optimized visibility-check
-
+    public $_visible_team=NULL;    # assoc array for optimized visibility-check
+	public $project_status;
+	
 	//=== constructor ================================================
 	function __construct ($id_or_array=NULL)
     {
@@ -664,7 +665,10 @@ class Project extends DbProjectItem
 		### default parameter ###
 		$order_by=NULL;
 		$alive_only=true;
-		$visible_only=true;
+		//$visible_only=true;
+		$visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+                        ? false
+                        : true;
 		$person_id = NULL;
 
 		### filter parameter ###
@@ -748,7 +752,7 @@ class Project extends DbProjectItem
 
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);
-
+		
     	$tmp=$sth->fetchall_assoc();
     	$ppersons=array();
         foreach($tmp as $n) {
@@ -941,7 +945,7 @@ class Project extends DbProjectItem
                         : true;
         $search=        NULL;
 		$id=			NULL;
-
+		$person=        NULL;
 
         ### filter params ###
         if($args) {
@@ -971,21 +975,35 @@ class Project extends DbProjectItem
         else {
             $AND_company= "";
         }
-
+		
+		if(!is_null($person)){
+			$AND_person_all_part1 = " {$prefix}projectperson upp, ";
+			$AND_person_all_part2 = "AND upp.person = '" . $person . "' 
+			                         AND upp.state = 1
+                                     AND upp.project = p.id";
+			$AND_person_visible_part1 = " {$prefix}projectperson upp2, ";
+			$AND_person_visible_part2 = "AND upp.project = upp2.project
+					                     AND upp2.person = '" . $person . "'" ;
+		}
+		else{
+			$AND_person_all_part1 = "";
+			$AND_person_all_part2 = "";
+			$AND_person_visible_part1 = "";
+			$AND_person_visible_part2 = "";
+		}
+		
         /**
         * @@@ NOTE: using a distinct select here is not nice...
         */
-
         ### only assigned projects ###
         if($visible_only) {
             $str=
-                "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, {$prefix}project p left join {$prefix}company c on p.company = c.id
+                "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, $AND_person_visible_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
                 WHERE
-                        upp.person = '{$auth->cur_user->id}'
-                    AND upp.state = 1
-
+					upp.person = '{$auth->cur_user->id}'
+					AND upp.state = 1
                     AND upp.project = p.id
-
+					$AND_person_visible_part2
                     AND   p.status <= ". intval($status_max) ."
                     AND   p.status >= ". intval($status_min) ."
                     AND   p.state = 1
@@ -999,7 +1017,7 @@ class Project extends DbProjectItem
         ### all projects ###
         else {
 			$str=
-			    "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}project p left join {$prefix}company c on p.company = c.id
+			    "SELECT DISTINCT i.*, p.* from {$prefix}item i, $AND_person_all_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
 
                 WHERE
                        p.status <= ".intval($status_max)."
@@ -1010,15 +1028,15 @@ class Project extends DbProjectItem
                   $AND_company
                   $AND_match
 				  $AND_id
+				  $AND_person_all_part2
                 ". getOrderByString($order_by) ;
         }
 
         $projects = self::queryFromDb($str);
+		
         return $projects;
     }
-
-
-
+	
     /**
     * get projects from db
     */
@@ -1333,6 +1351,16 @@ class Project extends DbProjectItem
             return false;
         }
     }
+	
+	function setStatus($status=NULL)
+	{
+		$this->project_status = $status;
+	}
+	
+	function getStatus()
+	{
+		return $this->project_status;
+	}
 }
 
 Project::initFields();

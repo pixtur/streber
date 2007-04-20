@@ -13,6 +13,7 @@ require_once(confGet('DIR_STREBER') . 'lists/list_comments.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
 
@@ -333,7 +334,8 @@ function taskEdit($task=NULL)
     ### write form #####
     {
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
-
+		
+		global $auth;
         global $REPRODUCIBILITY_VALUES;
 
         global $g_prio_names;
@@ -533,7 +535,11 @@ function taskEdit($task=NULL)
                             ? __("Assign to","Form label")
                             : __("Also assign to","Form label");
                 $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
-
+				
+				if(!$task->id){
+				}
+				else{
+				}
             }
 
 
@@ -737,7 +743,13 @@ function taskEdit($task=NULL)
             }
         }
 
-
+		## internal area ##
+		{
+			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
+				$tab->add($task->fields['calculation']->getFormElement(&$task));
+			}
+		}
 
 
         /**
@@ -988,17 +1000,22 @@ function taskEditSubmit()
         }
 
         $new_task_assignments= array();                     # store assigments after(!) validation
-
+		$forwarded = 0;
+		$forward_comment = '';
+		$old_task_assignments = array();
+		
         if(isset($task_assignments)) {
             foreach($task_assignments as $id=>$t_old) {
                 $id_new= get('task_assigned_to_'.$id);
+								
                 if($id_new === NULL) {
                     log_message("failure. Can't change no longer existing assigment (person-id=$id item-id=$t_old->id)", LOG_MESSAGE_DEBUG);
                     #$PH->abortWarning("failure. Can't change no longer existing assigment",ERROR_NOTE);
                     continue;
                 }
-
+				
                 if($id == $id_new) {
+					
                     #echo " [$id] {$team[$id]->name} still assigned<br>";
                     continue;
                 }
@@ -1018,7 +1035,7 @@ function taskEditSubmit()
                     $PH->abortWarning("failure during form-value passing",ERROR_BUG);
                 }
                 #echo " [$id] assignment changed from {$team[$id]->name} to {$team[$id_new]->name}<br>";
-
+	
                 $t_old->comment = sprintf(__("unassigned to %s","task-assignment comment"),$team[$id_new]->name);
                 $t_old->update();
                 $t_old->delete();
@@ -1037,12 +1054,12 @@ function taskEditSubmit()
         ### check new assigments ###
         $count=0;
         while($id_new= get('task_assign_to_'.$count)) {
-            $count++;
-
+            			
+			$count++;
+			
             ### check if already assigned ###
             if(isset($task_assignments[$id_new])) {
-
-
+				
                 #new FeedbackMessage(sprintf(__("task was already assigned to %s"),$team[$id_new]->name));
             }
             else {
@@ -1069,7 +1086,7 @@ function taskEditSubmit()
             }
         }
     }
-
+	
     $is_milestone=get('task_is_milestone');
     if(!is_null($is_milestone)) {
         $task->is_milestone= $is_milestone;
@@ -1297,7 +1314,6 @@ function taskEditSubmit()
     if($task->id == 0) {
         $task->insert();
 
-
         ### write task-assigments ###
         foreach($new_task_assignments as $nta) {
             $nta->insert();
@@ -1317,7 +1333,7 @@ function taskEditSubmit()
             $nta->insert();
         }
 
-        new FeedbackMessage(sprintf(__("Changed task %s with ID %s"),  $task->getLink(false),$task-> id));
+        new FeedbackMessage(sprintf(__("Changed task %s with ID %s"),  $task->getLink(false),$task->id));
         $task->update();
     }
 
@@ -1338,7 +1354,7 @@ function taskEditSubmit()
 	        new FeedbackMessage(sprintf(__('Marked %s tasks to be resolved in this version.'), count($resolved_tasks)));
 	    }
     }
-
+	
 	### notify on change ###
 	$task->nowChangedByUser();
 
@@ -2219,7 +2235,6 @@ function TaskViewEfforts()
     echo (new PageContentClose);
 	echo (new PageHtmlEnd());
 }
-
 
 
 /**

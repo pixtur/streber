@@ -76,8 +76,6 @@ class ListBlock_tasks extends ListBlock
             }
         }
 
-
-
         /**
         * @@@ dummy-settings for filters
         */
@@ -283,8 +281,10 @@ class ListBlock_tasks extends ListBlock
         );
 
         $this->initOrderQueryOption('order_id, status, prio');
+		
     }
-
+	
+	
     /**
     * render completely (overwrites original ListBlock::render())
     */
@@ -600,8 +600,6 @@ class ListBlock_tasks extends ListBlock
         #$this->filters[]= new ListFilter_for_milestone();
 
 
-
-
         ### add filter options ###
         foreach($this->filters as $f) {
             foreach($f->getQuerryAttributes() as $k=>$v) {
@@ -703,16 +701,16 @@ class ListBlock_tasks extends ListBlock
 
         ### tree view ###
         else {
-
+						
             ### first get only folders ###
             $parent_task_id = $parent_task
                             ? $parent_task->id
                             : NULL;
-
+			
             $t_order_by= isset($this->query_options['order_by'])
                        ?     $this->query_options['order_by'] .  ",order_id,status,prio"
                        : 'order_id,status,prio';
-
+			
             $tmp_options= array(
                 'visible_only'      => true,
                 'folders_only'      => true,
@@ -723,16 +721,17 @@ class ListBlock_tasks extends ListBlock
                 'status_min'       => STATUS_NEW,
                 'status_max'       => STATUS_CLOSED,
             );
-
-
-
+			
+			if(isset($this->query_options['person'])){
+				$tmp_options['person']= $this->query_options['person'];
+			}
 
             if(isset($project)) {
                 $tmp_options['project']= $project->id;
             }
 
             $tmp_folders= Task::getAll($tmp_options);
-
+						
             $folders= array();
             foreach($tmp_folders as $f) {
                 $folders[$f->id]= $f;
@@ -1209,11 +1208,28 @@ class ListBlockCol_TaskRelationEfforts extends ListBlockCol
 		}
 		$diff_str = '';
 		$estimated_str = '';
+		$estimated = 0;
+		$estimated_max = 0;
+		$sum_completion = 0;
+		$completion = 0;
 		
         $sum = $obj->getSumTaskEfforts();
 		
-		$estimated = $obj->estimated;
-		$estimated_max = $obj->estimated_max;
+		if($obj->is_folder){
+			if($subtasks = $obj->getSubTasks()){
+				foreach($subtasks as $s){
+					$estimated += $s->estimated;
+				    $estimated_max += $s->estimated_max;
+					$sum_completion += $s->completion;
+				}
+				$completion = round(($sum_completion / count($subtasks)),1);
+			}
+		}
+		else{
+			$estimated = $obj->estimated;
+			$estimated_max = $obj->estimated_max;
+			$completion = $obj->completion;
+		}
 		
 		if($estimated_max){
 			$estimated_str = round($estimated_max/60/60,1) . "h";
@@ -1229,7 +1245,7 @@ class ListBlockCol_TaskRelationEfforts extends ListBlockCol
 		}
 		
         $str =  $PH->getLink('taskViewEfforts', $estimated_str . " / " . round($sum/60/60,1) . "h {$diff_str}", array('task'=>$obj->id));
-		$percent = __('Completion:') . " " . $obj->completion . "%";
+		$percent = __('Completion:') . " " . $completion . "%";
 		
 		print "<td class=nowrap title='" .__("Relation between estimated time and booked efforts") . "'>$str<br><span class='sub who'>$percent</span></td>";
 	}

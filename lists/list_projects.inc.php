@@ -48,7 +48,8 @@ class ListGroupingCompany extends ListGrouping {
  */
 class ListBlock_projects extends ListBlock
 {
-
+	public $filters = array();
+	
     public function __construct($args=NULL)
     {
         parent::__construct($args);
@@ -190,7 +191,7 @@ class ListBlock_projects extends ListBlock
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
-
+		
         ### block style functions ###
         $this->add_blockFunction(new BlockFunction(array(
             'target'=>'changeBlockStyle',
@@ -250,11 +251,11 @@ class ListBlock_projects extends ListBlock
         $this->initOrderQueryOption();
 
         ### add filter options ###
-        #foreach($this->filters as $f) {
-        #    foreach($f->getQuerryAttributes() as $k=>$v) {
-        #        $this->query_options[$k]= $v;
-        #    }
-        #}
+        foreach($this->filters as $f) {
+            foreach($f->getQuerryAttributes() as $k=>$v) {
+                $this->query_options[$k]= $v;
+            }
+        }
 
         ### grouped view ###
         if($this->active_block_function == 'grouped') {
@@ -286,8 +287,6 @@ class ListBlock_projects extends ListBlock
         }
 
         $projects= Project::getAll($this->query_options);
-
-
         $this->render_list(&$projects);
     }
 }

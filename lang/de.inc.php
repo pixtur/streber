@@ -196,6 +196,7 @@ $g_lang_table= array(
 
 ### ../db/class_person.inc   ###
 'Password'                    =>'Passwort',
+'Salary per hour'             =>'Stundenlohn',
 
 ### ../lists/list_projects.inc   ###
 'Name'                        =>'Name',
@@ -212,7 +213,7 @@ $g_lang_table= array(
 'Estimated'                   =>'Geschätzt',
 'Date due'                    =>'Datue bis',
 'Date due end'                =>'Datum bis Ende',
-
+'Calculation'                 =>'Kalkulation',
 
 ### ../db/class_project.inc   ###
 'Status summary'              =>'Status zusammenfassung',
@@ -260,10 +261,24 @@ $g_lang_table= array(
 'Role|columnheader'            =>'Rolle',
 'Sum|columnheader'             =>'Summe',
 'Effortgraph|columnheader'     =>'Aufwandsgrafik',
-'Total effort sum: %s hours'   =>'Gesamtesumme Aufwände: %s Stunden',
+'Total effort sum: %s hours'   =>'Gesamtsumme Aufwände: %s Stunden',
 
 ### ../lists/list_effortstask.inc   ###
 'Efforts on task'       =>'Aufwände pro Aufgabe',
+
+### ../lists/list_effortstaskcalculation.inc   ###
+'Calculation on task'       =>'Kalkulation pro Aufgabe',
+'Costgraph|columnheader'    =>'Kostengrafik',
+
+### ../lists/list_effortstaskcalculation.inc   ###
+'Calculation on team member'       =>'Kalkulation pro Teammitglied',
+
+### ../lists/list_effortsprojectcalculation.inc   ###
+'Calculation for project'       =>'Projekt-Kalkulation',
+
+### ../lists/list_tasksforwarded.inc   ###
+'Your demand notes'             =>'Ihre Lese-Aufforderungen',
+'You have no demand notes'      =>'Sie haben keine Leseaufforderungen',
 
 ### ../lists/list_persons.inc   ###
 'Name Short'                  =>'Abkürzung',
@@ -584,6 +599,7 @@ $g_lang_table= array(
 'Mobile'                      =>'Mobil',
 'Website'                     =>'Webseite',
 'Personal'                    =>'Persönlich',
+'Last login'                  =>'zuletzt angemeldet',
 
 ### ../pages/proj.inc   ###
 'E-Mail'                      =>'E-Mail',

@@ -1347,10 +1347,14 @@ function ProjViewMilestones()
 function ProjViewEfforts()
 {
     global $PH;
-
+	global $auth;
+	
     require_once(confGet('DIR_STREBER') . "lists/list_efforts.inc.php");
 	require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
 	require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
+	require_once(confGet('DIR_STREBER') . "lists/list_effortstaskcalculation.inc.php");
+	require_once(confGet('DIR_STREBER') . "lists/list_effortspersoncalculation.inc.php");
+	require_once(confGet('DIR_STREBER') . "lists/list_effortsprojectcalculation.inc.php");
 	
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
@@ -1618,25 +1622,58 @@ function ProjViewEfforts()
 
 	}
 	
-	
-	#--- list effort summary on team members --------------------------------------------------------------------
-	{
-		$list_effort_person = new ListBlock_effortsPerson();
-		$list_effort_person->query_options['project'] = &$project->id;
-		if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
-		if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
-		$list_effort_person->print_automatic();
+	if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+		#--- list effort summary on team members --------------------------------------------------------------------
+		{
+			$list_effort_person = new ListBlock_effortsPerson();
+			$list_effort_person->query_options['project'] = &$project->id;
+			if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
+			if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
+			$list_effort_person->print_automatic();
+		}
+		
+		#--- list effort summary on tasks --------------------------------------------------------------------
+		{
+			$list_effort_tasks = new ListBlock_effortsTask();
+			$list_effort_tasks->query_options['project'] = &$project->id;
+			if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
+			if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
+			$list_effort_tasks->print_automatic();
+		}
+		
+		#--- list cost overview on person --------------------------------------------------------------------
+		{
+			if((confGet('INTERNAL_COST_FEATURE'))){
+				$list_effort_person_calc = new ListBlock_effortsPersonCalculation();
+				$list_effort_person_calc->query_options['project'] = &$project->id;
+				if($val1) $list_effort_person_calc->query_options['effort_status_min'] = $val1;
+				if($val2) $list_effort_person_calc->query_options['effort_status_max'] = $val2;
+				$list_effort_person_calc->print_automatic();
+			}
+		}
+		
+		#--- list cost overview on task --------------------------------------------------------------------
+		{		
+			if((confGet('INTERNAL_COST_FEATURE'))){
+				$list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
+				$list_effort_tasks_calc->query_options['project'] = &$project->id;
+				if($val1) $list_effort_tasks_calc->query_options['effort_status_min'] = $val1;
+				if($val2) $list_effort_tasks_calc->query_options['effort_status_max'] = $val2;
+				$list_effort_tasks_calc->print_automatic();
+			}
+		}
+		
+		#--- list cost overview for project --------------------------------------------------------------------
+		{		
+			if((confGet('INTERNAL_COST_FEATURE'))){
+				$list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
+				#$list_effort_proj_calc->query_options['project'] = &$project->id;
+				if($val1) $list_effort_proj_calc->query_options['effort_status_min'] = $val1;
+				if($val2) $list_effort_proj_calc->query_options['effort_status_max'] = $val2;
+				$list_effort_proj_calc->print_automatic(&$project);
+			}
+		}
 	}
-	
-	#--- list effort summary on tasks --------------------------------------------------------------------
-	{
-		$list_effort_tasks = new ListBlock_effortsTask();
-		$list_effort_tasks->query_options['project'] = &$project->id;
-		if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
-		if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
-		$list_effort_tasks->print_automatic();
-	}
-	
 	
 	### 'add new task'-field ###
 	$PH->go_submit='taskNew';
@@ -2319,6 +2356,7 @@ function projAddPersonSubmit()
                 'person'                => $person->id,
                 'project'               => $project->id,
                 'adjust_effort_style'   => $adjust_effort_style,
+				'salary_per_hour'       => $person->salary_per_hour,
             ));
 
             ### add project-right ###

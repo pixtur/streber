@@ -175,6 +175,11 @@ class Task extends DbProjectItem
                 'default'       => 0,
                 'log_changes'   => true,
             )),
+			# %% #
+			new FieldString(array('name'=>'calculation',
+			    'title'=>__('Calculation') . " " . __('in Euro'),
+				'default'=>0.0,
+			)),
 
         ) as $f) {
             self::$fields_static[$f->name] = $f;
@@ -629,9 +634,9 @@ foreach($filters_str as $fs=>$value) {
 
         ### recursively go through sub-tasks ###
         if($subtasks=$this->getSubtasks()) {
+			$sum = 0;
             foreach($subtasks as $st){
-                # $sum+= $st->getSumEfforts2();
-                $sum+= $st->getSumEfforts();
+                $sum+= $st->getSumTaskEfforts();
             }
         }
         return $sum;
@@ -786,7 +791,8 @@ foreach($filters_str as $fs=>$value) {
 		$category       = NULL;
 		$category_in    = NULL;
 		$label          = NULL;
-
+        $person         = 0;
+		
         ### filter params ###
         if($args) {
             foreach($args as $key=>$value) {
@@ -820,8 +826,7 @@ foreach($filters_str as $fs=>$value) {
         $str_is_folder= $show_folders
             ? ''
             : 'AND t.is_folder=0';
-
-
+		
         $str_modified_by= $modified_by
             ? 'AND i.modified_by ='. intval($modified_by)
             : '';
@@ -916,7 +921,11 @@ foreach($filters_str as $fs=>$value) {
         $str_match= $search
             ? "AND MATCH (t.name,t.short,t.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
         : '';
-
+		
+		$str_person = $person
+		            ? $person
+					: $auth->cur_user->id;
+					
         if(is_null($visible_only)) {
 
             $visible_only   = $auth->cur_user && $auth->cur_user->user_rights & RIGHT_VIEWALL
@@ -930,7 +939,8 @@ foreach($filters_str as $fs=>$value) {
                 $str_query=
                 "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp, {$prefix}projectperson upp, {$prefix}item itp
                 WHERE
-                        upp.person = {$auth->cur_user->id}
+                        /*upp.person = {$auth->cur_user->id}*/
+						upp.person = $str_person
                     $str_project
                     AND i.type = '".ITEM_TASK."'
                     AND i.project=upp.project
@@ -943,7 +953,8 @@ foreach($filters_str as $fs=>$value) {
 
                     AND ( i.pub_level >= upp.level_view
                           OR
-                          i.created_by = {$auth->cur_user->id}
+                          /*i.created_by = {$auth->cur_user->id}*/
+						  i.created_by = $str_person
                     )
 
                     AND t.id = i.id
@@ -981,7 +992,8 @@ foreach($filters_str as $fs=>$value) {
                 $str_query=
                 "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}projectperson upp
                 WHERE
-                        upp.person = {$auth->cur_user->id}
+                        /*upp.person = {$auth->cur_user->id}*/
+						upp.person = $str_person
                     $str_project
                     AND i.type = '".ITEM_TASK."'
                     AND i.project = upp.project
@@ -1000,7 +1012,8 @@ foreach($filters_str as $fs=>$value) {
                     $str_category_in
                     AND ( i.pub_level >= upp.level_view
                           OR
-                          i.created_by = {$auth->cur_user->id}
+                          /*i.created_by = {$auth->cur_user->id}*/
+						  i.created_by = $str_person
                     )
 
                     AND t.id = i.id
@@ -1042,7 +1055,6 @@ foreach($filters_str as $fs=>$value) {
                 $str_resolved_version
                 $str_category
                 $str_category_in
-
                 AND t.status >= ".intval($status_min)."
                 AND t.status <= ".intval($status_max)."
                 $str_match
@@ -1090,7 +1102,7 @@ foreach($filters_str as $fs=>$value) {
 
     	$sth->execute("",1);
     	$tmp=$sth->fetchall_assoc();
-
+		
     	$tasks=array();
         foreach($tmp as $t) {
             $task=new Task($t);
@@ -1246,6 +1258,7 @@ foreach($filters_str as $fs=>$value) {
             return $persons;
         }
     }
+	
 
     public function getLink($short_name= true)
     {

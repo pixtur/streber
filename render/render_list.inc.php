@@ -190,6 +190,30 @@ class ListFilter_efforts extends ListFilter
     }
 }
 
+class ListFilter_projects extends ListFilter
+{
+    public $id = 'projects';
+    public $sql_querry_attribute = '';
+    public $default = true;
+
+    public function __construct($args=NULL)
+    {
+        parent::__construct($args);
+    }
+}
+
+class ListFilter_tasks extends ListFilter
+{
+    public $id = 'tasks';
+    public $sql_querry_attribute = 'visible_only';
+    public $default = true;
+
+    public function __construct($args=NULL)
+    {
+        parent::__construct($args);
+    }
+}
+
 class ListFilter_persons extends ListFilter
 {
     public $id = 'persons';

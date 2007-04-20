@@ -305,4 +305,10 @@ if($db_version < 0.0794) {
 if($db_version < 0.795) {
     $update_queries[]="ALTER TABLE `{$db_table_prefix}effort` ADD `status` TINYINT( 4 )  DEFAULT '1' NOT NULL ;";
 }
+
+if($db_version < 0.07972) {
+	 $update_queries[]="ALTER TABLE `{$db_table_prefix}person` ADD `salary_per_hour` FLOAT  DEFAULT '0' NOT NULL ;";
+	 $update_queries[]="ALTER TABLE `{$db_table_prefix}projectperson` ADD `salary_per_hour` FLOAT  DEFAULT '0' NOT NULL ;";
+	 $update_queries[]="ALTER TABLE `{$db_table_prefix}task` ADD `calculation` FLOAT  DEFAULT '0' NOT NULL ;";
+}
 ?>

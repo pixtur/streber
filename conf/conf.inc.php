@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.07971',
-    'STREBER_VERSION_DATE'  => '2007-03-18',
+    'STREBER_VERSION'       => '0.07972',
+    'STREBER_VERSION_DATE'  => '2007-04-20',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -56,7 +56,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.0795',
+    'DB_VERSION_REQUIRED'   => '0.07971',
 
 
     /**
@@ -177,6 +177,7 @@ $g_config= array(
     */
     'TASK_LIST_EFFORT_COLUMN'=>false,
     'TASK_LIST_EFFORT_RELATION_COLUMN'=>false,
+	
 
     'LINK_REPORT_BUGS'=> " Please help us by  <a href='http://www.streber-pm.org/2717'>reporting a bug</a>",
 
@@ -321,8 +322,12 @@ $g_config= array(
     * use mod_rewrite clean urls
     */
     'USE_MOD_REWRITE'=>false,
-
-
+	
+	/**
+	* %%cost overview
+	*/
+	'INTERNAL_COST_FEATURE' => false,
+	
     /**
     * posts by anonymous users are rejected, if they contain any of these keys.
     * The value is an indicator for spam probability.

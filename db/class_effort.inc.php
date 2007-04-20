@@ -401,6 +401,7 @@ class Effort extends DbProjectItem
         $dbh = new DB_Mysql;
 		
 		$project = NULL;
+		$task = NULL;
 		$effort_status_min = EFFORT_STATUS_NEW;
 		$effort_status_max = EFFORT_STATUS_BALANCED;
 		
@@ -424,6 +425,10 @@ class Effort extends DbProjectItem
             ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
             : '';
 		
+		$str_task = $task
+		    ? "AND e.task = '" . $task ."'"
+			: '';
+			
 		if($effort_status_min != $effort_status_max){
 			$str_st = "";
 		}
@@ -440,6 +445,7 @@ class Effort extends DbProjectItem
 						   AND e.id = i.id
 						   $str_status_min
 						   $str_status_max
+						   $str_task
 						   AND i.state = '". ITEM_STATE_OK ."';"; 
 			$sth = $dbh->prepare($query_str);
 			$sth->execute("",1);
@@ -463,6 +469,7 @@ class Effort extends DbProjectItem
         $dbh = new DB_Mysql;
 		
 		$project = NULL;
+		$person = NULL;
 		$effort_status_min = EFFORT_STATUS_NEW;
 		$effort_status_max = EFFORT_STATUS_BALANCED;
 		
@@ -485,6 +492,10 @@ class Effort extends DbProjectItem
         $str_status_max = $effort_status_max
             ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
             : '';
+		
+		$str_person = $person
+		    ? "AND e.person = '" . $person ."'"
+			: '';
 			
 		if($effort_status_min != $effort_status_max){
 			$str_st = "";
@@ -502,6 +513,7 @@ class Effort extends DbProjectItem
 						   AND e.id = i.id
 						   $str_status_min
 						   $str_status_max
+						   $str_person
 						   AND i.state = '". ITEM_STATE_OK ."';"; 
 			$sth = $dbh->prepare($query_str);
 			$sth->execute("",1);

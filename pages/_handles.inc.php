@@ -1014,6 +1014,28 @@ new PageHandleFunc(array('id'=>'personDelete',
     'title'=>__('Delete Person'),
     'rights_required'=>RIGHT_PERSON_DELETE,
 ));
+new PageHandle(array('id'=>'personViewProjects',
+    'req'=>'pages/person.inc.php',
+    'title'=>__('View Projects of Person'),
+	'valid_params'=>array(  'from'=>'.*',
+                            'person'=>'\d*',
+							'preset'=>'.*',
+							'prj'=>'.*'
+                            ),
+    'test'=>'yes',
+    'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
+));
+new PageHandle(array('id'=>'personViewTasks',
+    'req'=>'pages/person.inc.php',
+    'title'=>__('View Task of Person'),
+	'valid_params'=>array(  'from'=>'.*',
+                            'person'=>'\d*',
+							'preset'=>'.*',
+							'prj'=>'.*'
+                            ),
+    'test'=>'yes',
+    'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
+));
 new PageHandle(array('id'=>'personViewEfforts',
     'req'=>'pages/person.inc.php',
     'title'=>__('View Efforts of Person'),
@@ -1025,7 +1047,17 @@ new PageHandle(array('id'=>'personViewEfforts',
     'test'=>'yes',
     'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
 ));
-
+new PageHandle(array('id'=>'personViewChanges',
+    'req'=>'pages/person.inc.php',
+    'title'=>__('View Changes of Person'),
+	'valid_params'=>array(  'from'=>'.*',
+                            'person'=>'\d*',
+							'preset'=>'.*',
+							'prj'=>'.*'
+                            ),
+    'test'=>'yes',
+    'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
+));
 new PageHandleFunc(array('id'=>'personSendActivation',
     'req'       =>'pages/person.inc.php',
     'title'     =>__('Send Activation E-Mail'),

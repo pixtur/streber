@@ -20,7 +20,8 @@ require_once(confGet('DIR_STREBER') . "render/render_list.inc.php");
 function projectPersonEdit($pp= NULL)
 {
     global $PH;
-
+	global $auth;
+	
     if(!$pp) {
         $id= getOnePassedId('projectperson','projectpersons_*', true, 'No team member selected?');   # WARNS if multiple; ABORTS if no id found
         if(!$pp= ProjectPerson::getEditableById($id)) {
@@ -49,7 +50,6 @@ function projectPersonEdit($pp= NULL)
         $page->crumbs=build_project_crumbs($project);
         $page->options[]= new NaviOption(array(
             'target_id' => 'projectPersonEdit',
-
         ));
 
 
@@ -63,7 +63,11 @@ function projectPersonEdit($pp= NULL)
 
         $form=new PageForm();
         $form->button_cancel=true;
-
+		
+		$form->add($tab_group=new Page_TabGroup());
+		
+		$tab_group->add($tab=new Page_Tab("details",__("Details")));
+		
         ### create an assoc with roles and find the current role ###
         {
             global $g_theme_names;
@@ -111,21 +115,27 @@ function projectPersonEdit($pp= NULL)
                 $count++;
             }*/
 
-            $form->add(new Form_Dropdown('person_profile',
+            /*$form->add(new Form_Dropdown('person_profile',
+                                        __("Role in this project"),
+                                        array_flip($g_user_profile_names),
+                                        $profile_num
+            ));*/
+
+			$tab->add(new Form_Dropdown('person_profile',
                                         __("Role in this project"),
                                         array_flip($g_user_profile_names),
                                         $profile_num
             ));
-
-
         }
 
-        $form->add($pp->fields['name']->getFormElement(&$pp));
+        //$form->add($pp->fields['name']->getFormElement(&$pp));
+		$tab->add($pp->fields['name']->getFormElement(&$pp));
 
         ### public-level ###
         if(($pub_levels=$pp->getValidUserSetPublevel())
             && count($pub_levels)>1) {
-            $form->add(new Form_Dropdown('projectperson_pub_level',  __("Publish to"),$pub_levels,$pp->pub_level));
+            //$form->add(new Form_Dropdown('projectperson_pub_level',  __("Publish to"),$pub_levels,$pp->pub_level));
+			$tab->add(new Form_Dropdown('projectperson_pub_level',  __("Publish to"),$pub_levels,$pp->pub_level));
         }
 
         ### effort-style ###
@@ -134,8 +144,16 @@ function projectPersonEdit($pp= NULL)
             __("duration")=> 2,
         );
 
-        $form->add(new Form_Dropdown('projectperson_effort_style',  __("Log Efforts as"), $effort_styles, $pp->adjust_effort_style));
-
+        //$form->add(new Form_Dropdown('projectperson_effort_style',  __("Log Efforts as"), $effort_styles, $pp->adjust_effort_style));
+		$tab->add(new Form_Dropdown('projectperson_effort_style',  __("Log Efforts as"), $effort_styles, $pp->adjust_effort_style));
+		
+		## internal area ##
+		{
+			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
+				$tab->add($pp->fields['salary_per_hour']->getFormElement(&$pp));
+			}
+		}
 
         echo ($form);
 

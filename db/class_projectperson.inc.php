@@ -87,6 +87,11 @@ class ProjectPerson extends DbProjectItem {
                 'title'=>__('role'),
                 'default'=>PROFILE_USER,
             )),
+			new FieldString(array('name'=>'salary_per_hour',
+				'title'     =>__('Salary per hour') . " " . __('in Euro'),
+                'default'   =>0.0,
+                'export'    =>false,
+            )),
         ) as $f) {
             $projectperson_fields[$f->name]=$f;
         }

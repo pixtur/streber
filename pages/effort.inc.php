@@ -813,11 +813,17 @@ function effortEditSubmit()
     }
 
     ### link to task ###
-    if($task_id = get('effort_task')) {
-        if($task= Task::getVisibleById($task_id)) {
-            $effort->task = $task->id;
-        }
-    }
+	$task_id = get('effort_task');
+	if(!is_null($task_id)){
+		if($task_id == 0) {
+			$effort->task = 0;
+		}
+		else{
+			if($task= Task::getVisibleById($task_id)) {
+				$effort->task = $task->id;
+			}
+		}
+	}
 
 
     ### go back to from if validation fails ###

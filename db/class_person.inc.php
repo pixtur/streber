@@ -353,27 +353,16 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
-    		new FieldInternal(array(    'name'=>'option1',
-                'view_in_forms'=>false,
-                'export'        =>false,
-            )),
-			new FieldInternal(array(    'name'=>'option2',
-                'view_in_forms'=>false,
-                'export'        =>false,
-            )),
-			new FieldInternal(array(    'name'=>'option3',
-                'view_in_forms'=>false,
-                'export'        =>false,
-            )),
-			new FieldInternal(array(    'name'=>'option4',
-                'view_in_forms'=>false,
-                'export'        =>false,
-            )),
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,
                 'default'       =>0,
                 'log_changes'   =>true,
+            )),
+			new FieldString(array('name'=>'salary_per_hour',
+				'title'     =>__('Salary per hour') . " " . __('in Euro'),
+                'default'   =>0.0,
+                'export'    =>false,
             )),
     
         ) as $f) {
@@ -959,7 +948,7 @@ class Person extends DbProjectItem {
         return $taskpersons;
 
     }
-
+	
     #---------------------------
     # get Companies
     #---------------------------
