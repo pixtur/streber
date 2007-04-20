@@ -1,4 +1,4 @@
-
+	
 body {
 	background-color:#ffffff;
 	padding-top:0px;
@@ -160,6 +160,10 @@ div.edit_functions {
 }
 
 .block .header span.block_options {
+    display:none;
+}
+
+.reduced_header {
     display:none;
 }
 
@@ -373,6 +377,14 @@ div.edit_functions {
 	}
 	table.list  tr.even {
 		background-color:#fff;
+	}
+
+	/*%%*/
+	table.list tr.not_viewed  {
+		color:#e57700;
+	}
+	table.list tr.not_viewed td a  {
+		color:#e57700;
 	}
 
     table.list tr.group td {
