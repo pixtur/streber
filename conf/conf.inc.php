@@ -323,11 +323,6 @@ $g_config= array(
     */
     'USE_MOD_REWRITE'=>false,
 
-	/*%%changeable variables for special events*/
-	'EVENT_OPTION1' => '',
-	'EVENT_OPTION2' => '',
-	'EVENT_OPTION3' => '',
-	'EVENT_OPTION4' => '',
 	
 	/**
 	* %%cost overview
