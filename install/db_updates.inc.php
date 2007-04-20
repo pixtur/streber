@@ -311,4 +311,8 @@ if($db_version < 0.07972) {
 	 $update_queries[]="ALTER TABLE `{$db_table_prefix}projectperson` ADD `salary_per_hour` FLOAT  DEFAULT '0' NOT NULL ;";
 	 $update_queries[]="ALTER TABLE `{$db_table_prefix}task` ADD `calculation` FLOAT  DEFAULT '0' NOT NULL ;";
 }
+
+if($db_version < 0.07973){
+	$update_queries[]="ALTER TABLE `{$db_table_prefix}projectperson` CHANGE `role` `role` TINYINT( 4 ) NOT NULL DEFAULT '0'";
+}
 ?>

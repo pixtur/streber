@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.07972',
+    'STREBER_VERSION'       => '0.07973',
     'STREBER_VERSION_DATE'  => '2007-04-20',
 
     'APP_NAME'              => 'streber',
@@ -322,7 +322,6 @@ $g_config= array(
     * use mod_rewrite clean urls
     */
     'USE_MOD_REWRITE'=>false,
-
 	
 	/**
 	* %%cost overview
