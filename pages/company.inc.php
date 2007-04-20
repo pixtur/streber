@@ -811,8 +811,8 @@ function companyView()
             $list->no_items_html=__("no persons related");
         }
 
-        #$list->render_list(&$persons);
-		$list->print_automatic(&$persons);
+        $list->render_list(&$persons);
+		//$list->print_automatic(&$persons);
     }
 
 
