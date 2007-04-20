@@ -216,6 +216,13 @@ function misc()
     });
 
     /**
+    * home selector
+    */
+    $('span#homeselector').click(function() {
+        $('span#homeselectorlist').toggle();
+    });
+
+    /**
     * call onload functions
     */
     for(i=0; i < onLoadFunctions.length; i++) {

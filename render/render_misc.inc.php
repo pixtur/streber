@@ -151,55 +151,72 @@ function url2linkMail($url,$show=false, $maxlen=32) {
 
 
 /**
-* NOTE: rolling out task-crumbreads at the top navigation is no longer supported
-* Since v0.06 the prefered method is listing the breadcrumbs before the page-title
+* Initialize a page for displaying task related content
+*
+* - inits: 
+*   - breadcrumps
+*   - options
+*   - current section
+*   - navigation
+*   - pageType (including task folders)
+*   - pageTitle (as Task title)
 */
-function build_task_crumbs(&$task, &$project=NULL) {
+function initPageForTask($page, $task, $project=NULL) 
+{
     $crumbs=array();
-
 
     if(!$project) {
         $project= Project::getVisibleById($task->project);
     }
-
-    if($project) {
-
-    	$crumbs=array(
-    	    new NaviCrumb(array('target_id'=>'projList')),
-    	    new NaviCrumb(array(
-	            'target_id'     =>'projView',
-	            'target_params' => array('prj'=>$task->project),
-	            'name'          => $project->getShort(),
-	            'tooltip'       => $project->name,
-    	    )),
-    	    new NaviCrumb(array(
-	            'target_id'     =>'projViewTasks',
-	            'target_params' => array('prj'=>$task->project),
-    	    )),
-    	);
-
-        ### breadcrumb + folders ##
-        $folders= $task->getFolder();
-        foreach($folders as $f) {
-            $crumbs[]=
-                    new NaviCrumb(array(
-                        'target_id'     =>'taskView',
-                        'target_params' =>array('tsk'=>$f->id),
-                        'name'          =>$f->getShort(),
-                        'type'          =>'task',
-                    ));
-        }
+    
+    if($task->category == TCATEGORY_MILESTONE) {
+        $page->cur_crumb= 'projViewMilestones';
     }
+    else if($task->category == TCATEGORY_VERSION) {
+        $page->cur_crumb= 'projViewVersions';
+    }
+    else if($task->category == TCATEGORY_DOCU) {
+        $page->cur_crumb= 'projViewDocu';
 
-    $crumbs[]=
-    new NaviCrumb(array(
-        'target_id'     =>'taskView',
-        'target_params' =>array('tsk'=>$task->id),
-        'name'          =>$task->getShort(),
-    ));
-    return $crumbs;
+    }
+    else {
+        $page->cur_crumb= 'projViewTasks';
+    }
+    
+    $page->crumbs= build_project_crumbs($project);
+    $page->options= build_projView_options($project);
+	$page->cur_tab='projects';
+	$page->title = asHtml($task->name);
 
+    /**
+    * render html buffer with page type of this task, including parent folders
+    * and type and status.
+    *
+    * - This is the tiny text about the page title.
+    */
+    {
+        global $g_status_names;
+        $type ="";
+
+        $status=  $task->status != STATUS_OPEN && isset($g_status_names[$task->status])
+               ?  ' ('.$g_status_names[$task->status] .')'
+               :  '';
+
+        $label=  $task->getLabel();
+        if(!$label) {
+            $label= __("Task");
+        }
+
+        if($folder= $task->getFolderLinks()) {
+            $type = $folder ." &gt; " . $label . $status ;
+        }
+        else {
+            $type = $status .' '. $label;
+        }
+        $page->type = $type;
+    }
 }
+
 
 function build_person_crumbs(&$person) {
     $crumbs=array();
@@ -278,6 +295,8 @@ function build_project_crumbs($project) {
 * is done by css only. This is a little bit tricky, because the Tab-list is already an
 * span which allows only further Spans to be included...
 *
+* The selectorlist is triggered by 
+*
 * read more at #3867
 */
 function buildProjectSelector()
@@ -295,14 +314,44 @@ function buildProjectSelector()
 
     if($projects= Project::getAll(array(
     ))) {
-        $buffer.="<span id=projectselector>&nbsp;</span>";
-        $buffer.= "<span style='display:none;' id='projectselectorlist'>";
+        $buffer.="<span id=projectselector class=selector>&nbsp;</span>";
+        $buffer.= "<span style='display:none;' id='projectselectorlist' class=selectorlist><span class=selectorlist_content>";
 
         foreach($projects as $p) {
             $buffer.= $PH->getLink('projView',$p->name, array('prj' => $p->id));
         }
-        $buffer.="</span>";
+        $buffer.="</span></span>";
     }
+    return $buffer;
+}
+
+
+
+/**
+* renders the list of open pages available in homeView
+*
+* The opening is done with javascript. Placing the list beside the Home Selector icon
+* is done by css only. This is a little bit tricky, because the Tab-list is already an
+* span which allows only further Spans to be included...
+*
+* read more at #3867
+*/
+function buildHomeSelector()
+{
+    global $auth;
+    global $PH;
+    if(!$auth->cur_user || !$auth->cur_user->id) {
+        return "";
+    }
+    $buffer= "";
+
+    $buffer.="<span id=homeselector class=selector>&nbsp;</span>";
+    $buffer.= "<span style='display:none;' id='homeselectorlist' class=selectorlist><span class=selectorlist_content>";
+
+    foreach(array('home', 'homeTasks', 'homeBookmarks', 'homeEfforts', 'homeAllChanges') as $p) {
+        $buffer.= $PH->getLink($p,NULL, array());
+    }
+    $buffer.="</span></span>";
     return $buffer;
 }
 
@@ -491,8 +540,9 @@ function getUserFormatDate()
         $userFormatDate = __('%b %e, %Y', 'strftime format string');
 
         // fix %e formatter if not supported (e.g. on Windows)
-        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
+        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1') {
             $userFormatDate = str_replace("%e", "%d", $userFormatDate);
+        }
     }
     return $userFormatDate;
 }
@@ -500,8 +550,9 @@ function getUserFormatDate()
 function getUserFormatTime()
 {
     global $userFormatTime;
-    if($userFormatTime)
+    if(!$userFormatTime) {
         $userFormatTime = __('%I:%M%P', 'strftime format string');
+    }
     return $userFormatTime;
 }
 
@@ -642,6 +693,8 @@ function renderDate($t, $smartnames= true) {
         $str= __('Today');
         if(gmdate('H:i:s',$t) !== '00:00:00') {
             $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
+
+            
         }
     }
     else if($smartnames && gmdate('Y-m-d', GMTToClientTime(time())) == gmdate('Y-m-d', GMTToClientTime($t + 60*60*24))) {

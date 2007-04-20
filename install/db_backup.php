@@ -18,17 +18,32 @@
 #error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT|E_PARSE|E_CORE_ERROR|E_CORE_WARNING|E_COMPILE_ERROR);
 
 
+ini_set("max_execution_time",300);
+
 $dumper= new MySQLDumper();
+$dumper->use_gzip = false;
 
 if($dumper->connect(
-        'localhost',	# hostname
-        'user',	# DB-username
-        'password',	# DB-password
-        'database'	# DB-name
+        'localhost',	    # hostname
+        'username',	            # DB-username
+        'password',	        # DB-password
+        'dbname'	        # DB-name
 )) {
-   #$dumper->dump();
+   $dumper->dump();
    #$dumper->executeFromFile("streber.pixtur.de.sql");
 }
+
+
+/*if($dumper->connect(
+        'localhost',	    # hostname
+        'user',	            # DB-username
+        'password',	        # DB-password
+        'database'	        # DB-name
+)) {
+   $dumper->dump();
+   #$dumper->executeFromFile("streber.pixtur.de.sql");
+}
+*/
 
 
 
@@ -42,6 +57,8 @@ class MySQLDumper {
     var $add_drop_statement = true;
     var $crlf               ="\n";
     var $use_backquotes     = true;
+    var $use_gzip           = true;
+    var $line_buffer        = array();
 
     function connect($hostname,$db_username,$db_password,$db_name) {
 
@@ -69,7 +86,15 @@ class MySQLDumper {
         return true;
     }
 
-
+    function write($string)
+    {
+        if($this->use_gzip) {
+            $this->line_buffer[]= $string;
+        }
+        else {
+            echo $string;
+        }
+    }
 
     function dump( ) 
     {
@@ -102,8 +127,6 @@ class MySQLDumper {
         #}
 
 
-
-
         ### Builds the dump
         $tables     = mysql_list_tables($this->db_name);
 
@@ -113,28 +136,30 @@ class MySQLDumper {
             exit(0);
         }
 
-        $dump_buffer    =  "# slim phpMyAdmin MySQL-Dump\n";
+        $this->write("# slim phpMyAdmin MySQL-Dump\n");
 
         for($i=0; $i < $num_tables; $i++) {
 
             $table_name = mysql_tablename($tables, $i);
-            $dump_buffer.= $this->crlf
+            $this->write( $this->crlf
                         .  '#' . $this->crlf
                         .  '#' . $this->backquote($table_name) . $this->crlf
                         .  '#' . $this->crlf . $this->crlf
                         .  $this->getTableDef($table_name) . ';' . $this->crlf
-                        .  $this->getTableContentFast($table_name);
+                        .  $this->getTableContentFast($table_name)
+            );
         }
 
-        $dump_buffer .= $this->crlf;
+        $this->write($this->crlf);
 
         ### Displays the dump as gzip-file
-        if (function_exists('gzencode')) {
-            echo gzencode($dump_buffer);                    # without the optional parameter level because it bugs
-            #echo "<pre>".$dump_buffer."</pre>";
-        }
-        else {
-            trigger_error("gzencode() not defined. Saving backup failed", E_USER_ERROR);
+        if($this->use_gzip) {            
+            if (function_exists('gzencode')) {
+                echo gzencode(implode("",$this->line_buffer));                    # without the optional parameter level because it bugs
+            }
+            else {
+                trigger_error("gzencode() not defined. Saving backup failed", E_USER_ERROR);
+            }
         }
     }
 

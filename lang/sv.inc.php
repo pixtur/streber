@@ -983,7 +983,7 @@ $g_lang_table= array(
 'Edit this project'           =>'Ändra projekt',  # line 279
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'NY ',  # line 134
+'new'                        =>'NY ',  # line 134
 
 ### ../pages/proj.inc.php   ###
 'Add person as team-member to project'=>'Lägg till gruppmedlem till projekt',  # line 291
@@ -1437,7 +1437,7 @@ $g_lang_table= array(
 'Failed to delete %s comments'=>'Det gick inte radera %s kommentarer',  # line 482
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'Ändra:',  # line 92
+'edit'                       =>'Ändra:',  # line 92
 
 ### ../pages/company.inc.php   ###
 'Person already related to company'=>'Användaren är redan kopplad till företaget',  # line 617
@@ -1715,7 +1715,7 @@ $g_lang_table= array(
 'Partners' =>'Partners', # line 293
 
 ### ../pages/task_view.inc.php ###
-'edit:' =>'ÄNDRA ', # line 82
+'edit' =>'ÄNDRA ', # line 82
 
 ### ../pages/company.inc.php ###
 'Remove person from company' =>'Ta bort användare från företag', # line 498

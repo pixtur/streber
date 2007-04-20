@@ -1558,7 +1558,7 @@ $g_lang_table= array(
 'Nickname|label in login form'=>'Brukernavn',
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'ny:',
+'new'                        =>'ny:',
 
 ### ../pages/proj.inc.php   ###
 'Team member'                 =>'Team Medlem',
@@ -1671,7 +1671,7 @@ $g_lang_table= array(
 'Person with account (can login)|form label'=>'Person med Konto (kan logge inn)',
 
 ### ../pages/task.inc.php   ###
-'edit:'                       =>'redigere',
+'edit'                       =>'redigere',
 'Wiki'                        =>'Wiki',
 
 ### ../pages/proj.inc.php   ###

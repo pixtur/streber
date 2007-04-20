@@ -84,7 +84,7 @@ function ProjView()
         
         if($editable) {
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('edit:')
+                'name'      => __('edit')
             )));
             $page->add_function(new PageFunction(array(
                 'target'    =>'projEdit',
@@ -130,7 +130,7 @@ function ProjView()
 
 
         $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('new:')
+            'name'      => __('new')
         )));
         /*
         $page->add_function(new PageFunction(array(
@@ -155,6 +155,15 @@ function ProjView()
             'tooltip'   =>__('Create task with issue-report'),
             'name'      =>__('Bug'),
         )));
+
+        $page->add_function(new PageFunction(array(
+            'target'    =>'taskNewDocu',
+            'params'    =>array('prj'=>$project->id),
+            'icon'      =>'new',
+            'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
+            'name'      =>__('Topic'),
+        )));
+
         $page->add_function(new PageFunction(array(
             'target'    =>'effortNew',
             'params'    =>array('prj'=>$project->id),

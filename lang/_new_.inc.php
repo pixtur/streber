@@ -873,7 +873,7 @@ undefined keys:
 'List'                        =>'',  # line 395
 
 ### ../pages/task_view.inc.php   ###
-'new:'                        =>'',  # line 1064
+'new'                        =>'',  # line 1064
 
 ### ../pages/company.inc.php   ###
 'no companies'                =>'',  # line 423
@@ -897,7 +897,7 @@ undefined keys:
 'Overview'                    =>'',  # line 66
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'',  # line 100
+'edit'                       =>'',  # line 100
 
 ### ../pages/company.inc.php   ###
 'Edit this company'           =>'',  # line 501

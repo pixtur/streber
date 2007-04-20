@@ -511,7 +511,7 @@ class File extends DbProjectItem
         $this->tmp_dir= "prj{$this->project}";
         if(! file_exists(confGet('DIR_FILES') . $this->tmp_dir)) {
             if(  !mkdir(confGet('DIR_FILES') . $this->tmp_dir, 0777)) {
-                trigger_error("could not create target directory for uploaded file '" .confGet('DIR_FILES') . $this->tmp_dir. "'", E_USER_WARNING);
+                trigger_error("could not create target directory for uploaded file '" .confGet('DIR_FILES') . $this->tmp_dir. "/'", E_USER_WARNING);
                 return NULL;
             }
         }
@@ -532,8 +532,8 @@ class File extends DbProjectItem
         parent::update();
 
         ### move file ###
-        if(!rename($upload_filepath, confGet('DIR_FILES') . $this->tmp_dir . $this->tmp_filename)) {
-            trigger_error("could not move uploaded file from '$upload_filepath' to '" .confGet('DIR_FILES') . $this->tmp_dir . $this->tmp_filename. "'", E_USER_WARNING);
+        if(!rename($upload_filepath, confGet('DIR_FILES') . $this->tmp_dir ."/". $this->tmp_filename)) {
+            trigger_error("could not move uploaded file from '$upload_filepath' to '" .confGet('DIR_FILES') . $this->tmp_dir ."/". $this->tmp_filename. "'", E_USER_WARNING);
 
             ### remove invalid database entry ###
             $this->DeleteFromDb();
@@ -550,7 +550,7 @@ class File extends DbProjectItem
     */
     public function download()
     {
-        $filepath= confGet('DIR_FILES') . $this->tmp_dir . $this->tmp_filename;
+        $filepath= confGet('DIR_FILES') . $this->tmp_dir . '/'. $this->tmp_filename;
 
         if(file_exists($filepath)) {
             header('Content-Length: '   . filesize($filepath));
@@ -565,7 +565,7 @@ class File extends DbProjectItem
 
     public function view()
     {
-        $filepath= confGet('DIR_FILES') . $this->tmp_dir . $this->tmp_filename;
+        $filepath= confGet('DIR_FILES') . $this->tmp_dir . '/' . $this->tmp_filename;
 
         if(file_exists($filepath)) {
             header('Content-Length: '   . filesize($filepath));
@@ -581,7 +581,7 @@ class File extends DbProjectItem
 
     public function viewAsImage($max_size = 0)
     {
-        $filepath= confGet('DIR_FILES') . $this->tmp_dir . $this->tmp_filename;
+        $filepath= confGet('DIR_FILES') . $this->tmp_dir . '/'. $this->tmp_filename;
 
         if(file_exists($filepath)) {
 

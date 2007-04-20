@@ -592,12 +592,15 @@ function effortEdit($effort=NULL)
         $page->type=__('Edit Effort','page type');
         $page->title=$effort->name;
 
-        if($task) {
-            $page->crumbs= build_task_crumbs($task);
-        }
-        else {
+        /**
+        * @@@ refactor with initPageForEffort()
+        */
+#        if($task) {
+#            $page->crumbs= build_task_crumbs($task);
+#        }
+#        else {
             $page->crumbs= build_project_crumbs($project);
-        }
+#        }
         $page->crumbs[]= new NaviCrumb(array(
             'target_id' => 'effortEdit',
         ));
@@ -913,7 +916,6 @@ function effortEditMultiple()
         $page->cur_tab = 'projects';
 
 
-        #$page->crumbs=build_task_crumbs($task,$project);
         $page->options[] = new naviOption(array(
             'target_id'  =>'effortEdit',
         ));

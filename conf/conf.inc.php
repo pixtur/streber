@@ -56,7 +56,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.0795',
+    'DB_VERSION_REQUIRED'   => '0.07972',
 
 
     /**
@@ -74,7 +74,7 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-    'DB_CREATE_VERSION'     => '0.0797',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_VERSION'     => '0.07972',     # sql-dump loaded from /_install/-directory at installation
     'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0797',
 
     'DB_USERNAME'           =>'',

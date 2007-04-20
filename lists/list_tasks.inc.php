@@ -49,10 +49,11 @@ class ListBlock_tasks extends ListBlock
 {
 
     public $filters                 = array();                               # assoc arry of ListFilters
-    #public $active_block_function   = 'tree';              #@@@ HACK
     public $tasks_assigned_to       = NULL;
     public $use_short_names         = false;
     public $show_summary            = false;
+
+    public $show_project_folder         = false;    
 
     public function __construct($args=NULL)
     {
@@ -122,10 +123,6 @@ class ListBlock_tasks extends ListBlock
 	    )));
 	    $this->add_col( new ListBlockCol_TaskAssignedTo(array('use_short_names'=>false )));
 
-        /*$this->add_col( new listBlockColDate(array(
-			'key'=>'date_start',
-            'name'=>__('Started'),
-        )));*/
         $this->add_col( new listBlockColDate(array(
 			'key'=>'modified',
             'name'=>__('Modified','Column header'),
@@ -269,10 +266,17 @@ class ListBlock_tasks extends ListBlock
         ));
         $this->add_blockFunction($this->groupings);
 
-
+        /**
+        * @NOTE:
+        * - if we deal with tasks of possibily multiple projects, we should list projects 
+        *   in path that is shown below the task in "List" mode
+        */
+        if(!isset($this->filters['project'])) {
+            $this->show_project_folder= true;
+            
+        }
 
         ### list groupings ###
-
         $this->groupings->groupings= array(
             new ListGroupingFolder(),
             new ListGroupingStatus(),
@@ -611,6 +615,8 @@ class ListBlock_tasks extends ListBlock
         if($sort= get($sort_cookie)) {
             $this->query_options['order_by']= $sort;
         }
+                    
+
 
 
         if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
@@ -637,7 +643,8 @@ class ListBlock_tasks extends ListBlock
             }
             $this->query_options['show_folders']    = false;
 
-            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            #$this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            #echo "%% here2". $this->query_options['order_by'];
 
             unset($this->columns['parent_task']);
             unset($this->columns['date_closed']);
@@ -1359,8 +1366,15 @@ class ListBlockCol_TasknameWithFolder extends ListBlockCol
             }
 
             $html_details= '';
-            if($tmp= $task->getFolderLinks()) {
-                $html_details .=__('in', 'very short for IN folder...'). ' '. $tmp;
+            if($this->parent_block->show_project_folder && ($project = Project::getVisibleById($task->project))) {
+                if($tmp= $task->getFolderLinks(true, $project)) {
+                    $html_details .=__('in', 'very short for IN folder...'). ' '. $tmp;                        
+                }
+            }
+            else {
+                if($tmp= $task->getFolderLinks()) {
+                    $html_details .=__('in', 'very short for IN folder...'). ' '. $tmp;
+                }
             }
 
             $isDone= ($task->status >= STATUS_COMPLETED)

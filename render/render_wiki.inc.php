@@ -1676,11 +1676,12 @@ class FormatBlockTable extends FormatBlock
 
                 $text= $b->str;
                 $found= false;
+                
                 while($text) {
 
                     if(preg_match("/(.*?)\r?\n((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
 
-                        $blocks_new[]= new FormatBlock($matches[1]);
+                        $keep_previous_block= new FormatBlock($matches[1]);
 
                         ### check number of pipes in each line...
                         $lines= explode("\n", $matches[2]);
@@ -1705,6 +1706,7 @@ class FormatBlockTable extends FormatBlock
                                 }
                                 else if(count($cells) != $last_num_cells) {
                                     $syntax_failure= true;
+                                    
                                     break;
                                 }
 
@@ -1717,12 +1719,15 @@ class FormatBlockTable extends FormatBlock
                         }
 
                         if(!$syntax_failure) {
+                            $blocks_new[]= $keep_previous_block;
                             $blocks_new[]= new FormatBlockTable($line_cells);
                             $text= $rest;
                             $found= true;
                         }
                         else {
                             $blocks_new[]= $b;
+                            #$text= $rest;
+                            $found= false;
                             break;
                         }
                     }
@@ -1731,7 +1736,6 @@ class FormatBlockTable extends FormatBlock
                         break;
                     }
                     else {
-                        $blocks_new[]= $b;
                         break;
                     }
                 }

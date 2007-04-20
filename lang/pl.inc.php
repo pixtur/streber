@@ -1063,7 +1063,7 @@ $g_lang_table= array(
 'User rights changed'         =>'Uprawnienia użytkownika zostały zmienione',  # line 1315
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'nowe:',  # line 134
+'new'                        =>'nowe:',  # line 134
 
 ### ../pages/task.inc.php   ###
 'Bug'                         =>'Błąd',  # line 150
@@ -1456,7 +1456,7 @@ $g_lang_table= array(
 'Partners'                    =>'Partnerzy',  # line 352
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'edycja:',  # line 89
+'edit'                       =>'edycja:',  # line 89
 
 ### ../render/render_form.inc.php   ###
 'Wiki format'                 =>'Format Wiki',  # line 323

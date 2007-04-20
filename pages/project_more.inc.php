@@ -913,7 +913,7 @@ function projViewTasks()
 
 
         $page->add_function(new PageFunctionGroup(array(
-            'name'=>__('new:'),
+            'name'=>__('new'),
         )));
         if($preset_id != 'next_milestone') {
             $page->add_function(new PageFunction(array(
@@ -1084,7 +1084,7 @@ function ProjViewDocu()
 
         ### page functions ###
         $page->add_function(new PageFunctionGroup(array(
-            'name'=>__('new:'),
+            'name'=>__('new'),
         )));
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNew',

@@ -1505,8 +1505,8 @@ $g_lang_table= array(
 'Partners'                    =>'Partenaires',
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'modifier:',
-'new:'                        =>'nouveau:',
+'edit'                       =>'modifier:',
+'new'                        =>'nouveau:',
 
 ### ../pages/company.inc.php   ###
 'Remove person from company'  =>'Enlever des personnes des companies',

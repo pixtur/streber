@@ -161,7 +161,7 @@ function changeBlockStyle()
 
     ### return to from-page ###
     if(!$PH->showFromPage()) {
-        $PH->show('home');
+        $PH->show($page_id);
     }
 }
 

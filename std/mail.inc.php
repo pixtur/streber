@@ -627,8 +627,8 @@ class Notifier
         ### headers  ###
         $headers="";
         if($html_format) {
-            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
             $headers .= "From: $from\r\n";
+            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
         }
 
 

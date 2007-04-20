@@ -209,7 +209,7 @@ $g_lang_table= array(
 'For Milestone'               =>'pre míľnik',
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'upraviť',
+'edit'                       =>'upraviť',
 
 ### ../db/class_task.inc.php   ###
 'resolved_version'            =>'',
@@ -1023,7 +1023,7 @@ $g_lang_table= array(
 'Edit this project'           =>'Upraviť tento projekt',
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'nové:',
+'new'                        =>'nové:',
 
 ### ../pages/proj.inc.php   ###
 'Add person as team-member to project'=>'Pridať osobu ako člena tímu',

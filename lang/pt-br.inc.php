@@ -1314,8 +1314,8 @@ $g_lang_table= array(
 'Partners'                    =>'Parceiros',
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'editar:',
-'new:'                        =>'novo:',
+'edit'                       =>'editar:',
+'new'                        =>'novo:',
 
 ### ../pages/company.inc.php   ###
 'related Persons'             =>'Pessoas relacionadas',

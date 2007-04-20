@@ -346,7 +346,7 @@ class ListBlockCol_EffortDate extends ListBlockCol
 		}
 
         #$value= date(__("D, d.m.Y"), strToGMTime($obj->time_start) );
-        $value= renderDateHtml($obj->time_start);
+        $value= renderTimestampHtml($obj->time_start);
 
         if($obj->as_duration) {
             $value.="&nbsp;&nbsp;".renderTime($obj->time_start) ;

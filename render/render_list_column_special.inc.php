@@ -320,7 +320,8 @@ class ListBlockColStatus extends ListBlockCol{
 }
 
 
-class ListBlockColPubLevel extends ListBlockCol{
+class ListBlockColPubLevel extends ListBlockCol
+{
 
     public $style='narrow';
     public $key='pub_level';
@@ -329,7 +330,7 @@ class ListBlockColPubLevel extends ListBlockCol{
         parent::__construct($args);
         $this->tooltip=__("Item is published to");
         $this->name=__("Pub","column header for public level");
-        $this->id='pub';
+        $this->id='pub_level';
     }
 
 	function render_tr(&$obj, $style="")

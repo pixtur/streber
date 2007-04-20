@@ -353,6 +353,8 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
+            
+            
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,

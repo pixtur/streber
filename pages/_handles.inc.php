@@ -22,9 +22,32 @@ new PageHandle(array('id'=>'home',
     'cleanurl'=>'home',
 
 ));
+new PageHandle(array('id'=>'homeTasks',
+    'req'=>'pages/home.inc.php',
+    'title'=>__('Your Tasks'),
+    'test'=>'yes',
+	
+    'valid_for_crawlers'=>false,
+));
+new PageHandle(array('id'=>'homeBookmarks',
+    'req'=>'pages/home.inc.php',
+    'title'=>__('Bookmarks'),
+    'test'=>'yes',
+	
+    'valid_for_crawlers'=>false,
+));
+new PageHandle(array('id'=>'homeEfforts',
+    'req'=>'pages/home.inc.php',
+    'title'=>__('Efforts'),
+    'test'=>'yes',
+	
+    'valid_for_crawlers'=>false,
+));
+
+
 new PageHandle(array('id'=>'homeAllChanges',
     'req'=>'pages/home.inc.php',
-    'title'=>__('Changes'),
+    'title'=>__('Overall history'),
     'test'=>'yes',
 	
     'valid_for_crawlers'=>false,
@@ -527,6 +550,23 @@ new PageHandleFunc(array('id'=>'taskNew',
     'test_params'=>array('prj'=>'_projectEdit_',),
 
 ));
+new PageHandleFunc(array('id'=>'taskNewDocu',
+    'req'=>'pages/task_more.inc.php',
+    'title'=>__('New Task'),
+    'valid_params'=>array(  'prj'=>'\d*',
+                            'parent_task'=>'\d*',
+                            'add_issue'=>'1',
+                            'new_name'=>'.*',
+                            'for_milestone'=>'\d*',
+                            'task_assign_to_0'=>'\d*',
+    ),
+
+    'test'=>'yes',
+    'test_params'=>array('prj'=>'_projectEdit_',),
+
+));
+
+
 new PageHandleFunc(array('id'=>'taskNewBug',
     'req'=>'pages/task_more.inc.php',
     'title'=>__('New Bug'),

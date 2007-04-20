@@ -171,7 +171,7 @@ function companyList() {
 
 			### page functions ###
 			$page->add_function(new PageFunctionGroup(array(
-				'name'      => __('new:')
+				'name'      => __('new')
 			)));
 			$page->add_function(new PageFunction(array(
 				'target'=>'companyNew',
@@ -283,7 +283,7 @@ function companyList() {
 
 			### page functions ###
 			$page->add_function(new PageFunctionGroup(array(
-				'name'      => __('new:')
+				'name'      => __('new')
 			)));
 			$page->add_function(new PageFunction(array(
 				'target'=>'companyNew',
@@ -373,7 +373,7 @@ function companyList() {
 
 			### page functions ###
 			$page->add_function(new PageFunctionGroup(array(
-				'name'      => __('new:')
+				'name'      => __('new')
 			)));
 			$page->add_function(new PageFunction(array(
 				'target'=>'companyNew',
@@ -459,7 +459,7 @@ function companyList() {
 
 			### page functions ###
 			$page->add_function(new PageFunctionGroup(array(
-				'name'      => __('new:')
+				'name'      => __('new')
 			)));
 			$page->add_function(new PageFunction(array(
 				'target'=>'companyNew',
@@ -547,7 +547,7 @@ function companyList() {
 
 			### page functions ###
 			$page->add_function(new PageFunctionGroup(array(
-				'name'      => __('new:')
+				'name'      => __('new')
 			)));
 			$page->add_function(new PageFunction(array(
 				'target'=>'companyNew',
@@ -646,7 +646,7 @@ function companyView()
 
         ### page functions ###
         $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('edit:')
+            'name'      => __('edit')
         )));
 
         $page->add_function(new PageFunction(array(
@@ -686,7 +686,7 @@ function companyView()
         }
 
         $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('new:')
+            'name'      => __('new')
         )));
 
         $page->add_function(new PageFunction(array(

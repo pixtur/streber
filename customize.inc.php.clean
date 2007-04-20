@@ -18,5 +18,6 @@
 #confChange('DB_USE_UTF8_ENCODING',true);
 
 #confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
+#confChange('SMTP','mail.yourdomain.de');
 
 ?>

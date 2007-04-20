@@ -61,55 +61,19 @@ function TaskView()
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        
+        initPageForTask($page, $task, $project);
 
-        /*
-            $page->crumbs= build_task_crumbs($task);
-        */
-        if($task->category == TCATEGORY_MILESTONE) {
-            $page->cur_crumb= 'projViewMilestones';
-        }
-        else if($task->category == TCATEGORY_VERSION) {
-            $page->cur_crumb= 'projViewVersions';
-        }
-        else if($task->category == TCATEGORY_DOCU) {
-            $page->cur_crumb= 'projViewDocu';
-
-        }
-        else {
-            $page->cur_crumb= 'projViewTasks';
-        }
-        $page->crumbs= build_project_crumbs($project);
-        $page->options= build_projView_options($project);
-
-
-
-        global $g_status_names;
-        $status=  $task->status != STATUS_OPEN && isset($g_status_names[$task->status])
-               ?  ' ('.$g_status_names[$task->status].')'
-               :  '';
-
-        $type=$task->getLabel();
-
-        if($folder= $task->getFolderLinks()) {
-            $page->type= $folder ." &gt; " . $type . $status ;
-        }
-        else {
-            $page->type=  $status .' '. $type ;
-        }
-
-        $page->title= $task->name;
-        $page->title_minor_html=$PH->getLink('taskView', sprintf(__('Item-ID %d'), $task->id), array('tsk'=>$task->id));
+        $page->title_minor_html=$PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
         if($task->state== -1) {
             $page->title_minor_html .= ' ' . sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
         }
-
 
         ### page functions ###
         {
             if($editable) {
                 $page->add_function(new PageFunctionGroup(array(
-                    'name'      => __('edit:')
+                    'name'      => __('edit')
                 )));
                 if($task->category == TCATEGORY_FOLDER) {
                     $page->add_function(new PageFunction(array(
@@ -145,7 +109,7 @@ function TaskView()
 
 
                 $page->add_function(new PageFunctionGroup(array(
-                    'name'=>__('new:'),
+                    'name'=>__('new'),
                 )));
 
                 $page->add_function(new PageFunction(array(
@@ -168,7 +132,7 @@ function TaskView()
             ### milestone ###
             else if($task->is_milestone) {
                 $page->add_function(new PageFunctionGroup(array(
-                    'name'=>__('new:'),
+                    'name'=>__('new'),
                 )));
 
                 $page->add_function(new PageFunction(array(
@@ -1033,31 +997,12 @@ function taskViewAsDocu()
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
 
-        $page->crumbs   = build_project_crumbs($project);
-        $page->cur_crumb= 'projViewDocu';
-        $page->options  = build_projView_options($project);
-
-        ### breadcrumbs ###
-        $type = $task->getLabel();
-
-        if($folder= $task->getFolderLinks()) {
-            $page->type= $folder ." &gt; " . $type ;
-        }
-        else if($type) {
-            $page->type=  $type;
-        }
-        else {
-            global $g_tcategory_names;
-            $page->type=  $g_tcategory_names[$task->category];
-
-        }
+        initPageForTask($page, $task, $project);
 
         $task->nowViewedByUser();
 
-        $page->title = $task->name;
-        $page->title_minor_html=$PH->getLink('taskView', sprintf(__('Item-ID %d'), $task->id), array('tsk'=>$task->id));
+        $page->title_minor_html=$PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
         if($task->state == -1) {
             $page->title_minor_html .= ' ' . sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
         }
@@ -1102,7 +1047,7 @@ function taskViewAsDocu()
 
             ### new ###
             $page->add_function(new PageFunctionGroup(array(
-                'name'=>__('new:'),
+                'name'=>__('new'),
             )));
             if($task->category == TCATEGORY_FOLDER) {
 

@@ -1006,7 +1006,7 @@ $g_lang_table= array(
 'Edit this project'           =>'Modifica questo progetto',  # line 279
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'nuova:',  # line 134
+'new'                        =>'nuova:',  # line 134
 
 ### ../pages/proj.inc.php   ###
 'Add person as team-member to project'=>'Aggiungi al progetto persona come membro del team',  # line 291
@@ -1451,7 +1451,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Failed to delete %s comments'=>'Errore durante l`eliminazione di %s commenti',  # line 472
 
 ### ../pages/task.inc.php   ###
-'edit:'                       =>'modifica:',  # line 2485
+'edit'                       =>'modifica:',  # line 2485
 
 ### ../pages/company.inc.php   ###
 'Person already related to company'=>'Persona già correlata all`azienda',  # line 617

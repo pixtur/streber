@@ -89,7 +89,7 @@ function ProjView()
 
 
         $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('new:')
+            'name'      => __('new')
         )));
         $page->add_function(new PageFunction(array(
             'target'    =>'projAddPerson',

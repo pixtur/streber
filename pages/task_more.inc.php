@@ -34,6 +34,23 @@ function taskNewBug()
 }
 
 /**
+* Create a task as docu page
+*
+* @ingroup pages
+*/
+function taskNewDocu()
+{
+    $foo=array(
+        'add_issue'=>1,
+        'task_category' =>TCATEGORY_DOCU
+        );
+    addRequestVars($foo);
+	TaskNew();
+	exit();
+}
+
+
+/**
 * Create a new milestone
 *
 * @ingroup pages
@@ -302,22 +319,22 @@ function taskEdit($task=NULL)
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true,'autofocus_field'=>'task_name'));
-    	$page->cur_tab='projects';
 
-
-    	$page->crumbs=build_task_crumbs($task,$project);
-    	$page->options[]= new naviOption(array(
-    	    'target_id'     =>'taskEdit',
-    	));
-
-        $page->type= sprintf(__("Edit %s","Page title") , $task->getLabel());
+    	initPageForTask($page, $task, $project);
+    	
         if($task->id) {
             $page->title=$task->name;
             $page->title_minor=$task->short;
         }
         else {
-            if($task->is_milestone) {
+            if($task->category == TCATEGORY_MILESTONE) {
                 $page->title=__("New milestone");
+            }            
+            else if($task->category == TCATEGORY_VERSION) {
+                $page->title=__("New version");
+            }            
+            else if($task->category == TCATEGORY_DOCU) {
+                $page->title=__("New topic");
             }
             else {
                 $page->title=__("New task");
@@ -2050,18 +2067,8 @@ function taskEditDescription($task=NULL)
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'task_name'));
-    	$page->cur_tab='projects';
 
-        if($task) {
-    	    $page->crumbs=build_task_crumbs($task);
-        }
-    	$page->crumbs[]=new NaviCrumb(array(
-    	    'target_id' => 'taskEditDescription',
-
-    	));
-
-        $page->type=__("Task");
-        $page->title= $task->name;
+        initPageForTask($page, $task);
 
         $page->title_minor= __("Edit description");
 
@@ -2187,16 +2194,9 @@ function TaskViewEfforts()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+    	initPageForTask($page, $task, $project);
 
-        $page->cur_crumb= 'projViewTasks';
-        $page->crumbs= build_project_crumbs($project);
-        $page->options= build_projView_options($project);
-
-        $page->title=$task->name;
         $page->title_minor= __("Task Efforts");
-
-        $page->type= $task->renderTypeAsBreadcrumbs();
 
         ### page functions ###
         $page->add_function(new PageFunction(array(
@@ -2346,7 +2346,6 @@ function TaskEditMultiple()
     	$page->cur_tab='projects';
 
 
-    	#$page->crumbs=build_task_crumbs($task,$project);
     	$page->options[]= new naviOption(array(
     	    'target_id'     =>'taskEdit',
     	));

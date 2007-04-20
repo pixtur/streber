@@ -775,7 +775,7 @@ $g_lang_table= array(
 'List'                        =>'Listaus',  # line 369
 
 ### ../pages/task_view.inc.php   ###
-'new:'                        =>'uusi:',  # line 158
+'new'                        =>'uusi:',  # line 158
 
 ### ../pages/company.inc.php   ###
 'no companies'                =>'ei yrityksiä',  # line 392
@@ -794,7 +794,7 @@ $g_lang_table= array(
 'Overview'                    =>'Yleiskatsaus',  # line 272
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'muokkaa:',  # line 89
+'edit'                       =>'muokkaa:',  # line 89
 
 ### ../pages/company.inc.php   ###
 'Edit this company'           =>'Muokkaa tätä yritystä',  # line 458

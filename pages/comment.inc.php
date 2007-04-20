@@ -48,19 +48,9 @@ function commentView(){
         $page= new Page();
     	$page->cur_tab='projects';
 
-
-        #if($task) {
-    	#    $page->crumbs=build_task_crumbs($task);
-        #}
-        #else {
         $page->cur_crumb= 'projViewTasks';
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
-    	#}
-    	#$page->crumbs[]=new NaviCrumb(array(
-    	#    'target_id' => 'commentView',
-    	#
-    	#));
 
         $type= __('Comment on task','page type');
 

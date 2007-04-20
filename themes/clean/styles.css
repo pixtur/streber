@@ -50,6 +50,10 @@ div.wiki .searchword
 {
     background-color:#ff4;
 }
+b.doclear{
+    clear:both;
+    display:block;
+}
 
 
 /*--- section-colors ---*/
@@ -71,90 +75,79 @@ div.wiki .searchword
 
 /* === header =========================================== */
 #header {
-	background:#464C4B url(img/bg_header.gif) repeat-x;
-		border-bottom:1px solid #DFDFDF;
-
+ background:    #5E6867 url(layout/bg_header.png) bottom left repeat-x;
 }
 
 #header #logo {
-	float:left;
-	width:7em;
+ float:         left;
+ width:         7em;
 }
 #header #logo .text {
-	padding-left:0.6em;
+ padding-left:  0.6em;
 }
 #header #logo .text a {
-	text-decoration:none;
-	color:#fff;
+ text-decoration:none;
+ color:          #fff;
 }
 
 #header #logo .text a .extend {
-    font-size:60%;
-    vertical-align:top;
+ font-size:60%;
+ vertical-align:top;
 }
 
 
 /*==== tabs ============================================= */
-	#header #tabs {
-		padding-top:0.5em;
-		padding-left:1em;
-		padding-bottom:1px;
-		font-size:90%;
-	    margin:    0px;
-	}
+div#sections {
+ padding-top:   5px;
+ padding-left:  5px;
+ width:         40em;
+}            
 
-	#header #tabs li {
-		display:inline;
-		/*padding:0px 12px 1px 12px;*/
-		margin:0px 1px 0px 1px;
+div#sections span.section {
+ display:       block;
+ float:         left;
 
-        border-bottom:1px solid #DFDFDF;
-		background-color:#B1B1B1;
-		-moz-border-radius:0px 7px 0px 0px;
-		/*background-image:url(img/tab_upri.png) top right no-repeat;*/
+ font-size:     10pt;
+ font-weight:   bold;
+ background:    #B1B1B1 url(layout/bg_section_tabs.png) bottom left repeat-x;
+ padding:       0.0em 0.5em;
+ line-height:   160%;
+ margin:        3px 0px 0px 2px;
+ padding-bottom: 2px;
+}
 
-	 	text-align:center;
-        white-space:nowrap;
-	}
+div#sections span.section a {                
+ color:         #000;   
+}
 
-	#header #tabs .current {
-		padding:4px 2px 3px 2px;
+div#sections span.section:hover,
+div#sections span.section.current {
+ background:    #D7DADB none;
+ margin-top:    0px;
+ padding-top:   3px;
+}
 
-        border-bottom-width:0px;
-        background-color:#D7DADB;
-
-		font-size:90%;
-		font-weight:bold;
-	}
-
-	#header #tabs li:hover {
-		background-color:#ffff90;
-		border-bottom:2px solid #000000;
-	}
-
-	#header #tabs a {
-		padding:0px 12px 1px 12px;
-		color:#000000;
-		text-decoration:none;
-	}
+div#sections span.section input.searchfield {       /* seach field */
+ width:         80px;
+ border:        0px;
+ background:    #DDDDDD url(layout/bg_header_search_field.png)  no-repeat top left;
+ font-size:     9pt;
+ padding:       2px 1px 0px 2px;
+}
+div#sections span.section  input:focus {
+ width:         140px;
+}
 
 
+#header #user_functions {
+    position:absolute;
+    right:0px;
+    z-index:1;
+}
 
-    #header #tabs input {       /* seach field */
-        width:80px;
-        margin-bottom:0px;
-        margin-top:0px;
-        margin-right:5px;
-        padding:0px;
-        border:0px solid #808080;
-        border-width:0px 0px 0px 0px;
-        background-color:#ddd;
 
-        font-size:70%;
-    }
-    #header #tabs input:focus {
-        width:140px;
-    }
+
+
 
 /*--- login -------------------------------------------------*/
 	#header #user_functions {
@@ -184,96 +177,92 @@ div.wiki .searchword
 
 
 /*--- sub-navigation (breadcrumbs and options) --------------------------*/
-	div#nav_sub {
-		clear:both;
-		padding:2px 1.22em 0px 45px;
-		margin:0px;
+div#nav_sub {
+ clear:         both;
+ margin:        0px;
+ padding:       2px 1.22em 0px 0px;
+ background:    #D7DADB url(layout/bg_header_pages.png) repeat-x bottom left;
+ font-size:     10pt;
+ line-height:   28px;
+}
+div#nav_sub a {
+ color:         #000;
+ text-decoration:none;
+ padding:       5px 3px 5px 6px;
+ font-weight:   bold;
+}
 
-		/*border-bottom:1px solid #808080;*/
-		background:#A5A5A5 url(img/bg_header_sub.gif) bottom repeat-x;
-		background-position:top left;
-
-		font-size:80%;
-		font-family:Tahoma;
-		line-height:155%;
-	}
-	div#nav_sub a {
-        color:#000;
-	    text-decoration:none;
-        padding:0px 3px 0px 6px;
-        -moz-border-radius: 0px 10px 0px 0px;
-        font-weight:bold;
-	}
-
-	div#nav_sub a.project {
-        background-image:url(items/item_project.png);
-        padding-left:18px;
-        background-repeat:no-repeat;
-        background-position:center left;
-	}
-	div#nav_sub a.person {
-        background-image:url(items/item_person.png);
-        padding-left:18px;
-        background-repeat:no-repeat;
-        background-position:center left;
-	}
-
-	div#nav_sub span.breadcrumbs em {
-	    color:#fff;
-	    font-weight:bold;
-        padding:0px 3px 0px 0px;
-        line-height:10%;
-	}
-
-	div#nav_sub span.breadcrumbs a.current {
-        background-color:#fff;
-        color:#000;
-        font-weight:bold;
-	}
-
-    div#nav_sub span.breadcrumbs a.up {
-	    padding:0px 0px 0px 4px;
-	    font-weight:bold;
-	    color:#fff;
-    }
+/*
+div#nav_sub a.project {
+ background-image:  url(items/item_project.png) no-repeat center left;
+ padding-left:      18px;
+}
+div#nav_sub a.person {
+ background-image:url(items/item_person.png) no-repeat center left;
+ padding-left:18px;
+}
+*/
 
 
-	div#nav_sub span.options a {
-	    color:#000;
-	    font-weight:bold;
-	}
 
-	div#nav_sub span.options em {
-        color:#a6a6a6;
+div#nav_sub span.breadcrumbs a{
+ background:        url(layout/bg_header_breadcrumb.png) no-repeat bottom right;
+ padding-right:     20px;
+}
 
-	}
+div#nav_sub span.breadcrumbs a.current {
+ background:        url(layout/bg_header_breadcrumb_current.png) no-repeat bottom right;
+ color:             #000;
+}
 
-	div#nav_sub span.options em.sep {
-        color:#fff;
-	}
+div#nav_sub span.breadcrumbs a.parent_of_current {
+ background:        url(layout/bg_header_breadcrumb_precurrent.png) no-repeat bottom right;
+ color:             #000;
+}
 
-	div#nav_sub a.current {
-        color:#000;
-        /*padding:0px 6px 0px 6px;*/
-        font-weight:bold;
-        -moz-border-radius: 0px 10px 0px 0px;
-        background-color:#fff;
-        padding-bottom:3px;
 
-	}
+div#nav_sub span.options {
+ padding-left:      1em;
+}
 
-    div#nav_sub span.options a:hover, div#nav_sub span.breadcrumbs a:hover {
-        background-color:#e8e8e8;
-        color:#000;
-        -moz-border-radius: 0px 10px 0px 0px;
-    }
+div#nav_sub span.options a {
+ color:             #000;
+ font-weight:       bold;
+ padding-left:      0.7em;
+ padding-right:     0.7em;
+ padding-top:       2px;
+ background:        url(layout/bg_header_pages_option.png) no-repeat bottom right;
 
-    div#nav_sub span.help {
-        text-align:right;
-        margin-right:0px;
-        position:absolute;
-        right:10px;
-    }
+}
+
+div#nav_sub em {
+ display:           none;
+}
+
+
+div#nav_sub span.options a.current {
+ color:             #000;
+ background-color:  #fff;
+ background-image:  none;
+ border:            1px solid #ABAEAE;
+ border-bottom-width:     0px;
+
+}
+
+div#nav_sub span.breadcrumbs a:hover {
+ text-decoration:   underline;
+}
+
+div#nav_sub span.options a:hover {
+ background-color:#e8e8e8;
+}
+
+div#nav_sub span.help {
+    text-align:right;
+    margin-right:0px;
+    position:absolute;
+    right:10px;
+}
 
 /* ==== feedback-line ==========================================*/
 
@@ -2466,39 +2455,46 @@ table.list tr.selected td span{
 /**
 * quick project selector in tabs
 */
-span#projectselector {
+span.selector {
  background-image:  url(layout/marker_context_menu.png);
  background-repeat: no-repeat;
  cursor:            pointer;
  padding-right:     14px;
  background-position: left center;
 }
-span#projectselector:hover {
+
+span.selector:hover {
  background-image: url(layout/marker_context_menu_hover.png);
 }
 
 
-span#projectselectorlist {
+span.selectorlist {
+ display:           inline;
+ z-index:           5000;
  position:          absolute;
+}
+
+
+span.selectorlist span.selectorlist_content {
+ position:          relative;
+ top:               15px;
+ left:              -20px;
+ display:           block;
  border:            1px solid #888;
  background:        #eee;
- z-index:           5000;
- padding:           0px;
- margin             0px;
- display:           inline;
+ padding:           2px;
+ margin             20px 0px 0px 0x;
  font-size:         90%;
 }
 
 
-#header #tabs span#projectselectorlist a{
+span.selectorlist span.selectorlist_content  a{
  display:           block;
  text-align:        left;
  font-weight:       normal;
 }
 
-#header #tabs span#projectselectorlist > a:hover{
- display:           block;
- text-align:        left;
- background-color:  #008;
- color:             #fff;
+span.selectorlist  a:hover{
+ background-color:  #fff;
+ /*color:             #fff;*/  /* this has no effect with Ghecko ???*/
 }

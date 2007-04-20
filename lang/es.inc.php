@@ -1006,7 +1006,7 @@ $g_lang_table= array(
 'Edit this project'           =>'editar este proyecto',  # line 279
 
 ### ../pages/task.inc.php   ###
-'new:'                        =>'nuevo:',  # line 134
+'new'                        =>'nuevo:',  # line 134
 
 ### ../pages/proj.inc.php   ###
 'Add person as team-member to project'=>'Agregar persona como miembro de equipo al proyecto',  # line 291
@@ -1525,7 +1525,7 @@ $g_lang_table= array(
 'Partners'                    =>'Socios',  # line 293
 
 ### ../pages/task_view.inc.php   ###
-'edit:'                       =>'editar:',  # line 82
+'edit'                       =>'editar:',  # line 82
 
 ### ../pages/company.inc.php   ###
 'Remove person from company'  =>'Eliminar persona de la empresa',  # line 498

@@ -18,6 +18,9 @@ require_once(confGet('DIR_STREBER') . 'lists/list_project_team.inc.php');
 
 /**
 * build the page-links under home
+*
+* @Note
+* - The names are taken from the handle definition
 */
 function build_home_options()
 {
@@ -25,12 +28,23 @@ function build_home_options()
 
         new NaviOption(array(
                 'target_id'=>'home',
-                'name'=>__('Today')
-            )),
-            new NaviOption(array(
-                'target_id'     =>'homeAllChanges',
-                'name'=>__('Changes'),
-            ))
+        )),
+        new NaviOption(array(
+            'target_id'     =>'homeTasks',
+        )),
+
+        new NaviOption(array(
+            'target_id'     =>'homeBookmarks',
+        )),
+
+        new NaviOption(array(
+            'target_id'     =>'homeEfforts',
+        )),
+
+        new NaviOption(array(
+            'target_id'     =>'homeAllChanges',
+        )),
+
     );
 }
 
@@ -56,6 +70,25 @@ function home() {
         $page->title=__("Today"); # $auth->cur_user->name;
         $page->type=__("At Home");
         $page->title_minor=renderTitleDate(time());
+
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target' =>'personEdit',
+            'params' =>array('person'=>$auth->cur_user->id),
+            'icon'  =>'edit',
+            'tooltip' =>__('Edit your profile'),
+            'name'  =>__('Edit your Profile')
+        )));
+
+        ### page functions ###
+        $page->add_function(new PageFunction(array(
+            'target' =>'personAllItemsViewed',
+            'params' =>array('person'=>$auth->cur_user->id),
+            'icon'  =>'edit',
+            'tooltip' =>__('Edit your profile'),
+            'name'  =>__('Mark all items as viewed')
+        )));        
+
         echo(new PageHeader);
     }
     echo (new PageContentOpen_Columns);
@@ -76,7 +109,7 @@ function home() {
         $function_links[]=$PH->getLink('projNew','',array());
         $function_links[]=$PH->getLink('companyNew','',array());
         $function_links[]=$PH->getLink('personNew','',array());
-        $function_links[]=$PH->getLink('personViewEfforts',__('View your efforts'),array('person'=>$auth->cur_user->id));
+        $function_links[]=$PH->getLink('homeEfforts',__('View your efforts'),array('person'=>$auth->cur_user->id));
         $function_links[]=$PH->getLink('personEdit',__('Edit your profile'),array('person'=>$auth->cur_user->id));
         $function_links[]=$PH->getLink('personAllItemsViewed','',array('person' => $auth->cur_user->id));
 
@@ -134,200 +167,54 @@ function home() {
 
     echo(new PageContentNextCol);
 
-    #--- list tasks -------------------------------------------------------------
-    if($show_tasks = $auth->cur_user->show_tasks_at_home) {
-        measure_start('get_tasks');
-
-        $order_str=get('sort_'.$PH->cur_page->id.'_home_tasks');
-        $tasks= Task::getHomeTasks($order_str);
-
-        measure_stop('get_tasks');
-        measure_start('list_tasks');
 
 
-        $list_tasks= new ListBlock(array(
-            'id' => 'tasks'
-        ));
-        $list_tasks->show_functions=false;
-        $list_tasks->no_items_html=__("You have no open tasks");
-
-        switch($show_tasks) {
-            case SHOW_NOTHING:
-            case SHOW_ASSIGNED_ONLY:
-                $list_tasks->title=__("Open tasks assigned to you");
-                break;
-            case SHOW_ALSO_UNASSIGNED:
-                $list_tasks->title=__("Open tasks (including unassigned)");
-                break;
-            case SHOW_ALL_OPEN:
-                $list_tasks->title=__("All open tasks");
-                break;
-
-            default:
-                trigger_error("Undefined value '$show_tasks' for show tasks at home", E_USER_WARNING);
-        }
-
-        #--- columns ---
-        $list_tasks->add_col( new ListBlockColSelect());
-        #$list_tasks->add_col( new ListBlockCol(array(
-        #   'key'=>'_select_col_',
-        #   'name'=>"S",
-        #   'tooltip'=>__("Select lines to use functions at end of list"),
-        #)));
-        $list_tasks->add_col( new ListBlockColPrio(array(
-            'key'=>'prio',
-            'name'=>__('P','column header'),
-            'tooltip'=>__('Priority'),
-            'sort'=>1,
-            'width'=>1,
-        )));
-        #$list_tasks->add_col( new ListBlockColStatus(array(
-        #   'key'=>'status',
-        #   'name'=>__('S','column header'),
-        #   'tooltip'=>__('Task-Status'),
-        #   'sort'=>0,
-        #    'width'=>1,
-        #)));
-        $list_tasks->add_col( new ListBlockCol_TaskLabel);
-        $list_tasks->add_col(new ListBlockColMethod(array(
-            'key'=>'project',
-            'name'=>__('Project','column header'),
-            'func'=>'getProjectLink'
-        )));
-        $list_tasks->add_col(new ListBlockColMethod(array(
-            'key'=>'parent_task',
-            'name'=>__('Folder','column header'),
-            'func'=>'getFolderLinks',
-            'width'=>'30%'
-        )));
-        /*$list_tasks->add_col( new ListBlock_ColHtml(array(
-            'key'=>'name',
-            'name'=>"Task",
-            'tooltip'=>"Task name. More Details as tooltips",
-            'width'=>'90%',
-            'sort'=>0,
-            'format'=>'<a href="index.php?go=taskView&tsk={?id}">{?name}</a>'
-        )));*/
-
-        $list_tasks->add_col( new ListBlockCol_TaskName);
-        #$list_tasks->add_col( new ListBlockCol_TaskCreatedBy(array('use_short_names'=>false,'indention'=>true)));
-
-        $list_tasks->add_col( new listBlockColDate(array(
-            'key'=>'modified',
-            'name'=>__('Modified','column header')
-        )));
+    echo (new PageContentClose);
+    echo (new PageHtmlEnd);
+}
 
 
 
-        $list_tasks->add_col( new ListBlockCol_DaysLeft);
-        #$list_tasks->add_col( new ListBlockColTime(array(
-        #   'key'=>'estimated',
-        #   'name'=>__('Est.','column header estimated time'),
-        #   'tooltip'=>__('Estimated time in hours'),
-        #)));
-
-        /* functions don't work
-        $list_tasks->add_col( new ListBlockColFormat(array(
-            'name'=>"FN",
-            'tooltip'=>"Function for tasks.",
-            'width'=>'1',
-            'sort'=>0,
-            'format'=>'<nobr><a href="index.php?go=tasksDelete&tsk={?id}" title="Delete this task"> X </a>'.
-            '<a href="index.php?go=taskEdit&tsk={?id}" title="Edit this task"> E </a>'.
-            '<a href="index.php?go=tasksComplete&tsk={?id}" title="Mark as done"> � </a></nobr>'
-        )));
-        */
-
-        #--- functions -------
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('taskEdit')->id,
-            'name'  =>__('Edit','context menu function'),
-            'id'    =>'taskEdit',
-            'icon'  =>'edit',
-            'context_menu'=>'submit',
-        )));
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('tasksComplete')->id,
-            'name'  =>__('status->Completed','context menu function'),
-            'id'    =>'tasksCompleted',
-            'icon'  =>'complete',
-            'context_menu'=>'submit',
-        )));
-
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('tasksApproved')->id,
-            'name'  =>__('status->Approved','context menu function'),
-            'id'    =>'tasksApproved',
-            'icon'  =>'approve',
-            'context_menu'=>'submit',
-        )));
-
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('tasksClosed')->id,
-            'name'  =>__('status->Closed','context menu function'),
-            'id'    =>'tasksClosed',
-            'icon'  =>'close',
-            'context_menu'=>'submit',
-        )));
-
-        /*
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('tasksDelete')->id,
-            'name'  =>__('Delete','context menu function'),
-            'id'    =>'tasksDelete',
-            'icon'  =>'delete',
-            'context_menu'=>'submit',
-        )));
-        */
-        $list_tasks->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('effortNew')->id,
-            'name'  =>__('Log hours for select tasks','context menu function'),
-            'id'    =>'effortNew',
-            'icon'    =>'loghours',
-            'context_menu'=>'submit'
-        )));
 
 
-        $list_tasks->render_header();
-        if($tasks || !$list_tasks->no_items_html) {
-            $list_tasks->render_thead();
-            if($tasks) {
-                $count_estimated=0;
-                foreach($tasks as $t) {
-                    $style="";
-                    $style.=($t->category == TCATEGORY_FOLDER)
-                        ?' isFolder'
-                        :'';
 
-                    ### done ###
-                    if($t->status>3) {
-                        $style.='isDone';
-                    }
-                    else {
-                        $count_estimated+=$t->estimated/60/60 * 1.0;
-                    }
-                    $list_tasks->render_trow(&$t,$style);
-                }
-            }
-            $list_tasks->summary=sprintf(__("%s tasks with estimated %s hours of work"),count($tasks),$count_estimated);
-            $list_tasks->render_tfoot();
-        }
-        else {
-            $list_tasks->render_tfoot_empty();
-        }
-        measure_stop('list_tasks');
+
+/**
+* render bookmarks @ingroup pages
+*/
+function homeBookmarks() {
+    global $PH;
+    global $auth;
+
+    ### create from handle ###
+    $PH->defineFromHandle(array());
+
+    ### set up page ####
+    {
+        $page= new Page();
+        $page->cur_tab='home';
+        $page->options=build_home_options();
+
+        $page->title=__("Your Bookmarks"); # $auth->cur_user->name;
+        $page->type=__("At Home");
+        echo(new PageHeader);
     }
+    echo (new PageContentOpen);
+    measure_stop('init2');
 
     ### list bookmarks ###
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_bookmarks.inc.php');
         $list_bookmarks = new ListBlock_bookmarks();
+        $list_bookmarks->reduced_header = true;
         $list_bookmarks->print_automatic();
     }
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
 }
+
+
 
 
 
@@ -339,8 +226,6 @@ function homeAllChanges()
     global $PH;
     global $auth;
 
-    ### create from handle ###
-    //$PH->defineFromHandle();
 
     ### sets the presets ###
     $presets= array(
@@ -570,4 +455,575 @@ function homeAllChanges()
 }
 
 
+
+
+/**
+* list all tasks assigned to person @ingroup pages
+*/
+function homeTasks()
+{
+    global $PH;
+    global $auth;
+
+    ### set up page ####
+    $presets= array(
+        ### all ###
+        'all_tasks' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'tree',
+                )
+            )
+        ),
+
+        ### open tasks ###
+        'open_tasks' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array(STATUS_NEW, STATUS_OPEN,STATUS_BLOCKED, STATUS_COMPLETED),
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_COMPLETED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        ### my open tasks ###
+        'my_open_tasks' => array(
+            'name'=> __('my open'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_NEW, STATUS_OPEN,STATUS_BLOCKED),
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_BLOCKED,
+                ),
+                'assigned_to'   => array(
+                    'id'        => 'assigned_to',
+                    'visible'   => true,
+                    'active'    => true,
+                    'value'    =>  $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            ),
+            'new_task_options'=> array(
+                'task_assign_to_0'=> $auth->cur_user->id,
+            ),
+
+        ),
+
+
+
+
+        ### need Feedback ###
+        'needs_feedback' => array(
+            'name'=> __('modified'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_COMPLETED),
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_COMPLETED,
+                ),
+                'not_modified_by'=> $auth->cur_user->id,
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+
+        ### to be approved ###
+        'approve_tasks' => array(
+            'name'=> __('needs approval'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_COMPLETED),
+                    'min'       => STATUS_COMPLETED,
+                    'max'       => STATUS_COMPLETED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+        ### without milestone ###
+        'without_milestone' => array(
+            'name'=> __('without milestone'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_COMPLETED),
+                    'min'       => STATUS_NEW,
+                    'max'       => STATUS_COMPLETED,
+                ),
+                'for_milestone'   => array(
+                    'id'        => 'for_milestone',
+                    'visible'   => true,
+                    'active'    => true,
+                    'value'     => 0,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+        ### closed tasks ###
+        'closed_tasks' => array(
+            'name'=> __('closed'),
+            'filter_empty_folders'=>false,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array( STATUS_APPROVED, STATUS_CLOSED),
+                    'min'       => STATUS_APPROVED,
+                    'max'       => STATUS_CLOSED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
+
+	## set preset location ##
+	$preset_location = 'homeTasks';
+
+    ### get preset-id ###
+    {
+        $preset_id= 'open_tasks';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_homeTasks_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_homeTasks_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+
+
+    $page= new Page();
+
+    ### init known filters for preset ###
+    $list= new ListBlock_tasks(array(
+        'active_block_function'=>'list',
+
+    ));
+    $list->filters[]=new ListFilter_for_milestone();
+    $list->filters[]=new ListFilter_category_in(array(
+        'value'=> array(TCATEGORY_TASK,TCATEGORY_BUG)
+
+    ));
+    {
+
+        $preset= $presets[$preset_id];
+        foreach($preset['filters'] as $f_name=>$f_settings) {
+            switch($f_name) {
+
+                case 'task_status':
+                    $list->filters[]= new ListFilter_status_min(array(
+                        'value'=>$f_settings['min'],
+                    ));
+                    $list->filters[]= new ListFilter_status_max(array(
+                        'value'=>$f_settings['max'],
+                    ));
+                    break;
+
+                case 'assigned_to':
+                    $list->filters[]= new ListFilter_assigned_to(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+
+                case 'for_milestone':
+                    $list->filters[]= new ListFilter_for_milestone(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+
+                case 'not_modified_by':
+                    $list->filters[]= new ListFilter_not_modified_by(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+
+
+                default:
+                    trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                    break;
+            }
+        }
+
+        $filter_empty_folders=  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                             ? true
+                             : NULL;
+    }
+
+
+    ### create from handle ###
+    $PH->defineFromHandle(array('preset_id'=>$preset_id));
+
+
+    ### setup page details ###
+    $page->cur_tab = 'home';
+    $page->options = build_home_options();
+
+    $page->title = __("Your Tasks");
+    $page->type = __('List','page type');
+    $page->title_minor = renderTitleDate(time());
+
+    echo(new PageHeader);
+    echo (new PageContentOpen);
+
+    $page->print_presets(array(
+        'target'        => $preset_location,
+        'project_id'    => '',
+        'preset_id'     => $preset_id,
+        'presets'       => $presets,
+        'person_id'     => ''
+    ));
+
+    ### remove assigned column (we know, who they are assigned to) ###
+    unset($list->columns['assigned_to']);
+    unset($list->columns['efforts']);
+    unset($list->columns['project']);
+    unset($list->columns['pub_level']);
+    unset($list->columns['planned_start']);
+    unset($list->block_functions['tree']);
+
+    $list->print_automatic();
+
+    echo (new PageContentClose);
+    echo (new PageHtmlEnd);
+
+}
+
+
+
+
+/**
+* display efforts for current user  @ingroup pages
+*
+* @NOTE 
+* - actually this is an excact copy for personViewEfforts
+* - this is of course not a good solution, but otherwise the breadcrumbs would change
+*
+*/
+function homeEfforts()
+{
+    global $PH;
+    global $auth;
+    require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+    require_once(confGet('DIR_STREBER') . 'lists/list_efforts.inc.php');
+
+    
+    ### get current project ###
+    $person= $auth->cur_user;
+        
+    $presets= array(
+        ### all ###
+        'all_efforts' => array(
+            'name'=> __('all'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+
+        ### new efforts ###
+        'new_efforts' => array(
+            'name'=> __('new'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NEW,
+                    'max'       => EFFORT_STATUS_NEW,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        
+        ### open efforts ###
+        'open_efforts' => array(
+            'name'=> __('open'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_OPEN,
+                    'max'       => EFFORT_STATUS_OPEN,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        
+        ### discounted efforts ###
+        'discounted_efforts' => array(
+            'name'=> __('discounted'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_DISCOUNTED,
+                    'max'       => EFFORT_STATUS_DISCOUNTED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        
+        ### not chargeable efforts ###
+        'notchargeable_efforts' => array(
+            'name'=> __('not chargeable'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_NOTCHARGEABLE,
+                    'max'       => EFFORT_STATUS_NOTCHARGEABLE,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+        
+        ### balanced efforts ###
+        'balanced_efforts' => array(
+            'name'=> __('balanced'),
+            'filters'=> array(
+                'effort_status'=> array(
+                    'id'        => 'effort_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'min'       => EFFORT_STATUS_BALANCED,
+                    'max'       => EFFORT_STATUS_BALANCED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            )
+        ),
+    );
+
+    ## set preset location ##
+    $preset_location = 'homeEfforts';
+    
+    ### get preset-id ###
+    {
+        $preset_id= 'all_efforts';                           # default value
+        if($tmp_preset_id= get('preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+                $preset_id= $tmp_preset_id;
+            }
+
+            ### set cookie
+            setcookie(
+                'STREBER_homeEfforts_preset',
+                $preset_id,
+                time()+60*60*24*30,
+                '',
+                '',
+                0);
+        }
+        else if($tmp_preset_id= get('STREBER_homeEfforts_preset')) {
+            if(isset($presets[$tmp_preset_id])) {
+
+                $preset_id= $tmp_preset_id;
+            }
+        }
+    }
+    ### create from handle ###
+    $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
+
+    ### set up page ####
+    {
+        $page= new Page();
+        $page->cur_tab='home';
+        $page->title=__("Your efforts");
+        $page->title_minor=__('Efforts','Page title add on');
+        $page->type=__("Person");
+
+        #$page->crumbs = build_person_crumbs($person);
+        $page->options= build_home_options($person);
+
+        echo(new PageHeader);
+    }
+    echo (new PageContentOpen);
+
+
+
+    #--- list efforts --------------------------------------------------------------------------
+    {
+        $order_by=get('sort_'.$PH->cur_page->id."_efforts");
+
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+        /*$efforts= Effort::getAll(array(
+            'person'    => $person->id,
+            'order_by'  => $order_by,
+        ));*/
+
+        $list= new ListBlock_efforts();
+        unset($list->functions['effortNew']);
+        unset($list->functions['effortNew']);
+        $list->no_items_html= __('no efforts yet');
+        
+        $list->filters[] = new ListFilter_efforts();
+        {
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'effort_status':
+                        $list->filters[]= new ListFilter_effort_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $list->filters[]= new ListFilter_effort_status_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
+        }
+        
+        $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => '',
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => $person->id));
+        
+        $list->query_options['order_by'] = $order_by;
+        $list->query_options['person'] = $person->id;
+        $list->print_automatic();
+        
+        //$list->render_list(&$efforts);
+    }
+    
+    echo '<input type="hidden" name="person" value="'.$person->id.'">';
+
+    echo (new PageContentClose);
+    echo (new PageHtmlEnd());
+}
 ?>

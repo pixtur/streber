@@ -58,6 +58,7 @@ abstract class NaviLink
     public $target_url  = '';       # target url including parameters / build from id and target_params
     public $tooltip;                # optional
     public $active=false;           # hightlight as current option
+    public $parent_of_active= false; # this is required for advanced css styling of breadcrumbs
     public $target_params=array();  # assoc. array of target-params
     public $type;                   # e.g. 'project', 'task' (addes as additional style-class to a)
 
@@ -117,18 +118,21 @@ class NaviCrumb extends NaviLink
         if(isset($this->target_id) && $this->target_id != "") {
             if($PH->getValidPage($this->target_id)) {
 
-                $additional_class= $this->type;
+                $classes= array($this->type);   # add type as additional class
 
                 if($this->active) {
-                    return "<a class=\"current $additional_class\" href=\"{$this->target_url}\" $str_tooltip>" . asHtml($this->name). "</a>";
+                    $classes[]="current";
+                }
+
+                if($this->parent_of_active) {
+                    $classes[]="parent_of_current";      # sick... this should be either "current" or "active"...
+                }
+
+                if($classes) {
+                    return "<a class='" . implode(" ", $classes). "' href=\"{$this->target_url}\" $str_tooltip>" . asHtml($this->name). "</a>";
                 }
                 else {
-                    if($additional_class) {
-                        return "<a class=\"$additional_class\" href=\"{$this->target_url}\" $str_tooltip>". asHtml($this->name) . "</a>";
-                    }
-                    else {
-                        return "<a href=\"{$this->target_url}\" $str_tooltip>". asHtml($this->name) . "</a>";
-                    }
+                    return "<a href=\"{$this->target_url}\" $str_tooltip>". asHtml($this->name) . "</a>";
                 }
             }
         }
@@ -159,12 +163,19 @@ class NaviOption extends NaviLink
         if(isset($this->target_id) && $this->target_id != "") {
 
             if($PH->getValidPage($this->target_id)) {
-
+                $classes= array();
                 if($this->active) {
-                    return "<a class=\"current\" href=\"{$this->target_url}\" $str_tooltip>".asHtml($this->name)."</a>";
+                    $classes[]="current";
+                }
+                if($this->parent_of_active) {
+                    $classes[]="parent_of_current";      # sick... this should be either "current" or "active"...
+                }
+
+                if($classes) {
+                    return "<a class='". implode(" ",$classes) . "' href=\"{$this->target_url}\" $str_tooltip>".asHtml($this->name)."</a>";
                 }
                 else {
-                    return "<a href=\"{$this->target_url}\" $str_tooltip>". asHtml($this->name)."</a>";
+                    return "<a href='{$this->target_url}' $str_tooltip>". asHtml($this->name)."</a>";
                 }
             }
         }
@@ -238,6 +249,7 @@ class Page
                        : 'Home',
 
                 #'title'=>__("<span class=accesskey>H</span>ome"),
+                'html'=>   buildHomeSelector(),
                 'bg'=>"misc"       ,
                 'accesskey'=>'h',
                 'tooltip'=>__('Go to your home. Alt-h / Option-h')
@@ -270,7 +282,7 @@ class Page
             "search"    =>array(
                 'target'    =>'javascript:document.my_form.go.value=\'search\';document.my_form.submit();',
                 'title'     =>__("<span class=accesskey>S</span>earch:&nbsp;"),
-                'html'      =>'<input accesskey=s '.$old_search_query.' name=search_query onFocus=\'document.my_form.go.value="search";\'>',
+                'html'      =>'<input class=searchfield accesskey=s '.$old_search_query.' name=search_query onFocus=\'document.my_form.go.value="search";\'>',
 
                 'tooltip'   =>__("Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`")
             )
@@ -734,10 +746,10 @@ class PageHeader extends PageElement
 
         }
 
-        $tabs= new PageHeaderTabs;
+        $tabs= new PageHeaderSections;
 
         $buffer.= $tabs->render();
-        #echo(new PageHeaderTabs);
+        #echo(new PageHeaderSections);
         $buffer.="</div>";
 
 
@@ -777,13 +789,13 @@ class PageHeader extends PageElement
 *
 * @ingroup render
 */
-class PageHeaderTabs extends PageElement {
+class PageHeaderSections extends PageElement {
 
     public function __toString()
     {
     #   global $tabs, $cur_tab, $str, $header_cur_tab_bg;
 
-        $buffer= '<ul id="tabs">';
+        $buffer= '<div id="sections">';
 
         $tab_found=false;
         if(!isset($this->page->tabs) || !is_array($this->page->tabs)) {
@@ -832,14 +844,15 @@ class PageHeaderTabs extends PageElement {
                 ? $html= $values['html']
                 : "";
             $active==""
-                ? $buffer.= "<li id=\"tab_{$tab}\" class=\"{$bg}\" $tooltip>\n"
-                : $buffer.= "<li id=\"tab_{$tab}\" class=\"{$active} {$bg}\" $tooltip>\n";
+                ? $buffer.= "<span id=\"tab_{$tab}\" class=\"section {$bg}\" $tooltip>\n"
+                : $buffer.= "<span id=\"tab_{$tab}\" class=\"section {$active} {$bg}\" $tooltip>\n";
             $buffer.= "<a href=\"$target\"  $accesskey>";
             $buffer.= $values['title'];
             $buffer.= '</a>';
             $buffer.= $html;
+            $buffer.= "</span>";
         }
-        $buffer.= '</ul>';
+        $buffer.= '</div><b class=doclear></b>';
         if(!$tab_found) {
             trigger_error("Could not find tab '{$this->page->cur_tab}' in list...", E_USER_NOTICE);
         }
@@ -865,6 +878,7 @@ class PageHeaderNavigation extends PageElement
 
         ### look for active naviLink ###
         $active_navi_link= NULL;
+        $last_navigation_option = NULL;
         foreach($this->page->crumbs as $l) {
 
             if(!$l instanceof NaviLink) {
@@ -875,7 +889,10 @@ class PageHeaderNavigation extends PageElement
             else if($l->target_id == $this->page->cur_crumb) {
                 $l->active = true;
                 $active_navi_link= $l;
-                break;
+                if($last_navigation_option) {
+                    $last_navigation_option->parent_of_active= true;
+                }
+                break;                
             }
             else if($l->target_id == $PH->cur_page_id) {
                 $l->active = true;
@@ -883,7 +900,11 @@ class PageHeaderNavigation extends PageElement
                     $active_navi_link->active=false;
                 }
                 $active_navi_link= $l;
+                if($last_navigation_option) {
+                    $last_navigation_option->parent_of_active= true;
+                }
             }
+            $last_navigation_option = $l;
         }
         foreach($this->page->options as $l) {
             ### overwrite active crumb-setting for tasks
@@ -925,7 +946,10 @@ class PageHeaderNavigation extends PageElement
             foreach($page->crumbs as $crumb) {
 
                 if($crumb instanceOf NaviCrumb) {
-                    if($str= $crumb->render($active_navi_link == $crumb )) {
+                    /**
+                    * also see NaviCrumb->render()
+                    */
+                    if($str= $crumb->render()) {
                         $buffer.=  $sep_crumbs . $str;
                         $sep_crumbs="<em>&gt;</em>";
                     }
@@ -980,99 +1004,6 @@ class PageHeaderNavigation extends PageElement
     }
 
 
-}
-
-/**
-* Rendering the parent pages of a page
-*
-* @ingroup render
-*/
-class PageHeaderCrumbs extends PageElement
-{
-
-    public function __toString() {
-        $scheme=$this->page->section_scheme;
-        $buffer="<div id=\"nav_sub\" class=\"bg_$scheme\">";
-        if($this->page->crumbs) {
-
-            ### breadcrumbs ###
-            $buffer.= '<span class="breadcrumbs">';
-
-            ### go up ###
-            $count=count($this->page->crumbs)-2;
-            while($count >=0) {
-                $str=$this->page->crumbs[$count];
-
-                if(preg_match("/ref=\"([^\"]*)\"/", $str,$matches)) {
-                   $buffer.= '<a class="up" href="'.$matches[1].'" title="'.__('Go to parent / alt-U').'" accesskey="u">^</a>';
-                    break;
-                }
-                $count--;
-            }
-
-
-            $sign="";
-            $page=$this->page;
-
-            $count=0;       # count added crumbs to mark the last crumb as current
-            $style="";
-            foreach($page->crumbs as $crumb) {
-
-                if($crumb) {
-                    $count++;
-                    if($count == count($page->crumbs)) {
-                        $style='class="current"';
-
-                    }
-                    if($crumb != '|') {
-                        $buffer.= $sign.asHtml($crumb);
-                    }
-                    $sign="<em>&gt;</em>";
-                }
-            }
-            $buffer.= "</span>";
-        }
-
-        ### options ###
-        if(@$this->page->options) {
-            $buffer.= '<span class="options">';
-            $page= $this->page;
-            $tmp_counter=0;                 # HACK! just to highlight a dummy breadcrump to test GUI-style
-
-            $sep= "";
-            foreach($page->options as $option) {
-                $tmp_counter++;
-
-                if($option instanceOf NaviOption) {
-                    $buffer.= $option->render();
-                    $buffer.= $sep;
-                }
-                else {
-                    trigger_error(sprintf("NaviOption '%s' is has invalid type",$option),E_USER_WARNING);
-                }
-                $sep ="<em>|</em>";
-
-     /*           #--- active? ---
-                if($tmp_counter == 1) {
-                    $buffer.= "<li class=\"current\">$option";
-                }
-                else {
-                    if($option == "") {
-                        $buffer.= "<li class=\"separator\">|";
-                    }
-                    else {
-                        $buffer.= "<li>$option";
-                    }
-                }
-                */
-            }
-            $buffer.= "</span>";
-        }
-        $buffer.="</div>";
-    #    $buffer.= "</div>";
-    #    $buffer.= "<div id=\"nav_sub\" class=\"$this->page->header_cur_tab_bg\"> ";
-        return $buffer;
-    }
 }
 
 
@@ -1130,7 +1061,7 @@ class PageFunctions extends PageElement {
                            : '';
 
                 if($fn instanceOf PageFunctionGroup) {
-                    $buffer.='<span class="group">'. $fn->name. '</span>';
+                    $buffer.='<span class="group">'. $fn->name. ': </span>';
                 }
                 else {
                     if($fn->tooltip) {

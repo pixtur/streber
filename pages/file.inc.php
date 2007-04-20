@@ -73,25 +73,6 @@ function fileView()
         $page->options= build_projView_options($project);
 
 
-/*        if($parent_task) {
-            $page->crumbs=build_task_crumbs($parent_task);
-        }
-        else {
-            $page->crumbs=build_project_crumbs($project);
-        }
-        $page->crumbs[]=new NaviCrumb(array(
-            'target_id' => 'projViewFiles',
-            'target_params'=>array('prj'=>$project->id),
-        ));
-        $page->crumbs[]=new NaviCrumb(array(
-            'target_id' => 'fileView',
-            'target_params'=>array('file'=>$file->id),
-            'name'=>$file->name,
-
-        ));
-        */
-
-
         $page->type= __('File');
 
         if($parent_task) {
@@ -105,7 +86,7 @@ function fileView()
 
 
         $page->title=$file_org->name;
-        $page->title_minor=sprintf(__('Item-ID %d'), $file_org->id);;
+        $page->title_minor=sprintf('#%d', $file_org->id);;
         if($file->state== -1) {
             $page->title_minor=sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($file->deleted));
         }

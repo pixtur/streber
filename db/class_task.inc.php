@@ -36,7 +36,7 @@ class Task extends DbProjectItem
                 'default'=>0,
                 'in_db_object'=>1,
                 'in_db_item'=>1,
-        		'log_changes'=>false,
+                'log_changes'=>false,
             )),
             new FieldString   (array('name'=>'name',
                 'title'=>__('Name'),
@@ -141,7 +141,7 @@ class Task extends DbProjectItem
             )),
 
             new FieldHidden(  array('name'=>'issue_report',
-        		'log_changes'=>false,
+                'log_changes'=>false,
             )),
             new FieldOption    (array('name'=>'label',
                 'title'=>__('Label'),
@@ -160,7 +160,7 @@ class Task extends DbProjectItem
             )),
             new FieldInternal      (array('name'=>'view_collapsed',
                 'default'=>0,
-        		'log_changes'=>false,
+                'log_changes'=>false,
             )),
             new FieldInternal      (array('name'=>'category',
                 'default'=>TCATEGORY_TASK,
@@ -187,8 +187,8 @@ class Task extends DbProjectItem
     }
 
 
-	//=== constructor ================================================
-	function __construct ($id_or_array=false)
+    //=== constructor ================================================
+    function __construct ($id_or_array=false)
     {
         $this->fields= &self::$fields_static;
 
@@ -197,7 +197,7 @@ class Task extends DbProjectItem
             $this->type= ITEM_TASK;
         }
 
-   	}
+    }
 
 /*
 Task::query(array(
@@ -306,23 +306,6 @@ foreach($filters_str as $fs=>$value) {
     }
 
 
-    function renderTypeAsBreadcrumbs()
-    {
-        global $g_status_names;
-        $status=  $this->status != STATUS_OPEN && isset($g_status_names[$this->status])
-               ?  $g_status_names[$this->status]
-               :  '';
-
-        $type=$this->getLabel();
-
-        if($folder= $this->getFolderLinks()) {
-            $buffer=  $folder ." &gt; " . $type . ' (' . $status . ')';
-        }
-        else {
-            $buffer=  $status .' '. $type ;
-        }
-        return $buffer;
-    }
 
 
     /**
@@ -439,7 +422,7 @@ foreach($filters_str as $fs=>$value) {
             }
             else if($cur_task=Task::getVisibleById(intval($cur_task->parent_task))) {
                 $folder_ids[$cur_task->id]= true;
-            	$folder[]=$cur_task;
+                $folder[]=$cur_task;
             }
         }
         return array_reverse($folder);
@@ -495,39 +478,36 @@ foreach($filters_str as $fs=>$value) {
     }
 
 
-    #----------------------------------------------------
-    # getComments()
-    #----------------------------------------------------
     function &getComments($args=array())
     {
-      	if($project= Project::getVisibleById($this->project)) {
-    		$args['on_task']= $this->id;
+        if($project= Project::getVisibleById($this->project)) {
+            $args['on_task']= $this->id;
 
-    		$comments= $project->getComments($args);
-    		return $comments;
-       	}
+            $comments= $project->getComments($args);
+            return $comments;
+        }
     }
 
 
     function &getLatestComment($args=array())
     {
-      	if($project= Project::getVisibleById($this->project)) {
-    		$args['on_task']= $this->id;
-    		$args['order_by']= 'created ASC';
-    		#$args['limit']=    1;
+        if($project= Project::getVisibleById($this->project)) {
+            $args['on_task']= $this->id;
+            $args['order_by']= 'created ASC';
+            #$args['limit']=    1;
 
-    		$comments= $project->getComments($args);
-    		return $comments[0];
-       	}
+            $comments= $project->getComments($args);
+            return $comments[0];
+        }
     }
 
-	/**
-	* @@@ todo: this should by mapped to Project::getNumComments()
-	*/
+    /**
+    * @@@ todo: this should by mapped to Project::getNumComments()
+    */
     function &getNumComments()
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare(
@@ -549,8 +529,8 @@ foreach($filters_str as $fs=>$value) {
                 AND c.task=$this->id    /* only  task-comments*/
              "
         );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['COUNT(*)'];
     }
 
@@ -567,7 +547,7 @@ foreach($filters_str as $fs=>$value) {
         global $auth;
         $sum=0;
 
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
         $dbh = new DB_Mysql;
         $query_str=
@@ -591,11 +571,11 @@ foreach($filters_str as $fs=>$value) {
             ";
 
         $sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
-    	$tmp= $sth->fetch_row();
-    	if($tmp) {
-    	    $sum+= $tmp[0];
-    	}
+        $sth->execute("",1);
+        $tmp= $sth->fetch_row();
+        if($tmp) {
+            $sum+= $tmp[0];
+        }
 
         ### recursively go through sub-tasks ###
         if($subtasks=$this->getSubtasks()) {
@@ -605,13 +585,13 @@ foreach($filters_str as $fs=>$value) {
         }
         return $sum;
     }
-	
-	function &getSumTaskEfforts()
+    
+    function &getSumTaskEfforts()
     {
         global $auth;
         $sum=0;
 
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
         $dbh = new DB_Mysql;
         $query_str=
@@ -626,11 +606,11 @@ foreach($filters_str as $fs=>$value) {
             ";
 
         $sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
-    	$tmp= $sth->fetch_row();
-    	if($tmp) {
-    	    $sum+= $tmp[0];
-    	}
+        $sth->execute("",1);
+        $tmp= $sth->fetch_row();
+        if($tmp) {
+            $sum+= $tmp[0];
+        }
 
         ### recursively go through sub-tasks ###
         if($subtasks=$this->getSubtasks()) {
@@ -650,7 +630,7 @@ foreach($filters_str as $fs=>$value) {
     public static function &getHomeTasks($order_by=" is_folder DESC,  parent_task, prio ASC, project, name")
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
 
         #--- select all visible tasks in home ---
@@ -727,11 +707,11 @@ foreach($filters_str as $fs=>$value) {
             trigger_error("Unknown setting for home task-list",E_USER_NOTICE);
         }
 
-    	$sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth= $dbh->prepare($query_str);
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 
-    	$tasks=array();
+        $tasks=array();
         foreach($tmp as $t) {
 
             unset($t['due_sort']);                          # remove temporary sql-variable
@@ -760,7 +740,7 @@ foreach($filters_str as $fs=>$value) {
     static function &getAll( $args=NULL)
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $project        = NULL;
@@ -784,13 +764,13 @@ foreach($filters_str as $fs=>$value) {
         $resolved_version = NULL;
         $is_released_min= NULL;
         $is_released_max= NULL;
-		$id             = NULL;
-		$modified_by    = NULL;
-		$not_modified_by    = NULL;
-		$resolve_reason_min= NULL;
-		$category       = NULL;
-		$category_in    = NULL;
-		$label          = NULL;
+        $id             = NULL;
+        $modified_by    = NULL;
+        $not_modified_by    = NULL;
+        $resolve_reason_min= NULL;
+        $category       = NULL;
+        $category_in    = NULL;
+        $label          = NULL;
         $person         = 0;
 		
         ### filter params ###
@@ -836,9 +816,9 @@ foreach($filters_str as $fs=>$value) {
             : '';
 
 
-	    $str_id= $id
-	       ? 'AND t.id='.intval($id)
-	       : '';
+        $str_id= $id
+           ? 'AND t.id='.intval($id)
+           : '';
 
 
         if(!is_null($label)) {
@@ -958,7 +938,7 @@ foreach($filters_str as $fs=>$value) {
                     )
 
                     AND t.id = i.id
-					$str_id
+                    $str_id
                     $str_is_folder
                     $str_is_issue
                     $str_label
@@ -1021,7 +1001,7 @@ foreach($filters_str as $fs=>$value) {
                     $str_is_issue
                     $str_parent_task
                     $str_has_name
-					$str_id
+                    $str_id
                     AND t.status >= ".intval($status_min)."
                     AND t.status <= ".intval($status_max)."
                     $str_match
@@ -1033,7 +1013,7 @@ foreach($filters_str as $fs=>$value) {
         else {
             if($assigned_to_person) {
                 $str_query=
-            	"SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp ,{$prefix}item itp
+                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp ,{$prefix}item itp
                 WHERE
                     i.type = '".ITEM_TASK."'
                 $str_project2
@@ -1042,7 +1022,7 @@ foreach($filters_str as $fs=>$value) {
                 $str_not_modified_by
 
                 AND t.id = i.id
-				$str_id
+                $str_id
                 $str_is_folder
                 $str_is_issue
                 $str_parent_task
@@ -1066,7 +1046,7 @@ foreach($filters_str as $fs=>$value) {
             }
             else {
                 $str_query=
-            	"SELECT i.*, t.* from {$prefix}item i, {$prefix}task t
+                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t
                 WHERE
                     i.type = '".ITEM_TASK."'
                 $str_project2
@@ -1075,7 +1055,7 @@ foreach($filters_str as $fs=>$value) {
                 $str_not_modified_by
 
                 AND t.id = i.id
-				$str_id
+                $str_id
                 $str_is_folder
                 $str_is_issue
                 $str_is_milestone
@@ -1100,10 +1080,10 @@ foreach($filters_str as $fs=>$value) {
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 		
-    	$tasks=array();
+        $tasks=array();
         foreach($tmp as $t) {
             $task=new Task($t);
             $task->level= $level;
@@ -1139,7 +1119,7 @@ foreach($filters_str as $fs=>$value) {
     * getAssignments
     */
     function getAssignments() {
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
         $dbh = new DB_Mysql;
 
@@ -1162,8 +1142,8 @@ foreach($filters_str as $fs=>$value) {
             ORDER BY $order_by";
 
         $sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $tps=array();
         foreach($tmp as $tp) {
             $tps[]=new TaskPerson($tp);
@@ -1185,7 +1165,7 @@ foreach($filters_str as $fs=>$value) {
             $person_id= intval($person);
         }
 
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
 
         ### all projects ###
@@ -1199,10 +1179,10 @@ foreach($filters_str as $fs=>$value) {
 
 
         $sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
+        $sth->execute("",1);
 
-    	$tmp=$sth->fetchall_assoc();
-    	return $tmp[0]['COUNT(*)'];
+        $tmp=$sth->fetchall_assoc();
+        return $tmp[0]['COUNT(*)'];
     }
 
 
@@ -1213,7 +1193,7 @@ foreach($filters_str as $fs=>$value) {
     function getAssignedPersons($visible_only=true) {
         global $auth;
 
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
 
         $order_by="pers.name";
@@ -1232,8 +1212,8 @@ foreach($filters_str as $fs=>$value) {
             ORDER BY $order_by";
 
         $sth= $dbh->prepare($query_str);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 
         $persons=array();
 
@@ -1310,13 +1290,13 @@ foreach($filters_str as $fs=>$value) {
     }
 
     /**
-    *	Tino Beirau
-	*
- 	*	return tasks of search-query
+    *   Tino Beirau
+    *
+    *   return tasks of search-query
     *
     * @params
     *   id
-	*	show_folders=true,
+    *   show_folders=true,
     *   order_by=NULL,
     *   status_min=2,
     *   status_max=4,
@@ -1327,11 +1307,11 @@ foreach($filters_str as $fs=>$value) {
     static function &getTaskById( $args=NULL)
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $id             = NULL;
-		$project        = NULL;
+        $project        = NULL;
         $show_folders   = true;
         $order_by       = "is_folder DESC, parent_task, prio ASC,project,name";
         $status_min     = STATUS_NEW;
@@ -1385,7 +1365,7 @@ foreach($filters_str as $fs=>$value) {
             : 'AND t.is_folder=0';
 
 
-	    $str_id = "AND i.id='" . intval($id) ."'";
+        $str_id = "AND i.id='" . intval($id) ."'";
 
 
         if(!is_null($is_milestone)) {
@@ -1425,14 +1405,14 @@ foreach($filters_str as $fs=>$value) {
 
         if($visible_only) {
             if($assigned_to_person) {
-				$str_query=
+                $str_query=
                 "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp, {$prefix}projectperson upp, {$prefix}item itp
                 WHERE
                         upp.person = {$auth->cur_user->id}
                     $str_project
                     AND i.type = '".ITEM_TASK."'
                     AND i.project=upp.project
-					$str_id
+                    $str_id
 
                     $str_is_alive
                     $str_project2
@@ -1471,11 +1451,11 @@ foreach($filters_str as $fs=>$value) {
                 "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}projectperson upp
                 WHERE
 
-					upp.person = {$auth->cur_user->id}
+                    upp.person = {$auth->cur_user->id}
                     $str_project
                     AND i.type = '".ITEM_TASK."'
                     AND i.project = upp.project
-					$str_id
+                    $str_id
                     $str_is_alive
                     $str_project2
                     $str_is_issue
@@ -1485,7 +1465,7 @@ foreach($filters_str as $fs=>$value) {
                           OR
                           i.created_by = {$auth->cur_user->id}
                     )
-					AND t.id = i.id
+                    AND t.id = i.id
                     $str_is_folder
                     $str_is_issue
                     $str_parent_task
@@ -1503,17 +1483,17 @@ foreach($filters_str as $fs=>$value) {
         else {
             if($assigned_to_person) {
                 $str_query=
-            	"SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp ,{$prefix}item itp
+                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp ,{$prefix}item itp
                 WHERE
                     i.type = '".ITEM_TASK."'
-				$str_id
+                $str_id
 
                 $str_project2
                 $str_is_alive
 
                 #AND t.id = i.id
                 $str_id
-				$str_is_folder
+                $str_is_folder
                 $str_is_issue
                 $str_parent_task
                 $str_has_name
@@ -1531,17 +1511,17 @@ foreach($filters_str as $fs=>$value) {
             }
             else {
                 $str_query=
-            	"SELECT i.*, t.* from {$prefix}item i, {$prefix}task t
+                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t
                 WHERE
                     i.type = '".ITEM_TASK."'
-				$str_id
+                $str_id
 
                 $str_project2
                 $str_is_alive
 
                 #AND t.id = i.id
                 $str_id
-				$str_is_folder
+                $str_is_folder
                 $str_is_issue
                 $str_is_milestone
                 $str_for_milestone
@@ -1558,9 +1538,9 @@ foreach($filters_str as $fs=>$value) {
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$tasks=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $tasks=array();
         foreach($tmp as $t) {
             $task=new Task($t);
             $task->level= $level;
@@ -1606,7 +1586,7 @@ foreach($filters_str as $fs=>$value) {
         $tmp_options= array(
             'visible_only'      => true,
             'use_collapsed'     => true,
-            'order_by'          => 'order_id',
+            'order_by'          => 'order_id, i.id',
             'parent_task'       => $parent_task_id,
             'status_min'        => 0,
             'status_max'        => 100,
@@ -1635,6 +1615,7 @@ foreach($filters_str as $fs=>$value) {
         }
         return $tasks;
     }
+    
 
 }
 
