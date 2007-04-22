@@ -59,24 +59,7 @@ function effortView()
     ### set up page and write header ####
     {
         $page= new Page();
-        $page->cur_tab='projects';
-
-        $page->cur_crumb= 'effortView';
-        $page->crumbs= build_project_crumbs($project);
-        $page->options= build_projView_options($project);
-
-        $type= __('Effort of task','page type');
-
-        if($task) {
-             $folder= $task->getFolderLinks() ."<em>&gt;</em>". $task->getLink();
-             $page->type= $folder."<em>&gt;</em>". $type;
-        }
-        else {
-             $page->type= $type;
-        }
-
-        $page->title=$effort->name;
-        $page->title_minor=__("Overview");
+        initPageForEffort($page, $effort, $project);
 
         ### page functions ###
         $page->add_function(new PageFunction(array(

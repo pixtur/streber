@@ -46,24 +46,8 @@ function commentView(){
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        initPageForComment($page, $comment, $project);
 
-        $page->cur_crumb= 'projViewTasks';
-        $page->crumbs= build_project_crumbs($project);
-        $page->options= build_projView_options($project);
-
-        $type= __('Comment on task','page type');
-
-        if($task) {
-             $folder= $task->getFolderLinks() ."<em>&gt;</em>". $task->getLink();
-             $page->type= $folder." > ". $type;
-        }
-        else {
-             $page->type= $type;
-        }
-
-        $page->title=$comment->name;
-        $page->title_minor="";;
         if($comment->state== -1) {
             $page->title_minor=sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($comment->deleted));
         }
@@ -308,34 +292,14 @@ function commentEdit($comment=NULL)
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'comment_name'));
-    	$page->cur_tab='projects';
+        initPageForComment($page, $comment, $project);
 
 
-        if($task) {
-    	    $page->crumbs=build_task_crumbs($task);
-        }
-        else {
-    	    $page->crumbs=build_project_crumbs($project);
-    	}
-    	$page->crumbs[]=new NaviCrumb(array(
-    	    'target_id' => 'commentEdit',
-
-    	));
-
-        $page->type=__("Comment");
         if($comment->id) {
             $page->title=__("Edit Comment","Page title");
         }
         else {
             $page->title=__("New Comment","Page title");
-        }
-
-        if($comment->task && ($task= Task::getVisibleById($comment->task))) {
-            $page->title_minor= sprintf(__('On task %s','page title add on'),$task->name);
-        }
-
-        else if($project= Project::getVisibleById($comment->project)) {
-            $page->title_minor= sprintf(__('On project %s','page title add on'),$project->name);
         }
 
         echo(new PageHeader);
@@ -880,14 +844,6 @@ function commentsMoveToFolder()
 	echo (new PageHtmlEnd());
 
 }
-
-
-
-
-
-
-
-
 
 
 

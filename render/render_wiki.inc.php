@@ -1201,7 +1201,7 @@ class FormatBlockLink extends FormatBlock
                         $this->html= "<a href='$url' title='$title' class=not_found>$this->target</a>";
                     }
                     else {
-                        $title= __('No item matches this name.');
+                        $title= __('No item matches this name...');
                         $this->html= "<span title='$title' class=not_found>$this->target</span>";
                     }
                 }
@@ -1753,13 +1753,6 @@ class FormatBlockTable extends FormatBlock
 
 
 
-/**
-* convert text to html-format (add line-breaks)
-*
-* if project has wiki-link, solve links
-*/
-global $g_wiki_project;
-$g_wiki_project= NULL;                                      # dirty hack to pass project for linking of wiki-pages
 
 function &wiki2html(&$text, $project=NULL, $item_id=NULL, $field_name=NULL)
 {
@@ -1873,17 +1866,24 @@ function &wiki2blocks(&$text)
 */
 function wiki2purehtml($text, $project=NULL)
 {
+    global $g_wiki_project;
+    $t= $g_wiki_project;
 
     ### convert, if id is given ###
-    if(!is_object($project)) {
-        $project= Project::getVisibleById($project);
+    if($project) {
+        if(!is_object($project)) {
+            $project= Project::getVisibleById($project);
+        }
+    
+        
+        $g_wiki_project= $project;
     }
 
-    global $g_wiki_project;
-    $g_wiki_project= $project;
 
 
-    $blocks = wiki2blocks(asHtml($text), $project);
+    $text= asHtml($text);
+    $blocks = wiki2blocks($text);
+
     $tmp = array();
     $out='';
     $tmp[]= "<div class=chapter>";

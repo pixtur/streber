@@ -163,6 +163,7 @@ function url2linkMail($url,$show=false, $maxlen=32) {
 */
 function initPageForTask($page, $task, $project=NULL) 
 {
+    global $PH;
     $crumbs=array();
 
     if(!$project) {
@@ -186,8 +187,9 @@ function initPageForTask($page, $task, $project=NULL)
     $page->crumbs= build_project_crumbs($project);
     $page->options= build_projView_options($project);
 	$page->cur_tab='projects';
-	$page->title = asHtml($task->name);
-
+	$page->title = $task->name;
+    $page->title_minor_html= $PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
+    
     /**
     * render html buffer with page type of this task, including parent folders
     * and type and status.
@@ -208,14 +210,207 @@ function initPageForTask($page, $task, $project=NULL)
         }
 
         if($folder= $task->getFolderLinks()) {
-            $type = $folder ." &gt; " . $label . $status ;
+            $type = $folder ." &gt; " . $label . '  '. $status ;
         }
         else {
-            $type = $status .' '. $label;
+            $type =  $label .' ' . $status;
         }
         $page->type = $type;
     }
 }
+
+
+
+
+/**
+* Initialize a page for displaying comment related content
+*
+* - inits: 
+*   - breadcrumps
+*   - options
+*   - current section
+*   - navigation
+*   - pageType (including task folders)
+*   - pageTitle (as Task title)
+*/
+function initPageForComment($page, $comment, $project=NULL) 
+{
+    global $PH;
+    $crumbs=array();
+
+    if(!$project) {
+        $project= Project::getVisibleById($comment->project);
+    }
+    
+    $page->cur_crumb= 'projViewTasks';
+    if($comment->task) {
+        if($task = Task::getVisibleById($comment->task)) {
+            if($task->category == TCATEGORY_MILESTONE) {
+                $page->cur_crumb= 'projViewMilestones';
+            }
+            else if($task->category == TCATEGORY_VERSION) {
+                $page->cur_crumb= 'projViewVersions';
+            }
+            else if($task->category == TCATEGORY_DOCU) {
+                $page->cur_crumb= 'projViewDocu';
+        
+            }
+        }
+    }    
+    
+    $page->crumbs= build_project_crumbs($project);
+    $page->options= build_projView_options($project);
+	$page->cur_tab='projects';
+	if($comment->name) {
+	    $page->title = $comment->name;
+	}
+	else {
+	    $page->title = __('Comment');
+	}
+    $page->title_minor_html= $PH->getLink('commentView', sprintf('#%d', $comment->id), array('comment'=>$comment->id));
+
+
+    /**
+    * render html buffer with page type of this task, including parent folders
+    * and type and status.
+    *
+    * - This is the tiny text about the page title.
+    */
+    {
+        global $g_status_names;
+        $type ="";
+
+        if($task) {
+            if($folder= $task->getFolderLinks()) {
+                $type = $folder ." &gt; " ;
+            }
+            $type.= $task->getLink() . ' &gt; ' ;
+        }
+        $type .= __('Comment');
+                
+        $page->type = $type;
+    }
+}
+
+
+
+/**
+* Initialize a page for displaying file related content
+*
+* - inits: 
+*   - breadcrumps
+*   - options
+*   - current section
+*   - navigation
+*   - pageType (including task folders)
+*   - pageTitle (as Task title)
+*/
+function initPageForFile($page, $file, $project=NULL) 
+{
+    global $PH;
+    $crumbs=array();
+
+    if(!$project) {
+        $project= Project::getVisibleById($file->project);
+    }
+    $task = Task::getVisibleById($file->parent_item);
+    
+    $page->cur_crumb= 'projViewFiles';
+    
+    
+    $page->crumbs= build_project_crumbs($project);
+    $page->options= build_projView_options($project);
+	$page->cur_tab='projects';
+	if($file->name) {
+	    $page->title = $file->name;
+	}
+	else {
+	    $page->title = __('File');
+	}
+    $page->title_minor_html= $PH->getLink('fileView', sprintf('#%d', $file->id), array('file'=>$file->id));
+
+
+    /**
+    * render html buffer with page type of this task, including parent folders
+    * and type and status.
+    *
+    * - This is the tiny text about the page title.
+    */
+    {
+        global $g_status_names;
+        $type ="";
+
+        if($task) {
+            if($folder= $task->getFolderLinks()) {
+                $type = $folder ." &gt; " ;
+            }
+            $type.= $task->getLink() . ' &gt; ' ;
+        }
+        $type .= __('File'); 
+        $page->type = $type;
+    }
+}
+
+
+
+/**
+* Initialize a page for displaying effort related content
+*
+* - inits: 
+*   - breadcrumps
+*   - options
+*   - current section
+*   - navigation
+*   - pageType (including task folders)
+*   - pageTitle (as Task title)
+*/
+function initPageForEffort($page, $effort, $project=NULL) 
+{
+    global $PH;
+    $crumbs=array();
+
+    if(!$project) {
+        $project= Project::getVisibleById($effort->project);
+    }
+    $task = Task::getVisibleById($effort->task);
+    
+    $page->cur_crumb= 'projViewEfforts';
+        
+    $page->crumbs= build_project_crumbs($project);
+    $page->options= build_projView_options($project);
+	$page->cur_tab='projects';
+	if($effort->name) {
+	    $page->title = $effort->name;
+	}
+	else {
+	    $page->title = __('Effort');
+	}
+    $page->title_minor_html= $PH->getLink('effortView', sprintf('#%d', $effort->id), array('effort'=>$effort->id));
+
+
+    /**
+    * render html buffer with page type of this task, including parent folders
+    * and type and status.
+    *
+    * - This is the tiny text about the page title.
+    */
+    {
+        global $g_status_names;
+        $type ="";
+
+        if($task) {
+            if($folder= $task->getFolderLinks()) {
+                $type = $folder ." &gt; " ;
+            }
+            $type.= $task->getLink() . ' &gt; ' ;
+        }
+        $type .= __('Effort'); 
+        $page->type = $type;
+    }
+}
+
+
+
 
 
 function build_person_crumbs(&$person) {

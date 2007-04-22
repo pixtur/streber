@@ -342,4 +342,13 @@ $g_time_zones=array(
     'GMT +13 : Tonga'                           => 13
 );
 
+
+/**
+* convert text to html-format (add line-breaks)
+*
+* if project has wiki-link, solve links
+*/
+global $g_wiki_project;
+$g_wiki_project= NULL;                                      # dirty hack to pass project for linking of wiki-pages
+
 ?>

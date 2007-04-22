@@ -1746,8 +1746,6 @@ $g_lang_table= array(
 ### ../pages/login.inc.php   ###
 'Nickname|label in login form'=>'Nickname',
 
-### ../pages/task.inc.php   ###
-'new'                        =>'neu:',
 
 ### ../pages/proj.inc.php   ###
 'Team member'                 =>'Team Mitglied',

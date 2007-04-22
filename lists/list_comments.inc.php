@@ -34,13 +34,14 @@ class ListBlock_comments extends ListBlock
 		$this->add_col( new ListBlockCol_CommentText());
 
         #--- functions -------
-        $this->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('commentNew')->id,
-            'name'  =>__('New Comment'),
-            'id'    =>'commentNew',
-			'label' => __('Add Comment'),
-            'context_menu'=>'submit',
-        )));
+        
+        #$this->add_function(new ListFunction(array(
+        #    'target'=>$PH->getPage('commentNew')->id,
+        #    'name'  =>__('New Comment'),
+        #    'id'    =>'commentNew',
+		#	'label' => __('Add Comment'),
+        #    'context_menu'=>'submit',
+        #)));
 		$this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('itemsAsBookmark')->id,
             'name'  =>__('Mark as bookmark'),

@@ -562,7 +562,7 @@ function asMatchString($str) {
 
 function asCleanString($str)
 {
-    return preg_replace("/[\\\<\>\`\´\"]/",'',$str);
+    return preg_replace("/[\\\<\>\`\´\"\/?]/",'',$str);
 
 
 }

@@ -957,6 +957,7 @@ function homeTasks()
     unset($list->columns['planned_start']);
     unset($list->block_functions['tree']);
 
+    $list->query_options['assigned_to_person'] = $auth->cur_user->id;
     $list->print_automatic();
 
     echo (new PageContentClose);

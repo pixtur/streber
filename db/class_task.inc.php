@@ -1270,7 +1270,7 @@ foreach($filters_str as $fs=>$value) {
             return __('Released Milestone');
         }
         else if ($this->category == TCATEGORY_DOCU) {
-            return __('Documentation');
+            return __('Topic');
         }
         else if ($this->category == TCATEGORY_BUG) {
             return __('Bug');

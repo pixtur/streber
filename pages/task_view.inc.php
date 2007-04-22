@@ -648,7 +648,7 @@ onLoadFunctions.push(function()
 			}
 
 
-    		$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
+    		#$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
             $list_comments->render_list(&$comments);
         }
     }
@@ -1058,7 +1058,7 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Page'),
+                    'name'=>__('Topic'),
                 )));
             }
             else if($task->parent_task) {
@@ -1069,7 +1069,7 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Page'),
+                    'name'=>__('Topic'),
                 )));
             }
             else {
@@ -1080,7 +1080,7 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Page'),
+                    'name'=>__('Topic'),
                 )));
             }
 

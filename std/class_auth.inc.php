@@ -102,6 +102,13 @@ class Auth
             return false;
         }
 
+        /**
+        * disable rendering for traffic exhaustive browsers
+        */
+        if($this->isUglyCrawler()) {
+            exit();
+        }
+
         ### success ###
         $this->cur_user= $user;
 
@@ -423,7 +430,7 @@ class Auth
             $crawlers= array(
                 "/Googlebot/",
                 "/Yahoo! Slurp;/",
-                "/msnbot\//",
+                "/msnbot/",
                 "/Mediapartners-Google/",
                 "/Scooter/",
                 "/Yahoo-MMCrawler/",
@@ -445,6 +452,26 @@ class Auth
             }
         }
         return false;
+    }
+
+    /**
+    * there are some web crawlers which only cause traffic
+    *
+    * those are provided with empty page
+    */
+    public static function isUglyCrawler()
+    {
+        if(isset($_SERVER['HTTP_USER_AGENT'])){
+            $agent= $_SERVER['HTTP_USER_AGENT'];
+            $crawlers= array(
+                "/HTTrack/",
+            );
+            foreach($crawlers as $c) {
+                if(preg_match($c, $agent)) {
+                    return true;
+                }
+            }
+        }      
     }
 }
 

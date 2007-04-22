@@ -170,7 +170,25 @@ function step_01_checkEvironment() {
         }
     }
 
-
+    ### check _rss-directory writeable ###
+    {
+        print_testStart("check write-permissions for directory '<b>". confGet('DIR_RSS') ."</b>'?");
+        if(!is_writeable('../'. confGet('DIR_RSS'))) {
+            if(!is_dir('../'. confGet('DIR_RSS'))){
+                @mkdir('../'. confGet('DIR_RSS'));
+            }
+            @chmod('../'. confGet('DIR_RSS'), 0777);
+            if(!is_writeable('../'. confGet('DIR_RSS'))){
+                print_testResult(RESULT_PROBLEM,"Please grand write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                $flag_errors= true;
+            }else{
+                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
+            }
+        }
+        else {
+            print_testResult(RESULT_GOOD);
+        }
+    }
     ### check db-setting exists ###
     {
         print_testStart("check previous db-settings in'<b>". confGet('DIR_SETTINGS') ."</b>'...");

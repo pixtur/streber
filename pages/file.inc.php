@@ -65,28 +65,10 @@ function fileView()
     ### set up page and write header ####
     {
         $page= new Page();
-        $page->cur_tab='projects';
+        initPageForFile($page, $file, $project);
 
-
-        $page->cur_crumb= 'projViewFiles';
-        $page->crumbs= build_project_crumbs($project);
-        $page->options= build_projView_options($project);
-
-
-        $page->type= __('File');
-
-        if($parent_task) {
-
-            if($folder= $parent_task->getFolderLinks()) {
-                $page->type= $folder;
-            }
-            $page->type.= " &gt; ". $parent_task->getLink() . " &gt; " . __('File');
-        }
-
-
-
-        $page->title=$file_org->name;
-        $page->title_minor=sprintf('#%d', $file_org->id);;
+        #$page->title_minor=sprintf('#%d', $file_org->id);;
+        
         if($file->state== -1) {
             $page->title_minor=sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($file->deleted));
         }
@@ -420,15 +402,7 @@ function fileEdit($file=NULL)
 
 
         $page= new Page(array('use_jscalendar'=>true, 'autofocus_field'=>'file_name'));
-        $page->cur_tab='projects';
-        $page->type=__('Edit File','page type');
-        $page->title=$file->name;
-
-        $page->crumbs= build_project_crumbs($project);
-
-        $page->crumbs[]= new NaviCrumb(array(
-            'target_id' => 'fileEdit',
-        ));
+        initPageForFile($page, $file, $project);
 
         if($file->id) {
             $page->title=__('Edit File','page title');
@@ -437,7 +411,7 @@ function fileEdit($file=NULL)
             $page->title=__('New File','page title');
         }
 
-        $page->title_minor= sprintf(__('On project %s','page title add on'),$project->name);
+        #$page->title_minor= sprintf(__('On project %s','page title add on'),$project->name);
 
 
         echo(new PageHeader);

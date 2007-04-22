@@ -73,6 +73,12 @@ function itemSaveField()
         print "Failure";
         return;
     }
+    
+    if(!$project= Project::getVisibleById($item->project)) {
+        print "Failure getting project";
+        return;
+    }
+    $g_wiki_project= $project;
 
     $field_name= 'description';
     if(get('field')) {

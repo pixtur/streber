@@ -649,8 +649,18 @@ class PageHandler extends BaseObject
                 : '';
         log_message($user_name . '@' . asHtml($_SERVER["REMOTE_ADDR"]) . " -> $id ". asHtml($_SERVER["REQUEST_URI"]) . "  (".asHtml($_SERVER["HTTP_USER_AGENT"]).") $crawler"  , LOG_MESSAGE_DEBUG);
 
-        if(!$id || !isset($this->hash[$id]) ) {
-            trigger_error('try to show undefined page-id '.$id,E_USER_WARNING);
+        if(!$id) {
+            $this->show('home');
+            exit;
+        }
+        
+        else if( $id != asAlphaNumeric($id)) {
+            new FeedbackWarning("Ignored invalid page '". asCleanString($id) ."'");
+            $this->show('home');
+            exit;
+        }            
+        else if(!isset($this->hash[$id]) ) {
+            trigger_error('try to show undefined page-id '.$id, E_USER_WARNING);
             $this->show('error');
             return;
         }

@@ -210,7 +210,7 @@ function ProjView()
                 if($creator= Person::getVisibleById($n->created_by)) {
                     $link_creator= ' by '. $creator->getLink();
                 }
-                echo "<div class=newsTitle><h3>".$PH->getLink('taskViewAsDocu', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
+                echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
                 echo wiki2html($n->description, $project);
                 
                 echo "<span class=comments>";

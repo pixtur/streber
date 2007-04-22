@@ -330,9 +330,9 @@ function personList()
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
-		if(!confGet('PERSON_LAST_LOGIN')){
-        	unset($list->columns['last_login']);
-		}
+		#if(!confGet('PERSON_LAST_LOGIN')){
+        #	unset($list->columns['last_login']);
+		#}
         unset($list->columns['changes']);
 		
 		$list->filters[] = new ListFilter_persons();
@@ -701,7 +701,7 @@ function personView()
 
             ### page functions ###
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('new') . ": "
+                'name'      => __('new')
             )));
             $page->add_function(new PageFunction(array(
                 'target'=>'taskNoteOnPersonNew',
@@ -709,15 +709,15 @@ function personView()
                 'tooltip'=>__('Create Note','Tooltip for page function'),
                 'name'=>__('Note','Page function person'),
             )));
-            $page->add_function(new PageFunction(array(
-            'target'    =>'personLinkCompanies',
-            'params'    =>array('person'=>$person->id),
-            'tooltip'   =>__('Add existing companies to this person'),
-            'name'      =>__('Companies'),
-            )));
+            #$page->add_function(new PageFunction(array(
+            #'target'    =>'personLinkCompanies',
+            #'params'    =>array('person'=>$person->id),
+            #'tooltip'   =>__('Add existing companies to this person'),
+            #'name'      =>__('Companies'),
+            #)));
 
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('edit').  ': '
+                'name'      => __('edit')
             )));
             $page->add_function(new PageFunction(array(
                 'target'=>'personEdit',
@@ -737,12 +737,12 @@ function personView()
 
             $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$person->id));
             if((!$item) || ($item[0]->is_bookmark == 0)){
-                $page->add_function(new PageFunction(array(
-                    'target'    =>'itemsAsBookmark',
-                    'params'    =>array('person'=>$person->id),
-                    'tooltip'   =>__('Mark this person as bookmark'),
-                    'name'      =>__('Bookmark'),
-                )));
+                #$page->add_function(new PageFunction(array(
+                #    'target'    =>'itemsAsBookmark',
+                #    'params'    =>array('person'=>$person->id),
+                #    'tooltip'   =>__('Mark this person as bookmark'),
+                #    'name'      =>__('Bookmark'),
+                #)));
             }
             else{
                 $page->add_function(new PageFunction(array(
@@ -754,7 +754,7 @@ function personView()
             }
 
             $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('notification:')
+                'name'      => __('notification')
             )));
             if($person->state == ITEM_STATE_OK && $person->can_login && ($person->personal_email || $person->office_email)) {
                 $page->add_function(new PageFunction(array(

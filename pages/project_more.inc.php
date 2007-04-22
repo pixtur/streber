@@ -1091,7 +1091,7 @@ function ProjViewDocu()
             'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU),
             'icon'      =>'new',
             'tooltip'   =>__('Create a new page'),
-            'name'      =>__('Page')
+            'name'      =>__('Topic')
         )));
 
     	### render title ###

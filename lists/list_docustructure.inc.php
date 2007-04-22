@@ -226,17 +226,19 @@ class Block_DocuNavigation extends PageBlock
     {
         global $PH;
         $style= NULL;
+        $page= 'taskView';
         if($t->category == TCATEGORY_FOLDER) {
             $style= 'folder';
             if($this->current_task && $t->id == $this->current_task->id) {
                 $style= 'folder current';
             }
+            $page= 'taskViewAsDocu';
         }
         else if($this->current_task && $t->id == $this->current_task->id) {
             $style= 'current';
         }
 
-        return $PH->getLink('taskViewAsDocu', $t->name, array('tsk' => $t->id), $style );
+        return $PH->getLink($page, $t->name, array('tsk' => $t->id), $style );
     }
 }
 
