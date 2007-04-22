@@ -994,6 +994,133 @@ div.block {
     }
 
 
+
+
+
+	/*--- .list_footer --------------------*/
+    .block .footer .items{
+        float:left;
+        display:inline;
+    }
+
+    .block .footer .pages{
+        float:left;
+        display:inline;
+    }
+
+
+    .block .footer {
+        text-align:left;
+        vertical-align:top;
+    }
+    .block .footer .summary {
+        font-size:90%;
+        padding-left:10px;
+        vertical-align:top;
+        text-align:right;
+        margin:2px 3px 3px 1px;
+    }
+
+    .block .footer .functions {
+        margin:0px;
+        padding:0px;
+    }
+
+    .block .footer>.functions {
+        margin-top:1px;
+        float:left;
+    }
+    .block .footer select {
+        text-align:left;
+        margin-right:10px;
+        font-size:70%;
+        padding:0px;
+        margin:0px;
+    }
+
+    .block div.footer span.links {
+        padding-left:1em;
+        font-size:   90%;
+    }
+    .block div.footer span.links a {
+        padding-right:  1em;
+    }
+
+
+    div.block div.footer {
+        background-image:url(layout/bg_block_footer.png);
+        background-repeat:repeat-x;
+        background-position:bottom;
+        padding-top:0.1em;
+        padding-bottom:0.3em;
+        margin-right:2px;
+    }
+	.block .footer .icons {
+        padding-left:20px;
+        background-image:url(img/arrow_checkbox_functions.gif);
+        background-repeat:no-repeat;
+        padding-right:3px;
+        margin-right:5px;
+	}
+
+    .footer>span.icons {
+        float:left;
+    }
+
+	.block .footer .icons img{
+		padding-left:5px;
+		padding-right:5px;
+	}
+
+	.block .footer .icons a img {
+		border:none;
+	}
+
+	.block .footer .list_functions {
+        font-size:80%;
+		padding-left:30px;
+		padding-top:0px;
+        background-image:url(img/arrow_checkbox_functions.gif);
+        background-repeat:no-repeat;
+        padding-right:3px;
+        margin-right:5px;
+	}
+
+    .footer>span.list_functions {
+        float:left;
+    }
+
+	.block .footer .list_functions a {
+        color:#C70000;
+        margin-right:9px;
+        padding-right:10px;
+        margin-left:2px;
+        text-decoration:none;
+        border-right:1px solid #888;
+
+	}
+
+	.block .footer .list_functions a:hover {
+	    text-decoration:underline;
+	}
+
+	.block .icons .notallowed {
+		opacity:0.2;
+	}
+
+	.block .icons .inactive {
+		opacity:0.6;
+	}
+
+	.block .icons .inactive:hover {
+		opacity:0.1;
+	}
+
+	.block .icons img:hover {
+		background-color:#ffffff;
+	}
+
+
 /*----- listBlock ----------------------------------------*/
 	table.list {
 		border-collapse:collapse;
@@ -1282,54 +1409,7 @@ div.block {
     }
 
 
-	/*--- .list_footer --------------------*/
-    .block .footer .items{
-        float:left;
-        display:inline;
-    }
 
-    .block .footer .pages{
-        float:left;
-        display:inline;
-    }
-
-
-    .block .footer {
-        text-align:left;
-        vertical-align:top;
-    }
-    .block .footer .summary {
-        font-size:90%;
-        padding-left:10px;
-        vertical-align:top;
-        text-align:right;
-        margin:2px 3px 3px 1px;
-    }
-
-    .block .footer .functions {
-        margin:0px;
-        padding:0px;
-    }
-
-    .block .footer>.functions {
-        margin-top:1px;
-        float:left;
-    }
-    .block .footer select {
-        text-align:left;
-        margin-right:10px;
-        font-size:70%;
-        padding:0px;
-        margin:0px;
-    }
-
-    .block div.footer span.links {
-        padding-left:1em;
-        font-size:   90%;
-    }
-    .block div.footer span.links a {
-        padding-right:  1em;
-    }
 
     .list .indention{
         padding-left:10px;
@@ -1352,78 +1432,6 @@ div.block {
     }
 
 
-    div.block div.footer {
-        background-image:url(layout/bg_block_footer.png);
-        background-repeat:repeat-x;
-        background-position:bottom;
-        padding-top:0.1em;
-        padding-bottom:0.3em;
-        margin-right:2px;
-    }
-	.block .footer .icons {
-        padding-left:20px;
-        background-image:url(img/arrow_checkbox_functions.gif);
-        background-repeat:no-repeat;
-        padding-right:3px;
-        margin-right:5px;
-	}
-
-    .footer>span.icons {
-        float:left;
-    }
-
-	.block .footer .icons img{
-		padding-left:5px;
-		padding-right:5px;
-	}
-
-	.block .footer .icons a img {
-		border:none;
-	}
-
-	.block .footer .list_functions {
-        font-size:80%;
-		padding-left:30px;
-		padding-top:0px;
-        background-image:url(img/arrow_checkbox_functions.gif);
-        background-repeat:no-repeat;
-        padding-right:3px;
-        margin-right:5px;
-	}
-
-    .footer>span.list_functions {
-        float:left;
-    }
-
-	.block .footer .list_functions a {
-        color:#C70000;
-        margin-right:9px;
-        padding-right:10px;
-        margin-left:2px;
-        text-decoration:none;
-        border-right:1px solid #888;
-
-	}
-
-	.block .footer .list_functions a:hover {
-	    text-decoration:underline;
-	}
-
-	.block .icons .notallowed {
-		opacity:0.2;
-	}
-
-	.block .icons .inactive {
-		opacity:0.6;
-	}
-
-	.block .icons .inactive:hover {
-		opacity:0.1;
-	}
-
-	.block .icons img:hover {
-		background-color:#ffffff;
-	}
 
     /*--- details in grouped list stye -------------------------*/
     .block table tr.details {
@@ -1632,40 +1640,11 @@ div.block {
     }
 
 
-.botton {
-    border:0px;
-    background-color:#ff0000;
-    font-weight:bold;
-}
-
 div.description {
   font-size:80%;
 }
 
 
-/*--- project news ---------*/
-div.newsBlock {
-    border-bottom:1px dashed #888;
-    padding-bottom:0.5em;
-}
-div.newsTitle {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-
-}
-
-div.newsTitle h3 a {
-    font-size:120%;
-    color:#000;
-    font-family: "Arial Black";
-    font-weight: normal;
-}
-
-div.newsBlock span.comments {
-    display:block;
-    text-align:right;
-
-}
 
 /*---- docuNavigation --------------------------*/
 .block div.docuNavigation {
@@ -1840,6 +1819,9 @@ div.newsBlock span.comments {
         height:1px;
 
     }
+
+
+
 
 /*=== page footer ===========================*/
 #footer {
@@ -2497,4 +2479,68 @@ span.selectorlist span.selectorlist_content  a{
 span.selectorlist  a:hover{
  background-color:  #fff;
  /*color:             #fff;*/  /* this has no effect with Ghecko ???*/
+}
+
+/*--- dashboard (recent changes) -----------------*/
+div#b_home_dashboard_long h4 {
+ margin:            0.2em 0.5em;
+}
+
+div#b_home_dashboard_long ul {
+ margin:            1px 1em 0em 1em;
+ padding:           0px;
+ font-size:         90%;
+}
+
+
+div#b_home_dashboard_long ul li{
+ list-style:        none;
+ background-color:  #fff;
+ padding:           0.2em 0.5em;
+ margin-bottom:     1px;
+ line-height:       120%;
+
+}
+
+div#b_home_dashboard_long ul li span.sub {
+ display:           block;
+ font-size:         8pt;
+ color:             #888;
+ padding-left:      0.5em;
+}
+
+div#b_home_dashboard_long ul li span.sub span.person {
+ color:             #555;
+}
+
+div#b_home_dashboard_long p.more {
+ text-align:        right;
+ margin:            1px 1em 1em 1.5em;
+ font-size:         10pt;
+}
+
+
+
+/*--- project news (for custom projView)--------------*/
+div.newsBlock {
+    border-bottom:1px dashed #888;
+    padding-bottom:0.5em;
+}
+div.newsTitle {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+
+}
+
+div.newsTitle h3 a {
+    font-size:120%;
+    color:#000;
+    font-family: "Arial Black";
+    font-weight: normal;
+}
+
+div.newsBlock span.comments {
+    display:block;
+    text-align:right;
+
 }

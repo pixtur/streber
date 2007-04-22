@@ -946,6 +946,7 @@ class Project extends DbProjectItem
         $search=        NULL;
 		$id=			NULL;
 		$person=        NULL;
+		$limit=         NULL;
 
         ### filter params ###
         if($args) {
@@ -991,6 +992,11 @@ class Project extends DbProjectItem
 			$AND_person_visible_part1 = "";
 			$AND_person_visible_part2 = "";
 		}
+
+        $str_limit= $limit
+                ? " LIMIT $limit"
+                : "";
+
 		
         /**
         * @@@ NOTE: using a distinct select here is not nice...
@@ -1012,7 +1018,8 @@ class Project extends DbProjectItem
                     $AND_company
                     $AND_match
 					$AND_id
-                ". getOrderByString($order_by) ;
+                ". getOrderByString($order_by) 
+                . $str_limit;
         }
         ### all projects ###
         else {
@@ -1029,7 +1036,9 @@ class Project extends DbProjectItem
                   $AND_match
 				  $AND_id
 				  $AND_person_all_part2
-                ". getOrderByString($order_by) ;
+                ". getOrderByString($order_by)
+                . $str_limit;
+                
         }
 
         $projects = self::queryFromDb($str);

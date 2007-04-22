@@ -20,8 +20,16 @@ new PageHandle(array('id'=>'home',
     'test'=>'yes',
 
     'cleanurl'=>'home',
+));
+new PageHandle(array('id'=>'homeDashboardAjaxMore',
+    'req'=>'pages/home.inc.php',
+    'test'=>'no',
+    'valid_for_crawlers'=>false,
+    'valid_params'=> array('prj'=>'\d+', 'start'=>'\d+', 'count' => '\d+'),
 
 ));
+
+
 new PageHandle(array('id'=>'homeTasks',
     'req'=>'pages/home.inc.php',
     'title'=>__('Your Tasks'),

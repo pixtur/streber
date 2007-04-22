@@ -762,6 +762,36 @@ function renderDateHtml($t)
 
 
 /**
+* renders a time as distance ago... (expects GMT times)
+*/
+function renderTimeAgo($t)
+{
+    $duration= time() - strToGMTime($t);
+
+    if($duration < 60 * 60) {
+        return sprintf(__('%s min ago'), ceil($duration / 60));
+    }
+    if($duration < 60 * 60 * 2) {
+        return __('1 hour ago');
+    }
+    if($duration < 60 * 60 * 24) {
+        return sprintf(__('%s hours ago'), ceil($duration / 60 / 60));
+    }
+
+    if($duration < 60 * 60 * 24 * 62) {
+        return sprintf(__('%s days ago'), ceil($duration / 60 / 60 / 24));
+    }
+    else {
+        return sprintf(__('%s months ago'), ceil($duration / 60 / 60 / 24 / 30));
+    }
+    
+    
+
+}
+
+
+
+/**
 * want duration in seconds
 */
 function renderEstimatedDuration($duration)

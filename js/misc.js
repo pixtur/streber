@@ -239,11 +239,43 @@ function misc()
     });
 }
 
+/**
+* load additional changes for dashboard
+*
+* - called directly from home.inc.php -> home() javascript in ahref
+*/
+
+function getMoreChanges(project, start, count)
+{
+    var element= $('ul#changesOnProject_' + project);
+
+    if(!this.starts)
+    {
+        this.starts = Array();
+    }       
+        
+    if(this.starts[project])
+    {
+        start= this.starts[project] + count;
+    }
+    this.starts[project] = start + count;
+    
+            
+    $.get("index.php",
+        { go:'homeDashboardAjaxMore', start: start, count: count, prj:project },
+        function(data) {
+            $(element).append(data);
+        }
+    );
+    return;
+}
+
 
 /**
 * add inline edit buttons for wiki chapters
 */
-function AjaxEdit(dom_element, item_id, field){
+function AjaxEdit(dom_element, item_id, field)
+{
     this.dom_element    = dom_element;
     this.item_id        = item_id || 0;
     this.field          = field || 0;

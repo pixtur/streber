@@ -641,6 +641,11 @@ abstract class DbItem {
     /**
     * with the help of the item_person table we highlight
     * items with have been changed by other users.
+    *
+    * return
+    * - 0 if viewed / old
+    * - 1 if new
+    * - 2 if updated
     */
     public function isChangedForUser()
     {
@@ -648,25 +653,28 @@ abstract class DbItem {
 
         ### ignore, if too old
         if($this->modified < $auth->cur_user->date_highlight_changes) {
-            return false;
+            return 0;
         }
 
         ### ignore self edited items ###
         if($this->modified_by == $auth->cur_user->id) {
-            return false;
+            return 0;
         }
 
         require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
-        if($item_persons = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item' => $this->id))) {
+        if($item_persons = ItemPerson::getAll(array(
+            'person'=>$auth->cur_user->id,
+            'item' => $this->id
+        ))) {
             $ip= $item_persons[0];
             if($ip->viewed_last < $this->modified) {
-                return true;
+                return 2;
             }
             else {
-                return false;
+                return 0;
             }
         }
-        return true;
+        return 1;
     }
 
     public function nowChangedByUser()
@@ -1518,6 +1526,9 @@ class DbProjectItem extends DbItem {
         $not_modified_by    = NULL;
         $show_issues        = false;
         $limit              = NULL;
+        $limit_start        = 0;
+        $unviewed_only      = NULL;
+        $type               = NULL;
 
         ### filter params ###
         if($args) {
@@ -1560,13 +1571,20 @@ class DbProjectItem extends DbItem {
             ? 'AND i.modified_by=' . intval($modified_by)
             : '';
 
+
+
         $str_not_modified_by= $not_modified_by
             ? 'AND i.modified_by != ' . intval($not_modified_by)
             : '';
 
-        $str_limit= $limit
-                ? " LIMIT $limit"
+        $str_type= $type
+                ? "AND i.type = $type"
                 : "";
+
+        $str_limit= $limit
+                ? " LIMIT $limit_start, $limit"
+                : "";
+
 
         ### only visibile for current user ###
         if($visible_only) {
@@ -1576,6 +1594,7 @@ class DbProjectItem extends DbItem {
                 upp.person = {$auth->cur_user->id}
                 AND upp.project = i.project
                 $str_state
+                $str_type
                 $str_show_issues
                 $str_project
                 $str_project2
@@ -1601,6 +1620,7 @@ class DbProjectItem extends DbItem {
             WHERE 1
 
             $str_state
+            $str_type
             $str_project
             $str_show_issues
             $str_modified_by
@@ -1621,9 +1641,36 @@ class DbProjectItem extends DbItem {
         $tmp=$sth->fetchall_assoc();
 
         $items= array();
-        foreach($tmp as $n) {
-            $item= new DbProjectItem($n);
-            $items[]= $item;
+        
+        if($unviewed_only)
+        {
+            require_once(confGet('DIR_STREBER') . "db/db_itemperson.inc.php");
+            $viewed_items=array();
+            foreach(ItemPerson::getAll(array(
+                'person'=> $auth->cur_user->id,
+            )) as $vi) {
+                $viewed_items[$vi->item]= $vi;                
+            }
+
+            foreach($tmp as $n) {
+                $item= new DbProjectItem($n);
+                if(
+                    $item->modified > $auth->cur_user->date_highlight_changes
+                    && (
+                        !isset($viewed_items[$item->id]) 
+                        ||
+                        $item->modified > $viewed_items[$item->id]->viewed_last
+                    )
+                ) {
+                    $items[]= $item;
+                }
+            }
+        }   
+        else {
+            foreach($tmp as $n) {
+                $item= new DbProjectItem($n);
+                $items[]= $item;
+            }
         }
         return $items;
     }

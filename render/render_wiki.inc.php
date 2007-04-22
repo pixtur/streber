@@ -1736,6 +1736,7 @@ class FormatBlockTable extends FormatBlock
                         break;
                     }
                     else {
+                        $blocks_new[]= $b;
                         break;
                     }
                 }

@@ -152,7 +152,6 @@ class ItemPerson extends DbItem
 		$person           = $auth->cur_user->id;
 		$item             = NULL;
 		$viewed           = NULL;
-		$viewed_last      = NULL;
 		$is_bookmark      = NULL;
 		$notify_on_change = NULL;
 		$notify_if_unchanged_min = NULL;
@@ -211,6 +210,8 @@ class ItemPerson extends DbItem
 		else{
 			$str_notify_if_unchanged_max = '';
 		}
+		
+
 		
 		if(!is_null($person)){
 			$str_query = "SELECT * FROM {$prefix}itemperson
