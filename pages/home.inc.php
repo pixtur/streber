@@ -182,11 +182,6 @@ function home() {
         #$list->print_automatic();
 
 
-        $block=new PageBlock(array(
-            'title' =>__('Recently changed projects'),
-            'id'    =>'dashboard'
-        ));
-        $block->render_blockStart();
 
         if(!$projects= Project::getAll(array(
             'order_by' => 'modified DESC',
@@ -221,52 +216,60 @@ function home() {
                 }
             }            
             
-            
-            $changelines_per_project= MAX_CHANGELINES_PER_PROJECT;
-            if(count($projects_with_changes) < MAX_CHANGELINES / MAX_CHANGELINES_PER_PROJECT) {
-                $changelines_per_project = MAX_CHANGELINES / count($projects_with_changes)  - 1;
-            }
+            if(count($projects_with_changes)) {
 
-            /**
-            * count printed changelines to keep size of list
-            */
-            $printed_changelines = 0;
-            foreach($projects_with_changes as $project) {
-                $changes= $project_changes[$project->id];
-
-                echo '<h4>'.  $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . "</h4>";
-
-                echo "<ul id='changesOnProject_$project->id'>";
-                $lines= 0;
-                foreach($changes as $c) {
-                    printChangeLine($c);
-
-                    $printed_changelines++;
-                    if($lines++ >= $changelines_per_project - 1) {
-                        break;                            
-                    };
-                }
-                echo "</ul>";
-                if($lines <= count($changes)) {
-                    echo "<p class=more>"
-                    . "<a href='javascript:getMoreChanges($project->id, $lines, 20);' "
-                    . '>'
-                    . __('Show more')
-                    . '</a>'
-                    ."</p>";
-                    
-                }
-
+                $block=new PageBlock(array(
+                    'title' =>__('Recently changed projects'),
+                    'id'    =>'dashboard'
+                ));
+                $block->render_blockStart();
                 
-                /**
-                * limit number of projects
-                */
-                if($printed_changelines >= MAX_CHANGELINES - MAX_CHANGELINES_PER_PROJECT) {
-                    break;
+                $changelines_per_project= MAX_CHANGELINES_PER_PROJECT;
+                if(count($projects_with_changes) < MAX_CHANGELINES / MAX_CHANGELINES_PER_PROJECT) {
+                    $changelines_per_project = MAX_CHANGELINES / count($projects_with_changes)  - 1;
                 }
-            }            
+    
+                /**
+                * count printed changelines to keep size of list
+                */
+                $printed_changelines = 0;
+                foreach($projects_with_changes as $project) {
+                    $changes= $project_changes[$project->id];
+    
+                    echo '<h4>'.  $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . "</h4>";
+    
+                    echo "<ul id='changesOnProject_$project->id'>";
+                    $lines= 0;
+                    foreach($changes as $c) {
+                        printChangeLine($c);
+    
+                        $printed_changelines++;
+                        if($lines++ >= $changelines_per_project - 1) {
+                            break;                            
+                        };
+                    }
+                    echo "</ul>";
+                    if($lines <= count($changes)) {
+                        echo "<p class=more>"
+                        . "<a href='javascript:getMoreChanges($project->id, $lines, 20);' "
+                        . '>'
+                        . __('Show more')
+                        . '</a>'
+                        ."</p>";
+                        
+                    }
+    
+                    
+                    /**
+                    * limit number of projects
+                    */
+                    if($printed_changelines >= MAX_CHANGELINES - MAX_CHANGELINES_PER_PROJECT) {
+                        break;
+                    }
+                }            
+                $block->render_blockEnd();
+            }
         }
-        $block->render_blockEnd();
     }
 
     echo (new PageContentClose);

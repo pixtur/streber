@@ -401,7 +401,7 @@ class Notifier
                     ### task
                     if($task= Task::getVisibleById($c->task_id)) {
                         if(confGet('USE_MOD_REWRITE')) {
-                		  $updates_html.= "<a href='$url{$task->id}'>". asHtml($task->name). "</a>";
+                		  $updates_html.= "<a href='$url/{$task->id}'>". asHtml($task->name). "</a>";
                 		}
                 		else {
                 		  $updates_html.= "<a href='$url?go=taskView&amp;tsk={$task->id}'>". asHtml($task->name). "</a>";

@@ -1148,7 +1148,7 @@ function personViewProjects()
         
         $list->query_options['order_by'] = $order_by;
         $list->query_options['person'] = $person->id;
-        $list->print_automatic();
+        #$list->print_automatic();
         
         //$list->render_list(&$efforts);
     }
