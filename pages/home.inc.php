@@ -135,6 +135,56 @@ function home() {
 
     #--- list projects --------------------------------------------------------
     {
+        require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
+        
+        $block=new PageBlock(array(
+            'title' =>__('Active projects'),
+            'id'    =>'projects'
+        ));
+        $block->render_blockStart();
+        echo "<div class=linklist>";
+                
+        /**
+        * get companies
+        */
+        foreach(Company::getAll() as $c) {
+            
+            /**
+            * get project for company
+            *
+            * @NOTE single sql requests are not the fastes solution here...
+            */
+            if($projects= Project::getAll(array(
+               'order_by'   => 'c.name',
+               'company'    => $c->id,
+            ))) {
+                echo "<span class=sub>" . __("for","short for client")  . '</span> <b>' . $c->getLink() . "</b>:";
+                echo '<ul>';
+                foreach($projects as $project){
+                    echo '<li>' . $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . '</li>';
+                }
+                echo '</ul>';                
+            }                                   
+        }
+        if($projects= Project::getAll(array(
+           'order_by'   => 'c.name',
+           'company'    => 0,
+        ))) {
+            echo __("without client");
+            echo '<ul>';
+            foreach($projects as $project){
+                echo '<li>' . $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . '</li>';
+            }
+            echo '</ul>';                
+        }    
+        echo "</div>";
+        
+        
+        
+        $block->render_blockEnd();
+
+
+        /*
         require_once(confGet('DIR_STREBER') . 'lists/list_projects.inc.php');
         #$projects=Project::getActive($order_str);
         $list= new ListBlock_projects();
@@ -168,6 +218,7 @@ function home() {
         }
 
         $list->print_automatic();
+        */
     }
 
     echo(new PageContentNextCol);
@@ -258,8 +309,7 @@ function home() {
                         ."</p>";
                         
                     }
-    
-                    
+                        
                     /**
                     * limit number of projects
                     */

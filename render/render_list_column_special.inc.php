@@ -230,12 +230,7 @@ class ListBlockCol_OpenTasks extends ListBlockCol
     }
     function render_tr(&$project,$style='') {
         $num_tasks= $project->getNumTasks();
-        #if($project->show_in_home) {
-            echo "<td class='right'>$num_tasks</td>";
-        #}
-        #else {
-        #    echo "<td class='right notShown' title='Tasks of this project are not shown in home'>($num_tasks)</td>";
-        #}
+        echo "<td class='right'>$num_tasks</td>";
     }
 }
 

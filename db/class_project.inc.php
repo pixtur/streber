@@ -969,9 +969,7 @@ class Project extends DbProjectItem
         : '';
 
         if(!is_null($company)) {
-            $AND_company= $company
-                        ? 'AND p.company=' . intval($company)
-                        : '';
+            $AND_company=  'AND p.company=' . intval($company);
         }
         else {
             $AND_company= "";

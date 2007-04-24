@@ -10,7 +10,7 @@ body {
 	padding:0px;
 	margin:0px;
 	font-family:"Trebuchet MS", Tahoma, Arial, Verdana,sans-serif;
-
+    font-size:10.5pt;
 }
 
 a {
@@ -19,6 +19,7 @@ a {
 }
 a:hover {
 	color:#a00;
+	text-decoration:underline;
 }
 
 
@@ -33,7 +34,7 @@ span.accesskey{
 }
 
 .small, td.small span{
-    font-size:75%;
+    font-size:8pt;
 }
 
 span.date {
@@ -53,6 +54,12 @@ div.wiki .searchword
 b.doclear{
     clear:both;
     display:block;
+}
+
+span.sub {
+ color:#898989;
+ line-height:120%;
+ font-size:  8pt;
 }
 
 
@@ -91,7 +98,7 @@ b.doclear{
 }
 
 #header #logo .text a .extend {
- font-size:60%;
+ font-size:9pt;
  vertical-align:top;
 }
 
@@ -100,7 +107,7 @@ b.doclear{
 div#sections {
  padding-top:   5px;
  padding-left:  5px;
- width:         40em;
+ width:         60em;
 }            
 
 div#sections span.section {
@@ -157,7 +164,7 @@ div#sections span.section  input:focus {
 		color:#fff;
 		text-align:right;
 	    white-space:nowrap;
-		font-size:75%;
+		font-size:8pt;
         line-height:95%;
         display:inline;
 	}
@@ -272,7 +279,7 @@ div.messages {
     padding:2px;
     padding-left:5px;
     color:#000;
-    font-size:80%;
+    /*font-size:80%;*/
 }
 
 div.messages p span.type{
@@ -320,14 +327,14 @@ div.messages a:hover {
 	#headline {
 		clear:both;
 		padding:3px 4px 6px 2px;
-		line-height:90%;
+		line-height:90%;		
 		z-index:300;
 		float:left;
 		position:relative;
 	}
 
 	#headline .type {
-		font-size:70%;
+		font-size:8pt;
 		padding-left:1px;
 		padding-bottom:10px;
 		color:#808080;
@@ -340,12 +347,12 @@ div.messages a:hover {
 	#headline .title {
 		font-family:verdana;
 		font-weight:bold;
-		font-size:120%;
+		font-size:15pt;
 		padding-left:5px;
 		font-style:italic;
 	}
 	#headline .title .minor {
-		font-size:80%;
+		font-size:13pt;
 		font-style:normal;
 	}
 	#headline a {
@@ -364,8 +371,8 @@ div.messages a:hover {
         background-image:url(img/bg_pagefunctions.png);
         background-position:bottom left;
         background-repeat:no-repeat;
-        font-family:"Tahoma";
-        font-size:80%;
+        /*font-family:"Tahoma";*/
+        /*font-size:80%;*/
     }
 
     div.page_functions img {
@@ -407,7 +414,7 @@ div.messages a:hover {
 
 /* ---- edit functions ----*/
 div.edit_functions {
-    font-size:90%;
+    /*font-size:90%;*/
     margin:0.8em 0.8em 0.8em 0em;
     padding:0.2em 0.2em 0.2em 0em ;
 
@@ -436,7 +443,7 @@ div.edit_functions a:hover{
 
 
 div.milestone_views {
-    font-size:80%;
+    /*font-size:80%;*/
     float:right;
     position:relative;
     top:-1em;
@@ -509,7 +516,7 @@ div.form {
     padding:10px 0px 0px 0px;
     text-align:left;
     margin:3px;
-    font-size:80%;
+    /*font-size:80%;*/
     max-width:700px;
 }
 
@@ -524,7 +531,7 @@ div.form {
         clear:left;
     }
     .form  label {
-        font-size:100%;
+        /*font-size:100%;*/
         width:19%;
         display:block;
         float:left;
@@ -623,7 +630,7 @@ div.form {
         padding:1px 1px 1px 1px;
         font-family:verdana;
         -moz-border-radius:4px;
-        font-size:80%;
+        /*font-size:80%;*/
         background-color:#ddd;
         cursor:pointer;
     }
@@ -644,7 +651,7 @@ div.form {
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
         margin:2px 0px 2px 4px;
-        font-size:100%;
+        /*font-size:100%;*/
         font-family:verdana;
         -moz-border-radius:4px;
     }
@@ -890,12 +897,6 @@ div.block {
 		margin-top:3px;
 	}
 
-    /* texts the refer to information not shown (like number of a project's tasks which are NOT shown at home*/
-    .block .notShown {
-        font-size:80%;
-        color:#888;
-    }
-
 
 	/*--- header ----*/
 	.block .header {
@@ -955,7 +956,7 @@ div.block {
 	.block  h2 {
 		cursor:pointer;
         padding-left:16px;
-        font-size:90%;
+        font-size:11pt;
 		position:releative;
 
 	}
@@ -974,7 +975,7 @@ div.block {
 	    position:relative;
 	    top:-1.4em;
 	    font-weight:normal;
-	    font-size:70%;
+	    font-size:9pt;
 	    padding-right:10px;
 	}
 
@@ -1014,7 +1015,7 @@ div.block {
         vertical-align:top;
     }
     .block .footer .summary {
-        font-size:90%;
+        /*font-size:90%;*/
         padding-left:10px;
         vertical-align:top;
         text-align:right;
@@ -1033,14 +1034,14 @@ div.block {
     .block .footer select {
         text-align:left;
         margin-right:10px;
-        font-size:70%;
+        font-size:8pt;
         padding:0px;
         margin:0px;
     }
 
     .block div.footer span.links {
         padding-left:1em;
-        font-size:   90%;
+        /*font-size:   90%;*/
     }
     .block div.footer span.links a {
         padding-right:  1em;
@@ -1077,7 +1078,7 @@ div.block {
 	}
 
 	.block .footer .list_functions {
-        font-size:80%;
+        /*font-size:80%;*/
 		padding-left:30px;
 		padding-top:0px;
         background-image:url(img/arrow_checkbox_functions.gif);
@@ -1156,7 +1157,9 @@ div.block {
 
 	table.list th {
 		font-weight:bolder;
-		font-size:70%;
+		font-size:8pt;
+	    line-height:    12pt;
+
 		text-align:left;
 		padding:0px 3px 1px 2px;
 		/*border-bottom:1px solid #808080;*/
@@ -1169,7 +1172,6 @@ div.block {
 
 		white-space:nowrap;
 		vertical-align:bottom;
-        line-height:90%;
         font-weight:normal;
 	}
 	table.list  .sort_primary {
@@ -1205,7 +1207,7 @@ div.block {
 		border-width:0px 1px 0px 0px;
 		margin:0px;
 		padding:3px 20px 3px 0px;
-		font-size:80%;
+		/*font-size:80%;*/
 		vertical-align:middle;
         cursor:pointer;
         vertical-align:top;
@@ -1218,7 +1220,7 @@ div.block {
 	    background-repeat:repeat-x;
 	    background-position:top right;
 	    color:#fff;
-	    font-size:80%;
+	    /*font-size:80%;*/
 	    font-weight:bold;
 	    font-style:italic;
 
@@ -1238,18 +1240,18 @@ div.block {
     }
 
     table.list td.status {
-        font-size:60%;
+        font-size:8pt;
         font-weight:bold;
     }
 
     table.list td.new {
         color:#E57700;
-        font-size:70%;
+        font-size:8pt;
     }
 
     table.list td.open {
         color:#888;
-        font-size:60%;
+        font-size:8pt;
     }
 
     table.list td.done {
@@ -1262,7 +1264,7 @@ div.block {
     }
 
     table.list td .entity {    /* entities like 'D' 'h' '�'*/
-        font-size:80%;
+        font-size:8pt;
     }
 
     table.list td.label {    /* entities like 'D' 'h' '�'*/
@@ -1277,7 +1279,7 @@ div.block {
         /*border-left-width:5px;
         border-right-width:5px;*/
         -moz-border-radius:6px;
-        font-size:80%;
+        font-size:8pt;
         font-weight:bold;
         color:#888;
     }
@@ -1294,7 +1296,7 @@ div.block {
 
 
     .diz {          /*note that task has description*/
-        font-size:70%;
+        font-size:8pt;
         color:#888;
         padding-left:5px;
     }
@@ -1437,7 +1439,7 @@ div.block {
     .block table tr.details {
         background-color:#fff;
         color:#888;
-        font-size:80%;
+        font-size:8pt;
         border-bottom:1px  solid #ddd;
 
     }
@@ -1485,13 +1487,12 @@ div.block {
 
     /*--- list changes -----------------------*/
     table.list td span.extract {
-        font-size:90%;
         line-height:120%;
     }
     table.list td span.sub {
-        font-size:90%;
         color:#898989;
         line-height:120%;
+        font-size:  8pt;
     }
     table.list td span.sub a {
         color:#619DD5;
@@ -1539,7 +1540,6 @@ div.block {
 
     table#comments td.details{
         vertical-align:top;
-        font-size:90%;
     }
 
 
@@ -1641,14 +1641,13 @@ div.block {
 
 
 div.description {
-  font-size:80%;
+  /*font-size:9pt;*/
 }
 
 
 
 /*---- docuNavigation --------------------------*/
 .block div.docuNavigation {
-    font-size:  84%;
 }
 .block div.docuNavigation ul {
     margin:     0px;
@@ -1684,7 +1683,7 @@ div.description {
 
 .block div.docuNavigation ul.children li {
     margin-left:2em;
-    font-size:  80%;
+    font-size:  8pt;
 }
 
 .block div.docuNavigation a.current {
@@ -1702,14 +1701,23 @@ div.description {
 }
 
 
-/*---- functionblock ---------------------------*/
+/**
+* block content without underlines
+*/
+.block div.linklist {
+    padding:3px;
+    /*font-size:80%;*/
+    margin:0px 2px 0px 5px;
+    -moz-border-radius:7px;
+}
+
 /*---- information-block / summary ----*/
 .block div.text{
     /*background-color:#f6f9df;*/
     /*border:2px solid #aaa;
     border-width:0px 2px 0px 2px;*/
     padding:3px;
-    font-size:80%;
+    /*font-size:80%;*/
     margin:0px 2px 0px 5px;
     -moz-border-radius:7px;
     /*background-color:#EFEFEF;*/
@@ -1758,7 +1766,7 @@ div.description {
         padding-top:0.25em;
         padding-right:5px;
         margin-left:-45px;
-        font-size:80%;
+        font-size:8pt;
         /*line-height:120%;*/
         color:#666;
     }
@@ -1802,7 +1810,7 @@ div.description {
         padding-top:0.2em;
         padding-right:5px;
         margin-left:-45px;
-        font-size:80%;
+        font-size:8pt;
         /*line-height:120%;*/
         color:#666;
     }
@@ -1829,7 +1837,7 @@ div.description {
 	color:#b0b0b0;
 	border-top:1px solid #e0e0e0;
 	padding:0px 10px 0px 18px;
-	font-size:60%;
+	font-size:8pt;
     float:right;
 
 }
@@ -1977,7 +1985,7 @@ div.weeks_risk {
 
 /*---- presets ----------------------*/
 div.presets {
- font-size:70%;
+ font-size:8pt;
 }
 
 div.presets a {
@@ -1996,7 +2004,7 @@ div.presets a.current {
 /*---- wiki -------------------------*/
 div.wiki {
     line-height:140%;
-    font-size:110%;
+    /*font-size:110%;*/
     max-width:50em;
 }
 
@@ -2004,7 +2012,7 @@ div.wiki pre {
     padding:0.5em 0.2em 0.5em 0.4em;
     border:1px dashed #ccc;
     background-color:#f8f8f8;
-    font-size:80%;
+    font-size:9pt;
     font-family:"Courier";
     font-weight:normal;
     line-height:125%;
@@ -2022,7 +2030,7 @@ div.wiki > pre {
 
 
 div.wiki code {
-    font-size:110%;
+    /*font-size:110%;*/
     font-family:"Courier New";
     color:#555;
     clear:both;
@@ -2035,7 +2043,7 @@ div.wiki p.code_from {
  padding:0px 5px 0px 10px;
  color:#999;
  position:relative;
- font-size:80%;
+ /*font-size:8pt;*/
  line-height:130%;
  display:inline;
  float:right;
@@ -2058,15 +2066,15 @@ div.wiki h1,div.wiki h2, div.wiki h3,div.wiki h4, div.wiki h5 {
     background-image:none;
 }
 div.wiki h1 {
-    font-size:140%;
+    font-size:14pt;
 }
 
 div.wiki h2 {
-    font-size:120%;
+    font-size:14pt;
 }
 
 div.wiki h3 {
-    font-size:110%;
+    font-size:12pt;
 }
 
 div.wiki ul, div.wiki ol {
@@ -2083,7 +2091,7 @@ div.wiki li{
 div.wiki em {
     /*font-weight:bold;*/
     font-family:"Georgia","Palatino Linotype","Palantino","Georgia";
-    font-size:110%;
+    /*font-size:110%;*/
     color:#060;
 }
 
@@ -2091,7 +2099,7 @@ div.wiki div.frame {
     background-color:#eee;
     padding:5px;
     -moz-border-radius:7px;
-    font-size:80%;
+    /*font-size:80%;*/
     white-space:normal;
     line-height:100%;
     display:block;
@@ -2159,7 +2167,7 @@ div.wiki span.end {
 }
 
 span.hint_wiki_syntax {
-    font-size:70%;
+    font-size:8pt;
 }
 span.hint_wiki_syntax a {
 }
@@ -2203,7 +2211,7 @@ div.wiki p.quote {
 div.wiki p.quoted_from {
     font-family:"georgia";
     color:#888;
-    font-size:80%;
+    font-size:8pt;
     text-align:right;
 }
 
@@ -2222,7 +2230,7 @@ div.wiki table th {
 div.wiki table th {
     background-color:#888;
     color:#fff;
-    font-size:80%;
+    font-size:8pt;
     margin:0px;
     line-height:130%;
 }
@@ -2244,7 +2252,7 @@ div.edit_chapter form textarea{
 
 /*----------- diff table -----------------------------------*/
 div.diff h2 {
-    font-size:100%;
+    /*font-size:100%;*/    
     padding:0.2em 0.2em 3px 0px;
     float:left;
     clear:left;
@@ -2280,7 +2288,7 @@ div.diff table.nav a {
     padding-right:10px;
     margin-left:2px;
     text-decoration:none;
-    font-size:90%;
+    /*font-size:90%;*/
 }
 
 div.diff table.nav a:hover {
@@ -2311,7 +2319,7 @@ table.diff  {
 
 table.diff td{
     width:50%;
-    font-size:80%;
+    /*font-size:80%;*/
     font-family:"Verdana";
     vertical-align:top;
     padding:2px;
@@ -2466,7 +2474,7 @@ span.selectorlist span.selectorlist_content {
  background:        #eee;
  padding:           2px;
  margin             20px 0px 0px 0x;
- font-size:         90%;
+ /*font-size:         90%;*/
 }
 
 
@@ -2489,7 +2497,7 @@ div#b_home_dashboard_long h4 {
 div#b_home_dashboard_long ul {
  margin:            1px 1em 0em 1em;
  padding:           0px;
- font-size:         90%;
+ /*font-size:         90%;*/
 }
 
 
@@ -2520,6 +2528,26 @@ div#b_home_dashboard_long p.more {
 }
 
 
+/*--- dashboard (projects) -----------------*/
+div#b_home_projects_long  {
+ margin:            0.5em;
+}
+
+div#b_home_projects_long ul {
+ margin:            0.2em 0em 1em 0.6em;
+ padding:           0px;
+ list-style:        none;
+
+}
+div#b_home_projects_long ul li {
+ margin:            0px;
+ padding:           0px 0px 0px 0.7em;
+ background:        url(layout/list_bullet.png) left center no-repeat; 
+ 
+
+}
+
+
 
 /*--- project news (for custom projView)--------------*/
 div.newsBlock {
@@ -2533,7 +2561,7 @@ div.newsTitle {
 }
 
 div.newsTitle h3 a {
-    font-size:120%;
+    font-size:14pt;
     color:#000;
     font-family: "Arial Black";
     font-weight: normal;
