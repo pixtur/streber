@@ -514,7 +514,11 @@ class PageHtmlStart extends PageElement {
             $buffer.= "<link rel=\"stylesheet\" href=\"themes/starlight/star-light.css\" type=\"text/css\"/>";
         }
 
-        $buffer.= "<link rel=\"stylesheet\" title=\"top\" media=\"screen\" type=\"text/css\" href=\"". getThemeFile("styles.css") . "?v=" . confGet('STREBER_VERSION') ."\">";
+        $buffer.= "<link rel=\"stylesheet\" title=\"top\" media=\"screen\" type=\"text/css\" href=\"". getThemeFile("styles.css") . "?v=" . confGet('STREBER_VERSION') ."\">"
+               .  "<!--[if IE]><link rel=\"stylesheet\" title=\"ie\" media=\"screen\" type=\"text/css\" href=\"". getThemeFile("styles_ie.css") . "?v=" . confGet('STREBER_VERSION') ."\"><![endif]-->";
+        
+
+
 
         ### link print-style ###
         if(confGet('LINK_STYLE_PRINT')) {

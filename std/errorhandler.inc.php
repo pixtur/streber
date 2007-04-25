@@ -83,7 +83,7 @@ function customHandler($number, $error_string, $file, $line, $context)
     $errous_function=-1;
 
     {
-        for($x=2; $x < count($trace); $x++) {                                        # Start at 2 -- ignore this function (0) and the customHandler() (1)
+        for($x=1; $x < count($trace); $x++) {                                        # Start at 2 -- ignore this function (0) and the customHandler() (1)
             $str_function= isset($trace[$x]['function'])
                          ?       $trace[$x]['function']
                          : '';

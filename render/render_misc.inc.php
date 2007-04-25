@@ -582,7 +582,7 @@ function build_projView_options($project)
     if($project->settings & PROJECT_SETTING_VERSIONS) {
         $options[]=  new NaviOption(array(
                 'target_id'=>'projViewVersions',
-                'name'=>__('Releases','Project option'),
+                'name'=>__('Versions','Project option'),
                 'target_params'=>array('prj'=>$project->id )
         ));
     }

@@ -700,6 +700,39 @@ class File extends DbProjectItem
             log_message("file::viewAsImage($this->id) can not find file '$filepath'",LOG_MESSAGE_MISSING_FILES);
         }
     }
+    
+    
+    /**
+    * renders the location of the file as a html string with links to project and parent tasks
+    *
+    */    
+    public function renderLocation($project=NULL, $show_project = true) 
+    {
+        if(is_null($project)) {
+            if(!$project = Project::getVisibleById($this->project)) {
+                trigger_error("file without visible project?", E_USER_NOTICE);                
+                $show_project = false;
+            }
+            
+        }
+        
+        $html= __('in');
+        if($show_project) {
+            $html.=  " <b>" . $project->getLink() . " </b>"; 
+        }
+
+        if($this->parent_item) {        
+            if($task= Task::getVisibleById($this->parent_item)) {
+    
+                if($folders= $task->getFolderLinks()) {
+                      $html .= ' &gt; '. $folders;
+                }
+                $html.=' &gt; '. $task->getLink(false);
+            }
+        }
+        return $html;
+    }
+    
 }
 File::initFields();
 

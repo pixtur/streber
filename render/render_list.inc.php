@@ -193,7 +193,7 @@ class ListFilter_efforts extends ListFilter
 class ListFilter_projects extends ListFilter
 {
     public $id = 'projects';
-    public $sql_querry_attribute = '';
+    public $sql_querry_attribute = 'visible_only';
     public $default = true;
 
     public function __construct($args=NULL)
@@ -870,6 +870,7 @@ class ListGrouping extends BaseObject
     public $sql_filter;                 # string which ()
     public $locked=false;               # if true, can't be removed
     public $hidden=false;               # if true no visible
+    public $order_key;
 
     public function __construct($args) {
         parent::__construct($args);
@@ -887,6 +888,9 @@ class ListGrouping extends BaseObject
         }
         if(!$this->key) {
             $this->key= $this->id;
+        }
+        if(!$this->order_key) {
+            $this->order_key= $this->id;
         }
     }
 
@@ -1009,6 +1013,32 @@ class ListGroupingCreatedBy extends ListGrouping
         return $name;
     }
 }
+
+class ListGroupingProject extends ListGrouping
+{
+
+    public function __construct($args=NULL) {
+        $this->id       = 'project';    # used get set cookie and hide columns
+        $this->order_key = 'i.project';  # used to construct sql order string
+        parent::__construct($args);
+    }
+
+    /**
+    * render separating row
+    */
+    public function render(&$item)
+    {
+        require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
+        if($project= Project::getVisibleById($item->project)) {
+            $name= sprintf($project->getLink());
+        }
+        else {
+            $name= "???";
+        }
+        return $name;
+    }
+}
+
 
 class ListGroupingTask extends ListGrouping
 {

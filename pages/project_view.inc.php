@@ -423,39 +423,6 @@ function ProjView()
 
 
 
-
-
-
-    if(confGet("PROJECT_COMMENTS")) {
-        $order_str=get("sort_".$PH->cur_page->id ."_comments");
-
-		if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-	        $comments= $project->getComments(array(
-	            'order_by'=>$order_str,
-	            'visible_only'=>false,
-	        ));
-		}
-		else{
-	        $comments= $project->getComments(array(
-	            'order_by'=>$order_str,
-	        ));
-		}
-		/**
-		* hide project comments by default
-		*/
-		if(count($comments)) {
-
-            $list_comments= new ListBlock_comments();
-            $list_comments->title=__("Comments on project");
-            $list_comments->title_append_hidden=
-                count($comments)
-                ? "(".count($comments).")"
-                : '';
-            $list_comments->no_items_html=$PH->getLink('commentNew','',array('prj'=>$project->id));
-            $list_comments->render_list(&$comments);
-        }
-    }
-
     echo "<br><br>";                                        # @@@ hack for firefox overflow problems
     ### HACKING: 'add new task'-field ###
     $PH->go_submit='taskNew';

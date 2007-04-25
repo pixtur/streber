@@ -1841,7 +1841,7 @@ $g_lang_table= array(
 'Category'                    =>'Kategoria',  # line 2768
 
 ### ../render/render_misc.inc.php   ###
-'Releases|Project option'     =>'Wydania',  # line 328
+'Versions|Project option'     =>'Wydania',  # line 328
 'Docu|Project option'         =>'Dokumentacja',  # line 336
 
 ### ../std/constant_names.inc.php   ###

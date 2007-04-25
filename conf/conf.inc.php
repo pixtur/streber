@@ -214,11 +214,6 @@ $g_config= array(
 
 
     /**
-    * comments on project possible (not attached to task)
-    */
-    'PROJECT_COMMENTS'=> false,
-
-    /**
     * linking print-stylesheet sometimes slows down pageload for 10%-15% percent
     * turn off for maximal performance
     */
@@ -459,7 +454,7 @@ $g_user_profiles=array(
         'level_reduce'          => PUB_LEVEL_PRIVATE,
     ),
     PROFILE_PM=>array(
-        'default_user_rights'   => RIGHT_ALL & (~RIGHT_PERSON_EDIT_RIGHTS) ,
+        'default_user_rights'   => RIGHT_ALL & (~ (RIGHT_PERSON_EDIT_RIGHTS|RIGHT_VIEWALL)) ,
         'level_view'            => PUB_LEVEL_SUGGESTED,
         'level_create'          => PUB_LEVEL_CLIENTEDIT,
         'level_edit'            => PUB_LEVEL_SUGGESTED,

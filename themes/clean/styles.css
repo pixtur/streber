@@ -24,6 +24,7 @@ a:hover {
 
 
 
+
 p,h1,h2,h3,h4,div {
 	margin:0px;
 	padding:0px;
@@ -61,6 +62,17 @@ span.sub {
  line-height:120%;
  font-size:  8pt;
 }
+
+span.itemid {
+ color:#aaa;
+ font-size:  8pt;
+ padding-left:1em;
+}
+
+span.isDone a {
+ text-decoration:line-through;
+}
+
 
 
 /*--- section-colors ---*/
@@ -551,7 +563,7 @@ div.form {
         margin:2px 0px 2px 4px;
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px;
     }
 
@@ -573,7 +585,7 @@ div.form {
         margin:2px 0px 2px 4px;
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px 1px 1px 4px;
     }
     .form .datetime .inp_time{
@@ -581,7 +593,7 @@ div.form {
         margin:2px 0px 2px 4px;
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px 1px 1px 4px;
     }
 
@@ -611,7 +623,7 @@ div.form {
         margin:2px 0px 2px 4px;
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px;
     }
 
@@ -620,7 +632,7 @@ div.form {
         margin:2px 0px 2px 4px;
         border:1px solid #bbb;
         padding:1px 2px 1px 3px;
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px;
     }
 
@@ -652,7 +664,7 @@ div.form {
         padding:1px 2px 1px 3px;
         margin:2px 0px 2px 4px;
         /*font-size:100%;*/
-        font-family:verdana;
+        /*font-family:verdana;*/
         -moz-border-radius:4px;
     }
 
@@ -906,6 +918,7 @@ div.block {
 		padding:0.4em 2px 0px 0.4em;
 		font-weight:bold;
 		height:20px;
+		margin:0px; 
 
 	}
 
@@ -917,7 +930,6 @@ div.block {
      	background-repeat:no-repeat;
      	background-position:top right;
     }
-
 
     /* good browsers */
     div.block.reduced_header > div.extra_top {
@@ -934,11 +946,11 @@ div.block {
     }
 
 
-    /* hide from IE6 */
-    div.block.reduced_header > div.extra_top {
+    /* this must be reversed in styles_ie.ccs */
+    div.block.reduced_header div.extra_top {
         margin-bottom:-15px;
-		position:releative;
-
+    	position:releative;		
+    
     }
 
     /*--- toggle blocks ---*/
@@ -946,6 +958,7 @@ div.block {
         background-image:url(img/toggle_block_open.gif);
         background-repeat:no-repeat;
         background-position:top left;
+
     }
 
 	.closed div.header h2{
@@ -1328,23 +1341,10 @@ div.block {
 		border:none;
 	}
 
-	table.list td a {
-		text-decoration:none;
-        /*padding-left:5px;*/
-	}
-
-
     table.list tr.isDone a {
 		text-decoration:line-through;
     }
 
-	table.list tr td span.isDone {
-		text-decoration:line-through;
-	}
-
-    .list tr td span.isDone a {
-		text-decoration:line-through;
-	}
 
     table.list td.right {
         text-align:right;
@@ -1744,6 +1744,7 @@ div.description {
         /*clear:both;*/ /* this clear messes multi-column display in firefox */
         margin:5px 0px 0px 80px;
         padding:0px 0px 0px 0px;
+        clear:left;
 
     }
     .block div.text p.description {
@@ -1757,6 +1758,7 @@ div.description {
     .block div.text p.text{
         margin:0px 0px 0px 0px;
     }
+
 
     .block div.text p label{
         width:90px;
@@ -2320,7 +2322,7 @@ table.diff  {
 table.diff td{
     width:50%;
     /*font-size:80%;*/
-    font-family:"Verdana";
+    /*font-family:"Verdana";*/
     vertical-align:top;
     padding:2px;
     -moz-border-radius:3px;

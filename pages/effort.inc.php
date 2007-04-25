@@ -158,7 +158,7 @@ function effortView()
 
         if($effort->description != "") {
             echo '<div class="text">';
-            echo wiki2html($effort->description, $effort);
+            echo wiki2html($effort->description, $project->id);
 
             ### update effort if relative links have been converted to ids ###
             global $g_wiki_auto_adjusted;

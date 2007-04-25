@@ -1581,9 +1581,10 @@ class DbProjectItem extends DbItem {
                 ? "AND i.type = $type"
                 : "";
 
-        $str_limit= $limit
+        $str_limit= ($limit || $limit_start)
                 ? " LIMIT $limit_start, $limit"
                 : "";
+
 
 
         ### only visibile for current user ###
@@ -1592,6 +1593,7 @@ class DbProjectItem extends DbItem {
             "SELECT i.* from {$prefix}item i, {$prefix}projectperson upp
             WHERE
                 upp.person = {$auth->cur_user->id}
+                AND upp.state = 1
                 AND upp.project = i.project
                 $str_state
                 $str_type
@@ -1632,7 +1634,6 @@ class DbProjectItem extends DbItem {
             . $str_limit;
         }
         require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
-
 
         $dbh = new DB_Mysql;
 

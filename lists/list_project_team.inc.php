@@ -170,8 +170,9 @@ class ListBlockCol_ProjectPersonName extends ListBlockCol
 
     public function __construct($args=NULL) {
         parent::__construct($args);
-        $this->name=__('Team members');
+        $this->name=__('Name');
         $this->id= 'member';
+        $this->width= "60%";
     }
 
 	function render_tr(&$pp, $style="") {
@@ -193,6 +194,7 @@ class ListBlockCol_ProjectRole extends ListBlockCol
         parent::__construct($args);
         $this->name=__('Role');
         $this->id='role';
+        $this->width= "1%";
     }
 
 	/*function render_tr(&$obj, $style="")

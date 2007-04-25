@@ -205,7 +205,7 @@ class PageBlock extends PageElement
 
     public function render_blockEnd()
     {
-        echo "\n</div><!-- end {$this->id} -->\n";
+        echo "\n<b class=doclear>&nbsp;</b></div><!-- end {$this->id} -->\n";
     }
 
 

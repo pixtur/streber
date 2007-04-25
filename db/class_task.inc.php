@@ -1077,6 +1077,7 @@ foreach($filters_str as $fs=>$value) {
             }
         }
 
+        
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 

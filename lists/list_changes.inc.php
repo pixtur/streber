@@ -206,43 +206,47 @@ class ListBlockCol_ChangesDetails extends ListBlockCol
 
     function render_tr(&$change_line, $style="")
     {
+        global $PH;
         if(!$change_line instanceof ChangeLine) {
             trigger_error('ListBlockCol_ChangesDetails() requires instance of ChangeLine',E_USER_WARNING);
             print "<td></td>";
             return;
         }
+        $str_item= "";
+        $str_details ="";
 
         if($change_line->task_html) {
-            $str_task= $change_line->task_html;
+            $str_item= $change_line->task_html;
         }
-        else if($change_line->task) {            
-            $str_task= $change_line->task->getLink(false);
-        }
-        else if($change_line->task_id) {
-            if($task= Task::getVisibleById($change_line->task_id)) {
+        else if($change_line->item) {
+            if($change_line->item->type == ITEM_TASK) {
+            
                 global $auth;
-
-                ### high light changes by others ###
-                $str_task= $task->getLink(false);
-
+                $task= $change_line->item;
+                
+                $str_item= "<b>" . $task->getLink(false) . "</b>" . ' <span class=itemid>#' . $task->id . '</span>';
+                
                 if($task->status >= STATUS_COMPLETED) {
-                    $str_task= '<span class=isDone>'. $str_task.'</span>';
+                    $str_item= '<span class=isDone>'. $str_item.'</span>';
                 }
 
-                if($change_line->person_by != $auth->cur_user->id) {
-                    $str_task= '<b' . $str_task . '</b>';
-                }
+                $str_details= $change_line->html_details
+                         ? $change_line->html_details
+                         : "";                
             }
+            else if($change_line->item->type == ITEM_FILE) {
+                $str_item= $PH->getLink('fileView', $change_line->item->name, array('file' => $change_line->item->id)); 
+                
+                $str_details= $change_line->item->renderLocation();
+                
+            }
+            
         }
-        else {
-            '';
+        else if($change_line->item_id) {
         }
 
-        $str_details= $change_line->html_details
-                 ? $change_line->html_details
-                 : "";
 
-        print '<td>'.$str_task .'<br><span class="sub">'. $str_details.'</span></td>';
+        print '<td>'.$str_item .'<br><span class="sub">'. $str_details.'</span></td>';
     }
 }
 

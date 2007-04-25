@@ -1115,7 +1115,7 @@ function personViewProjects()
         unset($list->functions['projNewFromTemplate']);
         $list->no_items_html= __('no projects yet');
         
-        $list->filters[] = new ListFilter_projects();
+        #$list->filters[] = new ListFilter_projects();
         {
             $preset = $presets[$preset_id];
             foreach($preset['filters'] as $f_name=>$f_settings) {
@@ -1148,7 +1148,7 @@ function personViewProjects()
         
         $list->query_options['order_by'] = $order_by;
         $list->query_options['person'] = $person->id;
-        #$list->print_automatic();
+        $list->print_automatic();
         
         //$list->render_list(&$efforts);
     }

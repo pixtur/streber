@@ -49,9 +49,6 @@ function build_home_options()
 }
 
 
-define('MAX_CHANGELINES_PER_PROJECT', 4);
-define('MAX_CHANGELINES', 16);
-define('MORE_CHANGELINES', 20);
 
 
 /**
@@ -98,43 +95,13 @@ function home() {
     measure_stop('init2');
 
 
-    #--- functions block ------------
-    /*
+
+
+    #--- list copmanies --------------------------------------------------------
     {
-        $block=new PageBlock(array(
-            'title' =>__('Functions'),
-            'id'    =>'functions'
-        ));
-        $block->render_blockStart();
-        echo "<div class=text>";
 
-        ### write functions ###
-        $function_links=array();
-        $function_links[]=$PH->getLink('projNew','',array());
-        $function_links[]=$PH->getLink('companyNew','',array());
-        $function_links[]=$PH->getLink('personNew','',array());
-        $function_links[]=$PH->getLink('homeEfforts',__('View your efforts'),array('person'=>$auth->cur_user->id));
-        $function_links[]=$PH->getLink('personEdit',__('Edit your profile'),array('person'=>$auth->cur_user->id));
-        $function_links[]=$PH->getLink('personAllItemsViewed','',array('person' => $auth->cur_user->id));
 
-        if($function_links) {
 
-            echo "<ul>";
-            foreach($function_links as $f){
-                if($f) {
-                    echo "<li>$f" ;
-                }
-            }
-            echo "</ul>";
-        }
-        echo "</div>";
-
-        $block->render_blockEnd();
-    }
-    */
-
-    #--- list projects --------------------------------------------------------
-    {
         require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
         
         $block=new PageBlock(array(
@@ -183,42 +150,6 @@ function home() {
         
         $block->render_blockEnd();
 
-
-        /*
-        require_once(confGet('DIR_STREBER') . 'lists/list_projects.inc.php');
-        #$projects=Project::getActive($order_str);
-        $list= new ListBlock_projects();
-        $list->reduced_header= true;
-
-        unset($list->functions['projNewFromTemplate']);
-        unset($list->columns['status']);
-        unset($list->columns['persons']);
-        unset($list->columns['status_summary']);
-        unset($list->columns['efforts']);
-        unset($list->columns['date_start']);
-        unset($list->columns['date_closed']);
-        $list->show_functions=false;
-        $list->title=__('Projects');
-        $list->reduced_header= false;
-
-        $list->query_options['status_min']= STATUS_UPCOMING;
-        $list->query_options['status_max']= STATUS_OPEN;
-
-
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-            $warning="";
-            if(! ($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-                $warning=__("<b>NOTE</b>: Some projects are hidden from your view. Please ask an administrator to adjust you rights to avoid double-creation of projects");
-            }
-
-            $list->no_items_html= $PH->getLink('projNew',__('create new project'),array()). $warning;
-        }
-        else {
-            $list->no_items_html= __("not assigned to a project");
-        }
-
-        $list->print_automatic();
-        */
     }
 
     echo(new PageContentNextCol);
@@ -226,17 +157,16 @@ function home() {
 
     #--- project dashboard ----
     {
+define('MAX_CHANGELINES_PER_PROJECT', 2);
+define('MAX_CHANGELINES', 16);
+define('MORE_CHANGELINES', 20);
         
         require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
         
-        #$list= new ListBlock_dashboard();
-        #$list->print_automatic();
-
-
 
         if(!$projects= Project::getAll(array(
             'order_by' => 'modified DESC',
-            'limit'     => MAX_CHANGELINES / MAX_CHANGELINES_PER_PROJECT,
+            'limit'     => intval(MAX_CHANGELINES),
             
         ))) {
             echo __("No active projects");
@@ -260,10 +190,10 @@ function home() {
                     'unviewed_only'     => false,
                     'limit'             => MAX_CHANGELINES + 1,      # increased by 1 to get "more link"
                     'limit_start'       => 0,
-                    'type'              => ITEM_TASK,
+                    #'type'              => ITEM_TASK,
                 ))) {
                     $projects_with_changes[]= $project;
-                    $project_changes[$project->id]= $changes;
+                    $project_changes[$project->id]= $changes;                    
                 }
             }            
             
@@ -285,6 +215,7 @@ function home() {
                 */
                 $printed_changelines = 0;
                 foreach($projects_with_changes as $project) {
+                    
                     $changes= $project_changes[$project->id];
     
                     echo '<h4>'.  $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . "</h4>";
@@ -292,17 +223,18 @@ function home() {
                     echo "<ul id='changesOnProject_$project->id'>";
                     $lines= 0;
                     foreach($changes as $c) {
+                        $lines++;
                         printChangeLine($c);
     
                         $printed_changelines++;
-                        if($lines++ >= $changelines_per_project - 1) {
+                        if($lines >= $changelines_per_project) {
                             break;                            
                         };
                     }
                     echo "</ul>";
-                    if($lines <= count($changes)) {
+                    if($lines < count($changes)) {
                         echo "<p class=more>"
-                        . "<a href='javascript:getMoreChanges($project->id, $lines, 20);' "
+                        . "<a href='javascript:getMoreChanges($project->id, ". ($lines - 1).", " . MORE_CHANGELINES . ");' "
                         . '>'
                         . __('Show more')
                         . '</a>'
@@ -313,7 +245,7 @@ function home() {
                     /**
                     * limit number of projects
                     */
-                    if($printed_changelines >= MAX_CHANGELINES - MAX_CHANGELINES_PER_PROJECT) {
+                    if($printed_changelines >= MAX_CHANGELINES) {
                         break;
                     }
                 }            
@@ -368,11 +300,11 @@ function homeDashboardAjaxMore()
         $lines= 0;
         foreach($changes as $c) {
             $lines ++;
-            if($lines > $start + $count) {
+            if($lines >= $start + $count) {
                 break;
             }
 
-            if($lines <= $start) {
+            if($lines < $start) {
                 continue;
             }
             printChangeLine($c);
@@ -386,14 +318,21 @@ function homeDashboardAjaxMore()
 */
 function printChangeLine($c)
 {
-    echo '<li>' . $c->task->getLink(false);
+    global $PH;
+    
+    if($c->item->type == ITEM_TASK) {
+        echo '<li>' . $c->item->getLink(false);
+    }
+    else {
+        echo '<li>' . $PH->getLink('fileView', $c->item->name, array('file' => $c->item->id));        
+    }
     
     
     /**
     * not viewed
     */
-    if($c->task) {
-        if($new= $c->task->isChangedForUser()) {
+    if($c->item) {
+        if($new= $c->item->isChangedForUser()) {
             if($new == 1) {
                 echo '<span class=new> (' . __('New') . ') </span>';
             }

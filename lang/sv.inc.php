@@ -2310,7 +2310,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'Docu|Project option'         =>'Doku',  # line 351
-'Releases|Project option'     =>'Utgåvor',  # line 366
+'Versions|Project option'     =>'Utgåvor',  # line 366
 
 ### ../render/render_page.inc.php   ###
 'Go to parent / alt-U'        =>'Gå till överliggande',  # line 986

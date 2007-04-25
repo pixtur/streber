@@ -44,8 +44,9 @@ class ChangeLine extends BaseObject
     public $html_what;
     public $txt_what;
     public $what;
+    public $item;
     public $task;
-    public $task_id;
+    public $item_id;
     public $task_html;
     public $html_details;
     public $html_assignment;
@@ -172,10 +173,11 @@ class ChangeLine extends BaseObject
 
 
                     $change= new ChangeLine(array(
+                        'item'      =>      $task,
                         'person_by' =>      $i->created_by,
                         'timestamp' =>      $i->created,
-                        'task_id'   =>      $i->id,
-                        'task'      =>      $task,
+                        'item_id'   =>      $i->id,
+                        #'task'      =>      $task,
                         'html_what' =>      '<span class=new>'. __('new') .' '. $task->getLabel() .'</span>',
                         'txt_what'  =>      __('new') .' '. $task->getLabel(),
                         'html_assignment'=> $html_assignment,
@@ -184,8 +186,20 @@ class ChangeLine extends BaseObject
                     $changes[]= $change;
 
                 }
-                else {
-
+                else if ($i->type == ITEM_FILE) {
+                    require_once(confGet('DIR_STREBER') . 'db/class_file.inc.php');
+                    if($file= File::getVisibleById($i->id)) {                    
+                        $change= new ChangeLine(array(
+                            'item'      =>      $file,
+                            'person_by' =>      $i->created_by,
+                            'timestamp' =>      $i->created,
+                            'item_id'   =>      $i->id,
+                            'html_what' =>      __('new File'),
+                            'txt_what'  =>      __('new File'),
+                            'html_details'=>    $file->name,
+                        ));
+                        $changes[]= $change;
+                    }
 
                 }
                 break;
@@ -411,8 +425,9 @@ class ChangeLine extends BaseObject
                     $change= new ChangeLine(array(
                         'person_by' =>      $i->modified_by,
                         'timestamp' =>      $i->modified,
-                        'task_id'   =>      $i->id,
-                        'task'      =>      $task,
+                        'item_id'   =>      $i->id,
+                        #'task'      =>      $task,
+                        'item'      =>      $task,
                         'txt_what'  =>      $txt_what,
                         'html_what' =>      $html_what,
                         'html_assignment'=> $html_assignment,
@@ -459,10 +474,11 @@ class ChangeLine extends BaseObject
 
 
                     $change= new ChangeLine(array(
+                        'item'      =>      $task,
                         'person_by' =>      $i->deleted_by,
                         'timestamp' =>      $i->deleted,
-                        'task_id'   =>      $i->id,
-                        'task'      =>      $task,
+                        'item_id'   =>      $i->id,
+                        #'task'      =>      $task,
                         'html_what' =>      $html_what,
                         'html_assignment'=> $html_assignment,
                         'html_details'=>    $html_details,

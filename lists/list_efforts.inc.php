@@ -127,7 +127,7 @@ class ListBlock_efforts extends ListBlock
             $this->active_block_function = 'list';
         }
 
-        $this->query_options['alive_only'] = false;
+        $this->query_options['alive_only'] = true;
 
         $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
 
@@ -161,7 +161,6 @@ class ListBlock_efforts extends ListBlock
 	        ### prepend key to sorting ###
 	        if(isset($this->query_options['order_by'])) {
 	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
-
 	        }
 	        else {
 	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();

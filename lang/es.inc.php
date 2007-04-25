@@ -2163,7 +2163,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'Docu|Project option'         =>'Docu',  # line 384
-'Releases|Project option'     =>'Lanzamientos',  # line 399
+'Versions|Project option'     =>'Lanzamientos',  # line 399
 '%b %e, %Y|strftime format string'=>'',  # line 583
 '%I:%M%P|strftime format string'=>'',  # line 596
 '%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 605

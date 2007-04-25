@@ -686,7 +686,7 @@ class ListBlock_tasks extends ListBlock
             * I am not sure, how we would do this here.
             */
             if($this->groupings->active_grouping_key == 'parent_task') {
-                $this->query_options['sort_hierarchical']= true;
+                #$this->query_options['sort_hierarchical']= true;
                 $this->query_options['use_collapsed']    = true;
                 $this->query_options['show_folders']     = true;
                 $this->query_options['order_by'] = 'is_folder' . ",".$this->query_options['order_by'];

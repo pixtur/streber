@@ -1679,7 +1679,7 @@ class FormatBlockTable extends FormatBlock
                 
                 while($text) {
 
-                    if(preg_match("/(.*?)\r?\n((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
+                    if(preg_match("/(.*?)((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
 
                         $keep_previous_block= new FormatBlock($matches[1]);
 
@@ -1869,6 +1869,8 @@ function wiki2purehtml($text, $project=NULL)
     global $g_wiki_project;
     $t= $g_wiki_project;
 
+    $text.="\n";
+    
     ### convert, if id is given ###
     if($project) {
         if(!is_object($project)) {
@@ -1906,9 +1908,9 @@ function wiki2purehtml($text, $project=NULL)
 *
 * this is used be inline editing functions with ajax
 */
-function getOneWikiChapter(&$text, $chapter)
+function getOneWikiChapter($text, $chapter)
 {
-    $parts= getWikiChapters(&$text);
+    $parts= getWikiChapters($text);
     if(isset($parts[$chapter])) {
         return $parts[$chapter];
     }
@@ -1938,8 +1940,11 @@ class ChapterBlockCode extends ChapterBlock{
 * - returns array with chapters.
 * - First chapter might be empty, if there is no text before the first headline.
 */
-function &getWikiChapters(&$text)
+function &getWikiChapters($text)
 {
+    if(!preg_match("/\n$/s", $text)) {
+        $text.= "\n";
+    }
     $regex_headlines= array(
         "/(.*?)(\r?==[ \t]*[^\n=]+==\s*\r?\n[ \t]*)(.*)/s",
         "/(.*?)(\r?===[ \t]*([^\n=]+)===\s*\n[ \t]*)(.*)/s",
