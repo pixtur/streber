@@ -83,6 +83,8 @@ class PageBlock extends PageElement
 {
 	public $bg_style                ='bg_misc';
     public $id                      = NULL;         # required for cookies, block-toggle, javascript, etc.
+    public $css_classes             = array('block');      # additional classes of block. Id is automatically added
+
     public $title                   ='';
     public $title_append_hidden;
     public $block_functions         = array();		# should be assoc array to allow user-settings
@@ -106,6 +108,7 @@ class PageBlock extends PageElement
                 $this->id= preg_replace("/[^\w\d]/","",$this->id);
             }
         }
+        $this->css_classes[]= $this->id;
 
         ### add current page id to id to make block unique for storing toggle-state as cookie ###
         global $PH;
@@ -118,8 +121,8 @@ class PageBlock extends PageElement
 	{
 	    global $auth;
 
-		$title=
-		$bg_style="bg_time";      # bg_proj|bg_time etc.
+		#$title=
+		#$bg_style="bg_time";      # bg_proj|bg_time etc.
 
 
         ### hidden-cookie set? ###
@@ -138,7 +141,7 @@ class PageBlock extends PageElement
                     $style= "style='display:none'" ;
                 }
     			echo "<!-- start of list-block {$this->id} -->\n";
-    	  		echo "<div id=b_{$this->id}_short class=\"block {$this->bg_style}_shade closed\" $style>\n";
+    	  		echo "<div id=b_{$this->id}_short class=\"" . implode(" ", $this->css_classes) . " closed\" $style>\n";
     			echo "<div class=\"header\">\n";
     			    echo "<b class=extra></b>";
 				    echo "<h2 class=table_name >\n";
@@ -160,7 +163,7 @@ class PageBlock extends PageElement
                     $style= "";
                 }
     			echo "<!-- start of list-block -->\n";
-    	  		echo "<div id=b_{$this->id}_long class=\"block {$this->bg_style}_shade opened\" $style>";
+    	  		echo "<div id=b_{$this->id}_long class=\"" . implode(" ", $this->css_classes) . " opened\" $style>";
     			echo "<div class=\"header\">";
     			    echo "<b class=extra></b>";
 				    echo "<h2 class=table_name >\n";

@@ -134,4 +134,56 @@ function itemSaveField()
         print wiki2purehtml($object->$field_name); 
     }    
 }
+
+
+/**
+* get recent changes for ajax request from home @ingroup pages
+*
+* @Params
+* - prj
+* - start
+* - count
+*
+* @NOTE
+* This page function was formerly a part of home.inc.php but since it will
+* be used in other places as well, item_ajax might be a better place for it.
+*/
+function AjaxMoreChanges()
+{
+    require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
+    require_once(confGet('DIR_STREBER') . 'lists/list_recentchanges.inc.php');
+
+    global $auth;
+    header("Content-type: text/html; charset=utf-8");
+
+    if(!$project= Project::getVisibleById(get('prj'))) {
+        return;
+    }
+    $start= is_null(get('start'))
+          ? 0
+          : intval(get('start'));
+
+    $count= is_null(get('count'))
+          ? 20
+          : intval(get('count'));
+        
+    /**
+    * first query all unviewed changes
+    */
+    if($changes= ChangeLine::getChangeLines(array(
+        'not_modified_by'   => $auth->cur_user->id,
+        'project'           => $project->id,
+        'unviewed_only'     => false,
+        'limit_rowcount'    => $count,
+        'limit_offset'      => $start,
+        'type'              => array(ITEM_TASK, ITEM_FILE),
+    ))) {
+        $lines= 0;
+        foreach($changes as $c) {
+            printChangeLine($c);
+        }
+    }
+}
+
+
 ?>

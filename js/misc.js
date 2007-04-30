@@ -258,13 +258,16 @@ function getMoreChanges(project, start, count)
     {
         start= this.starts[project] + count;
     }
-    this.starts[project] = start + count;
+    this.starts[project] = start;
+    
     
             
     $.get("index.php",
-        { go:'homeDashboardAjaxMore', start: start, count: count, prj:project },
+        { go:'ajaxMoreChanges', start: start, count: count, prj:project },
         function(data) {
             $(element).append(data);
+            
+            //alert("start="+ start+ " count=" + count);
         }
     );
     return;

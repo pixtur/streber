@@ -301,6 +301,20 @@ class ListBlockCol_ChangesDatePerson extends ListBlockCol
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+/**
+* depreciated listing of changes
+*/
 class ListBlock_AllChanges extends ListBlock
 {
     public $bg_style = "bg_time";
@@ -582,5 +596,15 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
         print "<td><a href='$str_url'>$str_name</a><span class='sub who'> $str_addon</span></td>";
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 ?>

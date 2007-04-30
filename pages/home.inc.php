@@ -157,100 +157,13 @@ function home() {
 
     #--- project dashboard ----
     {
-define('MAX_CHANGELINES_PER_PROJECT', 2);
-define('MAX_CHANGELINES', 16);
-define('MORE_CHANGELINES', 20);
-        
-        require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
-        
-
-        if(!$projects= Project::getAll(array(
+        if($projects= Project::getAll(array(
             'order_by' => 'modified DESC',
-            'limit'     => intval(MAX_CHANGELINES),
+            'limit'     => intval( confGet('MAX_CHANGELINES')),
             
         ))) {
-            echo __("No active projects");
-        }
-        else {
-            
-            /**
-            * first get all changelines for projects to filter out projects without changes
-            */
-            $projects_with_changes= array();    # array with projects
-            $project_changes= array();          # hash with project id and changelist
-
-            foreach($projects as $project) {
-                
-                /**
-                * first query all unviewed changes
-                */
-                if($changes= ChangeLine::getChangeLines(array(
-                    'not_modified_by'   => $auth->cur_user->id,
-                    'project'           => $project->id,
-                    'unviewed_only'     => false,
-                    'limit'             => MAX_CHANGELINES + 1,      # increased by 1 to get "more link"
-                    'limit_start'       => 0,
-                    #'type'              => ITEM_TASK,
-                ))) {
-                    $projects_with_changes[]= $project;
-                    $project_changes[$project->id]= $changes;                    
-                }
-            }            
-            
-            if(count($projects_with_changes)) {
-
-                $block=new PageBlock(array(
-                    'title' =>__('Recently changed projects'),
-                    'id'    =>'dashboard'
-                ));
-                $block->render_blockStart();
-                
-                $changelines_per_project= MAX_CHANGELINES_PER_PROJECT;
-                if(count($projects_with_changes) < MAX_CHANGELINES / MAX_CHANGELINES_PER_PROJECT) {
-                    $changelines_per_project = MAX_CHANGELINES / count($projects_with_changes)  - 1;
-                }
-    
-                /**
-                * count printed changelines to keep size of list
-                */
-                $printed_changelines = 0;
-                foreach($projects_with_changes as $project) {
-                    
-                    $changes= $project_changes[$project->id];
-    
-                    echo '<h4>'.  $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . "</h4>";
-    
-                    echo "<ul id='changesOnProject_$project->id'>";
-                    $lines= 0;
-                    foreach($changes as $c) {
-                        $lines++;
-                        printChangeLine($c);
-    
-                        $printed_changelines++;
-                        if($lines >= $changelines_per_project) {
-                            break;                            
-                        };
-                    }
-                    echo "</ul>";
-                    if($lines < count($changes)) {
-                        echo "<p class=more>"
-                        . "<a href='javascript:getMoreChanges($project->id, ". ($lines - 1).", " . MORE_CHANGELINES . ");' "
-                        . '>'
-                        . __('Show more')
-                        . '</a>'
-                        ."</p>";
-                        
-                    }
-                        
-                    /**
-                    * limit number of projects
-                    */
-                    if($printed_changelines >= MAX_CHANGELINES) {
-                        break;
-                    }
-                }            
-                $block->render_blockEnd();
-            }
+            require_once(confGet('DIR_STREBER') . 'lists/list_recentchanges.inc.php');            
+            printRecentChanges($projects);            
         }
     }
 
@@ -259,101 +172,10 @@ define('MORE_CHANGELINES', 20);
 }
 
 
-/**
-* get recent changes for ajax request from home @ingroup pages
-*
-* @Params
-* - prj
-* - start
-* - count
-*/
-
-function homeDashboardAjaxMore()
-{
-    require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
-
-    global $auth;
-    header("Content-type: text/html; charset=utf-8");
-
-    if(!$project= Project::getVisibleById(get('prj'))) {
-        return;
-    }
-    $start= is_null(get('start'))
-          ? 0
-          : intval(get('start'));
-
-    $count= is_null(get('count'))
-          ? 20
-          : intval(get('count'));
-        
-    /**
-    * first query all unviewed changes
-    */
-    if($changes= ChangeLine::getChangeLines(array(
-        'not_modified_by'   => $auth->cur_user->id,
-        'project'           => $project->id,
-        'unviewed_only'     => false,
-        'limit'             => $count,
-        'limit_start'       => $start,
-        'type'              => ITEM_TASK,
-    ))) {
-        $lines= 0;
-        foreach($changes as $c) {
-            $lines ++;
-            if($lines >= $start + $count) {
-                break;
-            }
-
-            if($lines < $start) {
-                continue;
-            }
-            printChangeLine($c);
-        }
-    }
-}
 
 
-/**
-* writes a changeline as html
-*/
-function printChangeLine($c)
-{
-    global $PH;
-    
-    if($c->item->type == ITEM_TASK) {
-        echo '<li>' . $c->item->getLink(false);
-    }
-    else {
-        echo '<li>' . $PH->getLink('fileView', $c->item->name, array('file' => $c->item->id));        
-    }
-    
-    
-    /**
-    * not viewed
-    */
-    if($c->item) {
-        if($new= $c->item->isChangedForUser()) {
-            if($new == 1) {
-                echo '<span class=new> (' . __('New') . ') </span>';
-            }
-            else {
-                echo '<span class=new>  (' . __('Updated') . ') </span>';
-            }
-        }
-    }
-    
-    echo "<span class=sub>$c->txt_what";
-    
-    if($person= Person::getVisibleById($c->person_by)) {
-        echo ' ' . __('by') . ' <span class=person>' . asHtml($person->name) ."</span>";
-    }
-    echo ' ' . renderTimeAgo($c->timestamp);
-    
-    echo "</span>";
-    
-    echo '</li>';    
-    return;
-}
+
+
 
 
 

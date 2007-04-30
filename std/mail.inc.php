@@ -399,7 +399,8 @@ class Notifier
                     }
 
                     ### task
-                    if($task= Task::getVisibleById($c->task_id)) {
+                    if($c->item && $c->item->type == ITEM_TASK) {
+                        $task= $c->item;
                         if(confGet('USE_MOD_REWRITE')) {
                 		  $updates_html.= "<a href='$url/{$task->id}'>". asHtml($task->name). "</a>";
                 		}
@@ -407,6 +408,16 @@ class Notifier
                 		  $updates_html.= "<a href='$url?go=taskView&amp;tsk={$task->id}'>". asHtml($task->name). "</a>";
                 		}
                         $updates_txt.= $task->name;
+                    }
+                    else if ($c->item && $c->item->type == ITEM_FILE) {
+                        $file= $c->item;
+                        if(confGet('USE_MOD_REWRITE')) {
+                		  $updates_html.= "<a href='$url/{$file->id}'>". asHtml($file->name). "</a>";
+                		}
+                		else {
+                		  $updates_html.= "<a href='$url?go=fileView&amp;tsk={$file->id}'>". asHtml($file->name). "</a>";
+                		}
+                        $updates_txt.= $file->name;                        
                     }
 
                     ### to...

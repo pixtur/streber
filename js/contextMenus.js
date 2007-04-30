@@ -1,4 +1,4 @@
-// context menu data objects
+ // context menu data objects
 var cMenu = new Object( );
 
 // position and display context menu

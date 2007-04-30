@@ -1525,8 +1525,8 @@ class DbProjectItem extends DbItem {
         $modified_by        = NULL;
         $not_modified_by    = NULL;
         $show_issues        = false;
-        $limit              = NULL;
-        $limit_start        = 0;
+        $limit_rowcount     = NULL;
+        $limit_offset       = NULL;
         $unviewed_only      = NULL;
         $type               = NULL;
 
@@ -1577,13 +1577,26 @@ class DbProjectItem extends DbItem {
             ? 'AND i.modified_by != ' . intval($not_modified_by)
             : '';
 
-        $str_type= $type
-                ? "AND i.type = $type"
-                : "";
+        if(is_array($type)) {
+            $str_type=  "AND i.type in ( ". implode("," , $type). ")";
+        }
+        else {
+            $str_type= $type
+                    ? "AND i.type = $type"
+                    : "";
+        }
 
-        $str_limit= ($limit || $limit_start)
-                ? " LIMIT $limit_start, $limit"
-                : "";
+        if(!is_null($limit_offset) && !is_null($limit_rowcount)) {
+            $str_limit=  " LIMIT " . intval($limit_offset) . "," .  intval($limit_rowcount );
+        }
+        else {
+            if($limit_rowcount) {
+                $str_limit=  " LIMIT " . intval($limit_rowcount );
+            }
+            else {
+                $str_limit= '';
+            }
+        }
 
 
 

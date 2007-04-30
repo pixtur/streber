@@ -884,7 +884,7 @@ function renderDate($t, $smartnames= true) {
     }
 
 
-    if($smartnames && gmdate('Y-m-d', GMTToClientTime(time())) == gmdate('Y-m-d', GMTToClientTime($t))) {
+    if($smartnames && gmdate('Y-m-d', time()) == gmdate('Y-m-d', $t)) {
         $str= __('Today');
         if(gmdate('H:i:s',$t) !== '00:00:00') {
             $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
@@ -892,11 +892,11 @@ function renderDate($t, $smartnames= true) {
             
         }
     }
-    else if($smartnames && gmdate('Y-m-d', GMTToClientTime(time())) == gmdate('Y-m-d', GMTToClientTime($t + 60*60*24))) {
+    else if($smartnames && gmdate('Y-m-d',time()) == gmdate('Y-m-d', $t + 60*60*24)) {
         $str= __('Yesterday');
-        if(gmdate('H:i:s',$t) !== '00:00:00') {
-            $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
-        }
+        #if(gmdate('H:i:s',$t) !== '00:00:00') {
+        #    $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
+        #}
     }
     else {
         $str= gmstrftime(getUserFormatDate(), $t);

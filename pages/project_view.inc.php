@@ -406,6 +406,13 @@ function ProjView()
         $block->render_blockEnd();
     }
 
+
+    {
+        require_once(confGet('DIR_STREBER') . './lists/list_recentchanges.inc.php');
+        printRecentChanges(array($project), false);
+    }
+
+/*
     #--- list changes (new) -----------------------------------------------------------
     measure_start('changes');
     {
@@ -419,6 +426,7 @@ function ProjView()
 		$list->print_automatic();
     }
     measure_stop('changes');
+    */
 
 
 

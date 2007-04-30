@@ -1,0 +1,23 @@
+﻿div.block.reduced_header  div.extra_top {
+ display:none;
+}
+
+
+.block div.text p {
+ padding-left:0px;
+ margin-left:0px;
+}
+.block div.text p label { /* hidden from IE5.0 */
+ clear:both;
+  margin-left:0px;
+  width:70px;
+  padding-left:0px;
+
+}
+
+
+div.block.reduced_header  h2 {
+ background-image: url(layout/bg_block_header.png);
+ padding-top:3px;
+}
+

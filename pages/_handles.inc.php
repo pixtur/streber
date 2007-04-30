@@ -21,8 +21,8 @@ new PageHandle(array('id'=>'home',
 
     'cleanurl'=>'home',
 ));
-new PageHandle(array('id'=>'homeDashboardAjaxMore',
-    'req'=>'pages/home.inc.php',
+new PageHandle(array('id'=>'ajaxMoreChanges',
+    'req'=>'pages/item_ajax.inc.php',
     'test'=>'no',
     'valid_for_crawlers'=>false,
     'valid_params'=> array('prj'=>'\d+', 'start'=>'\d+', 'count' => '\d+'),

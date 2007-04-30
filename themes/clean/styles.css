@@ -69,6 +69,7 @@ span.itemid {
  padding-left:1em;
 }
 
+a.isDone,
 span.isDone a {
  text-decoration:line-through;
 }
@@ -2492,18 +2493,18 @@ span.selectorlist  a:hover{
 }
 
 /*--- dashboard (recent changes) -----------------*/
-div#b_home_dashboard_long h4 {
+div.recentchanges h4 {
  margin:            0.2em 0.5em;
 }
 
-div#b_home_dashboard_long ul {
+div.recentchanges ul {
  margin:            1px 1em 0em 1em;
  padding:           0px;
  /*font-size:         90%;*/
 }
 
 
-div#b_home_dashboard_long ul li{
+div.recentchanges ul li{
  list-style:        none;
  background-color:  #fff;
  padding:           0.2em 0.5em;
@@ -2512,18 +2513,18 @@ div#b_home_dashboard_long ul li{
 
 }
 
-div#b_home_dashboard_long ul li span.sub {
+div.recentchanges ul li span.sub {
  display:           block;
  font-size:         8pt;
  color:             #888;
  padding-left:      0.5em;
 }
 
-div#b_home_dashboard_long ul li span.sub span.person {
+div.recentchanges ul li span.sub span.person {
  color:             #555;
 }
 
-div#b_home_dashboard_long p.more {
+div.recentchanges p.more {
  text-align:        right;
  margin:            1px 1em 1em 1.5em;
  font-size:         10pt;

@@ -347,6 +347,14 @@ $g_config= array(
     * editing.   
     */
     'TASKDETAILS_IN_SIDEBOARD' => false,
+
+    /**
+    * details on how the project changes are displayed in the dashboard
+    */
+    'MAX_CHANGELINES_PER_PROJECT'=> 5,
+    'MAX_CHANGELINES'=> 20,
+    'MORE_CHANGELINES'=> 20,
+
 );
 
 
