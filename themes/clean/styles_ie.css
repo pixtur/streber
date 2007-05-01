@@ -3,11 +3,11 @@
 }
 
 
-.block div.text p {
+.block div.text div.labeled {
  padding-left:0px;
  margin-left:0px;
 }
-.block div.text p label { /* hidden from IE5.0 */
+.block div.text div.labeled label { /* hidden from IE5.0 */
  clear:both;
   margin-left:0px;
   width:70px;

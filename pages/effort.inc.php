@@ -106,39 +106,39 @@ function effortView()
         echo '<div class="text">';
 
         if($project) {
-            echo "<p><label>" . __('Project','label') . "</label>". $project->getLink(false) ."</p>";
+            echo "<div class=labeled><label>" . __('Project','label') . "</label>". $project->getLink(false) ."</div>";
         }
 
         if($task){
             if($task->parent_task != 0) {
                 $folder= $task->getFolderLinks(false) ."<em> &gt; </em>". $task->getLink(false);
-                echo "<p><label>" . __('Task','label') . "</label>" . $folder . "</p>";
+                echo "<div class=labeled><label>" . __('Task','label') . "</label>" . $folder . "</div>";
             }
             else {
-                echo "<p><label>" . __('Task','label') . "</label>" . $task->getLink(false) . "</p>";
+                echo "<div class=labeled><label>" . __('Task','label') . "</label>" . $task->getLink(false) . "</div>";
             }
         }
         else {
-            echo "<p><label>" . __('Task','label') . "</label>" . __('No task related') . "</p>";
+            echo "<div class=labeled><label>" . __('Task','label') . "</label>" . __('No task related') . "</div>";
         }
 
         if(!$person = Person::getById($effort->person)){
-            echo "<p><label>" . __('Created by','label') . "</label>" . __('not available') . "</p>";
+            echo "<div class=labeled><label>" . __('Created by','label') . "</label>" . __('not available') . "</div>";
         }
         else {
-            echo "<p><label>" . __('Created by','label') . "</label>" . $person->getLink() . "</p>";
+            echo "<div class=labeled><label>" . __('Created by','label') . "</label>" . $person->getLink() . "</div>";
         }
 
         if($effort){
             $duration = round((strToGMTime($effort->time_end) - strToGMTime($effort->time_start))/60/60,1)." h";
             if($effort->as_duration){
-                echo "<p><label>" . __('Created at','label') . "</label>" . renderDateHtml($effort->time_start) . "</p>";
-                echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
+                echo "<div class=labeled><label>" . __('Created at','label') . "</label>" . renderDateHtml($effort->time_start) . "</div>";
+                echo "<div class=labeled><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</div>";
             }
             else {
-                echo "<p><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</p>";
-                echo "<p><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</p>";
-                echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
+                echo "<div class=labeled><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</div>";
+                echo "<div class=labeled><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</div>";
+                echo "<div class=labeled><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</div>";
             }
         }
 
@@ -294,23 +294,23 @@ function effortViewMultiple()
         echo '<div class="text">';
 
         if($number){
-            echo "<p><label>" . __('Number of efforts','label') . "</label>". asHtml($number) ."</p>";
+            echo "<div class=labeled><label>" . __('Number of efforts','label') . "</label>". asHtml($number) ."</div>";
         }
 
         if($sum) {
-            echo "<p><label>" . __('Sum of efforts','label') . "</label>". asHtml($sum) ." h</p>";
+            echo "<div class=labeled><label>" . __('Sum of efforts','label') . "</label>". asHtml($sum) ." h</div>";
         }
 
         $content['e_ids'] = $e_ids;
 
         $time = Effort::getMinMaxTime($content);
         if($time) {
-            $line = "<p><label>" . __('from','time label') . "</label>" . renderDateHtml($time[0]) . "</p>";
-            $line .= "<p><label>" . __('to','time label') . "</label>" . renderDateHtml($time[1]) . "</p>";
+            $line = "<div class=labeled><label>" . __('from','time label') . "</label>" . renderDateHtml($time[0]) . "</div>";
+            $line .= "<div class=labeled><label>" . __('to','time label') . "</label>" . renderDateHtml($time[1]) . "</div>";
             echo $line;
         }
         else {
-            echo "<p><label>" . __('Time','label') . "</label>" . __('not available') . "</p>";
+            echo "<div class=labeled><label>" . __('Time','label') . "</label>" . __('not available') . "</div>";
         }
 
         echo "</div>";
@@ -336,7 +336,7 @@ function effortViewMultiple()
             echo '<div class="text">';
 
             if($project) {
-                echo "<p><label>" . __('Project','label') . "</label>" . $project->getLink(false) ."</p>";
+                echo "<div class=labeled><label>" . __('Project','label') . "</label>" . $project->getLink(false) ."</div>";
             }
 
             $task = $effort->task
@@ -346,33 +346,33 @@ function effortViewMultiple()
             if($task){
                 if($task->parent_task != 0) {
                     $folder= $task->getFolderLinks(false) ."<em> &gt; </em>". $task->getLink(false);
-                    echo "<p><label>" . __('Task','label') . "</label>" . $folder . "</p>";
+                    echo "<div class=labeled><label>" . __('Task','label') . "</label>" . $folder . "</div>";
                 }
                 else {
-                    echo "<p><label>" . __('Task','label') . "</label>" . $task->getLink(false) . "</p>";
+                    echo "<div class=labeled><label>" . __('Task','label') . "</label>" . $task->getLink(false) . "</div>";
                 }
             }
             else {
-                echo "<p><label>" . __('Task','label') . "</label>" . __('No task related') . "</p>";
+                echo "<div class=labeled><label>" . __('Task','label') . "</label>" . __('No task related') . "</div>";
             }
 
             if(!$person = Person::getById($effort->person)){
-                echo "<p><label>" . __('Created by','label') . "</label>" . __('not available') . "</p>";
+                echo "<div class=labeled><label>" . __('Created by','label') . "</label>" . __('not available') . "</div>";
             }
             else {
-                echo "<p><label>" . __('Created by','label') . "</label>" . $person->getLink() . "</p>";
+                echo "<div class=labeled><label>" . __('Created by','label') . "</label>" . $person->getLink() . "</div>";
             }
 
             if($effort){
                 $duration = round((strToGMTime($effort->time_end) - strToGMTime($effort->time_start))/60/60,1)." h";
                 if($effort->as_duration){
-                    echo "<p><label>" . __('Created at','label') . "</label>" . renderDateHtml($effort->time_start) . "</p>";
-                    echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
+                    echo "<div class=labeled><label>" . __('Created at','label') . "</label>" . renderDateHtml($effort->time_start) . "</div>";
+                    echo "<div class=labeled><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</div>";
                 }
                 else {
-                    echo "<p><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</p>";
-                    echo "<p><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</p>";
-                    echo "<p><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</p>";
+                    echo "<div class=labeled><label>" . __('Time start','label') . "</label>" . renderTimestampHtml($effort->time_start) . "</div>";
+                    echo "<div class=labeled><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</div>";
+                    echo "<div class=labeled><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</div>";
                 }
             }
 

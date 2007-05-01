@@ -28,7 +28,7 @@ function printRecentChanges($projects, $print_project_headlines= true)
     $project_changes= array();          # hash with project id and changelist
 
     foreach($projects as $project) {
-        
+                
         /**
         * first query all unviewed changes
         */

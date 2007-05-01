@@ -196,7 +196,7 @@ class ListBlock_milestones extends ListBlock
         global $PH;
         global $auth;
 
-        $this->query_options['is_milestone']=1;
+
         if(!isset($this->query_options['status_max'])) {
             $this->query_options['status_max']=STATUS_COMPLETED;
         };
@@ -246,6 +246,9 @@ class ListBlock_milestones extends ListBlock
         if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
             $this->query_options['visible_only']=false;
         }
+
+
+        $this->query_options['category']= TCATEGORY_MILESTONE;
 
         $tasks= Task::getAll($this->query_options);
 

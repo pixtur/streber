@@ -630,8 +630,8 @@ class File extends DbProjectItem
                         }
                         return;
                     }
-                    else if($this->mimetype == 'image/png') {
-                        header('Content-Type: '     . 'image/png');
+                    else if($this->mimetype == 'image/png' || $this->mimetype == 'image/x-png') {
+                        header('Content-Type: '     . $this->mimetype);
                         header("Cache-Control: public");
                         header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
 

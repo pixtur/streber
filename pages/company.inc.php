@@ -730,27 +730,27 @@ function companyView()
             echo wiki2html($company->comments);
         }
         if($company->street) {
-            echo '<p><label>'. __('Adress') . ':</label>' . asHtml($company->street) .'</p>';
+            echo '<div class=labeled><label>'. __('Adress') . ':</label>' . asHtml($company->street) .'</div>';
         }
         if($company->zipcode) {
-            echo '<p><label></label>' . asHtml($company->zipcode). '</p>';
+            echo '<div class=labeled><label></label>' . asHtml($company->zipcode). '</div>';
         }
         if($company->phone) {
-            echo '<p><label>'. __('Phone') . ':</label>' . asHtml($company->phone) .'</p>';
+            echo '<div class=labeled><label>'. __('Phone') . ':</label>' . asHtml($company->phone) .'</div>';
         }
         if($company->fax) {
-            echo '<p><label>'. __('Fax') . ':</label>' . asHtml($company->fax) .'</p>';
+            echo '<div class=labeled><label>'. __('Fax') . ':</label>' . asHtml($company->fax) .'</div>';
         }
 
 
         if($company->homepage) {
-            echo '<p><label>'. __('Web') . ':</label>'.url2linkExtern($company->homepage).'</p>';
+            echo '<div class=labeled><label>'. __('Web') . ':</label>'.url2linkExtern($company->homepage).'</div>';
         }
         if($company->intranet) {
-            echo '<p><label>'. __('Intra') . ':</label>'.url2linkExtern($company->intranet).'</p>';
+            echo '<div class=labeled><label>'. __('Intra') . ':</label>'.url2linkExtern($company->intranet).'</div>';
         }
         if($company->email) {
-            echo '<p><label>'. __('Mail') . ':</label>'.url2linkMail($company->email).'</p>';
+            echo '<div class=labeled><label>'. __('Mail') . ':</label>'.url2linkMail($company->email).'</div>';
         }
 
         echo "</div>";

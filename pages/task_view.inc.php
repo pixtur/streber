@@ -229,7 +229,7 @@ function TaskView()
         if($task->is_milestone) {
             global $g_released_names;
             if($task->is_released && isset($g_released_names[$task->is_released])) {
-                echo "<p><label>".__("Released as","Label in Task summary")."</label>".$g_released_names[$task->is_released] ." / ". renderDateHtml($task->time_released). "</p>";
+                echo "<div class=labeled><label>".__("Released as","Label in Task summary")."</label>".$g_released_names[$task->is_released] ." / ". renderDateHtml($task->time_released). "</div>";
             }
 
 
@@ -240,49 +240,49 @@ function TaskView()
 
             if($task->for_milestone) {
                 if($milestone= Task::getVisibleById($task->for_milestone)) {
-                    echo "<p><label>".__("For Milestone","Label in Task summary")."</label>".$milestone->getLink(false)."</p>";
+                    echo "<div class=labeled><label>".__("For Milestone","Label in Task summary")."</label>".$milestone->getLink(false)."</div>";
                 }
             }
 
 
             global $g_status_names;
             if($status=$g_status_names[$task->status]) {
-                echo "<p><label>".__("Status","Label in Task summary")."</label>$status</p>";
+                echo "<div class=labeled><label>".__("Status","Label in Task summary")."</label>$status</div>";
             }
 
 
-            echo "<p><label>".__("Opened","Label in Task summary")."</label>".renderDateHtml($task->date_start)."</p>";
+            echo "<div class=labeled><label>".__("Opened","Label in Task summary")."</label>".renderDateHtml($task->date_start)."</div>";
 
             if($task->estimated) {
-                echo "<p><label>".__("Estimated","Label in Task summary")."</label>".renderDuration($task->estimated). ' ';
+                echo "<div class=labeled><label>".__("Estimated","Label in Task summary")."</label>".renderDuration($task->estimated). ' ';
 
                 if($task->estimated_max) {
                     echo " ... ". renderDuration($task->estimated_max);
                 }
-                echo "</p>";
+                echo "</div>";
             }
 
             if($task->completion) {
-                echo "<p><label>".__("Completed","Label in Task summary")."</label>".$task->completion."%</p>";
+                echo "<div class=labeled><label>".__("Completed","Label in Task summary")."</label>".$task->completion."%</div>";
             }
 
 
             if($task->planned_start && $task->planned_start != "0000-00-00 00:00:00") {
-                echo "<p><label>".__("Planned start","Label in Task summary")."</label>".renderTimestamp($task->planned_start)."</p>";
+                echo "<div class=labeled><label>".__("Planned start","Label in Task summary")."</label>".renderTimestamp($task->planned_start)."</div>";
             }
 
             if($task->planned_end && $task->planned_end != "0000-00-00 00:00:00") {
-                echo "<p><label>".__("Planned end","Label in Task summary")."</label>".renderTimestamp($task->planned_end)."</p>";
+                echo "<div class=labeled><label>".__("Planned end","Label in Task summary")."</label>".renderTimestamp($task->planned_end)."</div>";
             }
 
 
             if($task->date_closed !="0000-00-00") {
-                echo "<p><label>".__("Closed","Label in Task summary")."</label>". renderDateHtml($task->date_closed) . "</p>";
+                echo "<div class=labeled><label>".__("Closed","Label in Task summary")."</label>". renderDateHtml($task->date_closed) . "</div>";
             }
         }
 
         if($person_creator= Person::getVisibleById($task->created_by)) {
-            echo "<p><label>".__("Created","Label in Task summary")."</label>". renderDateHtml($task->created) . ' / ' . $person_creator->getLink().'</p>' ;
+            echo "<div class=labeled><label>".__("Created","Label in Task summary")."</label>". renderDateHtml($task->created) . ' / ' . $person_creator->getLink().'</div>' ;
         }
 
 
@@ -290,8 +290,8 @@ function TaskView()
 
         #if($task->modified_by != $task->created_by) {
             if($person_modify= Person::getVisibleById($task->modified_by)) {
-                echo "<p><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
-                #echo "<p><label>" . $str_version . "</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
+                echo "<div class=labeled><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
+                #echo "<p><label>" . $str_version . "</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
             }
 
         ### get version ###
@@ -303,7 +303,7 @@ function TaskView()
                                     sprintf(__("View previous %s versions"), count($versions)),
                                     array('item' => $task->id)
                                 );
-                echo "<p><label></label>$str_version</p>";
+                echo "<div class=labeled><label></label>$str_version</div>";
             }
         }
 
@@ -312,9 +312,9 @@ function TaskView()
 
         $sum_efforts= $task->getSumEfforts();
         if($sum_efforts) {
-            echo "<p><label>".__("Logged effort","Label in task-summary")."</label>".
+            echo "<div class=labeled><label>".__("Logged effort","Label in task-summary")."</label>".
             $PH->getLink('taskViewEfforts',round($sum_efforts/60/60,1), array('task'=>$task->id))
-            ."</p>" ;
+            ."</div>" ;
         }
 
         if($tps= $task->getAssignedPersons()) {
@@ -325,7 +325,7 @@ function TaskView()
                 $sep=", ";
             }
             $label=__("Assigned to");
-            echo "<p><label>$label</label>$value</p>" ;
+            echo "<div class=labeled><label>$label</label>$value</div>" ;
 
 
         }
@@ -333,13 +333,13 @@ function TaskView()
         ### publish to ###
         global $g_pub_level_names;
         if($task->pub_level != PUB_LEVEL_OPEN && isset($g_pub_level_names[$task->pub_level])) {
-            echo "<p><label>".__("Publish to","Label in Task summary")."</label>".$g_pub_level_names[$task->pub_level] ;
+            echo "<div class=labeled><label>".__("Publish to","Label in Task summary")."</label>".$g_pub_level_names[$task->pub_level] ;
             if($editable) {
                 echo '<br>('
                     . $PH->getLink('itemsSetPubLevel',__('Set to Open'), array('item' => $task->id,'item_pub_level' => PUB_LEVEL_OPEN))
                     . ')';
             }
-            echo "</p>";
+            echo "</div>";
         }
 
 
@@ -658,9 +658,9 @@ onLoadFunctions.push(function()
 	{
 
 		### visible only for real tasks, not for folders and milestones ###
-		if( ($task->category != TCATEGORY_FOLDER || $task->category == TCATEGORY_DOCU)
-		    &&
-		    !$task->is_milestone
+		if( ($task->category != TCATEGORY_FOLDER || $task->category == TCATEGORY_DOCU || $task->category == TCATEGORY_MILESTONE || $task->category == TCATEGORY_VERSION)
+		    #&&
+		    #!$task->is_milestone
 		) {
 			$block_task_quickedit= new Block_task_quickedit();
     	    $block_task_quickedit->render_quickedit(&$task);
@@ -1127,11 +1127,11 @@ function taskViewAsDocu()
         echo "<div class=text>";
 
         if($person_creator= Person::getVisibleById($task->created_by)) {
-            echo "<p><label>".__("Created","Label in Task summary")."</label>". renderDateHtml($task->created) . ' / ' . $person_creator->getLink().'</p>' ;
+            echo "<div class=labeled><label>".__("Created","Label in Task summary")."</label>". renderDateHtml($task->created) . ' / ' . $person_creator->getLink().'</div>' ;
         }
 
         if($person_modify= Person::getVisibleById($task->modified_by)) {
-            echo "<p><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</p>' ;
+            echo "<div class=labeled><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
         }
 
         ### get version ###
@@ -1143,7 +1143,7 @@ function taskViewAsDocu()
                                     sprintf(__("View previous %s versions"), count($versions)),
                                     array('item' => $task->id)
                                 );
-                echo "<p><label></label>$str_version</p>";
+                echo "<div class=labeled><label></label>$str_version</div>";
             }
         }
 
@@ -1151,13 +1151,13 @@ function taskViewAsDocu()
         ### publish to ###
         global $g_pub_level_names;
         if($task->pub_level != PUB_LEVEL_OPEN && isset($g_pub_level_names[$task->pub_level])) {
-            echo "<p><label>".__("Publish to","Label in Task summary")."</label>".$g_pub_level_names[$task->pub_level] ;
+            echo "<div class=labeled><label>".__("Publish to","Label in Task summary")."</label>".$g_pub_level_names[$task->pub_level] ;
             if($editable) {
                 echo '<br>('
                     . $PH->getLink('itemsSetPubLevel',__('Set to Open'), array('item' => $task->id,'item_pub_level' => PUB_LEVEL_OPEN))
                     . ')';
             }
-            echo "</p>";
+            echo "</div>";
         }
 
 

@@ -50,6 +50,7 @@ class Auth
         if(!$user=Person::getByCookieString(asKey($cookie_string))) {
             new FeedbackMessage( __("Cookie is no longer valid for this computer."));
             log_message(" Failed: Person::getByCookieString() without result", LOG_MESSAGE_DEBUG);
+            $this->removeUserCookie();
             return false;
         }
 

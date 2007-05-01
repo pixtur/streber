@@ -1741,27 +1741,18 @@ div.description {
 
     }
 
-    .block div.text p{
-        /*clear:both;*/ /* this clear messes multi-column display in firefox */
-        margin:5px 0px 0px 80px;
-        padding:0px 0px 0px 0px;
-        clear:left;
-
-    }
-    .block div.text p.description {
-        margin:0px 0px 0px 0px;
-    }
-    .block div.text p.description label {
-        display:none;
-    }
-
-
     .block div.text p.text{
         margin:0px 0px 0px 0px;
     }
 
+    /* ------ labeled text item ----------------------------------------*/
+    .block  div.labeled {
+        margin:5px 0px 0px 80px;
+        padding:0px 0px 0px 0px;
+        clear:left;
+    }
 
-    .block div.text p label{
+    .block  div.labeled label{
         width:90px;
         display:block;
         float:left;
@@ -1773,9 +1764,8 @@ div.description {
         /*line-height:120%;*/
         color:#666;
     }
-    .block div.text > p label { /* hidden from IE5.0 */
+    .block  div.labeled > label { /* hidden from IE5.0 */
         margin-left:-90px;
-
     }
 
     .block div.text p.edit { /* hidden from IE5.0 */
@@ -1784,7 +1774,6 @@ div.description {
         width:auto;
         position:relative;
         height:0px;
-
     }
 
     .block div.text a {
@@ -1794,12 +1783,27 @@ div.description {
     .block div.text a.dummy {
         text-decoration:line-through;
     }
+
+    
+    
+    /**
+    * simplify description
+    */
+    .block div.text p.description {
+        margin:0px 0px 0px 0px;
+    }
+    .block div.text p.description label {
+        display:none;
+    }
+
+    
+/*
     .block div.text div.labeled {
         margin:5px 0px 0px 85px;
         padding:0px 0px 0px 0px;
         max-width:600px;
     }
-
+    
     .block div.text div.labeled {
         margin:5px 0px 0px 85px;
         padding:0px 0px 0px 0px;
@@ -1814,14 +1818,15 @@ div.description {
         padding-right:5px;
         margin-left:-45px;
         font-size:8pt;
-        /*line-height:120%;*/
         color:#666;
     }
 
-    .block div.text div.labeled > label { /* hidden from IE5.0 */
+    .block div.text div.labeled > label {
         margin-left:-100px;
 
     }
+    */
+
     /* dummy tag to clear floating behind framed images
        (with float the framed would have 100% width) */
     .block span.clear {

@@ -158,7 +158,7 @@ class ListBlock_projectTeam extends ListBlock
         }
 
         #$team_members = &$project->getProjectPersons($this->query_options['order_by'], $this->query_options['alive_only'], $this->query_options['visible_only']);
-		$team_members = &$project->getProjectPersons($this->query_options);
+		$team_members = $project->getProjectPersons($this->query_options);
         $this->render_list(&$team_members);
     }
 }

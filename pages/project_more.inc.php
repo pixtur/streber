@@ -1292,7 +1292,6 @@ function ProjViewMilestones()
                 'target'=>'taskNewMilestone',
                 'params'=>array('prj'=>$project->id),
                 'icon'=>'new',
-                'name'=>__('new Milestone'),
             )));
         }
 
@@ -1310,7 +1309,8 @@ function ProjViewMilestones()
         require_once(confGet('DIR_STREBER') . "lists/list_milestones.inc.php");
         $list= new ListBlock_milestones();
 
-        $list->query_options['is_milestone']= 1;
+        #$list->query_options['is_milestone']= 1;
+        
         echo "<div class=milestone_views>";
         if(get('preset') == 'completed') {
             $list->query_options['status_min']= STATUS_COMPLETED;
@@ -1731,7 +1731,7 @@ function ProjViewVersions()
                 'target'=>'taskNewVersion',
                 'params'=>array('prj'=>$project->id),
                 'icon'=>'new',
-                'name'=>__('New released Milestone'),
+                'name'=>__('New released Version'),
             )));
         }
 
@@ -2257,7 +2257,10 @@ function projAddPerson()
         ### write list of persons ###
         {
             ### build hash of already added person ###
-            $pps= $project->getProjectPersons('', true,false);
+            $pps= $project->getProjectPersons(array(
+                'alive_only' => true,
+                'visible_only' => false
+            ));
             $pp_hash=array();
             foreach($pps as $pp) {
                 $pp_hash[$pp->person]= true;
@@ -2325,7 +2328,12 @@ function projAddPersonSubmit()
     }
 
     ### get team (including inactive members)  ###
-    $ppersons= $project->getProjectPersons('',false,false); # also  PP with state !=1
+    $ppersons= $project->getProjectPersons(array(
+		'alive_only' => false,
+		'visible_only' => false,
+		'person_id' => NULL,
+    ));
+    
 
     ### go through selected people ###
     foreach($person_ids as $pid) {
@@ -2377,11 +2385,11 @@ function projAddPersonSubmit()
         else if($pp->state != 1) {
             $pp->state=1;
             $pp->update();
-            new FeedbackMessage(__("Reanimated person as team-member"));
+            new FeedbackMessage(sprintf(__("Reanimated person %s as team-member"), asHtml($person->name)));
         }
         ### skip ###
         else {
-            new FeedbackMessage(__("Person already in project"));
+            new FeedbackMessage(sprintf(__("Person %s already in project"), asHtml($person->name)));
         }
     }
     ### display taskView ####
@@ -2543,11 +2551,10 @@ function projDuplicate($org_project_id=NULL)
     $flag_cur_user_in_project=false;
 
     ### copy projectpersons ###
-    if($org_ppersons= $org_project->getProjectPersons(
-                                     NULL,  # $order_by=NULL,
-                                     false, # $alive_only=true,
-                                     false  # $visible_only= true
-    )){
+    if($org_ppersons= $org_project->getProjectPersons(array(
+         'alive_only' => false, 
+         'visibly_only' => false
+    ))){
         foreach($org_ppersons as $pp){
             $pp->id=0;
             $pp->project= $new_project->id;

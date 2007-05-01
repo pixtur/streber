@@ -1847,7 +1847,7 @@ $g_lang_table= array(
 'Versions'                    =>'Versjoner',
 'Task Test'                   =>'Oppgave Test',
 'View Task Efforts'           =>'Se på oppgave innsatser',
-'New Released Milestone'      =>'Ny utgitt milepæl',
+'New released Version'      =>'Ny utgitt milepæl',
 'View effort'                 =>'Se på innsats',
 'View multiple efforts'       =>'Se på flere innsatser',
 'List Clients'                =>'Liste klienter',
@@ -1922,7 +1922,7 @@ $g_lang_table= array(
 'needs approval'              =>'trenger godkjenning',
 'without milestone'           =>'uten milepæl',
 'Released Versions'           =>'Utgitte versjoner',
-'New released Milestone'      =>'Ny utgitt milepæl',
+'New released Version'      =>'Ny utgitt milepæl',
 'Tasks resolved in upcomming version'=>'Oppgaver løst i komende versjon',
 
 ### ../pages/search.inc.php   ###

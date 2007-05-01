@@ -141,25 +141,25 @@ function fileView()
         echo "<div class=text>";
 
         ### show thumbnail
-        if($file_latest->mimetype == "image/png" || $file_latest->mimetype == "image/jpeg" || $file_latest->mimetype == "image/gif") {
+        if($file_latest->mimetype == "image/png" || $file_latest->mimetype == "image/x-png" || $file_latest->mimetype == "image/jpeg" || $file_latest->mimetype == "image/gif") {
             echo "<div class=image style='float:right;'><a href='index.php?go=fileDownloadAsImage&amp;file=$file_latest->id'>";
             echo "<img src='index.php?go=fileDownloadAsImage&amp;file=$file_latest->id&amp;max_size=128'>";
             echo "</a></div>";
         }
 
         if($parent_task)  {
-            echo "<p><label>" . __('For task') .  "</label><span>".$parent_task->getLink(false). "</span></p>";
+            echo "<div class=labeled><label>" . __('For task') .  "</label><span>".$parent_task->getLink(false). "</span></div>";
         }
-        echo "<p><label>" . __('Filesize') .  "</label><span>$file_latest->filesize bytes</span></p>";
-        echo "<p><label>" . __('Type') .  "</label><span>$file_latest->mimetype</span></p>";
-        echo "<p><label>" . __('Uploaded') .  "</label><span>". renderDateHtml($file_latest->created) ."</span></p>";
+        echo "<div class=labeled><label>" . __('Filesize') .  "</label><span>$file_latest->filesize bytes</span></div>";
+        echo "<div class=labeled><label>" . __('Type') .  "</label><span>$file_latest->mimetype</span></div>";
+        echo "<div class=labeled><label>" . __('Uploaded') .  "</label><span>". renderDateHtml($file_latest->created) ."</span></div>";
         if($uploader = Person::getVisibleById($file->created_by)) {
-            echo "<p><label>" . __('Uploaded by') .  "</label><span>". $uploader->getLink()  ."</span></p>";
+            echo "<div class=labeled><label>" . __('Uploaded by') .  "</label><span>". $uploader->getLink()  ."</span></div>";
         }
         if($file_latest->created != $file_latest->modified) {
-            echo "<p><label>" . __('Modified') .  "</label><span>". renderDateHtml($file_latest->created) ."</span></p>";
+            echo "<div class=labeled><label>" . __('Modified') .  "</label><span>". renderDateHtml($file_latest->created) ."</span></div>";
         }
-        echo "<p><label>". __('Download'). "</label><span>". $PH->getLink('fileDownload', $file_latest->org_filename ,array('file'=>$file_latest->id))."</span></p>";
+        echo "<div class=labeled><label>". __('Download'). "</label><span>". $PH->getLink('fileDownload', $file_latest->org_filename ,array('file'=>$file_latest->id))."</span></div>";
 
         $str= wiki2html($file_latest->description, $project);
         echo "<br>";
@@ -200,7 +200,7 @@ function fileView()
                 echo "<div class=text>";
 
                 ### show thumbnail
-                if($of->mimetype == "image/png" || $of->mimetype == "image/jpeg" || $of->mimetype == "image/gif") {
+                if($of->mimetype == "image/png" || $of->mimetype == "image/x-png"  || $of->mimetype == "image/jpeg" || $of->mimetype == "image/gif") {
                     echo "<div class=image style='float:right;'><a href='index.php?go=fileDownloadAsImage&file=$of->id'>";
                     echo "<img src='index.php?go=fileDownloadAsImage&file=$of->id&max_size=128'>";
                     echo "</a></div>";
@@ -209,12 +209,12 @@ function fileView()
                 $str= wiki2html($of->description, $project);
                 echo "$str";
 
-                echo "<p><label>" . __('Filesize') .  "</label><span>$of->filesize bytes</span></p>";
-                echo "<p><label>" . __('Type') .  "</label><span>$of->mimetype</span></p>";
-                echo "<p><label>" . __('Uploaded') .  "</label><span>". renderDateHtml($of->created) ."</span></p>";
+                echo "<div class=labeled><label>" . __('Filesize') .  "</label><span>$of->filesize bytes</span></div>";
+                echo "<div class=labeled><label>" . __('Type') .  "</label><span>$of->mimetype</span></div>";
+                echo "<div class=labeled><label>" . __('Uploaded') .  "</label><span>". renderDateHtml($of->created) ."</span></div>";
 
-                #echo "<p><label>" . __('Version') .  "</label><span>". intval($of->version) ."</span></p>";
-                echo "<p>". $PH->getLink('fileDownload','',array('file'=>$of->id))."</p>";
+                #echo "<div class=labeled><label>" . __('Version') .  "</label><span>". intval($of->version) ."</span></div>";
+                echo "<div class=labeled>". $PH->getLink('fileDownload','',array('file'=>$of->id))."</div>";
 
                 echo "</div>";
 

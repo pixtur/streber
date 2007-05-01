@@ -798,14 +798,14 @@ class PageHandler extends BaseObject
     public function getWikiLink($page=NULL, $alt_title=NULL) {
         if(!$page) {
             #return "<a href='http://wiki.pixtur.de/index.php/{$this->cur_page_id}'>Wiki+Help</a>";
-            return "<a href='http://www.streber-pm.org/index.php?go=search&search_query={$this->cur_page_id}!'>Wiki+Help</a>";
+            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}'>Wiki+Help</a>";
         }
         else {
             if(!$alt_title) {
                 $alt_title= $page;
             }
             #return "<a href='http://wiki.pixtur.de/index.php/{$page}'>$alt_title</a>";
-            return "<a href='http://www.streber-pm.org/index.php?go=search&search_query={$page}!'>$alt_title</a>";
+            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}'>$alt_title</a>";
         }
     }
 

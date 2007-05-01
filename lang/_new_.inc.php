@@ -713,7 +713,7 @@ undefined keys:
 'New Milestone'               =>'',  # line 37
 
 ### ../pages/_handles.inc.php   ###
-'New Released Milestone'      =>'',  # line 554
+'New released Version'      =>'',  # line 554
 'Toggle view collapsed'       =>'',  # line 769
 'Add issue/bug report'        =>'',  # line 598
 'Edit Description'            =>'',  # line 607
@@ -1404,7 +1404,7 @@ undefined keys:
 'View closed milestones'      =>'',  # line 1365
 'Project Efforts'             =>'',  # line 1407
 'Released Versions'           =>'',  # line 1497
-'New released Milestone'      =>'',  # line 1516
+'New released Version'      =>'',  # line 1516
 'Tasks resolved in upcomming version'=>'',  # line 1551
 'Company|form label'          =>'',  # line 1668
 

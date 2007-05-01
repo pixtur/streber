@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.07981',
+    'STREBER_VERSION'       => '0.07982',
     'STREBER_VERSION_DATE'  => '2007-04-24',
 
     'APP_NAME'              => 'streber',
@@ -62,7 +62,7 @@ $g_config= array(
 
     /**
     * url to online-help
-    */
+    */                                
     'STREBER_WIKI_URL'      => 'http://www.streber-pm.org/index.php?go=search&search_query=',
 
     /**
@@ -320,7 +320,7 @@ $g_config= array(
     'USE_MOD_REWRITE'=>false,
 	
 	/**
-	* %%cost overview
+	* cost overview
 	*/
 	'INTERNAL_COST_FEATURE' => false,
 	

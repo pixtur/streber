@@ -613,7 +613,7 @@ $g_lang_table= array(
 'New Milestone'               =>'Nový milník',
 
 ### ../pages/_handles.inc.php   ###
-'New Released Milestone'      =>'',  # line 466
+'New released Version'      =>'',  # line 466
 'Toggle view collapsed'       =>'Prepnout zobrazení',
 'Add issue/bug report'        =>'Přidat hlášení problému/chyby',
 'Edit Description'            =>'Upravit popis',
@@ -1694,7 +1694,7 @@ $g_lang_table= array(
 'Versions'                    =>'Verze',
 'Task Test'                   =>'Test úkolu',
 'View Task Efforts'           =>'Zobrazit vykonanou práci na úkolu',
-'New Released Milestone'      =>'Nový vypuštěný milník',
+'New released Version'      =>'Nový vypuštěný milník',
 'View effort'                 =>'Zobrazit práci',
 'View multiple efforts'       =>'Zobrazit výcero prácí',
 'List Clients'                =>'Seznam klientů',
@@ -1758,7 +1758,7 @@ $g_lang_table= array(
 'all'                         =>'vše',
 'without milestone'           =>'bez milníku',
 'Released Versions'           =>'Vydané verze',
-'New released Milestone'      =>'Nový vypuštěný milník',
+'New released Version'      =>'Nový vypuštěný milník',
 'Tasks resolved in upcomming version'=>'Úkoly vyřešené v nadcházející verzi',
 
 ### ../pages/search.inc.php   ###

@@ -275,6 +275,8 @@ class ListBlockCol_FileDownload extends ListBlockCol
 
 		if($file->mimetype == 'image/png'
 		  ||
+		  $file->mimetype == 'image/x-png'
+		  ||
 		  $file->mimetype == 'image/jpeg'
 		  ||
 		  $file->mimetype == 'image/pjpeg'
@@ -429,6 +431,8 @@ class ListBlockCol_FileSummary extends ListBlockCol
 
 		if($file->mimetype == 'image/png'
 		  ||
+		  $file->mimetype == 'image/x-png'
+		  ||
 		  $file->mimetype == 'image/jpeg'
 		  ||
 		  $file->mimetype == 'image/pjpeg'
@@ -490,6 +494,8 @@ class ListBlockCol_FileThumbnail extends ListBlockCol
 
 
 		if($file->mimetype == 'image/png'
+		  ||
+		  $file->mimetype == 'image/x-png'
 		  ||
 		  $file->mimetype == 'image/jpeg'
 		  ||

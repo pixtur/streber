@@ -743,10 +743,30 @@ class Person extends DbProjectItem {
     /**
     * get project-persons
     */
-    function &getProjectPersons($f_order_by=NULL,$alive_only=true,$visible_only= true)
+    function &getProjectPersons($args=NULL)
     {
         $prefix= confGet('DB_TABLE_PREFIX');
         global $auth;
+
+		### default parameter ###
+		$order_by       = NULL;
+		$alive_only     = true;
+		$visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+                        ? false
+                        : true;
+
+		### filter parameter ###
+        if($args) {
+            foreach($args as $key=>$value) {
+                if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                    trigger_error("unknown parameter",E_USER_NOTICE);
+                }
+                else {
+                    $$key= $value;
+                }
+            }
+        }
+
 
         $AND_state= $alive_only
                     ? 'AND i.state = 1'

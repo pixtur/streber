@@ -76,39 +76,6 @@ class ListBlock_versions extends ListBlock
             'context_menu'=>'submit',
         )));
 
-        ### block style functions ###
-        $this->add_blockFunction(new BlockFunction(array(
-            'target'=>'changeBlockStyle',
-            'key'=>'list',
-            'name'=>'List',
-            'params'=>array(
-                'style'=>'list',
-                'block_id'=>$this->id,
-                'page_id'=>$PH->cur_page->id,
-#                'use_collapsed'=>true, @@@ this parameter seems useless
-             ),
-            'default'=>true,
-        )));
-        $this->groupings= new BlockFunction_grouping(array(
-            'target'=>'changeBlockStyle',
-            'key'=>'grouped',
-            'name'=>'Grouped',
-            'params'=>array(
-                'style'=>'grouped',
-                'block_id'=>$this->id,
-                'page_id'=>$PH->cur_page->id,
-            ),
-        ));
-
-        $this->add_blockFunction($this->groupings);
-
-
-        ### list groupings ###
-
-        $this->groupings->groupings= array(
-            new ListGroupingStatus(),
-            new ListGroupingPrio(),
-        );
 
         $this->query_options['is_milestone']=    true;
         $this->query_options['is_released_min']= RELEASED_UPCOMMING;

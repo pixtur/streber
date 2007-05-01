@@ -576,8 +576,11 @@ function search()
         $PH->abortWarning("Nothing entered...");
     }
 
-    #$search_query= preg_replace("/[^\d\w_-]/","",$search_query);
-    $search_query= asCleanString($search_query);
+    /**
+    * additionally remove slashes and ? because we are gonny using this in a regex
+    */
+    $search_query= asMatchString($search_query);
+    
 
     ### direct id -jumps
     if($search_query && intval($search_query) == $search_query) {

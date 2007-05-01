@@ -159,10 +159,10 @@ function home() {
     {
         if($projects= Project::getAll(array(
             'order_by' => 'modified DESC',
-            'limit'     => intval( confGet('MAX_CHANGELINES')),
+            'limit_rowcount'     => intval( confGet('MAX_CHANGELINES')),
             
         ))) {
-            require_once(confGet('DIR_STREBER') . 'lists/list_recentchanges.inc.php');            
+            require_once(confGet('DIR_STREBER') . 'lists/list_recentchanges.inc.php');
             printRecentChanges($projects);            
         }
     }

@@ -1637,7 +1637,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Task Test'                   =>'Test dell`attività',  # line 258
 'Edit multiple Tasks'         =>'Modifica multiple attività',  # line 279
 'View Task Efforts'           =>'Visualizza Impieghi dell`attività',  # line 301
-'New Released Milestone'      =>'Nuovo evento rilasciato',  # line 417
+'New released Version'      =>'Nuovo evento rilasciato',  # line 417
 'Create Note'                 =>'Crea Nota',  # line 482
 'Edit Note'                   =>'Modifica Nota',  # line 496
 'View effort'                 =>'Mostra impegno',  # line 507
@@ -1733,7 +1733,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'needs approval'              =>'necessitano approvazione',  # line 863
 'without milestone'           =>'senza evento',  # line 887
 'Released Versions'           =>'Versioni rilasciate',  # line 1553
-'New released Milestone'      =>'Nuovo evento rilasciato',  # line 1571
+'New released Version'      =>'Nuovo evento rilasciato',  # line 1571
 'Tasks resolved in upcomming version'=>'Attività risolte nella prossima versione',  # line 1605
 'Moved %s projects to trash'  =>'Spostati %s progetti nel cestino',  # line 1916
 

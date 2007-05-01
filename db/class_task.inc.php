@@ -140,7 +140,7 @@ class Task extends DbProjectItem
                 'view_in_forms'=>true,
             )),
 
-            new FieldHidden(  array('name'=>'issue_report',
+            new FieldInternal(  array('name'=>'issue_report',
                 'log_changes'=>false,
             )),
             new FieldOption    (array('name'=>'label',
@@ -759,7 +759,7 @@ foreach($filters_str as $fs=>$value) {
         $assigned_to_person=0;      # skip by default
         $search         = NULL;
         $name           = NULL;
-        $is_milestone   = 0;
+        $is_milestone   = NULL;
         $for_milestone  = NULL;
         $resolved_version = NULL;
         $is_released_min= NULL;

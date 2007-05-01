@@ -201,12 +201,12 @@ function ProjView()
         if($project->company) {
             require_once(confGet('DIR_STREBER') . "db/class_company.inc.php");
             if( $company= Company::getVisibleById($project->company)) {
-                echo "<p><label>".__('Client','label')."</label>". $project->getCompanyLink(true) ."</p>";
+                echo "<div class=labeled><label>".__('Client','label')."</label>". $project->getCompanyLink(true) ."</div>";
                 if($company->phone) {
-                    echo "<p><label>" . __('Phone','label') . "</label>". asHtml($company->phone)."</p>";
+                    echo "<div class=labeled><label>" . __('Phone','label') . "</label>". asHtml($company->phone)."</div>";
                 }
                 if($company->email) {
-                    echo "<p><label>" . __('E-Mail','label') . "</label>". url2LinkMail($company->email)."</p>";
+                    echo "<div class=labeled><label>" . __('E-Mail','label') . "</label>". url2LinkMail($company->email)."</div>";
                 }
             }
             echo "<br>";
@@ -219,57 +219,57 @@ function ProjView()
                      ? ' ('. asHtml($project->status_summary).')'
                      : '';
 
-            echo "<p><label>".__("Status","Label in summary").'</label>'. asHtml($status) . $ssummary. '</p>';
+            echo "<div class=labeled><label>".__("Status","Label in summary").'</label>'. asHtml($status) . $ssummary. '</div>';
         }
 
 
         if($project->wikipage) {
-	        echo "<p><label>".__("Wikipage","Label in summary")."</label>".url2linkExtern($project->wikipage)."</p>";
+	        echo "<div class=labeled><label>".__("Wikipage","Label in summary")."</label>".url2linkExtern($project->wikipage)."</div>";
 	    }
 
         if($project->projectpage) {
-	        echo "<p><label>".__("Projectpage","Label in summary")."</label>".url2linkExtern($project->projectpage)."</p>";
+	        echo "<div class=labeled><label>".__("Projectpage","Label in summary")."</label>".url2linkExtern($project->projectpage)."</div>";
 	    }
 
 
         if($project->date_start !="0000-00-00") {
-	        echo "<p><label>".__("Opened","Label in summary")."</label>".renderDateHtml($project->date_start)."</p>";
+	        echo "<div class=labeled><label>".__("Opened","Label in summary")."</label>".renderDateHtml($project->date_start)."</div>";
 	    }
 
 
         if($project->date_closed !="0000-00-00") {
-            echo "<p><label>".__("Closed","Label in summary")."</label>".renderDateHtml($project->date_closed)."</p>";
+            echo "<div class=labeled><label>".__("Closed","Label in summary")."</label>".renderDateHtml($project->date_closed)."</div>";
         }
 
         if($person_creator= Person::getVisibleById($project->created_by)) {
-            echo "<p><label>".__("Created by","Label in summary")."</label>".$person_creator->getLink()."</p>" ;
+            echo "<div class=labeled><label>".__("Created by","Label in summary")."</label>".$person_creator->getLink()."</div>" ;
         }
 
         if($project->modified_by != $project->created_by) {
             if($person_modify= Person::getVisibleById($project->modified_by)) {
-                echo "<p><label>".__("Last modified by","Label in summary")."</label>".$person_modify->getLink()."</p>" ;
+                echo "<div class=labeled><label>".__("Last modified by","Label in summary")."</label>".$person_modify->getLink()."</div>" ;
             }
         }
 
 
         $sum_efforts= $project->getEffortsSum();
         if($sum_efforts) {
-            echo "<p><label>" . __("Logged effort") . "</label>"
+            echo "<div class=labeled><label>" . __("Logged effort") . "</label>"
                 .$PH->getLink('projViewEfforts',round($sum_efforts/60/60,1),array('prj'=>$project->id))
-                ." ".__("hours")."</p>" ;
+                ." ".__("hours")."</div>" ;
         }
 
         $sum_progress= $project->getProgressSum();
         if($sum_progress) {
-            echo "<p><label>" . __("Completed") . "</label><b>"
+            echo "<div class=labeled><label>" . __("Completed") . "</label><b>"
                 .$PH->getLink('projViewTasks',number_format($sum_progress, 1, ',', ''),array('prj'=>$project->id))
-                ."%</b></p>" ;
+                ."%</b></div>" ;
         }
         $num_tasks= $project->getNumTasks();
         if($num_tasks) {
-            echo "<p><label>" . __("Tasks") . "</label>"
+            echo "<div class=labeled><label>" . __("Tasks") . "</label>"
                 .$PH->getLink('projViewTasks',$num_tasks,array('prj'=>$project->id))
-                ."</p>" ;
+                ."</div>" ;
         }
 
 

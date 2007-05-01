@@ -784,56 +784,55 @@ function personView()
         #    echo wiki2html($person->description);
         #}
 
-
         if($person->mobile_phone) {
-            echo "<p><label>" . __('Mobile','Label mobilephone of person'). '</label>'. asHtml($person->mobile_phone). '</p>';
+            echo "<div class=labeled><label>" . __('Mobile','Label mobilephone of person'). '</label>'. asHtml($person->mobile_phone). '</div>';
         }
         if($person->office_phone) {
-            echo "<p><label>" . __('Office','label for person'). '</label>'. asHtml($person->office_phone) . '</p>';
+            echo "<div class=labeled><label>" . __('Office','label for person'). '</label>'. asHtml($person->office_phone) . '</div>';
         }
         if($person->personal_phone) {
-            echo "<p><label>" . __('Private','label for person'). '</label>'. asHtml($person->personal_phone) .'</p>';
+            echo "<div class=labeled><label>" . __('Private','label for person'). '</label>'. asHtml($person->personal_phone) .'</div>';
         }
         if($person->office_fax) {
-            echo "<p><label>" . __('Fax (office)','label for person'). '</label>'. asHtml($person->office_fax) .'</p>';
+            echo "<div class=labeled><label>" . __('Fax (office)','label for person'). '</label>'. asHtml($person->office_fax) .'</div>';
         }
 
 
         if($person->office_homepage) {
-            echo "<p><label>" . __('Website','label for person'). '</label>'.url2linkExtern($person->office_homepage).'</p>';
+            echo "<div class=labeled><label>" . __('Website','label for person'). '</label>'.url2linkExtern($person->office_homepage).'</div>';
         }
         if($person->personal_homepage) {
-            echo "<p><label>" . __('Personal','label for person'). '</label>'.url2linkExtern($person->personal_homepage).'</p>';
+            echo "<div class=labeled><label>" . __('Personal','label for person'). '</label>'.url2linkExtern($person->personal_homepage).'</div>';
         }
 
         if($person->office_email) {
-            echo "<p><label>" . __('E-Mail','label for person office email'). '</label>'.url2linkMail($person->office_email).'</p>';
+            echo "<div class=labeled><label>" . __('E-Mail','label for person office email'). '</label>'.url2linkMail($person->office_email).'</div>';
         }
         if($person->personal_email) {
-            echo "<p><label>" . __('E-Mail','label for person personal email'). '</label>'.url2linkMail($person->personal_email).'</p>';
+            echo "<div class=labeled><label>" . __('E-Mail','label for person personal email'). '</label>'.url2linkMail($person->personal_email).'</div>';
         }
 
 
         if($person->personal_street) {
-            echo "<p><label>" . __('Adress Personal','Label'). '</label>'. asHtml($person->personal_street) . '</p>';
+            echo "<div class=labeled><label>" . __('Adress Personal','Label'). '</label>'. asHtml($person->personal_street) . '</div>';
         }
         if($person->personal_zipcode) {
-            echo '<p><label></label>'. asHtml($person->personal_zipcode) . '</p>';
+            echo '<div class=labeled><label></label>'. asHtml($person->personal_zipcode) . '</div>';
         }
 
         if($person->office_street) {
-            echo "<p><label>" . __('Adress Office','Label'). '</label>'. asHtml($person->office_street) .'</p>';
+            echo "<div class=labeled><label>" . __('Adress Office','Label'). '</label>'. asHtml($person->office_street) .'</div>';
         }
         if($person->office_zipcode) {
-            echo "<p><label></label>". asHtml($person->office_zipcode).'</p>';
+            echo "<div class=labeled><label></label>". asHtml($person->office_zipcode).'</div>';
         }
 
         if($person->birthdate && $person->birthdate != "0000-00-00") {
-            echo "<p><label>" . __('Birthdate','Label'). "</label>".renderDateHtml($person->birthdate)."</p>";
+            echo "<div class=labeled><label>" . __('Birthdate','Label'). "</label>".renderDateHtml($person->birthdate)."</div>";
         }
 		
 		if($person->last_login) {
-			echo "<p><label>" . __('Last login','Label'). '</label>'. renderDateHtml($person->last_login) .'</p>';
+			echo "<div class=labeled><label>" . __('Last login','Label'). '</label>'. renderDateHtml($person->last_login) .'</div>';
 		}
 		
 
@@ -2641,11 +2640,10 @@ function personDelete()
         }
 
         ### persons in project can't be deleted ###
-        if($p->getProjectPersons(
-            NULL,       # order_by
-            false,   #$alive_only=true,
-            false   #$visible_only= true
-        )) {
+        if($p->getProjectPersons(array(
+            'alive_only' => false,
+            'visible_only' => false 
+        ))) {
           new FeedbackWarning(sprintf(__('<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'), $p->getLink()));
         }
         else {

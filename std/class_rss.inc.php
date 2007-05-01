@@ -11,6 +11,8 @@ require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_changes.inc.php');
 require_once(confGet('DIR_STREBER') . 'lib/class_feedcreator.inc.php');
+require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
+
 
 
 /**
@@ -29,24 +31,50 @@ class RSS
     *
     * @param project - current project object used in: proj.inc.php <- function call
     */
-    static function updateRSS(&$project)
+    static function updateRSS($project)
     {
+        global $PH;
+        global $auth;
+        
         if(!$project) {
             return NULL;
         }
 
+        /**
+        * only show changes by others
+        */
+        if(Auth::isAnonymousUser()) {
+            $not_modified_by = NULL;
+        }
+        else {
+            $not_modified_by= $auth->cur_user->id;
+        }
+
         ### get all the changes (array of history items) ##
+        $changes= ChangeLine::getChangeLines(array(
+            'project'           => $project->id,
+            'unviewed_only'     => false,
+            'limit_rowcount'    => 30,
+            'not_modified_by'   => $not_modified_by,
+            'type'              => array(ITEM_TASK),
+        ));
+        
+        /*
         $changes= DbProjectItem::getAll(array(
             'project'           => $project->id,        # query only this project history
             'alive_only'        => false,               # get deleted entries
             'visible_only'      => false,               # ignore user viewing rights
-            'limit'             => 20,                  # show only last 20 entries in rss feed
+            'limit_rowcount'    => 20,                  # show only last 20 entries in rss feed
             #'show_assignments'  => false,              # ignore simple assignment events
         ));
+        */
 
         $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');   # url part of the link to the task
         $from_domain = confGet('SELF_DOMAIN');                      # domain url
 
+        if(confGet('USE_MOD_REWRITE')) {
+            $url= str_replace('index.php','',$url);
+        }
 
         ### define general rss file settings ###
         $rss = new UniversalFeedCreator();
@@ -60,145 +88,37 @@ class RSS
 
         foreach($changes as $ch) {
 
-            ### analyze history entries:
-            {
+            $item = $ch->item;
 
-                ### person name
-                $date_created=$ch->created;
-                $date_modified=$ch->modified;
-                $date_deleted=$ch->deleted;
+            $name_author = __('???');            
+            if($person = Person::getVisibleById($item->modified_by)) {
+                $name_author= $person->name;
+            }
 
-                $prs=NULL;
-                $person=NULL;
-                $str="";
-                if($date_deleted >= $date_modified) {
-                    $prs= Person::getById($ch->deleted_by);
-                }
-                else if($date_modified > $date_created) {
-                    $prs= Person::getById($ch->modified_by);
+
+            $str_updated= '';
+            if($new= $ch->item->isChangedForUser()) {
+                if($new == 1) {
+                    $str_updated= __('New');
                 }
                 else {
-                    $prs= Person::getById($ch->created_by);
+                    $str_updated= __('Updated');
                 }
-                $person_name = $prs->name;
-
-
-                ### action
-                $date_created=$ch->created;
-                $date_modified=$ch->modified;
-                $date_deleted=$ch->deleted;
-                $action="";
-                if($date_deleted >= $date_modified) {
-                    $action= "Deleted";
-                }
-                else if($date_modified > $date_created) {
-                    $action= "Modified";
-                }
-                else {
-                    $action= "New";
-                }
-
-
-                ### type of item
-                $item_names =array(
-                    ITEM_PROJECT        => 'Project',
-                    ITEM_TASK           =>'Task',
-                    ITEM_PERSON         =>'Person',
-                    ITEM_PROJECTPERSON  =>'Team Member',
-                    ITEM_COMPANY        =>'Company',
-                    ITEM_EMPLOYMENT     =>'Employment',
-                    ITEM_ISSUE          =>'Issue',
-                    ITEM_EFFORT         =>'Effort',
-                    ITEM_TASK_EFFORT    =>'Effort',
-                    ITEM_COMMENT        =>'Comment',
-                    ITEM_FILE           =>'File',
-                    ITEM_TASKPERSON     =>'Task assignment'
-                );
-                if(!$typename= $item_names[$ch->type]) {
-                    $typename="?";
-                }
-
-
-                ### item name - consists of
-                #       str_url (direct link),
-                #       str_name (name as string)
-                #       str_addon (extra link description)
-                global $PH;
-                $str_url="";
-                $str_name="";
-                $str_addon="";
-                switch($ch->type) {
-                    case ITEM_TASK:
-                        if($task= Task::getById($ch->id)) {
-                            $str_name= $task->name;
-                            $str_url= "$url?go=taskView&tsk={$task->id}";
-                        }
-                        break;
-
-                    case ITEM_COMMENT:
-                        require_once("db/class_comment.inc.php");
-                        if($comment= Comment::getById($ch->id)) {
-                            $str_name= $comment->name;
-                            if($comment->comment) {
-                                $str_url= "$url?go=taskView&tsk={$comment->task}";
-                                $str_addon="(on comment)";
-                            }
-
-                            else if($comment->task) {
-                                $str_url= "$url?go=taskView&tsk={$comment->task}";
-                                $str_addon="(on task)";
-
-                            }
-
-                            else {
-                                $str_url= "$url?go=projView&prj={$comment->project}";
-                                $str_addon="(on project)";
-                            }
-                        }
-                        break;
-
-                    case ITEM_PROJECTPERSON:
-                        if($pp= Person::getById(ProjectPerson::getById($ch->id)->person)) {
-                            $str_name= $pp->name;
-                            $str_url= "$url?go=personView&person={$pp->id}";
-                        }
-                        break;
-
-                    case ITEM_EFFORT:
-                        require_once("db/class_effort.inc.php");
-                        if($e= Effort::getById($ch->id)) {
-                            $str_name= $e->name;
-                            $str_url= "$url?go=effortEdit&effort={$e->id}";
-                        }
-                        break;
-                    case ITEM_FILE:
-                        require_once("db/class_file.inc.php");
-                        if($f= File::getById($ch->id)) {
-                            $str_name= $f->org_filename;
-                            $str_url= "$url?go=fileView&file={$f->id}";
-                        }
-                    default:
-                        break;
-                }
-
-
-                ### modified at which time
-                $modified = strtotime($ch->modified);
             }
 
 
             ### adding rss item
             {
 
-                $item = new FeedItem();
-                $item->title = $str_name;
-                $item->link = $str_url;
-                $item->description = $person_name." - ".$action." ".$typename.": ".$str_name;
-                $item->date = $modified;
-                $item->source = $url;
-                $item->author = "StreberPM";
+                $feeditem = new FeedItem();
+                $feeditem->title = $item->name  . " (" . $ch->txt_what .' ' . __("by") . ' ' . $name_author . ")";
+                $feeditem->link = $url . "?go=itemView&item=$item->id";
+                #$feeditem->description =  ;
+                $feeditem->date = gmdate("r", strToGMTime($item->modified));
+                $feeditem->source = $url;
+                $feeditem->author = $name_author;
 
-                $rss->addItem($item);
+                $rss->addItem($feeditem);
             }
         }
 

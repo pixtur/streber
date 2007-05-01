@@ -1666,7 +1666,7 @@ $g_lang_table= array(
 'Versions'                    =>'Verzie',
 'Task Test'                   =>'',
 'View Task Efforts'           =>'Zobraziť úsilie úlohy',
-'New Released Milestone'      =>'',
+'New released Version'      =>'',
 'View effort'                 =>'Zobraziť úsilie',
 'View multiple efforts'       =>'',
 'List Clients'                =>'Zoznam klientov',
@@ -1730,7 +1730,7 @@ $g_lang_table= array(
 'all'                         =>'všeko',
 'without milestone'           =>'bez míľnika',
 'Released Versions'           =>'Vydané verzie',
-'New released Milestone'      =>'',
+'New released Version'      =>'',
 'Tasks resolved in upcomming version'=>'',
 
 ### ../pages/search.inc.php   ###

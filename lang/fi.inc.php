@@ -635,7 +635,7 @@ $g_lang_table= array(
 'New Milestone'               =>'Uusi etappi',  # line 32
 
 ### ../pages/_handles.inc.php   ###
-'New Released Milestone'      =>'Uusi julkaistu etappi',  # line 466
+'New released Version'      =>'Uusi julkaistu etappi',  # line 466
 'Toggle view collapsed'       =>'Vaihda näkymä',  # line 680
 'Add issue/bug report'        =>'Lisää ongelma/bugi raportti',  # line 510
 'Edit Description'            =>'Muokkaa kuvausta',  # line 519
@@ -1222,7 +1222,7 @@ $g_lang_table= array(
 'View closed milestones'      =>'Näytä saavutetut etapit',  # line 1431
 'Project Efforts'             =>'Näytä projektin työpanokset',  # line 1473
 'Released Versions'           =>'Julkasitut versiot',  # line 1553
-'New released Milestone'      =>'Uusi julkaistu etappi',  # line 1571
+'New released Version'      =>'Uusi julkaistu etappi',  # line 1571
 'Tasks resolved in upcomming version'=>'Ratkaistut tehtävät tulevissa versioissa',  # line 1605
 'Company|form label'          =>'Yritys',  # line 1723
 'Create another project after submit'=>'Lisää heti toinen projekti',  # line 1741

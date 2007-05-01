@@ -287,7 +287,7 @@ function systemInfo()
 
     echo "<div class=text>";
     foreach($system_info as $label=>$value) {
-        echo "<p><label>$label:</label> <span>$value</span></p>";
+        echo "<div class=labeled><label>$label:</label> <span>$value</span></div>";
     }
     echo "</div>";
 

@@ -657,7 +657,7 @@ class Project extends DbProjectItem
     *
     * @see: getPersons()
 	**/
-	function &getProjectPersons($args=NULL)
+	function getProjectPersons($args=NULL)
 	{
 		global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');
@@ -748,7 +748,6 @@ class Project extends DbProjectItem
         require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
 
         $dbh = new DB_Mysql;
-
 
         $sth= $dbh->prepare($s_query);
     	$sth->execute("",1);

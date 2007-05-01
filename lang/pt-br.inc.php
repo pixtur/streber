@@ -1270,7 +1270,7 @@ $g_lang_table= array(
 'New Milestone'               =>'Novo Marco',
 
 ### ../pages/_handles.inc.php   ###
-'New Released Milestone'      =>'Novo Marco Disponibilizado',
+'New released Version'      =>'Novo Marco Disponibilizado',
 'Edit Description'            =>'Editar DescriÃ§Ã£o',
 'View effort'                 =>'Visualizar esforÃ§o',
 'View multiple efforts'       =>'Visualizar mÃºltiplos esforÃ§os',
@@ -1479,7 +1479,7 @@ $g_lang_table= array(
 'View open milestones'        =>'Visualizar marcos abertos',
 'View closed milestones'      =>'Visualizar marcos fechados',
 'Released Versions'           =>'VersÃµes Publicadas',
-'New released Milestone'      =>'Novo Marco publicado',
+'New released Version'      =>'Novo Marco publicado',
 'Tasks resolved in upcomming version'=>'Tarefa resolvida na prÃ³xima ediÃ§Ã£o',
 'Company|form label'          =>'Companhia|etiqueta de formulÃ¡rio',
 'Found no persons to add. Go to `People` to create some.'=>'NÃ£o encontrada pessoas para adicionar. VÃ¡ atÃ© `Pessoas` para criar algumas',

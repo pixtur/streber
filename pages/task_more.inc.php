@@ -373,8 +373,8 @@ function taskEdit($task=NULL)
 
         ### task category ###
         {
-            $list= array();
-            if($task->is_milestone) {
+            $list= array();                       
+            if($task->category == TCATEGORY_MILESTONE ||  $task->category == TCATEGORY_VERSION) {
                 $list= array(TCATEGORY_MILESTONE, TCATEGORY_VERSION);
 
                 ### make sure it's valid
@@ -1245,18 +1245,21 @@ function taskEditSubmit()
     if($task->id && !get('task_issue_report')) {
         $task_issue_report = $task->issue_report;
     }
-    else {
+    else if($task->issue_report != get('task_issue_report')) {
+        trigger_error("Requesting invalid issue report id for task!", E_USER_WARNING);
         $task_issue_report= get('task_issue_report');
+    }
+    else {
+        $task_issue_report = 0;
     }
     
     
+    printFormVars();
     
     ### consider issue-report? ###
     #$task_issue_report= get('task_issue_report');
-    if( $task_issue_report != 0
-     || $task->category == TCATEGORY_BUG
-     #&& !get('comment_name')                            # don't update issue report 
-    ) {
+    if( $task->category == TCATEGORY_BUG || (isset($task_issue_report) && $task_issue_report) ) {
+
 
         ### new report as / temporary ###
         if($task_issue_report == 0 || $task_issue_report == -1) {
@@ -1273,6 +1276,26 @@ function taskEditSubmit()
                 $f->parseForm(&$issue);
             }
 
+            global $g_reproducibility_names;
+            if(!is_null($rep= get('issue_reproducibility'))) {
+                if(isset($g_reproducibility_names[$rep])) {
+                    $issue->reproducibility= intval($rep);
+                }
+                else {
+                    $issue->reproducibility= REPRODUCIBILITY_UNDEFINED;
+                }
+            }
+
+            global $g_severity_names;
+            if(!is_null($sev= get('issue_severity'))) {
+                if(isset($g_severity_names[$sev])) {
+                    $issue->severity= intval($sev);
+                }
+                else {
+                    $issue->severity= SEVERITY_UNDEFINED;
+                }
+            }
+
             ### write to db ###
             if(!$issue->insert()) {
                 trigger_error("Failed to insert issue to db",E_USER_WARNING);
@@ -1284,7 +1307,6 @@ function taskEditSubmit()
         }
         ### get from database ###
         else if($issue= Issue::getById($task_issue_report)) {
-            
 
             ### querry form-information ###
             foreach($issue->fields as $f) {
@@ -1340,7 +1362,7 @@ function taskEditSubmit()
         foreach($link_items as $i) {
             $i->task= $task->id;
             $i->update();
-        }
+        }        
         new FeedbackMessage(sprintf(__("Created task %s with ID %s"),  $task->getLink(false),$task-> id));
     }
     else {
@@ -1352,11 +1374,12 @@ function taskEditSubmit()
 
         new FeedbackMessage(sprintf(__("Changed task %s with ID %s"),  $task->getLink(false),$task->id));
         $task->update();
+        $project->update(array(), true);
     }
 
 
     ### if this is a just released version add any recently resolved tasks? ###
-    if($task->is_milestone && $task->is_released >= RELEASED_INTERNAL && $was_released_as < RELEASED_INTERNAL ) {
+    if($task->category == TCATEGORY_MILESTONE && $task->is_released >= RELEASED_INTERNAL && $was_released_as < RELEASED_INTERNAL ) {
 	    if($resolved_tasks= Task::getAll(array(
 	        'project'           => $task->project,
 	        'status_min'        => STATUS_COMPLETED,
@@ -1378,10 +1401,11 @@ function taskEditSubmit()
     ### create another task ###
     if(get('create_another')) {
 
+
         ### build dummy form ###
         $newtask= new Task(array(
             'id'        =>0,
-            'name'      =>__('New task'),
+            'name'      =>__('Name'),
             'project'   =>$task->project,
             'state'     =>1,
             'prio'      =>$task->prio,
@@ -1389,8 +1413,8 @@ function taskEditSubmit()
             'parent_task'=>$task->parent_task,
             'for_milestone'=>$task->for_milestone,
             'category'  =>$task->category,
+            'is_milestone' => $task->is_milestone,                   
         ));
-
 
 
 		$PH->show('taskEdit',array('tsk'=>$newtask->id),$newtask);

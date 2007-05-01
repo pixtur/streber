@@ -1768,7 +1768,6 @@ $g_lang_table= array(
 'Create new folder for tasks and files'=>'Einen neuen Ordner für Aufgaben und Dateien erstellen',
 'Filter-Preset:'              =>'Filter-Set',
 'No tasks'                    =>'keine Aufgaben',
-'new Milestone'               =>'neuer Meilenstein',
 'View open milestones'        =>'Offene Meilensteine zeigen',
 'View closed milestones'      =>'Geschlossene Meilensteine zeigen',
 'modified by me'              =>'meine Änderungen',
@@ -2145,7 +2144,7 @@ $g_lang_table= array(
 'Versions'                    =>'Versionen',
 'Task Test'                   =>'Aufgaben Testen',
 'View Task Efforts'           =>'Aufwände zeigen',
-'New Released Milestone'      =>'Neu veröffentlichter Meilenstein',
+'New released Version'        =>'Neue Version',
 'View effort'                 =>'Aufwand zeigen',
 'View multiple efforts'       =>'Mehrere Aufwände zeigen',
 'List Clients'                =>'Kunden zeigen',
@@ -2176,7 +2175,6 @@ $g_lang_table= array(
 ### ../pages/proj.inc.php   ###
 'all'                         =>'alle',
 'without milestone'           =>'ohne Meilenstein',
-'New released Milestone'      =>'Neuer veröffentlichter Meilenstein',
 
 ### ../pages/search.inc.php   ###
 'cannot jump to this item type'=>'Kann nicht zu diesem Elementtyp springen',

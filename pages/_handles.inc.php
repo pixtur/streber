@@ -620,7 +620,7 @@ new PageHandleFunc(array('id'=>'taskNewMilestone',
 
 new PageHandleFunc(array('id'=>'taskNewVersion',
     'req'=>'pages/task_more.inc.php',
-    'title'=>__('New Released Milestone'),
+    'title'=>__('New released Version'),
     'valid_params'=>array(  'prj'=>'\d*',
                             'task_assign_to_0'=>'\d*',
     ),

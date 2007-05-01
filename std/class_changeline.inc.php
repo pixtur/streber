@@ -243,6 +243,8 @@ class ChangeLine extends BaseObject
                             'person' => $i->modified_by,
                             'task' => $task->id,
                             'date_min'  => $timestamp_last_change,
+                            'order_by' => 'created ASC',
+
                         ))) {
                             $last_comment= $comments[count($comments)-1];
                             $timestamp_last_change= $last_comment->created;
@@ -256,7 +258,7 @@ class ChangeLine extends BaseObject
                                 $html_comment= substr($html_comment, 0, COMMENT_LEN_PREVIEW). "...";
                             }
                             if(count($comments) > 1) {
-                                $html_comment= sprintf(__('Last of %s comments:'), count($comments)). ' '. $html_comment;
+                                $html_comment= __('Latest comment:') . ' '. $html_comment;
                             }
                             else {
                                 $html_comment= __('comment:'). ' '. $html_comment;
