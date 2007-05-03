@@ -3,6 +3,7 @@
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
+
 /**
  * derived ListBlock-class for listing efforts
  *
@@ -115,6 +116,7 @@ class ListBlock_efforts extends ListBlock
             new ListGroupingEffortStatus(),
             new ListGroupingCreatedBy(),
 			new ListGroupingTask(),
+			new ListGroupingProject(),
         );
 		
     }
@@ -160,7 +162,12 @@ class ListBlock_efforts extends ListBlock
 
 	        ### prepend key to sorting ###
 	        if(isset($this->query_options['order_by'])) {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+				if($this->groupings->getActiveFromCookie() == 'project'){
+					$this->query_options['order_by'] = "i.project,".$this->query_options['order_by'];
+				}
+				else{
+	            	$this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+				}
 	        }
 	        else {
 	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
