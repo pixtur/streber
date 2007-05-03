@@ -17,6 +17,30 @@
 require_once('db/db_itemperson.inc.php');
 require_once('db/db_item.inc.php');
 
+class ListGroupingType extends ListGrouping {
+
+    public function __construct($args=NULL) {
+        $this->id = 'type';
+        parent::__construct($args);
+    }
+
+    /**
+    * render separating row
+    */
+    public function render(&$item)
+    {
+        global $g_item_type_names;
+		if(isset($item->type)){
+            $type_name = $g_item_type_names[$item->type];
+			return $type_name;
+		}
+        else {
+            trigger_error("can't group for type",E_USER_NOTICE);
+            return "---";
+        }
+    }
+}
+
 class ListBlock_bookmarks extends ListBlock
 {
     public $bg_style = "bg_misc";
@@ -58,6 +82,37 @@ class ListBlock_bookmarks extends ListBlock
             'id'    =>'itemsRemoveBookmark',
             'context_menu'=>'submit',
         )));
+		
+		### block style functions ###
+        $this->add_blockFunction(new BlockFunction(array(
+            'target'=>'changeBlockStyle',
+            'key'=>'list',
+            'name'=>'List',
+            'params'=>array(
+                'style'=>'list',
+                'block_id'=>$this->id,
+                'page_id'=>$PH->cur_page->id,
+                #'use_collapsed'=>true, @@@ this parameter seems useless
+             ),
+            'default'=>true,
+        )));
+        $this->groupings= new BlockFunction_grouping(array(
+            'target'=>'changeBlockStyle',
+            'key'=>'grouped',
+            'name'=>'Grouped',
+            'params'=>array(
+                'style'=>'grouped',
+                'block_id'=>$this->id,
+                'page_id'=>$PH->cur_page->id,
+            ),
+        ));
+
+        $this->add_blockFunction($this->groupings);
+		
+		### list groupings ###
+        $this->groupings->groupings= array(
+            new ListGroupingType(),
+        );
    }
 
     public function print_automatic()
@@ -65,24 +120,54 @@ class ListBlock_bookmarks extends ListBlock
         global $PH;
 		global $auth;
 		
-		$this->active_block_function = 'list';
+		if(!$this->active_block_function=$this->getBlockStyleFromCookie()) {
+            $this->active_block_function = 'list';
+        }
+
+        $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
 		
-		$this->initOrderQueryOption("created DESC");
+		#$this->initOrderQueryOption("created DESC");
+		$this->initOrderQueryOption();
 		
         $this->query_options['person'] = $auth->cur_user->id;
 		$this->query_options['is_bookmark'] = 1;
 		
+		### grouped view ###
+        if($this->active_block_function == 'grouped') {
+            /**
+            * @@@ later use only once...
+            *
+            *   $this->columns= filterOptions($this->columns,"CURPAGE.BLOCKS[{$this->id}].STYLE[{$this->active_block_function}].COLUMNS");
+            */
+			
+            if(isset($this->columns[$this->group_by])) {
+                unset($this->columns[$this->group_by]);
+            }
+			
+			#$this->query_options['order_by'] = '';
+            ### prepend key to sorting ###
+            if(isset($this->query_options['order_by'])) {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+				#$this->query_options['order_by'] = 'id';
+
+            }
+            else {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+				#$this->query_options['order_by'] = 'id';
+            }
+        }
+        ### list view ###
+        else {
+            $pass= true;
+        }
+
 		$bookmark_items = ItemPerson::getAll($this->query_options);
-		/*$bookmark_items = ItemPerson::getAll(array(
-		    'person'        =>$auth->cur_user->id,
-		    'is_bookmark'   =>1,
-			'order_by'		=>$order_by
-		));*/
+		
 		$items= array();
 
 		foreach($bookmark_items as $bi) {
 		    if($item= DbProjectItem::getVisibleById($bi->item)) {
-		        $items[]= $item;
+		       $items[]= $item;
 		    }
 		}
 
@@ -97,10 +182,11 @@ class ListBlock_bookmarks extends ListBlock
 */
 class ListBlockCol_ItemType extends ListBlockCol
 {
-
     public function __construct($args=NULL)
     {
         parent::__construct($args);
+		$this->id = 'type';
+		$this->key = 'type';
         $this->name = __('Type');
 		$this->width = '10%';
     }
@@ -186,10 +272,10 @@ class ListBlockCol_ItemType extends ListBlockCol
 				}
 			}
 
-            print "<td><span class=$isDone>$type_name</span><br><span class='sub who'>$status_name</span></td>";
+            echo "<td><span class=$isDone>$type_name</span><br><span class='sub who'>$status_name</span></td>";
         }
         else{
-            print "<td>&nbsp;</td>";
+            echo "<td>&nbsp;</td>";
         }
     }
 }

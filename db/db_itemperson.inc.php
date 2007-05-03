@@ -156,7 +156,7 @@ class ItemPerson extends DbItem
 		$notify_on_change = NULL;
 		$notify_if_unchanged_min = NULL;
 		$notify_if_unchanged_max = NULL;
-		$order_by         = "created DESC";
+		$order_by         = "ip.created DESC";
 		
 		### filter params ###
         if($args) {
@@ -171,11 +171,11 @@ class ItemPerson extends DbItem
         }
 
 		$str_id = $id
-		    ? "AND id = " . $id .""
+		    ? "AND ip.id = " . $id .""
 			: "";
 
 		$str_item = $item
-		    ? "AND item = " . $item .""
+		    ? "AND ip.item = " . $item .""
 			: "";
 
        if(is_null($is_bookmark)){
@@ -183,47 +183,58 @@ class ItemPerson extends DbItem
 	   }
 	   else{
 	       if($is_bookmark){
-		       $str_bookmark = "AND is_bookmark = 1";
+		       $str_bookmark = "AND ip.is_bookmark = 1";
 		   }
 		   else{
-		       $str_bookmark = "AND is_bookmark = 0";
+		       $str_bookmark = "AND ip.is_bookmark = 0";
 		   }
 	   }
 		
 		if(!is_null($notify_on_change)){
-			$str_notify_on_change = 'AND notify_on_change = ' . $notify_on_change;
+			$str_notify_on_change = 'AND ip.notify_on_change = ' . $notify_on_change;
 		}
 		else{
 			$str_notify_on_change = '';
 		}
 		
 		if(!is_null($notify_if_unchanged_min)){
-			$str_notify_if_unchanged_min = 'AND notify_if_unchanged >= ' . $notify_if_unchanged_min;
+			$str_notify_if_unchanged_min = 'AND ip.notify_if_unchanged >= ' . $notify_if_unchanged_min;
 		}
 		else{
 			$str_notify_if_unchanged_min = '';
 		}
 		
 		if(!is_null($notify_if_unchanged_max)){
-			$str_notify_if_unchanged_max = 'AND notify_if_unchanged <= ' . $notify_if_unchanged_max;
+			$str_notify_if_unchanged_max = 'AND ip.notify_if_unchanged <= ' . $notify_if_unchanged_max;
 		}
 		else{
 			$str_notify_if_unchanged_max = '';
 		}
 		
-
-		
 		if(!is_null($person)){
-			$str_query = "SELECT * FROM {$prefix}itemperson
-				          WHERE person = " . $person . "
-						  $str_item
-						  $str_bookmark
-						  $str_id
-						  $str_notify_on_change
-						  $str_notify_if_unchanged_min
-						  $str_notify_if_unchanged_max"
-						  . getOrderByString($order_by);
-						  
+			#if($order_by == 'type'){
+				$str_query = "SELECT ip.* FROM {$prefix}itemperson ip,  {$prefix}item i
+				              WHERE ip.person = " . $person . "
+						      AND i.id = ip.item
+						      $str_item
+						      $str_bookmark
+						      $str_id
+						      $str_notify_on_change
+						      $str_notify_if_unchanged_min
+						      $str_notify_if_unchanged_max"
+						      . getOrderByString($order_by);
+			#}
+			/*else{
+			    $str_query = "SELECT * FROM {$prefix}itemperson ip
+				              WHERE ip.person = " . $person . "
+						      $str_item
+						      $str_bookmark
+						      $str_id
+						      $str_notify_on_change
+						      $str_notify_if_unchanged_min
+						      $str_notify_if_unchanged_max"
+						      . getOrderByString($order_by);
+			} */ 
 			$sth = $dbh->prepare($str_query);
 			$sth->execute("",1);
 			$tmp = $sth->fetchall_assoc();
