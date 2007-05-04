@@ -115,28 +115,28 @@ new PageHandleFunc(array('id'=>'itemsRemoveNotification',
     'test'=>'yes',
     'test_params'=>array('item'=>'_itemView_',),
 ));
-new PageHandleForm(array('id'=>'itemMonitorEdit',
+new PageHandleForm(array('id'=>'itemBookmarkEdit',
     'req'=>'pages/item.inc.php',
-    'title'=>__('Edit monitored items'),
+    'title'=>__('Edit bookmarks'),
 	'valid_params'=>array(),
     'test'=>'yes',
     'test_params'=>array('id'=>'_ITEM_',),
 ));
 
-new PageHandleSubm(array('id'=>'itemMonitorEditSubmit',
+new PageHandleSubm(array('id'=>'itemBookmarkEditSubmit',
     'req'=>'pages/item.inc.php',
     'valid_params'=>array(),
 ));
 
-new PageHandleForm(array('id'=>'itemMonitorEditMultiple',
+new PageHandleForm(array('id'=>'itemBookmarkEditMultiple',
     'req'=>'pages/item.inc.php',
-    'title'=>__('Edit multiple monitored items'),
+    'title'=>__('Edit multiple bookmarks'),
 	'valid_params'=>array(),
     'test'=>'yes',
     'test_params'=>array('id'=>'_ITEM_',),
 ));
 
-new PageHandleSubm(array('id'=>'itemMonitorEditMultipleSubmit',
+new PageHandleSubm(array('id'=>'itemBookmarkEditMultipleSubmit',
     'req'=>'pages/item.inc.php',
     'valid_params'=>array(),
 ));
@@ -1154,7 +1154,7 @@ new PageHandleFunc(array('id'=>'personCompaniesDelete',
 ));
 new PageHandleFunc(array('id'=>'personAllItemsViewed',
     'req'       =>'pages/person.inc.php',
-    'title'     =>__('Marks all items viewed'),
+    'title'     =>__('Mark all items as viewed'),
     'rights_required'=>RIGHT_PERSON_EDIT_SELF,
 
     'test'=>'yes',

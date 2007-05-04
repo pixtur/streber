@@ -22,6 +22,7 @@ confChange('SQL_MODE', "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USE
 #confChange('SQL_MODE', "STRICT_ALL_TABLES");
 
 confChange('EMAIL_ADMINISTRATOR','thomas@pixtur.de');
+#confChange('SMTP','mail.pixtur.de');
 
 confChange('REGISTER_NEW_USERS', true);
 confChange('REGISTER_NEW_USERS_TO_PROJECT', 1908);

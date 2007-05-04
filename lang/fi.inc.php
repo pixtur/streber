@@ -1298,7 +1298,7 @@ $g_lang_table= array(
 'undefined'                   =>'määrittämätön',  # line 153
 
 ### ../pages/task_more.inc.php   ###
-'-- next released version --' =>'-- seuraava julkaistu versio --',  # line 457
+'next released version' => 'seuraava julkaistu versio',  # line 457
 
 ### ../pages/task_view.inc.php   ###
 'Resolved in'                 =>'Korjattu',  # line 726
@@ -1391,7 +1391,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Muokkaa useita tehtäviä.',  # line 2641
 'Edit %s tasks|Page title'    =>'Muokkaa %s tehtävää',  # line 2643
 'keep different'              =>'pidä erilaiset',  # line 2788
-'-- keep different --'        =>'-- pidä erilaiset --',  # line 2678
 'Prio'                        =>'Prio',  # line 2728
 'none'                        =>'ei yht.',  # line 2762
 

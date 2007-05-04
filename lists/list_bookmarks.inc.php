@@ -70,9 +70,9 @@ class ListBlock_bookmarks extends ListBlock
 		$this->add_col(new ListBlockCol_ItemModified());
 
 		$this->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('itemMonitorEdit')->id,
+            'target'=>$PH->getPage('itemBookmarkEdit')->id,
             'name'  =>__('Edit bookmark'),
-            'id'    =>'itemMonitorEdit',
+            'id'    =>'itemBookmarkEdit',
             'icon'  =>'edit',
             'context_menu'=>'submit',
         )));

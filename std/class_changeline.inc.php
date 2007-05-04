@@ -193,8 +193,8 @@ class ChangeLine extends BaseObject
                             'person_by' =>      $i->created_by,
                             'timestamp' =>      $i->created,
                             'item_id'   =>      $i->id,
-                            'html_what' =>      __('new File'),
-                            'txt_what'  =>      __('new File'),
+                            'html_what' =>      __('New File'),
+                            'txt_what'  =>      __('New File'),
                             'html_details'=>    $file->name,
                         ));
                         $changes[]= $change;

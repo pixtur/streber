@@ -179,7 +179,7 @@ if($requested_page->http_auth) {
             exit();
         }
         else {
-           echo __('Sorry. 	Authentication failed');
+           echo __('Sorry. Authentication failed');
            exit();
         }
     }

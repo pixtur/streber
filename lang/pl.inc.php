@@ -1549,7 +1549,7 @@ $g_lang_table= array(
 'Select some task(s) to edit' =>'Zaznacz zadania do edycji',  # line 367
 'You do not have enough rights to edit this task'=>'Nie posiadasz wystarczających uprawnień do edycji tego zadania',  # line 375
 'New milestone'               =>'Nowy kamień milowy',  # line 407
-'-- next released version --' =>'-- najbliższa wydana wersja --',  # line 457
+'next released version' => 'najbliższa wydana wersja',  # line 457
 'Release as version|Form label, attribute of issue-reports'=>'Wydanie jako wersja',  # line 605
 'Reproducibility|Form label, attribute of issue-reports'=>'Powtarzalność',  # line 719
 'Create another task after submit'=>'Utworzenie następnego zadania po zatwierdzeniu',  # line 743
@@ -1961,7 +1961,7 @@ $g_lang_table= array(
 'Not enough rights to close %s tasks.'=>'Brak wystarczających uprawnień do zamknięcia %s zadań.',  # line 1928
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'Oznacz wszystkie pozycje jako przeczytane',  # line 1048
+'Mark all items as viewed'      =>'Oznacz wszystkie pozycje jako przeczytane',  # line 1048
 'Forgot your password?'       =>'Zapomniałeś hasło?',  # line 1108
 
 ### ../pages/login.inc.php   ###
@@ -2009,7 +2009,7 @@ $g_lang_table= array(
 ### ../pages/_handles.inc.php   ###
 'Send notification'           =>'Wyślij powiadomienia',  # line 59
 'Remove notification'         =>'Usuń powiadomienia',  # line 65
-'Edit monitored items'        =>'Edytuj monitorowane pozycje',  # line 71
+'Edit bookmarks'        =>'Edytuj monitorowane pozycje',  # line 71
 
 ### ../pages/company.inc.php   ###
 'Delete this company'         =>'Usuń firmę',  # line 510
@@ -2079,7 +2079,7 @@ $g_lang_table= array(
 'en_US.utf8,en_US,enu|list of locales'=>'pl_PL.utf8,pl_PL,plk',  # line 482
 
 ### ../pages/_handles.inc.php   ###
-'Edit multiple monitored items'=>'Edycja wielu monitorowanych pozycji',  # line 84
+'Edit multiple bookmarks'=>'Edycja wielu monitorowanych pozycji',  # line 84
 'View Project as RSS'         =>'Wyświetlenie projektu jako kanał RSS',  # line 169
 'Load Field'                  =>'Załadowanie pola',  # line 1296
 'Save Field'                  =>'Zapisanie pola',  # line 1301
@@ -2132,7 +2132,7 @@ $g_lang_table= array(
 '%s queries / %s fields '     =>'%s zapytań / %s pól',  # line 1322
 
 ### ../std/class_auth.inc.php   ###
-'Sorry. 	Authentication failed'=>'Niestety autentyfikacja nieprawidłowa.',  # line 373
+'Sorry. Authentication failed'=>'Niestety autentyfikacja nieprawidłowa.',  # line 373
 
 ### ../std/mail.inc.php   ###
 'Changed monitored items:|notification'=>'Zmienione pozycje monitorowane:',  # line 229

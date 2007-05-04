@@ -1601,7 +1601,7 @@ $g_lang_table= array(
 'For editing all tasks must be of same project.'=>'Všechny upravované úkoly musí být ze stejného projektu',
 'Edit multiple tasks|Page title'=>'Upravit více úkol',
 'Edit %s tasks|Page title'    =>'Upravit %s úkol',
-'-- keep different --'        =>'-- různé --',
+'keep different'        =>'různé',
 'Prio'                        =>'Prio',
 '- none -'                    =>'- nic -',
 '%s tasks could not be written'=>'%s úkol nemůže být zapsaných',
@@ -1788,7 +1788,7 @@ $g_lang_table= array(
 ### ../pages/task_more.inc.php   ###
 'resolved in Version'         =>'vyřešeno ve verzi',
 'Resolve Reason'              =>'Důvod řešení',
-'-- next released version --' =>'-- další vypuštěná verze --',  # line 457
+'next released version' => 'další vypuštěná verze',  # line 457
 'Note'                        =>'Poznámka',  # line 3121
 'Create new note'             =>'Vytvořit novou poznámku',  # line 3124
 

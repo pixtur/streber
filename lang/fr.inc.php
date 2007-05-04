@@ -1652,7 +1652,6 @@ $g_lang_table= array(
 'You do not have enough rights to edit this task'=>'Droits inssufisant pour modifier cette tâche',
 'Edit %s|Page title'          =>'Modifier %s',
 'New milestone'               =>'Nouvelle objectif',
-'-- next released version --' =>'',
 
 ### ../pages/task_view.inc.php   ###
 'Resolved in'                 =>'Résolu dans',
@@ -1707,7 +1706,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Modifier plusieurs tâches',
 'Edit %s tasks|Page title'    =>'Modifier %s tâches',
 'keep different'              =>'Sont différent',
-'-- keep different --'        =>'-- sont différent --',
 'Prio'                        =>'Prio',
 'none'                        =>'sans',
 

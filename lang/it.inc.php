@@ -1751,7 +1751,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 
 ### ../pages/task_more.inc.php   ###
 'Select some task(s) to edit' =>'Seleziona attività da modificare',  # line 367
-'-- next released version --' =>'-- prossima versione rilasciata --',  # line 457
+'next released version' => 'prossima versione rilasciata',  # line 457
 'Release as version|Form label, attribute of issue-reports'=>'Rilascia come versione',  # line 605
 'Reproducibility|Form label, attribute of issue-reports'=>'Riproducibilità',  # line 719
 'Marked %s tasks to be resolved in this version.'=>'Contrassegnati %s attività da risolvere con questa versione',  # line 1204
@@ -1766,7 +1766,6 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Edit multiple tasks|Page title'=>'Modifica attività multiple',  # line 2619
 'Edit %s tasks|Page title'    =>'Modifica %s attività',  # line 2621
 'keep different'              =>'mantieni differente',  # line 2766
-'-- keep different --'        =>'-- mantieni differente --',  # line 2656
 'Prio'                        =>'Priorità',  # line 2706
 'none'                        =>'nessuna',  # line 2740
 

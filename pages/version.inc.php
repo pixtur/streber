@@ -250,7 +250,7 @@ function versionsDelete()
         new FeedbackWarning(sprintf(__("Failed to delete %s versions"), $errors));
     }
     else {
-        new FeedbackMessage(sprintf(__("Moved %s versions to dumpster"),$counter));
+        new FeedbackMessage(sprintf(__("Moved %s versions to trash"),$counter));
     }
 
     if(!$PH->showFromPage()) {

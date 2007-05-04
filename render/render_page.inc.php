@@ -931,16 +931,6 @@ class PageHeaderNavigation extends PageElement
             ### breadcrumbs ###
             $buffer.= '<span class="breadcrumbs">';
 
-            ### go up ###
-            $count=count($this->page->crumbs)-2;
-            while($count >=0) {
-
-                if($str=$this->page->crumbs[$count]->target_url) {
-                   $buffer.= '<a class="up" href="'.$str.'" title="'.__('Go to parent / alt-U').'" accesskey="u">^</a>';
-                    break;
-                }
-                $count--;
-            }
 
             $sep_crumbs="";
             $page=$this->page;

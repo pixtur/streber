@@ -378,7 +378,7 @@ class Auth
         ){
            header('WWW-Authenticate: Basic realm="blabl"');
            header('HTTP/1.0 401 Unauthorized');
-           echo __('Sorry. 	Authentication failed');
+           echo __('Sorry. Authentication failed');
            exit();
         }
 

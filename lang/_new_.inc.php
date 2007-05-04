@@ -665,8 +665,8 @@ undefined keys:
 'Set Public Level'            =>'',  # line 37
 'Send notification'           =>'',  # line 59
 'Remove notification'         =>'',  # line 65
-'Edit monitored items'        =>'',  # line 71
-'Edit multiple monitored items'=>'',  # line 84
+'Edit bookmarks'        =>'',  # line 71
+'Edit multiple bookmarks'=>'',  # line 84
 'view changes'                =>'',  # line 97
 'Active Projects'             =>'',  # line 129
 'Closed Projects'             =>'',  # line 137
@@ -779,7 +779,7 @@ undefined keys:
 'Remove companies from person'=>'',  # line 669
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'',  # line 1088
+'Mark all items as viewed'      =>'',  # line 1088
 
 ### ../render/render_page.inc.php   ###
 'Login'                       =>'',  # line 695
@@ -1160,7 +1160,6 @@ undefined keys:
 'yes'                         =>'',  # line 675
 
 ### ../pages/task_more.inc.php   ###
-'-- keep different --'        =>'',  # line 2331
 
 ### ../pages/item.inc.php   ###
 'Edited %s bookmark(s).'      =>'',  # line 817
@@ -1778,7 +1777,7 @@ undefined keys:
 'Anonymous account has been disabled. '=>'',  # line 100
 'Unable to automatically detect client time zone'=>'',  # line 262
 'Could not set cookie.'       =>'',  # line 304
-'Sorry. 	Authentication failed'=>'',  # line 373
+'Sorry. Authentication failed'=>'',  # line 373
 
 ### ../std/class_pagehandler.inc.php   ###
 'Operation aborted (%s)'      =>'',  # line 742

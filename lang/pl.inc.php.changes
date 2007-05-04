@@ -1,6 +1,127 @@
 undefined keys:
 ---------------
 
+### ../__obsolete/class_version.inc.php   ###
+'Time Released'               =>'',  # line 50
+
+### ../db/class_projectperson.inc.php   ###
+'Salary per hour'             =>'',  # line 91
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'in Euro'                     =>'',  # line 221
+
+### ../db/class_task.inc.php   ###
+'Calculation'                 =>'',  # line 180
+
+### ../lists/list_effortsperson.inc.php   ###
+'Efforts on team member'      =>'',  # line 28
+
+### ../lists/list_effortstask.inc.php   ###
+'Total effort sum: %s hours'  =>'',  # line 98
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Role|columnheader'           =>'',  # line 101
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Sum|columnheader'            =>'',  # line 168
+
+### ../lists/list_effortstask.inc.php   ###
+'Effortgraph|columnheader'    =>'',  # line 162
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Calculation on team member'  =>'',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Calculation|columnheader'    =>'',  # line 221
+'Costgraph|columnheader'      =>'',  # line 251
+
+### ../lists/list_effortsprojectcalculation.inc.php   ###
+'Calculation for project'     =>'',  # line 28
+'Project|columnheader'        =>'',  # line 90
+
+### ../lists/list_effortstask.inc.php   ###
+'Efforts on task'             =>'',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Task|columnheader'           =>'',  # line 116
+'Calculation on task'         =>'',  # line 28
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recently changes'            =>'',  # line 51
+'Show more'                   =>'',  # line 90
+
+### ../std/class_rss.inc.php   ###
+'Updated'                     =>'',  # line 105
+
+### ../pages/home.inc.php   ###
+'Your Tasks'                  =>'',  # line 749
+
+### ../pages/_handles.inc.php   ###
+'Bookmarks'                   =>'',  # line 42
+'Overall history'             =>'',  # line 58
+'View Projects of Person'     =>'',  # line 1067
+'View Task of Person'         =>'',  # line 1078
+'View Changes of Person'      =>'',  # line 1100
+
+### ../pages/company.inc.php   ###
+'clients'                     =>'',  # line 47
+'prospective clients'         =>'',  # line 66
+'supplier'                    =>'',  # line 85
+'partner'                     =>'',  # line 104
+
+### ../pages/home.inc.php   ###
+'Edit your Profile'           =>'',  # line 80
+'for|short for client'        =>'',  # line 128
+'without client'              =>'',  # line 140
+'Your Bookmarks'              =>'',  # line 197
+'Your efforts'                =>'',  # line 958
+
 ### ../pages/item.inc.php   ###
-'Edit bookmark: "%s"|page title'=>'',  # line 367
-'Bookmark: "%s"'              =>'',  # line 368
+'Edit bookmark: "%s"|page title'=>'',  # line 390
+'Bookmark: "%s"'              =>'',  # line 391
+
+### ../pages/person.inc.php   ###
+'without account'             =>'',  # line 165
+'with account'                =>'',  # line 183
+'employees'                   =>'',  # line 201
+'contact persons'             =>'',  # line 220
+'notification'                =>'',  # line 757
+'Last login|Label'            =>'',  # line 835
+'Projects|Page title add on'  =>'',  # line 1095
+'Tasks|Page title add on'     =>'',  # line 1348
+'no tasks yet'                =>'',  # line 1372
+'Changes|Page title add on'   =>'',  # line 1788
+
+### ../pages/task_more.inc.php   ###
+'Internal'                    =>'',  # line 766
+
+### ../pages/project_more.inc.php   ###
+'Reanimated person %s as team-member'=>'',  # line 2388
+'Person %s already in project'=>'',  # line 2392
+
+### ../pages/project_view.inc.php   ###
+'Create wiki documentation page or start discussion topic'=>'',  # line 163
+
+### ../pages/task_more.inc.php   ###
+'New version'                 =>'',  # line 334
+'New topic'                   =>'',  # line 337
+
+### ../render/render_misc.inc.php   ###
+'Persons|page option'         =>'',  # line 619
+'%s min ago'                  =>'',  # line 967
+'1 hour ago'                  =>'',  # line 970
+'%s hours ago'                =>'',  # line 973
+'%s days ago'                 =>'',  # line 977
+'%s months ago'               =>'',  # line 980
+
+### ../render/render_wiki.inc.php   ###
+'No item matches this name...'=>'',  # line 1204
+
+### ../std/class_changeline.inc.php   ###
+'New File'                    =>'',  # line 197
+'Latest comment:'             =>'',  # line 261
+'changed File'                =>'',  # line 447
+'deleted File'                =>'',  # line 517
+
+### ../std/class_rss.inc.php   ###
+'???'                         =>'',  # line 93

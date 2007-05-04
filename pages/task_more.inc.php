@@ -437,7 +437,7 @@ function taskEdit($task=NULL)
 
                         $tmp_milestonelist= array(('-- '. __('undefined') . ' --') => '0');
 
-                        $tmp_resolvelist= array(('-- '. __('undefined') . ' --') => '0', __('-- next released version --')=>-1);
+                        $tmp_resolvelist= array(('-- '. __('undefined') . ' --') => '0', ('-- ' . __('next released version') . ' --') => -1);
                         foreach($milestones as $m) {
                             if($m->is_released >= RELEASED_UPCOMMING) {
                                 $tmp_resolvelist[$m->name]= $m->id;

@@ -1516,7 +1516,7 @@ $g_lang_table= array(
 'Edit %s|Page title'          =>'Editar %s|TÃ­tulo de pÃ¡gina',
 'New milestone'               =>'Novo marco',
 'for %s|e.g. new task for something'=>'para %s|ex. nova tarefa para alguma coisa',
-'-- next released version --' =>'-- prÃ³xima versÃ£o disponÃ­vel --',
+'next released version' =>'prÃ³xima versÃ£o disponÃ­vel',
 
 ### ../pages/task_view.inc.php   ###
 'Resolved in'                 =>'Resolvido em',
@@ -1571,7 +1571,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Editar multiplas tarefas|TÃ­tulo de pÃ¡gina',
 'Edit %s tasks|Page title'    =>'Editar %s tarefas|TÃ­tulo de pÃ¡gina',
 'keep different'              =>'mantenha diferente',
-'-- keep different --'        =>'-- mantenha diferente --',
 'Prio'                        =>'Prio',
 'none'                        =>'nenhum',
 

@@ -1,8 +1,5 @@
 <?php
 
-# streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
-# Distributed under the terms and conditions of the GPL as stated in lang/license.html
-
 /**
 * language-table for German translation (C) Thomas Mann
 */
@@ -12,9 +9,7 @@ $g_lang_table= array(
 
 'en_US.utf8,en_US,enu|list of locales'=>'de.utf8,deu,german',
 
-#--- top navigation tabs -------------------------------------------------------
 'Office E-Mail'               =>'Büro E-Mail',
-
 
 '<span class=accesskey>H</span>ome'
                     =>'<span class=accesskey>H</span>ome',
@@ -35,7 +30,6 @@ $g_lang_table= array(
 "Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`"
                     =>'Begriff eingeben und Bestätigen. Erweiterte Suche durch anklicken des Tabs.',
 
-#--- header --------------------------------------------------------------
 'Wiki+Help'         =>'Wiki+Hilfe',
 'Documentation and Discussion about this page'
                     =>'Hilfe und Diskussion zu diesem Bereich von Streber',
@@ -48,13 +42,11 @@ $g_lang_table= array(
 'Client view'       =>'Ansicht für Kunden',
 'Logout'            =>'Abmelden',
 
-#--- common texts --------------------------------------------------------------
 'Task'              =>'Aufgabe',
 'Effort'            =>'Aufwand',
 'Comment'           =>'Kommentar',
 'Add Now'           =>'hinzufügen',
 
-#--- home -----------------------------------------------------------------------
 'Today'             =>'Heute',
 'Yesterday'         =>'Gestern',
 'today'             =>'heute',
@@ -93,7 +85,6 @@ $g_lang_table= array(
 '%s tasks with estimated %s hours of work'
                     =>'%s Aufgaben mit mit ca. %s Stunden',
 
-#--- pages/_handles.inc -------------
 'Home'                        =>'Home',
 'Active Projects'             =>'Aktive Projekte',
 'Closed Projects'             =>'Geschlossene Projekte',
@@ -146,22 +137,17 @@ $g_lang_table= array(
 'Remove companies from person'=>'Firmen entfernen',
 'Edit multiple efforts'       =>'Mehrere Aufwände bearbeiten',
 
-### ../db/class_company.inc   ###
 'Optional'                    =>'Optional',
 'more than expected'          =>'mehr als erwartet',
 'not available'               =>'nicht verfügbar',
 
-### ../db/class_effort.inc   ###
 'optional if tasks linked to this effort'=>'Optional, falls eine Aufgabe mit dem Aufwand verbunden ist',
 
-### ../db/class_person.inc   ###
 'Full name'                   =>'Voller Name',
 'Nickname'                    =>'Nickname',
 
-### ../lists/list_persons.inc   ###
 'Tagline'                     =>'Namenszusatz',
 
-### ../lists/list_items.inc   ###
 'Your bookmarks'          =>'Ihre Lesezeichen',
 'You have no bookmarks' =>'Sie haben keine Lesezeichen',
 'Remove bookmark'       =>'Lesezeichen entfernen', 
@@ -171,7 +157,6 @@ $g_lang_table= array(
 'in %s day(s)'          =>'in %s Tagen',
 'since %s day(s)'       =>'seit %s Tagen',
 
-### ../db/class_person.inc   ###
 'Mobile Phone'                =>'Mobiltelefon',
 'Office Phone'                =>'Büro Tel',
 'Office Fax'                  =>'Büro Fax',
@@ -186,22 +171,17 @@ $g_lang_table= array(
 'Personal E-Mail'             =>'Private E-Mail',
 'Birthdate'                   =>'Geburtstag',
 
-### ../db/class_project.inc   ###
 'Color'                       =>'Farbe',
 
-### ../lists/list_comments.inc   ###
 '1 Comment'				 	  =>'1 Kommentar',
 '%s Comments'				  =>'%s Kommentare',
 'Comments'                    =>'Kommentare',
 
-### ../db/class_person.inc   ###
 'Password'                    =>'Passwort',
 'Salary per hour'             =>'Stundenlohn',
 
-### ../lists/list_projects.inc   ###
 'Name'                        =>'Name',
 
-### ../db/class_task.inc   ###
 'Short'                       =>'Abkürzung',
 'Planned Start'               =>'geplanter Beginn',
 'Planned End'                 =>'geplantes Ende',
@@ -215,47 +195,35 @@ $g_lang_table= array(
 'Date due end'                =>'Datum bis Ende',
 'Calculation'                 =>'Kalkulation',
 
-### ../db/class_project.inc   ###
 'Status summary'              =>'Status zusammenfassung',
 'Project page'                =>'Projekt Webseite',
 'Wiki page'                   =>'Projekt Wiki-Seite',
 'show tasks in home'          =>'Aufgaben in Home zeigen',
 'validating invalid item'     =>'Überprüfung auf ungültiges Element',
 
-### ../pages/comment.inc   ###
 'insuffient rights'           =>'Ungenügende Zugriffsrechte',
 
-
-### ../db/class_projectperson.inc   ###
 'job'                         =>'Tätigkeit',
 'role'                        =>'Rolle',
 
-### ../pages/task.inc   ###
 'Label'                       =>'Etikett',
 
-### ../pages/task.inc   ###
 'task without project?'       =>'Aufgabe ohne Projekt?',
 
-### ../db/db_item.inc   ###
 '<b>%s</b> isn`t a known format for date.'=>'Warnung: <b>%s</b> ist ein unbekanntes Datumsformat',
 
-### ../lists/list_tasks.inc   ###
 'New'                         =>'Neu',
 'Sum of all booked efforts (including subtasks)'=>'erfasster Gesamtaufwand',
 
-### ../lists/list_comments.inc   ###
 'Move to Folder'              =>'In Ordner verschieben',
 'Shrink View'                 =>'Ansicht einklappen',
 'Expand View'                 =>'Ansicht ausklappen',
 'Topic'                       =>'Thema',
 
-### ../lists/list_companies.inc   ###
 'related companies'           =>'relevante Firmen',
 
-### ../lists/list_efforts.inc   ###
 'S'                           =>'S',
 
-### ../lists/list_effortsperson.inc   ###
 'no efforts booked yet'        =>'Keine Aufwände gebucht',
 'Efforts on team member'       =>'Aufwände pro Teammitglied',
 'Role|columnheader'            =>'Rolle',
@@ -263,31 +231,23 @@ $g_lang_table= array(
 'Effortgraph|columnheader'     =>'Aufwandsgrafik',
 'Total effort sum: %s hours'   =>'Gesamtsumme Aufwände: %s Stunden',
 
-### ../lists/list_effortstask.inc   ###
 'Efforts on task'       =>'Aufwände pro Aufgabe',
 
-### ../lists/list_effortstaskcalculation.inc   ###
 'Calculation on task'       =>'Kalkulation pro Aufgabe',
 'Costgraph|columnheader'    =>'Kostengrafik',
 
-### ../lists/list_effortstaskcalculation.inc   ###
 'Calculation on team member'       =>'Kalkulation pro Teammitglied',
 
-### ../lists/list_effortsprojectcalculation.inc   ###
 'Calculation for project'       =>'Projekt-Kalkulation',
 
-### ../lists/list_tasksforwarded.inc   ###
 'Your demand notes'             =>'Ihre Lese-Aufforderungen',
 'You have no demand notes'      =>'Sie haben keine Leseaufforderungen',
 
-### ../lists/list_persons.inc   ###
 'Name Short'                  =>'Abkürzung',
 'Shortnames used in other lists'=>'Abkürzungen werden in Listen verwendet',
 
-### ../pages/proj.inc   ###
 'Phone'                       =>'Telefon',
 
-### ../lists/list_companies.inc   ###
 'Phone-Number'                =>'Telefon',
 'Proj'                        =>'Proj',
 'Number of open Projects'     =>'Anzahl der offenen Projekte',
@@ -297,37 +257,29 @@ $g_lang_table= array(
 'Delete company'              =>'Firma löschen',
 'Create new company'          =>'Neue Firma',
 
-### ../lists/list_efforts.inc   ###
 'person'                      =>'Person',
 
-### ../lists/list_efforts.inc   ###
 'Effort name. More Details as tooltips'=>'Name des Aufwandes. Mehr Informationen als Tooltip.',
 'Select one or more efforts' => 'Einen oder mehrere Aufwände auswählen',
 'Effort of task|page type'			 => 'Aufwand der Aufgabe',
 'No description available'   => 'Keine Beschreibung vorhanden',
 'No task related'			 => 'Keiner Aufgabe zugeordnet',
 
-### ../lists/list_projects.inc   ###
 'Task name. More Details as tooltips'=>'Name der Aufgabe. Mehr Informationen als Tooltip.',
 
-### ../lists/list_efforts.inc   ###
 'Edit effort'                 =>'Aufwand bearbeiten',
 'New effort'                  =>'Neuer Aufwand',
 'D, d.m.Y'                    =>'D, d.m.Y',
 
-### ../lists/list_persons.inc   ###
 'Mobil'                       =>'Mobil',
 
-### ../pages/person.inc   ###
 'Office'                      =>'Büro',
 'Private'                     =>'Privat',
 
-### ../lists/list_persons.inc   ###
 'Edit person'                 =>'Person bearbeiten',
 'Delete person'               =>'Person löschen',
 'Create new person'           =>'Person erstellen',
 
-### ../lists/list_project_team.inc   ###
 'Your related persons'        =>'Für relevante Personen',
 'Rights'                      =>'Rechte',
 'Persons rights in this project'=>'Projektrechte der Person',
@@ -336,13 +288,10 @@ $g_lang_table= array(
 'Member'                      =>'Projektperson',
 'Role'                        =>'Rolle',
 
-### ../pages/proj.inc   ###
 'Changes'                     =>'Änderungen',
 
-### ../lists/list_tasks.inc   ###
 'Created by'                  =>'Erstellt von',
 
-### ../lists/list_projectchanges.inc   ###
 'Item was originally created by'=>'Objekt wurde ursprünglich erstellt von...',
 'modified'                    =>'bearbeitet',
 'C'                           =>'C',
@@ -359,37 +308,30 @@ $g_lang_table= array(
 'shows if item is deleted'    =>'Zeigt, ob Objekt gelöscht wurde',
 'deleted'                     =>'gelöscht',
 
-### ../lists/list_projects.inc   ###
 'Status Summary'              =>'Status Zusammenfassung',
 'Short discription of the current status'=>'Kurze Beschreibung des aktuellen Projektstatus',
 
-### ../lists/list_tasks.inc   ###
 'Tasks'                       =>'Aufgaben',
 'Tasks|short column header'   =>'A',
 '%s open tasks / %s h'        =>'%s offene Aufgaben / %s h',
 
-### ../lists/list_projects.inc   ###
 'Number of open Tasks'        =>'Anzahl der offenen Aufgaben',
 'Opened'                      =>'Start',
 'Day the Project opened'      =>'wann das Projekt begonnen wurde',
 
-### ../pages/proj.inc   ###
 'Closed'                      =>'Geschlossen',
 
-### ../lists/list_projects.inc   ###
 'Day the Project state changed to closed'=>'Wann das Projekt abgeschlossen wurde',
 'Edit project'                =>'Projekt bearbeiten',
 'Delete project'              =>'Projekt löschen',
 'Open / Close'                =>'Projekt Öffnen/Schließen',
 '... working in project'      =>'... arbeitet in Projekt',
 
-### ../lists/list_taskfolders.inc   ###
 'Folders'                     =>'Ordner',
 'Select all, range, no row'   =>'Alle, dazwischen oder keine Zeile auswählen',
 'Number of subtasks'          =>'Anzahl der Unteraufgaben',
 'Create new folder under selected task'=>'Neuer Ordner unter dem ausgewählten Ordner',
 
-### ../lists/list_tasks.inc   ###
 'Move selected to folder'     =>'In Ordner verschieben',
 'Priority of task'            =>'Priorität der Aufgabe',
 'Status->Completed'           =>'Status->Fertig?',
@@ -399,7 +341,6 @@ $g_lang_table= array(
 'has %s comments'             =>'hat %s Kommentare',
 'Notify on change'            =>'Benachrichtigung bei Änderung',
 
-### ../pages/item.inc ###
 'Mark as bookmark'   									 => 'Lesezeichen hinzufügen',
 'No item(s) selected.'  								 => 'Es wurde kein(e) Element(e) ausgewählt.',
 'Modified by'        									 => 'Geändert durch',
@@ -418,25 +359,19 @@ $g_lang_table= array(
 '%s bookmark(s) could not be added.'					 => '%s Lesezeichen konnte(n) nicht hinzugefügt werden.',
 'Edited %s bookmark(s).'                                 => '%s Lesezeichen wurde(n) bearbeitet.',
 
-### ../pages/person.inc  ###
 'Bookmark'												 => 'Lesezeichen',	
 'Remove Bookmark'						  			     => 'Lesezeichen entfernen',	
 'Mark this person as bookmark'                           => 'Diese Person als Lesezeichen markieren',
 'Remove this bookmark'                                   => 'Dieses Lesezeichen entfernen',
 
-### ../pages/comment.inc  ###
 'Mark this comment as bookmark'                          => 'Dieses Kommentar als Lesezeichen markieren',
 
-### ../pages/company.inc  ###
 'Mark this company as bookmark'                          => 'Diese Firma als Lesezeichen markieren',
 
-### ../pages/task_view.inc  ###
 'Mark this task as bookmark'                             => 'Diese Aufgabe als Lesezeichen markieren',
 
-### ../pages/project_view.inc  ###
 'Mark this project as bookmark'                          => 'Dieses Projekt als Lesezeichen markieren',
 
-### ../pages/project_more.inc  ### 
 'new|effort status'                                      => 'neu',
 'open|effort status'                                     => 'offen',
 'discounted|effort status'                               => 'abgerechnet',
@@ -448,22 +383,16 @@ $g_lang_table= array(
 'balanced'                                               => 'bezahlt',
 'not chargeable'                                         => 'nicht abrechenbar',
 
-### ../pages/file.inc  ###
 'Mark this file as bookmark'                             => 'Diese Datei als Lesezeichen markieren',
 
-### ../pages/version.inc  ###
 'Mark this version as bookmark'                          => 'Diese Version als Lesezeichen markieren',
 
-### ../pages/effort.inc  ###
 'Mark this effort as bookmark'                           => 'Diesen Aufwand als Lesezeichen markieren',
 
-### ../pages/person.inc   ###
 'Efforts'                     =>'Aufwände',
 
-### ../lists/list_tasks.inc   ###
 'Effort in hours'             =>'Aufwand in Stunden',
 
-### ../pages/comment.inc   ###
 'New Comment'                 =>'Neuer Kommentar',
 'Reply to '                   =>'Anwort auf ',
 'Edit Comment'                =>'Kommentar bearbeiten',
@@ -471,49 +400,38 @@ $g_lang_table= array(
 'On project %s'               =>'für Projekt %s',
 'Occasion'                    =>'Gelegenheit',
 
-### ../pages/task.inc   ###
 'Publish to'                   =>'Sichtbar für',
 'Edit this task'              =>'Aufgabe bearbeiten',
 'Append bug report'           =>'Fehlerbericht hinzufügen',
 'Delete this task'            =>'Aufgabe löschen',
 'Restore this task'           =>'Aufgabe wieder herstellen',
 
-### ../pages/comment.inc   ###
 'Select some comments to delete'=>'Bitte wählen Sie die zu löschenden Kommentare',
 'Select some comments to move'=>'Bitte wählen Sie die zu verschiebenden Kommentare',
 
-### ../pages/task.inc   ###
 'Select excactly ONE folder to move tasks into'=>'Bitte wählen sie zusätzlich genau einen Ordner als Ziel.',
 
-### ../pages/comment.inc   ###
 'is no longer a reply'        =>'Ist nicht länger eine Antwort',
 
-### ../pages/company.inc   ###
 'related projects of %s'     =>'Relevante Projekte für %s',
 
-### ../pages/proj.inc   ###
 'admin view'                  =>'Admin-Sicht',
 'List'                        =>'Liste',
 
-### ../pages/company.inc   ###
 'no companies'                =>'Keine Firmen',
 
-### ../pages/proj.inc   ###
 'Overview'                    =>'Überblick',
 
-### ../pages/company.inc   ###
 'Edit this company'           =>'Firma bearbeiten',
 'Delete this company'         =>'Firma löschen',
 'Create new person for this company'=>'Neue Person für Firma',
 
-### ../pages/person.inc   ###
 'Person'                      =>'Person',
 'without account'             =>'ohne Account',
 'with account'				  =>'mit Account',
 'employees'                   =>'Mitarbeiter',
 'contact persons'             =>'Ansprechpartner',	 
 
-### ../pages/company.inc   ###
 'Create new project for this company'=>'Neues Projekt für Firma',
 'Add existing persons to this company'=>'Existierende Person mit Firma verbinden',
 'Persons'                     =>'Personen',
@@ -522,12 +440,10 @@ $g_lang_table= array(
 'supplier'                    =>'Lieferanten',
 'partner'                     =>'Partner',
 
-### ../pages/person.inc   ###
 'Summary'                     =>'Zusammenfassung',
 'Adress'                      =>'Addresse',
 'Fax'                         =>'Fax',
 
-### ../pages/company.inc   ###
 'Web'                         =>'Web',
 'Intra'                       =>'Intra',
 'Mail'                        =>'E-Mail',
@@ -546,7 +462,6 @@ $g_lang_table= array(
 'Select one or more companies' =>'Wählen Sie eine oder mehrere Firmen aus',
 'Export companies'			  =>'Firmenliste exportieren',
 
-### ../pages/effort.inc   ###
 'New Effort'                  =>'Neuer Aufwand',
 'only expected one task. Used the first one.'=>'Kann nur die erste Aufgabe verwenden.',
 'For task'                    =>'Für Aufgabe',
@@ -572,24 +487,18 @@ $g_lang_table= array(
 'Error while editing %s effort(s).' => '%s  Fehler trat(en) während der Bearbeitung auf.',
 'Edit %s efforts'             =>'%s Aufwände bearbeiten',
 
-### ../pages/error.inc   ###
 'Unknown Page'                =>'Unbekannte Seite',
 
-### ../pages/home.inc   ###
 'You are not assigned to a project.'=>'Sie sind in keinem Projekt.',
 
-### ../pages/login.inc   ###
 'Welcome to streber'          =>'Willkommen bei Streber.',
 'please login'                =>'Bitte anmelden',
 'invalid login'               =>'Anmeldung fehlgeschlagen',
 
-### ../pages/person.inc   ###
 'Active People'               =>'Aktive Personen',
 
-### ../pages/proj.inc   ###
 'relating to %s'              =>'in Verbindung mit %s',
 
-### ../pages/person.inc   ###
 'With Account'                =>'mit Konto',
 'All Persons'                 =>'Alle Personen',
 'no related persons'          =>'keine relevanten Personen',
@@ -601,10 +510,8 @@ $g_lang_table= array(
 'Personal'                    =>'Persönlich',
 'Last login'                  =>'zuletzt angemeldet',
 
-### ../pages/proj.inc   ###
 'E-Mail'                      =>'E-Mail',
 
-### ../pages/person.inc   ###
 'works for'                   =>'arbeitet für Firma',
 'not related to a company'    =>'arbeitet für keine Firma',
 'works in Projects'           =>'in Projekten',
@@ -628,7 +535,6 @@ $g_lang_table= array(
 'Create Note'                 =>'Notiz erstellen',
 'Delete this person'          =>'Person löschen',
 
-### ../pages/proj.inc   ###
 'Active'                      =>'Aktiv',
 'Templates'                   =>'Vorlagen',
 'Your Active Projects'        =>'Ihre aktiven Projekte',
@@ -668,7 +574,7 @@ $g_lang_table= array(
 'No persons selected...'      =>'Es waren keine Personen ausgewählt.',
 'Could not access person by id'=>'Konnte nicht auf Person mit ID zugreifen',
 'reanimated person as team-member'=>'Person wurde wieder aufgenommen.',
-'Person already in project'=>'Person ist bereits ein Team-Mitglied',
+'Person %s already in project'=>'Person %s ist bereits ein Team-Mitglied',
 'Failed to insert new project'=>'Das Hinzufügen des neuen Projekt ist gescheitert.',
 'Failed to insert new projectproject'=>'Das Hinzufügen des neuem Team-Mitgliedes ist gescheitert.',
 'Failed to insert new issue'  =>'Das Hinzufügen des neuen Fehlerberichtet ist gescheitert',
@@ -677,7 +583,6 @@ $g_lang_table= array(
 'Select one or more projects' =>'Wählen Sie ein oder mehrere Projekte aus',
 'Export projects'			  =>'Projektliste exportieren',
 
-### ../pages/task.inc   ###
 'Issue report'                =>'Fehlerbericht',
 'Plattform'                   =>'Plattform',
 'OS'                          =>'OS',
@@ -709,13 +614,9 @@ $g_lang_table= array(
 'Could not get task'          =>'Konnte Aufgabe nicht ermitteln',
 'Select one or more tasks' =>'Wählen Sie eine oder mehrere Aufgaben aus',
 
-### ../render/render_page.inc   ###
 'Return to normal view'       =>'Zurück zur Normalansicht',
 'Leave Client-View'           =>'Kundensicht verlassen',
 
-
-
-### tooltips ###
 'Required. Full name like (e.g. Thomas Mann)' =>'Wichtig. Vollständiger Name (z.B. Thomas Mann)',
 'Required. (e.g. pixtur)' =>'z.B. pixtur',
 'Optional: Additional tagline (eg. multimedia concepts)' =>'Namenszusatz (z.B. multimedia solution)',
@@ -737,27 +638,21 @@ $g_lang_table= array(
 'Optional: Private (eg. Poststreet 28)' =>'z.B. Poststraße 28',
 'Optional: (eg. Poststreet 28)' =>'z.B. Poststraße 28ß',
 
-### in listen ###
 '-- do...'                      =>'-- Funktion wählen...',
 "Status is %s"                  =>'Status: %s',
 "Priority is %s"                =>'Priorität: %s',
 
-
-### ../pages/comment.inc   ###
 'Failed to delete %s comments'=>'%s Kommentare konnten nicht gelöscht werden.',
 'Moved %s comments to trash'=>'%s Kommentare in den Papierkorb verschoben.',
 
-### ../pages/company.inc   ###
 'Failed to delete %s companies'=>'%s Firmen konnten nicht gelöscht werden.',
 'Moved %s companies to trash'=>'%s Firmen in den Papierkorb verschoben.',
 'Failed to remove %s contact person(s)' => '%s Ansprechpartner konnte(n) nicht entfernt werden.',
 'Removed %s contact person(s)' => '%s Ansprechpartner wurde(n) entfernt.',
 
-### ../pages/effort.inc   ###
 'Failed to delete %s efforts'=>'%s Aufwände konnten nicht gelöscht werden.',
 'Moved %s efforts to trash'=>'%s Aufwände in den Papierkorb verschoben.',
 
-### ../pages/person.inc   ###
 'passwords don´t match'       =>'Passwörter stimmen nicht überein.',
 'Failed to delete %s persons'=>'Die Objekte für %s Personen konnten nicht gelöscht werden.',
 'Moved %s persons to trash'=>'Die Objekte für %s Personen wurden in den Papierkorb verschoben.',
@@ -768,47 +663,33 @@ $g_lang_table= array(
 'Add related companies' => 'in Bezug stehende Firmen hinzufügen',
 'Add existing companies to this person' => 'Existierende Firmen mit dieser Person verbinden',
 
-
-### ../pages/proj.inc   ###
 'Issues'                      =>'Fehlerberichte',
 'History'                     =>'Geschichte',
 
-
-
-### ../db/db_item.inc   ###
 'unnamed'                     =>'unbenannt',
 
-### ../lists/list_tasks.inc   ###
 'New / Add'                   =>'Neu / Hinzufügen',
 
-### ../pages/task.inc   ###
 'Assigned to'                 =>'Zugewiesen an',
 
-### ../lists/list_tasks.inc   ###
 '- no name -|in task lists'   =>'- unbekannt -',
 
-### ../pages/company.inc   ###
 'Active projects'             =>'Aktive Projekte',
 'Closed projects'             =>'Abgeschlossene Projekte',
 
-### ../pages/home.inc   ###
 'Open tasks assigned to you'  =>'Offene, Ihnen zugewiesene Aufgaben',
 
-### ../pages/person.inc   ###
 'Language'                    =>'Sprache',
 'passwords don´t match'       =>'Passwörter stimmen nicht überein',
 'Select some persons to edit' =>'Bitte wählen Sie zu bearbeitende Personen',
 'Could not get Person'        =>'Kann Person nicht finden',
 
-### ../pages/proj.inc   ###
 'Reactivated %s projects'     =>'%s Projekte wieder aktiviert',
 'Failed to insert new projectperson'=>'Fehler beim Erstellen einer neuen Projektperson',
 
-### ../pages/projectperson.inc   ###
 'Edit Team Member'            =>'Projektrolle anpassen',
 'role of %s in %s|edit team-member title'=>'Rolle von %s in Projekt %s bearbeiten',
 
-### ../pages/task.inc   ###
 'Assign to'                   =>'zuweisen für',
 'Also assign to'              =>'auch zuweisen für',
 'formerly assigned to %s'     =>'früher zugewiesen an %s',
@@ -817,7 +698,6 @@ $g_lang_table= array(
 ' ungrouped %s subtasks to above parents.'=>'Gruppierung von %s Unteraufgaben aufgehoben',
 'Task <b>%s</b> doesn´t need to be restored'=>'Aufgabe <b>%s</b> muss nicht wiederhergestellt werden',
 
-### ../render/render_list_column_special.inc   ###
 'Days until planned start'    =>'Tage bis zum geplanten Anfang',
 'Due|concerning time'         =>'Fällig',
 'Number of open tasks is hilighted if shown home.'=>'Anzahl der Aufgaben wird hervorgehoben, wenn diese in der HOME-Ansicht gezeigt werden',
@@ -826,44 +706,33 @@ $g_lang_table= array(
 'Publish to %s'                =>'Sichtbar für %s',
 'Select / Deselect'            =>'Anwählen / Abwählen',
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-### ../db/class_project.inc   ###
 'insuffient rights (not in project)'=>'Fehlende Zugriffsrechte, da nicht im Projekt.',
 
-### ../lists/list_persons.inc   ###
 '(adjusted)'                  =>'(angepasst)',
 
-### ../lists/list_projectchanges.inc   ###
 '(on comment)'                =>'(an Kommentar)',
 '(on task)'                   =>'(an Aufgabe)',
 '(on project)'                =>'(an Projekt)',
 
-### ../lists/list_changes.inc ###
 '(on task: %s)'                   =>'(zu Aufgabe: %s)',
 '(on comment: %s)'                =>'(zu Kommentar: %s)',
 '(on project: %s)'                =>'(zu Projekt: %s)',
 
-### ../pages/_handles.inc   ###
 'Create Template'             =>'Vorlage erstellen',
 'Project from Template'       =>'Projekt von Vorlage',
 
-### ../pages/home.inc   ###
 'Open tasks (including unassigned)'=>'Offene Aufgaben (inkl. nicht zugewiesene)',
 
-### ../pages/person.inc   ###
 '(resetting rights)'          =>'(Rechte zurücksetzend)',
 'passwords do not match'      =>'Passwörter stimmen nicht überein',
 'Password is too weak (please add numbers, special chars or length)'=>'Passwort zu kurz',
 
-### ../pages/proj.inc   ###
 'Project Template'            =>'Projekt Vorlage',
 'Inactive Project'            =>'Inaktive Projekte',
 'Project|Page Type'           =>'Projekt',
 'Template|as addon to project-templates'=>'Vorlage',
 'Project duplicated (including %s items)'=>'Projekt wurde kopiert (inklusive %s elemente)',
 
-### ../pages/task.inc   ###
 'No task(s) selected for deletion...'=>'Keine Aufgaben zu löschen ausgewählt.',
 'Task <b>%s</b> do not need to be restored'=>'Aufgabe <b>%s</b> muss nicht wieder hergestellt werden.',
 'No task(s) selected for restoring...'=>'Keine Aufgaben zum wiederherstellen ausgewählt.',
@@ -876,34 +745,24 @@ $g_lang_table= array(
 'Select some task(s) to mark as closed'=>'Bitte wählen Sie Aufgaben, um diese als geschlossen zu kennzeichnen.',
 'Select some task(s)'         =>'Bitte wählen Sie Aufgaben.',
 
-### ../render/render_list_column_special.inc   ###
 'Due|column header, days until planned start'=>'Bis',
 'planned for %s|a certain date'=>'Geplant für %s',
 'Pub|column header for public level'=>'Pub',
 
-### ../render/render_misc.inc   ###
 'No element selected? (could not find id)|Message if a function started without items selected'=>'Keine Objekte ausgewählt?',
 
-### ../std/class_pagehandler.inc   ###
 'operation aborted (%s)'=>'Operation abgebrochen (%s)',
 'Insuffient rights'    =>'Fehlende Berechtigung.',
 
-
-##############
-
-### ../lists/list_project_team.inc   ###
 'Edit team member'            =>'Projektrolle bearbeiten',
 
-### ../pages/_handles.inc   ###
 'Search'                      =>'Suchen',
 
-### ../pages/effort.inc   ###
 'Edit Effort'                 =>'Aufwand bearbeiten',
 'Date / Duration|Field label when booking time-effort as duration'=>'Datum / Aufwand',
 'Name required'               =>'Name wird benötigt.',
 'Cannot start before end.'    =>'Kann nicht vor dem Anfang aufhören.',
 
-### ../pages/proj.inc   ###
 'create new project'          =>'Neues Projekt erstellen',
 'no tasks closed yet'         =>'Bisher keine Aufgaben abgeschlossen',
 'Create another project after submit'=>'anschließend weiteres Projekt erstellen',
@@ -913,13 +772,11 @@ $g_lang_table= array(
 'Failed to update new task. DB structure might have been corrupted.'=>'Task konnte nicht geschrieben werden. Datenbankstruktur eventuell beschädigt!',
 'Failed to insert new comment. DB structure might have been corrupted.'=>'Comment konnte nicht geschrieben werden. Datenbankstruktur eventuell beschädigt!',
 
-### ../pages/projectperson.inc   ###
 'Role in this project'        =>'Rolle in diesem Projekt',
 'start times and end times'   =>'Anfangs- und Endzeiten',
 'duration'                    =>'nur Zeitaufwände',
 'Log Efforts as'              =>'Aufwände buchen als',
 
-### ../pages/search.inc   ###
 'Jumped to the only result found.'=>'Sofort zum einzigen Suchergebnis gesprungen.',
 'Search Results'              =>'Suchergebnisse',
 'Searching'                   =>'Suche',
@@ -929,7 +786,6 @@ $g_lang_table= array(
 'Found %s tasks'              =>'%s Aufgaben gefunden',
 'Found %s comments'           =>'%s Kommentare gefunden',
 
-### ../pages/task.inc   ###
 'Summary|Block title'         =>'Übersicht',
 'Description|Label in Task summary'=>'Beschreibung',
 'Part of|Label in Task summary'=>'Gehört zu',
@@ -955,28 +811,20 @@ $g_lang_table= array(
 'unassigned to %s|task-assignment comment'=>'abgegeben an %s',
 'formerly assigned to %s|task-assigment comment'=>'war davor %s zugewiesen',
 
-### ../std/class_pagehandler.inc   ###
 'Operation aborted with an fatal error (%s). Please help us by %s'=>'',
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up. Please help us by %s'=>'',
 
-
-
-### ../lists/list_tasks.inc   ###
 'Add new Task'                =>'Neue Aufgabe',
 
-### ../pages/task.inc   ###
 'Report new Bug'              =>'Neuer Fehlerbericht',
 
-### ../pages/_handles.inc   ###
 'New Bug'                     =>'Neuer Fehler',
 'View comment'                =>'Kommentar zeigen',
 'System Information'          =>'System Information',
 'PhpInfo'                     =>'phpInfo',
 
-### ../pages/task.inc   ###
 '(deleted %s)|page title add on with date of deletion'=>'(gelöscht %s)',
 
-### ../pages/comment.inc   ###
 'Edit this comment'           =>'Kommentar bearbeiten',
 'New Comment|Default name of new comment'=>'Neuer Kommentar',
 'Reply to |prefix for name of new comment on another comment'=>'Antwort auf ',
@@ -984,23 +832,18 @@ $g_lang_table= array(
 'New Comment|Page title'      =>'Neuer Kommentar',
 'On task %s|page title add on'=>'zu Aufgabe %s',
 
-### ../pages/effort.inc   ###
 'On project %s|page title add on'=>'zu Projekt %s',
 
-### ../pages/comment.inc   ###
 'Occasion|form label'         =>'Gelegenheit',
 'Publish to|form label'        =>'Öffentlich für',
 'is no longer a reply|message'=>'Kommentar ist nicht länger eine Antwort',
 
-### ../pages/effort.inc   ###
 'Edit Effort|page type'       =>'Aufwand bearbeiten',
 'Edit Effort|page title'      =>'Aufwand bearbeiten',
 'New Effort|page title'       =>'Neuer Aufwand',
 
-### ../pages/error.inc   ###
 'Error|top navigation tab'    =>'Fehler',
 
-### ../pages/home.inc   ###
 'S|Column header for status'  =>'S',
 'P|Column header for priority'=>'P',
 'Priority|Tooltip for column header'=>'Prio',
@@ -1021,7 +864,6 @@ $g_lang_table= array(
 'Delete|context menu function'=>'Löschen',
 'Log hours for select tasks|context menu function'=>'Aufwand für Aufgabe buchen',
 
-### ../pages/login.inc   ###
 'Login|tab in top navigation' =>'',
 'License|tab in top navigation'=>'',
 'Welcome to streber|Page title'=>'',
@@ -1030,7 +872,6 @@ $g_lang_table= array(
 'invalid login|message when login failed'=>'',
 'License|page title'          =>'',
 
-### ../pages/misc.inc   ###
 'Admin|top navigation tab'    =>'Admin',
 'System information'          =>'System Information',
 'Admin'                       =>'Admin',
@@ -1044,7 +885,6 @@ $g_lang_table= array(
 'magic quotes runtime'        =>'magic quotes runtime',
 'safe mode'                   =>'safe mode',
 
-### ../pages/company.inc  ###
 'Companies|page option'				=> 'Firmen',
 'Clients|page option'				=> 'Kunden',
 'Prospective Clients|page option'	=> 'Interessenten',
@@ -1056,7 +896,6 @@ $g_lang_table= array(
 'Suppliers'							=> 'Lieferanten',
 'Partners'							=> 'Partner',
 
-### ../pages/person.inc   ###
 'relating to %s|page title add on listing pages relating to current user'=>'in bezug auf %s',
 'With Account|page option'    =>'Mit Benutzerkonto',
 'All Persons|page option'     =>'Alle Personen',
@@ -1096,7 +935,6 @@ $g_lang_table= array(
 'Assigne to project|form label' =>'Zuordnen zu Projekt',
 '- no -'					  =>'- nein -',
 
-### ../pages/proj.inc   ###
 'List|page type'              =>'Liste',
 'Summary|block title'         =>'Zusammenfassung',
 'Status|Label in summary'     =>'Status',
@@ -1111,14 +949,11 @@ $g_lang_table= array(
 'new Effort'                  =>'neuer Aufwand',
 'Company|form label'          =>'Kunde',
 
-### ../pages/projectperson.inc   ###
 'Changed role of <b>%s</b> to <b>%s</b>'=>'Rolle von %s angepasst',
 
-### ../pages/search.inc   ###
 'Sorry. Could not find anything.'=>'Suche leider ergebnislos.',
 'Due to limitations of MySQL fulltext search, searching will not work for...<br>- words with 3 or less characters<br>- Lists with less than 3 entries<br>- words containing special charaters'=>'Suche funktioniert nur für<br>- Wörter mit mehr als 3 Buchstaben<br>- Listen mit mehr als 3 Einträgen<br>- Wörter ohne Sonderzeichen',
 
-### ../pages/task.inc   ###
 'Task with subtasks|page type'=>'Aufgabe mit Unteraufgaben',
 'Task|page type'              =>'Aufgabe',
 'new subtask for this folder' =>'Neue Unteraufgabe in diesem Ordner',
@@ -1128,11 +963,9 @@ $g_lang_table= array(
 'Failed, adding to parent-task'=>'Konte nicht zum Ordner hinzugefügt werden.',
 'Task <b>%s</b> does not need to be restored'=>'Aufgabe %s muss nicht wieder hergestellt werden.',
 
-### ../std/class_pagehandler.inc   ###
 'Operation aborted with an fatal error (%s).'=>'Schwerwiegender Fehler: %s ',
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operation wurde wegen eines Fehlers in der Datenstruktur abgebrochen. Das kann ein Hinweis auf eine inkonsistente Datenbankstruktur sein. Unter Umständen sollten Sie eine Sicherung machen oder zur letzen Sicherung zurückkehren.',
 
-### ../pages/login.inc   ###
 'Login|tab in top navigation' =>'Anmelden',
 'License|tab in top navigation'=>'Lizenz',
 'Welcome to streber|Page title'=>'Willkommen',
@@ -1141,13 +974,6 @@ $g_lang_table= array(
 'invalid login|message when login failed'=>'Anmeldung fehlgeschlagen',
 'License|page title'          =>'Lizenz',
 
-
-
-
-
-
-
-### ../db/class_person.inc   ###
 'only required if user can login (e.g. pixtur)'=>'Pflichtfeld, wenn sich Anwender anmelden kann.',
 'Optional: Mobile phone (eg. +49-172-12345678)'=>'Mobile Telefon (z.B: +0-171-123456)',
 'Optional: Office Phone (eg. +49-30-12345678)'=>'Büro Telefon (z.B: +49-30-123456)',
@@ -1159,27 +985,21 @@ $g_lang_table= array(
 'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'Farbe für grafische Darstellungen (z.B. #ff000)',
 'Only required if user can login|tooltip'=>'Pflichtfeld, wenn sich Anwender anmelden kann.',
 
-### ../pages/task.inc   ###
 'Move tasks'                  =>'Aufgaben bewegen',
 
-### ../lists/list_tasks.inc   ###
 'Subtasks'                    =>'Unteraufgaben',
 
-### ../pages/_handles.inc   ###
 'Send Activation E-Mail'      =>'Aktivierungs E-Mail versenden',
 'Activate an account'         =>'Konto aktivieren',
 
-### ../pages/home.inc   ###
 'Personal Efforts'            =>'Eigene Aufwände',
 
-### ../pages/login.inc   ###
 'I forgot my password.|label in login form'=>'Passwort vergessen.',
 'If you remember your name, please enter it and try again.'=>'Wenn Du Dich wenigstens an Deinen Namen erinnern kannst, gib Ihn ein und versuche es noch einmal.',
 'Supposed a user with this name existed a notification mail has been sent.'=>'Angenommen diese Anwender existiert, dann wurde ihm eine E-Mail geschickt.',
 'Welcome %s. Please adjust your profile and insert a good password to activate your account.'=>'Willkommen %s. Bitte aktualisiere Dein Profil und vergib ein gutes Passwort.',
 'Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.'=>'Fehler: dieser Aktivierungscode ist nicht mehr gültig. Eventuell wurde zwischenzeitlich das Passwort geändert...',
 
-### ../pages/person.inc   ###
 'daily'                       =>'täglich',
 'each 3 days'                 =>'alle 3 Tage',
 'each 7 days'                 =>'alle 7 Tage',
@@ -1194,11 +1014,9 @@ $g_lang_table= array(
 'Notification mail has been sent.'=>'E-Mail mit Neuigkeiten wurde versendet.',
 'Sending notification e-mail failed.'=>'Fehler beim versenden der E-Mail.',
 
-### ../pages/proj.inc   ###
 'Wikipage|Label in summary'   =>'Wiki Webseite',
 'Projectpage|Label in summary'=>'Projekt Webseite',
 
-### ../pages/task.inc   ###
 'Comments on task'            =>'Kommentare für Aufgabe',
 'insufficient rights'         =>'ungenügend Rechte',
 'Can not move task <b>%s</b> to own child.'=>'Kann Aufgabe nicht an eigene Unteraufgabe hängen.',
@@ -1207,7 +1025,6 @@ $g_lang_table= array(
 'Select folder to move tasks into'=>'Wählen Sie einen Ordner als Ziel...',
 '... or select nothing to move to project root'=>'... oder nichts für Projekt Ursprung.',
 
-### ../render/render_list.inc   ###
 'changed today'               =>'Heute geändert',
 'changed since yesterday'     =>'Gestern geändert',
 'changed since <b>%d days</b>'=>'seit <b>%s Tagen</b> geändert',
@@ -1215,7 +1032,6 @@ $g_lang_table= array(
 'created by %s'               =>'Erstellt von %s',
 'created by unknown'          =>'Erstellt von unbekannt',
 
-### ../std/constant_names.inc   ###
 'template|status name'        =>'Vorlage',
 'undefined|status_name'       =>'undefiniert',
 'upcoming|status_name'        =>'kommt bald',
@@ -1277,20 +1093,16 @@ $g_lang_table= array(
 'discounted|effort status'      =>'abgerechnet',
 'balanced|effort status'        =>'bezahlt',
 
-### ../std/mail.inc   ###
 '<br>- You have been assigned to projects:<br><br>'=>'<br>- Sie wurden Projekten zugewiesen:<br><br>',
 '<br>- You have been assigned to tasks:<br><br>'=>'<br>- Sie wurden Aufgaben zugewiesen:<br><br>',
 
 'Adjust user-rights'          =>'Rechte bearbeiten',
 
-
-### ../std/mail.inc   ###
 'Changed monitored items:|notification'  	=> 'Geänderte Elemente:',
 'Unchanged monitored items:|notification'	=> 'Unveränderte Elemente:',
 '%s edited > %s'							=> '%s bearbeitete > %s',
 '%s (not touched since %s day(s))'          => '%s (nicht verändert seit %s Tag(en))', 
 
-### ../db/class_company.inc   ###
 'Tag line|form field for company'=>'Namenszusatz',
 'Short|form field for company'=>'Abkürzung',
 'Phone|form field for company'=>'Telefon',
@@ -1300,55 +1112,41 @@ $g_lang_table= array(
 'Intranet'                    =>'Firmennetz',
 'Comments|form label for company'=>'Anmerkungen',
 
-### ../db/class_person.inc   ###
 'Optional:  Private (eg. Poststreet 28)'=>'Optional (z.b. Poststraße 28)',
 'Theme|Formlabel'             =>'Thema',
 
-### ../pages/file.inc   ###
 'Type'                        =>'Typ',
 
-### ../lists/list_files.inc   ###
 'Size'                        =>'Größe',
 
-### ../pages/_handles.inc   ###
 'Edit file'                   =>'Datei bearbeitne',
 
-### ../lists/list_files.inc   ###
 'New file'                    =>'Neue Datei',
 'No files uploaded'           =>'Keine hochgeladenen Dateien',
 'Download|Column header'      =>'Herunterladen',
 
-### ../lists/list_projectchanges.inc   ###
 'restore'                     =>'Wiederherstellen',
 
-### ../lists/list_tasks.inc   ###
 'Modified|Column header'      =>'Änderungsdatum',
 'Add comment'                 =>'Kommentar hinzufügen',
 
-### ../pages/proj.inc   ###
 'Uploaded Files'              =>'Dateien',
 
-### ../pages/_handles.inc   ###
 'View file'                   =>'Datei zeigen',
 'Upload file'                 =>'Datei hochladen',
 'Update file'                 =>'Datei aktualisieren',
 
-### ../pages/file.inc   ###
 'Download'                    =>'Herunterladen',
 
-### ../pages/_handles.inc   ###
 'Show file scaled'             =>'Skaliert anzeigen',
 'restore Item'                =>'Objekt wiederherstellen',
 
-### ../pages/comment.inc   ###
 'Can not edit comment %s'     =>'Kommentar %s kann nicht bearbeitet werden',
 'Select one folder to move comments into'=>'Bitte einen Ordnet als Ziel wählen',
 'No folders in this project...'=>'Keine Ordner in diesem Projekt',
 
-### ../pages/task.inc   ###
 'Move items'                  =>'Objekte verschieben',
 
-### ../pages/file.inc   ###
 'File'                        =>'Datei',
 'Edit this file'              =>'Datei bearbeiten',
 'Version #%s (current): %s'   =>'Version #%s (aktuell): %s',
@@ -1370,13 +1168,11 @@ $g_lang_table= array(
 'Select one or more files'    =>'Wählen Sie eine oder mehrere Dateien aus',
 'Export files'			      =>'Dateienliste exportieren',
 
-### ../pages/misc.inc   ###
 'Select some items to restore'=>'Bitte wählen Sie Objekte zum wiederherstellen.',
 'Item %s does not need to be restored'=>'%s Objekte brauchten nicht wiederhergestellt zu werden.',
 'Failed to restore %s items'=>'%s Objekte konnten nicht wiederhergestellt werden.',
 'Restored %s items'           =>'%s Objekt(e) wiederhergestellt.',
 
-### ../pages/person.inc   ###
 'Fax (office)|label for person'=>'Fax Büro',
 'Adress Personal|Label'       =>'Anschrift privat',
 'Adress Office|Label'         =>'Anschrift Büro',
@@ -1384,66 +1180,46 @@ $g_lang_table= array(
 'Since nicknames are case sensitive using uppercase letters might confuse users at login.'=>'Da bei Nutzernahmen Groß- und Kleinschreibung unterschieden wird, wären einige Nutzer vielleicht verwirrt.',
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'<b>%s</b> wurde bereits zu Projekten hinzugefügt und kann daher nicht gelöscht werden. Sie können jedoch das Konto für die Anmeldung deaktivieren.',
 
-### ../pages/proj.inc   ###
 'Files'                       =>'Dateien',
 
-### ../pages/task.inc   ###
 'Upload file|block title'     =>'Datei hochladen',
 
-### ../pages/proj.inc   ###
 'Add'                         =>'Hinzufügen',
 
-### ../pages/task.inc   ###
 'Undelete'                    =>'Wiederherstellen',
 
-### ../render/render_form.inc   ###
 'Submit'                      =>'OK',
 'Cancel'                      =>'Abbrechen',
 'Apply'                       =>'Übernehmen',
 
-### ../render/render_list_column_special.inc   ###
 'S|Short status column header'=>'S',
 'Date'                        =>'Datum',
 'Yesterday'                   =>'Gestern',
 
-### ../std/constant_names.inc   ###
 'Edit Persons|a user right'   =>'Personen bearbeiten',
 
-
-
-
-
-### ../db/class_comment.inc   ###
 'Details'                     =>'Details',
 
-### ../db/class_issue.inc   ###
 'Production build'            =>'Build Version',
 
-### ../lists/list_projectchanges.inc   ###
 'Nothing has changed.'=>'Keine Änderungen.',
 'item %s has undefined type'=>'Item %s hat einen unbekannten Typ',
 
-### ../lists/list_tasks.inc   ###
 'Latest Comment'              =>'Letzte Kommentar',
 'by'                          =>'von',
 'for'                         =>'für',
 'number of subtasks'          =>'Anzahl von Unteraufgaben',
 
-### ../pages/_handles.inc   ###
 'Flush Notifications'         =>'E-Mail jetzt senden',
 
-### ../pages/company.inc   ###
 'related Persons'             =>'relevante Personen',
 
-### ../pages/file.inc   ###
 'Could not access parent task.'=>'Konnte nicht auf Aufgabe zugreifen',
 'Could not edit task'         =>'Konnte Aufgabe nicht bearbeiten',
 'Select some file to display' =>'Wählen Sie eine zu zeigende Datei',
 
-### ../pages/home.inc   ###
 'Modified|column header'      =>'Bearbeitet',
 
-### ../pages/person.inc   ###
 'Birthdate|Label'             =>'Geburtstag',
 'Assigned tasks'              =>'Zugewiesene Aufgaben',
 'No open tasks assigned'      =>'Keine offenen Aufgaben zugewiesen',
@@ -1456,12 +1232,10 @@ $g_lang_table= array(
 'Failed to mail %s persons'=>'Versenden der Mail an %s fehlgeschlagen.',
 'Sent notification to %s person(s)'=>'Benachrichtigung wurde an %s Person(en) versendet.',
 
-### ../pages/proj.inc   ###
 'Your tasks'                  =>'Ihre Aufgaben',
 'No tasks assigned to you.'   =>'Ihnen sind keine offene Aufgaben zugewiesen.',
 'All project tasks'           =>'Alle Projektaufgaben',
 
-### ../pages/task.inc   ###
 'Planned start|Label in Task summary'=>'Geplanter Beginn',
 'Planned end|Label in Task summary'=>'Geplantes Ende',
 'Attached files'              =>'Hochgeladene Dateien',
@@ -1470,14 +1244,11 @@ $g_lang_table= array(
 'Feature|Task label that added by default'=>'Feature',
 'for %s|e.g. new task for something'=>'für %s',
 
-### ../render/render_list.inc   ###
 'modified by %s'              =>'geändert von %s',
 'modified by unknown'         =>'',
 
-### ../render/render_misc.inc   ###
 'new since last logout'       =>'geändert seit letztem abmelden',
 
-### ../std/constant_names.inc   ###
 'Team Member'                 =>'Team Member',
 'Employment'                  =>'Anstellung',
 'Issue'                       =>'Fehlerbericht',
@@ -1497,13 +1268,9 @@ $g_lang_table= array(
 'Have not tried|reproducabilty'=>'Nicht versucht',
 'Unable to reproduce|reproducabilty'=>'nicht reproduzierbar',
 
-
-
-### ../lists/list_comments.inc   ###
 'Date|column header'          =>'Datum',
 'By|column header'            =>'Von',
 
-### ../lists/list_efforts.inc   ###
 'no efforts booked yet'       =>'Keine Aufwände gebucht',
 'booked'                      =>'gebucht',
 'estimated'                   =>'geschätzt',
@@ -1513,15 +1280,11 @@ $g_lang_table= array(
 'len|column header of length of effort'=>'Dauer',
 'Daygraph|columnheader'       =>'Tagesgrafik',
 
-### ../lists/list_projectchanges.inc   ###
 'new'                         =>'neu',
 'Type|Column header'          =>'Typ',
 
-
-### ../render/render_list.inc   ###
 'modified by unknown'         =>'Geändert von unbekannt',
 
-### ../lists/list_persons.inc   ###
 'last login'                  =>'angemeldet',
 'Profile|column header'       =>'Profil',
 'Account settings for user (do not confuse with project rights)'=>'Rechte für Person (Nicht zu verwechseln mit Rechten für ein bestimmtes Projekt).',
@@ -1529,54 +1292,34 @@ $g_lang_table= array(
 'recent changes|column header'=>'Letzte Änderungen',
 'changes since YOUR last logout'=>'Seit Ihrem letztem Logout',
 
-### ../lists/list_project_team.inc   ###
 'last Login|column header'    =>'Angemeldet',
 
-### ../lists/list_tasks.inc   ###
 '%s hidden'                   =>'%s ausgeblendet',
 
-### ../pages/task.inc   ###
 'Item-ID %d'                  =>'Item-Nr. %s',
 
-
-
-### ../render/render_list.inc   ###
 'item #%s has undefined type' =>'item #%s hat einen unbekannten Typ',
 
-### ../std/mail.inc   ###
 'You have been assigned to projects:'=>'Sie wurden zu folgenden Projekten hinzugezogen:',
 'You have been assigned to tasks:'=>'Ihnen wurden folgende neuen Aufgaben zugewiesen:',
 
 'Description' => 'Beschreibung',
 
-
-
-
-
-### ../db/class_comment.inc   ###
 'Title'                       =>'Titel',
 
-### ../db/class_effort.inc   ###
 'Time Start'                  =>'Startzeit',
 'Time End'                    =>'Endzeit',
 
-### ../db/db.inc   ###
 'Database exception'          =>'Datenbankfehler',
 
-### ../pages/_handles.inc   ###
 'Edit Description'            =>'Beschreibung Bearbeiten',
 
-### ../pages/comment.inc   ###
 'Comment on task|page type'   =>'Kommentar an Aufgabe',
 
-
-### ../pages/person.inc   ###
 'Nickname has been converted to lowercase'=>'Nickname wurde in kleinbuchstaben konvertiert',
 
-### ../pages/proj.inc   ###
 'Details|block title'         =>'Details',
 
-### ../pages/task.inc   ###
 'Complete|Page function for task status complete'=>'Erledigt',
 'Approved|Page function for task status approved'=>'Abgenommen',
 'attach new'         =>'neue Datei',
@@ -1584,10 +1327,8 @@ $g_lang_table= array(
 'Select a task to edit description'=>'Bitte wählen Sie eine Aufgaben, um deren Beschreibung zu bearbeiten',
 'Edit description'            =>'Beschreibung bearbeiten',
 
-### ../render/render_form.inc   ###
 'Please use Wiki format'      =>'Wiki Formatierung erlaubt',
 
-### ../render/render_wiki.inc   ###
 'enlarge'                     =>'vergrößern',
 'Unknown File-Id:'            =>'Unbekannte Datei-Id',
 'Unknown project-Id:'         =>'Unbekannte Projekt-Id',
@@ -1597,20 +1338,14 @@ $g_lang_table= array(
 'No item excactly matches this name.'=>'Kein Objekt hat präzise diesen Namen',
 'List %s related tasks'       =>'%s relevante Aufgaben anzeigen',
 
-### ../std/class_auth.inc   ###
 'Could not set cookie.'       =>'Cookie konnte nicht gesetzt werden.',
 
-### ../std/constant_names.inc   ###
 'Create & Edit Persons|a user right'=>'Personen erstellen und bearbeiten',
 
-
-
-### ../_docs/changes.inc   ###
 'to'                          =>'für',
 'you'                         =>'Sie',
 'assign to'                   =>'zuweisen an',
 
-### ../lists/list_changes.inc   ###
 'to|very short for assigned tasks TO...'=>'für',
 'in|very short for IN folder...'=>'in',
 'read more...'                =>'weiter lesen...',
@@ -1628,49 +1363,36 @@ $g_lang_table= array(
 'what|column header in change list'=>'Was',
 'Date / by'                   =>'Datum / Wer',
 
-### ../lists/list_files.inc   ###
 'Name|Column header'          =>'Name',
 'Details/Version|Column header'          =>'Details/Version',
 
-### ../pages/_handles.inc   ###
 'Edit Project Description'    =>'Projektbeschreibung bearbeiten',
 
-### ../pages/effort.inc   ###
 'Could not get person of effort'=>'konnte person für Aufwand nicht ermitteln',
 
-### ../pages/login.inc   ###
 'I forgot my password'        =>'Passwort vergessen',
 
-### ../pages/person.inc   ###
 'A notification / activation  will be mailed to <b>%s</b> when you log out.'=>'Eine Aktivierungsmail wird and <b>%s</b> geschickt, sobald sie sich abmelden.',
 
-### ../pages/proj.inc   ###
 'No tasks have been closed yet'=>'Keine abgeschlossenen Aufgaben',
 'Select a project to edit description'=>'Bitten wählen Sie ein zu bearbeitendes Projekt.',
 
-### ../pages/task.inc   ###
 'Upload'                      =>'Hochladen',
 'Created task %s with ID %s'=>'Neue Aufgabe %s wurde mit ID %s erstellt.',
 
-### ../render/render_misc.inc   ###
 'Completed'                   =>'Fertig?',
 
-### ../render/render_wiki.inc   ###
 'No item matches this name. Create new task with this name?'=>'Objekt existiert nicht. Jetzt anlegen?',
 'This task seems to be related'=>'Diese Aufgabe(n) könnten interessant sein.',
 'No item matches this name.'  =>'Kein Objekt mit diesem Namen',
 
-### ../std/constant_names.inc   ###
 'blocked|status_name'         =>'Blockiert',
 
-### ../std/mail.inc   ###
 'Failure sending mail: %s'    =>'Fehlen beim Verschicken der Mail.',
 'Hello %s,|notification'      =>'Hallo %s!',
 'with this automatically created e-mail we want to inform you that|notification'=>'Diese Nachricht möchte Sie darüber informieren, dass',
 'since %s'                    =>'seit %s',
 
-
-### ../std/mail.inc   ###
 'Streber Email Notification|notifcation mail from'=>'Streber Email Notification',
 'Updates at %s|notication mail subject'=>'Neues auf %s',
 'following happened at %s |notification'=>'folgendes auf %s passierte:',
@@ -1684,36 +1406,25 @@ $g_lang_table= array(
 'the management|notication'   =>'Die Verwaltung',
 'No news for <b>%s</b>'       =>'Nichts neues für %',
 
-
-
-### ../lists/list_milestones.inc.php   ###
 'Planned for'                 =>'Geplant für',
 
-### ../pages/task.inc.php   ###
 'For Milestone'               =>'für Meilenstein',
 
-### ../db/class_task.inc.php   ###
 'resolved_version'            =>'behoben in Version',
 'is a milestone / version'    =>'is ein Meilenstein / eine Version',
 'milestones are shown in a different list'=>'Meilensteine werden in einer separaten Liste aufgeführt',
 
-### ../pages/task.inc.php   ###
 'Estimated time'              =>'Geschätzte Zeit',
 'Estimated worst case'        =>'im schlimmsten Fall',
 
-### ../lists/list_tasks.inc.php   ###
 'Milestone'                   =>'Meilenstein',
 
-### ../lists/list_changes.inc.php   ###
 'moved'                       =>'bewegt',
 
-### ../pages/proj.inc.php   ###
 'Milestones'                  =>'Meilensteine',
 
-### ../pages/company.inc.php   ###
 'or'                          =>'oder',
 
-### ../lists/list_milestones.inc.php   ###
 'Due Today'                   =>'Heute fällig',
 '%s days late'                =>'%s Tage überfällig',
 '%s days left'                =>'in %s Tagen',
@@ -1723,7 +1434,6 @@ $g_lang_table= array(
 'Completed|columnheader'      =>'Fertig',
 'Completed tasks: %s'         =>'Fertig: %s',
 
-### ../lists/list_tasks.inc.php   ###
 'Status|Columnheader'         =>'Status',
 'Label|Columnheader'          =>'Etikett',
 'Task has %s attachments'     =>'Aufgabe hat %s Anhänge',
@@ -1737,24 +1447,17 @@ $g_lang_table= array(
 'Completion:'                 =>'Fertigstellung:',
 'Relation between estimated time and booked efforts' =>'Verhältnis zwischen geschätzter und gebuchter Arbeitszeit',
 
-### ../pages/task.inc.php   ###
 'New Milestone'               =>'Neuer Meilenstein',
 
-### ../pages/company.inc.php   ###
 'edit'                        =>'bearbeiten',
 
-### ../pages/login.inc.php   ###
 'Nickname|label in login form'=>'Nickname',
 
-
-### ../pages/proj.inc.php   ###
 'Team member'                 =>'Team Mitglied',
 'Create task'                 =>'Aufgabe erstellen',
 
-### ../pages/task.inc.php   ###
 'Bug'                         =>'Fehler',
 
-### ../pages/proj.inc.php   ###
 'all open'                    =>'offene',
 'all my open'                 =>'meine offenen',
 'my open for next milestone'  =>'meilenstein',
@@ -1776,7 +1479,6 @@ $g_lang_table= array(
 '1 week'                      =>'1 Woche',
 '2 weeks'                     =>'2 Wochen',
 
-### ../pages/task.inc.php   ###
 'new task for this milestone' =>'neue Aufgabe für diesen Meilenstein',
 'Append details'              =>'Details anhängen',
 'Please select only one item as parent'=>'Bitte nur ein Objekt as Ziel wählen.',
@@ -1803,11 +1505,9 @@ $g_lang_table= array(
 'Changed task %s with ID %s'=>'Aufgabe %s (ID %s) geändert.',
 'insufficient rights to edit any of the selected items'=>'Ungenügend Rechte zum Bearbeiten der Elemente',
 
-### ../render/render_list.inc.php   ###
 'for milestone %s'            =>'für Meilenstein %s',
 'do...'                       =>'-- Funktion wählen--',
 
-### ../render/render_misc.inc.php   ###
 'Tasks|Project option'        =>'Aufgaben',
 'Completed|Project option'    =>'Fertig',
 'Milestones|Project option'   =>'Meilensteine',
@@ -1816,24 +1516,17 @@ $g_lang_table= array(
 'Efforts|Project option'      =>'Aufwände',
 'History|Project option'      =>'Geschichte',
 
-### ../render/render_page.inc.php   ###
 'Help'                        =>'Hilfe',
 
-### ../render/render_wiki.inc.php   ###
 'identical'                  =>'gleich benannt',
 
-### ../std/class_auth.inc.php   ###
 'Fresh login...'              =>'Neu anmelden',
 'Cookie is no longer valid for this computer.'=>'Cookie ungültig für diesen Rechner',
 'Your IP-Address changed. Please relogin.'=>'Ihre IP-Adresse hat sich geändert. Bitte neu anmelden.',
 'Your account has been disabled. '=>'Ihr Konto wurde gesperrt.',
 
-
-
-### ../lists/list_companies.inc.php   ###
 'Company|Column header'       =>'Company',
 
-### ../lists/list_files.inc.php   ###
 'Parent item'                 =>'Übergeordnet',
 'ID'                          =>'ID',
 'Move files'                  =>'Dateien bewegen',
@@ -1841,36 +1534,28 @@ $g_lang_table= array(
 'in|... folder'               =>'in',
 'Attached to|Column header'   =>'hängt an',
 
-### ../lists/list_milestones.inc.php   ###
 'open'                        =>'offen',
 
-### ../lists/list_tasks.inc.php   ###
 'Task name'                   =>'Aufgabe',
 
-### ../pages/_handles.inc.php   ###
 'Mark tasks as Open'          =>'Aufgaben als offen kennzeichnen',
 'Move files to folder'        =>'Dateien in Ordner verschieben',
 
-### ../pages/file.inc.php   ###
 'Select some files to move'   =>'Bitte wählen Sie Dateien zum Verschieben.',
 'Can not edit file %s'        =>'Kann Datei %s nicht bearbeiten',
 'Edit files'                  =>'Datei bearbeiten',
 'Select folder to move files into'=>'Wählen Sie einen Zielordner für Dateien',
 'No folders available'        =>'Es existieren keine Ordner',
 
-### ../pages/person.inc.php   ###
 'no company'                  =>'keine Firma',
 'Person with account (can login)|form label'=>'Person mit Konto (kann sich anmelden)',
 
-### ../pages/task.inc.php   ###
 'edit'                       =>'bearbeiten',
 'Wiki'                        =>'Wiki',
 
-### ../pages/proj.inc.php   ###
 'Create a new folder for tasks and files'=>'Neuen Ordner für Aufgaben und Dateien erstellen',
 'Found no persons to add. Go to `People` to create some.'=>'Keine Personen zum hinzufügen gefunden.',
 
-### ../pages/task.inc.php   ###
 'Add Details|page function'   =>'Details hinzufügen',
 'Move|page function to move current task'=>'Bewegen',
 'status:'                     =>'status:',
@@ -1886,50 +1571,35 @@ $g_lang_table= array(
 'Select some task(s) to reopen'=>'Bitte wählen zu wiederzueröffnende Aufgaben',
 'Reopened %s tasks.'          =>'%s Aufgaben wieder eröffnet',
 
-### ../render/render_form.inc.php   ###
 'Wiki format'                 =>'Wiki-Formatierung',
 
-
-### ../std/mail.inc.php   ###
 'Please set a password to activate it.|notification'=>'Bitte setzen Sie ein Password zur Aktivierung.',
 
-
-### ../db/db_item.inc.php   ###
 'Unknown'                     =>'Unbekannt',
 'Item has been modified during your editing by %s (%s minutes ago). Your changes can not be submitted.'=>'Objekt wurde während Ihrer Bearbeitung von %s geändert (vor %s Minuten). Speichern fehlgeschlagen.',
 
-### ../lists/list_changes.inc.php   ###
 'renamed'                     =>'umbenannt',
 'edit wiki'                   =>'wiki bearbeitet',
 'attached'                    =>'angehangen',
 'attached file'               =>'Datei angehangen',
 
-### ../lists/list_files.inc.php   ###
 'Click on the file ids for details.'=>'Kicken Sie auf Datei-IDs für Detail Ansicht',
 
-### ../pages/_handles.inc.php   ###
 'List Deleted Persons'        =>'Gelöschte Personen anzeigen',
 
-
-### ../pages/person.inc.php   ###
 'Deleted People'              =>'Gelöschte Personen',
 'notification:'               =>'Mail:',
 
-### ../pages/task.inc.php   ###
 'Parent task not found.'      =>'Überaufgabe nicht gefunden.',
 'You do not have enough rights to edit this task'=>'Sie habe nicht genügend Rechte zum Bearbeiten dieser Aufgabe.',
 
-### ../render/render_misc.inc.php   ###
 'Other Persons|page option'   =>'Andere Personen',
 'Deleted|page option'         =>'Gelöscht',
 
-### ../render/render_wiki.inc.php   ###
 'from'                        =>'von',
 
-### ../std/common.inc.php   ###
 'only one item expected.'     =>'Nur ein Element erwartet',
 
-### ../std/constant_names.inc.php   ###
 'Member|profile name'         =>'Mitglied',
 'Admin|profile name'          =>'Admin',
 'Project manager|profile name'=>'Projektleiter',
@@ -1964,21 +1634,16 @@ $g_lang_table= array(
 
 'Category|form label'		=> 'Kategorie',
 
-### ../pages/_handles.inc.php   ###
 'view changes'                =>'Änderungen',
 
-### ../pages/person.inc.php   ###
 'Passwords do not match'      =>'Passwörter stimmen nicht überein',
 'Could not insert object'     =>'Objekt konnte nicht erzeugt werden.',
 
-### ../pages/proj.inc.php   ###
-'Reanimated person as team-member'=>'Person wurde wieder ins Team aufgenommen.',
+'Reanimated person %s as team-member'=>'Person %s wurde wieder ins Team aufgenommen.',
 
-### ../pages/projectperson.inc.php   ###
 'Failed to remove %s members from team'=>'Das Löschen von %s Mitglied(ern) ist fehlgeschlagen.',
 'Unassigned %s team member(s) from project'=>'%s Mitglieder wurden vom Team abgezogen.',
 
-### ../pages/task.inc.php   ###
 'View history of item'        =>'Änderungsgeschichte des Items zeigen',
 'Create another task after submit'=>'Anschließend weitere Aufgabe erstellen',
 'Could not update task'       =>'Aufgabe konnte nicht geändert werden.',
@@ -1994,51 +1659,38 @@ $g_lang_table= array(
 'no changes between %s and %s'=>'Keine Änderungen zwischen %s und %s',
 'ok'                          =>'Ok',
 
-
-### ../std/class_pagehandler.inc.php   ###
 'Operation aborted (%s)'      =>'Befehl abgebrochen (%s)',
 
-
-### ../lists/list_changes.inc.php   ###
 'Last of %s comments:'        =>'Letzer Kommentar (von %s):',
 'Approve Task'                =>'Abgenommen',
 'assigned'                    =>'zugewiesen',
 'attached file to'            =>'Datei angehangen',
 
-### ../lists/list_milestones.inc.php   ###
 '%s required'                 =>'%s benötigt',
 
-### ../pages/_handles.inc.php   ###
 'Edit multiple Tasks'         =>'Mehrere Aufgaben bearbeiten',
 'Filter errors.log'           =>'errors.log filtern',
 'Delete errors.log'           =>'errors.log löschen',
 
-### ../pages/home.inc.php   ###
 'Projects'                    =>'Projekte',
 
-### ../pages/misc.inc.php   ###
 'Error-Log'                   =>'Error-Log',
 'hide'                        =>'ausblenden',
 
-### ../pages/person.inc.php   ###
 'Person details'              =>'Person Details',
 
-### ../pages/task_more.inc.php   ###
 'Invalid checksum for hidden form elements'=>'Ungültige checksumme für hidden-form Felder.',
 
-### ../pages/person.inc.php   ###
 'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'=>
 'Das geänderte Profil hat keinen Einfluss auf aktuelle Projektrollen. Diese müssen einzeln angepasst werden.',
 'Person %s created'           =>'Person %s angelegt',
 
-### ../pages/proj.inc.php   ###
 'not assigned to a closed project'=>'Keinem geschlossenem Projekt zugewiesen',
 'no project templates'        =>'keine Templates',
 'my open'                     =>'meine offenen',
 'for milestone'               =>'für Meilenstein',
 'needs approval'              =>'noch abzunehmen',
 
-### ../pages/search.inc.php   ###
 'in'                          =>'in',
 'on'                          =>'an',
 'jumped to best of %s search results'=>'Zum besten von %s Suchergebnissen gesprungen',
@@ -2046,11 +1698,10 @@ $g_lang_table= array(
 '%s search results for `%s`'  =>'%s Ergebnisse für `%s`',
 'No search results for `%s`'  =>'Keine Ergebnisse für `%s`',
 
-### ../pages/task_more.inc.php   ###
 'For editing all tasks must be of same project.'=>'Nur Aufgeben eines Projekte können gleichzeitig bearbeitet werden.',
 'Edit multiple tasks|Page title'=>'Mehrere Aufgaben bearbeiten.',
 'Edit %s tasks|Page title'    =>'%s Aufgaben bearbeiten',
-'keep different'        =>'-- nicht ändern --',
+'keep different'        =>'nicht ändern',
 'Prio'                        =>'Prio',
 'none'                    =>'- nichts -',
 '%s tasks could not be written'=>'%s Aufgaben konnten nich geschrieben werden',
@@ -2079,19 +1730,13 @@ $g_lang_table= array(
 'Also assigned to'			  =>'Auch zugewiesen an',
 'select person'				  =>'wähle Person',
 
-### ../pages/task_view.inc.php   ###
 'Publish to|Label in Task summary'=>'Öffentlich für',
 'Comment / Update'			  =>'Kommentieren / Aktualisieren',
 
-### ../pages/version.inc.php ###
 'Released Versions'			  =>'freigegebene Versionen',
 
-### ../render/render_fields.inc.php   ###
-
-### ../render/render_list_column_special.inc.php   ###
 'Status|Short status column header'=>'Status',
 
-### ../render/render_misc.inc.php   ###
 '%s hours'                    =>'%s Stunden',
 '%s days'                     =>'%s Tage',
 '%s weeks'                    =>'%s Wochen',
@@ -2099,33 +1744,22 @@ $g_lang_table= array(
 '%s days max'                 =>'%s Tage max',
 '%s weeks max'                =>'%s Wochen',
 
-### ../render/render_wiki.inc.php   ###
-
-### ../std/class_pagehandler.inc.php   ###
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Anfrage aufgrund eines Programmierfehlers abgebrochen (%s).',
 
-
-### ../__obsolete/class_version.inc.php   ###
 'Time Released'               =>'Veröffentlicht am',
 
-### ../db/class_project.inc.php   ###
 'only team members can create items'=>'Nur Teammitglieder dürfen Elemente erstellen.',
 
-### ../db/class_task.inc.php   ###
 'resolved in version'         =>'Fertig in Version',
 
-### ../pages/task_view.inc.php   ###
 'Resolve reason'              =>'Behoben als',
 
-### ../db/class_task.inc.php   ###
 'is a milestone'              =>'Ist ein Meilenstein',
 'released'                    =>'Veröffentlicht',
 'release time'                =>'Veröffentlicht am',
 
-### ../lists/list_versions.inc.php   ###
 'Released Milestone'          =>'Veröffentlichter Meilenstein',
 
-### ../lists/list_comments.inc.php   ###
 'Add Comment'                 =>'Kommentar hinzufügen',
 'Shrink All Comments'         =>'Alle Kommentare einklappen',
 'Collapse All Comments'       =>'Alle Kommentare einklappen',
@@ -2134,13 +1768,10 @@ $g_lang_table= array(
 '1 sub comment'               =>'1 Antwort',
 '%s sub comments'             =>'%s Antworten',
 
-### ../lists/list_efforts.inc.php   ###
 '%s effort(s) with %s hours'  =>'%s Aufwände mit %s Stunden',
 
-### ../lists/list_versions.inc.php   ###
 'Release Date'                =>'Veröffentlicht am',
 
-### ../pages/_handles.inc.php   ###
 'Versions'                    =>'Versionen',
 'Task Test'                   =>'Aufgaben Testen',
 'View Task Efforts'           =>'Aufwände zeigen',
@@ -2153,11 +1784,9 @@ $g_lang_table= array(
 'List Partners'               =>'Partner zeigen',
 'List Employees'              =>'Angestellte zeigen',
 
-### ../pages/company.inc.php   ###
 'related companies of %s'     =>'Relevante Firmen für %s',
 'Remove person from company'  =>'Person von Firma entfernen',
 
-### ../pages/effort.inc.php   ###
 'You do not have enough rights'=>'Sie haben nicht genügend Rechte',
 'Edit this effort'            =>'Diesen Aufwand bearbeiten',
 'Project|label'               =>'Projekt',
@@ -2168,27 +1797,20 @@ $g_lang_table= array(
 'Information'                 =>'Informationen',
 'Created at'				  =>'Erstellt am',
 
-### ../pages/person.inc.php   ###
 'Employees|Pagetitle for person list'=>'Angestellte',
 'Contact Persons|Pagetitle for person list'=>'Ansprechpartner',
 
-### ../pages/proj.inc.php   ###
 'all'                         =>'alle',
 'without milestone'           =>'ohne Meilenstein',
 
-### ../pages/search.inc.php   ###
 'cannot jump to this item type'=>'Kann nicht zu diesem Elementtyp springen',
 
-### ../pages/version.inc.php   ###
 'New Version'                 =>'Neue Version',
 
-### ../pages/task_more.inc.php   ###
 'Select some task(s) to edit' =>'Bitte wählen Sie zu bearbeitende Aufgaben',
 
-### ../pages/task_view.inc.php   ###
 'next released version' =>'-- nächste veröffentlichte Version --',
 
-### ../pages/task_more.inc.php   ###
 'Release as version|Form label, attribute of issue-reports'=>'Als Version veröffentlichen',
 'Reproducibility|Form label, attribute of issue-reports'=>'Wiederholbarkeit',
 'NOTICE: Ungrouped %s subtasks to <b>%s</b>'=>'Hinweis: %s Unteraufgaben wurden ungruppiert.',
@@ -2197,22 +1819,16 @@ $g_lang_table= array(
 'date1 should be smaller than date2. Swapped'=>'Datum 1 sollte kleiner sein als Datum 2.',
 'Export tasks'			  =>'Aufgabenliste exportieren',
 
-
-
-### ../db/db.inc.php   ###
 'Database exception. Please read %s next steps on database errors.%s'=>'Datenbankfehler. Bitte lesen Sie %s nächste Schritte bei Datenbankfehlern. %s',
 
-### ../pages/task_view.inc.php   ###
 'next released version' =>'nächste Version',
 
-### ../pages/task_more.inc.php   ###
 'Failed to delete task %s'=>'Das Löschen von Aufgabe %s ist fehlgeschlagen.',
 'prev change'                 =>'vorherige Änderung',
 'next'                        =>'nächste Änderung',
 'resolved in Version'         =>'Behoben in Version',
 'Resolve Reason'              =>'Behoben als',
 
-### ../pages/task_view.inc.php   ###
 'Released as|Label in Task summary'=>'Veröffentlicht als',
 'Severity|label in issue-reports'=>'Dringlichkeit',
 'Reproducibility|label in issue-reports'=>'Wiederholbarkeit',
@@ -2220,7 +1836,6 @@ $g_lang_table= array(
 'quick edit'                  =>'Schnellbearbeiten',
 'Public to'                   =>'Öffentlich für',
 
-### ../pages/version.inc.php   ###
 'Edit Version|page type'      =>'Version bearbeiten',
 'Edit Version|page title'     =>'Version bearbeiten',
 'New Version|page title'      =>'Neue Version',
@@ -2233,19 +1848,14 @@ $g_lang_table= array(
 'Edit this version'           =>'Diese Version bearbeiten.',
 'Select one or more versions' =>'Wählen Sie eine oder mehrere Versionen aus',
 
-### ../render/render_list_column_special.inc.php   ###
 'Item is published to'        =>'Element veröffentlicht für',
 
-### ../render/render_misc.inc.php   ###
 'All Companies|page option'   =>'Alle Firmen',
 
-### ../render/render_wiki.inc.php   ###
 'Wiki-format: <b>%s</b> is not a valid link-type'=>'',
 
-### ../std/class_auth.inc.php   ###
 'Unable to automatically detect client time zone'=>'Zeitzone konnte nicht automatisch bestimmt werden.',
 
-### ../std/constant_names.inc.php   ###
 'done|resolve reason'         =>'fertig',
 'fixed|resolve reason'        =>'korrigiert',
 'works_for_me|resolve reason' =>'funktioniert hier',
@@ -2261,15 +1871,233 @@ $g_lang_table= array(
 'Without support|release type'=>'Ohne Service',
 'No longer supported|release type'=>'Nicht länger unterstützt',
 
-
-
-### ../render/render_fields.inc.php   ###
 '<b>%s</b> is not a known format for date.'=>'<b>%s</b> ist kein unterstütztes Datumsformat.',
 
-### ../render/render_wiki.inc.php   ###
 'Wiki-format: <b>%s</b> is not a valid link-type'=>'Wiki-Format: <b>%s</a> ist kein gültiger Linktyp.',
 
-);
+'autodetect'                  =>'automatisch',  # line 311
+'in Euro'                     =>'in Euro',  # line 221
+'Order Id'                    =>'OrdnungsNr.',  # line 174
+'Comment|form label for items'=>'Kommentar',  # line 45
+'State'                       =>'Status',  # line 718
+'Other team members changed nothing since last logout (%s)'=>'Keine Änderungen andere Teammitglieger seit dem letzten Logout(%s)',  # line 33
+'version %s'                  =>'version %s',  # line 141
+'Publish'                     =>'Veröffentlichen',  # line 174
+'Documentation'               =>'Dokumentation',  # line 1073
+'View selected Efforts'       =>'Ausgewählte Aufwände anzeigen',  # line 76
+'Status|column header'        =>'Status',  # line 312
+'Calculation|columnheader'    =>'Rechnung',  # line 221
+'Project|columnheader'        =>'Projekt',  # line 90
+'Task|columnheader'           =>'Aufgabe',  # line 116
 
+'ID %s'                       =>'ID %s',  # line 460
+'Show Details'                =>'Details anzeigen',  # line 462
+'Summary|Column header'       =>'Zusammenfassung',  # line 415
+'Thumbnail|Column header'     =>'Miniatur',  # line 478
+
+'Nickname|column header'      =>'Nickname',  # line 218
+'Name|column header'          =>'Name',  # line 240
+
+'Recently changes'            =>'Letzte Änderungen',  # line 51
+'Show more'                   =>'Weitere zeigen',  # line 90
+
+'Updated'                     =>'Geändert',  # line 105
+
+'List|List sort mode'         =>'Liste',  # line 238
+'Tree|List sort mode'         =>'Baum',  # line 249
+'Grouped|List sort mode'      =>'Gruppiert',  # line 260
+'Page name'                   =>'Seitenname',  # line 1138
+
+'Your Tasks'                  =>'Ihre Aufgaben',  # line 751
+
+'Bookmarks'                   =>'Lesezeichen',  # line 42
+'Overall history'             =>'Gesamtverlauf',  # line 58
+'Playground'                  =>'Spielwiese',  # line 66
+
+'View item'                   =>'Element zeigen',  # line 1044
+
+'Set Public Level'            =>'Veröffentlichung einstellen',  # line 86
+'Edit bookmarks'        =>'Lesezeichen bearbeiten',  # line 120
+'View Project as RSS'         =>'Projekt als RSS',  # line 218
+'View Task As Docu'           =>'Aufgabe als Dokumentation',  # line 443
+'Mark tasks as Closed'        =>'Aufgaben schließen',  # line 531
+'View Projects of Person'     =>'Projekte eine Person zeigen',  # line 1067
+'View Task of Person'         =>'Aufgaben einer Person zeigen',  # line 1078
+'View Changes of Person'      =>'Änderungen einer Person zeigen',  # line 1100
+
+'Register'                    =>'Registrieren',  # line 747
+
+'Forgot your password?'       =>'Passwort vergessen?',  # line 1209
+'Load Field'                  =>'Feld laden',  # line 1357
+'Save Field'                  =>'Feld speichern',  # line 1362
+
+'Delete this comment'         =>'Kommentar löschen',  # line 97
+'Restore'                     =>'Wiederherstellen',  # line 89
+'Select some comments to restore'=>'Bitte Kommentare zum Wiederherstellen markieren',  # line 533
+'Failed to restore %s comments'=>'Wiederherstellen von %s Kommentaren fehlgeschlagen',  # line 559
+'Restored %s comments'        =>'%s Kommentare wiederhergestellt.',  # line 562
+
+'Export as CSV'               =>'Als CSV exportieren',  # line 827
+
+'News'                        =>'Neuigkeiten',  # line 177
+
+'%s comments'                 =>'%s Kommentare',  # line 218
+
+'Downloads'                   =>'Downloads',  # line 53
+
+'Created at|label'            =>'Erstellt am',  # line 369
+'For editing all efforts must be of same project.'=>'Nur Aufwände des gleichen Projektes können bearbeitet werden.',  # line 884
+'Edit multiple efforts|Page title'=>'Mehrere Aufwände bearbeiten',  # line 906
+'Edit %s efforts|Page title'  =>'%s Aufwände bearbeitet',  # line 907
+
+'Could not access parent task Id:%s'=>'Konnte nicht auf übergeordnetes Element von Task mit id %s zugreifen',  # line 55
+'Move this file to another task'=>'Diese Datei zu einer anderen Aufgabe bewegen',  # line 88
+'Move'                        =>'Bewegen',  # line 89
+
+'Edit your Profile'           =>'Ihr Profil bearbeiten',  # line 80
+'Mark all items as viewed'    =>'Alles als gelesen markieren',  # line 89
+'for|short for client'        =>'für',  # line 128
+'without client'              =>'ohne Kunde',  # line 140
+'Your Bookmarks'              =>'Ihre Lesezeichen',  # line 199
+'Your efforts'                =>'Ihre Aufwände',  # line 960
+
+'Select some items(s) to change pub level'=>'Bitte wählen Sie Elemente, um deren Sichtbarkeit zu bearbeiten.',  # line 76
+'Made %s items public to %s'  =>'%s Elemente für %s sichtbar gemacht',  # line 101
+'Select one or more bookmark(s)'=>'Wählen Sie einen oder mehrere Lesezeichen',  # line 247
+'An error occured'            =>'Ein Fehler ist aufgetreten',  # line 271
+'Could not get bookmark'      =>'Konnte Lesezeichen nicht finden.',  # line 460
+'Edit bookmarks'              =>'Lesezeichen bearbeiten',  # line 604
+'Edit multiple bookmarks|page title'=>'Mehrere Lesezeichen bearbeiten.',  # line 606
+
+'Continue anonymously'        =>'Anonym fortfahren',  # line 111
+'Password reminder|Page title'=>'Passworterinnerung',  # line 311
+'Please enter your nickname'  =>'Bitte geben Sie Ihren Nutzernamen ein',  # line 323
+'We will then sent you an E-mail with a link to adjust your password.'=>'Wir werden Ihnen dann eine E-Mail mit dem Link zum Ändern Ihres Passwortes schicken.',  # line 333
+'If you do not know your nickname, please contact your administrator: %s.'=>'Wenn Sie Ihren Nutzernamen nicht mehr kennen, kontaktieren Sie Bitte den Administrator: %s',  # line 335
+'A notification mail has been sent.'=>'Eine E-Mail wurde versendet.',  # line 396
+
+'Could not find requested page `%s`'=>'Geforderte Seite konnte nicht gefunden werden.',  # line 46
+
+'Create Note|Tooltip for page function'=>'Notiz erstellen',  # line 709
+'Note|Page function person'   =>'Notiz',  # line 710
+'notification'                =>'Erinnerung',  # line 757
+'Last login|Label'            =>'Zuletzt angemeldet',  # line 835
+'link existing Company'       =>'Bestehende Firma verknüpfen',  # line 878
+'no companies related'        =>'Keine relevanten Firmen',  # line 883
+'Projects|Page title add on'  =>'Projekte',  # line 1095
+'Tasks|Page title add on'     =>'Aufgaben',  # line 1348
+'no tasks yet'                =>'Bisher keine Aufgaben',  # line 1372
+'Changes|Page title add on'   =>'Keine Änderungen',  # line 1788
+'Account'                     =>'Konto',  # line 1999
+'Options'                     =>'Optionen',  # line 2143
+'Time zone|form label'        =>'Zeitzone',  # line 3060
+
+'Internal'                    =>'Intern',  # line 766
+
+'Malformed activation url'    =>'Falsche Aktivierungs URL',  # line 2257
+'Using auto detection of time zone requires this user to relogin.'=>'Automatische Erkennung der zeitzone erfordert Neuanmeldung.',  # line 3179
+'Registering is not enabled'  =>'Registrierung ist nicht aktiviert.',  # line 2929
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Bitte geben Sie ein paar Informationen zu Ihrer Person, und warum Sie sich registrieren möchten.',  # line 2934
+'Register as a new user'      =>'Als neuer Anwender registrieren.',  # line 2942
+'Login-accounts require a full name.'=>'Login-Konto erfordert einen vollständigen Namen.',  # line 3216
+'Please enter an e-mail address.'=>'Bitte geben Sie eine E-Mail Adresse an.',  # line 3226
+'Please copy the text from the image.'=>'Bitte kopieren sie den Text aus dem Bild.',  # line 3300
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Vielen Dank für die Registrierung. Sie erhalten eine E-Mail sobald Ihre Anfrage durch einen Moderator überprüft wurde.',  # line 3329
+'Marked all previous items as viewed.'=>'Alle Elemente als gelesen markiert.',  # line 3599
+
+'Create a new page'           =>'Eine neue Seite erstellen.',  # line 1093
+'Tasks resolved in upcomming version'=>'Aufgaben, die in der nächsten Version geschlossen sind.',  # line 1770
+
+'Display'                     =>'Darstellen',  # line 734
+
+'Create wiki documentation page or start discussion topic'=>'Wikiseite Diskussionsthema erstellen',  # line 163
+
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'Aufgrund der MySQL implementierung wurden folgende Wörter bei der Suche ignoriert.',  # line 666
+'Sorry, but there is nothing left to search.'=>'Für die Suche ist nichts übrig geblieben.',  # line 671
+
+'New version'                 =>'Neue Version',  # line 334
+'New topic'                   =>'Neues Thema',  # line 337
+'Display as'                  =>'Darstellen als',  # line 403
+'This folder has %s subtasks. Changing category will ungroup them.'=>'Der Ordner hat %s Unteraufgaben, deren Gruppierung beim Ändern der Darstellung aufgehoben wird.',  # line 407
+'Bug Report'                  =>'Fehlerbericht',  # line 619
+'Timing'                      =>'Zeiten',  # line 682
+'Comment has been rejected, because it looks like spam.'=>'Kommentar wurde verweigert, da er wie Werbung aussieht.',  # line 899
+'Not enough rights to edit task'=>'Sie haben nicht genügend Rechte, um diese Aufgabe bearbeiten zu können.',  # line 939
+'Milestones may not have sub tasks'=> 'Milesteine dürfen keine Unteraufgaben haben.',  # line 1210
+'Marked %s tasks to be resolved in this version.'=> '%s Aufgaben wurde als in dieser Version erledigt markiert.',  # line 1394
+'Category'                    =>'Kategorie',  # line 2419
+'Publish to|Form label'       =>'Öffentlich für',  # line 3113
+'New Project|form label'      =>'Neues Projekt',  # line 3197
+
+'View previous %s versions'   =>'Bisherige %s Versionen',  # line 1143
+'Set to Open'                 =>'Veröffentlichen',  # line 1157
+'Further Documentation'       =>'Weitere Dokumentation',  # line 359
+'Resolved tasks|Block title'  =>'Erledigte Aufgaben',  # line 593
+'Update'                      =>'Aktualisieren',  # line 771
+'Book Effort'                 =>'Aufwand buchen',  # line 1095
+
+'Please copy the text'        =>'Bitte kopieren Sie den Text',  # line 62
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Dies dient zur Reduzierung von Werbemüll.',  # line 64
+
+'Docu|Project option'         =>'Doku',  # line 570
+'Persons|page option'         =>'Personen',  # line 619
+'%b %e, %Y|strftime format string'=>'',  # line 735
+'%I:%M%P|strftime format string'=>'',  # line 749
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
+'%s min'                      =>'%s min',  # line 854
+'%s min ago'                  =>'vor %s Minuten',  # line 967
+'1 hour ago'                  =>'vor 1 Stunde',  # line 970
+'%s hours ago'                =>'vor %s Stunden',  # line 973
+'%s days ago'                 =>'vor %s Tagen',  # line 977
+'%s months ago'               =>'var %s Monaten',  # line 980
+'%A, %B %e|strftime format string'=>'',  # line 1111
+
+'rendered in'                 =>'Erstellt in',  # line 1287
+'memory used'                 =>'Speicher gebraucht',  # line 1290
+'%s queries / %s fields '     =>'%s DB-Anfragen / %s Felder',  # line 1293
+
+'Image details'               =>'Bild-Details',  # line 997
+'Cannot link to item of type %s'=>'Kann nicht zu Element vom Type %s verlinken.',  # line 1075
+'No item matches this name...'=>'Keine Element mit diesem Namen',  # line 1204
+'Unknown Item Id'             =>'Unbekannte Element-Id',  # line 1351
+'Warning: Could not find wiki chapter'=>'Warnung: Konnte Wiki-Kapitel nicht finden.',  # line 1918
+
+'Invalid anonymous user'      =>'Ungültiger anonymer Nutzer',  # line 95
+'Anonymous account has been disabled. '=>'Anonymes Konte wurde deaktiviert.',  # line 101
+'Sorry. Authentication failed'=> 'Leider ist die Authentifizierung fehlgeschlagen.',  # line 381
+
+'Latest comment:'             =>'Letzter Kommentar',  # line 261
+'changed File'                =>'Datei geändert',  # line 447
+'deleted File'                =>'Datei gelöscht',  # line 517
+
+'???'                         =>'???',  # line 93
+
+'Sorry, but the entered number did not match'=>'Leider stimmt die eingegebene Zahl nicht überein.',  # line 237
+
+'Enable Efforts|Project setting'=> 'Äufwände aktivieren.',  # line 74
+'Enable Milestones|Project setting'=> 'Meilensteine aktvieren.',  # line 75
+'Enable Versions|Project setting'=> 'Versionen aktivieren.',  # line 76
+'Only PM may close tasks|Project setting'=> 'Nur Projektleider dürfen Aufgaben schließen.',  # line 77
+'done|Resolve reason'         =>'erledigt',  # line 160
+'fixed|Resolve reason'        =>'behoben',  # line 161
+'works_for_me|Resolve reason' =>'funktioniert',  # line 162
+'duplicate|Resolve reason'    =>'doppelt',  # line 163
+'bogus|Resolve reason'        =>'fehlerhaft',  # line 164
+'rejected|Resolve reason'     =>'abgelehnt',  # line 165
+'deferred|Resolve reason'     =>'verschoben',  # line 166
+'Task|Task Category'          =>'Aufabe',  # line 213
+'Bug|Task Category'           =>'Fehler',  # line 214
+'Documentation|Task Category' =>'Dokumentation',  # line 215
+'Event|Task Category'         =>'Ereignis',  # line 216
+'Folder|Task Category'        =>'Ordner',  # line 217
+'Milestone|Task Category'     =>'Meilenstein',  # line 218
+'Version|Task Category'       =>'Version',  # line 219
+
+'Your account at|notification'=>'Ihr Konto auf',  # line 604
+'Your account at %s is still active.|notification'=>'Ihr Konto auf %s ist gültig.',  # line 621
+'Your login name is|notification'=> 'Ihr Kontoname lautet',  # line 622
+'Maybe you want to %s set your password|notification'=> 'Bitte korrigieren Sie Ihr Passwort',  # line 623
+
+);
 
 ?>

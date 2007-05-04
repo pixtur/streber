@@ -1536,7 +1536,7 @@ $g_lang_table= array(
 'For editing all tasks must be of same project.'=>'För att ändra alla måste uppgifterna tillhöra samma projekt.',  # line 2386
 'Edit multiple tasks|Page title'=>'Ändra flera uppgifter',  # line 2409
 'Edit %s tasks|Page title'    =>'Ändra %s uppgifter',  # line 2411
-'-- keep different --'        =>'-- behåll olika -- ',  # line 2513
+'keep different'        =>'behåll olika ',  # line 2513
 'Prio'                        =>'Prio',  # line 2496
 '- none -'                    =>'- ingen -',  # line 2507
 '%s tasks could not be written'=>'Det gick inte att skriva till %s uppgifter',  # line 2633
@@ -1843,7 +1843,7 @@ $g_lang_table= array(
 'Select some task(s) to edit' =>'Välj uppgift(er) att ändra', # line 371
 'You do not have enough rights to edit this task'=>'Du har inte tillräckligt med rättigheter att ändra denna uppgift', # line 379
 'New milestone' =>'Ny milstolpe', # line 411
-'-- next released version --' =>'-- nästa utgivna version --', # line 461
+'next released version' => 'nästa utgivna version', # line 461
 'Release as version|Form label, attribute of issue-reports'=>'Utgiven som version', # line 610
 'Reproducibility|Form label, attribute of issue-reports'=>'Möjlighet att uppstå igen', # line 724
 'Create another task after submit'=>'Skapa ytterligare uppgift', # line 748
@@ -1873,7 +1873,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Ändra flera uppgifter', # line 2622
 'Edit %s tasks|Page title' =>'Ändra %s uppgifter', # line 2624
 'keep different' =>'behåll olika', # line 2769
-'-- keep different --' =>'-- behåll olika --', # line 2659
 'Prio' =>'Prio', # line 2709
 'none' =>'ingen', # line 2743
 
@@ -2196,7 +2195,7 @@ $g_lang_table= array(
 'Playground'                  =>'Lekplats',  # line 17
 'Send notification'           =>'Skicka meddelande',  # line 59
 'Remove notification'         =>'Ta bort meddelande',  # line 65
-'Edit monitored items'        =>'Ändra bevakades poster',  # line 71
+'Edit bookmarks'        =>'Ändra bevakades poster',  # line 71
 
 ### ../pages/project_more.inc.php   ###
 'Documentation'               =>'Dokumentation',  # line 1091
@@ -2210,7 +2209,7 @@ $g_lang_table= array(
 'Remove companies from person'=>'Ta bort företag från användare',  # line 651
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'Markera alla visade',  # line 1069
+'Mark all items as viewed'      =>'Markera alla visade',  # line 1069
 'Forgot your password?'       =>'Glömt lösenord?',  # line 1129
 
 ### ../std/class_pagehandler.inc.php   ###

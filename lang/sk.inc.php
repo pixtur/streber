@@ -1570,7 +1570,7 @@ $g_lang_table= array(
 'For editing all tasks must be of same project.'=>'Všetky upravované úlohy musia byť z rovnakého projektu',
 'Edit multiple tasks|Page title'=>'Upraviť viacero úloh',
 'Edit %s tasks|Page title'    =>'Upraviť %s úloh',
-'-- keep different --'        =>'-- rôzne --',
+'keep different'        =>'rôzne',
 'Prio'                        =>'Prio',
 '- none -'                    =>'- nič -',
 '%s tasks could not be written'=>'%s úloh nemôže byť zapísaných',
@@ -1741,7 +1741,6 @@ $g_lang_table= array(
 
 ### ../pages/task_more.inc.php   ###
 'Select some task(s) to edit' =>'Vyberte nejaké úlohy na úpravu',
-'-- next released version --' =>'',
 'Release as version|Form label, attribute of issue-reports'=>'',
 'Reproducibility|Form label, attribute of issue-reports'=>'Reprodukovateľnosť',
 'Marked %s tasks to be resolved in this version.'=>'Označiť %s úloh za vyriešené v tejto verzií',

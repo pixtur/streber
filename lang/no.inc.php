@@ -1939,7 +1939,7 @@ $g_lang_table= array(
 
 ### ../pages/task_more.inc.php   ###
 'Select some task(s) to edit' =>'Velg oppgave(r) å redigere',
-'-- next released version --' =>'-- neste utgitte versjon --',
+'next released version' =>'neste utgitte versjon',
 'Release as version|Form label, attribute of issue-reports'=>'Utgi som versjon',
 'Reproducibility|Form label, attribute of issue-reports'=>'Gjenskapelsesmulighet',
 'Marked %s tasks to be resolved in this version.'=>'Merket %s oppgaver som skal løses i denne versjonen',
@@ -1953,7 +1953,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Endre flere oppgaver',
 'Edit %s tasks|Page title'    =>'Endre %s oppgaver',
 'keep different'              =>'behold forskjellig',
-'-- keep different --'        =>'-- behold forskjellig --',
 'Prio'                        =>'Prio',
 'none'                        =>'ingen',
 

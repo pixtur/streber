@@ -1671,7 +1671,7 @@ $g_lang_table= array(
 'Parent task not found.'      =>'Tarea superior no pudo ser encontrada',  # line 162
 'Select some task(s) to edit' =>'Seleccione una tarea para editar!',  # line 367
 'New milestone'               =>'Nuevo Hito',  # line 407
-'-- next released version --' =>'-- nueva versión liberada --',  # line 457
+'next released version' => 'nueva versión liberada',  # line 457
 'Release as version|Form label, attribute of issue-reports'=>'Liberar como versión',  # line 605
 'Reproducibility|Form label, attribute of issue-reports'=>'Cómo reproducir',  # line 719
 'Create another task after submit'=>'Crear otra tarea luego de enviar',  # line 743
@@ -1705,7 +1705,6 @@ $g_lang_table= array(
 'Edit multiple tasks|Page title'=>'Editar múltiples tareas',  # line 2619
 'Edit %s tasks|Page title'    =>'Editar la tarea $s',  # line 2621
 'keep different'              =>'dejar las diferentes',  # line 2766
-'-- keep different --'        =>'-- dejar las diferentes --',  # line 2656
 'Prio'                        =>'Prio',  # line 2706
 'none'                        =>'ninguna',  # line 2740
 
@@ -1964,7 +1963,7 @@ $g_lang_table= array(
 'Set Public Level'            =>'Fijar Nivel Público',  # line 37
 'Send notification'           =>'Enviar Notificación',  # line 59
 'Remove notification'         =>'Eliminar Notificación',  # line 65
-'Edit monitored items'        =>'Editar itemes monitoreados',  # line 71
+'Edit bookmarks'        =>'Editar itemes monitoreados',  # line 71
 
 ### ../pages/project_more.inc.php   ###
 'Documentation'               =>'Documentación',  # line 1091
@@ -1981,7 +1980,7 @@ $g_lang_table= array(
 'Remove companies from person'=>'Eliminar Empresas de la persona',  # line 651
 
 ### ../pages/_handles.inc.php   ###
-'Marks all items viewed'      =>'Marcar todos los ítemes como vistos',  # line 1069
+'Mark all items as viewed'      =>'Marcar todos los ítemes como vistos',  # line 1069
 'Forgot your password?'       =>'Olvidé mi contraseña',  # line 1129
 
 ### ../pages/comment.inc.php   ###
@@ -2090,7 +2089,7 @@ $g_lang_table= array(
 'Comment has been rejected, because it looks like spam.'=>'Este comentario fue rechazado ya que fue considerado como Spam',  # line 844
 
 ### ../pages/_handles.inc.php   ###
-'Edit multiple monitored items'=>'Editar múltiples itemes monitoreados',  # line 84
+'Edit multiple bookmarks'=>'Editar múltiples itemes monitoreados',  # line 84
 'View Project as RSS'         =>'Ver Proyecto como RSS',  # line 169
 'Load Field'                  =>'Cargar Campo',  # line 1296
 'Save Field'                  =>'Guardar Campo',  # line 1301
@@ -2182,7 +2181,7 @@ $g_lang_table= array(
 ### ../std/class_auth.inc.php   ###
 'Invalid anonymous user'      =>'Usuario anónimo no válido',  # line 94
 'Anonymous account has been disabled. '=>'La cuenta de usuario anónimo fue deshabilitada',  # line 100
-'Sorry. 	Authentication failed'=>'Disculpe.  Error en la autenticación',  # line 373
+'Sorry. Authentication failed'=>'Disculpe.  Error en la autenticación',  # line 373
 
 ### ../std/common.inc.php   ###
 'Sorry, but the entered number did not match'=>'Disculpe, el número ingresado no corresponde',  # line 236

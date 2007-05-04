@@ -80,7 +80,7 @@ function itemsSetPubLevel()
         ||
         !isset($g_pub_level_names[$new_pub_level])
     ) {
-        $PH->abortWarning(__("itemsSetPubLevel requires item_pub_level"), ERROR_NOTE);
+        $PH->abortWarning("itemsSetPubLevel requires item_pub_level", ERROR_NOTE);
         return;
     }
 
@@ -151,7 +151,7 @@ function itemsAsBookmark()
 		
 	## not a nice solution with 'bookmark'=>$ids[0], but the more important value is the '$ids' value ##
 	if($valid){
-		$PH->show('itemMonitorEdit', array('bookmark'=>$ids[0]), $ids);
+		$PH->show('itemBookmarkEdit', array('bookmark'=>$ids[0]), $ids);
 	}
 }
 
@@ -232,7 +232,7 @@ function itemsRemoveBookmark()
 /**
 * Edit one bookmarks @ingroup pages
 */
-function itemMonitorEdit($bookmark=NULL)
+function itemBookmarkEdit($bookmark=NULL)
 {
 	global $PH;
 	global $auth;
@@ -248,7 +248,7 @@ function itemMonitorEdit($bookmark=NULL)
 			return;
 		}
 		elseif(count($ids) > 1) {
-			$PH->show('itemMonitorEditMultiple');
+			$PH->show('itemBookmarkEditMultiple');
 			exit();
 		}
 		
@@ -274,7 +274,7 @@ function itemMonitorEdit($bookmark=NULL)
 		elseif(count($bookmark) > 1)
 		{
 			## not a nice solution with 'bookmark'=>$ids[0], but the more important value is the '$ids' value ##
-			$PH->show('itemMonitorEditMultiple', array('bookmark'=>$bookmark[0]), $bookmark);
+			$PH->show('itemBookmarkEditMultiple', array('bookmark'=>$bookmark[0]), $bookmark);
 			exit();
 		}
 				
@@ -385,7 +385,7 @@ function itemMonitorEdit($bookmark=NULL)
 			$page = new Page();
 			$page->cur_tab = 'home';
 	
-			$page->options = array(new NaviOption(array('target_id'=>'itemMonitorEdit','name'=>__('Edit bookmark'))));
+			$page->options = array(new NaviOption(array('target_id'=>'itemBookmarkEdit','name'=>__('Edit bookmark'))));
 	
 			$page->type= sprintf(__('Edit bookmark: "%s"', 'page title') , $str_name);
 			$page->title = sprintf(__('Bookmark: "%s"') , $str_name);
@@ -417,7 +417,7 @@ function itemMonitorEdit($bookmark=NULL)
 			
 			echo($form);
 			
-			$PH->go_submit = 'itemMonitorEditSubmit';
+			$PH->go_submit = 'itemBookmarkEditSubmit';
 			
 			$block->render_blockEnd();
 		}
@@ -431,7 +431,7 @@ function itemMonitorEdit($bookmark=NULL)
 /**
 * submit changes to one bookmark @ingroup pages
 */
-function itemMonitorEditSubmit()
+function itemBookmarkEditSubmit()
 {
 	global $PH;
     global $auth;
@@ -526,7 +526,7 @@ function itemMonitorEditSubmit()
 /**
 * edit several bookmarks @ingroup pages
 */
-function itemMonitorEditMultiple($thebookmarks=NULL)
+function itemBookmarkEditMultiple($thebookmarks=NULL)
 {
 	global $PH;
 	global $auth;
@@ -601,7 +601,7 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
 			$page = new Page();
 			$page->cur_tab = 'home';
 	
-			$page->options = array(new NaviOption(array('target_id'=>'itemMonitorEdit','name'=>__('Edit bookmarks'))));
+			$page->options = array(new NaviOption(array('target_id'=>'itemBookmarkEdit','name'=>__('Edit bookmarks'))));
 	
 			$page->type= __('Edit multiple bookmarks', 'page title');
 			$page->title = sprintf(__('Edit %s bookmark(s)'), count($items));
@@ -705,7 +705,7 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
             $b[0] = __('no');
 			$b[1] = __('yes');
             if(isset($different_fields['notify_on_change'])) {
-                $b[-1]= __('-- keep different --');
+                $b[-1]= '-- ' . __('keep different') . ' --';
                 $form->add(new Form_Dropdown('notify_on_change',__("Notify on change"),array_flip($b),  -1));
             }
             else {
@@ -720,7 +720,7 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
                 $a[$key] = $value;
             }
             if(isset($different_fields['notify_if_unchanged'])) {
-                $a[-1]= __('-- keep different --');
+                $a[-1]=  '-- ' . __('keep different') . ' --';
                 $form->add(new Form_Dropdown('notify_if_unchanged',__("Notify if unchanged in"),array_flip($a),  -1));
             }
             else {
@@ -742,7 +742,7 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
 		
 		$block->render_blockEnd();
 		
-		$PH->go_submit = 'itemMonitorEditMultipleSubmit';
+		$PH->go_submit = 'itemBookmarkEditMultipleSubmit';
 		
 		echo (new PageContentClose);
 		echo (new PageHtmlEnd);
@@ -752,7 +752,7 @@ function itemMonitorEditMultiple($thebookmarks=NULL)
 /**
 * submit changes to several bookmarks @ingroup pages
 */
-function itemMonitorEditMultipleSubmit()
+function itemBookmarkEditMultipleSubmit()
 {
 	global $PH;
     global $auth;
@@ -1152,18 +1152,18 @@ function itemViewDiff()
                 }
                 else if($v->version_number > $version_right->version_number) {
                     $str_link= $PH->getUrl('itemViewDiff', array('item'=>$item->id, 'date1'=> $version_left->date_from, 'date2'=> $versions[$i]->date_from));
-                    $name= '&gt; &nbsp;&nbsp; v.'.$v->version_number . __(' -- '). $author. " -- ". renderDate($v->date_from);
+                    $name= '&gt; &nbsp;&nbsp; v.'.$v->version_number . ' -- '. $author. ' -- ' . renderDate($v->date_from);
                     $options_right[]="<option  value='".$str_link ."'>". $name. "</option>";
 
                 }
                 else {
                     if($v->version_number > $version_left->version_number) {
                         $str_link= $PH->getUrl('itemViewDiff', array('item'=>$item->id, 'date1'=> $version_left->date_from, 'date2'=> $versions[$i]->date_from));
-                        $name= '&lt; &nbsp;&nbsp; v.'.$v->version_number . __(' -- '). $author. " -- ". renderDate($v->date_from);
+                        $name= '&lt; &nbsp;&nbsp; v.'.$v->version_number . ' -- ' . $author. " -- ". renderDate($v->date_from);
                     }
                     else {
                         $str_link= $PH->getUrl('itemViewDiff', array('item'=>$item->id, 'date1'=> $versions[$i]->date_from, 'date2'=> $versions[$i]->date_to));
-                        $name= '&lt;&lt;&nbsp;&nbsp; v.'.$v->version_number . __(' -- '). $author. " -- ". renderDate($v->date_from);
+                        $name= '&lt;&lt;&nbsp;&nbsp; v.'.$v->version_number .  ' -- ' . $author. ' -- '. renderDate($v->date_from);
                     }
 
                     $options_right[]="<option  value='".$str_link ."'>". $name. "</option>";
