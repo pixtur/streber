@@ -1,5 +1,66 @@
 streber-version-history
 
+version: v0.0799 [2007-05-05]
+==============================
+major:
+- party fixed backslashes in wiki texts and ajax editing #4286, #4043
+- fixed changelist claims "attached file" even if person only added comment #4300
+- fixed uploading of files on strato server #4264
+- party fixed splitting of utf8 chars (#4259)
+- added russian translation
+- fixed storing of uploaded files in project directories
+- added homeselectorlist 
+- splitted home into "homeDashboard" (to be implemented), "homeTasks", "homeEfforts", "homeBookmarks" and "homeAllChanges"
+- polished  the look of pageHeader in clean theme 
+- fixed inline edit cannot find wiki chapter if invalid table syntax #4556
+- home dashboard lists recent changes (add gets more changes with ajax) #4639
+- changed font-size settings from "%" to "pt"
+- fixed: Default rights doesn't work as expected #3871
+- fixed item relatiionshop for deleted team members #4512
+- hide deleted efforts #4160
+- list changes now explicitly lists files 
+- fixed some problems with IE7 display
+- fixed composition of notification mails 
+- fixed reassigning persons to teams (assigned twice?) #4849
+- fixed Strange behaviour when re-assigning a user to a project #4083
+- fixed issue values are not stored correctly #4865
+- refactored project RSS-Feed:
+  - now supports author
+  - uses class_changeline
+  - Summarizes what happened
+
+minor:
+- fixed rendering for Dates "Today" (added time again) 
+- Replaced minor title "Item-ID:123" with  "# 123" 
+- fixed Mail header "from" is malformed #4471
+- install checks for readable /_rss directory
+- removed some Bookmark page functions (e.g. person)
+- "Page" renamed to "Topic"
+- polished project list in home 
+- fixed error in effort description with wiki links 
+- Fatal error in effortView when links exist in description #4439
+- added item-id to change list to quicker fill out svn commit comments :)
+- Change Version(s) to Release(s) consequently #3136
+- added support of additinal image mimetype image/x-png
+- fixed adding a new comment stated as "renamed" in History #4522
+- fixed in changelog not the last, of multiple comments is listed #4514
+- adjusted stylesheet to fix Labels moves after any link "on focus" event at task description #4584
+- re add comments to milestones #4729
+- fixed Notification email do not have task name anymore #4862
+- fixed "add another" option from create Milestone form does not work #4858
+- minor: removed block style functions from list Milestones
+- updated translation and some texts
+
+internal:
+- Cleaned up most of the source code for doxygen 
+- added File::renderLocation()
+- fixed undefined 'projects' warning in personView 
+- added separate stylesheet for IE to fix some layoutproblems with IE 7.0
+
+
+
+
+
 version: v0.0796 [2007-02-25]
 ==============================
 

@@ -443,8 +443,11 @@ class Auth
                 "/grub-client-/",
                 "/MSIECrawler/",
                 "/NPBot/",
-                "/NameProtect/",
-                "/ZyBorg/",
+                "/NameProtect/i",
+                "/ZyBorg/i",
+                "/worio bot heritrix/i",
+                "/Ask Jeeves/",
+                "/libwww-perl/i",
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {
