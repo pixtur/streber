@@ -805,7 +805,7 @@ class PageHandler extends BaseObject
                 $alt_title= $page;
             }
             #return "<a href='http://wiki.pixtur.de/index.php/{$page}'>$alt_title</a>";
-            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}'>$alt_title</a>";
+            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$page}'>$alt_title</a>";
         }
     }
 
