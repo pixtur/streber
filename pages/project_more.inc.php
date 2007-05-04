@@ -933,13 +933,15 @@ function projViewTasks()
             'name'=>__('Task'),
         )));
 
-        $page->add_function(new PageFunction(array(
-            'target'    =>'taskNewBug',
-            'params'    =>array('prj'=>$project->id,'add_issue'=>1)+ $new_task_options,
-            'icon'      =>'new',
-            'tooltip'   =>__('Create task with issue-report'),
-            'name'      =>__('Bug')
-        )));
+        if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNewBug',
+                'params'    =>array('prj'=>$project->id,'add_issue'=>1)+ $new_task_options,
+                'icon'      =>'new',
+                'tooltip'   =>__('Create task with issue-report'),
+                'name'      =>__('Bug')
+            )));
+        }
 
 
     	### render title ###
@@ -1083,15 +1085,12 @@ function ProjViewDocu()
         }
 
         ### page functions ###
-        $page->add_function(new PageFunctionGroup(array(
-            'name'=>__('new'),
-        )));
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNew',
             'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU),
             'icon'      =>'new',
             'tooltip'   =>__('Create a new page'),
-            'name'      =>__('Topic')
+            'name'      =>__('New Topic')
         )));
 
     	### render title ###
@@ -1309,8 +1308,6 @@ function ProjViewMilestones()
         require_once(confGet('DIR_STREBER') . "lists/list_milestones.inc.php");
         $list= new ListBlock_milestones();
 
-        #$list->query_options['is_milestone']= 1;
-        
         echo "<div class=milestone_views>";
         if(get('preset') == 'completed') {
             $list->query_options['status_min']= STATUS_COMPLETED;
@@ -1915,9 +1912,10 @@ function projEdit($project=NULL)
             $tab->add($project->fields['short']->getFormElement(&$project));
             $tab->add($project->fields['status_summary']->getFormElement(&$project));
 
-            $tab->add(new Form_checkbox('project_setting_efforts',      $g_project_setting_names[PROJECT_SETTING_EFFORTS], $project->settings & PROJECT_SETTING_EFFORTS));
-            $tab->add(new Form_checkbox('project_setting_milestones',   $g_project_setting_names[PROJECT_SETTING_MILESTONES], $project->settings & PROJECT_SETTING_MILESTONES));
-            $tab->add(new Form_checkbox('project_setting_versions',     $g_project_setting_names[PROJECT_SETTING_VERSIONS], $project->settings & PROJECT_SETTING_VERSIONS));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_BUGS',         $g_project_setting_names[PROJECT_SETTING_ENABLE_BUGS], $project->settings & PROJECT_SETTING_ENABLE_BUGS));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_EFFORTS',      $g_project_setting_names[PROJECT_SETTING_ENABLE_EFFORTS], $project->settings & PROJECT_SETTING_ENABLE_EFFORTS));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_MILESTONES',   $g_project_setting_names[PROJECT_SETTING_ENABLE_MILESTONES], $project->settings & PROJECT_SETTING_ENABLE_MILESTONES));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_VERSIONS',     $g_project_setting_names[PROJECT_SETTING_ENABLE_VERSIONS], $project->settings & PROJECT_SETTING_ENABLE_VERSIONS));
             #$tab->add(new Form_checkbox('project_setting_only_pm_may_close',     $g_project_setting_names[PROJECT_SETTING_ONLY_PM_MAY_CLOSE], $project->settings & PROJECT_SETTING_ONLY_PM_MAY_CLOSE));
 
         }
@@ -2036,10 +2034,12 @@ function projEditSubmit()
     */
     {
         foreach( array(
-            'project_setting_efforts'           =>  PROJECT_SETTING_EFFORTS,
-            'project_setting_milestones'        =>  PROJECT_SETTING_MILESTONES,
-            'project_setting_versions'          =>  PROJECT_SETTING_VERSIONS,
-            'project_setting_only_pm_may_close' =>  PROJECT_SETTING_ONLY_PM_MAY_CLOSE,
+            'PROJECT_SETTING_ENABLE_BUGS'          =>  PROJECT_SETTING_ENABLE_BUGS,
+            'PROJECT_SETTING_ENABLE_EFFORTS'       =>  PROJECT_SETTING_ENABLE_EFFORTS,
+            'PROJECT_SETTING_ENABLE_MILESTONES'    =>  PROJECT_SETTING_ENABLE_MILESTONES,
+            'PROJECT_SETTING_ENABLE_VERSIONS'      =>  PROJECT_SETTING_ENABLE_VERSIONS,
+            'project_setting_only_pm_may_close'    =>  PROJECT_SETTING_ONLY_PM_MAY_CLOSE,
+            
         ) as $form_name => $setting) {
             if(!is_null(get($form_name))) {
                 $project->settings |= $setting;

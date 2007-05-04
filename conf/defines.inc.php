@@ -193,10 +193,12 @@ define('PRIO_LOWER',4);
 define('PRIO_LOWEST', 5);
 
 
-define('PROJECT_SETTING_EFFORTS',           1<<1);
-define('PROJECT_SETTING_MILESTONES',        1<<2);
-define('PROJECT_SETTING_VERSIONS',          1<<3);
-define('PROJECT_SETTING_ONLY_PM_MAY_CLOSE', 1<<4);
+define('PROJECT_SETTING_ENABLE_EFFORTS',           1<<1);
+define('PROJECT_SETTING_ENABLE_MILESTONES',        1<<2);
+define('PROJECT_SETTING_ENABLE_VERSIONS',          1<<3);
+define('PROJECT_SETTING_ONLY_PM_MAY_CLOSE',        1<<4);
+define('PROJECT_SETTING_ENABLE_BUGS',              1<<5);
+
 define('PROJECT_SETTING_ALL',               0x7f);
 
 define('USER_SETTING_NOTIFICATIONS',                1<<1);  #
@@ -204,6 +206,8 @@ define('USER_SETTING_HTML_MAIL',                    1<<2);  # obsolete
 define('USER_SETTING_NOTIFY_ASSIGNED_TO_PROJECT',   1<<3);  # obsolete
 define('USER_SETTING_SEND_ACTIVATION',              1<<4);  # flag if next notification should include activiation
 define('USER_SETTING_EFFORTS_AS_DURATION',          1<<5);  #
+define('USER_SETTING_ENABLE_EFFORTS',               1<<6);  #
+define('USER_SETTING_ENABLE_BOOKMARKS',             1<<7);  #
 
 define('EFFORT_STYLE_TIMES',1);
 define('EFFORT_STYLE_DURATION',2);

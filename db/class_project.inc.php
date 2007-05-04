@@ -1339,7 +1339,7 @@ class Project extends DbProjectItem
             "SELECT  i.id
                  from {$prefix}item i,  {$prefix}task t
                 WHERE
-                        t.is_milestone=1
+                        t.category = " . TCATEGORY_MILESTONE .  "
                     AND t.id= i.id
                     AND i.state = '".ITEM_STATE_OK."'
                     AND i.project= $this->id
@@ -1367,6 +1367,100 @@ class Project extends DbProjectItem
 	{
 		return $this->project_status;
 	}
+
+
+
+    /**
+    * build list of milestones / versions for drop downselection "resolved in"
+    *
+    * -- undefined --
+    * -- next version --
+    * version 1
+    * version 2
+    * -- milestones ---
+    * milestone 1
+    * milestone 2    
+    *
+    * @NOTE: listing milestones here is a little bit weird, but if don't
+    * editing old tasks will drop the versions that had be changed into milestones. 
+    * (which would be a weird situation, though)
+    */
+    public function buildResolvedInList()
+    {
+        $tmp_resolvelist= array(
+                    ('-- ' . __('undefined')             . ' --') => '0',
+                    ('-- ' . __('next released version') . ' --') => -1);
+        
+        $versions=Task::getAll(array(
+            'category'      => TCATEGORY_VERSION,
+            'project'       => $this->id,
+            'status_min'    => 0,
+            'status_max'    => 10,
+            'order_by'      => "name",            
+        ));
+
+        foreach($versions as $version) {
+            $tmp_resolvelist[$version->name]= $version->id;
+        }
+    
+        if($milestones =Task::getAll(array(
+            'category'      => TCATEGORY_MILESTONE,
+            'project'       => $this->id,
+            'status_min'    => 0,
+            'status_max'    => 10,
+            'order_by'      => "name",
+        ))) {
+            $tmp_resolvelist[('-- ' . __('Milestones')             . ' --')] = '-1';
+            foreach($milestones as $milestone) {
+                $tmp_resolvelist[$milestone->name]= $milestone->id;
+            }
+        }
+        return $tmp_resolvelist;
+    }
+    
+    
+    
+    /**
+    * build list of milestones / versions for drop downselection planned "for_milestone"
+    *
+    * -- undefined --
+    * milestone 1
+    * milestone 2
+    * -- already released versions ---
+    * version 1
+    * version 2
+    */
+    public function buildPlannedForMilestoneList()
+    {
+        $tmp_milestonelist= array(
+                    ('-- ' . __('undefined')             . ' --') => '0');
+        
+        foreach(Task::getAll(array(
+            'category'      => TCATEGORY_MILESTONE,
+            'project'       => $this->id,
+            'status_min'    => 0,
+            'status_max'    => 10,
+            'order_by'      => "name",
+
+        )) as $milestone) {
+            $tmp_milestonelist[$milestone->name]= $milestone->id;
+        }
+    
+        if($versions =Task::getAll(array(
+            'category'      => TCATEGORY_VERSION,
+            'project'       => $this->id,
+            'status_min'    => 0,
+            'status_max'    => 10,
+            'order_by'      => "name",
+        ))) {
+            $tmp_milestonelist[('-- ' . __('Released versions')             . ' --')] = '-2';
+            foreach($versions as $version) {
+                $tmp_milestonelist[$version->name]= $version->id;
+            }
+        }
+        return $tmp_milestonelist;
+    }
+
 }
 
 Project::initFields();

@@ -379,7 +379,7 @@ $g_lang_table= array(
 '%s hidden'                   =>'%s nascosti',  # line 318
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Nuova Cartella',  # line 511
+'New folder'                  =>'Nuova Cartella',  # line 511
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'o',  # line 236

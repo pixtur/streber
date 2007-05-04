@@ -99,6 +99,10 @@ class Task extends DbProjectItem
                 'view_in_forms'=>true,
                 'default'   =>0,
             )),
+
+            /**
+            * DEPRECIATED !
+            */
             new FieldBool(  array('name'=>'is_milestone',
                 'title'=>__('is a milestone'),
                 'tooltip'=> __('milestones are shown in a different list'),
@@ -467,7 +471,7 @@ foreach($filters_str as $fs=>$value) {
             $t->update();
         }
 
-        if($this->is_milestone) {
+        if($this->isMilestoneOrVersion()) {
             $tasks= $this->getMilestoneTasks();
             foreach($tasks as $t) {
                 $t->for_milestone= 0;
@@ -1286,7 +1290,7 @@ foreach($filters_str as $fs=>$value) {
             return $value;
         }
         else {
-            return '';
+            return __('Task');
         }
     }
 
@@ -1615,6 +1619,30 @@ foreach($filters_str as $fs=>$value) {
             }
         }
         return $tasks;
+    }
+    
+    
+    
+    public function isMilestoneOrVersion()
+    {
+        return $this->isOfCategory(array(TCATEGORY_MILESTONE, TCATEGORY_VERSION));
+    }
+
+    
+    public function isOfCategory($cat)
+    {
+        if(is_array($cat)) {
+            foreach($cat as $c) {
+                if($this->category == $c) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        elseif($this->category == $cat) {
+            return true;
+        }
+        return false;        
     }
     
 

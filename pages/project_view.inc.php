@@ -83,15 +83,12 @@ function ProjView()
         ### page functions ###
         
         if($editable) {
-            $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('edit')
-            )));
             $page->add_function(new PageFunction(array(
                 'target'    =>'projEdit',
                 'params'    =>array('prj'=>$project->id),
                 'icon'      =>'edit',
                 'tooltip'   =>__('Edit this project'),
-                'name'      => __('Project')
+                'name'      => __('Edit project')
     
             )));
         }
@@ -148,14 +145,17 @@ function ProjView()
             'tooltip'   =>__('Create task'),
             'name'      =>__('Task')
         )));
-        $page->add_function(new PageFunction(array(
-            'target'    =>'taskNewBug',
-            'params'    =>array('prj'=>$project->id,'add_issue'=>1),
-            'icon'      =>'new',
-            'tooltip'   =>__('Create task with issue-report'),
-            'name'      =>__('Bug'),
-        )));
 
+        if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNewBug',
+                'params'    =>array('prj'=>$project->id,'add_issue'=>1),
+                'icon'      =>'new',
+                'tooltip'   =>__('Create task with issue-report'),
+                'name'      =>__('Bug'),
+            )));
+        }
+    
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNewDocu',
             'params'    =>array('prj'=>$project->id),
@@ -163,14 +163,17 @@ function ProjView()
             'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
             'name'      =>__('Topic'),
         )));
-
-        $page->add_function(new PageFunction(array(
-            'target'    =>'effortNew',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'loghours',
-            'tooltip'   =>__('Book effort for this project'),
-            'name'      =>__('Effort'),
-        )));
+        
+        
+        if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS && $auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'effortNew',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'loghours',
+                'tooltip'   =>__('Book effort for this project'),
+                'name'      =>__('Effort'),
+            )));
+        }
 
         $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));
         $page->extra_header_html.=

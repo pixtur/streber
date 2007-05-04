@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0799',
+    'STREBER_VERSION'       => '0.07991',
     'STREBER_VERSION_DATE'  => '2007-05-04',
 
     'APP_NAME'              => 'streber',
@@ -57,7 +57,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.07972',
+    'DB_VERSION_REQUIRED'   => '0.07991',
 
 
     /**
@@ -75,8 +75,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-    'DB_CREATE_VERSION'     => '0.07972',     # sql-dump loaded from /_install/-directory at installation
-    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0797',
+    'DB_CREATE_VERSION'     => '0.07991',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.07991',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -103,6 +103,11 @@ $g_config= array(
     */
     'CHECK_PASSWORD_LEVEL'  => 8,
     'PERSON_PROFILE_DEFAULT'=> PROFILE_DEVELOPER,
+    'PERSON_DEFAULT_SETTINGS' => (USER_SETTING_HTML_MAIL
+                             | USER_SETTING_NOTIFY_ASSIGNED_TO_PROJECT
+                             | USER_SETTING_ENABLE_EFFORTS
+                             | USER_SETTING_ENABLE_BOOKMARKS),
+                             
 
     /**
     * this will measure the microtimes for some rendering and db-processes.

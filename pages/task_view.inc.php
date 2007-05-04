@@ -72,27 +72,13 @@ function TaskView()
         ### page functions ###
         {
             if($editable) {
-                $page->add_function(new PageFunctionGroup(array(
-                    'name'      => __('edit')
+                $page->add_function(new PageFunction(array(
+                    'target'=>'taskEdit',
+                    'params'=>array('tsk'=>$task->id),
+                    'icon'=>'edit',
+                    'tooltip'=> sprintf(__('Edit this task %s'), $task->getLabel),
+                    'name'=> __('Edit'),
                 )));
-                if($task->category == TCATEGORY_FOLDER) {
-                    $page->add_function(new PageFunction(array(
-                        'target'=>'taskEdit',
-                        'params'=>array('tsk'=>$task->id),
-                        'icon'=>'edit',
-                        'tooltip'=>__('Edit this task'),
-                        'name'=>__('Folder')
-                    )));
-                }
-                else {
-                    $page->add_function(new PageFunction(array(
-                        'target'=>'taskEdit',
-                        'params'=>array('tsk'=>$task->id),
-                        'icon'=>'edit',
-                        'tooltip'=>__('Edit this task'),
-                        'name'=>__('Task')
-                    )));
-                }
 
             }
 
@@ -130,7 +116,7 @@ function TaskView()
             }
 
             ### milestone ###
-            else if($task->is_milestone) {
+            else if($task->isMilestoneOrVersion()) {
                 $page->add_function(new PageFunctionGroup(array(
                     'name'=>__('new'),
                 )));
@@ -165,23 +151,25 @@ function TaskView()
 
             }
 
-			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
-			if((!$item) || ($item[0]->is_bookmark == 0)){
-				$page->add_function(new PageFunction(array(
-					'target'    =>'itemsAsBookmark',
-					'params'    =>array('task'=>$task->id),
-					'tooltip'   =>__('Mark this task as bookmark'),
-					'name'      =>__('Bookmark'),
-        		)));
-			}
-			else{
-				$page->add_function(new PageFunction(array(
-					'target'    =>'itemsRemoveBookmark',
-					'params'    =>array('task'=>$task->id),
-					'tooltip'   =>__('Remove this bookmark'),
-					'name'      =>__('Remove Bookmark'),
-        		)));
-			}
+            if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+    			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
+    			if((!$item) || ($item[0]->is_bookmark == 0)){
+    				$page->add_function(new PageFunction(array(
+    					'target'    =>'itemsAsBookmark',
+    					'params'    =>array('task'=>$task->id),
+    					'tooltip'   =>__('Mark this task as bookmark'),
+    					'name'      =>__('Bookmark'),
+            		)));
+    			}
+    			else{
+    				$page->add_function(new PageFunction(array(
+    					'target'    =>'itemsRemoveBookmark',
+    					'params'    =>array('task'=>$task->id),
+    					'tooltip'   =>__('Remove this bookmark'),
+    					'name'      =>__('Remove Bookmark'),
+            		)));
+    			}
+    		}
 
             if($editable) {
                 if($task->state == 1) {
@@ -226,7 +214,7 @@ function TaskView()
 
 
         ### milestones and versions ###
-        if($task->is_milestone) {
+        if($task->isMilestoneOrVersion()) {
             global $g_released_names;
             if($task->is_released && isset($g_released_names[$task->is_released])) {
                 echo "<div class=labeled><label>".__("Released as","Label in Task summary")."</label>".$g_released_names[$task->is_released] ." / ". renderDateHtml($task->time_released). "</div>";
@@ -557,8 +545,7 @@ onLoadFunctions.push(function()
     }
 
     #--- list milestone-tasks ---------------------------------------------------
-    if($task->category== TCATEGORY_MILESTONE || $task->category== TCATEGORY_VERSION) {
-
+    if($task->isOfCategory(array(TCATEGORY_MILESTONE, TCATEGORY_VERSION))) {
         $list= new ListBlock_tasks(array(
             'active_block_function'=>'tree',
             'title'=> __('Open tasks for milestone'),
@@ -571,10 +558,14 @@ onLoadFunctions.push(function()
         unset($list->columns['modified']);
         unset($list->columns['for_milestone']);
         unset($list->columns['pub_level']);
-        $list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
-        $list->filters[]= new ListFilter_for_milestone(array('value'=>$task->id));
+        #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
+        #$list->filters[]= new ListFilter_for_milestone(array('value'=>$task->id));
+        $list->query_options['status_max'] = STATUS_COMPLETED;
+        $list->query_options['for_milestone'] = $task->id;
+        
+        
+        
         $list->print_automatic($project, NULL, true);
-
     }
 
     #--- list change log ---------------
@@ -656,12 +647,7 @@ onLoadFunctions.push(function()
 
 	#--- task qickedit form -------------------------------------------------------------
 	{
-
-		### visible only for real tasks, not for folders and milestones ###
-		if( ($task->category != TCATEGORY_FOLDER || $task->category == TCATEGORY_DOCU || $task->category == TCATEGORY_MILESTONE || $task->category == TCATEGORY_VERSION)
-		    #&&
-		    #!$task->is_milestone
-		) {
+		if(! $task->isOfCategory(array(TCATEGORY_FOLDER, TCATEGORY_DOCU, TCATEGORY_MILESTONE, TCATEGORY_VERSION))) {
 			$block_task_quickedit= new Block_task_quickedit();
     	    $block_task_quickedit->render_quickedit(&$task);
 		}
@@ -770,39 +756,17 @@ class Block_task_quickedit extends PageBlock
             {
                 $tab_group->add($tab=new Page_Tab("update",__("Update")));
 
-                if($task->category == TCATEGORY_TASK || $task->category == TCATEGORY_BUG && $editable) {
-
-                    ### milestone / resolved in version ###
-                    {
-                        if($milestones= Task::getAll(array(
-                            'is_milestone'  =>1,
-                            'project'       =>$project->id,
-                            'status_min'    =>STATUS_NEW,
-                            'status_max'    =>STATUS_CLOSED,
-                        ))) {
-
-                            $tmp_milestonelist= array(('-- ' . __('undefined') . ' --' )=>'0');
-
-                            $tmp_resolvelist= array(
-                                        ('-- ' . __('undefined')             . ' --') => '0',
-                                        ('-- ' . __('next released version') . ' --') => -1);
-                            foreach($milestones as $m) {
-                                if($m->is_released >= RELEASED_UPCOMMING) {
-                                    $tmp_resolvelist[$m->name]= $m->id;
-                                }
-                                if($m->status >= STATUS_NEW && $m->status <= STATUS_APPROVED) {
-                                    $tmp_milestonelist[$m->name]= $m->id;
-                                }
-                            }
-                            $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),$tmp_milestonelist,$task->for_milestone));
+                if($editable && $task->isOfCategory(array(TCATEGORY_TASK,  TCATEGORY_BUG))) {
 
 
-                            $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'),$tmp_resolvelist,$task->resolved_version));
+                    $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
 
-                            global $g_resolve_reason_names;
-                            $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
-                        }
-                    }
+
+                    $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
+
+                    global $g_resolve_reason_names;
+                    $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
+
 
         	        ### public-level ###
         	       	#{
@@ -863,7 +827,7 @@ class Block_task_quickedit extends PageBlock
 
         			### priority ###
         		    {
-        		    	if(!$task->is_milestone) {
+        		    	if(!$task->isMilestoneOrVersion()) {
         		            $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
         		        }
         			}
@@ -924,7 +888,7 @@ class Block_task_quickedit extends PageBlock
         	                    $st[$s]=$n;
         	                }
         	            }
-        	            if($task->is_milestone) {
+        	            if($task->isMilestoneOrVersion()) {
         	                unset($st[STATUS_NEW]);
         	            }
 
@@ -1046,9 +1010,6 @@ function taskViewAsDocu()
             }
 
             ### new ###
-            $page->add_function(new PageFunctionGroup(array(
-                'name'=>__('new'),
-            )));
             if($task->category == TCATEGORY_FOLDER) {
 
                 $page->add_function(new PageFunction(array(
@@ -1058,7 +1019,7 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Topic'),
+                    'name'=>__('New topic'),
                 )));
             }
             else if($task->parent_task) {
@@ -1069,7 +1030,7 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Topic'),
+                    'name'=>__('New topic'),
                 )));
             }
             else {
@@ -1080,11 +1041,11 @@ function taskViewAsDocu()
                         'task_category' =>TCATEGORY_DOCU,
                     ),
                     'icon'=>'edit',
-                    'name'=>__('Topic'),
+                    'name'=>__('New topic'),
                 )));
             }
 
-            if($project->settings & PROJECT_SETTING_EFFORTS) {
+            if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
                 $page->add_function(new PageFunction(array(
                     'target'=>'effortNew',
                     'params'=>array(

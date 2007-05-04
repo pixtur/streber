@@ -478,7 +478,7 @@ $g_lang_table= array(
 '%s hidden'                   =>'%s ukryte',  # line 318
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Nowy folder',  # line 511
+'New folder'                  =>'Nowy folder',  # line 511
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'lub',  # line 236

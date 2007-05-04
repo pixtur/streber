@@ -89,23 +89,25 @@ function fileView()
             'name'=>__('Move')
         )));
         
-        $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$file->id));
-        if((!$item) || ($item[0]->is_bookmark == 0)){
-            $page->add_function(new PageFunction(array(
-                'target'    =>'itemsAsBookmark',
-                'params'    =>array('file'=>$file->id),
-                'tooltip'   =>__('Mark this file as bookmark'),
-                'name'      =>__('Bookmark'),
-            )));
+        if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+            $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$file->id));
+            if((!$item) || ($item[0]->is_bookmark == 0)){
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsAsBookmark',
+                    'params'    =>array('file'=>$file->id),
+                    'tooltip'   =>__('Mark this file as bookmark'),
+                    'name'      =>__('Bookmark'),
+                )));
+            }
+            else{
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsRemoveBookmark',
+                    'params'    =>array('file'=>$file->id),
+                    'tooltip'   =>__('Remove this bookmark'),
+                    'name'      =>__('Remove Bookmark'),
+                )));
+            } 
         }
-        else{
-            $page->add_function(new PageFunction(array(
-                'target'    =>'itemsRemoveBookmark',
-                'params'    =>array('file'=>$file->id),
-                'tooltip'   =>__('Remove this bookmark'),
-                'name'      =>__('Remove Bookmark'),
-            )));
-        } 
 
 
         ### render title ###

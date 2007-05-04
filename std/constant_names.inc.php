@@ -71,9 +71,10 @@ $g_pub_level_short_names=array(
 
 global $g_project_setting_names;
 $g_project_setting_names=array(
-    PROJECT_SETTING_EFFORTS     =>__('Enable Efforts','Project setting'),
-    PROJECT_SETTING_MILESTONES  =>__('Enable Milestones','Project setting'),
-    PROJECT_SETTING_VERSIONS    =>__('Enable Versions','Project setting'),
+    PROJECT_SETTING_ENABLE_EFFORTS     =>__('Enable Efforts','Project setting'),
+    PROJECT_SETTING_ENABLE_MILESTONES  =>__('Enable Milestones','Project setting'),
+    PROJECT_SETTING_ENABLE_VERSIONS    =>__('Enable Versions','Project setting'),
+    PROJECT_SETTING_ENABLE_BUGS    =>__('Enable Bugreports','Project setting'),
     PROJECT_SETTING_ONLY_PM_MAY_CLOSE=>__('Only PM may close tasks','Project setting'),
 );
 

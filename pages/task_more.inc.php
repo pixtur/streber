@@ -71,7 +71,6 @@ function TaskNewMilestone()
         'name'      =>__("New Milestone"),
         'project'   =>$prj_id,
         'category' =>TCATEGORY_MILESTONE,
-        'is_milestone' =>1,
         'status'    =>STATUS_OPEN,
         )
     );
@@ -99,7 +98,6 @@ function TaskNewVersion()
         'id'            => 0,
         'name'          => __("New Version"),
         'project'       => $prj_id,
-        'is_milestone'  => 1,
         'status'        => STATUS_APPROVED,
         'completion'    => 100,
         'category' =>TCATEGORY_VERSION,
@@ -149,7 +147,7 @@ function TaskNewFolder()
     ### build dummy form ###
     $newtask= new Task(array(
         'id'        =>0,
-        'name'      =>__("New Folder"),
+        'name'      =>__("New folder"),
         'project'   =>$prj_id,
         'is_folder' =>1,                                    #@@@ depreciated!
         'category' =>TCATEGORY_FOLDER,
@@ -226,7 +224,7 @@ function TaskNew()
 
 
     ### if parent-task is milestone for some reason, avoid parenting ###
-    if($parent_task && $parent_task->is_milestone) {
+    if($parent_task && ($parent_task->category == TCATEGORY_MILESTONE || $parent_task->category == TCATEGORY_VERSION)) {
         $parent_task_id=0;
         if(!$for_milestone_id) {
             $for_milestone_id= $parent_task->id;
@@ -312,7 +310,6 @@ function taskEdit($task=NULL)
         $PH->abortWarning("FATAL error! parent project not found");
     }
 
-
     ### abort, if not enough rights ###
     #$project->validateEditItem($task);
 
@@ -335,6 +332,9 @@ function taskEdit($task=NULL)
             }            
             else if($task->category == TCATEGORY_DOCU) {
                 $page->title=__("New topic");
+            }
+            else if($task->category == TCATEGORY_FOLDER) {
+                $page->title=__("New folder");
             }
             else {
                 $page->title=__("New task");
@@ -414,49 +414,16 @@ function taskEdit($task=NULL)
         {
             $tab_group->add($tab= new Page_Tab('task', __("Task")));
 
-
-            ### milestone ###
-            if($task->is_milestone) {
-                $tab->add(new Form_HiddenField('task_is_milestone','',$task->is_milestone));
-            }
             ### normaltasks and folders ##
-            else {
-
-                ### get milestones for later selection
-                $milestones= Task::getAll(array(
-                    'is_milestone'  =>1,
-                    'project'       =>$project->id,
-                    'status_min'    =>STATUS_NEW,
-                    'status_max'    =>STATUS_CLOSED,
-                ));
-
-
-                ### milestone ###
-                {
-                    if($milestones) {
-
-                        $tmp_milestonelist= array(('-- '. __('undefined') . ' --') => '0');
-
-                        $tmp_resolvelist= array(('-- '. __('undefined') . ' --') => '0', ('-- ' . __('next released version') . ' --') => -1);
-                        foreach($milestones as $m) {
-                            if($m->is_released >= RELEASED_UPCOMMING) {
-                                $tmp_resolvelist[$m->name]= $m->id;
-                            }
-                            if($m->status >= STATUS_NEW && $m->status <= STATUS_APPROVED) {
-                                $tmp_milestonelist[$m->name]= $m->id;
-                            }
-                        }
-                        $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),$tmp_milestonelist,$task->for_milestone));
-
-
-                    }
+            if(!$task->isMilestoneOrVersion()) {
+                if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
+                    $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),$project->buildPlannedForMilestoneList(), $task->for_milestone));
                 }
 
                 ### prio ###
-                if(!$task->is_milestone) {
+                if($task->category != TCATEGORY_MILESTONE && $task->category != TCATEGORY_VERSION) {
                     $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
                 }
-
             }
 
             ### assigned to ###
@@ -591,19 +558,23 @@ function taskEdit($task=NULL)
                         $st[$s]=$n;
                     }
                 }
-                if($task->is_milestone) {
+                if($task->isMilestoneOrVersion()) {
                     unset($st[STATUS_NEW]);
                 }
 
-                $tab->add(new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status));
+                $field_status=new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status);
+                if($task->fields['status']->invalid) {
+                    $field_status->invalid= true;
+                }
+                $tab->add($field_status);
             }
 
-            if(!$task->is_milestone) {
+            if(!$task->isMilestoneOrVersion()) {
 
-                if($milestones) {
+                if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
 
                     ### resolved version ###
-                    $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'),$tmp_resolvelist,$task->resolved_version));
+                    $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
                 }
 
                 ### resolved reason ###
@@ -619,62 +590,58 @@ function taskEdit($task=NULL)
             $tab_group->add($tab= new Page_Tab("bug",__("Bug Report")));
 
             ### use issue-report ###
-            #if(!$task->is_milestone && $task->issue_report != 0) {
-                global $g_severity_names;
-                global $g_reproducibility_names;
+            global $g_severity_names;
+            global $g_reproducibility_names;
 
-                ### create new one ###
-                if($task->issue_report <= 0) {
-                    $issue= new Issue(array('id'=>0));
+            ### create new one ###
+            if($task->issue_report <= 0) {
+                $issue= new Issue(array('id'=>0));
 
-                    ### get recent issue-reports ###
-                    if($recent_ir=Issue::getCreatedRecently()) {
-                        $default_version='';
-                        $default_plattform='';
-                        $default_production_build='';
-                        $default_os='';
+                ### get recent issue-reports ###
+                if($recent_ir=Issue::getCreatedRecently()) {
+                    $default_version='';
+                    $default_plattform='';
+                    $default_production_build='';
+                    $default_os='';
 
-                        foreach($recent_ir as $ir){
-                            if($ir->project == $project->id) {
-                                if(!$issue->version && $ir->version) {
-                                    $issue->version= $ir->version;
-                                }
-                                if(! $issue->plattform && $ir->plattform) {
-                                    $issue->plattform= $ir->plattform;
-                                }
-                                if(! $issue->os && $ir->os) {
-                                    $issue->os= $ir->os;
-                                }
-                                if(! $issue->production_build && $ir->production_build) {
-                                    $issue->production_build= $ir->production_build;
-                                }
+                    foreach($recent_ir as $ir){
+                        if($ir->project == $project->id) {
+                            if(!$issue->version && $ir->version) {
+                                $issue->version= $ir->version;
+                            }
+                            if(! $issue->plattform && $ir->plattform) {
+                                $issue->plattform= $ir->plattform;
+                            }
+                            if(! $issue->os && $ir->os) {
+                                $issue->os= $ir->os;
+                            }
+                            if(! $issue->production_build && $ir->production_build) {
+                                $issue->production_build= $ir->production_build;
                             }
                         }
                     }
                 }
-                else {
-                    /**
-                    * note: if task is visible ignore visibility of issue report
-                    */
-                    $issue= Issue::getById($task->issue_report);
+            }
+            else {
+                /**
+                * note: if task is visible ignore visibility of issue report
+                */
+                $issue= Issue::getById($task->issue_report);
 
+            }
+
+            if($issue) {
+
+                $tab->add(new Form_Dropdown('issue_severity',       __("Severity","Form label, attribute of issue-reports"),        array_flip($g_severity_names),        $issue->severity));
+                $tab->add(new Form_Dropdown('issue_reproducibility',__("Reproducibility","Form label, attribute of issue-reports"), array_flip($g_reproducibility_names), $issue->reproducibility));
+                foreach($issue->fields as $field) {
+                    $tab->add($field->getFormElement(&$issue));
                 }
-
-                if($issue) {
-
-                    $tab->add(new Form_Dropdown('issue_severity',       __("Severity","Form label, attribute of issue-reports"),        array_flip($g_severity_names),        $issue->severity));
-                    $tab->add(new Form_Dropdown('issue_reproducibility',__("Reproducibility","Form label, attribute of issue-reports"), array_flip($g_reproducibility_names), $issue->reproducibility));
-                    foreach($issue->fields as $field) {
-                        $tab->add($field->getFormElement(&$issue));
-                    }
-                    $tab->add(new Form_HiddenField('task_issue_report','',$task->issue_report));
-                }
-                else {
-                    trigger_error("could not get Issue with id ($task->issue-report)", E_USER_NOTICE);
-                }
-
-            #}
-
+                $tab->add(new Form_HiddenField('task_issue_report','',$task->issue_report));
+            }
+            else {
+                trigger_error("could not get Issue with id ($task->issue-report)", E_USER_NOTICE);
+            }
         }
 
         ### timing ###
@@ -682,7 +649,7 @@ function taskEdit($task=NULL)
             $tab_group->add($tab= new Page_Tab("timing",__("Timing")));
 
             ### estimated ###
-            if(!$task->is_milestone){
+            if(!$task->isMilestoneOrVersion()){
                 #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
                 $ar= array(
                     __('undefined')=> 0,
@@ -706,12 +673,12 @@ function taskEdit($task=NULL)
 
 
             ### planned time ###
-            if(!$task->is_milestone) {
+            if(!$task->isMilestoneOrVersion()) {
                 $tab->add($task->fields['planned_start'     ]->getFormElement(&$task));
             }
             $tab->add($task->fields['planned_end' ]->getFormElement(&$task));
 
-            if($task->is_milestone) {
+            if($task->isMilestoneOrVersion()) {
                 global $g_released_names;
                 $tab->add(new Form_Dropdown('task_is_released',       __("Release as version","Form label, attribute of issue-reports"),        array_flip($g_released_names),        $task->is_released));
 
@@ -750,7 +717,7 @@ function taskEdit($task=NULL)
 
 
             ### label ###
-            if(!$task->is_milestone && $task->category != TCATEGORY_FOLDER) {
+            if(!$task->isOfCategory(TCATEGORY_VERSION, TCATEGORY_MILESTONE, TCATEGORY_FOLDER)) {
                 $labels=array(__('undefined') => 0);
                 $counter= 1;
                 foreach(split(",",$project->labels) as $l) {
@@ -844,12 +811,18 @@ function taskEditSubmit()
             'id'=>0,
             'project'=>get('task_project'),
         ));
+        $was_category= 0;                       # undefined category for new tasks
+        $was_resolved_version= 0;
     }
     else {
         if(!$task= Task::getVisiblebyId($tsk_id)) {
             $PH->abortWarning("invalid task-id");
         }
+        $was_category=$task->category;
+        $was_resolved_version= $task->resolved_version;
     }
+
+
 
     ### cancel? ###
     if(get('form_do_cancel')) {
@@ -1104,13 +1077,11 @@ function taskEditSubmit()
         }
     }
 	
-    $is_milestone=get('task_is_milestone');
-    if(!is_null($is_milestone)) {
-        $task->is_milestone= $is_milestone;
-
-        $is_released=get('task_is_released');
-        if(!is_null($is_released)) {
-            $task->is_released = $is_released;
+    if($task->isOfCategory(array(TCATEGORY_VERSION, TCATEGORY_MILESTONE))) {
+        if($is_released=get('task_is_released')) {
+            if(!is_null($is_released)) {
+                $task->is_released = $is_released;
+            }
         }
     }
 
@@ -1185,6 +1156,21 @@ function taskEditSubmit()
         }
     }
 
+    ### automatically close resolved tasks ###
+    if($task->resolve_reason && $task->status < STATUS_COMPLETED) {
+        $task->status = STATUS_COMPLETED;
+        new FeedbackMessage(sprintf(__('Because task is resolved, its status has been changed completed.')));
+    }
+
+
+    ### Check if resolved tasks should be completed ###
+    if($task->resolved_version != 0 && $task->status < STATUS_COMPLETED) {
+        new FeedbackWarning(sprintf(__('Task has resolved version but is not completed?')));
+        $task->fields['resolved_version']->invalid= true;
+        $task->fields['status']->invalid= true;
+        $is_ok = false;
+    }
+
     ### Check if completion should be 100% ###
     if ($task->status >= STATUS_COMPLETED) {
         $task->completion = 100;
@@ -1202,7 +1188,7 @@ function taskEditSubmit()
     #--- be sure parent-task is folder ---
     if($parent_task) {
 
-        if($parent_task->is_milestone) {
+        if($parent_task->isMilestoneOrVersion()) {
             if($parent_task->is_folder) {
                 $parent_task->is_folder= 0;
                 $parent_task->update(array('is_folder'),false);
@@ -1253,9 +1239,7 @@ function taskEditSubmit()
         $task_issue_report = 0;
     }
     
-    
-    printFormVars();
-    
+        
     ### consider issue-report? ###
     #$task_issue_report= get('task_issue_report');
     if( $task->category == TCATEGORY_BUG || (isset($task_issue_report) && $task_issue_report) ) {
@@ -1372,20 +1356,19 @@ function taskEditSubmit()
             $nta->insert();
         }
 
-        new FeedbackMessage(sprintf(__("Changed task %s with ID %s"),  $task->getLink(false),$task->id));
+        new FeedbackMessage(sprintf(__("Changed %s %s with ID %s","type,link,id"),  $task->getLabel(), $task->getLink(false),$task->id));
         $task->update();
         $project->update(array(), true);
     }
 
 
-    ### if this is a just released version add any recently resolved tasks? ###
-    if($task->category == TCATEGORY_MILESTONE && $task->is_released >= RELEASED_INTERNAL && $was_released_as < RELEASED_INTERNAL ) {
+    ### add any recently resolved tasks if this is a just released version  ###
+    if($task->category == TCATEGORY_VERSION && $was_category != TCATEGORY_VERSION) {
 	    if($resolved_tasks= Task::getAll(array(
 	        'project'           => $task->project,
-	        'status_min'        => STATUS_COMPLETED,
-	        'status_max'        => STATUS_CLOSED,
+	        'status_min'        => 0,
+	        'status_max'        => 10,
 	        'resolved_version'  => RESOLVED_IN_NEXT_VERSION,
-	        'resolve_reason_min'=> RESOLVED_DONE,                          # @@@ this is not the best solution (should be IS NOT)
 	    ))) {
 	        foreach($resolved_tasks as $rt) {
                 $rt->resolved_version= $task->id;
@@ -1413,7 +1396,6 @@ function taskEditSubmit()
             'parent_task'=>$task->parent_task,
             'for_milestone'=>$task->for_milestone,
             'category'  =>$task->category,
-            'is_milestone' => $task->is_milestone,                   
         ));
 
 
@@ -2488,48 +2470,24 @@ function TaskEditMultiple()
 
         ### milestone ###
         {
-            if($milestones= Task::getAll(array(
-                'is_milestone'  =>1,
-                'project'       => $tasks[0]->project,
-                'status_min'    => 0,
-                'status_max'    => 100,
-            ))) {
-                $tmp_milestonelist= array('0' => ('-- ' . __('none') . ' --'));
+            if(isset($different_fields['for_milestone'])) {
+                $tmp_milestonelist['__dont_change__']= ('-- ' . __('keep different'). ' --');
 
-                foreach($milestones as $m) {
-                    $tmp_milestonelist[$m->id]= $m->name;
-                }
-                if(isset($different_fields['for_milestone'])) {
-                    $tmp_milestonelist['__dont_change__']= ('-- ' . __('keep different'). ' --');
-                    $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),array_flip($tmp_milestonelist),'__dont_change__'));
-                }
-                else {
-                    $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),array_flip($tmp_milestonelist),$tasks[0]->for_milestone));
-                }
+                $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList() ,'__dont_change__'));
+            }
+            else {
+                $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList() ,$tasks[0]->for_milestone));
             }
         }
 
         ### resolved_version ###
         {
-            if($milestones= Task::getAll(array(
-                'is_milestone'  =>1,
-                'project'       => $tasks[0]->project,
-                'is_released_min'   => RELEASED_UPCOMMING,
-            ))) {
-                $tmp_milestonelist= array(
-                    '0' => ('-- ' . __('none') . ' --'),
-                    '-1' => ('-- ' . __('next released version')));
-
-                foreach($milestones as $m) {
-                    $tmp_milestonelist[$m->id]= $m->name;
-                }
-                if(isset($different_fields['resolved_version'])) {
-                    $tmp_milestonelist['__dont_change__']= ('-- '. __('keep different') . ' --');
-                    $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'),array_flip($tmp_milestonelist),'__dont_change__'));
-                }
-                else {
-                    $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'),array_flip($tmp_milestonelist),$tasks[0]->resolved_version));
-                }
+            if(isset($different_fields['resolved_version'])) {
+                $tmp_milestonelist['__dont_change__']= ('-- '. __('keep different') . ' --');
+                $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'), $project->buildResolvedInList(), '__dont_change__'));
+            }
+            else {
+                $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'), $project->buildResolvedInList(), $tasks[0]->resolved_version));
             }
         }
 
@@ -2782,7 +2740,7 @@ function taskEditMultipleSubmit()
             $fm= get('task_for_milestone');
             if(!is_null($fm) && $fm != '__dont_change__' && $task->for_milestone != $fm) {
                 if($fm) {
-                    if(($m= Task::getVisibleById($fm)) && $m->is_milestone) {
+                    if(($m= Task::getVisibleById($fm)) && $m->isMilestoneOrVersion()) {
                         $task->for_milestone= $fm;
                         $change= true;
                     }
@@ -2802,7 +2760,7 @@ function taskEditMultipleSubmit()
             if((!is_null($rv)) && ($rv != '__dont_change__') && ($task->resolved_version != $rv)) {
                 if($rv && $rv != -1) {
                     if($v= Task::getVisibleById($rv)) {
-                        if(($v->is_milestone) && ($v->is_released >= RELEASED_UPCOMMING)) {
+                        if($v->isMilestoneOrVersion()) {
                             $task->resolved_version= $rv;
                             $change= true;
                         }

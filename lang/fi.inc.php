@@ -394,7 +394,7 @@ $g_lang_table= array(
 '%s hidden'                   =>'%s piilossa',  # line 340
 
 ### ../pages/task_more.inc.php   ###
-'New Folder'                  =>'Uusi kansio',  # line 105
+'New folder'                  =>'Uusi kansio',  # line 105
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'tai',  # line 581

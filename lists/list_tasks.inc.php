@@ -578,13 +578,13 @@ class ListBlock_tasks extends ListBlock
 
         if(!$this->no_items_html && $parent_task) {
             $this->no_items_html=
-            $PH->getLink('taskNewFolder',__('New Folder'),array('parent_task'=>$parent_task->id, 'prj'=>$project->id))
+            $PH->getLink('taskNewFolder',__('New folder'),array('parent_task'=>$parent_task->id, 'prj'=>$project->id))
             ." ". __("or")." "
             . $PH->getLink('taskNew','',array('parent_task'=>$parent_task->id));
         }
         else if(!$this->no_items_html && $project) {
             $this->no_items_html=
-            $PH->getLink('taskNewFolder',__('New Folder'),array('prj'=>$project->id))
+            $PH->getLink('taskNewFolder',__('New folder'),array('prj'=>$project->id))
             ." ". __("or")." "
             . $PH->getLink('taskNew','',array('prj'=>$project->id));
         }
@@ -626,11 +626,11 @@ class ListBlock_tasks extends ListBlock
 
 
         ### hide columns depending on project options ###
-        if($project && !($project->settings & PROJECT_SETTING_MILESTONES)) {
+        if($project && !($project->settings & PROJECT_SETTING_ENABLE_MILESTONES)) {
             unset($this->columns['for_milestone']);
         }
 
-        if($project && !($project->settings & PROJECT_SETTING_EFFORTS)) {
+        if($project && !($project->settings & PROJECT_SETTING_ENABLE_EFFORTS)) {
             unset($this->columns['efforts']);
         }
 
@@ -644,7 +644,6 @@ class ListBlock_tasks extends ListBlock
             $this->query_options['show_folders']    = false;
 
             #$this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
-            #echo "%% here2". $this->query_options['order_by'];
 
             unset($this->columns['parent_task']);
             unset($this->columns['date_closed']);
@@ -766,6 +765,7 @@ class ListBlock_tasks extends ListBlock
 	        else {
                 $this->query_options['show_folders']= false;
                 $this->query_options['parent_task']= NULL;
+                                
                 $tasks= Task::getAll($this->query_options);
 
                 ### build hash of tasks appended to a folder ###

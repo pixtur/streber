@@ -208,7 +208,7 @@ class ListBlock_milestones extends ListBlock
         /*
         if(!$this->no_items_html && $project) {
             $this->no_items_html=
-            $PH->getLink('taskNewFolder',__('New Folder'),array('prj'=>$project->id))
+            $PH->getLink('taskNewFolder',__('New folder'),array('prj'=>$project->id))
             ." ". __("or")." "
             . $PH->getLink('taskNew','',array('prj'=>$project->id));
         }

@@ -539,7 +539,7 @@ $g_lang_table= array(
 'I guess you wanted to create a folder...'=>'Je suppose que vous avez voulu créer un dossier...',
 'Assumed <b>%s</b> to be mean label <b>%s</b>'=>'Assumed <b>%s</b> to be mean label <b>%s</b>',
 'No project selected?'        =>'Pas de projet sélectionné ?',
-'New Folder'                  =>'Nouveau dossier',
+'New folder'                  =>'Nouveau dossier',
 'No task selected?'           =>'Pas de tâche sélectionnée ?',
 'NOTICE: Ungrouped %s subtasks to <b>%s</b>'=>'NOTICE: dégroupé les sous tâches %s de <b>%s</b>',
 'HINT: You turned task <b>%s</b> into a folder. Folders are shown in the task-folders list.'

@@ -375,7 +375,7 @@ $g_lang_table= array(
 '%s hidden'                   =>'%s oculto',  # line 318
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Nueva Carpeta',  # line 511
+'New folder'                  =>'Nueva Carpeta',  # line 511
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'o',  # line 236

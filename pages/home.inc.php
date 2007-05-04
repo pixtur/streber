@@ -24,28 +24,35 @@ require_once(confGet('DIR_STREBER') . 'lists/list_project_team.inc.php');
 */
 function build_home_options()
 {
-    return array(
+    global $auth;
+    $options= array();
 
-        new NaviOption(array(
+    $options[]= new NaviOption(array(
                 'target_id'=>'home',
-        )),
-        new NaviOption(array(
+        ));
+
+    $options[]= new NaviOption(array(
             'target_id'     =>'homeTasks',
-        )),
+        ));
 
-        new NaviOption(array(
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+        
+        $options[]= new NaviOption(array(
             'target_id'     =>'homeBookmarks',
-        )),
+        ));
+    }
 
-        new NaviOption(array(
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+        $options[]= new NaviOption(array(
             'target_id'     =>'homeEfforts',
-        )),
+        ));
+    }
 
-        new NaviOption(array(
-            'target_id'     =>'homeAllChanges',
-        )),
+    $options[]= new NaviOption(array(
+        'target_id'     =>'homeAllChanges',
+    ));
 
-    );
+    return $options;
 }
 
 

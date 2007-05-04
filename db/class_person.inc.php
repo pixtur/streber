@@ -293,9 +293,8 @@ class Person extends DbProjectItem {
             * bit-field of misc settings
             */
             new FieldInternal(array(    'name'=>'settings',
-                'default'=> (
-                             USER_SETTING_HTML_MAIL
-                             | USER_SETTING_NOTIFY_ASSIGNED_TO_PROJECT),
+                'default'=> (confGet('PERSON_DEFAULT_SETTINGS')
+                             ),
                 'log_changes'   =>false,
                 'export'        =>false,
     

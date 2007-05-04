@@ -302,7 +302,7 @@ if($db_version < 0.0794) {
 
 }
 
-if($db_version < 0.795) {
+if($db_version < 0.0795) {
     $update_queries[]="ALTER TABLE `{$db_table_prefix}effort` ADD `status` TINYINT( 4 )  DEFAULT '1' NOT NULL ;";
 }
 
@@ -315,4 +315,11 @@ if($db_version < 0.07972) {
 if($db_version < 0.07973){
 	$update_queries[]="ALTER TABLE `{$db_table_prefix}projectperson` CHANGE `role` `role` TINYINT( 4 ) NOT NULL DEFAULT '0'";
 }
+
+if($db_version < 0.07991){
+	$update_queries[]="UPDATE `{$db_table_prefix}project` SET settings = settings | " . (PROJECT_SETTING_ENABLE_BUGS) . ";";
+	$update_queries[]="UPDATE `{$db_table_prefix}person` SET settings = settings | " . (USER_SETTING_ENABLE_BOOKMARKS| USER_SETTING_ENABLE_EFFORTS) . ";";
+}
+
+
 ?>

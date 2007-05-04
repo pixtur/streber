@@ -45,6 +45,21 @@ class PageFormElement extends PageElement{
     PUBLIC function __construct() {
         return;
     }
+    
+    protected function renderCssClasses() 
+    {
+        $classes = array($this->type);        
+
+        if($this->invalid) {
+            $classes[]= 'invalid';
+        }
+        if($this->required) {
+            $classes[]= 'required';
+        }
+
+        return 'class="'. implode(' ', $classes) . '"';
+    }
+    
 }
 
 
@@ -86,7 +101,8 @@ class Form_Captcha extends PageFormElement
 */
 
 
-class Form_Input extends PageFormElement {
+class Form_Input extends PageFormElement 
+{
     public $required=false;
 
     PUBLIC function __construct($name=false, $title="", $value=false, $tooltip=NULL, $required=false, $id="", $display="")
@@ -107,13 +123,8 @@ class Form_Input extends PageFormElement {
         $str_tooltip= $this->tooltip
                   ? "title='$this->tooltip'"
                   : "";
-        $str_required=$this->required
-                      ? 'required'
-                      : '';
-        $str_invalid=$this->invalid
-                      ? 'invalid'
-                      : '';
-        $buffer= "<p $str_tooltip $this->id $this->display><label>$this->title</label><input class='inp $str_required $str_invalid' name='$this->name' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
+                      
+        $buffer= "<p " . $this->renderCssClasses() .  "$str_tooltip $this->id $this->display><label>$this->title</label><input class='inp' name='$this->name' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
         return $buffer;
     }
 }
@@ -197,11 +208,8 @@ class Form_Password extends PageFormElement {
                   ? "title='$this->tooltip'"
                   : "";
 
-        $style_required =$this->required
-                        ? 'required'
-                        : '';
 
-        $buffer= "<p $str_tooltip><label>$this->title</label><input class='inp $style_required' type='password' name='$this->name' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
+        $buffer= "<p " . $this->renderCssClasses() . "$str_tooltip><label>$this->title</label><input class='inp' type='password' name='$this->name' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
         return $buffer;
     }
 }
@@ -290,7 +298,7 @@ class Form_DateTime extends PageFormElement
 
         $field_id= $this->name;
 
-        $buffer= "<p $tooltip class=datetime>"
+        $buffer= "<p $tooltip " . $this->renderCssClasses() .  ">"
             ."<label>$label</label>"
             ."<input class=inp_date id='{$field_id}_date' name='{$field_id}_date' value='$value_date'>"
             ."<span class=button_calendar id='trigger_{$field_id}_date'>...</span>"
@@ -334,7 +342,7 @@ class Form_Date extends PageFormElement {
         }
 
 
-        $buffer= "<p class=datetime >"
+        $buffer= "<p " . $this->renderCssClasses() . ">"
             ."<label>$this->title</label>"
             ."<input class=inp_date name='$this->name' id='$this->name' value='$str_value'>"
             ."<span class=button_calendar id='trigger_{$this->name}'>...</span>"
@@ -379,7 +387,7 @@ class Form_Time extends PageFormElement {
             ? "title='$this->tooltip'"
             :  ucwords($this->name);
 
-        $buffer= "<p $tooltip class=datetime>"
+        $buffer= "<p $tooltip " . $this->renderCssClasses() .  ">"
             ."<label>$this->title</label>"
             ."<input class=inp_time id='{$this->name}' name='{$this->name}' value='$str_value'>"
             ."<span class=slider_time id='drag_{$this->name}' >%</span>"
@@ -415,7 +423,7 @@ class Form_Edit extends PageFormElement {
         global $PH;
         $hint= "<span class=hint_wiki_syntax><br>(". $PH->getWikiLink('WikiSyntax', __('Wiki format')).")</span>";
 
-        $buffer= "<p><label>$this->title $hint</label><textarea rows=$this->rows name='$this->name'>".htmlspecialchars($this->value, ENT_QUOTES)."</textarea></p>"
+        $buffer= "<p ". $this->renderCssClasses() ."><label>$this->title $hint</label><textarea rows=$this->rows name='$this->name'>".htmlspecialchars($this->value, ENT_QUOTES)."</textarea></p>"
 
         ;
         return $buffer;
@@ -446,7 +454,7 @@ class Form_Dropdown extends PageFormElement {
 
     PUBLIC function __toString()
     {
-        $buffer= "<p $this->id $this->display><label>$this->title</label>";
+        $buffer= "<p " . $this->renderCssClasses() .  " $this->id $this->display><label>$this->title</label>";
         $buffer.="<select size=1 name='$this->name' id='$this->name'>";
         foreach($this->options as $key=>$value) {
             $str_selected= ($this->value==$value)
@@ -489,7 +497,7 @@ class Form_Checkbox extends PageFormElement {
                   ? "value='{$this->value}'"
                   : '';
 
-        $buffer= "<p>";
+        $buffer= "<p " . $this->renderCssClasses() .  ">";
         $buffer.="<span class=checker><input type='checkbox' id='$this->name' name='$this->name' $str_value $this->func $checked><label for='$this->name'>$this->title</label></span>";
         $buffer.="</p>";
         return $buffer;
@@ -519,7 +527,7 @@ class Form_Text extends PageFormElement
 
     PUBLIC function __toString()
     {
-        return "<p class=text>" . $this->html . "</p>";
+        return "<p " . $this->renderCssClasses() . "class=text>" . $this->html . "</p>";
     }
 }
 

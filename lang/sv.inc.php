@@ -356,7 +356,7 @@ $g_lang_table= array(
 '%s hidden'                   =>'%s dold',  # line 318
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Ny mapp',  # line 511
+'New folder'                  =>'Ny mapp',  # line 511
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'eller',  # line 236

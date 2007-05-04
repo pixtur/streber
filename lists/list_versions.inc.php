@@ -77,8 +77,8 @@ class ListBlock_versions extends ListBlock
         )));
 
 
-        $this->query_options['is_milestone']=    true;
-        $this->query_options['is_released_min']= RELEASED_UPCOMMING;
+        $this->query_options['category']=    TCATEGORY_VERSION;
+        #$this->query_options['is_released_min']= RELEASED_UPCOMMING;
         $this->query_options['status_min']= 0;
         $this->query_options['status_max']= 200;
         $this->query_options['order_by']= 'created DESC';

@@ -2143,10 +2143,12 @@ function personEdit($person=NULL)
             $tab_group->add($tab=new Page_Tab("options",__("Options")));
 
 
+            $tab->add(new Form_checkbox("person_enable_efforts",__('Enable efforts'), $person->settings & USER_SETTING_ENABLE_EFFORTS));
+            $tab->add(new Form_checkbox("person_enable_bookmarks",__('Enable bookmarks'), $person->settings & USER_SETTING_ENABLE_BOOKMARKS));
+
 
             ### theme and language ###
             {
-
                 global $g_theme_names;
                 if(count($g_theme_names)> 1) {
                     $tab->add(new Form_Dropdown('person_theme',  __("Theme","form label"), array_flip($g_theme_names), $person->theme));
@@ -2163,6 +2165,7 @@ function personEdit($person=NULL)
             }
 
 
+
             ### effort-style ###
             $effort_styles=array(
                 __("start times and end times")=> 1,
@@ -2173,6 +2176,10 @@ function personEdit($person=NULL)
                          : 1;
 
             $tab->add(new Form_Dropdown('person_effort_style',  __("Log Efforts as"), $effort_styles, $effort_style));
+            
+
+
+            
         }
 		
 		## internal area ##
@@ -2409,6 +2416,22 @@ function personEditSubmit()
             trigger_error("undefined person effort style", E_USER_WARNING);
         }
     }
+    
+    ### enable bookmarks ###
+    if(get('person_enable_bookmarks')) {
+        $person->settings |= USER_SETTING_ENABLE_BOOKMARKS;
+    }
+    else {
+        $person->settings &= USER_SETTING_ENABLE_BOOKMARKS ^ RIGHT_ALL;        
+    }
+
+    if(get('person_enable_efforts')) {
+        $person->settings |= USER_SETTING_ENABLE_EFFORTS;
+    }
+    else {
+        $person->settings &= USER_SETTING_ENABLE_EFFORTS ^ RIGHT_ALL;        
+    }
+
 
     ### time zone ###
     {
@@ -2588,6 +2611,10 @@ function personEditSubmit()
     ### ... or update existing ###
     else {
         $person->update();
+    }
+
+    if($auth->cur_user->id == $person->id) {
+        $auth->cur_user= $person;
     }
 
     ### notify on change ###

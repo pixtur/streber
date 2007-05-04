@@ -552,7 +552,13 @@ div.form {
         padding-top:4px;
     }
 
-
+    .form p.invalid {
+        border:1px solid #d00;
+    }
+    .form p.invalid  label {
+        /*font-size:100%;*/
+        color: #d00;
+    }
     .form p.text {
         margin:1em 1em 1em 19% ;
         color:#555;
@@ -573,7 +579,7 @@ div.form {
         width: 20%;
     }
 
-    .form .required {
+    .form p.required input {
         background-color:#ff8;
     }
     .form .invalid {

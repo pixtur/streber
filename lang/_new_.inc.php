@@ -453,7 +453,7 @@ undefined keys:
 'Milestones'                  =>'',  # line 1324
 
 ### ../pages/task_more.inc.php   ###
-'New Folder'                  =>'',  # line 111
+'New folder'                  =>'',  # line 111
 
 ### ../pages/person.inc.php   ###
 'or'                          =>'',  # line 678

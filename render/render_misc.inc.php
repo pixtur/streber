@@ -571,7 +571,7 @@ function build_projView_options($project)
             'target_params'=>array('prj'=>$project->id )
     ));
 
-    if($project->settings & PROJECT_SETTING_MILESTONES) {
+    if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
         $options[]=  new NaviOption(array(
             'target_id'=>'projViewMilestones',
             'name'=>__('Milestones','Project option'),
@@ -579,7 +579,7 @@ function build_projView_options($project)
         ));
     }
 
-    if($project->settings & PROJECT_SETTING_VERSIONS) {
+    if($project->settings & PROJECT_SETTING_ENABLE_VERSIONS) {
         $options[]=  new NaviOption(array(
                 'target_id'=>'projViewVersions',
                 'name'=>__('Versions','Project option'),
@@ -595,7 +595,7 @@ function build_projView_options($project)
         'target_params'=>array('prj'=>$project->id )
     ));
 
-    if($project->settings & PROJECT_SETTING_EFFORTS) {
+    if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
         $options[]=  new NaviOption(array(
                 'target_id'=>'projViewEfforts',
                 'name'=>__('Efforts','Project option'),

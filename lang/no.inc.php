@@ -537,7 +537,7 @@ $g_lang_table= array(
 'I guess you wanted to create a folder...'=>'Jeg antar at det var en mappe du ville opprette...',
 'Assumed <b>%s</b> to be mean label <b>%s</b>'=>'<b>%s</b> ble anvendt som etikett <b>%s</b>',
 'No project selected?'        =>'Ingen Prosjekter valgt?',
-'New Folder'                  =>'Ny mappe',
+'New folder'                  =>'Ny mappe',
 'No task selected?'           =>'Ingen Oppgaver valgt',
 'NOTICE: Ungrouped %s subtasks to <b>%s</b>'=>'%s underoppgaver ble forskjøvet til %s',
 'HINT: You turned task <b>%s</b> into a folder. Folders are shown in the task-folders list.'

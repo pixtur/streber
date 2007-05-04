@@ -397,7 +397,7 @@ $g_lang_table= array(
 'Task name'                   =>'Název úkolu',
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Nová složka',
+'New folder'                  =>'Nová složka',
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'nebo',

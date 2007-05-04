@@ -394,7 +394,7 @@ $g_lang_table= array(
 'Task name'                   =>'Názov úlohy',
 
 ### ../pages/task.inc.php   ###
-'New Folder'                  =>'Nový priečinok',
+'New folder'                  =>'Nový priečinok',
 
 ### ../pages/company.inc.php   ###
 'or'                          =>'alebo',
