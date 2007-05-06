@@ -2188,6 +2188,150 @@ $g_lang_table= array(
 'Please copy the text from the image.'=>'Proszę skopiuj tekst z obrazka.',  # line 2441
 'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Dziękujemy za rejstrację! Po zaakceptowaniu Twojej prośby przez moderatora otrzymasz mail powiadamiający.',  # line 2470
 
+### ../db/class_projectperson.inc.php   ###
+'Salary per hour'             =>'Stawka godzinowa',  # line 91
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'in Euro'                     =>'w Euro',  # line 221
+
+### ../db/class_project.inc.php   ###
+'Released versions'           =>'Wydane wersje',  # line 1456
+
+### ../db/class_task.inc.php   ###
+'Calculation'                 =>'Kalkulacja',  # line 184
+
+### ../lists/list_effortsperson.inc.php   ###
+'Efforts on team member'      =>'Wysiłki członka zespołu',  # line 28
+
+### ../lists/list_effortstask.inc.php   ###
+'Total effort sum: %s hours'  =>'Łączny wysiłek: %s h',  # line 98
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Role|columnheader'           =>'Rola',  # line 101
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Sum|columnheader'            =>'Suma',  # line 168
+
+### ../lists/list_effortstask.inc.php   ###
+'Effortgraph|columnheader'    =>'Wykres wysiłków',  # line 162
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Calculation on team member'  =>'Kalkulacja dla członka zespołu',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Calculation|columnheader'    =>'Kalkulacja',  # line 221
+'Costgraph|columnheader'      =>'Wykres kosztów',  # line 251
+
+### ../lists/list_effortsprojectcalculation.inc.php   ###
+'Calculation for project'     =>'Kalkulacja dla projektu',  # line 28
+'Project|columnheader'        =>'Projekt',  # line 90
+
+### ../lists/list_effortstask.inc.php   ###
+'Efforts on task'             =>'Wysiłki zadania',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Task|columnheader'           =>'Zadanie',  # line 116
+'Calculation on task'         =>'Kalkulacja dla zadania',  # line 28
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recently changes'            =>'Ostatnie zmiany',  # line 51
+'Show more'                   =>'Pokaż więcej',  # line 90
+
+### ../std/class_rss.inc.php   ###
+'Updated'                     =>'Zaktualizowane',  # line 105
+
+### ../pages/home.inc.php   ###
+'Your Tasks'                  =>'Twoje zadania',  # line 756
+
+### ../pages/_handles.inc.php   ###
+'Bookmarks'                   =>'Zakładki',  # line 42
+'Overall history'             =>'Zbiorcza historia',  # line 58
+'View Projects of Person'     =>'Wyświetl projekty osoby',  # line 1067
+'View Task of Person'         =>'Wyświetl zadania osoby',  # line 1078
+'View Changes of Person'      =>'Wyświetl zmiany osoby',  # line 1100
+
+### ../pages/company.inc.php   ###
+'clients'                     =>'klienci',  # line 47
+'prospective clients'         =>'kluczowi klienci',  # line 66
+'supplier'                    =>'dostawca',  # line 85
+'partner'                     =>'partner',  # line 104
+
+### ../pages/home.inc.php   ###
+'Edit your Profile'           =>'Edycja profilu',  # line 87
+'for|short for client'        =>'dla',  # line 135
+'without client'              =>'bez klienta',  # line 147
+'Your Bookmarks'              =>'Twoje zakładki',  # line 204
+'Your efforts'                =>'Twoje wysiłki',  # line 965
+
+### ../pages/item.inc.php   ###
+'Edit bookmark: "%s"|page title'=>'Edycja zakładki: "%s"',  # line 390
+'Bookmark: "%s"'              =>'Zakładka: "%s"',  # line 391
+
+### ../pages/person.inc.php   ###
+'without account'             =>'bez konta',  # line 165
+'with account'                =>'z kontem',  # line 183
+'employees'                   =>'zatrudniony',  # line 201
+'contact persons'             =>'osoba kontaktowa',  # line 220
+'notification'                =>'notyfikacja',  # line 757
+'Last login|Label'            =>'Ostatnio zalogwany',  # line 835
+'Projects|Page title add on'  =>'Projekty',  # line 1095
+'Tasks|Page title add on'     =>'Zadania',  # line 1348
+'no tasks yet'                =>'nie wprowadzono jeszcze zadań',  # line 1372
+'Changes|Page title add on'   =>'Zmiany',  # line 1788
+'Enable efforts'              =>'Włącz wysiłki',  # line 2146
+'Enable bookmarks'            =>'Włącz zakładki',  # line 2147
+
+### ../pages/task_more.inc.php   ###
+'Internal'                    =>'Wewnętrzne',  # line 733
+
+### ../pages/project_more.inc.php   ###
+'New Topic'                   =>'Nowy temat',  # line 1093
+'Reanimated person %s as team-member'=>'Osoba %s została przywrócona jako członek zespołu',  # line 2388
+'Person %s already in project'=>'Osoba %s jest już przypisana do projektu',  # line 2392
+
+### ../pages/project_view.inc.php   ###
+'Create wiki documentation page or start discussion topic'=>'Utwórz stronę wiki z dokumentacją lub utwórz nowy temat dyskusji',  # line 163
+
+### ../pages/task_more.inc.php   ###
+'New version'                 =>'Nowa wersja',  # line 331
+
+### ../pages/task_view.inc.php   ###
+'New topic'                   =>'Nowy temat',  # line 1044
+
+### ../pages/task_more.inc.php   ###
+'Because task is resolved, its status has been changed completed.'=>'Ponieważ zadanie zostąło rozwiązane, jego status został zmieniony na zakończone.',  # line 1162
+'Task has resolved version but is not completed?'=>'Zadanie ma oznaczenie, że jest rozwiązane w kontretnej wersji, a nie jest zakończone?',  # line 1168
+'Changed %s %s with ID %s|type,link,id'=>'Zmienione %s %s z ID %s',  # line 1359
+
+### ../pages/task_view.inc.php   ###
+'Edit this task %s'           =>'Edycja zadania %s',  # line 79
+
+### ../pages/version.inc.php   ###
+'Moved %s versions to trash'  =>'Przesunięto %s wersji do kosza',  # line 253
+
+### ../render/render_misc.inc.php   ###
+'Persons|page option'         =>'Osoby',  # line 619
+'%s min ago'                  =>'%s min temu',  # line 967
+'1 hour ago'                  =>'1 h temu',  # line 970
+'%s hours ago'                =>'%s h temu',  # line 973
+'%s days ago'                 =>'%s dni temu',  # line 977
+'%s months ago'               =>'%s miesięcy temu',  # line 980
+
+### ../render/render_wiki.inc.php   ###
+'No item matches this name...'=>'Nie znaleziono żadnej pozycji o takiej nazwie...',  # line 1204
+
+### ../std/class_changeline.inc.php   ###
+'New File'                    =>'nowy plik',  # line 197
+'Latest comment:'             =>'ostatni komentarz:',  # line 261
+'changed File'                =>'zmieniony plik',  # line 447
+'deleted File'                =>'usunięty plik',  # line 517
+
+### ../std/class_rss.inc.php   ###
+'???'                         =>'???',  # line 93
+
+### ../std/constant_names.inc.php   ###
+'Enable Bugreports|Project setting'=>'Włącz raporty błędów',  # line 77
+
 
 );
 
