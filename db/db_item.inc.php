@@ -1501,6 +1501,13 @@ class DbProjectItem extends DbItem {
         return true;
     }
 
+    function getLabel()
+    {
+        if(isset($this->fields['name'])) {
+            return $this->name;
+        }
+        return '';
+    }
 
 
     /**
@@ -1791,6 +1798,10 @@ class DbProjectItem extends DbItem {
     *
     * DbProjectItem::getById() would only load to basic fields. Getting the
     * complete date required check for type.
+    *
+    * @NOTE: This function causes a awkward dependency to classes derived from
+    * DbProjectItem. It's somehow weird, that this method is placed inside the
+    * parent class.
     */
     public static function getObjectById($id)
     {

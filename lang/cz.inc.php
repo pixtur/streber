@@ -585,7 +585,7 @@ $g_lang_table= array(
 ### ../pages/proj.inc.php   ###
 'Uploaded Files'              =>'Odeslané soubory',
 'Closed tasks'                =>'Uzařít úkoly',
-'New Project'                 =>'Nový projekt',
+'New project'                 =>'Nový projekt',
 
 ### ../pages/_handles.inc.php   ###
 'Edit Project Description'    =>'Upravit popis projektu',
@@ -607,7 +607,7 @@ $g_lang_table= array(
 'Mark tasks as Complete'      =>'Označit úkoly jako vyřešené',
 'Mark tasks as Approved'      =>'Označit úkoly jako schválené',
 'New Task'                    =>'Nový úkol',
-'New Bug'                     =>'Nová chyba',
+'New bug'                     =>'Nová chyba',
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Nový milník',
@@ -640,7 +640,7 @@ $g_lang_table= array(
 'View Company'                =>'Zobrazit firmy',
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Nová firma',
+'New company'                 =>'Nová firma',
 'Edit Company'                =>'Upravit firmu',
 
 ### ../pages/_handles.inc.php   ###
@@ -654,7 +654,7 @@ $g_lang_table= array(
 'View Person'                 =>'Zobrazit osoby',
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Nová osoba',
+'New person'                  =>'Nová osoba',
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Upravit osobu',
@@ -829,7 +829,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Není možné upravit úkol',
 'Edit File|page type'         =>'Upravit soubor',
 'Edit File|page title'        =>'Upravit soubor',
-'New File|page title'         =>'Nový soubor',
+'New file|page title'         =>'Nový soubor',
 'Could not get file'          =>'Není možné získat soubor',
 'Could not get project of file'=>'Není možné získat projekt souboru',
 'Please enter a proper filename'=>'Vlož správny název souboru',

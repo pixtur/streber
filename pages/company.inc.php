@@ -894,7 +894,7 @@ function companyNew() {
 
     $name=get('new_name')
         ? get('new_name')
-        :__("New Company");
+        :__('New company');
 
 
     if(get('company_category')) {

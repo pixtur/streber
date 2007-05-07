@@ -7,22 +7,25 @@ undefined keys:
 ### ../lists/list_effortstaskcalculation.inc.php   ###
 'in Euro'                     =>'',  # line 221
 
-### ../db/class_task.inc.php   ###
-'Order Id'                    =>'',  # line 174
-'Calculation'                 =>'',  # line 180
+### ../pages/project_more.inc.php   ###
+'Released versions'           =>'',  # line 1712
 
-### ../pages/task_view.inc.php   ###
-'Topic'                       =>'',  # line 1083
+### ../db/class_task.inc.php   ###
+'Order Id'                    =>'',  # line 178
+'Calculation'                 =>'',  # line 184
+
+### ../pages/project_view.inc.php   ###
+'Topic'                       =>'',  # line 164
 
 ### ../db/db_itemperson.inc.php   ###
 'Comment|form label for items'=>'',  # line 45
 
 ### ../lists/list_bookmarks.inc.php   ###
-'Your bookmarks'              =>'',  # line 32
-'You have no bookmarks'       =>'',  # line 33
+'Your bookmarks'              =>'',  # line 56
+'You have no bookmarks'       =>'',  # line 57
 
 ### ../pages/item.inc.php   ###
-'Edit bookmark'               =>'',  # line 388
+'Edit bookmark'               =>'',  # line 391
 
 ### ../pages/_handles.inc.php   ###
 'Remove bookmark'             =>'',  # line 101
@@ -31,11 +34,11 @@ undefined keys:
 'Notify on change'            =>'',  # line 712
 
 ### ../lists/list_bookmarks.inc.php   ###
-'Remind'                      =>'',  # line 422
-'in %s day(s)'                =>'',  # line 471
-'since %s day(s)'             =>'',  # line 475
-'State'                       =>'',  # line 718
-'Modified by'                 =>'',  # line 751
+'Remind'                      =>'',  # line 508
+'in %s day(s)'                =>'',  # line 557
+'since %s day(s)'             =>'',  # line 561
+'State'                       =>'',  # line 804
+'Modified by'                 =>'',  # line 837
 
 ### ../lists/list_changes.inc.php   ###
 'Nothing has changed.'        =>'',  # line 334
@@ -47,11 +50,11 @@ undefined keys:
 'version %s'                  =>'',  # line 141
 
 ### ../pages/project_more.inc.php   ###
-'Documentation'               =>'',  # line 1073
+'Documentation'               =>'',  # line 1075
 
 ### ../lists/list_efforts.inc.php   ###
-'View selected Efforts'       =>'',  # line 76
-'Status|column header'        =>'',  # line 312
+'View selected Efforts'       =>'',  # line 77
+'Status|column header'        =>'',  # line 319
 
 ### ../lists/list_effortsperson.inc.php   ###
 'Efforts on team member'      =>'',  # line 28
@@ -106,7 +109,7 @@ undefined keys:
 'Page name'                   =>'',  # line 1138
 
 ### ../pages/home.inc.php   ###
-'Your Tasks'                  =>'',  # line 749
+'Your Tasks'                  =>'',  # line 756
 
 ### ../pages/_handles.inc.php   ###
 'Bookmarks'                   =>'',  # line 42
@@ -133,7 +136,7 @@ undefined keys:
 'Remove companies from person'=>'',  # line 870
 
 ### ../pages/home.inc.php   ###
-'Mark all items as viewed'    =>'',  # line 89
+'Mark all items as viewed'    =>'',  # line 96
 
 ### ../pages/_handles.inc.php   ###
 'Forgot your password?'       =>'',  # line 1209
@@ -162,8 +165,8 @@ undefined keys:
 'Delete this company'         =>'',  # line 683
 
 ### ../pages/project_view.inc.php   ###
-'Delete this project'         =>'',  # line 125
-'News'                        =>'',  # line 177
+'Delete this project'         =>'',  # line 122
+'News'                        =>'',  # line 180
 
 ### ../pages/custom_projView.inc.php   ###
 '%s comments'                 =>'',  # line 218
@@ -182,30 +185,30 @@ undefined keys:
 
 ### ../pages/file.inc.php   ###
 'Could not access parent task Id:%s'=>'',  # line 55
-'Mark this file as bookmark'  =>'',  # line 97
+'Mark this file as bookmark'  =>'',  # line 98
 
 ### ../pages/home.inc.php   ###
-'Edit your Profile'           =>'',  # line 80
-'for|short for client'        =>'',  # line 128
-'without client'              =>'',  # line 140
-'Your Bookmarks'              =>'',  # line 197
+'Edit your Profile'           =>'',  # line 87
+'for|short for client'        =>'',  # line 135
+'without client'              =>'',  # line 147
+'Your Bookmarks'              =>'',  # line 204
 
 ### ../pages/project_more.inc.php   ###
 'last logout'                 =>'',  # line 331
 
 ### ../pages/home.inc.php   ###
-'today'                       =>'',  # line 251
-'yesterday'                   =>'',  # line 269
+'today'                       =>'',  # line 258
+'yesterday'                   =>'',  # line 276
 
 ### ../pages/project_more.inc.php   ###
 '1 week'                      =>'',  # line 349
 '2 weeks'                     =>'',  # line 368
-'discounted'                  =>'',  # line 1429
-'not chargeable'              =>'',  # line 1449
-'balanced'                    =>'',  # line 1469
+'discounted'                  =>'',  # line 1426
+'not chargeable'              =>'',  # line 1446
+'balanced'                    =>'',  # line 1466
 
 ### ../pages/home.inc.php   ###
-'Your efforts'                =>'',  # line 958
+'Your efforts'                =>'',  # line 965
 
 ### ../pages/item.inc.php   ###
 'No item(s) selected.'        =>'',  # line 956
@@ -213,8 +216,6 @@ undefined keys:
 'Removed %s bookmark(s).'     =>'',  # line 219
 'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'',  # line 223
 'An error occured'            =>'',  # line 271
-'Edit bookmark: "%s"|page title'=>'',  # line 390
-'Bookmark: "%s"'              =>'',  # line 391
 'Notify if unchanged in'      =>'',  # line 727
 'Could not get bookmark'      =>'',  # line 460
 'Added %s bookmark(s).'       =>'',  # line 847
@@ -273,34 +274,39 @@ undefined keys:
 'Changes|Page title add on'   =>'',  # line 1788
 'Account'                     =>'',  # line 1999
 'Options'                     =>'',  # line 2143
+'Enable efforts'              =>'',  # line 2146
+'Enable bookmarks'            =>'',  # line 2147
 
 ### ../pages/task_more.inc.php   ###
-'Internal'                    =>'',  # line 766
+'Internal'                    =>'',  # line 733
 
 ### ../pages/person.inc.php   ###
-'Malformed activation url'    =>'',  # line 2257
-'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 2694
-'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 2699
-'Please consider that activating login-accounts might trigger security-issues.'=>'',  # line 2824
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2934
-'Login-accounts require a full name.'=>'',  # line 3216
-'Please enter an e-mail address.'=>'',  # line 3226
-'Please copy the text from the image.'=>'',  # line 3300
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3329
-'Add related companies'       =>'',  # line 3403
-'No companies selected...'    =>'',  # line 3504
-'Company already related to person'=>'',  # line 3480
-'Failed to remove %s companies'=>'',  # line 3544
-'Removed %s companies'        =>'',  # line 3547
-'Marked all previous items as viewed.'=>'',  # line 3599
+'Malformed activation url'    =>'',  # line 2264
+'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 2721
+'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 2726
+'Please consider that activating login-accounts might trigger security-issues.'=>'',  # line 2851
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2961
+'Login-accounts require a full name.'=>'',  # line 3243
+'Please enter an e-mail address.'=>'',  # line 3253
+'Please copy the text from the image.'=>'',  # line 3327
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3356
+'Add related companies'       =>'',  # line 3430
+'No companies selected...'    =>'',  # line 3531
+'Company already related to person'=>'',  # line 3507
+'Failed to remove %s companies'=>'',  # line 3571
+'Removed %s companies'        =>'',  # line 3574
+'Marked all previous items as viewed.'=>'',  # line 3626
 
 ### ../pages/project_more.inc.php   ###
 'modified by me'              =>'',  # line 281
 'modified by others'          =>'',  # line 306
-'Create a new page'           =>'',  # line 1093
+'Create a new page'           =>'',  # line 1092
+
+### ../pages/task_view.inc.php   ###
+'New topic'                   =>'',  # line 1058
 
 ### ../pages/task_more.inc.php   ###
-'Display'                     =>'',  # line 734
+'Display'                     =>'',  # line 701
 
 ### ../pages/project_more.inc.php   ###
 'Found no persons to add. Go to `People` to create some.'=>'',  # line 2289
@@ -308,7 +314,7 @@ undefined keys:
 'Person %s already in project'=>'',  # line 2392
 
 ### ../pages/project_view.inc.php   ###
-'Mark this project as bookmark'=>'',  # line 105
+'Mark this project as bookmark'=>'',  # line 102
 'Create wiki documentation page or start discussion topic'=>'',  # line 163
 
 ### ../pages/search.inc.php   ###
@@ -317,35 +323,39 @@ undefined keys:
 'Due to limitations of MySQL fulltext search, searching will not work for...<br>- words with 3 or less characters<br>- Lists with less than 3 entries<br>- words containing special charaters'=>'',  # line 726
 
 ### ../pages/task_more.inc.php   ###
-'New version'                 =>'',  # line 334
-'New topic'                   =>'',  # line 337
+'New version'                 =>'',  # line 331
 'Display as'                  =>'',  # line 403
 'This folder has %s subtasks. Changing category will ungroup them.'=>'',  # line 407
-'Bug Report'                  =>'',  # line 619
-'Timing'                      =>'',  # line 682
-'Comment has been rejected, because it looks like spam.'=>'',  # line 899
-'Milestones may not have sub tasks'=>'',  # line 1210
-'Select some task(s) to mark as closed'=>'',  # line 1902
-'Marked %s tasks as closed.'  =>'',  # line 1923
-'Not enough rights to close %s tasks.'=>'',  # line 1925
-'Category'                    =>'',  # line 2419
-'select person'               =>'',  # line 2582
-'Also assigned to'            =>'',  # line 2583
+'Bug Report'                  =>'',  # line 590
+'Timing'                      =>'',  # line 649
+'Comment has been rejected, because it looks like spam.'=>'',  # line 872
+'Because task is resolved, its status has been changed to completed.'=>'',  # line 1162
+'Task has resolved version but is not completed?'=>'',  # line 1168
+'Milestones may not have sub tasks'=>'',  # line 1196
+'Changed %s %s with ID %s|type,link,id'=>'',  # line 1359
+'Select some task(s) to mark as closed'=>'',  # line 1884
+'Marked %s tasks as closed.'  =>'',  # line 1905
+'Not enough rights to close %s tasks.'=>'',  # line 1907
+'Category'                    =>'',  # line 2401
+'select person'               =>'',  # line 2540
+'Also assigned to'            =>'',  # line 2541
 
 ### ../pages/task_view.inc.php   ###
-'Mark this task as bookmark'  =>'',  # line 173
-'View previous %s versions'   =>'',  # line 1143
-'Further Documentation'       =>'',  # line 359
-'Resolved tasks|Block title'  =>'',  # line 593
-'Update'                      =>'',  # line 771
-'Book Effort'                 =>'',  # line 1095
+'Edit this %s'                =>'',  # line 79
+'Mark this task as bookmark'  =>'',  # line 182
+'View previous %s versions'   =>'',  # line 1108
+'Further Documentation'       =>'',  # line 349
+'Resolved tasks|Block title'  =>'',  # line 586
+'Update'                      =>'',  # line 759
+'Book Effort'                 =>'',  # line 1022
 
 ### ../pages/version.inc.php   ###
+'Moved %s versions to trash'  =>'',  # line 253
 'Mark this version as bookmark'=>'',  # line 324
 
 ### ../render/render_form.inc.php   ###
-'Please copy the text'        =>'',  # line 62
-'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 64
+'Please copy the text'        =>'',  # line 77
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 79
 
 ### ../render/render_misc.inc.php   ###
 'Docu|Project option'         =>'',  # line 570
@@ -377,7 +387,6 @@ undefined keys:
 'Sorry. Authentication failed'=>'',  # line 381
 
 ### ../std/class_changeline.inc.php   ###
-'New File'                    =>'',  # line 197
 'Latest comment:'             =>'',  # line 261
 'changed File'                =>'',  # line 447
 'deleted File'                =>'',  # line 517
@@ -393,31 +402,32 @@ undefined keys:
 'Enable Efforts|Project setting'=>'',  # line 74
 'Enable Milestones|Project setting'=>'',  # line 75
 'Enable Versions|Project setting'=>'',  # line 76
-'Only PM may close tasks|Project setting'=>'',  # line 77
-'Edit own profile|a user right'=>'',  # line 95
-'Task|Task Category'          =>'',  # line 213
-'Bug|Task Category'           =>'',  # line 214
-'Documentation|Task Category' =>'',  # line 215
-'Event|Task Category'         =>'',  # line 216
-'Folder|Task Category'        =>'',  # line 217
-'Milestone|Task Category'     =>'',  # line 218
-'Version|Task Category'       =>'',  # line 219
-'never|notification period'   =>'',  # line 225
-'one day|notification period' =>'',  # line 226
-'two days|notification period'=>'',  # line 227
-'three days|notification period'=>'',  # line 228
-'four days|notification period'=>'',  # line 229
-'five days|notification period'=>'',  # line 230
-'one week|notification period'=>'',  # line 231
-'two weeks|notification period'=>'',  # line 232
-'three weeks|notification period'=>'',  # line 233
-'one month|notification period'=>'',  # line 234
-'two months|notification period'=>'',  # line 235
-'new|effort status'           =>'',  # line 240
-'open|effort status'          =>'',  # line 241
-'discounted|effort status'    =>'',  # line 242
-'not chargeable|effort status'=>'',  # line 243
-'balanced|effort status'      =>'',  # line 244
+'Enable Bugreports|Project setting'=>'',  # line 77
+'Only PM may close tasks|Project setting'=>'',  # line 78
+'Edit own profile|a user right'=>'',  # line 96
+'Task|Task Category'          =>'',  # line 214
+'Bug|Task Category'           =>'',  # line 215
+'Documentation|Task Category' =>'',  # line 216
+'Event|Task Category'         =>'',  # line 217
+'Folder|Task Category'        =>'',  # line 218
+'Milestone|Task Category'     =>'',  # line 219
+'Version|Task Category'       =>'',  # line 220
+'never|notification period'   =>'',  # line 226
+'one day|notification period' =>'',  # line 227
+'two days|notification period'=>'',  # line 228
+'three days|notification period'=>'',  # line 229
+'four days|notification period'=>'',  # line 230
+'five days|notification period'=>'',  # line 231
+'one week|notification period'=>'',  # line 232
+'two weeks|notification period'=>'',  # line 233
+'three weeks|notification period'=>'',  # line 234
+'one month|notification period'=>'',  # line 235
+'two months|notification period'=>'',  # line 236
+'new|effort status'           =>'',  # line 241
+'open|effort status'          =>'',  # line 242
+'discounted|effort status'    =>'',  # line 243
+'not chargeable|effort status'=>'',  # line 244
+'balanced|effort status'      =>'',  # line 245
 
 ### ../std/mail.inc.php   ###
 'Changed monitored items:|notification'=>'',  # line 229

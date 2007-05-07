@@ -602,7 +602,7 @@ $g_lang_table= array(
 
 ### ../pages/proj.inc.php   ###
 'Uploaded Files'              =>'Siirrä tiedostoja',  # line 1290
-'New Project'                 =>'Uusi projekti',  # line 1643
+'New project'                 =>'Uusi projekti',  # line 1643
 
 ### ../pages/_handles.inc.php   ###
 'Edit Project Description'    =>'Muokkaa projektin kuvausta',  # line 180
@@ -629,7 +629,7 @@ $g_lang_table= array(
 'Mark tasks as Approved'      =>'Merkkaa tehtävä hyväksytyksi',  # line 391
 'Mark tasks as Open'          =>'Merkkaa tehtävä avoimeksi',  # line 399
 'New Task'                    =>'Uusi tehtävä',  # line 439
-'New Bug'                     =>'Uusi bugi',  # line 424
+'New bug'                     =>'Uusi bugi',  # line 424
 
 ### ../pages/task_more.inc.php   ###
 'New Milestone'               =>'Uusi etappi',  # line 32
@@ -667,7 +667,7 @@ $g_lang_table= array(
 'View Company'                =>'Näytä yritystiedot',  # line 796
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Uusi yritys',  # line 712
+'New company'                 =>'Uusi yritys',  # line 712
 'Edit Company'                =>'Muokkaa yritystä',  # line 890
 
 ### ../pages/_handles.inc.php   ###
@@ -684,7 +684,7 @@ $g_lang_table= array(
 'View Person'                 =>'Näytä henkilöt',  # line 891
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Uusi henkilö',  # line 776
+'New person'                  =>'Uusi henkilö',  # line 776
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Muokkaa henkilöä',  # line 907
@@ -925,7 +925,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Tehtävää ei voitu muokata',  # line 362
 'Edit File|page type'         =>'Muokkaa tiedostoa',  # line 407
 'Edit File|page title'        =>'Muokkaa tiedostoa',  # line 417
-'New File|page title'         =>'Uusi tiedosto',  # line 420
+'New file|page title'         =>'Uusi tiedosto',  # line 420
 'Could not get file'          =>'Tiedostoa ei saatu',  # line 535
 'Could not get project of file'=>'Tiedoston projektia ei saatu',  # line 542
 'Please enter a proper filename'=>'Ole hyvä ja anna oikeanlainen tiedostonimi',  # line 579
@@ -1416,7 +1416,7 @@ $g_lang_table= array(
 'All other Projects'          =>'Kaikki muut projektit',  # line 3232
 '- no other projects'         =>'- ei muita projekteja',  # line 3229
 'For Project|form label'      =>'Projektille',  # line 3238
-'New Project|form label'      =>'Uusi projekti',  # line 3243
+'New project|form label'      =>'Uusi projekti',  # line 3243
 'Project name|form label'     =>'Projektin nimi',  # line 3244
 'ERROR: could not get assigned persons'=>'VIRHE: ei voitu vastuuttaa henkilöitä',  # line 3260
 'Also assign to'              =>'Vastuuta myös',  # line 3296

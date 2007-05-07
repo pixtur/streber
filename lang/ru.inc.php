@@ -660,7 +660,7 @@ $g_lang_table= array(
 
 ### ../pages/project_more.inc.php   ###
 'Uploaded Files'              =>'Загруженнеые Файлы',  # line 1220
-'New Project'                 =>'Новый Проект',  # line 1589
+'New project'                 =>'Новый Проект',  # line 1589
 'Edit Project'                =>'Редактировать Проект',  # line 2014
 
 ### ../pages/_handles.inc.php   ###
@@ -686,7 +686,7 @@ $g_lang_table= array(
 'Mark tasks as Closed'        =>'Пометить задачу как Закрытую',  # line 479
 'Mark tasks as Open'          =>'Пометить задачу как Открытую',  # line 485
 'New Task'                    =>'Новая Задача',  # line 527
-'New Bug'                     =>'Новая Ошибка',  # line 511
+'New bug'                     =>'Новая Ошибка',  # line 511
 
 ### ../pages/task_more.inc.php   ###
 'New Milestone'               =>'Новый Этап',  # line 37
@@ -724,7 +724,7 @@ $g_lang_table= array(
 'View Company'                =>'Просмотр Компании',  # line 890
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Новая компания',  # line 740
+'New company'                 =>'Новая компания',  # line 740
 'Edit Company'                =>'Редактировать компанию',  # line 948
 
 ### ../pages/_handles.inc.php   ###
@@ -741,7 +741,7 @@ $g_lang_table= array(
 'View Person'                 =>'Просмотреть Профиль',  # line 985
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Новый Профиль',  # line 858
+'New person'                  =>'Новый Профиль',  # line 858
 'Edit Person'                 =>'Редактировать Профиль',  # line 2055
 
 ### ../pages/_handles.inc.php   ###
@@ -1058,7 +1058,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Невозможно изменить задачу',  # line 383
 'Edit File|page type'         =>'Изменение Файла',  # line 428
 'Edit File|page title'        =>'Изменение Файла',  # line 438
-'New File|page title'         =>'Новый Файл',  # line 441
+'New file|page title'         =>'Новый Файл',  # line 441
 'Could not get file'          =>'невозможно получить файл',  # line 563
 'Could not get project of file'=>'Невозможно получить проект файла',  # line 570
 'Please enter a proper filename'=>'Введите правильное наименование файла',  # line 607
@@ -1572,7 +1572,7 @@ $g_lang_table= array(
 'All other Projects'          =>'Все остальные Проекты',  # line 3059
 '- no other projects'         =>'- нет других проектов',  # line 3056
 'For Project|form label'      =>'Для Прокта',  # line 3065
-'New Project|form label'      =>'Новый Проект',  # line 3070
+'New project|form label'      =>'Новый Проект',  # line 3070
 'Project name|form label'     =>'Наименование Проекта',  # line 3071
 'ERROR: could not get assigned persons'=>'ОШИБКА: невозможно получить назначенных пользователей',  # line 3087
 'Also assign to'              =>'Так же назначить на',  # line 3123

@@ -91,7 +91,7 @@ $g_lang_table= array(
 'Project Templates'           =>'Projekt Vorlagen',
 'View Project'                =>'Projekt Überblick',
 'Closed tasks'                =>'Abgeschlossene Aufgaben',
-'New Project'                 =>'Neues Projekt',
+'New project'                 =>'Neues Projekt',
 'Duplicate Project'           =>'Projekt duplizieren',
 'Edit Project'                =>'Projekt bearbeiten',
 'Delete Project'              =>'Projekt löschen',
@@ -117,13 +117,13 @@ $g_lang_table= array(
 'Add issue/bug report'        =>'Fehlerreport zur Aufgabe hinzufügen',
 'List Companies'              =>'Firmen',
 'View Company'                =>'Firma Überblick',
-'New Company'                 =>'Neue Firma',
+'New company'                 =>'Neue Firma',
 'Edit Company'                =>'Firma bearbeiten',
 'Delete Company'              =>'Firma löschen',
 'Link Persons'                =>'mit Personen verknüpfen',
 'List Persons'                =>'Personen auflisten',
 'View Person'                 =>'Person Überblick',
-'New Person'                  =>'Neue Person',
+'New person'                  =>'Neue Person',
 'Edit Person'                 =>'Person bearbeiten',
 'Edit User Rights'            =>'Rechte einer Person bearbeiten',
 'Delete Person'               =>'Person entfernen',
@@ -818,7 +818,7 @@ $g_lang_table= array(
 
 'Report new Bug'              =>'Neuer Fehlerbericht',
 
-'New Bug'                     =>'Neuer Fehler',
+'New bug'                     =>'Neuer Fehler',
 'View comment'                =>'Kommentar zeigen',
 'System Information'          =>'System Information',
 'PhpInfo'                     =>'phpInfo',
@@ -1157,7 +1157,7 @@ $g_lang_table= array(
 'Upload new version|block title'=>'Eine neuere Version hochladen',
 'Edit File|page type'         =>'Datei bearbeiten',
 'Edit File|page title'        =>'Datei bearbeiten',
-'New File|page title'         =>'Neue Datei',
+'New file|page title'         =>'Neue Datei',
 'Could not get file'          =>'Kann Datei nicht übertragen.',
 'Could not get project of file'=>'Eigenschaften der Datei nicht verfügbar.',
 'Please enter a proper filename'=>'Bitte geben Sie einen richtigen Namen an.',
@@ -1733,7 +1733,7 @@ $g_lang_table= array(
 'Publish to|Label in Task summary'=>'Öffentlich für',
 'Comment / Update'			  =>'Kommentieren / Aktualisieren',
 
-'Released Versions'			  =>'freigegebene Versionen',
+'Released versions'			  =>'freigegebene Versionen',
 
 'Status|Short status column header'=>'Status',
 
@@ -2027,7 +2027,7 @@ $g_lang_table= array(
 'Marked %s tasks to be resolved in this version.'=> '%s Aufgaben wurde als in dieser Version erledigt markiert.',  # line 1394
 'Category'                    =>'Kategorie',  # line 2419
 'Publish to|Form label'       =>'Öffentlich für',  # line 3113
-'New Project|form label'      =>'Neues Projekt',  # line 3197
+'New project|form label'      =>'Neues Projekt',  # line 3197
 
 'View previous %s versions'   =>'Bisherige %s Versionen',  # line 1143
 'Set to Open'                 =>'Veröffentlichen',  # line 1157
@@ -2097,6 +2097,36 @@ $g_lang_table= array(
 'Your account at %s is still active.|notification'=>'Ihr Konto auf %s ist gültig.',  # line 621
 'Your login name is|notification'=> 'Ihr Kontoname lautet',  # line 622
 'Maybe you want to %s set your password|notification'=> 'Bitte korrigieren Sie Ihr Passwort',  # line 623
+
+
+'Edit multiple bookmarks'     =>'Mehrere Lesezeichen bearbeiten',  # line 133
+
+
+### ../pages/person.inc.php   ###
+'Enable efforts'              =>'Aufwände aktivieren',  # line 2146
+'Enable bookmarks'            =>'Lesezeichen aktivieren',  # line 2147
+
+### ../pages/project_more.inc.php   ###
+
+### ../pages/task_more.inc.php   ###
+'Because task is resolved, its status has been changed to completed.'=> 'Status der behobenen Aufgabe wurde in <b>fertig</b> geändert.',  # line 1162
+'Task has resolved version but is not completed?'=>'Auf wurde einer Version zugewiesen, obwohl sie nicht behoben wurde?',  # line 1168
+'Changed %s %s with ID %s|type,link,id'=>'%s geändert mit ID %s',  # line 1359
+
+### ../pages/task_view.inc.php   ###
+'Edit this %s'           =>'%s bearbeiten',  # line 79
+
+### ../render/render_misc.inc.php   ###
+'%b %e, %Y|strftime format string'=>'',  # line 735
+'%I:%M%P|strftime format string'=>'',  # line 749
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
+'%A, %B %e|strftime format string'=>'',  # line 1111
+
+### ../std/constant_names.inc.php   ###
+'Enable Bugreports|Project setting'=>'Fehlerberichte aktivieren',  # line 77
+
+
+
 
 );
 

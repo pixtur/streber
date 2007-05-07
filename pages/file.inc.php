@@ -410,7 +410,7 @@ function fileEdit($file=NULL)
             $page->title=__('Edit File','page title');
         }
         else {
-            $page->title=__('New File','page title');
+            $page->title=__('New file','page title');
         }
 
         #$page->title_minor= sprintf(__('On project %s','page title add on'),$project->name);

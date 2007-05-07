@@ -277,7 +277,7 @@ $g_lang_table= array(
 'Inactive Project'            =>'Projekt nieaktywny',  # line 1419
 'Project|Page Type'           =>'Projekt',  # line 1422
 'new Effort'                  =>'Nowy wysiłek',  # line 1430
-'New Project'                 =>'Nowy projekt',  # line 1476
+'New project'                 =>'Nowy projekt',  # line 1476
 'Company|form label'          =>'Firma',  # line 1556
 'Create another project after submit'=>'Utworzenie następnego projektu po zatwierdzeniu obecnego',  # line 1574
 'Released Versions'           =>'Wydane wersje',  # line 1553
@@ -664,7 +664,7 @@ $g_lang_table= array(
 'Mark tasks as Complete'      =>'Zmień status zadań na Zakończone',  # line 288
 'Mark tasks as Approved'      =>'Zmień status zadań na Zaakceptowane',  # line 296
 'New Task'                    =>'Nowe zadanie',  # line 334
-'New Bug'                     =>'Nowy błąd',  # line 319
+'New bug'                     =>'Nowy błąd',  # line 319
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Nowy kamień milowy',  # line 464
@@ -692,7 +692,7 @@ $g_lang_table= array(
 'View Company'                =>'Wyświetlenie firmy',  # line 562
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Nowa firma',  # line 366
+'New company'                 =>'Nowa firma',  # line 366
 'Edit Company'                =>'Edycja firmy',  # line 523
 
 ### ../pages/_handles.inc.php   ###
@@ -706,7 +706,7 @@ $g_lang_table= array(
 'View Person'                 =>'Wyświetlenie osoby',  # line 624
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Nowa osoba',  # line 495
+'New person'                  =>'Nowa osoba',  # line 495
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Edycja osoby',  # line 638
@@ -871,7 +871,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Edycja zadania niemożliwa',  # line 331
 'Edit File|page type'         =>'Edycja pliku',  # line 376
 'Edit File|page title'        =>'Edycja pliku',  # line 386
-'New File|page title'         =>'Nowy plik',  # line 389
+'New file|page title'         =>'Nowy plik',  # line 389
 'Could not get file'          =>'Nie znaleziono pliku',  # line 504
 'Could not get project of file'=>'Nie znaleziono projektu dla pliku',  # line 511
 'Please enter a proper filename'=>'Proszę wprowadzić prawidłową nazwę pliku',  # line 548
@@ -1601,7 +1601,7 @@ $g_lang_table= array(
 'All other Projects'          =>'Wszystkie pozostałe projekty',  # line 3254
 '- no other projects'         =>'- brak innych projektów',  # line 3251
 'For Project|form label'      =>'Do projektu',  # line 3260
-'New Project|form label'      =>'Nowy projekt',  # line 3265
+'New project|form label'      =>'Nowy projekt',  # line 3265
 'Project name|form label'     =>'Nazwa projektu',  # line 3266
 'ERROR: could not get assigned persons'=>'BŁĄD: nie znaleziono przypisanych osób',  # line 3282
 'Also assign to'              =>'Przypisz również do',  # line 3318

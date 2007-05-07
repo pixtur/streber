@@ -76,23 +76,45 @@ function TaskView()
                     'target'=>'taskEdit',
                     'params'=>array('tsk'=>$task->id),
                     'icon'=>'edit',
-                    'tooltip'=> sprintf(__('Edit this task %s'), $task->getLabel),
+                    'tooltip'=> sprintf(__('Edit this %s'), $task->getLabel()),
                     'name'=> __('Edit'),
                 )));
 
             }
 
 
+
+            $page->add_function(new PageFunction(array(
+                'target'=>'tasksMoveToFolder',
+                'params'=>array('tsk'=>$task->id),
+                'icon'=>'edit',
+                'name'=>__('Move', 'page function to move current task'),
+            )));
+
+
+            if($editable) {
+                if($task->state == 1) {
+                    $page->add_function(new PageFunction(array(
+                        'target'=>'tasksDelete',
+                        'params'=>array('tsk'=>$task->id),
+                        'icon'=>'delete',
+                        'tooltip'=>__('Delete this task'),
+                        'name'=>__('Delete')
+                    )));
+                }
+                if($task->state == -1) {
+                    $page->add_function(new PageFunction(array(
+                        'target'=>'tasksUndelete',
+                        'params'=>array('tsk'=>$task->id),
+                        'icon'=>'undelete',
+                        'tooltip'=>__('Restore this task'),
+                        'name'=>__('Undelete')
+                    )));
+                }
+            }
+
             ### folder ###
             if($task->category == TCATEGORY_FOLDER) {
-
-                $page->add_function(new PageFunction(array(
-                    'target'=>'tasksMoveToFolder',
-                    'params'=>array('tsk'=>$task->id),
-                    'icon'=>'edit',
-                    'name'=>__('Move', 'page function to move current task'),
-                )));
-
 
                 $page->add_function(new PageFunctionGroup(array(
                     'name'=>__('new'),
@@ -139,17 +161,17 @@ function TaskView()
             }
 
             ### normal task ###
-            else {
-                if($editable) {
-                    $page->add_function(new PageFunction(array(
-                        'target'=>'tasksMoveToFolder',
-                        'params'=>array('tsk'=>$task->id),
-                        'icon'=>'edit',
-                        'name'=>__('Move', 'page function to move current task'),
-                    )));
-                }
-
-            }
+            #else {
+            #    if($editable) {
+            #        $page->add_function(new PageFunction(array(
+            #            'target'=>'tasksMoveToFolder',
+            ##            'params'=>array('tsk'=>$task->id),
+            #            'icon'=>'edit',
+            #            'name'=>__('Move', 'page function to move current task'),
+            #        )));
+            #    }
+#
+            #}
 
             if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
     			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
@@ -171,26 +193,6 @@ function TaskView()
     			}
     		}
 
-            if($editable) {
-                if($task->state == 1) {
-                    $page->add_function(new PageFunction(array(
-                        'target'=>'tasksDelete',
-                        'params'=>array('tsk'=>$task->id),
-                        'icon'=>'delete',
-                        'tooltip'=>__('Delete this task'),
-                        'name'=>__('Delete')
-                    )));
-                }
-                if($task->state == -1) {
-                    $page->add_function(new PageFunction(array(
-                        'target'=>'tasksUndelete',
-                        'params'=>array('tsk'=>$task->id),
-                        'icon'=>'undelete',
-                        'tooltip'=>__('Restore this task'),
-                        'name'=>__('Undelete')
-                    )));
-                }
-            }
         }
 
 
@@ -1009,6 +1011,18 @@ function taskViewAsDocu()
                 }
             }
 
+            if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
+                $page->add_function(new PageFunction(array(
+                    'target'=>'effortNew',
+                    'params'=>array(
+                        'parent_task'=>$task->id,
+
+                    ),
+                    'icon'=>'effort',
+                    'name'=>__('Book Effort'),
+                )));
+            }
+
             ### new ###
             if($task->category == TCATEGORY_FOLDER) {
 
@@ -1045,17 +1059,7 @@ function taskViewAsDocu()
                 )));
             }
 
-            if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
-                $page->add_function(new PageFunction(array(
-                    'target'=>'effortNew',
-                    'params'=>array(
-                        'parent_task'=>$task->id,
 
-                    ),
-                    'icon'=>'effort',
-                    'name'=>__('Book Effort'),
-                )));
-            }
 
         }
 

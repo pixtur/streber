@@ -561,7 +561,7 @@ $g_lang_table= array(
 ### ../pages/proj.inc.php   ###
 'Uploaded Files'              =>'Subir Archivos',  # line 1237
 'Closed tasks'                =>'Tareas Cerradas',  # line 908
-'New Project'                 =>'Nuevo Proyecto',  # line 1476
+'New project'                 =>'Nuevo Proyecto',  # line 1476
 
 ### ../pages/_handles.inc.php   ###
 //***
@@ -584,7 +584,7 @@ $g_lang_table= array(
 'Mark tasks as Complete'      =>'Marcar tareas como finalizadas',  # line 288
 'Mark tasks as Approved'      =>'Marcar tareas como aprobadas',  # line 296
 'New Task'                    =>'Nueva Tarea',  # line 334
-'New Bug'                     =>'Nueva Discrepancia',  # line 319
+'New bug'                     =>'Nueva Discrepancia',  # line 319
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Nuevo Hito',  # line 464
@@ -614,7 +614,7 @@ $g_lang_table= array(
 'View Company'                =>'Ver Empresa',  # line 562
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Nueva Empresa',  # line 366
+'New company'                 =>'Nueva Empresa',  # line 366
 'Edit Company'                =>'Editar Empresa',  # line 523
 
 ### ../pages/_handles.inc.php   ###
@@ -628,7 +628,7 @@ $g_lang_table= array(
 'View Person'                 =>'Ver individuo',  # line 624
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Nueva persona',  # line 495
+'New person'                  =>'Nueva persona',  # line 495
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Editar Persona',  # line 638
@@ -801,7 +801,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'No se pudo editar tarea',  # line 331
 'Edit File|page type'         =>'Editar Archivo',  # line 376
 'Edit File|page title'        =>'Editar Archivo',  # line 386
-'New File|page title'         =>'Nuevo Archivo',  # line 389
+'New file|page title'         =>'Nuevo Archivo',  # line 389
 'Could not get file'          =>'No se pudo obtener archivo',  # line 504
 'Could not get project of file'=>'No se pudo obtener proyecto de archivo',  # line 511
 'Please enter a proper filename'=>'Por favor ingrese un nombre de archivo correcto',  # line 548
@@ -1730,7 +1730,7 @@ $g_lang_table= array(
 'All other Projects'          =>'Todos los otros Proyectos',  # line 3202
 '- no other projects'         =>'- no hay más proyectos',  # line 3199
 'For Project|form label'      =>'Para el Proyecto',  # line 3208
-'New Project|form label'      =>'Nuevo Proyecto',  # line 3213
+'New project|form label'      =>'Nuevo Proyecto',  # line 3213
 'Project name|form label'     =>'Nombre del Proyecto',  # line 3214
 'ERROR: could not get assigned persons'=>'Error: no se pudo traer a la persona asignada',  # line 3230
 'Assigne to'                  =>'Asignar a',  # line 3247

@@ -540,7 +540,7 @@ $g_lang_table= array(
 ### ../pages/proj.inc.php   ###
 'Uploaded Files'              =>'Uppladdade filer',  # line 1237
 'Closed tasks'                =>'Stängda uppgifter',  # line 908
-'New Project'                 =>'Nytt projekt',  # line 1476
+'New project'                 =>'Nytt projekt',  # line 1476
 
 ### ../pages/_handles.inc.php   ###
 'Edit Project Description'    =>'Ändra projektbeskrivning',  # line 134
@@ -562,7 +562,7 @@ $g_lang_table= array(
 'Mark tasks as Complete'      =>'Markera uppgifter som slutförda',  # line 288
 'Mark tasks as Approved'      =>'Markera uppgifter som godkända',  # line 296
 'New Task'                    =>'Ny uppgift',  # line 334
-'New Bug'                     =>'Ny bug',  # line 319
+'New bug'                     =>'Ny bug',  # line 319
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Ny milstolpe',  # line 464
@@ -590,7 +590,7 @@ $g_lang_table= array(
 'View Company'                =>'Visa företag',  # line 562
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Nytt företag',  # line 366
+'New company'                 =>'Nytt företag',  # line 366
 'Edit Company'                =>'Ändra företag',  # line 523
 
 ### ../pages/_handles.inc.php   ###
@@ -604,7 +604,7 @@ $g_lang_table= array(
 'View Person'                 =>'Visa användare',  # line 624
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Ny användare',  # line 495
+'New person'                  =>'Ny användare',  # line 495
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Ändra användare',  # line 638
@@ -776,7 +776,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Det gick inte att ändra uppgift',  # line 331
 'Edit File|page type'         =>'Ändra fil',  # line 376
 'Edit File|page title'        =>'Ändra fil',  # line 386
-'New File|page title'         =>'Ny fil',  # line 389
+'New file|page title'         =>'Ny fil',  # line 389
 'Could not get file'          =>'Det gick inte att hämta fil',  # line 504
 'Could not get project of file'=>'Det gick inte att hämta fil för projekt',  # line 511
 'Please enter a proper filename'=>'Ange ett passande filnamn',  # line 548
@@ -2062,7 +2062,7 @@ $g_lang_table= array(
 'All other Projects'          =>'Alla andra projekt',  # line 3202
 '- no other projects'         =>'- Inga andra projekt',  # line 3199
 'For Project|form label'      =>'Till projekt',  # line 3208
-'New Project|form label'      =>'Nytt projekt',  # line 3213
+'New project|form label'      =>'Nytt projekt',  # line 3213
 'Project name|form label'     =>'Projekt',  # line 3214
 'ERROR: could not get assigned persons'=>'Det gick inte att hämta tilldelade användare',  # line 3230
 'Assigne to'                  =>'Tilldelad till',  # line 3247

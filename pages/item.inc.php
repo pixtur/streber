@@ -387,9 +387,9 @@ function itemBookmarkEdit($bookmark=NULL)
 	
 			$page->options = array(new NaviOption(array('target_id'=>'itemBookmarkEdit','name'=>__('Edit bookmark'))));
 	
-			$page->type= sprintf(__('Edit bookmark: "%s"', 'page title') , $str_name);
-			$page->title = sprintf(__('Bookmark: "%s"') , $str_name);
-			$page->title_minor = __('Edit');
+			$page->type= __('Bookmark');
+			$page->title = __('Edit bookmark');
+			$page->title_minor = $str_name;
 		   
 			echo(new PageHeader);
 		}

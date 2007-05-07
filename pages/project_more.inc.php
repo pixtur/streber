@@ -912,16 +912,16 @@ function projViewTasks()
                           : array();
 
 
-        $page->add_function(new PageFunctionGroup(array(
-            'name'=>__('new'),
-        )));
+        #$page->add_function(new PageFunctionGroup(array(
+        #    'name'=>__('new'),
+        #)));
         if($preset_id != 'next_milestone') {
             $page->add_function(new PageFunction(array(
                 'target'    =>'taskNewFolder',
                 'params'    =>array('prj'=>$project->id)+ $new_task_options,
                 'icon'      =>'new',
                 'tooltip'   =>__('Create a new folder for tasks and files'),
-                'name'      =>__('Folder')
+                #'name'      =>__('New folder')
             )));
         }
 
@@ -930,7 +930,7 @@ function projViewTasks()
             'params'=>array('prj'=>$project->id)+ $new_task_options,
             'icon'=>'new',
             'tooltip'=>__('new subtask for this folder'),
-            'name'=>__('Task'),
+            #'name'=>__('Task'),
         )));
 
         if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
@@ -939,7 +939,7 @@ function projViewTasks()
                 'params'    =>array('prj'=>$project->id,'add_issue'=>1)+ $new_task_options,
                 'icon'      =>'new',
                 'tooltip'   =>__('Create task with issue-report'),
-                'name'      =>__('Bug')
+                #'name'      =>__('Bug')
             )));
         }
 
@@ -1090,7 +1090,7 @@ function ProjViewDocu()
             'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU),
             'icon'      =>'new',
             'tooltip'   =>__('Create a new page'),
-            'name'      =>__('New Topic')
+            'name'      =>__('New topic')
         )));
 
     	### render title ###
@@ -1709,7 +1709,7 @@ function ProjViewVersions()
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
 
-        $page->title_minor= __("Released Versions");
+        $page->title_minor= __("Released versions");
         $page->title=$project->name;
 
         if($project->status == STATUS_TEMPLATE) {
@@ -1804,7 +1804,7 @@ function projNew() {
     ### build dummy form ###
     $newproject= new Project(array(
         'id'        => 0,
-        'name'      => __('New Project'),
+        'name'      => __('New project'),
         'state'     => 1,
         'company'   => $company,
         'pub_level' => 100,

@@ -1159,7 +1159,7 @@ function taskEditSubmit()
     ### automatically close resolved tasks ###
     if($task->resolve_reason && $task->status < STATUS_COMPLETED) {
         $task->status = STATUS_COMPLETED;
-        new FeedbackMessage(sprintf(__('Because task is resolved, its status has been changed completed.')));
+        new FeedbackMessage(sprintf(__('Because task is resolved, its status has been changed to completed.')));
     }
 
 
@@ -3152,7 +3152,7 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 
 		## new project ##
 		if($task->id == 0){
-			$form->add(new Form_checkbox('new_project',__('New Project','form label'), false, "id='proj_new_checkbox'"));
+			$form->add(new Form_checkbox('new_project',__('New project','form label'), false, "id='proj_new_checkbox'"));
 			$form->add(new Form_Input('new_project_name', __('Project name', 'form label'),false,NULL,false, "id='proj_new_input'","style='display:none'"));
 		}
 

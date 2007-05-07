@@ -32,7 +32,7 @@ class ListBlock_versions extends ListBlock
         $this->id='tasks';
         $this->bg_style='bg_projects';
         $this->title="Versions";
-
+        $this->active_block_function = 'list';
 
         $this->add_col( new ListBlockColSelect());
         #$this->add_col( new ListBlockColPrio());
@@ -161,7 +161,7 @@ class ListBlockCol_VersionName extends ListBlockCol
         $buffer='';
 
         ### collapsed view ###
-        $html_link= '<b>'. $task->getLink(false) .'</b>';
+        $html_link= '<b>'. $task->getLink(false, false) .'</b>';
         if($task->view_collapsed) {
             $buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"". getThemeFile("img/toggle_folder_closed.gif") ."\">",array('tsk'=>$task->id),NULL, true)
                     . $html_link;

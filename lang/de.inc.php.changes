@@ -1,21 +1,8 @@
 undefined keys:
 ---------------
 
-### ../pages/_handles.inc.php   ###
-'Edit multiple bookmarks'     =>'',  # line 133
-
-### ../pages/item.inc.php   ###
-'Edit bookmark: "%s"|page title'=>'',  # line 390
-'Bookmark: "%s"'              =>'',  # line 391
-
-### ../pages/version.inc.php   ###
-'Moved %s versions to dumpster'=>'',  # line 253
-
 ### ../render/render_misc.inc.php   ###
 '%b %e, %Y|strftime format string'=>'',  # line 735
 '%I:%M%P|strftime format string'=>'',  # line 749
 '%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
 '%A, %B %e|strftime format string'=>'',  # line 1111
-
-### ../std/class_changeline.inc.php   ###
-'New File'                    =>'',  # line 197

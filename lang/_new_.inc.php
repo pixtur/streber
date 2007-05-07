@@ -681,7 +681,7 @@ undefined keys:
 
 ### ../pages/project_more.inc.php   ###
 'Uploaded Files'              =>'',  # line 1220
-'New Project'                 =>'',  # line 1589
+'New project'                 =>'',  # line 1589
 'Edit Project'                =>'',  # line 2014
 
 ### ../pages/_handles.inc.php   ###
@@ -707,7 +707,7 @@ undefined keys:
 'Mark tasks as Closed'        =>'',  # line 479
 'Mark tasks as Open'          =>'',  # line 485
 'New Task'                    =>'',  # line 527
-'New Bug'                     =>'',  # line 511
+'New bug'                     =>'',  # line 511
 
 ### ../pages/task_more.inc.php   ###
 'New Milestone'               =>'',  # line 37
@@ -745,7 +745,7 @@ undefined keys:
 'View Company'                =>'',  # line 890
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'',  # line 740
+'New company'                 =>'',  # line 740
 'Edit Company'                =>'',  # line 948
 
 ### ../pages/_handles.inc.php   ###
@@ -762,7 +762,7 @@ undefined keys:
 'View Person'                 =>'',  # line 985
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'',  # line 858
+'New person'                  =>'',  # line 858
 'Edit Person'                 =>'',  # line 2055
 
 ### ../pages/_handles.inc.php   ###
@@ -1079,7 +1079,7 @@ undefined keys:
 'Could not edit task'         =>'',  # line 383
 'Edit File|page type'         =>'',  # line 428
 'Edit File|page title'        =>'',  # line 438
-'New File|page title'         =>'',  # line 441
+'New file|page title'         =>'',  # line 441
 'Could not get file'          =>'',  # line 563
 'Could not get project of file'=>'',  # line 570
 'Please enter a proper filename'=>'',  # line 607
@@ -1592,7 +1592,7 @@ undefined keys:
 'All other Projects'          =>'',  # line 3059
 '- no other projects'         =>'',  # line 3056
 'For Project|form label'      =>'',  # line 3065
-'New Project|form label'      =>'',  # line 3070
+'New project|form label'      =>'',  # line 3070
 'Project name|form label'     =>'',  # line 3071
 'ERROR: could not get assigned persons'=>'',  # line 3087
 'Also assign to'              =>'',  # line 3123

@@ -4,6 +4,14 @@ undefined keys:
 ### ../__obsolete/class_version.inc.php   ###
 'Time Released'               =>'',  # line 50
 
+### ../_docs/changes.inc.php   ###
+'to'                          =>'',  # line 90
+'you'                         =>'',  # line 90
+'assign to'                   =>'',  # line 93
+
+### ../db/class_person.inc.php   ###
+'Optional: (eg. thomas@pixtur.de)'=>'',  # line 138
+
 ### ../db/class_projectperson.inc.php   ###
 'Salary per hour'             =>'',  # line 91
 
@@ -15,6 +23,9 @@ undefined keys:
 
 ### ../db/class_task.inc.php   ###
 'Calculation'                 =>'',  # line 184
+
+### ../pages/project_view.inc.php   ###
+'Topic'                       =>'',  # line 164
 
 ### ../lists/list_efforts.inc.php   ###
 'Status|column header'        =>'',  # line 319
@@ -57,6 +68,9 @@ undefined keys:
 'Relation between estimated time and booked efforts'=>'',  # line 1257
 'Completion:'                 =>'',  # line 1255
 
+### ../pages/task_more.inc.php   ###
+'New folder'                  =>'',  # line 337
+
 ### ../lists/list_recentchanges.inc.php   ###
 'Recently changes'            =>'',  # line 51
 'Show more'                   =>'',  # line 90
@@ -70,16 +84,27 @@ undefined keys:
 ### ../pages/_handles.inc.php   ###
 'Bookmarks'                   =>'',  # line 42
 'Overall history'             =>'',  # line 58
-'Edit multiple efforts'       =>'',  # line 760
+'Edit multiple bookmarks'     =>'',  # line 133
+
+### ../pages/project_more.inc.php   ###
+'New released Version'        =>'',  # line 1731
+
+### ../pages/_handles.inc.php   ###
 'View Projects of Person'     =>'',  # line 1067
 'View Task of Person'         =>'',  # line 1078
 'View Changes of Person'      =>'',  # line 1100
+
+### ../pages/home.inc.php   ###
+'Mark all items as viewed'    =>'',  # line 96
 
 ### ../pages/company.inc.php   ###
 'clients'                     =>'',  # line 47
 'prospective clients'         =>'',  # line 66
 'supplier'                    =>'',  # line 85
 'partner'                     =>'',  # line 104
+
+### ../pages/person.inc.php   ###
+'edit'                        =>'',  # line 720
 
 ### ../pages/effort.inc.php   ###
 'Select some efforts(s) to edit'=>'',  # line 1052
@@ -94,16 +119,10 @@ undefined keys:
 'for|short for client'        =>'',  # line 135
 'without client'              =>'',  # line 147
 'Your Bookmarks'              =>'',  # line 204
-'today'                       =>'',  # line 258
-'yesterday'                   =>'',  # line 276
-
-### ../pages/project_more.inc.php   ###
-'discounted'                  =>'',  # line 1426
-'not chargeable'              =>'',  # line 1446
-'balanced'                    =>'',  # line 1466
-
-### ../pages/home.inc.php   ###
 'Your efforts'                =>'',  # line 965
+
+### ../pages/misc.inc.php   ###
+'Could not find requested page `%s`'=>'',  # line 46
 
 ### ../pages/person.inc.php   ###
 'without account'             =>'',  # line 165
@@ -113,6 +132,7 @@ undefined keys:
 'notification'                =>'',  # line 757
 'Last login|Label'            =>'',  # line 835
 'Projects|Page title add on'  =>'',  # line 1095
+'blocked'                     =>'',  # line 1243
 'Tasks|Page title add on'     =>'',  # line 1348
 'no tasks yet'                =>'',  # line 1372
 'Changes|Page title add on'   =>'',  # line 1788
@@ -147,22 +167,26 @@ undefined keys:
 
 ### ../pages/task_view.inc.php   ###
 'Edit this %s'                =>'',  # line 79
+'Resolved tasks|Block title'  =>'',  # line 586
 
 ### ../pages/version.inc.php   ###
 'Moved %s versions to trash'  =>'',  # line 253
 
 ### ../render/render_misc.inc.php   ###
+'Versions|Project option'     =>'',  # line 585
 'Persons|page option'         =>'',  # line 619
 '%s min ago'                  =>'',  # line 967
 '1 hour ago'                  =>'',  # line 970
 '%s hours ago'                =>'',  # line 973
 '%s days ago'                 =>'',  # line 977
 '%s months ago'               =>'',  # line 980
-'%A, %B %e|strftime format string'=>'',  # line 1111
 
 ### ../render/render_wiki.inc.php   ###
 'No item matches this name...'=>'',  # line 1204
 'Warning: Could not find wiki chapter'=>'',  # line 1918
+
+### ../std/class_auth.inc.php   ###
+'Sorry. Authentication failed'=>'',  # line 381
 
 ### ../std/class_changeline.inc.php   ###
 'Latest comment:'             =>'',  # line 261
@@ -174,7 +198,6 @@ undefined keys:
 
 ### ../std/constant_names.inc.php   ###
 'Enable Bugreports|Project setting'=>'',  # line 77
-'Edit own profile|a user right'=>'',  # line 96
 'new|effort status'           =>'',  # line 241
 'open|effort status'          =>'',  # line 242
 'discounted|effort status'    =>'',  # line 243

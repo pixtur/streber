@@ -82,7 +82,7 @@ function build_person_options(&$person) {
             'target'    =>'personNew',
             'params'    =>array(),
             'icon'      =>'new',
-            'tooltip'   =>__('New Person'),
+            'tooltip'   =>__('New person'),
         )));
 
         $page->options=build_personList_options();
@@ -306,7 +306,7 @@ function personList()
             'target'    =>'personNew',
             'params'    =>array(),
             'icon'      =>'new',
-            'tooltip'   =>__('New Person'),
+            'tooltip'   =>__('New person'),
         )));
 
 
@@ -432,7 +432,7 @@ function personList()
             'target'    =>'personNew',
             'params'    =>array('perscat'=>PCATEGORY_STAFF),
             'icon'      =>'new',
-            'tooltip'   =>__('New Person'),
+            'tooltip'   =>__('New person'),
         )));
 
         ### render title ###
@@ -516,7 +516,7 @@ function personList()
             'target'    =>'personNew',
             'params'    =>array('perscat'=>PCATEGORY_CLIENT),
             'icon'      =>'new',
-            'tooltip'   =>__('New Person'),
+            'tooltip'   =>__('New person'),
         )));
 
 
@@ -1878,7 +1878,7 @@ function personNew() {
 
     $name=get('new_name')
         ? get('new_name')
-        :__("New Person");
+        :__("New person");
 
 
     $default_profile_num= confGet('PERSON_PROFILE_DEFAULT');

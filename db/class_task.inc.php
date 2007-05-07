@@ -1245,10 +1245,11 @@ foreach($filters_str as $fs=>$value) {
     }
 	
 
-    public function getLink($short_name= true)
+    public function getLink($short_name= true, $strikeDone= true)
     {
 
-        $style_isdone= $this->status >= STATUS_COMPLETED
+        
+        $style_isdone= ($strikeDone && $this->status >= STATUS_COMPLETED)
                     ? 'isDone'
                     : '';
 
@@ -1257,7 +1258,7 @@ foreach($filters_str as $fs=>$value) {
             return '<span  title="'.asHtml($this->name).'" class="item task">'.$PH->getLink('taskView',$this->getShort(),array('tsk'=>$this->id),$style_isdone).'</span>';
         }
         else {
-            return '<span  class="item task">'.$PH->getLink('taskView',$this->name,array('tsk'=>$this->id),$style_isdone).'</span>';
+            return $PH->getLink('taskView',$this->name,array('tsk'=>$this->id),$style_isdone);
         }
     }
 

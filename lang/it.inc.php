@@ -563,7 +563,7 @@ $g_lang_table= array(
 ### ../pages/proj.inc.php   ###
 'Uploaded Files'              =>'File allegati',  # line 1237
 'Closed tasks'                =>'Attività chiuse',  # line 908
-'New Project'                 =>'Nuovo progetto',  # line 1476
+'New project'                 =>'Nuovo progetto',  # line 1476
 
 ### ../pages/_handles.inc.php   ###
 'Edit Project Description'    =>'Modifica descrizione del Progetto',  # line 134
@@ -585,7 +585,7 @@ $g_lang_table= array(
 'Mark tasks as Complete'      =>'Segna attività come Completate',  # line 288
 'Mark tasks as Approved'      =>'Segna attività come Approvate',  # line 296
 'New Task'                    =>'Nuova Attività',  # line 334
-'New Bug'                     =>'Nuovo Bug',  # line 319
+'New bug'                     =>'Nuovo Bug',  # line 319
 
 ### ../pages/task.inc.php   ###
 'New Milestone'               =>'Nuovo evento',  # line 464
@@ -613,7 +613,7 @@ $g_lang_table= array(
 'View Company'                =>'Visualizza Azienda',  # line 562
 
 ### ../pages/company.inc.php   ###
-'New Company'                 =>'Nuova Azienda',  # line 366
+'New company'                 =>'Nuova Azienda',  # line 366
 'Edit Company'                =>'Modifica Azienda',  # line 523
 
 ### ../pages/_handles.inc.php   ###
@@ -627,7 +627,7 @@ $g_lang_table= array(
 'View Person'                 =>'Visualizza Persona',  # line 624
 
 ### ../pages/person.inc.php   ###
-'New Person'                  =>'Nuova Persona',  # line 495
+'New person'                  =>'Nuova Persona',  # line 495
 
 ### ../pages/_handles.inc.php   ###
 'Edit Person'                 =>'Modifica Persona',  # line 638
@@ -799,7 +799,7 @@ $g_lang_table= array(
 'Could not edit task'         =>'Non è stato possibile modificare l`attività',  # line 331
 'Edit File|page type'         =>'Modifica File',  # line 376
 'Edit File|page title'        =>'Modifica File',  # line 386
-'New File|page title'         =>'Nuovo File',  # line 389
+'New file|page title'         =>'Nuovo File',  # line 389
 'Could not get file'          =>'Non è stato possibile aprire il file',  # line 504
 'Could not get project of file'=>'Non è stato possibile aprire il progetto del file',  # line 511
 'Please enter a proper filename'=>'Prego inserire il nome del file',  # line 548
@@ -1791,7 +1791,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'All other Projects'          =>'Tutti gli altri Progetti',  # line 3202
 '- no other projects'         =>'- nessun altro progetto',  # line 3199
 'For Project|form label'      =>'Per il Progetto',  # line 3208
-'New Project|form label'      =>'Nuovo Progetto',  # line 3213
+'New project|form label'      =>'Nuovo Progetto',  # line 3213
 'Project name|form label'     =>'Nome del progetto',  # line 3214
 'ERROR: could not get assigned persons'=>'ERRORE: non è stato possibile prendere le persone assegnate',  # line 3230
 'Assigne to'                  =>'Assegna a',  # line 3247
