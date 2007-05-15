@@ -121,6 +121,7 @@ jQuery.fn.editable = function(url, options) {
 
         /*  main input element */
         var i;
+        
         switch (settings.type) {
             case 'textarea':
                 i = document.createElement('textarea');
@@ -248,18 +249,13 @@ jQuery.fn.editable = function(url, options) {
             /* show the saving indicator */
             jQuery(self).html(options.indicator);
             if(settings.chapter) {
-                //this.ajax_edit.initEditChapters();
-                jQuery(self).load(settings.url, p, function(str) {
-                    
-                    $(this).html();
-                    self.editing = false;
-                    var parentNode= this.parentNode;
-                    
-                    
-                    $(parentNode).html(str);
-                    parentNode.ajax_edit.initEditChapters();
+                
+                t= settings.obj.ajax_edit;
+                $.post(settings.url, p,function(str) {
+                    $(settings.obj).html(str);
+                    settings.obj.ajax_edit= t;
+                    settings.obj.ajax_edit.initEditChapters();
                 });
-
             }
             else {
                 jQuery(self).load(settings.url, p, function(str) {

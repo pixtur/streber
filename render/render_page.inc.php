@@ -857,7 +857,11 @@ class PageHeaderSections extends PageElement {
             $buffer.= "</span>";
         }
         $buffer.= '</div><b class=doclear></b>';
-        if(!$tab_found) {
+        /**
+        * we do not display sections for crawlers, to do not complain
+        */
+        global $auth;
+        if(!$tab_found && !Auth::isCrawler()) { 
             trigger_error("Could not find tab '{$this->page->cur_tab}' in list...", E_USER_NOTICE);
         }
 

@@ -448,6 +448,9 @@ class Auth
                 "/worio bot heritrix/i",
                 "/Ask Jeeves/",
                 "/libwww-perl/i",
+                "/Gigabot/i",
+                "/bot@bot.bot/i",
+                "/SeznamBot/i",
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {

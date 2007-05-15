@@ -711,9 +711,6 @@ function companyView()
             'name'      =>__('Persons'),
         )));
 
-
-
-
     	### render title ###
         echo(new PageHeader);
     }

@@ -1006,7 +1006,7 @@ function projViewTasks()
         #if($for_milestone=get('for_milestone')) {
         #    $list->filters['for_milestone']= intval($for_milestone);
         #}
-
+        $list->show_project_folder= false;
 
         unset($list->columns['project']);
         unset($list->columns['planned_start']);
@@ -2232,7 +2232,7 @@ function projAddPerson()
 
     ### set up page and write header ####
     {
-        $page= new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'company_name'));
+        $page= new Page(array('use_jscalendar'=>false));
     	$page->cur_tab='projects';
         $page->type= __("Edit Project");
         $page->title="$project->name";
@@ -2553,7 +2553,7 @@ function projDuplicate($org_project_id=NULL)
     ### copy projectpersons ###
     if($org_ppersons= $org_project->getProjectPersons(array(
          'alive_only' => false, 
-         'visibly_only' => false
+         'visible_only' => false
     ))){
         foreach($org_ppersons as $pp){
             $pp->id=0;

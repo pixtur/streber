@@ -83,7 +83,6 @@ function home() {
             'target' =>'personEdit',
             'params' =>array('person'=>$auth->cur_user->id),
             'icon'  =>'edit',
-            'tooltip' =>__('Edit your profile'),
             'name'  =>__('Edit your Profile')
         )));
 
@@ -92,7 +91,6 @@ function home() {
             'target' =>'personAllItemsViewed',
             'params' =>array('person'=>$auth->cur_user->id),
             'icon'  =>'edit',
-            'tooltip' =>__('Edit your profile'),
             'name'  =>__('Mark all items as viewed')
         )));        
 

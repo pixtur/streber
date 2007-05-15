@@ -1059,6 +1059,25 @@ function taskViewAsDocu()
                 )));
             }
 
+            if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+    			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
+    			if((!$item) || ($item[0]->is_bookmark == 0)){
+    				$page->add_function(new PageFunction(array(
+    					'target'    =>'itemsAsBookmark',
+    					'params'    =>array('task'=>$task->id),
+    					'tooltip'   =>__('Mark this task as bookmark'),
+    					'name'      =>__('Bookmark'),
+            		)));
+    			}
+    			else{
+    				$page->add_function(new PageFunction(array(
+    					'target'    =>'itemsRemoveBookmark',
+    					'params'    =>array('task'=>$task->id),
+    					'tooltip'   =>__('Remove this bookmark'),
+    					'name'      =>__('Remove Bookmark'),
+            		)));
+    			}
+    		}
 
 
         }

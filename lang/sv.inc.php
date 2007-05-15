@@ -4,7 +4,7 @@
 *  language:      Swedish
 *  translated by: Mats Djärf <md@webbplatsen.se>
 *                 www.webbplatsen.se
-*  last updated:  2007-01-12
+*  last updated:  2007-05-10
 *
 *  comments: plaese inform me if there is some misspelled words,
 *            wrong translation or text string that is too long etc.
@@ -983,7 +983,7 @@ $g_lang_table= array(
 'Edit this project'           =>'Ändra projekt',  # line 279
 
 ### ../pages/task.inc.php   ###
-'new'                        =>'NY ',  # line 134
+'new'                        =>'ny ',  # line 134
 
 ### ../pages/proj.inc.php   ###
 'Add person as team-member to project'=>'Lägg till gruppmedlem till projekt',  # line 291
@@ -1369,7 +1369,7 @@ $g_lang_table= array(
 ### ../std/mail.inc.php   ###
 'Failure sending mail: %s'    =>'Det gick inte att mejla: %s',  # line 49
 'Streber Email Notification|notifcation mail from'=>'Streber email',  # line 85
-'Updates at %s|notication mail subject'=>'Uppdateringar på',  # line 105
+'Updates at %s|notication mail subject'=>'%s (UPPDATERAT)',  # line 105
 'Hello %s,|notification'      =>'Hej %s',  # line 117
 'with this automatically created e-mail we want to inform you that|notification'=>'med detta automatiskt skapade mejl vill vi informera dig att',  # line 119
 'since %s'                    =>'sedan %s',  # line 123
@@ -1689,7 +1689,7 @@ $g_lang_table= array(
 'view changes' =>'visa ändringar', # line 288
 'View Task Efforts' =>'Visa uppgiftsförsök', # line 301
 'Mark tasks as Open' =>'Markera uppgifter som pågående', # line 350
-'New released Version' =>'Ny utgiven milstolpe', # line 417
+'New released Version' =>'Ny utgiven version', # line 417
 'View effort' =>'Visa försök', # line 487
 'View multiple efforts' =>'Visa flera försök', # line 496
 'Move files to folder' =>'Flytta filer till mapp', # line 661
@@ -1814,7 +1814,7 @@ $g_lang_table= array(
 'needs approval' =>'behöver godkännas', # line 864
 'without milestone' =>'utan milstolpe', # line 888
 'Released Versions' =>'Utgivna versioner', # line 1542
-'New released Version' =>'Ny utgiven milstolpe', # line 1560
+'New released Version' =>'Ny utgiven version', # line 1560
 'Tasks resolved in upcomming version'=>'Uppgift löst i kommande version', # line 1594
 'Failed to delete %s projects'=>'Det gick inte att radera %s projekt', # line 1902
 'Failed to change %s projects'=>'Det gick inte att ändra %s projekt', # line 1952
@@ -2185,7 +2185,7 @@ $g_lang_table= array(
 'Nothing has changed.'        =>'Ingenting har änfrats.',  # line 33
 
 ### ../lists/list_tasks.inc.php   ###
-'Status->Closed'              =>'Status',  # line 208
+'Status->Closed'              =>'Status --> Stängd',  # line 208
 'List|List sort mode'         =>'Lista',  # line 240
 'Tree|List sort mode'         =>'Träd',  # line 251
 'Grouped|List sort mode'      =>'Grupperad',  # line 262
@@ -2232,7 +2232,7 @@ $g_lang_table= array(
 'Could not access parent task Id:%s'=>'Det gick inte att komma åt uppgift ID: %s',  # line 52
 
 ### ../pages/home.inc.php   ###
-'status->Closed|context menu function'=>'status',  # line 265
+'status->Closed|context menu function'=>'Status --> Stängd',  # line 265
 
 ### ../pages/item.inc.php   ###
 'itemsSetPubLevel requires item_pub_level'=>'itemsSetPubLevel kräver item_pub_level',  # line 67
@@ -2309,7 +2309,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'Docu|Project option'         =>'Doku',  # line 351
-'Versions|Project option'     =>'Utgåvor',  # line 366
+'Versions|Project option'     =>'Versioner',  # line 366
 
 ### ../render/render_page.inc.php   ###
 'Go to parent / alt-U'        =>'Gå till överliggande',  # line 986
@@ -2357,6 +2357,238 @@ $g_lang_table= array(
 'Notification on changed item|notifcation mail from'=>'Meddelande om post ändras',  # line 1039
 'Changes on "%s"|notication mail subject'=>'Ändringar på "%s"',  # line 1075
 'The following item was changed:|notification'=>'Följande post har ändrats:',  # line 1091
+
+
+### ../db/class_projectperson.inc.php   ###
+'Salary per hour'             =>'Timlön',  # line 91
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'in Euro'                     =>'i Euro',  # line 221
+
+### ../pages/project_more.inc.php   ###
+'Released versions'           =>'Utgivna versioner',  # line 1712
+
+### ../db/class_task.inc.php   ###
+'Order Id'                    =>'Sorterings ID',  # line 178
+'Calculation'                 =>'Beräkning',  # line 184
+
+### ../lists/list_efforts.inc.php   ###
+'Status|column header'        =>'Status',  # line 319
+
+### ../lists/list_effortsperson.inc.php   ###
+'Efforts on team member'      =>'Försök av gruppmedlem',  # line 28
+
+### ../lists/list_effortstask.inc.php   ###
+'Total effort sum: %s hours'  =>'Försök totalt: % timmar ',  # line 98
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Role|columnheader'           =>'Roll',  # line 101
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Sum|columnheader'            =>'Sum',  # line 168
+
+### ../lists/list_effortstask.inc.php   ###
+'Effortgraph|columnheader'    =>'Försökskurva',  # line 162
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Calculation on team member'  =>'Beräkning på gruppmedlem',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Calculation|columnheader'    =>'Beräkning',  # line 221
+'Costgraph|columnheader'      =>'Kostnadskurva',  # line 251
+
+### ../lists/list_effortsprojectcalculation.inc.php   ###
+'Calculation for project'     =>'Beräkning för projekt',  # line 28
+'Project|columnheader'        =>'Projekt',  # line 90
+
+### ../lists/list_effortstask.inc.php   ###
+'Efforts on task'             =>'Försök på uppgift',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Task|columnheader'           =>'Uppgift',  # line 116
+'Calculation on task'         =>'Beräkning på uppgift',  # line 28
+
+### ../lists/list_tasks.inc.php   ###
+'Estimated/Booked (Diff.)'    =>'Uppskattad/Bokad (Skillnad)',  # line 1204
+'Relation between estimated time and booked efforts'=>'Relation mellan uppskattad tid och bokade försök',  # line 1257
+'Completion:'                 =>'Komplettering:',  # line 1255
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recently changes'            =>'Nyligen uppdaterat',  # line 51
+'Show more'                   =>'Visa mer',  # line 90
+
+### ../std/class_rss.inc.php   ###
+'Updated'                     =>'Uppdaterat',  # line 105
+
+### ../pages/home.inc.php   ###
+'Your Tasks'                  =>'Dina uppgifter',  # line 756
+
+### ../pages/_handles.inc.php   ###
+'Bookmarks'                   =>'Bokmärken',  # line 42
+'Overall history'             =>'Historik',  # line 58
+'Edit multiple bookmarks'     =>'Ändra flera bokmärken',  # line 133
+'View Project as RSS'         =>'Visa projekt som RSS',  # line 218
+'Edit multiple efforts'       =>'Ändra flera försök',  # line 760
+'View Projects of Person'     =>'Visa användares projekt',  # line 1067
+'View Task of Person'         =>'Visa användares uppgifter',  # line 1078
+'View Changes of Person'      =>'Visa användares ändringar',  # line 1100
+'Load Field'                  =>'Ladda fält',  # line 1357
+'Save Field'                  =>'Spara fält',  # line 1362
+
+### ../pages/comment.inc.php   ###
+'Mark this comment as bookmark'=>'Markera kommentar som bokmärke',  # line 69
+
+### ../pages/version.inc.php   ###
+'Bookmark'                    =>'Bokmärke',  # line 325
+'Remove this bookmark'        =>'Ta bort bokmärke',  # line 332
+'Remove Bookmark'             =>'Ta bort bokmärke',  # line 333
+
+### ../pages/company.inc.php   ###
+'clients'                     =>'kunder',  # line 47
+'prospective clients'         =>'blivande kunder',  # line 66
+'supplier'                    =>'leverantörer',  # line 85
+'partner'                     =>'partner',  # line 104
+'Mark this company as bookmark'=>'Markera företag som bokmärke',  # line 665
+
+### ../pages/effort.inc.php   ###
+'Mark this effort as bookmark'=>'Markera försök som bokmärke',  # line 78
+'Select some efforts(s) to edit'=>'Välj försök att ändra',  # line 1052
+'For editing all efforts must be of same project.'=>'För att ändra alla försök måste dom vara för samma projekt',  # line 884
+'Edit multiple efforts|Page title'=>'Ändra flera försök',  # line 906
+'Edit %s efforts|Page title'  =>'Ändra %s försök',  # line 907
+'Edited %s effort(s).'        =>'Ändrat %s försök.',  # line 1094
+'Error while editing %s effort(s).'=>'Fel när %s försök skulle ändras.',  # line 1098
+
+### ../pages/file.inc.php   ###
+'Mark this file as bookmark'  =>'Markera fil som bokmärke',  # line 98
+
+### ../pages/home.inc.php   ###
+'Edit your Profile'           =>'Ändra din profil',  # line 87
+'for|short for client'        =>'för',  # line 135
+'without client'              =>'saknar kund',  # line 147
+'Your Bookmarks'              =>'Dina bokmärken',  # line 204
+'today'                       =>'idag',  # line 258
+'yesterday'                   =>'igår',  # line 276
+
+### ../pages/project_more.inc.php   ###
+'discounted'                  =>'rabatterad',  # line 1426
+'not chargeable'              =>'ej debiterbart',  # line 1446
+'balanced'                    =>'balanserad',  # line 1466
+
+### ../pages/home.inc.php   ###
+'Your efforts'                =>'Dina försök',  # line 965
+
+### ../pages/item.inc.php   ###
+'Added %s bookmark(s).'       =>'%s bokmärke/n lades till.',  # line 847
+'Edit multiple bookmarks|page title'=>'Ändra flera bokmärken',  # line 606
+'Edit %s bookmark(s)'         =>'Ändra %s bokmärke/n',  # line 607
+'no'                          =>'nej',  # line 705
+'yes'                         =>'ja',  # line 706
+'Edited %s bookmark(s).'      =>'Ändrat %s bokmärke/n',  # line 851
+'%s bookmark(s) could not be added.'=>'%s bokmärke/n kunde inte läggas till.',  # line 855
+
+### ../pages/person.inc.php   ###
+'without account'             =>'saknar konto',  # line 165
+'with account'                =>'med konto',  # line 183
+'employees'                   =>'anställda',  # line 201
+'contact persons'             =>'kontaktperson',  # line 220
+'Mark this person as bookmark'=>'Markera användaren som bokmärke',  # line 743
+'notification'                =>'meddelande',  # line 757
+'Last login|Label'            =>'Senast inloggad',  # line 835
+'Projects|Page title add on'  =>'Projekt',  # line 1095
+'Tasks|Page title add on'     =>'Uppgifter',  # line 1348
+'no tasks yet'                =>'inga uppgifter',  # line 1372
+'Changes|Page title add on'   =>'Ändringar',  # line 1788
+'Enable efforts'              =>'Aktivera försök',  # line 2146
+'Enable bookmarks'            =>'Aktivera bokmärken',  # line 2147
+
+### ../pages/task_more.inc.php   ###
+'Internal'                    =>'Intern',  # line 733
+
+### ../pages/person.inc.php   ###
+'Malformed activation url'    =>'Felaktig aktiveringskod',  # line 2264
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Pga risken för SPAM-robotar, vänligen ange information om dig själv och varför du vill registrera dig.',  # line 2961
+'Login-accounts require a full name.'=>'Inloggningskonto kräver fullständigt namn.',  # line 3243
+'Please enter an e-mail address.'=>'Vänligen ange e-postadress.',  # line 3253
+'Please copy the text from the image.'=>'Vänligen kopiera texten från bilden.',  # line 3327
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Tack för din registrering! När din registering blivit godkänd kommer du få ett  e-postmeddelande.',  # line 3356
+
+### ../pages/task_view.inc.php   ###
+'New topic'                   =>'Nytt ämne',  # line 1058
+
+### ../pages/project_more.inc.php   ###
+'Reanimated person %s as team-member'=>'Återuppliva användare %s som gruppmedlem',  # line 2388
+'Person %s already in project'=>'Användaren % är redan med i projektet',  # line 2392
+
+### ../pages/project_view.inc.php   ###
+'Mark this project as bookmark'=>'Markera projekt som bokmärke',  # line 102
+'Create wiki documentation page or start discussion topic'=>'Skapa wiki-sida eller starta diskussionsämne',  # line 163
+
+### ../pages/task_more.inc.php   ###
+'New version'                 =>'Ny version',  # line 331
+'Because task is resolved, its status has been changed to completed.'=>'Pga att uppgiften är löst har status ändrats till slutförd.',  # line 1162
+'Task has resolved version but is not completed?'=>'Uppgift har en löst version men är inte slutförd?',  # line 1168
+'Changed %s %s with ID %s|type,link,id'=>'Ändrade %s %s med ID %s',  # line 1359
+
+### ../pages/task_view.inc.php   ###
+'Edit this %s'                =>'Ändra %s',  # line 79
+'Mark this task as bookmark'  =>'Markera uppgift som bokmärke',  # line 182
+'Further Documentation'       =>'Mer dokumentation',  # line 349
+'Resolved tasks|Block title'  =>'Lösta uppgifter',  # line 586
+'Book Effort'                 =>'Boka försök',  # line 1022
+
+### ../pages/version.inc.php   ###
+'Mark this version as bookmark'=>'Markera version som bokmärke',  # line 324
+
+### ../render/render_misc.inc.php   ###
+'Persons|page option'         =>'Användare',  # line 619
+'%b %e, %Y|strftime format string'=>'%b %e, %Y',  # line 735
+'%I:%M%P|strftime format string'=>'%H:%M',  # line 749
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'%a %e %b, %H:%M, %Y',  # line 759
+'%s min'                      =>'%s min',  # line 854
+'%s min ago'                  =>'%s min sedan',  # line 967
+'1 hour ago'                  =>'1 timma sedan',  # line 970
+'%s hours ago'                =>'%s timmar sedan',  # line 973
+'%s days ago'                 =>'%s dagar sedan',  # line 977
+'%s months ago'               =>'%s månader sedan',  # line 980
+'%A, %B %e|strftime format string'=>'%A, %e %B',  # line 1111
+
+### ../render/render_page.inc.php   ###
+'%s queries / %s fields '     =>'%s frågor / %s fält',  # line 1283
+
+### ../render/render_wiki.inc.php   ###
+'Image details'               =>'Bildegenskaper',  # line 997
+'No item matches this name...'=>'Inga poster matchade detta namn...',  # line 1204
+'Warning: Could not find wiki chapter'=>'Det gick inte att hitta wiki-avsnittet',  # line 1918
+
+### ../std/class_auth.inc.php   ###
+'Sorry. Authentication failed'=>'Autentiseringen misslyckades',  # line 381
+
+### ../std/class_changeline.inc.php   ###
+'Latest comment:'             =>'Senaste kommentaren:',  # line 261
+'changed File'                =>'ändrad fil',  # line 447
+'deleted File'                =>'raderad fil',  # line 517
+
+### ../std/class_rss.inc.php   ###
+'???'                         =>'???',  # line 93
+
+### ../std/common.inc.php   ###
+'en_US.utf8,en_US,enu|list of locales'=>'sv_SE.utf8,sv_SE,swe',  # line 500
+
+### ../std/constant_names.inc.php   ###
+'Enable Bugreports|Project setting'=>'Aktivera bugrapportering',  # line 77
+'new|effort status'           =>'ny',  # line 241
+'open|effort status'          =>'öppen',  # line 242
+'discounted|effort status'    =>'rabatterad',  # line 243
+'not chargeable|effort status'=>'ej debiterbar',  # line 244
+'balanced|effort status'      =>'balanserad',  # line 245
+
+### ../std/mail.inc.php   ###
+'Changed monitored items:|notification'=>'Ändrat bevakade poster:',  # line 229
+'%s edited > %s'              =>'%s ändrade',  # line 239
+'Unchanged monitored items:|notification'=>'Oförändrade poster för bevakning:',  # line 267
+'%s (not touched since %s day(s))'=>'%s (ej ändrad sedan %s dag/ar)',  # line 322
+
 
 );
 

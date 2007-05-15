@@ -54,7 +54,7 @@ $g_lang_table= array(
 'Sorry, but this activation code is no longer valid. If you already have an account, you could enter you name and use the <b>forgot password link</b> below.'=>'Niestety ten kod aktywacyjny nie jest już ważny. Jeśli posiadasz konto, możesz wpisać swój login i użyć poniższego linku: <b>zapomniałem hasła</b>.',  # line 226
 
 ### ../pages/company.inc.php   ###
-'Summary'                     =>'Zbiorczo',  # line 161
+'Summary'                     =>'Temat',  # line 161
 
 ### ../db/class_comment.inc.php   ###
 'Details'                     =>'Szczegóły',  # line 61
@@ -210,7 +210,7 @@ $g_lang_table= array(
 'List'                        =>'Lista',  # line 199
 'no project templates'        =>'brak szablonów projektów',  # line 229
 'Overview'                    =>'Streszczenie',  # line 262
-'Edit this project'           =>'Edycja projektu',  # line 279
+'Edit this project'           =>'Edytuj projekt',  # line 279
 'Add person as team-member to project'=>'Dodanie osoby jako członka zespołu projektu',  # line 291
 'Team member'                 =>'Członek zespołu',  # line 292
 'Create task'                 =>'Utworzenie zadania',  # line 298
@@ -224,8 +224,8 @@ $g_lang_table= array(
 'Projectpage|Label in summary'=>'Strona projektu',  # line 367
 'Opened|Label in summary'     =>'Otwarte',  # line 372
 'Closed|Label in summary'     =>'Zamknięte',  # line 377
-'Created by|Label in summary' =>'Utworzone przez',  # line 381
-'Last modified by|Label in summary'=>'Ostatnio zmodyfikowane',  # line 386
+'Created by|Label in summary' =>'Twórca',  # line 381
+'Last modified by|Label in summary'=>'Ostatnio zmienione',  # line 386
 'Logged effort'               =>'Zarejestrowane wysiłki',  # line 393
 'hours'                       =>'godziny',  # line 395
 'Team members'                =>'Członkowie zespołu',  # line 440
@@ -237,7 +237,7 @@ $g_lang_table= array(
 'Closed Tasks'                =>'Zadania zamknięte',  # line 637
 'No tasks have been closed yet'=>'Żadne zadania nie zostały jeszcze zamknięte',  # line 668
 'invalid project-id'          =>'nieprawidłowe ID projektu',  # line 699
-'all'                         =>'wszytkie',  # line 724
+'all'                         =>'wszystkie',  # line 724
 'open'                        =>'otwarte',  # line 746
 'my open'                     =>'moje otwarte',  # line 768
 'for milestone'               =>'do kamienia milowego',  # line 804
@@ -292,7 +292,7 @@ $g_lang_table= array(
 'WARNING: Failed to change %s projects'=>'OSTRZEŻENIE: Modyfikacja %s projektu/projektów nie powiodła się',  # line 1762
 'Closed %s projects'          =>'%s projektów zostało zamknięte',  # line 1766
 'Reactivated %s projects'     =>'Reaktywacja %s projektów',  # line 1769
-'Edit Project'                =>'Edycja projektu',  # line 1801
+'Edit Project'                =>'Edytuj projekt',  # line 1801
 'Select new team members'     =>'Zaznacz nowych członków zespołu',  # line 1803
 'Found no persons to add. Go to `People` to create some.'=>'Nie znaleziono osób do dodania. Przejdź do `Osoby` w celu dodania kilku.',  # line 1847
 'Add'                         =>'Dodanie',  # line 1859
@@ -314,8 +314,8 @@ $g_lang_table= array(
 
 
 ### ../db/class_projectperson.inc.php   ###
-'job'                         =>'praca',  # line 28
-'role'                        =>'rola',  # line 57
+'job'                         =>'Praca',  # line 28
+'role'                        =>'Rola',  # line 57
 
 ### ../pages/task.inc.php   ###
 'For Milestone'               =>'Do kamienia milowego',  # line 849
@@ -357,7 +357,7 @@ $g_lang_table= array(
 'in|very short for IN folder...'=>'w',  # line 334
 
 ### ../lists/list_projectchanges.inc.php   ###
-'modified'                    =>'zmodyfikowane',  # line 48
+'modified'                    =>'zmienione',  # line 48
 
 ### ../lists/list_changes.inc.php   ###
 'read more...'                =>'czytaj więcej...',  # line 208
@@ -386,13 +386,13 @@ $g_lang_table= array(
 'Date / by'                   =>'Data / przez',  # line 601
 
 ### ../render/render_page.inc.php   ###
-'Edit'                        =>'Edycja',  # line 589
+'Edit'                        =>'Edytuj',  # line 589
 
 ### ../lists/list_taskfolders.inc.php   ###
 'New'                         =>'Nowy',  # line 102
 
 ### ../pages/task.inc.php   ###
-'Delete'                      =>'Usunięcie',  # line 95
+'Delete'                      =>'Usuń',  # line 95
 
 ### ../lists/list_comments.inc.php   ###
 'Move to Folder'              =>'Przenieś do folderu',  # line 61
@@ -484,14 +484,15 @@ $g_lang_table= array(
 'or'                          =>'lub',  # line 236
 
 ### ../lists/list_milestones.inc.php   ###
-'Due Today'                   =>'Dzisiejsza należność',  # line 308
-'%s days late'                =>'opóźniona %s dni',  # line 313
-'%s days left'                =>'pozostało %s dni',  # line 317
+'Due Today'                   =>'mija termin',  # line 308
+'%s days late'                =>'opóźn. %s dni',  # line 313
+'%s days left'                =>'zostało %s dni',  # line 317
 'Tasks open|columnheader'     =>'Zadania otwarte',  # line 345
 'Open|columnheader'           =>'Otwarte',  # line 407
 '%s open'                     =>'%s otwarte',  # line 429
 'Completed|columnheader'      =>'Zakończone',  # line 441
 'Completed tasks: %s'         =>'Zadania zakończone: %s',  # line 459
+'date not set'                =>'brak terminu',
 
 ### ../lists/list_persons.inc.php   ###
 'Private'                     =>'Prywatne',  # line 44
@@ -532,7 +533,7 @@ $g_lang_table= array(
 'Remove person from team'     =>'Usunięcie osoby z zespołu',  # line 112
 'Member'                      =>'Członek',  # line 141
 'Role'                        =>'Rola',  # line 162
-'last Login|column header'    =>'ostatnio zalogowany',  # line 179
+'last Login|column header'    =>'Ostatni login',  # line 179
 
 ### ../render/render_list_column_special.inc.php   ###
 'Created by'                  =>'Utworzone przez',  # line 386
@@ -540,11 +541,11 @@ $g_lang_table= array(
 ### ../lists/list_projectchanges.inc.php   ###
 'Item was originally created by'=>'Pozycja została oryginalnie utworzona przez',  # line 42
 'C'                           =>'N,Z,U',  # line 191
-'Created,Modified or Deleted' =>'Utworzone (Nowe),Zmodyfikowane lub Usunięte',  # line 192
+'Created,Modified or Deleted' =>'Utworzone (Nowe),Zmienione lub Usunięte',  # line 192
 'Deleted'                     =>'Usunięte',  # line 205
 
 ### ../render/render_list_column_special.inc.php   ###
-'Modified'                    =>'Zmodyfikowane',  # line 197
+'Modified'                    =>'Zmienione',  # line 197
 
 ### ../lists/list_projectchanges.inc.php   ###
 'by Person'                   =>'przez osobę',  # line 229
@@ -575,7 +576,7 @@ $g_lang_table= array(
 
 ### ../lists/list_projects.inc.php   ###
 'Day the Project state changed to closed'=>'Dzień, w którym status projektu został zmieniony na zamknięty',  # line 121
-'Edit project'                =>'Edycja projektu',  # line 129
+'Edit project'                =>'Edytuj projekt',  # line 129
 'Delete project'              =>'Usunięcie projektu',  # line 136
 'Log hours for a project'     =>'Rejestruj czas w h do projektu',  # line 143
 'Open / Close'                =>'Otwarcie / Zamknięcie',  # line 151
@@ -599,7 +600,7 @@ $g_lang_table= array(
 'Log hours for select tasks'  =>'Rejestruj czas w h dla zaznaczonych zadań',  # line 209
 'Priority of task'            =>'Priorytet zadania',  # line 95
 'Status|Columnheader'         =>'Status',  # line 106
-'Modified|Column header'      =>'Zmodyfikowane',  # line 129
+'Modified|Column header'      =>'Zmienione',  # line 129
 'Est.'                        =>'Przew.',  # line 140
 
 ### ../pages/home.inc.php   ###
@@ -608,7 +609,7 @@ $g_lang_table= array(
 ### ../lists/list_tasks.inc.php   ###
 'Add new Task'                =>'Dodanie nowego zadania',  # line 160
 'Report new Bug'              =>'Zgłoszenie nowego błędu',  # line 167
-'Add comment'                 =>'Dodanie komentarza',  # line 175
+'Add comment'                 =>'Komentarz',  # line 175
 'Status->Completed'           =>'Status->Zakończone?',  # line 188
 'Status->Approved'            =>'Status->Zaakceptowane',  # line 195
 'Move tasks'                  =>'Przeniesienie zadań',  # line 202
@@ -630,8 +631,8 @@ $g_lang_table= array(
 'Sum of all booked efforts (including subtasks)'=>'Suma wszystkich zarejestrowanych wysiłków (włączając podzadania)',  # line 966
 'Effort in hours'             =>'Wysiłek w godzinach',  # line 977
 'Days until planned start'    =>'Liczba dni do planowanego startu',  # line 989
-'Due|column header, days until planned start'=>'Należność',  # line 990
-'planned for %s|a certain date'=>'planowane dla %s',  # line 1019
+'Due|column header, days until planned start'=>'Do rozp.',  # line 990
+'planned for %s|a certain date'=>'planowane na %s',  # line 1019
 'Est/Compl'                   =>'Przew./Zakoń.',  # line 1035
 'Estimated time / completed'  =>'Czas przewidywany / zakończony',  # line 1037
 'estimated %s hours'          =>'przewidywane %s godzin',  # line 1059
@@ -648,7 +649,7 @@ $g_lang_table= array(
 'View Project'                =>'Wyświetlenie projektu',  # line 79
 
 ### ../pages/_handles.inc.php   ###
-'Edit Project Description'    =>'Edycja opisu projektu',  # line 134
+'Edit Project Description'    =>'Edytuj opis projektu',  # line 134
 
 ### ../pages/_handles.inc.php   ###
 'Delete Project'              =>'Usunięcie projektu',  # line 167
@@ -672,15 +673,15 @@ $g_lang_table= array(
 ### ../pages/_handles.inc.php   ###
 'Toggle view collapsed'       =>'Zmiana widoku zwiniętego',  # line 489
 'Add issue/bug report'        =>'Dodanie raportu zdarzenia/błędu',  # line 370
-'Edit Description'            =>'Edycja opisu',  # line 379
+'Edit Description'            =>'Edytuj opis',  # line 379
 'Log hours'                   =>'Rejestracja godzin (czasu)',  # line 396
 'Edit time effort'            =>'Edycja czasu wysiłku',  # line 403
-'View comment'                =>'Wyświetlenie k	omentarza',  # line 423
+'View comment'                =>'Wyświetlenie komentarza',  # line 423
 'Create comment'              =>'Utworzenie komentarza',  # line 433
 'Edit comment'                =>'Edycja komentarza',  # line 443
 'Delete comment'              =>'Usunięcie komentarza',  # line 460
 'View file'                   =>'Wyświetlenie pliku',  # line 505
-'Upload file'                 =>'Wgranie pliku',  # line 513
+'Upload file'                 =>'Wprowadź plik',  # line 513
 'Update file'                 =>'Aktualizacja pliku',  # line 519
 
 ### ../pages/file.inc.php   ###
@@ -864,10 +865,10 @@ $g_lang_table= array(
 'Edit this file'              =>'Edycja pliku',  # line 96
 'Version #%s (current): %s'   =>'Wersja aktualna #%s: %s',  # line 109
 'Filesize'                    =>'Wielkość pliku',  # line 182
-'Uploaded'                    =>'Wgrany',  # line 184
-'Uploaded by'                 =>'Wgrany przez',  # line 133
+'Uploaded'                    =>'Wprowadzony',  # line 184
+'Uploaded by'                 =>'Wprow. przez',  # line 133
 'Version #%s : %s'            =>'Wersja #%s: %s',  # line 165
-'Upload new version|block title'=>'Wgranie nowej wersji',  # line 199
+'Upload new version|block title'=>'Wprowadź nową wersję',  # line 199
 'Could not edit task'         =>'Edycja zadania niemożliwa',  # line 331
 'Edit File|page type'         =>'Edycja pliku',  # line 376
 'Edit File|page title'        =>'Edycja pliku',  # line 386
@@ -913,7 +914,7 @@ $g_lang_table= array(
 'P|column header'             =>'P',  # line 240
 'S|column header'             =>'S',  # line 247
 'Folder|column header'        =>'Folder',  # line 260
-'Modified|column header'      =>'Zmodyfikowane',  # line 277
+'Modified|column header'      =>'Zmienione',  # line 277
 'Est.|column header estimated time'=>'Przew.',  # line 285
 'Edit|context menu function'  =>'Edycja',  # line 304
 'status->Completed|context menu function'=>'status->Zakończone?',  # line 311
@@ -988,7 +989,7 @@ $g_lang_table= array(
 'User Rights|Page function for edit user rights'=>'Uprawnienia użytkownika',  # line 242
 
 ### ../pages/task.inc.php   ###
-'Summary|Block title'         =>'Podsumowaie',  # line 190
+'Summary|Block title'         =>'Podsumowanie',  # line 190
 
 ### ../pages/person.inc.php   ###
 'Mobile|Label mobilephone of person'=>'Telefon komórkowy',  # line 290
@@ -1078,7 +1079,7 @@ $g_lang_table= array(
 'Issues'                      =>'Zdarzenia',  # line 260
 
 ### ../pages/task.inc.php   ###
-'Edit description'            =>'Edycja opisu',  # line 2118
+'Edit description'            =>'Edytuj opis',  # line 2118
 
 ### ../pages/projectperson.inc.php   ###
 'Edit Team Member'            =>'Edycja członka zespołu',  # line 46
@@ -1116,14 +1117,14 @@ $g_lang_table= array(
 'Status|Label in Task summary'=>'Status',  # line 215
 'Opened|Label in Task summary'=>'Otwarte',  # line 218
 'Planned start|Label in Task summary'=>'Planowany start',  # line 221
-'Planned end|Label in Task summary'=>'Planowane zakończenie',  # line 225
+'Planned end|Label in Task summary'=>'Plan. koniec',  # line 225
 'Closed|Label in Task summary'=>'Zamknięte',  # line 230
 'Created by|Label in Task summary'=>'Utworzone przez',  # line 234
-'Last modified by|Label in Task summary'=>'Ostatnio zmodyfikowane przez',  # line 239
+'Last modified by|Label in Task summary'=>'Ostatnio zmienione przez',  # line 239
 'Logged effort|Label in task-summary'=>'Zarejestrowany wysiłek',  # line 244
-'Attached files'              =>'Pliki wgrane',  # line 287
+'Attached files'              =>'Załączone pliki',  # line 287
 'attach new'                  =>'załączenie nowego',  # line 289
-'Upload'                      =>'Wgranie',  # line 292
+'Upload'                      =>'Wprowadź',  # line 292
 'Issue report'                =>'Raport zdarzenia',  # line 353
 'Plattform'                   =>'Platforma',  # line 362
 'OS'                          =>'OS',  # line 365
@@ -1226,8 +1227,8 @@ $g_lang_table= array(
 'changed since <b>%d weeks</b>'=>'zmiany od <b>%d tygodni</b>',  # line 299
 'created by %s'               =>'utworzone przez %s',  # line 555
 'created by unknown'          =>'utworzone przez nieznanego',  # line 558
-'modified by %s'              =>'zmodyfikowane przez %s',  # line 581
-'modified by unknown'         =>'zmodyfikowane przez nieznanego',  # line 584
+'modified by %s'              =>'zmienione przez %s',  # line 581
+'modified by unknown'         =>'zmienione przez nieznanego',  # line 584
 'item #%s has undefined type' =>'pozycja #%s posiada niezdefinowany typ',  # line 607
 'do...'                       =>'wybierz...',  # line 833
 
@@ -1366,7 +1367,7 @@ $g_lang_table= array(
 'Unable to reproduce|reproducabilty'=>'Nie udaje się zreprodukować',  # line 133
 'Member|profile name'         =>'Członek zespołu',  # line 32
 'Admin|profile name'          =>'Administrator',  # line 33
-'Project manager|profile name'=>'Menadżer projektu',  # line 34
+'Project manager|profile name'=>'Menedżer projektu',  # line 34
 'Developer|profile name'      =>'Programista',  # line 35
 'Artist|profile name'         =>'Artysta',  # line 36
 'Tester|profile name'         =>'Tester',  # line 37
@@ -1408,8 +1409,8 @@ $g_lang_table= array(
 
 ### ../std/mail.inc.php   ###
 'Failure sending mail: %s'    =>'Nie powiodło się wysłanie maila: %s',  # line 49
-'Streber Email Notification|notifcation mail from'=>'Streber - mail informacyjny',  # line 85
-'Updates at %s|notication mail subject'=>'Zmiany w serwisie %s',  # line 105
+'Streber Email Notification|notifcation mail from'=>'Streber Info',  # line 85
+'Updates at %s|notication mail subject'=>'Powiadomienie z %s',  # line 105
 'Hello %s,|notification'      =>'Witaj %s,',  # line 117
 'with this automatically created e-mail we want to inform you that|notification'=>'w tym automatycznie generowanym mailu pragniemy poinformować Ciebie, że',  # line 119
 'since %s'                    =>'od %s',  # line 123
@@ -1422,7 +1423,7 @@ $g_lang_table= array(
 'If you do not want to get further notifications feel free to|notification'=>'Jeśli nie chcesz otrzymywać następnych powiadomień o zmianach, możesz',  # line 221
 'adjust your profile|notification'=>'zmodyfikować swój profil',  # line 223
 'Thanks for your time|notication'=>'Dziękujemy za poświęcony czas.',  # line 228
-'the management|notication'   =>'Zarządzający projektem.',  # line 229
+'the management|notication'   =>'Zarządzający serwisem',  # line 229
 'No news for <b>%s</b>'       =>'Brak nowych wiadomości dla <b>%s</b>',  # line 275
 'If you do not want to get further notifications or you forgot your password feel free to|notification'=>'Jeśli nie chcesz otrzymywać następnych powiadomień o zmianach lub zapomniałeś swojego hasła dostępu, możesz',  # line 312
 'Your account at %s is still active.|notification'=>'Twoje konto pod adresem %s jest nadal aktywne.', #line 470
@@ -1648,7 +1649,7 @@ $g_lang_table= array(
 'Thumbnail|Column header'     =>'Minitura',  # line 468
 
 ### ../pages/_handles.inc.php   ###
-'View item'                   =>'Wyświetlenie pozycji',  # line 17
+'View item'                   =>'Pokaż pozycję',  # line 17
 'Set Public Level'            =>'Ustawienie publicznego poziomu dostępu',  # line 27
 'Versions'                    =>'Wersje',  # line 104
 'Task Test'                   =>'Test zadania',  # line 307
@@ -1681,16 +1682,16 @@ $g_lang_table= array(
 '%s sub comments'             =>'%s podkomentarzy',  # line 207
 
 ### ../pages/task_view.inc.php   ###
-'Move|page function to move current task'=>'Przesunięcie',  # line 193
+'Move|page function to move current task'=>'Przenieś',  # line 193
 'Add Details|page function'   =>'Dodanie uszczegółowienia',  # line 185
-'View history of item'        =>'Wyświetlenie historii zmian',  # line 222
+'View history of item'        =>'Pokaż historię zmian',  # line 222
 'History'                     =>'Historia',  # line 223
 'Released as|Label in Task summary'=>'Wydane jako',  # line 259
 'For Milestone|Label in Task summary'=>'Do kamienia milowego',  # line 276
-'Estimated|Label in Task summary'=>'Oszacowanie czasu',  # line 290
+'Estimated|Label in Task summary'=>'Szacowany czas',  # line 290
 'Completed|Label in Task summary'=>'Zakończone',  # line 299
 'Created|Label in Task summary'=>'Utworzone',  # line 318
-'Modified|Label in Task summary'=>'Zmodyfikowane',  # line 323
+'Modified|Label in Task summary'=>'Zmienione',  # line 323
 'Publish to|Label in Task summary'=>'Opublikowane w',  # line 348
 'Set to Open'                 =>'Ustawienie statusu na Otwarte',  # line 350
 'Severity|label in issue-reports'=>'Waga',  # line 446
@@ -1700,7 +1701,7 @@ $g_lang_table= array(
 'No open tasks for this milestone'=>'Nie ma otwartych zadań dla tego kamienia milowego',  # line 530
 '1 Comment'                   =>'1 komentarz',  # line 570
 '%s Comments'                 =>'Komentarze (%s)',  # line 573
-'Comment / Update'            =>'Komentarz / modyfikacja zadania',  # line 637
+'Comment / Update'            =>'Operacje',  # line 637
 'quick edit'                  =>'edycja podręczna',  # line 667
 'Public to'                   =>'Publiczny do',  # line 736
 
@@ -1735,7 +1736,7 @@ $g_lang_table= array(
 
 ### ../pages/file.inc.php   ###
 'Move this file to another task'=>'Przeniesienie pliku do innego zadania ',  # line 121
-'Move'                        =>'Przeniesienie',  # line 122
+'Move'                        =>'Przenieś',  # line 122
 'Failed to delete %s files'   =>'Usunięcie %s pliku/plików nie powiodło się',  # line 646
 'Select some files to move'   =>'Zazanacz pliki do przeniesienia',  # line 727
 'Can not edit file %s'        =>'Pliku %s nie można edytowa',  # line 781
@@ -1848,7 +1849,7 @@ $g_lang_table= array(
 'Enable Efforts|Project setting'=>'Włącz wysiłki',  # line 74
 'Enable Milestones|Project setting'=>'Włącz kamienie milowe',  # line 75
 'Enable Versions|Project setting'=>'Włącz wydania',  # line 76
-'Only PM may close tasks|Project setting'=>'Tylko menadżer projektu może zamknąc zadanie',  # line 77
+'Only PM may close tasks|Project setting'=>'Tylko Menedżer projektu może zamknąć zadanie',  # line 77
 'Task|Task Category'          =>'Zadanie',  # line 213
 'Documentation|Task Category' =>'Dokumentacja',  # line 214
 'Folder|Task Category'        =>'Folder',  # line 215
@@ -1873,8 +1874,8 @@ $g_lang_table= array(
 'Options'                     =>'Opcje',  # line 1056
 
 ### ../pages/proj.inc.php   ###
-'modified by me'              =>'zmodyfikowane przeze mnie',  # line 670
-'modified by others'          =>'zmodyfikowane przez innych',  # line 695
+'modified by me'              =>'zmienione przeze mnie',  # line 670
+'modified by others'          =>'zmienione przez innych',  # line 695
 'last logout'                 =>'od ostatniego wylogowania',  # line 720
 '1 week'                      =>'1 tydzień',  # line 738
 '2 weeks'                     =>'2 tygodnie',  # line 757
@@ -1961,7 +1962,7 @@ $g_lang_table= array(
 'Not enough rights to close %s tasks.'=>'Brak wystarczających uprawnień do zamknięcia %s zadań.',  # line 1928
 
 ### ../pages/_handles.inc.php   ###
-'Mark all items as viewed'      =>'Oznacz wszystkie pozycje jako przeczytane',  # line 1048
+'Mark all items as viewed'      =>'Oznacz wszystko jako przeczytane',  # line 1048
 'Forgot your password?'       =>'Zapomniałeś hasło?',  # line 1108
 
 ### ../pages/login.inc.php   ###
@@ -2038,7 +2039,7 @@ $g_lang_table= array(
 'Comment has been rejected, because it looks like spam.'=>'Komentarz został odrzucony, gdyż wygląda jak spam.',  # line 844
 
 ### ../pages/task_view.inc.php   ###
-'View previous %s versions'   =>'Wyświetl poprzednie %s wersje',  # line 1112
+'View previous %s versions'   =>'Wyświetl zmiany (%s)',  # line 1112
 
 ### ../std/constant_names.inc.php   ###
 'never|notification period'   =>'nigdy',  # line 225
@@ -2151,7 +2152,7 @@ $g_lang_table= array(
 'Status|column header'        =>'Status',  # line 310
 
 ### ../lists/list_tasks.inc.php   ###
-'Estimated/Booked (Diff.)'    =>'Przewidywane/Zareestrowane (różnica)',  # line 1203
+'Estimated/Booked (Diff.)'    =>'Przewidywane/Faktyczne (różnica)',  # line 1203
 'Relation between estimated time and booked efforts'=>'Strosunek wysiłków przewidywanych do zarejestrowanych',  # line 1239
 'Completion:'                 =>'Stopień ukończenia:',  # line 1237
 

@@ -118,7 +118,60 @@ class FormatBlockCode extends FormatBlock
 }
 
 
+/**
+* turn leading spaces into nonbreaking spaces
+*/
+class FormatBlockLeadingSpaces extends FormatBlock
+{
 
+    public function renderAsHtml()
+    {
+        return str_repeat("&nbsp;", strlen($this->str));
+    }
+
+    static function parseBlocks(&$blocks)
+    {
+        $blocks_new= array();
+
+        foreach($blocks as $b) {
+
+            if($b->str && !($b instanceof FormatBlockCode)) {
+
+                $text= $b->str;
+                $found= false;
+                while($text) {
+
+
+                    if(preg_match("/\A(.*?)\r?\n([ \t]+)(.*)/s", $text, $matches)) {
+                        $blocks_new[]= new FormatBlock($matches[1]."\n");
+                        $blocks_new[]= new FormatBlockLeadingSpaces($matches[2]);
+                        $text= $matches[3];
+                        $found= true;
+                    }
+                    else if($found) {
+                        $blocks_new[]= new FormatBlock($text);
+                        break;
+                    }
+                    else {
+                        $blocks_new[]=$b;
+                        break;
+                    }
+                }
+
+            }
+            else {
+                $blocks_new[]=$b;
+            }
+        }
+        return $blocks_new;
+    }    
+}
+
+
+
+/**
+* depreciated
+*/
 class FormatBlockCodeIndented extends FormatBlockCode
 {
 
@@ -939,15 +992,40 @@ class FormatBlockLink extends FormatBlock
             $this->target=$str;
         }
 
-        if(preg_match("/\A([\w]+)\:(\d+)/",$this->target, $matches)) {
+
+        /**
+        * urls
+        */
+        if(preg_match("/\A([\w]+)\:\/\/(\S+)/",$this->target, $matches)) {
+            $type       = asKey($matches[1]);
+
+            $target     = $matches[2];
+            $target     = asCleanString($matches[2]);
+                    
+            if($this->name) {
+                $this->html= "<a class=extern title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->name) . "</a>";
+            }
+            else {
+                $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->target) . "</a>";
+            }
+                    
+
+            
+
+        }
+        else if(preg_match("/\A([\w]+)\:(\d+)/",$this->target, $matches)) {
 
             $type       = asKey($matches[1]);
 
             $target     = $matches[2];
             $target     = asCleanString($matches[2]);
 
+
             switch($type) {
 
+
+                
+                
                 /**
                 * embedding images...
                 */
@@ -1831,28 +1909,34 @@ function &wiki2blocks(&$text)
 
     ### code-blocks ###
     $blocks= FormatBlockCode::parseBlocks($blocks);
-    $blocks= FormatBlockCodeIndented::parseBlocks($blocks);
+    #$blocks= FormatBlockCodeIndented::parseBlocks($blocks);
+    
 
     $blocks= FormatBlockTable::parseBlocks($blocks);
 
     $blocks= FormatBlockQuote::parseBlocks($blocks);
     $blocks= FormatBlockHeadline::parseBlocks($blocks);
 
+    
     $blocks= FormatBlockList::parseBlocks($blocks);
 
-    $blocks= FormatBlockHref::parseBlocks($blocks);
+    $blocks= FormatBlockLeadingSpaces::parseBlocks($blocks);
+
 
     $blocks= FormatBlockBold::parseBlocks($blocks);
     $blocks= FormatBlockStrike::parseBlocks($blocks);
     $blocks= FormatBlockSub::parseBlocks($blocks);
 
 
+    $blocks= FormatBlockLink::parseBlocks($blocks);
+    $blocks= FormatBlockHref::parseBlocks($blocks);
+
     $blocks= FormatBlockLinebreak::parseBlocks($blocks);
 
     $blocks= FormatBlockHr::parseBlocks($blocks);
     $blocks= FormatBlockItemId::parseBlocks($blocks);
 
-    $blocks= FormatBlockLink::parseBlocks($blocks);
+    
     $blocks= FormatBlockMonospaced::parseBlocks($blocks);
     $blocks= FormatBlockEmphasize::parseBlocks($blocks);
     $blocks= FormatBlockLongMinus::parseBlocks($blocks);

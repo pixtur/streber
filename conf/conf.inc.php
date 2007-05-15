@@ -63,8 +63,9 @@ $g_config= array(
     /**
     * url to online-help
     */                                
-    'STREBER_WIKI_URL'      => 'http://www.streber-pm.org/index.php?go=search&search_query=',
-
+    'STREBER_WIKI_URL' => 'http://www.streber-pm.org/index.php?go=search&search_query=',
+    'STREBER_WIKISYNTAX' => 'WikiSyntax!',
+    
     /**
     * version of databases created by installation
     *

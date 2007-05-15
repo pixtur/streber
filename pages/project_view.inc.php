@@ -126,9 +126,9 @@ function ProjView()
 		*/
 
 
-        $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('new')
-        )));
+        #$page->add_function(new PageFunctionGroup(array(
+        #    'name'      => __('new')
+        #)));
         /*
         $page->add_function(new PageFunction(array(
             'target'    =>'projAddPerson',
@@ -143,7 +143,7 @@ function ProjView()
             'params'    =>array('prj'=>$project->id),
             'icon'      =>'new',
             'tooltip'   =>__('Create task'),
-            'name'      =>__('Task')
+            'name'      =>__('New task')
         )));
 
         if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
@@ -152,7 +152,7 @@ function ProjView()
                 'params'    =>array('prj'=>$project->id,'add_issue'=>1),
                 'icon'      =>'new',
                 'tooltip'   =>__('Create task with issue-report'),
-                'name'      =>__('Bug'),
+                'name'      =>__('New bug'),
             )));
         }
     
@@ -161,7 +161,7 @@ function ProjView()
             'params'    =>array('prj'=>$project->id),
             'icon'      =>'new',
             'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
-            'name'      =>__('Topic'),
+            'name'      =>__('New topic'),
         )));
         
         
@@ -171,7 +171,7 @@ function ProjView()
                 'params'    =>array('prj'=>$project->id),
                 'icon'      =>'loghours',
                 'tooltip'   =>__('Book effort for this project'),
-                'name'      =>__('Effort'),
+                'name'      =>__('Book effort'),
             )));
         }
 
@@ -386,6 +386,7 @@ function ProjView()
         echo "<div class=description>";
         if($editable) {
             echo  wiki2html($project->description, $project, $project->id, 'description');
+            
         }
         else {
             echo  wiki2html($project->description, $project);
@@ -410,13 +411,13 @@ function ProjView()
     }
 
 
+    #--- list changes (new) -----------------------------------------------------------
     {
         require_once(confGet('DIR_STREBER') . './lists/list_recentchanges.inc.php');
         printRecentChanges(array($project), false);
     }
 
 /*
-    #--- list changes (new) -----------------------------------------------------------
     measure_start('changes');
     {
         require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');

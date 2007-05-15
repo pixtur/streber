@@ -28,7 +28,19 @@ function ProjView()
     global $auth;
     require_once(confGet('DIR_STREBER') . "render/render_wiki.inc.php");
 
+    $id=getOnePassedId('prj','projects_*');
+    if($project= Project::getEditableById($id)) {
+        $editable= true;        
+    }
+    else if ($project= Project::getVisibleById($id)) {
+        $editable= false;        
+    }
+    else {
+        $PH->abortWarning(__("invalid project-id"));
+		return;
+	}
 
+/*
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
     $project= Project::getVisibleById($id);
@@ -36,6 +48,7 @@ function ProjView()
         $PH->abortWarning(__("invalid project-id"));
 		return;
 	}
+	*/
 
     ### define from-handle ###
     $PH->defineFromHandle(array('prj'=>$project->id));
@@ -68,15 +81,60 @@ function ProjView()
         }
 
         ### page functions ###
-        $page->add_function(new PageFunction(array(
-            'target'    =>'projEdit',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'edit',
-            'tooltip'   =>__('Edit this project'),
-            'name'      => __('Edit Project')
+        #$page->add_function(new PageFunction(array(
+        #    'target'    =>'projEdit',
+        #    'params'    =>array('prj'=>$project->id),
+        #    'icon'      =>'edit',
+        #    'tooltip'   =>__('Edit this project'),
+        #    'name'      => __('Edit Project')
+        #   
+        #)));
 
-        )));
+		#if($project->state == 1) {
+		#		$page->add_function(new PageFunction(array(
+		#			'target'=>'projDelete',
+		#			'params'=>array('prj'=>$project->id),
+		#			'icon'=>'delete',
+		#			'tooltip'=>__('Delete this project'),
+		#			'name'=>__('Delete')
+		#		)));
+		#}
 
+
+        ### page functions ###
+        
+        if($editable) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'projEdit',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'edit',
+                'tooltip'   =>__('Edit this project'),
+                'name'      => __('Edit project')
+    
+            )));
+        }
+
+		/*
+		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$project->id));
+		if((!$item) || ($item[0]->is_bookmark == 0)){
+			$page->add_function(new PageFunction(array(
+				'target'    =>'itemsAsBookmark',
+				'params'    =>array('proj'=>$project->id),
+				'tooltip'   =>__('Mark this project as bookmark'),
+				'name'      =>__('Bookmark'),
+			)));
+		}
+		else{
+			$page->add_function(new PageFunction(array(
+				'target'    =>'itemsRemoveBookmark',
+				'params'    =>array('proj'=>$project->id),
+				'tooltip'   =>__('Remove this bookmark'),
+				'name'      =>__('Remove Bookmark'),
+			)));
+		}
+		*/
+
+		/*
 		if($project->state == 1) {
 				$page->add_function(new PageFunction(array(
 					'target'=>'projDelete',
@@ -86,11 +144,13 @@ function ProjView()
 					'name'=>__('Delete')
 				)));
 		}
+		*/
 
 
-        $page->add_function(new PageFunctionGroup(array(
-            'name'      => __('new')
-        )));
+        #$page->add_function(new PageFunctionGroup(array(
+        #    'name'      => __('new')
+        #)));
+        /*
         $page->add_function(new PageFunction(array(
             'target'    =>'projAddPerson',
             'params'    =>array('prj'=>$project->id),
@@ -98,20 +158,44 @@ function ProjView()
             'tooltip'   =>__('Add person as team-member to project'),
             'name'      =>__('Team member')
         )));
+        */
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNew',
             'params'    =>array('prj'=>$project->id),
             'icon'      =>'new',
             'tooltip'   =>__('Create task'),
-            'name'      =>__('Task')
+            'name'      =>__('New task')
         )));
+
+        if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNewBug',
+                'params'    =>array('prj'=>$project->id,'add_issue'=>1),
+                'icon'      =>'new',
+                'tooltip'   =>__('Create task with issue-report'),
+                'name'      =>__('New bug'),
+            )));
+        }
+    
         $page->add_function(new PageFunction(array(
-            'target'    =>'taskNewBug',
-            'params'    =>array('prj'=>$project->id,'add_issue'=>1),
+            'target'    =>'taskNewDocu',
+            'params'    =>array('prj'=>$project->id),
             'icon'      =>'new',
-            'tooltip'   =>__('Create task with issue-report'),
-            'name'      =>__('Bug'),
+            'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
+            'name'      =>__('New topic'),
         )));
+        
+        
+        if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS && $auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'effortNew',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'loghours',
+                'tooltip'   =>__('Book effort for this project'),
+                'name'      =>__('Book effort'),
+            )));
+        }
+
 
         $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));
 
@@ -203,7 +287,7 @@ function ProjView()
             
             $count = 0;
             foreach($news as $n) {
-                if($count++ > 3) {
+                if($count++ >= 3) {
                     break;
                 };
                 echo "<div class='newsBlock'>";
@@ -233,16 +317,21 @@ function ProjView()
 
 
     #--- list changes (new) -----------------------------------------------------------
-    measure_start('changes');
-    if(!Auth::isAnonymousUser()) {
-        require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
+    #measure_start('changes');
+    #if(!Auth::isAnonymousUser()) {
+    #    require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
+    #
+    #     $list= new ListBlock_changes();
+    #    $list->query_options['date_min']= $auth->cur_user->last_logout;
+    #    $list->query_options['not_modified_by']= $auth->cur_user->id;
+    #    $list->print_automatic($project);
+    #}
+    #measure_stop('changes');
 
-        $list= new ListBlock_changes();
-        $list->query_options['date_min']= $auth->cur_user->last_logout;
-        $list->query_options['not_modified_by']= $auth->cur_user->id;
-        $list->print_automatic($project);
+    {
+        require_once(confGet('DIR_STREBER') . './lists/list_recentchanges.inc.php');
+        printRecentChanges(array($project), false);
     }
-    measure_stop('changes');
 
 
     echo "<br><br>";                                        # @@@ hack for firefox overflow problems

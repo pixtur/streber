@@ -1155,7 +1155,7 @@ new PageHandleFunc(array('id'=>'personCompaniesDelete',
 new PageHandleFunc(array('id'=>'personAllItemsViewed',
     'req'       =>'pages/person.inc.php',
     'title'     =>__('Mark all items as viewed'),
-    'rights_required'=>RIGHT_PERSON_EDIT_SELF,
+
 
     'test'=>'yes',
     'test_params'=>array('person'=>'_personEdit_',),

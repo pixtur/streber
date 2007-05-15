@@ -74,7 +74,13 @@ function itemSaveField()
         return;
     }
     
-    if(!$project= Project::getVisibleById($item->project)) {
+    if($item->type ==  ITEM_PROJECT) {
+        if(!$project= Project::getVisibleById($item->id)) {
+            print "Failure getting project";
+            return;
+        }
+    }
+    else if(!$project= Project::getVisibleById($item->project)) {
         print "Failure getting project";
         return;
     }

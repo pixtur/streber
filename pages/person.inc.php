@@ -2235,6 +2235,10 @@ function personEditSubmit()
 {
     global $PH;
     global $auth;
+    
+    global $g_user_profile_names;
+    global $g_user_profiles;
+    
 
     ### cancel ? ###
     if(get('form_do_cancel')) {
@@ -2282,7 +2286,7 @@ function personEditSubmit()
         }
         else if ($pcategory == -2)
         {
-            $person->category = PCATEGORY_CUSTOMER;
+            $person->category = PCATEGORY_CONTACT;
         }
         else
         {
@@ -2340,8 +2344,6 @@ function personEditSubmit()
         if(!is_null($profile_num )) {
             if($profile_num != -1) {
                 $person->profile= $profile_num;
-                global $g_user_profile_names;
-                global $g_user_profiles;
                 if(isset($g_user_profiles[$profile_num]['default_user_rights'])) {
                     $rights=$g_user_profiles[$profile_num]['default_user_rights'];
                     $person->user_rights= $rights;
@@ -3141,7 +3143,7 @@ function personRegisterSubmit()
         }
         else if ($pcategory == -2)
         {
-            $person->category = PCATEGORY_CUSTOMER;
+            $person->category = PCATEGORY_CONTACT;
         }
         else
         {
@@ -3598,9 +3600,14 @@ function personAllItemsViewed()
 
     $id = intval(getOnePassedId('person','persons_*'));
     if($id) {
-        $person = Person::getEditableById($id);
-        if(!$person) {
-            $PH->abortWarning("Could not get object...");
+        if($id == $auth->cur_user->id) {
+            $person= $auth->cur_user;
+        }
+        else {
+            $person = Person::getEditableById($id);
+            if(!$person) {
+                $PH->abortWarning("Could not get object...");
+            }
         }
     }
     else {

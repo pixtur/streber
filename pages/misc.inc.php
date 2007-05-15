@@ -454,7 +454,8 @@ function showLog()
 
         echo $PH->getLink('systemInfo','back to sysInfo') . " | ";
         echo $PH->getLink('showLog','log', array('showlog'=>1)) . " | ";
-        echo $PH->getLink('showLog','errors', array());
+        echo $PH->getLink('showLog','errors', array()) . " | ";
+        echo $PH->getLink('showLog','newbots', array('newbots'=>1)) . " | ";
         echo "<hr>";
 
 
@@ -463,12 +464,21 @@ function showLog()
         $line = fgets($handle);
         #echo $line."<br><br>";
 
+
         if(preg_match("/(\w+) (\d+)\s*(.*)/", $line, $matches)) {
             $cat= $matches[1];
             $time= $matches[2];
             $rest= $matches[3];
 
-            if(get('time')) {
+            if(get('newbots')) {
+                if(preg_match("/\Sbot/", $rest, $matches)) {
+                    if(!preg_match("/ crawler/", $rest)) {
+                        echo $line ."<br>";
+                    }
+                }
+            }
+
+            else if(get('time')) {
                 if($time && $time==get('time')) {
                     echo asHtml($line);
                 }

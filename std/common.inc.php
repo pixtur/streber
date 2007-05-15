@@ -557,7 +557,7 @@ function asAlphaNumeric($str) {
 }
 
 function asMatchString($str) {
-    return preg_replace("/[^0-9a-z_\* ]/i",'',strtolower($str));
+    return preg_replace("/[^0-9a-z_\*! ]/i",'',strtolower($str));
 }
 
 function asCleanString($str)

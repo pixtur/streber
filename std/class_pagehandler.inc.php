@@ -797,17 +797,19 @@ class PageHandler extends BaseObject
 
     public function getWikiLink($page=NULL, $alt_title=NULL) {
         if(!$page) {
-            #return "<a href='http://wiki.pixtur.de/index.php/{$this->cur_page_id}'>Wiki+Help</a>";
             return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}'>Wiki+Help</a>";
         }
         else {
+            if($page == "WikiSyntax") {
+            $page = confGet('STREBER_WIKISYNTAX');
+            }        
             if(!$alt_title) {
                 $alt_title= $page;
             }
-            #return "<a href='http://wiki.pixtur.de/index.php/{$page}'>$alt_title</a>";
             return "<a href='" . confGet('STREBER_WIKI_URL').  "{$page}'>$alt_title</a>";
         }
     }
+    
 
     public function getCSVLink($page=NULL, $format= FORMAT_CSV) {
         if(is_null($page)) {

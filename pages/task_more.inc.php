@@ -1527,7 +1527,7 @@ function TasksMoveToFolder()
 
     ### set up page and write header ####
     {
-        $page= new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'company_name'));
+        $page= new Page(array('use_jscalendar'=>false));
     	$page->cur_tab='projects';
         $page->type= __("Edit tasks");
         $page->title="$project->name";

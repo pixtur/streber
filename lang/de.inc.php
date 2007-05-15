@@ -664,7 +664,7 @@ $g_lang_table= array(
 'Add existing companies to this person' => 'Existierende Firmen mit dieser Person verbinden',
 
 'Issues'                      =>'Fehlerberichte',
-'History'                     =>'Geschichte',
+'History'                     =>'Änderungen',
 
 'unnamed'                     =>'unbenannt',
 
@@ -1911,7 +1911,7 @@ $g_lang_table= array(
 'Your Tasks'                  =>'Ihre Aufgaben',  # line 751
 
 'Bookmarks'                   =>'Lesezeichen',  # line 42
-'Overall history'             =>'Gesamtverlauf',  # line 58
+'Overall history'             =>'Alle Änderungen',  # line 58
 'Playground'                  =>'Spielwiese',  # line 66
 
 'View item'                   =>'Element zeigen',  # line 1044

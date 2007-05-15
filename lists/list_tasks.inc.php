@@ -53,7 +53,7 @@ class ListBlock_tasks extends ListBlock
     public $use_short_names         = false;
     public $show_summary            = false;
 
-    public $show_project_folder         = false;    
+    public $show_project_folder     = false;                                    # set to false to hide project from path in List view (e.g. should be true in lists with tasks from different projects)
 
     public function __construct($args=NULL)
     {

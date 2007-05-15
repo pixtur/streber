@@ -236,7 +236,7 @@ function misc()
         aj= new AjaxEdit(this);
         ajax_edits.push(aj);
         this.ajax_edit= aj;
-    });
+    });    
 }
 
 /**
@@ -286,8 +286,19 @@ function AjaxEdit(dom_element, item_id, field)
     if(!dom_element)
         return;
 
-    if(dom_element.attributes['item_id']) {
-        item_id= dom_element.attributes['item_id'].value;
+    if($(dom_element).attr('item_id')) {
+        item_id= $(dom_element).attr('item_id');
+    }
+    else {
+        alert("Warning: no item id for ajax editing!");
+        return;
+    }
+
+    if(dom_element.attributes['field_name']) {
+        field_name= dom_element.attributes['field_name'].value;
+    }
+    else {
+        field_name= "description";
     }
 
     this.initEditChapters = function()
@@ -305,14 +316,17 @@ function AjaxEdit(dom_element, item_id, field)
 
             var chapter_name= chapter_count++;
 
-            $(this).addClass('edit_chapter');
 
-            $(this).editable('index.php?go=itemSaveField&item=' + item_id + '&field=description&chapter=' + chapter_name, {
-                postload:'index.php?go=itemLoadField&item=' + item_id + '&field=description&chapter=' + chapter_name,
+            $(this).addClass('edit_chapter');
+            $(this).attr('title', 'Doubleclick to edit chapter');
+
+            $(this).editable('index.php?go=itemSaveField&item=' + item_id + '&field=' + field_name + '&chapter=' + chapter_name, {
+                postload:'index.php?go=itemLoadField&item=' + item_id + '&field=' + field_name + '&chapter=' + chapter_name,
                 type:'textarea',
                 submit:'Save',
                 cancel:'Cancel',
-                chapter:true
+                chapter:true,
+                obj:dom_element
             });
         });
     }

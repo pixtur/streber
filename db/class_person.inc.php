@@ -788,7 +788,7 @@ class Person extends DbProjectItem {
                     AND pp.person = $this->id
                     AND pp.id = i.id
 
-                ". getOrderByString($f_order_by, "name desc")
+                ". getOrderByString($order_by, "name desc")
             );
 
         }
@@ -811,7 +811,7 @@ class Person extends DbProjectItem {
                     AND pp.id = i.id
                     AND pp.person = $this->id
 
-                ". getOrderByString($f_order_by, "name desc")
+                ". getOrderByString($order_by, "name desc")
             );
         }
         $sth->execute("",1);

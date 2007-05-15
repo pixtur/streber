@@ -22,6 +22,11 @@ a:hover {
 	text-decoration:underline;
 }
 
+a.extern {
+ background:url(layout/bg_link_extern.gif) left center no-repeat;
+ padding-left:17px;
+}
+
 
 
 
@@ -55,6 +60,8 @@ div.wiki .searchword
 b.doclear{
     clear:both;
     display:block;
+    height:1px;
+    overflow:hidden;
 }
 
 span.sub {
@@ -515,9 +522,16 @@ body.loginForm div.block,
 body.loginForgotPassword div.block
  {
  margin: 4em auto 10em auto;
- width:30em;
+ width:32em;
 }
 
+body.loginForm .form label {
+ width:30%;
+}
+
+body.loginForm .form .inp {
+ width:60%;
+}
 
 /**
 *
