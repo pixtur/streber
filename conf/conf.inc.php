@@ -539,6 +539,7 @@ $g_languages=array(
     'es'=>'Spanish',
     'fi'=>'Finish',
     'ru'=> 'Russian',
+    'hu'=> 'Hungarian',
 );
 $g_language_names= array_keys($g_languages);
 
