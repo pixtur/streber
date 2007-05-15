@@ -1,6 +1,9 @@
 undefined keys:
 ---------------
 
+### ../pages/project_view.inc.php   ###
+'Book effort'                 =>'',  # line 174
+
 ### ../render/render_misc.inc.php   ###
 '%b %e, %Y|strftime format string'=>'',  # line 735
 '%I:%M%P|strftime format string'=>'',  # line 749

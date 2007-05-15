@@ -1,5 +1,21 @@
 streber-version-history
 
+
+version: v0.08 [2007-05-15]
+==========================
+major:
+- fixed ajax editing fails for Safari #4113
+- "Failure getting project" when editing Wiki inline project description #5188, #5074
+- Wiki syntax:
+  - Depreciate indented code blocks #5184 
+  - Leading spaces are now displayed as &nbsp; 
+- added hungarian translation #
+
+minor:
+- updated Polish and Swedish Translations
+- add HTTP Links in Wiki Syntax #4986
+
+
 version: v0.0799 [2007-05-05]
 ==============================
 major:

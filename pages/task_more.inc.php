@@ -1793,11 +1793,12 @@ function TasksComplete()
                 foreach($subtasks as $st) {
                     if($subtask_editable= Task::getEditableById($st->id)) {
                         $count_subtasks++;
-                        $subtask_editable->status=5;
+                        $subtask_editable->status=  STATUS_COMPLETED;
                         $subtask_editable->date_closed= gmdate("Y-m-d", time());
                         $subtask_editable->completion=100;
                         $subtask_editable->update();
 						$subtask_editable->nowChangedByUser();
+						$subtask_editable->resolved_version= RESOLVED_IN_NEXT_VERSION;
                     }
                     else {
                         $num_errors++;

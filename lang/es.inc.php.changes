@@ -65,7 +65,7 @@ undefined keys:
 'Updated'                     =>'',  # line 105
 
 ### ../pages/home.inc.php   ###
-'Your Tasks'                  =>'',  # line 756
+'Your Tasks'                  =>'',  # line 754
 
 ### ../pages/_handles.inc.php   ###
 'Bookmarks'                   =>'',  # line 42
@@ -81,6 +81,15 @@ undefined keys:
 'supplier'                    =>'',  # line 85
 'partner'                     =>'',  # line 104
 
+### ../pages/project_view.inc.php   ###
+'Create wiki documentation page or start discussion topic'=>'',  # line 163
+
+### ../pages/task_view.inc.php   ###
+'New topic'                   =>'',  # line 1058
+
+### ../pages/project_view.inc.php   ###
+'Book effort'                 =>'',  # line 174
+
 ### ../pages/effort.inc.php   ###
 'Select some efforts(s) to edit'=>'',  # line 1052
 'For editing all efforts must be of same project.'=>'',  # line 884
@@ -90,12 +99,12 @@ undefined keys:
 'Error while editing %s effort(s).'=>'',  # line 1098
 
 ### ../pages/home.inc.php   ###
-'Edit your Profile'           =>'',  # line 87
-'for|short for client'        =>'',  # line 135
-'without client'              =>'',  # line 147
-'Your Bookmarks'              =>'',  # line 204
-'today'                       =>'',  # line 258
-'yesterday'                   =>'',  # line 276
+'Edit your Profile'           =>'',  # line 86
+'for|short for client'        =>'',  # line 133
+'without client'              =>'',  # line 145
+'Your Bookmarks'              =>'',  # line 202
+'today'                       =>'',  # line 256
+'yesterday'                   =>'',  # line 274
 
 ### ../pages/project_more.inc.php   ###
 'discounted'                  =>'',  # line 1426
@@ -103,7 +112,7 @@ undefined keys:
 'balanced'                    =>'',  # line 1466
 
 ### ../pages/home.inc.php   ###
-'Your efforts'                =>'',  # line 965
+'Your efforts'                =>'',  # line 963
 
 ### ../pages/person.inc.php   ###
 'without account'             =>'',  # line 165
@@ -123,21 +132,15 @@ undefined keys:
 'Internal'                    =>'',  # line 733
 
 ### ../pages/person.inc.php   ###
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2961
-'Login-accounts require a full name.'=>'',  # line 3243
-'Please enter an e-mail address.'=>'',  # line 3253
-'Please copy the text from the image.'=>'',  # line 3327
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3356
-
-### ../pages/task_view.inc.php   ###
-'New topic'                   =>'',  # line 1058
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 2963
+'Login-accounts require a full name.'=>'',  # line 3245
+'Please enter an e-mail address.'=>'',  # line 3255
+'Please copy the text from the image.'=>'',  # line 3329
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3358
 
 ### ../pages/project_more.inc.php   ###
 'Reanimated person %s as team-member'=>'',  # line 2388
 'Person %s already in project'=>'',  # line 2392
-
-### ../pages/project_view.inc.php   ###
-'Create wiki documentation page or start discussion topic'=>'',  # line 163
 
 ### ../pages/task_more.inc.php   ###
 'New version'                 =>'',  # line 331
@@ -161,8 +164,8 @@ undefined keys:
 '%A, %B %e|strftime format string'=>'',  # line 1111
 
 ### ../render/render_wiki.inc.php   ###
-'No item matches this name...'=>'',  # line 1204
-'Warning: Could not find wiki chapter'=>'',  # line 1918
+'No item matches this name...'=>'',  # line 1282
+'Warning: Could not find wiki chapter'=>'',  # line 2002
 
 ### ../std/class_changeline.inc.php   ###
 'Latest comment:'             =>'',  # line 261
