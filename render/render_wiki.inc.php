@@ -386,7 +386,6 @@ class FormatBlockQuote extends FormatBlock
 
         $blocks= array(new FormatBlock($str));
 
-        $blocks= FormatBlockHref::parseBlocks($blocks);
 
         $blocks= FormatBlockBold::parseBlocks($blocks);
         $blocks= FormatBlockStrike::parseBlocks($blocks);
@@ -396,6 +395,7 @@ class FormatBlockQuote extends FormatBlock
 
 
         $blocks= FormatBlockLink::parseBlocks($blocks);
+        $blocks= FormatBlockHref::parseBlocks($blocks);
         $blocks= FormatBlockMonospaced::parseBlocks($blocks);
         $blocks= FormatBlockEmphasize::parseBlocks($blocks);
         $blocks= FormatBlockLongMinus::parseBlocks($blocks);
@@ -637,10 +637,10 @@ class FormatBlockHeadline extends FormatBlock
         $blocks= FormatBlockMonospaced::parseBlocks($blocks);
         $blocks= FormatBlockEmphasize::parseBlocks($blocks);
 
+        $blocks= FormatBlockLink::parseBlocks($blocks);
         $blocks= FormatBlockHref::parseBlocks($blocks);
-        $blocks= FormatBlockItemId::parseBlocks($blocks);
+        $this->children= FormatBlockItemId::parseBlocks($blocks);
 
-        $this->children= FormatBlockLink::parseBlocks($blocks);
 
         #$tmp= array(new FormatBlock($str));
         #$this->children= FormatBlockStrike::parseBlocks($tmp);
@@ -1496,10 +1496,10 @@ class FormatBlockListLine extends FormatBlock
         $blocks= FormatBlockLongMinus::parseBlocks($blocks);
 
 
+        $blocks= FormatBlockLink::parseBlocks($blocks);
         $blocks= FormatBlockHref::parseBlocks($blocks);
-        $blocks= FormatBlockItemId::parseBlocks($blocks);
+        $this->children= FormatBlockItemId::parseBlocks($blocks);
 
-        $this->children= FormatBlockLink::parseBlocks($blocks);
 
         $this->str= '';
         $this->level=$level;
@@ -1707,10 +1707,10 @@ class FormatBlockTable extends FormatBlock
                 $cell_blocks= FormatBlockMonospaced::parseBlocks($cell_blocks);
                 $cell_blocks= FormatBlockEmphasize::parseBlocks($cell_blocks);
 
+                $cell_blocks= FormatBlockLink::parseBlocks($cell_blocks);
                 $cell_blocks= FormatBlockHref::parseBlocks($cell_blocks);
-                $cell_blocks= FormatBlockItemId::parseBlocks($cell_blocks);
+                $new_cells[]=  FormatBlockItemId::parseBlocks($cell_blocks);
 
-                $new_cells[]=  FormatBlockLink::parseBlocks($cell_blocks);
             }
             $this->line_cells[]= $new_cells;
         }
@@ -1928,8 +1928,10 @@ function &wiki2blocks(&$text)
     $blocks= FormatBlockSub::parseBlocks($blocks);
 
 
+    
     $blocks= FormatBlockLink::parseBlocks($blocks);
     $blocks= FormatBlockHref::parseBlocks($blocks);
+
 
     $blocks= FormatBlockLinebreak::parseBlocks($blocks);
 
