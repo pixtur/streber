@@ -295,8 +295,23 @@ class ListBlockCol_MilestoneName extends ListBlockCol
 
     		$buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"" . getThemeFile("img/toggle_folder_open.gif") . "\">",array('tsk'=>$task->id),NULL, true)
     		. $html_link
-    		. '<br>'
-            . wiki2html($task->description, $task->project);
+    		. '<br>';
+            #. wiki2html($task->description, $task->project);
+            
+            $editable= false;
+            if(Task::getEditableById($task->id)) {
+                $editable= true;
+            }
+                        
+            $buffer.= "<div class=description>";
+            if($editable) {
+                $buffer.=  wiki2html($task->description, $task->project, $task->id, 'description');
+            }
+            else {
+                $buffer.=  wiki2html($task->description, $task->project);
+            }
+            $buffer.= "</div>";
+
 		}
         echo '<td>'. $buffer .'</td>';
    	}
