@@ -2477,8 +2477,10 @@ span.selector {
  background-image:  url(layout/marker_context_menu.png);
  background-repeat: no-repeat;
  cursor:            pointer;
- padding-right:     14px;
- background-position: left center;
+ padding:     		0px 4px 0px 4px;
+ margin-left: 		4px;
+ background-position: right center;
+ border-left: 		1px dotted #777;
 }
 
 span.selector:hover {
@@ -2495,26 +2497,47 @@ span.selectorlist {
 
 span.selectorlist span.selectorlist_content {
  position:          relative;
- top:               15px;
- left:              -20px;
+ top:               -2px;
+ left:              5px;
  display:           block;
  border:            1px solid #888;
  background:        #eee;
  padding:           2px;
- margin             20px 0px 0px 0x;
+ margin:            20px 0px 0px 0x;
  /*font-size:         90%;*/
+ text-align: 		left;
+ width: 			180px;
 }
 
-
-span.selectorlist span.selectorlist_content  a{
+span.selectorlist span.selectorlist_content a {
  display:           block;
  text-align:        left;
  font-weight:       normal;
 }
 
-span.selectorlist  a:hover{
+span.selectorlist span.selectorlist_content div.companies:hover {
  background-color:  #fff;
  /*color:             #fff;*/  /* this has no effect with Ghecko ???*/
+}
+
+span.selectorlist span.selectorlist_content div.companies {
+	padding: 2px;
+ 	margin:  0px 0px 0px 0x;	
+	border-top: 1px dotted #000; 	
+}
+
+span.selectorlist span.selectorlist_content div.projects {
+	padding:       2px;
+	margin:	       0px;
+}
+
+span.selectorlist span.selectorlist_content div.projects ul {
+	margin: 0px 0px 5px 30px;
+	padding: 0px 2px 2px 2px;
+}
+
+span.selectorlist span.selectorlist_content div.projects ul li:hover {
+ background-color:  #fff;
 }
 
 /*--- dashboard (recent changes) -----------------*/

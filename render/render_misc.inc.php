@@ -505,18 +505,40 @@ function buildProjectSelector()
 
     global $PH;
 
+	require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
     require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
 
-    if($projects= Project::getAll(array(
-    ))) {
-        $buffer.="<span id=projectselector class=selector>&nbsp;</span>";
-        $buffer.= "<span style='display:none;' id='projectselectorlist' class=selectorlist><span class=selectorlist_content>";
+    $buffer.="<span id=projectselector class=selector>&nbsp;</span>";
+    $buffer.= "<span style='display:none;' id='projectselectorlist' class=selectorlist><span class=selectorlist_content>";
 
-        foreach($projects as $p) {
-            $buffer.= $PH->getLink('projView',$p->name, array('prj' => $p->id));
-        }
-        $buffer.="</span></span>";
+    foreach(Company::getAll() as $c) {
+	    if($projects= Project::getAll(array(
+	    	'order_by'   => 'c.name',
+	        'company'    => $c->id,
+	    ))) {
+	        $buffer .= "<div class='companies'><span style='float:left;margin-right:3px;'>" . __("for","short for client") . "</span>" . $c->getLink() . "</div>";
+	        $buffer .= "<div class='projects'><ul>";
+	        foreach($projects as $p) {
+	            $buffer.= "<li>" . $PH->getLink('projView',$p->name, array('prj' => $p->id)) . "</li>";
+	        }
+	        $buffer .= "</ul></div>";
+	    }
     }
+	/* projects without client */
+	if($projects= Project::getAll(array(
+       'order_by'   => 'c.name',
+       'company'    => 0,
+    ))) {
+        $buffer .= "<div class='companies'><span style='float:left;margin-right:3px;'>" . __("without client","short for client") . "</span>&nbsp;</div>";
+		$buffer .= "<div class='projects'><ul>";
+        foreach($projects as $p){
+			$buffer.= "<li>" . $PH->getLink('projView',$p->name, array('prj' => $p->id)) . "</li>";
+        } 
+        $buffer .= "</ul></div>";
+    }
+
+    $buffer.="</span></span>";
+               
     return $buffer;
 }
 
