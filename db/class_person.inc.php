@@ -352,18 +352,23 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
-            
-            
+			
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,
                 'default'       =>0,
                 'log_changes'   =>true,
             )),
-			new FieldString(array('name'=>'salary_per_hour',
+			new FieldString(array(     'name'=>'salary_per_hour',
 				'title'     =>__('Salary per hour') . " " . __('in Euro'),
                 'default'   =>0.0,
                 'export'    =>false,
+            )),
+			new FieldInternal(array(    'name'=>'ldap',
+                'view_in_forms' =>false,
+                'log_changes'=>false,
+				'default'=>0,
+				'export'=>false,
             )),
     
         ) as $f) {
@@ -970,6 +975,34 @@ class Person extends DbProjectItem {
 
     }
 	
+	function getTaskAssignment($task_id=NULL)
+    {
+        $dbh = new DB_Mysql;
+        $prefix= confGet('DB_TABLE_PREFIX');
+
+        $sth= $dbh->prepare(
+
+        "
+        SELECT  itp.*, tp.* from {$prefix}taskperson tp, {$prefix}item itp
+        WHERE tp.person = {$this->id}
+		AND tp.task = {$task_id}
+        AND tp.id = itp.id
+        AND itp.state = 1
+        ");
+
+        $sth->execute("",1);
+        $tmp=$sth->fetch_row();
+        $taskperson=0;
+        require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
+		
+        //foreach($tmp as $tp) {
+		if($tmp){
+            $taskperson=new TaskPerson($tmp[0]);
+        }
+        return $taskperson;
+
+    }
+
     #---------------------------
     # get Companies
     #---------------------------

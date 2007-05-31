@@ -137,6 +137,14 @@ $g_lang_table= array(
 'Remove companies from person'=>'Firmen entfernen',
 'Edit multiple efforts'       =>'Mehrere Aufwände bearbeiten',
 
+'Your Tasks'                  =>'Ihre Aufgaben',
+'Bookmarks'					  =>'Lesezeichen',
+'Overall history'             =>'Geschichte',
+
+### ../pages/person.inc.php   ###
+'Authentication with'         => 'Authentifizierung mit',
+
+### ../db/class_company.inc   ###
 'Optional'                    =>'Optional',
 'more than expected'          =>'mehr als erwartet',
 'not available'               =>'nicht verfügbar',
@@ -243,6 +251,10 @@ $g_lang_table= array(
 'Your demand notes'             =>'Ihre Lese-Aufforderungen',
 'You have no demand notes'      =>'Sie haben keine Leseaufforderungen',
 
+### ../list/list_recentchanges.inc.php
+'Recent changes'                =>'Letzte Änderungen',
+
+### ../lists/list_persons.inc   ###
 'Name Short'                  =>'Abkürzung',
 'Shortnames used in other lists'=>'Abkürzungen werden in Listen verwendet',
 
@@ -556,6 +568,7 @@ $g_lang_table= array(
 'All open tasks'              =>'Alle offenen Aufgaben',
 'Comments on project'         =>'Projekt Kommentare',
 'Project Efforts'             =>'Projekt Aufwände',
+'Effort calculations'         =>'Aufwandskalkulationen',
 'Closed Tasks'                =>'Abgeschlossene Aufgaben',
 'changed project-items'       =>'geänderte Projekt-Objekte',
 'no changes yet'              =>'keine Änderungen bis jetzt',
@@ -582,6 +595,7 @@ $g_lang_table= array(
 'Failed to insert new comment'=>'Das Hinzufügen des neuen Kommentars ist gescheitert',
 'Select one or more projects' =>'Wählen Sie ein oder mehrere Projekte aus',
 'Export projects'			  =>'Projektliste exportieren',
+'Your efforts'                =>'Ihre Aufwände',
 
 'Issue report'                =>'Fehlerbericht',
 'Plattform'                   =>'Plattform',
@@ -1478,6 +1492,9 @@ $g_lang_table= array(
 'last logout'                 =>'letzter Logout',
 '1 week'                      =>'1 Woche',
 '2 weeks'                     =>'2 Wochen',
+'3 weeks'                     =>'3 Wochen',
+'1 month'                     =>'1 Monat',
+'prior'                       =>'älter',
 
 'new task for this milestone' =>'neue Aufgabe für diesen Meilenstein',
 'Append details'              =>'Details anhängen',
@@ -2049,7 +2066,7 @@ $g_lang_table= array(
 '1 hour ago'                  =>'vor 1 Stunde',  # line 970
 '%s hours ago'                =>'vor %s Stunden',  # line 973
 '%s days ago'                 =>'vor %s Tagen',  # line 977
-'%s months ago'               =>'var %s Monaten',  # line 980
+'%s months ago'               =>'vor %s Monaten',  # line 980
 '%A, %B %e|strftime format string'=>'',  # line 1111
 
 'rendered in'                 =>'Erstellt in',  # line 1287

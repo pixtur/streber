@@ -321,5 +321,11 @@ if($db_version < 0.07991){
 	$update_queries[]="UPDATE `{$db_table_prefix}person` SET settings = settings | " . (USER_SETTING_ENABLE_BOOKMARKS| USER_SETTING_ENABLE_EFFORTS) . ";";
 }
 
+if($db_version < 0.07992){
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}taskperson ADD forward TINYINT( 1 ) DEFAULT 0 NOT NULL";
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}taskperson ADD forward_comment TEXT NULL";
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}person ADD ldap TINYINT( 1 ) DEFAULT 0 NOT NULL";
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}project CHANGE labels labels DEFAULT 'Bug,Feature,Enhancement,Refacture,Idea,Research,Organize,Wiki,Docu,News' NOT NULL";
+}
 
 ?>

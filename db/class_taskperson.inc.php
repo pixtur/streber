@@ -57,6 +57,11 @@ class TaskPerson extends DbProjectItem {
             new FieldInternal(array(    'name'=>'assigntype',
                 'default'=>ASSIGNTYPE_INITIAL,
             )),
+			new FieldInternal(array(    'name'=>'forward',
+                'default'=>0,
+            )),
+			new FieldString(array(      'name'=>'forward_comment',
+            )),
         
         ) as $f) {
             $g_task_person_fields[$f->name]=$f;
@@ -126,7 +131,9 @@ class TaskPerson extends DbProjectItem {
         $person             = NULL;        # who has was assigned...
         $task               = NULL;
         $project            = NULL;
-
+		$forward            = NULL;
+		$state              = NULL;
+						
         ### filter params ###
         if($args) {
             foreach($args as $key=>$value) {
@@ -163,35 +170,48 @@ class TaskPerson extends DbProjectItem {
         $str_person= $person
             ? 'AND tp.person ='.intval($person)
             : '';
-
-
+		
+		$str_forward = $forward
+		    ? 'AND tp.forward = 1'
+			: '';
+		
+		$str_state = $state
+		    ? 'AND i.state ='.intval($state)
+			: '';
+			
         ### show all ###
-        $str_query=
-            "SELECT tp.*, i.* from {$prefix}taskperson tp, {$prefix}item i
-             WHERE
-            i.type = '".ITEM_TASKPERSON."'
-            $str_project
-            $str_created_by
-            AND tp.id = i.id
-                $str_person
-                $str_task
-            $str_date_max
-            $str_date_min
-            ";
+		$str_query=
+			"SELECT tp.*, i.* from {$prefix}taskperson tp, {$prefix}item i
+			 WHERE
+			i.type = '".ITEM_TASKPERSON."'
+			$str_project
+			$str_created_by
+			$str_forward
+			$str_state
+			AND tp.id = i.id
+				$str_person
+				$str_task
+			$str_date_max
+			$str_date_min
+			";
 
-        $dbh = new DB_Mysql;
-        $sth= $dbh->prepare($str_query);
+		$dbh = new DB_Mysql;
+		$sth= $dbh->prepare($str_query);
 
-        $sth->execute("",1);
-        $tmp=$sth->fetchall_assoc();
-        $tps=array();
-        foreach($tmp as $t) {
-            $c=new TaskPerson($t);
-            $tps[]=$c;
-        }
-        return $tps;
+		$sth->execute("",1);
+		$tmp=$sth->fetchall_assoc();
+		#echo "%%query: " .$str_query. "<br>";
+		$tps=array();
+		foreach($tmp as $t) {
+			$c=new TaskPerson($t);
+			$tps[]=$c;
+		}
+		return $tps;
+		
     }
 }
+
+
 
 TaskPerson::initFields();
 

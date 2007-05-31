@@ -38,12 +38,12 @@ class ListBlock_effortsProjectCalculation extends ListBlock
     {
         #global $PH;
 		
-		$project_status = false;
+		/*$project_status = false;
 		if($this->query_options['effort_status_min'] == $this->query_options['effort_status_max']){
 			$project_status = true;
-		}
+		}*/
 		
-		$project->setStatus($project_status);
+		#$project->setStatus($project_status);
 		
         $this->render_list(&$project);
     }

@@ -57,7 +57,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.07991',
+    'DB_VERSION_REQUIRED'   => '0.07992',
 
 
     /**
@@ -76,8 +76,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-    'DB_CREATE_VERSION'     => '0.07991',     # sql-dump loaded from /_install/-directory at installation
-    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.07991',
+    'DB_CREATE_VERSION'     => '0.07992',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.07992',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -345,7 +345,6 @@ $g_config= array(
     */
     'REJECT_SPAM_CONTENT' => 0.1,
     
-    
     /**
     * enables the sideboard, which is been been displayed on the
     * right side of the screen after a row in a task list has been
@@ -360,6 +359,13 @@ $g_config= array(
     'MAX_CHANGELINES_PER_PROJECT'=> 5,
     'MAX_CHANGELINES'=> 20,
     'MORE_CHANGELINES'=> 20,
+	
+	/**
+	* LDAP Settings
+	*/
+	'LDAP' => false,
+	'LDAP_USERNAME_PREFIX' =>'',
+	'LDAP_SERVER' => '',
 
 );
 

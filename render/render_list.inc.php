@@ -494,7 +494,7 @@ class ListFilter_max_week extends ListFilter
 {
     public $id = 'date_max';
     public $max_date = NULL;
-
+	public $factor = NULL;
     public function initValue($value= NULL)
     {
         parent::initValue($value);
@@ -503,13 +503,12 @@ class ListFilter_max_week extends ListFilter
         * get logout date and reset the value variable
         */
         if(!$this->max_date) {
-            $date = gmdate("Y-m-d", time());
+            $date = gmdate("Y-m-d", (time()-($this->factor*24*60*60)));
             $time = getGMTString();
             #$dt = $date . " " . renderTime($time);
             $dt = $date . " 23:59:59";
             $this->max_date = $dt;
         }
-
         return $this->value;
     }
 
@@ -1600,7 +1599,8 @@ class ListBlock extends PageBlock
                 ### grouping ###
                 if($this->groupings && $this->active_block_function == 'grouped' && $this->groupings->active_grouping_obj) {
                     $last_group= NULL;
-                    $gr= $this->groupings->active_grouping_key;
+                    $gr = $this->groupings->active_grouping_key;
+					
                     foreach($list as $e) {
                         if($last_group != $e->$gr) {
                             echo '<tr class=group><td colspan='. count($this->columns) .'>'. $this->groupings->active_grouping_obj->render($e).'</td></tr>';

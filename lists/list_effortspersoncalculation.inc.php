@@ -45,16 +45,16 @@ class ListBlock_effortsPersonCalculation extends ListBlock
     {
         global $PH;
 		
-		$effort_status = false;
+		/*$effort_status = false;
 		if($this->query_options['effort_status_min'] == $this->query_options['effort_status_max']){
 			$effort_status = true;
-		}
+		}*/
 		
 		$efforts = Effort::getEffortPersons($this->query_options);
 		
-		foreach($efforts as $e){
+		/*foreach($efforts as $e){
 			$e->setStatus($effort_status);
-		}
+		}*/
 		
         $this->render_list(&$efforts);
     }
@@ -143,12 +143,12 @@ class ListBlockCol_EffortPersonAmountHour extends ListBlockCol
 		
 		$sum = 0.0;
 		
-		if($obj->getStatus()){
+		/*if($obj->getStatus()){
 			$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person, 'status'=>$obj->status));
 		}
-		else{
+		else{*/
 			$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person));
-		}
+		#}
 		
 		if($sum_eff)
 		{
@@ -178,12 +178,12 @@ class ListBlockCol_EffortPersonAmountSalary extends ListBlockCol
 		$sum_all = 0.0;
 		
 		if($person = Person::getVisibleById($obj->person)){
-			if($obj->getStatus()){
+			/*if($obj->getStatus()){
 				$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$person->id, 'status'=>$obj->status));
 			}
-			else{
+			else{*/
 				$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$person->id));
-			}
+			#}
 			if($sum_sal)
 			{
 				$sum = (round($sum_sal/60/60, 1) * 1.0);
@@ -264,12 +264,12 @@ class ListBlockCol_EffortPersonCalcGraph extends ListBlockCol
 		}
 		else {
 			if($person = Person::getVisibleById($obj->person)){
-				if($obj->getStatus()){
+				/*if($obj->getStatus()){
 					$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$person->id, 'status'=>$obj->status));
 				}
-				else{
+				else{*/
 					$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$person->id));
-				}
+				#}
 				if($sum_sal)
 				{
 					$sum = (round($sum_sal/60/60, 1) * 1.0);

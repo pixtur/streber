@@ -48,7 +48,7 @@ function printRecentChanges($projects, $print_project_headlines= true)
     if(count($projects_with_changes)) {
 
         $block=new PageBlock(array(
-            'title' =>__('Recently changes'),
+            'title' =>__('Recent changes'),
             'id'    =>'recentchanges'
         ));
         $block->render_blockStart();

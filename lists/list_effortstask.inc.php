@@ -37,16 +37,16 @@ class ListBlock_effortsTask extends ListBlock
     {
         global $PH;
 		
-		$effort_status = false;
+		/*$effort_status = false;
 		if($this->query_options['effort_status_min'] == $this->query_options['effort_status_max']){
 			$effort_status = true;
-		}
+		}*/
 		
 		$efforts = Effort::getEffortTasks($this->query_options);
 		
-		foreach($efforts as $e){
+		/*foreach($efforts as $e){
 			$e->setStatus($effort_status);
-		}
+		}*/
 		
         $this->render_list(&$efforts);
     }
@@ -83,12 +83,12 @@ class ListBlock_effortsTask extends ListBlock
 				$this->render_trow(&$e);
 			}
 			
-			if($efforts[0]->getStatus()){
+			/*if($efforts[0]->getStatus()){
 				$sum_proj = Effort::getSumEfforts(array('project'=>$efforts[0]->project, 'status'=>$efforts[0]->status));
 			}
-			else{
+			else{*/
 				$sum_proj = Effort::getSumEfforts(array('project'=>$efforts[0]->project));
-			}
+			#}
 			
 			if($sum_proj){
 				$sum += $sum_proj/60/60 * 1.0;
@@ -138,12 +138,12 @@ class ListBlockCol_EffortTaskAmount extends ListBlockCol
 		
 		$sum = 0.0;
 		
-		if($obj->getStatus()){
+		/*if($obj->getStatus()){
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'status'=>$obj->status));
 		}
-		else{
+		else{*/
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task));
-		}
+		#}
 		
 		if($sum_task)
 		{
@@ -173,14 +173,14 @@ class ListBlockCol_EffortTaskGraph extends ListBlockCol
 		    echo "<td>-</td>";
 		}
 		else {
-			if($obj->getStatus()){
+			/*if($obj->getStatus()){
 				$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'status'=>$obj->status));
 				$sum_proj = Effort::getSumEfforts(array('project'=>$obj->project, 'status'=>$obj->status));
 			}
-			else{
+			else{*/
 				$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task));
 				$sum_proj = Effort::getSumEfforts(array('project'=>$obj->project));
-			}
+			#}
 			
 			if($sum_task && $sum_proj){
 				$max_length_value = 3;

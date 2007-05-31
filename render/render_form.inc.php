@@ -499,6 +499,7 @@ class Form_Checkbox extends PageFormElement {
 
         $buffer= "<p " . $this->renderCssClasses() .  ">";
         $buffer.="<span class=checker><input type='checkbox' id='$this->name' name='$this->name' $str_value $this->func $checked><label for='$this->name'>$this->title</label></span>";
+
         $buffer.="</p>";
         return $buffer;
     }
@@ -531,6 +532,30 @@ class Form_Text extends PageFormElement
     }
 }
 
+class Form_InputText extends PageFormElement
+{
+	private $text = '';
+	private $rows = 1;
+
+    PUBLIC function __construct($text="", $title="", $name="", $rows=1)
+    {
+        $this->type     = 'text';
+		$this->title    = $title;
+		$this->name     = $name;
+        parent::__construct();
+        $this->text     = $text;
+		$this->rows     = $rows;
+    }
+
+    PUBLIC function __toString()
+    {
+		$buffer= "<p>";
+        $buffer.="<label>$this->title</label><span class=text><textarea rows=$this->rows name=$this->name>$this->text</textarea></span>";
+        $buffer.="</p>";
+        return $buffer;
+    }
+}
+
 
 class Form_CustomHTML extends PageFormElement {
 
@@ -539,7 +564,7 @@ class Form_CustomHTML extends PageFormElement {
     PUBLIC function __construct($html='',$name=false)
     {
         $this->type='html';
-		$this->name=$name; ## changed ##
+		$this->name=$name; ##%% changed ##
         parent::__construct();
         $this->html=  $html;
     }

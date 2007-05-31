@@ -40,16 +40,16 @@ class ListBlock_effortsTaskCalculation extends ListBlock
     {
         global $PH;
 		
-		$effort_status = false;
+		/*$effort_status = false;
 		if($this->query_options['effort_status_min'] == $this->query_options['effort_status_max']){
 			$effort_status = true;
-		}
+		}*/
 		
 		$efforts = Effort::getEffortTasks($this->query_options);
 		
-		foreach($efforts as $e){
+		/*foreach($efforts as $e){
 			$e->setStatus($effort_status);
-		}
+		}*/
 		
         $this->render_list(&$efforts);
     }
@@ -145,12 +145,12 @@ class ListBlockCol_EffortTaskAmountHour extends ListBlockCol
 		
 		$sum = 0.0;
 		
-		if($obj->getStatus()){
+		/*if($obj->getStatus()){
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'status'=>$obj->status));
 		}
-		else{
+		else{*/
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task));
-		}
+		#}
 		
 		if($sum_task)
 		{
@@ -182,12 +182,12 @@ class ListBlockCol_EffortTaskAmountSalary extends ListBlockCol
 		if($effort_persons = Effort::getEffortPersons(array('project'=>$obj->project, 'task'=>$obj->task))){
 			foreach($effort_persons as $ep){
 				if($person = Person::getVisibleById($ep->person)){
-					if($obj->getStatus()){
+					/*if($obj->getStatus()){
 						$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id, 'status'=>$obj->status));
 					}
-					else{
+					else{*/
 						$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id));
-					}
+					#}
 					if($sum_sal)
 					{
 						$sum = (round($sum_sal/60/60, 1) * 1.0);
@@ -271,12 +271,12 @@ class ListBlockCol_EffortTaskCalcGraph extends ListBlockCol
 			if($effort_persons = Effort::getEffortPersons(array('project'=>$obj->project, 'task'=>$obj->task))){
 				foreach($effort_persons as $ep){
 					if($person = Person::getVisibleById($ep->person)){
-						if($obj->getStatus()){
+						/*if($obj->getStatus()){
 							$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id, 'status'=>$obj->status));
 						}
-						else{
+						else{*/
 							$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id));
-						}
+						#}
 						if($sum_sal)
 						{
 							$sum = (round($sum_sal/60/60, 1) * 1.0);
@@ -363,12 +363,12 @@ class ListBlockCol_EffortTaskRelation extends ListBlockCol
 		$str = '';
 		$percent = '';
 		
-		if($obj->getStatus()){
+		/*if($obj->getStatus()){
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'status'=>$obj->status));
 		}
-		else{
+		else{*/
 			$sum_task = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task));
-		}
+		#}
 		
 		if($sum_task)
 		{

@@ -3,6 +3,8 @@
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
+require_once(confGet('DIR_STREBER') . "db/class_effort.inc.php");
+
 /**
  * derived ListBlock-class for listing efforts
  *
@@ -43,16 +45,16 @@ class ListBlock_effortsPerson extends ListBlock
     {
         global $PH;
 		
-		$effort_status = false;
+		/*$effort_status = false;
 		if($this->query_options['effort_status_min'] == $this->query_options['effort_status_max']){
 			$effort_status = true;
-		}
+		}*/
 		
 		$efforts = Effort::getEffortPersons($this->query_options);
 		
-		foreach($efforts as $e){
+		/*foreach($efforts as $e){
 			$e->setStatus($effort_status);
-		}
+		}*/
 		
         $this->render_list(&$efforts);
     }
@@ -89,12 +91,12 @@ class ListBlock_effortsPerson extends ListBlock
 				$this->render_trow(&$e);
 			}
 			
-			if($efforts[0]->getStatus()){
+			/*if($efforts[0]->getStatus()){
 				$sum_proj = Effort::getSumEfforts(array('project'=>$efforts[0]->project, 'status'=>$efforts[0]->status));
 			}
-			else{
+			else{*/
 				$sum_proj = Effort::getSumEfforts(array('project'=>$efforts[0]->project));
-			}
+			#}
 			
 			if($sum_proj)
 			{
@@ -157,12 +159,12 @@ class ListBlockCol_EffortPersonAmount extends ListBlockCol
 		
 		$sum = 0.0;
 		
-		if($obj->getStatus()){
+		/*if($obj->getStatus()){
 			$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person, 'status'=>$obj->status));
 		}
-		else{
+		else{*/
 			$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person));
-		}
+		#}
 		
 		if($sum_eff)
 		{
@@ -193,14 +195,14 @@ class ListBlockCol_EffortGraph extends ListBlockCol
 		}
 		else {
 			
-			if($obj->getStatus()){
+			/*if($obj->getStatus()){
 				$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person, 'status'=>$obj->status));
 				$sum_proj = Effort::getSumEfforts(array('project'=>$obj->project, 'status'=>$obj->status));
 			}
-			else{
+			else{*/
 				$sum_eff = Effort::getSumEfforts(array('project'=>$obj->project, 'person'=>$obj->person));
 				$sum_proj = Effort::getSumEfforts(array('project'=>$obj->project));
-			}
+			#}
 			
 			if($sum_eff && $sum_proj){
 				$max_length_value = 3;

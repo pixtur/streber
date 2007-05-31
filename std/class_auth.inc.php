@@ -157,10 +157,137 @@ class Auth
         return $user;
     }
 
+	public function checkLdapOption($name)
+	{
+		if(!$user=Person::getByNickname($name)) {
+            log_message("login failed, unknown person '$name' from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            return false;
+        }
+		
+		if(!$user->ldap){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public function tryLoginUserByLdap($name, $password)
+	{
+		$user = Person::getByNickname($name);
+		
+		if($user->state != ITEM_STATE_OK) {
+            log_message("login failed,  deleted person '$name'/ from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_FAILURE);
+            return false;
+        }
+		
+        if(!$user->can_login) {
+            log_message("login failed,  person '$name' without account / from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            return false;
+        }
+		
+        if(!$user instanceof Person) {
+            return false;
+        }
+		
+		if(!$ldapconn = ldap_connect(confGet('LDAP_SERVER'))){
+			log_message("login failed, connection to ldap server failed.", LOG_MESSAGE_LOGIN_FAILURE);
+			return false;
+		}
+		
+		if(!$ldapbind = ldap_bind($ldapconn, confGet('LDAP_USERNAME_PREFIX').$name, $password)){
+			log_message("login failed, bind to ldap server failed.", LOG_MESSAGE_LOGIN_FAILURE);
+			return false;
+		}
+		
+		$this->cur_user= $user;
 
+        /**
+        * if cookie-string is empty add appropriate setting
+        * - actually this is only good for providing the first admin-user
+        *   a valid cookie setting. This can not be done in install because
+        *   we can't use Person->calcCookieString() from there.
+        *
+        * If users should keep login across sessions (on different computers
+        * or IP-Adresses), calcCookieString must NOT be called here, because
+        * it uses Time and Random.
+        *
+        * However, when the user is loggin out, the cookieString should be randomized.
+        * This make all stored cookies invalid.
+        */
+        if(
+            confGet('CHECK_IP_ADDRESS')
+            ||
+            $this->cur_user->cookie_string == ""
+            ||
+            $this->cur_user->cookie_string == "0"
+        ) {
+            log_message("tryLoginUser()->calcCookieString()", LOG_MESSAGE_DEBUG);
 
+            $this->cur_user->cookie_string= $this->cur_user->calcCookieString();
 
+            log_message("cookie is (".$this->cur_user->cookie_string.")", LOG_MESSAGE_DEBUG);
+        }
 
+        $this->cur_user->ip_address= asCleanString($_SERVER['REMOTE_ADDR']);
+
+        /**
+        * guess time client time offset to gmt in seconds
+        */
+        if($this->cur_user->time_zone == TIME_OFFSET_AUTO) {
+
+            ### store date-offsetset for this user ###
+
+            if($time_offset= get('user_timeoffset')) {
+                list($hour,$min,$sec) = explode(':',$time_offset);
+                $client_day_seconds= $hour*60*60 + $min*60 + $sec;
+
+                ### get servertime ###
+                if($t= get('edit_request_time')) {
+                    $t= get('edit_request_time');
+                }
+                else {
+                    $t= time();
+                }
+                list($hour,$min,$sec) = explode(':', gmdate('H:i:s', $t));
+                $server_day_seconds= $hour*60*60 + $min*60 + $sec;
+                $offset= $server_day_seconds - $client_day_seconds;
+                if($offset < - 12*60*60) {
+                    $offset+= 24*60*60;
+                }
+                else if($offset > 12*60*60) {
+                    $offset-= 24*60*60;
+                }
+                $offset *= -1;
+
+                if(confGet('ROUND_AUTO_DETECTED_TIME_OFFSET')) {
+                    $offset= intval(($offset + 30*60) / 60 / 60) *60 * 60;
+                }
+
+                $this->cur_user->time_offset = $offset;
+                log_message("usertime offset = $offset sec", LOG_MESSAGE_LOGIN_SUCCESS);
+            }
+            else {
+                new FeedbackWarning(__("Unable to automatically detect client time zone"));
+            }
+        }
+        else {
+            $this->cur_user->time_offset = $this->cur_user->time_zone * 60.0 * 60.0;
+        }
+
+        /**
+        * update user
+        */
+        log_message("tryLoginUser()->update cur_user", LOG_MESSAGE_DEBUG);
+        $this->cur_user->last_login= getGMTString();
+        $this->cur_user->update(array('last_login','cookie_string','ip_address','time_offset'),false);
+
+        log_message("tryLoginUser()->success", LOG_MESSAGE_DEBUG);
+        log_message("'$name' logged in from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_SUCCESS);
+		
+        return $user;
+		
+	}
+	
     /**
     * perform login for user/password
     *

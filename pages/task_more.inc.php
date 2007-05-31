@@ -503,9 +503,15 @@ function taskEdit($task=NULL)
 
                         if($task->id) {
                             $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
+							if($task_person = $ap->getTaskAssignment($task->id)){
+								$tab->add(new Form_checkbox('task_forward_to_'.$ap->id, __("Forward"), $task_person->forward, ''));
+            					$tab->add(new Form_InputText($task_person->forward_comment,  __("Forward comment"), 'task_forward_comment_to_'.$ap->id));
+							}
                         }
                         else {
                             $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
+							$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
+							$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
                             $count_new++;
                         }
                         $count_all++;
@@ -521,8 +527,12 @@ function taskEdit($task=NULL)
                 $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
 				
 				if(!$task->id){
+					$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
+            		$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
 				}
 				else{
+					$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
+            		$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
 				}
             }
 
@@ -997,7 +1007,15 @@ function taskEditSubmit()
         if(isset($task_assignments)) {
             foreach($task_assignments as $id=>$t_old) {
                 $id_new= get('task_assigned_to_'.$id);
-								
+				$forward_state = get('task_forward_to_'.$id);
+				if($forward_state){
+					$forwarded = 1;
+				}
+				else{
+					$forwarded = 0;
+				}
+				$forward_comment = get('task_forward_comment_to_'.$id);
+				
                 if($id_new === NULL) {
                     log_message("failure. Can't change no longer existing assigment (person-id=$id item-id=$t_old->id)", LOG_MESSAGE_DEBUG);
                     #$PH->abortWarning("failure. Can't change no longer existing assigment",ERROR_NOTE);
@@ -1005,7 +1023,11 @@ function taskEditSubmit()
                 }
 				
                 if($id == $id_new) {
-					
+					if($tp = TaskPerson::getTaskPersons(array('person'=>$id, 'task'=>$task->id))){
+						$tp[0]->forward = $forwarded;
+						$tp[0]->forward_comment = $forward_comment;
+						$old_task_assignments[] = $tp[0];
+					}
                     #echo " [$id] {$team[$id]->name} still assigned<br>";
                     continue;
                 }
@@ -1034,6 +1056,8 @@ function taskEditSubmit()
                     'task'  => $task->id,
                     'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $team[$id]->name),
                     'project'=>$project->id,
+					'forward'=>$forwarded,
+					'forward_comment'=>$forward_comment,
                 ));
 
                 $new_task_assignments[]=$new_assignment;
@@ -1044,12 +1068,26 @@ function taskEditSubmit()
         ### check new assigments ###
         $count=0;
         while($id_new= get('task_assign_to_'.$count)) {
-            			
+            
+			$forward_state = get('task_forward_to_'.$count);
+			if($forward_state){
+				$forwarded = 1;
+			}
+			else{
+				$forwarded = 0;
+			}
+			$forward_comment = get('task_forward_comment_to_'.$count);
+			
 			$count++;
 			
             ### check if already assigned ###
             if(isset($task_assignments[$id_new])) {
-				
+				if($tp = TaskPerson::getTaskPersons(array('person'=>$id_new,'task'=>$task->id))){
+					$tp[0]->forward = $forwarded;
+					$tp[0]->forward_comment = $forward_comment;
+					$old_task_assignments[] = $tp[0];
+				}
+
                 #new FeedbackMessage(sprintf(__("task was already assigned to %s"),$team[$id_new]->name));
             }
             else {
@@ -1062,6 +1100,8 @@ function taskEditSubmit()
                     'task'  => $task->id,
                     'comment'=>"",
                     'project'=>$project->id,
+					'forward'=>$forwarded,
+					'forward_comment'=>$forward_comment,
                 ));
 
                 /**
@@ -1355,6 +1395,10 @@ function taskEditSubmit()
         foreach($new_task_assignments as $nta) {
             $nta->insert();
         }
+		
+		foreach($old_task_assignments as $ota){
+			$ota->update();
+		}
 
         new FeedbackMessage(sprintf(__("Changed %s %s with ID %s","type,link,id"),  $task->getLabel(), $task->getLink(false),$task->id));
         $task->update();
@@ -1377,6 +1421,25 @@ function taskEditSubmit()
 	        new FeedbackMessage(sprintf(__('Marked %s tasks to be resolved in this version.'), count($resolved_tasks)));
 	    }
     }
+	
+	### Get and update forwarded tasks ###
+	/*if($task_ass = $task->getAssignments()){
+		foreach($task_ass as $ta){
+			$forward_state = get('task_forward_to_'.$ta->person);
+			if($forward_state){
+				$ta->forward = 1;
+			}
+			else{
+				$ta->forward = 0;
+			}
+			$forward_comment = get('task_forward_comment_to_'.$ta->person);
+			
+			if((!($forward_comment == "") || !(is_null($forward_comment))) && ($forward_state)){
+				$ta->forward_comment = $forward_comment;
+			}
+			$ta->update();
+		}
+	}*/
 	
 	### notify on change ###
 	$task->nowChangedByUser();

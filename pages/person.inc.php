@@ -1427,6 +1427,7 @@ function personViewTasks()
 function personViewEfforts()
 {
     global $PH;
+	global $auth;
     
     ### get current project ###
     $id=getOnePassedId('person','persons_*');
@@ -1556,6 +1557,125 @@ function personViewEfforts()
                 )
             )
         ),
+		
+		## last logout ##
+		'last_logout' => array(
+            'name'=> __('last logout'),
+            'filters'=> array(
+                'last_logout'   => array(
+                    'id'        => 'last_logout',
+                    'visible'   => true,
+                    'active'    => true,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 1 week ##
+		'last_week' => array(
+            'name'=> __('1 week'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 7,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 2 weeks ##
+		'last_two_weeks' => array(
+            'name'=> __('2 weeks'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 14,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 3 weeks ##
+		'last_three_weeks' => array(
+            'name'=> __('3 weeks'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 21,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 1 month ##
+		'last_month' => array(
+            'name'=> __('1 month'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 28,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## prior ##
+		'prior' => array(
+            'name'=> __('prior'),
+            'filters'=> array(
+                'prior'    => array(
+                    'id'        => 'prior',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 29,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
     );
 
     ## set preset location ##
@@ -1629,6 +1749,21 @@ function personViewEfforts()
                             'value'=>$f_settings['max'],
                         ));
                         break;
+					case 'last_logout':
+						$list->filters[]= new ListFilter_last_logout(array(
+							'value'=>$f_settings['value'],
+						));
+					    break;
+					case 'last_weeks':
+						$list->filters[]= new ListFilter_min_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+						break;
+					case 'prior':
+						$list->filters[]= new ListFilter_max_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+					    break;
                     default:
                         trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
                         break;
@@ -2019,7 +2154,12 @@ function personEdit($person=NULL)
                 $fpw2->required= true;
             }
             $tab->add($fpw2);
-
+			
+			### authentication ###
+			if(confGet('LDAP')){
+				$authentication = array('streber'=>0, 'ldap'=>1);
+				$tab->add(new Form_Dropdown('person_auth', __("Authentication with","form label"), $authentication, $person->ldap));
+			}
 
             ### profile and login ###
             if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
@@ -2093,9 +2233,6 @@ function personEdit($person=NULL)
             }
 
         }
-
-
-
 
         ### details ###
         {
@@ -2490,7 +2627,16 @@ function personEditSubmit()
             new FeedbackMessage(__("Nickname has been converted to lowercase"));
             $person->nickname = strtolower($person->nickname);
         }
-
+		
+		### authentication ###
+		$p_auth = get('person_auth');
+		if($p_auth){
+			$person->ldap = true;
+		}
+		else{
+			$person->ldap = false;
+		}
+		
         if($p2= Person::getByNickname($t_nickname)) { # another person with this nick?
             if($p2->id != $person->id) {
                 new FeedbackWarning(__("Nickname has to be unique"));

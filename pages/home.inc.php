@@ -213,6 +213,13 @@ function homeBookmarks()
         $list_bookmarks->reduced_header = true;
         $list_bookmarks->print_automatic();
     }
+	
+	### list forwarded tasks ###
+	{
+		require_once(confGet('DIR_STREBER') . 'lists/list_forwardedtasks.inc.php');
+        $list_forwarded_tasks = new ListBlock_forwarded_tasks();
+        $list_forwarded_tasks->print_automatic();
+	}
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
@@ -390,33 +397,33 @@ function homeAllChanges()
                     $list->filters[]= new ListFilter_min_week(array(
                         'value'=>$f_settings['value'], 'factor'=>0
                     ));
-                    $list->filters[]= new ListFilter_max_week(array(
-                        'value'=>$f_settings['value'],
-                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #    'value'=>$f_settings['value'],
+                    #));
                     break;
                 case 'yesterday':
                     $list->filters[]= new ListFilter_min_week(array(
                         'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
                     ));
-                    $list->filters[]= new ListFilter_max_week(array(
-                        'value'=>$f_settings['value'],
-                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #    'value'=>$f_settings['value'],
+                    #));
                     break;
                 case 'last_week':
                     $list->filters[]= new ListFilter_min_week(array(
                         'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
                     ));
-                    $list->filters[]= new ListFilter_max_week(array(
-                        'value'=>$f_settings['value'],
-                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #    'value'=>$f_settings['value'],
+                    #));
                     break;
                 case 'last_two_weeks':
                     $list->filters[]= new ListFilter_min_week(array(
                         'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
                     ));
-                    $list->filters[]= new ListFilter_max_week(array(
-                        'value'=>$f_settings['value'],
-                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #    'value'=>$f_settings['value'],
+                    #));
                     break;
                 default:
                     trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
@@ -924,6 +931,125 @@ function homeEfforts()
                 )
             )
         ),
+		
+		## last logout ##
+		'last_logout' => array(
+            'name'=> __('last logout'),
+            'filters'=> array(
+                'last_logout'   => array(
+                    'id'        => 'last_logout',
+                    'visible'   => true,
+                    'active'    => true,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 1 week ##
+		'last_week' => array(
+            'name'=> __('1 week'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 7,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 2 weeks ##
+		'last_two_weeks' => array(
+            'name'=> __('2 weeks'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 14,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 3 weeks ##
+		'last_three_weeks' => array(
+            'name'=> __('3 weeks'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 21,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## 1 month ##
+		'last_month' => array(
+            'name'=> __('1 month'),
+            'filters'=> array(
+                'last_weeks'    => array(
+                    'id'        => 'last_weeks',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 28,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
+		
+		## prior ##
+		'prior' => array(
+            'name'=> __('prior'),
+            'filters'=> array(
+                'prior'    => array(
+                    'id'        => 'prior',
+                    'visible'   => true,
+                    'active'    => true,
+					'factor'    => 29,
+					'value'     => $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'changes' =>array(
+                    'hide_columns'  => array(''),
+                    'style'=> 'list',
+                )
+            ),
+        ),
     );
 
     ## set preset location ##
@@ -1001,6 +1127,21 @@ function homeEfforts()
                             'value'=>$f_settings['max'],
                         ));
                         break;
+					case 'last_logout':
+						$list->filters[]= new ListFilter_last_logout(array(
+							'value'=>$f_settings['value'],
+						));
+					    break;
+					case 'last_weeks':
+						$list->filters[]= new ListFilter_min_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+						break;
+					case 'prior':
+						$list->filters[]= new ListFilter_max_week(array(
+							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+						));
+					    break;
                     default:
                         trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
                         break;
