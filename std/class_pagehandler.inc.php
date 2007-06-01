@@ -797,7 +797,7 @@ class PageHandler extends BaseObject
 
     public function getWikiLink($page=NULL, $alt_title=NULL) {
         if(!$page) {
-            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}'>Wiki+Help</a>";
+            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$this->cur_page_id}' target='_blank'>Wiki+Help</a>";
         }
         else {
             if($page == "WikiSyntax") {
@@ -806,7 +806,7 @@ class PageHandler extends BaseObject
             if(!$alt_title) {
                 $alt_title= $page;
             }
-            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$page}'>$alt_title</a>";
+            return "<a href='" . confGet('STREBER_WIKI_URL').  "{$page}' target='_blank'>$alt_title</a>";
         }
     }
     
