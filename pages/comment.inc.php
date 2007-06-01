@@ -228,7 +228,20 @@ function commentNew() {
     if($id=getOnePassedId('comment','comments_*',false)) { #no not abort if not found
 		if($comment= Comment::getById($id)) {
             $newComment->comment= $comment->id;
-            $newComment->name=__('Reply to ','prefix for name of new comment on another comment').$comment->name;
+            switch (confGet('REPLY_ON_COMMENT_PREFIX')) {
+			    case 0: 
+			        $newComment->name='';
+			        break;
+				case 1: 
+				    $newComment->name=__('Re: ').$comment->name;
+					break;
+				case 2: 
+				    $newComment->name=__('Reply to ','prefix for name of new comment on another comment').$comment->name;
+				    break;
+				default: 
+				    $newComment->name=__('Re: ').$comment->name;
+				    break;
+			}
             $newComment->occasion=$COMMENTTYPE_VALUES['Reply'];
 
         }

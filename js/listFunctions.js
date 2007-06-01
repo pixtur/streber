@@ -42,14 +42,18 @@ function listFunctions()
     /**
     * prevent normal links from being overwritten by row toggling
     */
-    $('table.list a').click
-    (
-        function(e)
+    $('table.list a').click(function(e) {
+        // Ctrl+Click in Firefox - open link in new Tab
+		if( e.ctrlKey )
+        {
+            document.location.href = gBrowser.addTab(this.href);
+        }
+        else 
         {
             document.location.href= this.href;
-            return false
         }
-    );
+        return false;
+    });
 
     $('table.list input[@type=checkbox]').each(function(){
         //   td         tr

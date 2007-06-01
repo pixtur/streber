@@ -367,6 +367,14 @@ $g_config= array(
 	'LDAP_USERNAME_PREFIX' =>'',
 	'LDAP_SERVER' => '',
 
+	/**
+	* Reply on comment prefix
+	*   0 - no prefix at all (default)
+	*   1 - Re: (international standard)
+	*	2 - default "Reply to" text from language file
+	*/
+	'REPLY_ON_COMMENT_PREFIX' => '0',
+
 );
 
 
