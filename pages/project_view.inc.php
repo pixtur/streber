@@ -94,7 +94,10 @@ function ProjView()
         }
 
 		/*
-		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$project->id));
+		$item = ItemPerson::getAll(array(
+		    'person'=>$auth->cur_user->id,
+		    'item'=>$project->id
+		));
 		if((!$item) || ($item[0]->is_bookmark == 0)){
 			$page->add_function(new PageFunction(array(
 				'target'    =>'itemsAsBookmark',

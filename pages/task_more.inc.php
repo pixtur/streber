@@ -2412,7 +2412,7 @@ function TaskEditMultiple()
 
     ### set up page and write header ####
     {
-        $page= new Page(array('use_jscalendar'=>true,'autofocus_field'=>'task_name'));
+        $page= new Page(array('use_jscalendar'=>true));
     	$page->cur_tab='projects';
 
 

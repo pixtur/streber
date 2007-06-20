@@ -2051,7 +2051,7 @@ $g_lang_table= array(
 'Further Documentation'       =>'Weitere Dokumentation',  # line 359
 'Resolved tasks|Block title'  =>'Erledigte Aufgaben',  # line 593
 'Update'                      =>'Aktualisieren',  # line 771
-'Book Effort'                 =>'Aufwand buchen',  # line 1095
+'Book effort'                 =>'Aufwand buchen',  # line 1095
 
 'Please copy the text'        =>'Bitte kopieren Sie den Text',  # line 62
 'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Dies dient zur Reduzierung von Werbemüll.',  # line 64
@@ -2102,7 +2102,7 @@ $g_lang_table= array(
 'bogus|Resolve reason'        =>'fehlerhaft',  # line 164
 'rejected|Resolve reason'     =>'abgelehnt',  # line 165
 'deferred|Resolve reason'     =>'verschoben',  # line 166
-'Task|Task Category'          =>'Aufabe',  # line 213
+'Task|Task Category'          =>'Aufgabe',  # line 213
 'Bug|Task Category'           =>'Fehler',  # line 214
 'Documentation|Task Category' =>'Dokumentation',  # line 215
 'Event|Task Category'         =>'Ereignis',  # line 216

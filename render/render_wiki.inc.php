@@ -276,7 +276,7 @@ class FormatBlockStrike extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/^(.*?)~~([^\*\s][^\*\+\/]+[^~\s])~~(.*)/s", $text, $matches)) {
+                    if(preg_match("/^(.*?)~~([^\*\s].+[^~\s])~~(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockStrike($matches[2]);
                         $text= $matches[3];
@@ -291,7 +291,6 @@ class FormatBlockStrike extends FormatBlock
                         break;
                     }
                 }
-
             }
             else {
                 $blocks_new[]=$b;
@@ -1762,6 +1761,7 @@ class FormatBlockTable extends FormatBlock
                         $keep_previous_block= new FormatBlock($matches[1]);
 
                         ### check number of pipes in each line...
+
                         $lines= explode("\n", $matches[2]);
                         $line_cells=array();
                         $rest= $matches[3];
@@ -1811,6 +1811,9 @@ class FormatBlockTable extends FormatBlock
                     }
                     else if($found) {
                         $blocks_new[]= new FormatBlock($text);
+                        #$text= $b->str;
+                        $found= false;
+                        $syntax_failure= false;
                         break;
                     }
                     else {

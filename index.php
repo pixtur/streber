@@ -57,6 +57,7 @@ if(file_exists('customize.inc.php')) {
 filterGlobalArrays();
 
 
+
 /**
 * run profiler and output measures in footer?
 */
@@ -99,7 +100,13 @@ if ($result = $dbh->prepare('SELECT NOW()')) {
   $result->execute();
 }
 
+
 measure_stop( confGet('DIR_STREBER') . 'core_includes');
+
+if(!$requested_page_id = get('go')) {
+    require_once( confGet('DIR_STREBER') . "./std/check_version.inc.php");
+    validateEnvironment();
+}
 
 /**
 * authenticate user by cookie / start translation
@@ -156,10 +163,7 @@ if($g_tags_removed) {
 * route to pages
 ********************************************************************************/
 ### if index.php was called without target, check environment ###
-if(!$requested_page_id = get('go')) {
-    require_once( confGet('DIR_STREBER') . "./std/check_version.inc.php");
-    validateEnvironment();
-}
+
 
 
 
