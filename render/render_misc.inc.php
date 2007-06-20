@@ -30,6 +30,13 @@ function getCurTheme()
     global $g_theme_names;
 
     ### make sure theme is define ###
+    if(!is_null(confGet('THEME_OVERWRITE'))) {
+        $t= confGet('THEME_OVERWRITE');
+        if(isset($g_theme_names[$t]) && ($theme= $g_theme_names[$t])) {
+            return $theme;
+        }
+    }
+    
     if(isset($auth)
      && isset($auth->cur_user)
      && isset($g_theme_names[$auth->cur_user->theme])

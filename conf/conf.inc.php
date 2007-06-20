@@ -156,7 +156,8 @@ $g_config= array(
     /**
     * NUMBER in theme-list
     */
-    'THEME_DEFAULT'         =>0,
+    'THEME_DEFAULT'         => 0,
+    'THEME_OVERWRITE'       => NULL,
 
     /**
     * change this to override the automatic selection of the locale based on the current language
@@ -434,7 +435,7 @@ $g_themes=array(
 #    'classic' =>'Classic Theme',
 
 );
-$g_theme_names=array_keys($g_themes);
+$g_theme_names= array_keys($g_themes);
 
 
 

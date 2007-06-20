@@ -1,9 +1,94 @@
 /**
-* clean theme from streberPM
-*  (c)2005 thomas@pixtur.de
+
+    This is an example how to overwrite the default theme
+
 */
 
-/* === common settings ================================== */
-
+/* === default settings from clean theme ================================== */
 @import url(../clean/styles.css);
 
+
+/* overwrite some settings */
+body {
+ background-color: #FFFEF2;
+}
+
+div#header {
+    background: url(layout/bg_header.png)  left bottom repeat-x #720003;
+}
+
+
+div#header div#logo {
+ margin:    7px 10px 7px 13px;
+ padding:   0px; 
+ background: url(layout/bg_header_logo.png) no-repeat left bottom ;
+ height:     43px;
+ width:     173px;
+ display:   block;
+    
+}
+
+div#header div#logo div.text {
+ display:none;
+}
+
+div#sections {
+ padding-top:   35px;
+}
+
+#header #user_functions {
+ margin:        7px;
+}
+
+
+
+div.block {
+ background-image:none;
+ background-color:#fff;
+ border:1px solid #E9DFCD;
+}
+
+
+
+div.block div.header {
+ background-image:none;
+ background-color:#E9DFCD;
+ padding: 3px;
+ 
+}
+
+div.block.reduced_header {
+ padding:0px;
+ margin:0px;
+ background:#E9DFCD url() no-repeat;
+}
+div.block.reduced_header > h2 {
+ background-image:none;
+ background:#E9DFCD url() no-repeat;
+ margin:0px;
+ 
+ 
+}
+
+div.block.reduced_header > div.extra_top {
+ display:none;
+}
+
+div.block div.header b.extra {
+ display:none;
+}
+
+
+table td,
+div.block div.footer,
+table.list th { 
+ background-image:none;
+ background-color:#F4EEE5;
+
+}
+
+
+/* --- hide companies ---*/
+div#sections span.section#tab_companies {
+ display:none;
+}
