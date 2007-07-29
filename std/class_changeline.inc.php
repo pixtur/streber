@@ -98,7 +98,7 @@ class ChangeLine extends BaseObject
 
 
         /**
-        * get list of items touched by other persons
+        * get list of items touched by other people
         */       
         $changed_items= DbProjectItem::getAll($query_options);
        

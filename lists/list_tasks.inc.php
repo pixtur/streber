@@ -606,7 +606,7 @@ class ListBlock_tasks extends ListBlock
 
         ### add filter options ###
         foreach($this->filters as $f) {
-            foreach($f->getQuerryAttributes() as $k=>$v) {
+            foreach($f->getQuerryAttributes() as $k => $v) {
                 $this->query_options[$k]= $v;
             }
         }

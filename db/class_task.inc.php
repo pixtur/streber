@@ -179,7 +179,7 @@ class Task extends DbProjectItem
                 'default'       => 0,
                 'log_changes'   => true,
             )),
-			# %% #
+
 			new FieldString(array('name'=>'calculation',
 			    'title'=>__('Calculation') . " " . __('in Euro'),
 				'default'=>0.0,
@@ -789,6 +789,8 @@ foreach($filters_str as $fs=>$value) {
             }
         }
 
+        
+        
         if($sort_hierarchical && is_null($parent_task)) {
             $parent_task=0;
         }
@@ -1080,7 +1082,6 @@ foreach($filters_str as $fs=>$value) {
                 " . getOrderByString($order_by);
             }
         }
-
         
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);

@@ -260,7 +260,7 @@ class ListFilter_for_milestone extends ListFilter
         * check for visibility
         */
         if($ms= Task::getVisibleById($this->value)) {
-            if($ms->is_milestone) {
+            if($ms->category == TCATEGORY_MILESTONE) {
                 $this->milestone= $ms;
             }
             else {

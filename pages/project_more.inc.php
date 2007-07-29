@@ -799,12 +799,12 @@ function projViewTasks()
         }
     }
 
-    if($ms=get('for_milestone')) {
+    if($milestone) {
         ### create from handle ###
         $PH->defineFromHandle(array(
             'prj'      =>$project->id,
-            'peset_id' =>$preset_id,
-            'for_milestone'=>$ms
+            'preset_id' =>$preset_id,
+            'for_milestone'=>$milestone->id
         ));
 
     }
@@ -812,7 +812,7 @@ function projViewTasks()
         ### create from handle ###
         $PH->defineFromHandle(array(
             'prj'      =>$project->id,
-            'peset_id' =>$preset_id
+            'preset_id' =>$preset_id
         ));
     }
 
@@ -872,7 +872,6 @@ function projViewTasks()
                              ? true
                              : NULL;
     }
-
 
 
     ### set up page ####

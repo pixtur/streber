@@ -25,9 +25,9 @@
 *
 *    translated by: Gábor Salamon (http://sala.sallala.hu/)
 *
-*             date: 2007-05-02
+*             date: 2007-05-23
 *
-*  streber version: 0.0795
+*  streber version: 0.08
 *
 *         comments: Not finished yet.
 */
@@ -40,7 +40,7 @@ $g_lang_table= array(
 'autodetect'                  =>'',  # line 304
 
 ### ../pages/company.inc.php   ###
-'Summary'                     =>'Összesítés',  # line 570
+'Summary'                     =>'Összegzés',  # line 570
 
 ### ../pages/person.inc.php   ###
 'Details'                     =>'Részletek',  # line 1079
@@ -170,6 +170,10 @@ $g_lang_table= array(
 
 ### ../pages/home.inc.php   ###
 'Priority'                    =>'Prioritás',  # line 177
+'Edit your Profile'           =>'Profilom szerkesztése',  # line 86
+'for|short for client'        =>'ügyf:',  # line 133
+'today'                       =>'ma',  # line 256
+'yesterday'                   =>'tegnap',  # line 274
 
 ### ../std/constant_names.inc.php   ###
 'Company'                     =>'Cég',  # line 123
@@ -255,6 +259,8 @@ $g_lang_table= array(
 
 ### ../pages/_handles.inc.php   ###
 'Remove bookmark'             =>'Könyvjelző eltávolítása',  # line 52
+'Bookmarks'                   =>'Könyvjelzők',  # line 42
+'Overall history'             =>'Összes előzmény',  # line 58
 
 ### ../pages/search.inc.php   ###
 'Type'                        =>'Típus',  # line 871
@@ -285,7 +291,7 @@ $g_lang_table= array(
 'Modified'                    =>'Módosítva',  # line 197
 
 ### ../std/constant_names.inc.php   ###
-'Project'                     =>'Project',  # line 119
+'Project'                     =>'Projekt',  # line 119
 
 ### ../lists/list_bookmarks.inc.php   ###
 'State'                       =>'',  # line 718
@@ -410,8 +416,8 @@ $g_lang_table= array(
 'person'                      =>'személy',  # line 37
 'Edit effort'                 =>'',  # line 50
 'New effort'                  =>'',  # line 57
-'View selected Efforts'       =>'',  # line 72
-'%s effort(s) with %s hours'  =>'',  # line 129
+'View selected Efforts'       =>'Kijelöltek megtekintése',  # line 72
+'%s effort(s) with %s hours'  =>'%s bejegyzés, összesen %s óra',  # line 129
 
 ### ../std/constant_names.inc.php   ###
 'Effort'                      =>'Munkaidő',  # line 127
@@ -549,6 +555,7 @@ $g_lang_table= array(
 
 ### ../pages/home.inc.php   ###
 'Task-Status'                 =>'',  # line 184
+'Mark all items as viewed'    =>'Az összes megjelölése olvasottként',  # line 94
 
 ### ../lists/list_projects.inc.php   ###
 'Status Summary'              =>'',  # line 102
@@ -603,7 +610,8 @@ $g_lang_table= array(
 'Est.'                        =>'',  # line 144
 
 ### ../pages/home.inc.php   ###
-'Estimated time in hours'     =>'',  # line 223
+'Estimated time in hours'     =>'Becsült munkaórák',  # line 223
+'Your Bookmarks'              =>'Könyvjelzőim',  # line 202
 
 ### ../lists/list_tasks.inc.php   ###
 'Add new Task'                =>'Új feladat',  # line 166
@@ -653,7 +661,7 @@ $g_lang_table= array(
 'Release Date'                =>'Kiadás dátuma',  # line 240
 
 ### ../pages/_handles.inc.php   ###
-'Home'                        =>'',  # line 7
+'Home'                        =>'Kezdőlap',  # line 7
 'Playground'                  =>'',  # line 17
 
 ### ../pages/item.inc.php   ###
@@ -726,11 +734,12 @@ $g_lang_table= array(
 'Edit comment'                =>'',  # line 717
 'Delete comment'              =>'',  # line 740
 'View file'                   =>'',  # line 785
-'Upload file'                 =>'',  # line 797
-'Update file'                 =>'',  # line 803
+'Upload file'                 =>'Fájl feltöltése',  # line 797
+'Update file'                 =>'Fájl feltöltése',  # line 803
 
 ### ../pages/file.inc.php   ###
-'Download'                    =>'',  # line 197
+'Download'                    =>'Letöltés',  # line 197
+'Download'                    =>'Letöltés',  # line 164
 
 ### ../pages/_handles.inc.php   ###
 'Show file scaled'            =>'',  # line 823
@@ -796,6 +805,7 @@ $g_lang_table= array(
 'Error'                       =>'Hiba',  # line 39
 
 ### ../pages/_handles.inc.php   ###
+'Home'                        =>'Kezdőoldal',  # line 19
 'Activate an account'         =>'',  # line 1228
 'System Information'          =>'',  # line 1241
 'PhpInfo'                     =>'',  # line 1253
@@ -869,6 +879,8 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'List'                        =>'Lista',  # line 395
+'New person'                  =>'Új személy',  # line 1881
+
 
 ### ../pages/task_view.inc.php   ###
 'new:'                        =>'új',  # line 1064
@@ -1100,13 +1112,15 @@ $g_lang_table= array(
 
 ### ../pages/playground.inc.php   ###
 'Personal Efforts'            =>'',  # line 205
-'At Home'                     =>'',  # line 212
+'At Home'                     =>'Kezdőlap',  # line 212
 
 ### ../pages/home.inc.php   ###
+'Your Tasks'                  =>'Feladataim',  # line 754
 'Functions'                   =>'Funkciók',  # line 65
 'View your efforts'           =>'Munkaidőm',  # line 76
 'Edit your profile'           =>'Profilom szerkesztése',  # line 77
 'Projects'                    =>'Projectek',  # line 110
+'Your efforts'                =>'Munkaidőim',  # line 963
 
 ### ../pages/project_more.inc.php   ###
 '<b>NOTE</b>: Some projects are hidden from your view. Please ask an administrator to adjust you rights to avoid double-creation of projects'=>'',  # line 94
@@ -1178,6 +1192,7 @@ $g_lang_table= array(
 
 ### ../pages/item.inc.php   ###
 'ok'                          =>'',  # line 1295
+'Notify on change'            =>'Értesíts, ha változik',  # line 712
 
 ### ../pages/login.inc.php   ###
 'Login|tab in top navigation' =>'',  # line 26
@@ -1186,7 +1201,7 @@ $g_lang_table= array(
 'Go to your home. Alt-h / Option-h'=>'',  # line 225
 
 ### ../pages/login.inc.php   ###
-'License|tab in top navigation'=>'',  # line 32
+'License|tab in top navigation'=>'Licensz',  # line 32
 
 ### ../render/render_page.inc.php   ###
 'Your projects. Alt-P / Option-P'=>'',  # line 231
@@ -1253,6 +1268,8 @@ $g_lang_table= array(
 
 ### ../pages/task_view.inc.php   ###
 'Summary|Block title'         =>'',  # line 243
+'Version'                     =>'Verzió',  # line 486
+
 
 ### ../pages/person.inc.php   ###
 'Mobile|Label mobilephone of person'=>'Mobil',  # line 591
@@ -1273,7 +1290,7 @@ $g_lang_table= array(
 'Person details'              =>'',  # line 694
 'works in Projects|list title for person projects'=>'projectek, amiben részt vesz',  # line 730
 'no active projects'          =>'nincs aktív project',  # line 744
-'Assigned tasks'              =>'Kiosztott feladatok',  # line 762
+'Assigned tasks'              =>'Nyitott feladatok',  # line 762
 'No open tasks assigned'      =>'',  # line 763
 'Efforts|Page title add on'   =>'',  # line 805
 'no efforts yet'              =>'',  # line 833
@@ -1306,7 +1323,7 @@ $g_lang_table= array(
 'Log Efforts as'              =>'',  # line 137
 
 ### ../pages/person.inc.php   ###
-'Create another person after submit'=>'',  # line 1168
+'Create another person after submit'=>'Rögzítek egy másik személyt is ezután',  # line 1168
 
 ### ../pages/task_more.inc.php   ###
 'Invalid checksum for hidden form elements'=>'',  # line 777
@@ -1685,6 +1702,7 @@ $g_lang_table= array(
 'do...'                       =>'Művelet...',  # line 1024
 
 ### ../render/render_list_column_special.inc.php   ###
+'Created by'                  =>'Létrehozta:',  # line 387
 'Tasks|short column header'   =>'',  # line 226
 'Number of open tasks is hilighted if shown home.'=>'',  # line 227
 'Status|Short status column header'=>'',  # line 273
@@ -1922,9 +1940,9 @@ $g_lang_table= array(
 ### ../std/mail.inc.php   ###
 'Failure sending mail: %s'    =>'Levélküldési hiba: %s',  # line 49
 'Streber Email Notification|notifcation mail from'=>'Streber',  # line 572
-'Updates at %s|notication mail subject'=>'Változások a(z) %s oldalon',  # line 116
+'Updates at %s|notication mail subject'=>'Változások a(z) %s streber rendszeren',  # line 116
 'Hello %s,|notification'      =>'Kedves %s,',  # line 607
-'with this automatically created e-mail we want to inform you that|notification'=>'Ezzel az automatikusan generált üzenettel szeretnénk értesíteni, hogy',  # line 135
+'with this automatically created e-mail we want to inform you that|notification'=>'Ezzel az automatikus üzenettel szeretnénk értesíteni, hogy',  # line 135
 'since %s'                    =>'%s óta',  # line 140
 'following happened at %s |notification'=>'a következő történt az alábbinál: %s',  # line 147
 'Your account has been created.|notification'=>'Az azonosítód elkészült.',  # line 157
@@ -1945,8 +1963,12 @@ $g_lang_table= array(
 'Your login name is|notification'=>'A bejelentkezési neved az alábbi:',  # line 611
 'Maybe you want to %s set your password|notification'=>'',  # line 612
 
+### ../lists/list_recentchanges.inc.php   ###
+'Recently changes'            =>'Friss változások',  # line 51
 
 
+### ../lists/list_effortstask.inc.php   ###
+'Total effort sum: %s hours'  =>'Teljes munkaidő: %s óra',  # line 98
 
 );
 
