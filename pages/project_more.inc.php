@@ -1347,9 +1347,7 @@ function ProjViewEfforts()
     require_once(confGet('DIR_STREBER') . "lists/list_efforts.inc.php");
 	require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
 	require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortstaskcalculation.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortspersoncalculation.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortsprojectcalculation.inc.php");
+
 	
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
@@ -1655,10 +1653,15 @@ function ProjViewEfforts()
 
         ### page functions ###
         $page->add_function(new PageFunction(array(
-            'target'=>'effortNew',
-            'params'=>array('prj'=>$project->id),
-            'icon'=>'new',
-            'name'=>__('new Effort'),
+            'target'    => 'effortNew',
+            'params'    => array('prj'=>$project->id),
+            'icon'      => 'new',
+            'name'      => __('new Effort'),
+        )));
+        $page->add_function(new PageFunction(array(
+            'target'    => 'projViewEffortCalculations',
+            'params'    => array('prj'=>$project->id),
+            'name'      => __('View calculation'),
         )));
 
 

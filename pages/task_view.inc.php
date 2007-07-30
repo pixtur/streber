@@ -761,8 +761,12 @@ class Block_task_quickedit extends PageBlock
                 if($editable && $task->isOfCategory(array(TCATEGORY_TASK,  TCATEGORY_BUG))) {
 
 
-                    $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
-
+                    #$tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
+                    $tab->add( new Form_DropdownGrouped('task_for_milestone', 
+                                __('For Milestone'), 
+                                $project->buildPlannedForMilestoneList(), 
+                                $task->for_milestone
+                             ));
 
                     $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
 

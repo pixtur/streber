@@ -634,13 +634,16 @@ function build_projView_options($project)
         ));
     }
 	
-	if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-		$options[]=  new NaviOption(array(
-            'target_id'=>'projViewEffortCalculations',
-            'name'=>__('Calculation','Project option'),
-            'target_params'=>array('prj'=>$project->id )
-        ));
-	}
+	
+	
+	#if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+	#	$options[]=  new NaviOption(array(
+    #        'target_id'=>'projViewEffortCalculations',
+    #        'name'=>__('Calculation','Project option'),
+    #        'target_params'=>array('prj'=>$project->id )
+    #    ));
+	#}
+	
 	
     $options[]=  new NaviOption(array(
             'target_id'=>'projViewChanges',

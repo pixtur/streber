@@ -62,6 +62,7 @@ b.doclear{
     display:block;
     height:1px;
     overflow:hidden;
+    margin-bottom: -1px;
 }
 
 span.sub {
@@ -294,12 +295,12 @@ div#nav_sub span.help {
 /* ==== feedback-line ==========================================*/
 
 div.messages {
-    background-color:#ffa;
+    background: #F6F9E0 url(layout/bg_header_messages.png) bottom left repeat-x;
     border-bottom:1px dashed #888;
-    padding:2px;
-    padding-left:5px;
+    padding:0.8em;
     color:#000;
     /*font-size:80%;*/
+    
 }
 
 div.messages p span.type{

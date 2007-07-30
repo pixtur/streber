@@ -41,7 +41,7 @@ div#sections {
 }
 
 
-
+/*
 div.block {
  background-image:none;
  background-color:#fff;
@@ -87,6 +87,7 @@ table.list th {
 
 }
 
+*/
 
 /* --- hide companies ---*/
 div#sections span.section#tab_companies {

@@ -446,17 +446,17 @@ class Form_Dropdown extends PageFormElement {
         $this->value=   $value;
 		$this->id=      $id;
 		$this->display= $display;
-        $this->options=$options;
-        $this->options=$options
-            ? $options
-            :array();
+
+        $this->options= $options
+                      ? $options
+                        :array();
     }
 
     PUBLIC function __toString()
     {
         $buffer= "<p " . $this->renderCssClasses() .  " $this->id $this->display><label>$this->title</label>";
         $buffer.="<select size=1 name='$this->name' id='$this->name'>";
-        foreach($this->options as $key=>$value) {
+        foreach($this->options as $key => $value) {
             $str_selected= ($this->value==$value)
                  ? "selected='selected'"
                  :"";
@@ -467,6 +467,72 @@ class Form_Dropdown extends PageFormElement {
         return $buffer;
     }
 }
+
+define('NO_OPTION_GROUP', '__NO_GROUP__');
+
+/**
+* Builds a grouped drop down list
+*
+* This can be used to list grouped select options like milestone selection
+*
+* The options has be passed as a cascased list in this format.
+*
+* [ 
+*   NO_OPTION_GROUP => ['-1' => 'undefined'],
+*   'Grouptitle 1' => ['1' => 'First option',   '2' => '2nd option'],
+*   'Grouptitle 2' => ['3' => 'Another one' ]
+* ]
+*
+* Use NO_OPTION_GROUP the group label, to avoid grouping.
+*
+* Important!!!
+* Note that the order of the option hash is reversed compared
+* to From_Dropdown.
+*/
+class Form_DropdownGrouped extends PageFormElement {
+
+    private $options;
+
+    PUBLIC function __construct($name=false, $title="", $options=array(), $value=false, $id="", $display="")
+    {
+        $this->type='dropdown';
+        parent::__construct();
+        $this->name=    $name;
+        $this->title=   $title;
+        $this->value=   $value;
+		$this->id=      $id;
+		$this->display= $display;
+
+        $this->options= $options
+                      ? $options
+                      :array();
+    }
+
+    PUBLIC function __toString()
+    {
+        $buffer= "<p " . $this->renderCssClasses() .  " $this->id $this->display><label>$this->title</label>";
+        $buffer.="<select size=1 name='$this->name' id='$this->name'>";
+        
+        foreach($this->options as $group_title => $group_options) {
+            if ($group_title != NO_OPTION_GROUP) {
+                $buffer.= "<optgroup label='". asHtml($group_title). "'>";
+            }
+            foreach($group_options as $option_value => $option_name) {
+                $str_selected= ($this->value == $option_value)
+                     ? 'selected=1'
+                     : '';
+    
+                $buffer.='<option ' . $str_selected .' label="' . asHtml($option_name) . '" value="' . asHtml($option_value) . '" >' . asHtml($option_name) . '</option>';
+            }
+            if ($group_title != NO_OPTION_GROUP) {
+                $buffer.= "</optgroup>";
+            }
+        }
+        $buffer.="</select></p>";
+        return $buffer;
+    }
+}
+
 
 #====================================================================================
 # Form_Checkbox

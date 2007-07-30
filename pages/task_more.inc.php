@@ -417,7 +417,19 @@ function taskEdit($task=NULL)
             ### normaltasks and folders ##
             if(!$task->isMilestoneOrVersion()) {
                 if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
-                    $tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'),$project->buildPlannedForMilestoneList(), $task->for_milestone));
+                    #$tab->add( new Form_Dropdown('task_for_milestone', 
+                    #                                __('For Milestone'), 
+                    #                                $project->buildPlannedForMilestoneList(), 
+                    #                                $task->for_milestone
+                    #                             ));
+
+                    $tab->add( new Form_DropdownGrouped('task_for_milestone', 
+                                                    __('For Milestone'), 
+                                                    $project->buildPlannedForMilestoneList(), 
+                                                    $task->for_milestone
+                                                 ));
+
+                    
                 }
 
                 ### prio ###
@@ -2534,13 +2546,25 @@ function TaskEditMultiple()
 
         ### milestone ###
         {
-            if(isset($different_fields['for_milestone'])) {
-                $tmp_milestonelist['__dont_change__']= ('-- ' . __('keep different'). ' --');
+            $grouped_milestone_options= $project->buildPlannedForMilestoneList();
+            if(isset($different_fields['for_milestone'])) {                
+                $grouped_milestone_options[NO_OPTION_GROUP]['__dont_change__']= ('-- ' . __('keep different'). ' --');
+                #$tmp_milestonelist['__dont_change__']= ('-- ' . __('keep different'). ' --');
 
-                $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList() ,'__dont_change__'));
+                $form->add(new Form_DropdownGrouped(
+                                'task_for_milestone',
+                                 __('For Milestone'), 
+                                 $grouped_milestone_options,
+                                 '__dont_change__'
+                               ));
             }
             else {
-                $form->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList() ,$tasks[0]->for_milestone));
+                $form->add(new Form_DropdownGrouped(
+                                'task_for_milestone', 
+                                __('For Milestone'), 
+                                $grouped_milestone_options,
+                                $tasks[0]->for_milestone
+                                ));
             }
         }
 

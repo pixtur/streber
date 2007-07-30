@@ -1433,8 +1433,12 @@ class Project extends DbProjectItem
     public function buildPlannedForMilestoneList()
     {
         $tmp_milestonelist= array(
-                    ('-- ' . __('undefined')             . ' --') => '0');
+            NO_OPTION_GROUP => array('0' => '-- ' . __('undefined')   . ' --')
+        );
         
+        $milestone_options= array();
+        $closed_milestone_options = array();
+
         foreach(Task::getAll(array(
             'category'      => TCATEGORY_MILESTONE,
             'project'       => $this->id,
@@ -1443,9 +1447,25 @@ class Project extends DbProjectItem
             'order_by'      => "name",
 
         )) as $milestone) {
-            $tmp_milestonelist[$milestone->name]= $milestone->id;
+            if ($milestone->status >= STATUS_COMPLETED) {
+                $closed_milestone_options[$milestone->id] = $milestone->name;            
+            }
+            else{
+                $milestone_options[$milestone->id] = $milestone->name;            
+            }
+
+        }
+        if( $milestone_options ) {
+            $tmp_milestonelist[__('Milestones')] = $milestone_options;
         }
     
+        if( $closed_milestone_options ) {
+            $tmp_milestonelist[__('Milestones (closed)')] = $closed_milestone_options;
+        }
+
+
+        $version_options= array();        
+        
         if($versions =Task::getAll(array(
             'category'      => TCATEGORY_VERSION,
             'project'       => $this->id,
@@ -1453,10 +1473,13 @@ class Project extends DbProjectItem
             'status_max'    => 10,
             'order_by'      => "name",
         ))) {
-            $tmp_milestonelist[('-- ' . __('Released versions')             . ' --')] = '-2';
+            #$tmp_milestonelist[('-- ' . __('Released versions')             . ' --')] = '-2';
             foreach($versions as $version) {
-                $tmp_milestonelist[$version->name]= $version->id;
-            }
+                $version_options[ $version->id] = $version->name;
+            }            
+        }
+        if( $version_options ) {
+            $tmp_milestonelist[__('Versions')] = $version_options;
         }
         return $tmp_milestonelist;
     }
