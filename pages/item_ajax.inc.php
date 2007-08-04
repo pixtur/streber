@@ -108,7 +108,7 @@ function itemSaveField()
         */
         
         $org= $object->$field_name;
-        $org= str_replace("\\", "\\\\", $org);
+        #$org= str_replace("\\", "\\\\", $org);
 
         $parts= getWikiChapters($org);
                 

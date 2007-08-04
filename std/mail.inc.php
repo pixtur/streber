@@ -615,12 +615,16 @@ class Notifier
             ."<style>\r\n body {background-color:#ffffff; color:#000000; font-family:\"Trebuchet MS\", Tahoma, Arial, Verdana,sans-serif; font-size:10pt;}\r\n a {color:#163075; text-decoration:none;}\r\n a:hover{color:#ff0000; text-decoration:underline;}\r\n h3 {font-size:12pt;}\r\n h4 {font-size:11pt;}\r\n ul {margin:0; padding:0px 0px 0px 1em;}\r\n</style>\r\n"
             . "</head>\r\n"
             ."<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
-            .sprintf(__('Hello %s,','notification'), asHtml($person->name)) . "<br><br>\r\n";
+            . sprintf(__('Hello %s,','notification'), asHtml($person->name)) . "<br><br>\r\n";
 
             ### new account ###
             $message.= sprintf(__('Your account at %s is still active.','notification'), "<a href='" . $url ."'>" . confGet('SELF_DOMAIN')."</a>") . "<br>\r\n"
             .__('Your login name is','notification') . " " . $person->nickname . "<br>\r\n"
-            .sprintf(__('Maybe you want to %s set your password','notification'), "<a href=\"" . $url . "?go=activateAccount&tuid=" . $person->identifier . "\">") . "</a>...<br>\r\n";
+            . __('Maybe you want to') 
+            .' ' 
+            . "<a href=\"" . $url . "?go=activateAccount&tuid=" . $person->identifier . "\">"
+            . __('set your password')
+            . "</a>...<br>\r\n";
 
             ### footer ####
             {

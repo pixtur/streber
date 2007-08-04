@@ -272,8 +272,7 @@ class ListBlock_tasks extends ListBlock
         *   in path that is shown below the task in "List" mode
         */
         if(!isset($this->filters['project'])) {
-            $this->show_project_folder= true;
-            
+            $this->show_project_folder= true;            
         }
 
         ### list groupings ###
@@ -283,9 +282,7 @@ class ListBlock_tasks extends ListBlock
             new ListGroupingPrio(),
             new ListGroupingCreatedBy(),
         );
-
         $this->initOrderQueryOption('order_id, status, prio');
-		
     }
 	
 	

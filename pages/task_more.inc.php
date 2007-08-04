@@ -515,18 +515,13 @@ function taskEdit($task=NULL)
 
                         if($task->id) {
                             $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
-							if($task_person = $ap->getTaskAssignment($task->id)){
-								$tab->add(new Form_checkbox('task_forward_to_'.$ap->id, __("Forward"), $task_person->forward, ''));
-            					$tab->add(new Form_InputText($task_person->forward_comment,  __("Forward comment"), 'task_forward_comment_to_'.$ap->id));
-							}
                         }
                         else {
                             $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
-							$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
-							$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
                             $count_new++;
                         }
                         $count_all++;
+
                         unset($team[$ap->name]);
                     }
                 }
@@ -537,15 +532,6 @@ function taskEdit($task=NULL)
                             ? __("Assign to","Form label")
                             : __("Also assign to","Form label");
                 $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
-				
-				if(!$task->id){
-					$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
-            		$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
-				}
-				else{
-					$tab->add(new Form_checkbox('task_forward_to_'.$count_new, __("Forward"), 0, ''));
-            		$tab->add(new Form_InputText('',  __("Forward comment"), 'task_forward_comment_to_'.$count_new));
-				}
             }
 
 
