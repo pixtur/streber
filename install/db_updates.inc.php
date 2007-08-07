@@ -328,4 +328,16 @@ if($db_version < 0.07992){
 	$update_queries[] = "ALTER TABLE {$db_table_prefix}project CHANGE `labels` `labels` varchar( 255 )  DEFAULT 'Bug,Feature,Enhancement,Refacture,Idea,Research,Organize,Wiki,Docu,News' NOT NULL";
 }
 
+if($db_version < 0.0802) {
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}project CHANGE `settings` `settings` INT( 4 ) DEFAULT '65535'";
+	$update_queries[]="UPDATE `{$db_table_prefix}project` SET settings = settings | " . (PROJECT_SETTING_ENABLE_TASKS) . ";";
+	$update_queries[]="UPDATE `{$db_table_prefix}project` SET settings = settings | " . (PROJECT_SETTING_ENABLE_FILES) . ";";
+}
+
+if($db_version < 0.0803) {
+	$update_queries[] = "ALTER TABLE {$db_table_prefix}task ADD `is_news` TINYINT ( 1 ) DEFAULT '0' NOT NULL ";
+	$update_queries[]="UPDATE `{$db_table_prefix}project` SET settings = settings | " . (PROJECT_SETTING_ENABLE_NEWS) . ";";
+}
+
+
 ?>

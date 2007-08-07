@@ -244,9 +244,7 @@ class Page
         $this->tabs=array(
             "home"      =>array(
                 'target'=>$PH->getUrl('home'),
-                'title'=>isset($auth->cur_user->nickname)
-                       ? $auth->cur_user->nickname
-                       : 'Home',
+                'title'=>__('Home', 'section'),
 
                 #'title'=>__("<span class=accesskey>H</span>ome"),
                 'html'=>   buildHomeSelector(),

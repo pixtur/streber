@@ -16,7 +16,7 @@
 
 new PageHandle(array('id'=>'home',
     'req'=>'pages/home.inc.php',
-    'title'=>__('Home'),
+    'title'=>__('Recent changes','Page option tab'),
     'test'=>'yes',
 
     'cleanurl'=>'home',
@@ -55,7 +55,7 @@ new PageHandle(array('id'=>'homeEfforts',
 
 new PageHandle(array('id'=>'homeAllChanges',
     'req'=>'pages/home.inc.php',
-    'title'=>__('Overall history'),
+    'title'=>__('Overall changes'),
     'test'=>'yes',
 	
     'valid_for_crawlers'=>false,
@@ -290,7 +290,7 @@ new PageHandle(array('id'=>'projViewFiles',
 
 new PageHandle(array('id'=>'projViewChanges',
     'req'=>'pages/project_more.inc.php',
-    'title'=>__('View Project'),
+    'title'=>__('Changes'),
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
 							'preset'=>'.*',

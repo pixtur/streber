@@ -427,6 +427,7 @@ function ProjView()
             'category'  => TCATEGORY_DOCU,
             'label'     => 10,
             'order_by'  => 'created DESC',
+            'is_news'  => 1,
         )))  {
             
             $block=new PageBlock(array(

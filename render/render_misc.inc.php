@@ -590,15 +590,17 @@ function build_projView_options($project)
     global $auth;
 	
     $options=array();
-    $options[]=  new NaviOption(array(
-            'target_id'=>'projViewTasks',
-            'name'=>__('Tasks','Project option'),
-            'target_params'=>array('prj'=>$project->id )
-    ));
+    if($project->settings & PROJECT_SETTING_ENABLE_TASKS) {
+        $options[]=  new NaviOption(array(
+                'target_id'=>'projViewTasks',
+                'name'=>__('Tasks','Project option'),
+                'target_params'=>array('prj'=>$project->id )
+        ));
+    }
 
     $options[]=  new NaviOption(array(
             'target_id'=>'projViewDocu',
-            'name'=>__('Docu','Project option'),
+            'name'=>__('Topics','Project option'),
             'target_params'=>array('prj'=>$project->id )
     ));
 
@@ -618,13 +620,13 @@ function build_projView_options($project)
         ));
     }
 
-
-
-    $options[]=new NaviOption(array(
-        'target_id'=>'projViewFiles',
-        'name'=>__('Files','Project option'),
-        'target_params'=>array('prj'=>$project->id )
-    ));
+    if($project->settings & PROJECT_SETTING_ENABLE_FILES) {
+        $options[]=new NaviOption(array(
+            'target_id'=>'projViewFiles',
+            'name'=>__('Files','Project option'),
+            'target_params'=>array('prj'=>$project->id )
+        ));
+    }
 
     if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
         $options[]=  new NaviOption(array(
@@ -647,7 +649,7 @@ function build_projView_options($project)
 	
     $options[]=  new NaviOption(array(
             'target_id'=>'projViewChanges',
-            'name'=>__('History','Project option'),
+            'name'=>__('Changes','Project option'),
             'target_params'=>array('prj'=>$project->id )
     ));
     return $options;

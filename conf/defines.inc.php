@@ -198,8 +198,11 @@ define('PROJECT_SETTING_ENABLE_MILESTONES',        1<<2);
 define('PROJECT_SETTING_ENABLE_VERSIONS',          1<<3);
 define('PROJECT_SETTING_ONLY_PM_MAY_CLOSE',        1<<4);
 define('PROJECT_SETTING_ENABLE_BUGS',              1<<5);
+define('PROJECT_SETTING_ENABLE_TASKS',             1<<6);
+define('PROJECT_SETTING_ENABLE_FILES',             1<<7);
+define('PROJECT_SETTING_ENABLE_NEWS',              1<<8);
 
-define('PROJECT_SETTING_ALL',               0x7f);
+define('PROJECT_SETTING_ALL',               0xffff);
 
 define('USER_SETTING_NOTIFICATIONS',                1<<1);  #
 define('USER_SETTING_HTML_MAIL',                    1<<2);  # obsolete

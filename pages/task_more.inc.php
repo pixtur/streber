@@ -388,12 +388,15 @@ function taskEdit($task=NULL)
                 }
             }
             else {
-                $list= array(
-                    TCATEGORY_TASK,
-                    TCATEGORY_BUG,
-                    TCATEGORY_DOCU,
-                    TCATEGORY_FOLDER,
-                );
+                $list=array();
+                if($project->settings & PROJECT_SETTING_ENABLE_TASKS) {
+                    $list[]= TCATEGORY_TASK;
+                }
+                if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+                    $list[]= TCATEGORY_BUG;
+                }
+                $list[]= TCATEGORY_DOCU;
+                $list[]= TCATEGORY_FOLDER;
             }
             global $g_tcategory_names;
             $cats= array();
@@ -716,6 +719,8 @@ function taskEdit($task=NULL)
             ### order id ###
             $tab->add($task->fields['order_id']->getFormElement(&$task));
 
+            ### Shows as news ###
+            $tab->add($task->fields['is_news']->getFormElement(&$task));
 
             ### public-level ###
             if(($pub_levels=$task->getValidUserSetPublevel())

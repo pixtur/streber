@@ -417,41 +417,6 @@ function TaskView()
         }
     }
 
-    ### edit description button ###
-    if($editable) {
-        echo "<div class=edit_functions>";
-        echo $PH->getLink('taskEditDescription',NULL,array('tsk'=> $task->id),'edit_description');
-        echo "</div>";
-
-/**
-early development version of inline edit handler.
-
-echo "
-<script type='text/javascript'>
-// <![CDATA[
-onLoadFunctions.push(function()
-{
-    var chapter= $('div.wiki')[0];
-
-    $('body.taskView div.edit_functions a.edit_description').editable('index.php?go=itemSaveField&item={$task->id}&field=description', {
-        postload:'index.php?go=itemLoadField&item={$task->id}&field=description',
-        type:'textarea',
-        obj:chapter,
-        submit:'Save',
-        cancel:'Cancel'
-    });
-    alert('here');
-
-});
-
-// ]]>
-</script>
-";
-*/
-
-
-    }
-
 
     #--- issue report -------------------------------------------------------------
     if($task->category == TCATEGORY_BUG && $task->issue_report) {
@@ -1218,12 +1183,6 @@ function taskViewAsDocu()
         }
     }
 
-    ### edit description button ###
-    if($editable) {
-        echo "<div class=edit_functions>";
-        echo $PH->getLink('taskEditDescription',NULL,array('tsk'=> $task->id));
-        echo "</div>";
-    }
 
     #--- list comments -------------------------------------------------------------
     {

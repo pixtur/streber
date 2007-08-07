@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0801',
-    'STREBER_VERSION_DATE'  => '2007-05-15',
+    'STREBER_VERSION'       => '0.0803',
+    'STREBER_VERSION_DATE'  => '2007-08-04',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -57,7 +57,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.07992',
+    'DB_VERSION_REQUIRED'   => '0.0803',
 
 
     /**
@@ -76,8 +76,8 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-    'DB_CREATE_VERSION'     => '0.07992',     # sql-dump loaded from /_install/-directory at installation
-    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.07992',
+    'DB_CREATE_VERSION'     => '0.0803',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0803',
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
@@ -90,12 +90,12 @@ $g_config= array(
     *
     * "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
     */
-    'SQL_MODE'              =>NULL,
+    'SQL_MODE'              => NULL,
     /**
     * in some situations (when upgrading with mysql4) you might have to disable this options
     * to avoid invalid display of characters
     */
-    'DB_USE_UTF8_ENCODING'  =>true,
+    'DB_USE_UTF8_ENCODING'  => true,
 
     /**
     * minium required length/complexity of entered password
@@ -218,7 +218,6 @@ $g_config= array(
 
     'PROJECT_DEFAULT_LABELS' => 'Bug,Feature,Enhancement,Refactor,Idea,Research,Organize,Wiki,Docu',
     'PROJECT_DEFAULT_SETTINGS'=> PROJECT_SETTING_ALL,
-
 
     /**
     * linking print-stylesheet sometimes slows down pageload for 10%-15% percent

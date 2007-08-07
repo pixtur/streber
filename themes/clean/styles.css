@@ -1174,7 +1174,7 @@ div.block {
 
     div.block > div.table_container {
 		clear:both;
-        /*overflow:hidden;*/    /* causes hidden table rows with Firefox 1.0 */
+        /*overflow:scroll;*/        /* causes hidden table rows with Firefox 1.0 */
         margin-right:1px;
     }
 
@@ -1189,6 +1189,8 @@ div.block {
         border:0px solid #000;
         overflow:clipped;
     }
+
+
 
 	table.list th {
 		font-weight:bolder;
@@ -1563,6 +1565,7 @@ div.block {
     table#comments td.details{
         vertical-align:top;
     }
+
 
 
 

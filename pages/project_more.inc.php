@@ -1070,7 +1070,7 @@ function ProjViewDocu()
         $page->options= build_projView_options($project);
 
         $page->title= $project->name;
-        $page->title_minor= __("Documentation");
+        $page->title_minor= __("Topics");
 
         if($project->status == STATUS_TEMPLATE) {
             $page->type=__("Project Template");
@@ -1105,6 +1105,7 @@ function ProjViewDocu()
         $list= new ListBlock_tasks(array(
             'active_block_function'=>'tree'
         ));
+        $list->title= __('Topics');
 
         $list->reduced_header= true;
         #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
@@ -1126,17 +1127,21 @@ function ProjViewDocu()
         }
         $list->columns= $c_new;
         $list->add_col( new ListBlockCol_TaskAsDocu());
+        
+
 
         unset($list->functions['taskNew']);
         unset($list->functions['taskNewBug']);
         unset($list->functions['tasksCompleted']);
         unset($list->functions['tasksApproved']);
         unset($list->functions['tasksClosed']);
-        #unset($list->functions['effortNew']);
+        if(! ($project->settings & PROJECT_SETTING_ENABLE_EFFORTS)) {
+            unset($list->functions['effortNew']);
+        }
         #unset($list->functions['commentNew']);
 
 
-        $list->no_items_html=__('No tasks');
+        $list->no_items_html= __('No topics yet');
         $list->print_automatic($project, NULL, true);
 	}
 
@@ -2143,10 +2148,14 @@ function projEdit($project=NULL)
             $tab->add($project->fields['short']->getFormElement(&$project));
             $tab->add($project->fields['status_summary']->getFormElement(&$project));
 
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_TASKS',         $g_project_setting_names[PROJECT_SETTING_ENABLE_TASKS], $project->settings & PROJECT_SETTING_ENABLE_TASKS));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_FILES',         $g_project_setting_names[PROJECT_SETTING_ENABLE_FILES], $project->settings & PROJECT_SETTING_ENABLE_FILES));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_BUGS',         $g_project_setting_names[PROJECT_SETTING_ENABLE_BUGS], $project->settings & PROJECT_SETTING_ENABLE_BUGS));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_EFFORTS',      $g_project_setting_names[PROJECT_SETTING_ENABLE_EFFORTS], $project->settings & PROJECT_SETTING_ENABLE_EFFORTS));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_MILESTONES',   $g_project_setting_names[PROJECT_SETTING_ENABLE_MILESTONES], $project->settings & PROJECT_SETTING_ENABLE_MILESTONES));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_VERSIONS',     $g_project_setting_names[PROJECT_SETTING_ENABLE_VERSIONS], $project->settings & PROJECT_SETTING_ENABLE_VERSIONS));
+            $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_NEWS',     $g_project_setting_names[PROJECT_SETTING_ENABLE_NEWS], $project->settings & PROJECT_SETTING_ENABLE_NEWS));
+
             #$tab->add(new Form_checkbox('project_setting_only_pm_may_close',     $g_project_setting_names[PROJECT_SETTING_ONLY_PM_MAY_CLOSE], $project->settings & PROJECT_SETTING_ONLY_PM_MAY_CLOSE));
 
         }
@@ -2265,10 +2274,13 @@ function projEditSubmit()
     */
     {
         foreach( array(
+            'PROJECT_SETTING_ENABLE_TASKS'          =>  PROJECT_SETTING_ENABLE_TASKS,
             'PROJECT_SETTING_ENABLE_BUGS'          =>  PROJECT_SETTING_ENABLE_BUGS,
+            'PROJECT_SETTING_ENABLE_FILES'          =>  PROJECT_SETTING_ENABLE_FILES,
             'PROJECT_SETTING_ENABLE_EFFORTS'       =>  PROJECT_SETTING_ENABLE_EFFORTS,
             'PROJECT_SETTING_ENABLE_MILESTONES'    =>  PROJECT_SETTING_ENABLE_MILESTONES,
             'PROJECT_SETTING_ENABLE_VERSIONS'      =>  PROJECT_SETTING_ENABLE_VERSIONS,
+            'PROJECT_SETTING_ENABLE_NEWS'           =>  PROJECT_SETTING_ENABLE_NEWS,
             'project_setting_only_pm_may_close'    =>  PROJECT_SETTING_ONLY_PM_MAY_CLOSE,
             
         ) as $form_name => $setting) {

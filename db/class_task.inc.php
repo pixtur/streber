@@ -185,6 +185,15 @@ class Task extends DbProjectItem
 				'default'=>0.0,
 			)),
 
+            new FieldBool(  array('name'=>'is_news',
+                'title'=>__('Display in project news'),
+                'tooltip'=> __('List title and description in project overview'),
+                'view_in_forms'=> true,
+                'default'   =>0,
+                'log_changes' => true,
+            )),
+
+
         ) as $f) {
             self::$fields_static[$f->name] = $f;
         }
@@ -776,6 +785,7 @@ foreach($filters_str as $fs=>$value) {
         $category_in    = NULL;
         $label          = NULL;
         $person         = 0;
+        $is_news        = NULL;
 		
         ### filter params ###
         if($args) {
@@ -855,6 +865,13 @@ foreach($filters_str as $fs=>$value) {
         }
         else {
             $str_category_in='';
+        }
+
+        if(!is_null($is_news)) {
+            $str_is_news='AND t.is_news=' . intval($is_news);
+        }
+        else {
+            $str_is_news='';
         }
 
         $str_is_released_min= $is_released_min
@@ -945,6 +962,8 @@ foreach($filters_str as $fs=>$value) {
 
                     AND t.id = i.id
                     $str_id
+                    $str_category
+                    $str_category_in
                     $str_is_folder
                     $str_is_issue
                     $str_label
@@ -955,8 +974,7 @@ foreach($filters_str as $fs=>$value) {
                     $str_is_released_max
                     $str_for_milestone
                     $str_resolved_version
-                    $str_category
-                    $str_category_in
+                    $str_is_news
                     AND t.status >= ". intval($status_min)."
                     AND t.status <= ". intval($status_max)."
 
@@ -985,6 +1003,8 @@ foreach($filters_str as $fs=>$value) {
                     AND i.project = upp.project
                     $str_is_alive
                     $str_project2
+                    $str_category
+                    $str_category_in
                     $str_modified_by
                     $str_not_modified_by
                     $str_is_issue
@@ -994,8 +1014,7 @@ foreach($filters_str as $fs=>$value) {
                     $str_for_milestone
                     $str_label
                     $str_resolved_version
-                    $str_category
-                    $str_category_in
+                    $str_is_news
                     AND ( i.pub_level >= upp.level_view
                           OR
                           /*i.created_by = {$auth->cur_user->id}*/
@@ -1031,6 +1050,8 @@ foreach($filters_str as $fs=>$value) {
                 $str_id
                 $str_is_folder
                 $str_is_issue
+                $str_category
+                $str_category_in
                 $str_parent_task
                 $str_has_name
                 $str_label
@@ -1038,9 +1059,8 @@ foreach($filters_str as $fs=>$value) {
                 $str_is_released_min
                 $str_is_released_max
                 $str_for_milestone
+                $str_is_news
                 $str_resolved_version
-                $str_category
-                $str_category_in
                 AND t.status >= ".intval($status_min)."
                 AND t.status <= ".intval($status_max)."
                 $str_match
@@ -1061,6 +1081,8 @@ foreach($filters_str as $fs=>$value) {
                 $str_not_modified_by
 
                 AND t.id = i.id
+                $str_category
+                $str_category_in
                 $str_id
                 $str_is_folder
                 $str_is_issue
@@ -1068,8 +1090,7 @@ foreach($filters_str as $fs=>$value) {
                 $str_for_milestone
                 $str_label
                 $str_resolved_version
-                $str_category
-                $str_category_in
+                $str_is_news
 
                 $str_is_released_min
                 $str_is_released_max

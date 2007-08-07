@@ -700,14 +700,11 @@ function personView()
         if($edit= Person::getEditableById($person->id)) {
 
             ### page functions ###
-            $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('new')
-            )));
             $page->add_function(new PageFunction(array(
                 'target'=>'taskNoteOnPersonNew',
                 'params'=>array('person'=>$person->id),
-                'tooltip'=>__('Create Note','Tooltip for page function'),
-                'name'=>__('Note','Page function person'),
+                'tooltip'=>__('Add task for this persons (optionally creating project and effort on the fly)','Tooltip for page function'),
+                'name'=>__('Add note','Page function person'),
             )));
             #$page->add_function(new PageFunction(array(
             #'target'    =>'personLinkCompanies',
@@ -716,15 +713,12 @@ function personView()
             #'name'      =>__('Companies'),
             #)));
 
-            $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('edit')
-            )));
             $page->add_function(new PageFunction(array(
                 'target'=>'personEdit',
                 'params'=>array('person'=>$person->id),
                 'icon'=>'edit',
                 'tooltip'=>__('Edit this person','Tooltip for page function'),
-                'name'=>__('Profile','Page function edit person'),
+                'name'=>__('Edit profile','Page function edit person'),
             )));
 
             $page->add_function(new PageFunction(array(
@@ -732,7 +726,7 @@ function personView()
                 'params'=>array('person'=>$person->id),
                 'icon'=>'edit',
                 'tooltip'=>__('Edit User Rights','Tooltip for page function'),
-                'name'=>__('User Rights','Page function for edit user rights'),
+                'name'=>__('Edit user Rights','Page function for edit user rights'),
             )));
 
             $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$person->id));
@@ -753,9 +747,6 @@ function personView()
                 )));
             }
 
-            $page->add_function(new PageFunctionGroup(array(
-                'name'      => __('notification')
-            )));
             if($person->state == ITEM_STATE_OK && $person->can_login && ($person->personal_email || $person->office_email)) {
                 $page->add_function(new PageFunction(array(
                     'target'=>'personSendActivation',

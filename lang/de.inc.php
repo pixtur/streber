@@ -53,7 +53,7 @@ $g_lang_table= array(
 'yesterday'         =>'gestern',
 'Discussions'       =>'Discussionen',
 'At Home'           =>'Zu Hause',
-'F, jS'            =>'F, jS',          # format date headline home
+'F, jS'            =>'F, jS',
 'Functions'         =>'Funktionen',
 'View your efforts' =>'Eigene gebuchte Aufwände',
 'Edit your profile' =>'Eigenes Profil editieren',
@@ -139,12 +139,12 @@ $g_lang_table= array(
 
 'Your Tasks'                  =>'Ihre Aufgaben',
 'Bookmarks'					  =>'Lesezeichen',
-'Overall history'             =>'Geschichte',
+'Overall changes'             =>'Geschichte',
 
-### ../pages/person.inc.php   ###
+### ../pages/person.inc.php
 'Authentication with'         => 'Authentifizierung mit',
 
-### ../db/class_company.inc   ###
+
 'Optional'                    =>'Optional',
 'more than expected'          =>'mehr als erwartet',
 'not available'               =>'nicht verfügbar',
@@ -251,10 +251,10 @@ $g_lang_table= array(
 'Your demand notes'             =>'Ihre Lese-Aufforderungen',
 'You have no demand notes'      =>'Sie haben keine Leseaufforderungen',
 
-### ../list/list_recentchanges.inc.php
+
 'Recent changes'                =>'Letzte Änderungen',
 
-### ../lists/list_persons.inc   ###
+
 'Name Short'                  =>'Abkürzung',
 'Shortnames used in other lists'=>'Abkürzungen werden in Listen verwendet',
 
@@ -678,7 +678,7 @@ $g_lang_table= array(
 'Add existing companies to this person' => 'Existierende Firmen mit dieser Person verbinden',
 
 'Issues'                      =>'Fehlerberichte',
-'History'                     =>'Änderungen',
+'Changes'                     =>'Änderungen',
 
 'unnamed'                     =>'unbenannt',
 
@@ -996,7 +996,8 @@ $g_lang_table= array(
 'Optional: Official Zip-Code and City (eg. 12345 Berlin)'=>'Büro Postleitzahl und Ort (z.B. 10178 Berlin)',
 'Optional: (eg. www.pixtur.de)'=>'Optional (z.B. www.pixtur.de)',
 'Optional: (eg. thomas@pixtur.de)'=>'Optional (z.B. thomas@pixtur.de)',
-'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'Farbe für grafische Darstellungen (z.B. #ff000)',
+'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'Farbe fÃ¼r grafische Darstellungen (z.B. #ff000)',
+
 'Only required if user can login|tooltip'=>'Pflichtfeld, wenn sich Anwender anmelden kann.',
 
 'Move tasks'                  =>'Aufgaben bewegen',
@@ -1531,7 +1532,7 @@ $g_lang_table= array(
 'Versions|Project option'     =>'Versionen',
 'Files|Project option'        =>'Dateien',
 'Efforts|Project option'      =>'Aufwände',
-'History|Project option'      =>'Geschichte',
+'Changes|Project option'      =>'Änderungen',
 
 'Help'                        =>'Hilfe',
 
@@ -1892,257 +1893,308 @@ $g_lang_table= array(
 
 'Wiki-format: <b>%s</b> is not a valid link-type'=>'Wiki-Format: <b>%s</a> ist kein gültiger Linktyp.',
 
-'autodetect'                  =>'automatisch',  # line 311
-'in Euro'                     =>'in Euro',  # line 221
-'Order Id'                    =>'OrdnungsNr.',  # line 174
-'Comment|form label for items'=>'Kommentar',  # line 45
-'State'                       =>'Status',  # line 718
-'Other team members changed nothing since last logout (%s)'=>'Keine Änderungen andere Teammitglieger seit dem letzten Logout(%s)',  # line 33
-'version %s'                  =>'version %s',  # line 141
-'Publish'                     =>'Veröffentlichen',  # line 174
-'Documentation'               =>'Dokumentation',  # line 1073
-'View selected Efforts'       =>'Ausgewählte Aufwände anzeigen',  # line 76
-'Status|column header'        =>'Status',  # line 312
-'Calculation|columnheader'    =>'Rechnung',  # line 221
-'Project|columnheader'        =>'Projekt',  # line 90
-'Task|columnheader'           =>'Aufgabe',  # line 116
+'autodetect'                  =>'automatisch',
+'in Euro'                     =>'in Euro',
+'Order Id'                    =>'OrdnungsNr.',
+'Comment|form label for items'=>'Kommentar',
+'State'                       =>'Status',
+'Other team members changed nothing since last logout (%s)'=>'Keine Änderungen andere Teammitglieger seit dem letzten Logout(%s)',
+'version %s'                  =>'version %s',
+'Publish'                     =>'Veröffentlichen',
+'Documentation'               =>'Dokumentation',
+'View selected Efforts'       =>'Ausgewählte Aufwände anzeigen',
+'Status|column header'        =>'Status',
+'Calculation|columnheader'    =>'Rechnung',
+'Project|columnheader'        =>'Projekt',
+'Task|columnheader'           =>'Aufgabe',
 
-'ID %s'                       =>'ID %s',  # line 460
-'Show Details'                =>'Details anzeigen',  # line 462
-'Summary|Column header'       =>'Zusammenfassung',  # line 415
-'Thumbnail|Column header'     =>'Miniatur',  # line 478
+'ID %s'                       =>'ID %s',
+'Show Details'                =>'Details anzeigen',
+'Summary|Column header'       =>'Zusammenfassung',
+'Thumbnail|Column header'     =>'Miniatur',
 
-'Nickname|column header'      =>'Nickname',  # line 218
-'Name|column header'          =>'Name',  # line 240
+'Nickname|column header'      =>'Nickname',
+'Name|column header'          =>'Name',
 
-'Recently changes'            =>'Letzte Änderungen',  # line 51
-'Show more'                   =>'Weitere zeigen',  # line 90
+'Recently changes'            =>'Letzte Änderungen',
+'Show more'                   =>'Weitere zeigen',
 
-'Updated'                     =>'Geändert',  # line 105
+'Updated'                     =>'Geändert',
 
-'List|List sort mode'         =>'Liste',  # line 238
-'Tree|List sort mode'         =>'Baum',  # line 249
-'Grouped|List sort mode'      =>'Gruppiert',  # line 260
-'Page name'                   =>'Seitenname',  # line 1138
+'List|List sort mode'         =>'Liste',
+'Tree|List sort mode'         =>'Baum',
+'Grouped|List sort mode'      =>'Gruppiert',
+'Page name'                   =>'Seitenname',
 
-'Your Tasks'                  =>'Ihre Aufgaben',  # line 751
+'Your Tasks'                  =>'Ihre Aufgaben',
 
-'Bookmarks'                   =>'Lesezeichen',  # line 42
-'Overall history'             =>'Alle Änderungen',  # line 58
-'Playground'                  =>'Spielwiese',  # line 66
+'Bookmarks'                   =>'Lesezeichen',
+'Overall changes'             =>'Alle Änderungen',
+'Playground'                  =>'Spielwiese',
 
-'View item'                   =>'Element zeigen',  # line 1044
+'View item'                   =>'Element zeigen',
 
-'Set Public Level'            =>'Veröffentlichung einstellen',  # line 86
-'Edit bookmarks'        =>'Lesezeichen bearbeiten',  # line 120
-'View Project as RSS'         =>'Projekt als RSS',  # line 218
-'View Task As Docu'           =>'Aufgabe als Dokumentation',  # line 443
-'Mark tasks as Closed'        =>'Aufgaben schließen',  # line 531
-'View Projects of Person'     =>'Projekte eine Person zeigen',  # line 1067
-'View Task of Person'         =>'Aufgaben einer Person zeigen',  # line 1078
-'View Changes of Person'      =>'Änderungen einer Person zeigen',  # line 1100
+'Set Public Level'            =>'Veröffentlichung einstellen',
+'Edit bookmarks'        =>'Lesezeichen bearbeiten',
+'View Project as RSS'         =>'Projekt als RSS',
+'View Task As Docu'           =>'Aufgabe als Dokumentation',
+'Mark tasks as Closed'        =>'Aufgaben schließen',
+'View Projects of Person'     =>'Projekte eine Person zeigen',
+'View Task of Person'         =>'Aufgaben einer Person zeigen',
+'View Changes of Person'      =>'Änderungen einer Person zeigen',
 
-'Register'                    =>'Registrieren',  # line 747
+'Register'                    =>'Registrieren',
 
-'Forgot your password?'       =>'Passwort vergessen?',  # line 1209
-'Load Field'                  =>'Feld laden',  # line 1357
-'Save Field'                  =>'Feld speichern',  # line 1362
+'Forgot your password?'       =>'Passwort vergessen?',
+'Load Field'                  =>'Feld laden',
+'Save Field'                  =>'Feld speichern',
 
-'Delete this comment'         =>'Kommentar löschen',  # line 97
-'Restore'                     =>'Wiederherstellen',  # line 89
-'Select some comments to restore'=>'Bitte Kommentare zum Wiederherstellen markieren',  # line 533
-'Failed to restore %s comments'=>'Wiederherstellen von %s Kommentaren fehlgeschlagen',  # line 559
-'Restored %s comments'        =>'%s Kommentare wiederhergestellt.',  # line 562
+'Delete this comment'         =>'Kommentar löschen',
+'Restore'                     =>'Wiederherstellen',
+'Select some comments to restore'=>'Bitte Kommentare zum Wiederherstellen markieren',
+'Failed to restore %s comments'=>'Wiederherstellen von %s Kommentaren fehlgeschlagen',
+'Restored %s comments'        =>'%s Kommentare wiederhergestellt.',
 
-'Export as CSV'               =>'Als CSV exportieren',  # line 827
+'Export as CSV'               =>'Als CSV exportieren',
 
-'News'                        =>'Neuigkeiten',  # line 177
+'News'                        =>'Neuigkeiten',
 
-'%s comments'                 =>'%s Kommentare',  # line 218
+'%s comments'                 =>'%s Kommentare',
 
-'Downloads'                   =>'Downloads',  # line 53
+'Downloads'                   =>'Downloads',
 
-'Created at|label'            =>'Erstellt am',  # line 369
-'For editing all efforts must be of same project.'=>'Nur Aufwände des gleichen Projektes können bearbeitet werden.',  # line 884
-'Edit multiple efforts|Page title'=>'Mehrere Aufwände bearbeiten',  # line 906
-'Edit %s efforts|Page title'  =>'%s Aufwände bearbeitet',  # line 907
+'Created at|label'            =>'Erstellt am',
+'For editing all efforts must be of same project.'=>'Nur Aufwände des gleichen Projektes können bearbeitet werden.',
+'Edit multiple efforts|Page title'=>'Mehrere Aufwände bearbeiten',
+'Edit %s efforts|Page title'  =>'%s Aufwände bearbeitet',
 
-'Could not access parent task Id:%s'=>'Konnte nicht auf übergeordnetes Element von Task mit id %s zugreifen',  # line 55
-'Move this file to another task'=>'Diese Datei zu einer anderen Aufgabe bewegen',  # line 88
-'Move'                        =>'Bewegen',  # line 89
+'Could not access parent task Id:%s'=>'Konnte nicht auf übergeordnetes Element von Task mit id %s zugreifen',
+'Move this file to another task'=>'Diese Datei zu einer anderen Aufgabe bewegen',
+'Move'                        =>'Bewegen',
 
-'Edit your Profile'           =>'Ihr Profil bearbeiten',  # line 80
-'Mark all items as viewed'    =>'Alles als gelesen markieren',  # line 89
-'for|short for client'        =>'für',  # line 128
-'without client'              =>'ohne Kunde',  # line 140
-'Your Bookmarks'              =>'Ihre Lesezeichen',  # line 199
-'Your efforts'                =>'Ihre Aufwände',  # line 960
+'Edit your Profile'           =>'Ihr Profil bearbeiten',
+'Mark all items as viewed'    =>'Alles als gelesen markieren',
+'for|short for client'        =>'für',
+'without client'              =>'ohne Kunde',
+'Your Bookmarks'              =>'Ihre Lesezeichen',
+'Your efforts'                =>'Ihre Aufwände',
 
-'Select some items(s) to change pub level'=>'Bitte wählen Sie Elemente, um deren Sichtbarkeit zu bearbeiten.',  # line 76
-'Made %s items public to %s'  =>'%s Elemente für %s sichtbar gemacht',  # line 101
-'Select one or more bookmark(s)'=>'Wählen Sie einen oder mehrere Lesezeichen',  # line 247
-'An error occured'            =>'Ein Fehler ist aufgetreten',  # line 271
-'Could not get bookmark'      =>'Konnte Lesezeichen nicht finden.',  # line 460
-'Edit bookmarks'              =>'Lesezeichen bearbeiten',  # line 604
-'Edit multiple bookmarks|page title'=>'Mehrere Lesezeichen bearbeiten.',  # line 606
+'Select some items(s) to change pub level'=>'Bitte wählen Sie Elemente, um deren Sichtbarkeit zu bearbeiten.',
+'Made %s items public to %s'  =>'%s Elemente für %s sichtbar gemacht',
+'Select one or more bookmark(s)'=>'Wählen Sie einen oder mehrere Lesezeichen',
+'An error occured'            =>'Ein Fehler ist aufgetreten',
+'Could not get bookmark'      =>'Konnte Lesezeichen nicht finden.',
+'Edit bookmarks'              =>'Lesezeichen bearbeiten',
+'Edit multiple bookmarks|page title'=>'Mehrere Lesezeichen bearbeiten.',
 
-'Continue anonymously'        =>'Anonym fortfahren',  # line 111
-'Password reminder|Page title'=>'Passworterinnerung',  # line 311
-'Please enter your nickname'  =>'Bitte geben Sie Ihren Nutzernamen ein',  # line 323
-'We will then sent you an E-mail with a link to adjust your password.'=>'Wir werden Ihnen dann eine E-Mail mit dem Link zum Ändern Ihres Passwortes schicken.',  # line 333
-'If you do not know your nickname, please contact your administrator: %s.'=>'Wenn Sie Ihren Nutzernamen nicht mehr kennen, kontaktieren Sie Bitte den Administrator: %s',  # line 335
-'A notification mail has been sent.'=>'Eine E-Mail wurde versendet.',  # line 396
+'Continue anonymously'        =>'Anonym fortfahren',
+'Password reminder|Page title'=>'Passworterinnerung',
+'Please enter your nickname'  =>'Bitte geben Sie Ihren Nutzernamen ein',
+'We will then sent you an E-mail with a link to adjust your password.'=>'Wir werden Ihnen dann eine E-Mail mit dem Link zum Ändern Ihres Passwortes schicken.',
+'If you do not know your nickname, please contact your administrator: %s.'=>'Wenn Sie Ihren Nutzernamen nicht mehr kennen, kontaktieren Sie Bitte den Administrator: %s',
+'A notification mail has been sent.'=>'Eine E-Mail wurde versendet.',
 
-'Could not find requested page `%s`'=>'Geforderte Seite konnte nicht gefunden werden.',  # line 46
+'Could not find requested page `%s`'=>'Geforderte Seite konnte nicht gefunden werden.',
 
-'Create Note|Tooltip for page function'=>'Notiz erstellen',  # line 709
-'Note|Page function person'   =>'Notiz',  # line 710
-'notification'                =>'Erinnerung',  # line 757
-'Last login|Label'            =>'Zuletzt angemeldet',  # line 835
-'link existing Company'       =>'Bestehende Firma verknüpfen',  # line 878
-'no companies related'        =>'Keine relevanten Firmen',  # line 883
-'Projects|Page title add on'  =>'Projekte',  # line 1095
-'Tasks|Page title add on'     =>'Aufgaben',  # line 1348
-'no tasks yet'                =>'Bisher keine Aufgaben',  # line 1372
-'Changes|Page title add on'   =>'Keine Änderungen',  # line 1788
-'Account'                     =>'Konto',  # line 1999
-'Options'                     =>'Optionen',  # line 2143
-'Time zone|form label'        =>'Zeitzone',  # line 3060
+'Create Note|Tooltip for page function'=>'Notiz erstellen',
+'Note|Page function person'   =>'Notiz',
+'notification'                =>'Erinnerung',
+'Last login|Label'            =>'Zuletzt angemeldet',
+'link existing Company'       =>'Bestehende Firma verknüpfen',
+'no companies related'        =>'Keine relevanten Firmen',
+'Projects|Page title add on'  =>'Projekte',
+'Tasks|Page title add on'     =>'Aufgaben',
+'no tasks yet'                =>'Bisher keine Aufgaben',
+'Changes|Page title add on'   =>'Keine Änderungen',
+'Account'                     =>'Konto',
+'Options'                     =>'Optionen',
+'Time zone|form label'        =>'Zeitzone',
 
-'Internal'                    =>'Intern',  # line 766
+'Internal'                    =>'Intern',
 
-'Malformed activation url'    =>'Falsche Aktivierungs URL',  # line 2257
-'Using auto detection of time zone requires this user to relogin.'=>'Automatische Erkennung der zeitzone erfordert Neuanmeldung.',  # line 3179
-'Registering is not enabled'  =>'Registrierung ist nicht aktiviert.',  # line 2929
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Bitte geben Sie ein paar Informationen zu Ihrer Person, und warum Sie sich registrieren möchten.',  # line 2934
-'Register as a new user'      =>'Als neuer Anwender registrieren.',  # line 2942
-'Login-accounts require a full name.'=>'Login-Konto erfordert einen vollständigen Namen.',  # line 3216
-'Please enter an e-mail address.'=>'Bitte geben Sie eine E-Mail Adresse an.',  # line 3226
-'Please copy the text from the image.'=>'Bitte kopieren sie den Text aus dem Bild.',  # line 3300
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Vielen Dank für die Registrierung. Sie erhalten eine E-Mail sobald Ihre Anfrage durch einen Moderator überprüft wurde.',  # line 3329
-'Marked all previous items as viewed.'=>'Alle Elemente als gelesen markiert.',  # line 3599
+'Malformed activation url'    =>'Falsche Aktivierungs URL',
+'Using auto detection of time zone requires this user to relogin.'=>'Automatische Erkennung der zeitzone erfordert Neuanmeldung.',
+'Registering is not enabled'  =>'Registrierung ist nicht aktiviert.',
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Bitte geben Sie ein paar Informationen zu Ihrer Person, und warum Sie sich registrieren möchten.',
+'Register as a new user'      =>'Als neuer Anwender registrieren.',
+'Login-accounts require a full name.'=>'Login-Konto erfordert einen vollständigen Namen.',
+'Please enter an e-mail address.'=>'Bitte geben Sie eine E-Mail Adresse an.',
+'Please copy the text from the image.'=>'Bitte kopieren sie den Text aus dem Bild.',
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Vielen Dank für die Registrierung. Sie erhalten eine E-Mail sobald Ihre Anfrage durch einen Moderator überprüft wurde.',
+'Marked all previous items as viewed.'=>'Alle Elemente als gelesen markiert.',
 
-'Create a new page'           =>'Eine neue Seite erstellen.',  # line 1093
-'Tasks resolved in upcomming version'=>'Aufgaben, die in der nächsten Version geschlossen sind.',  # line 1770
+'Create a new page'           =>'Eine neue Seite erstellen.',
+'Tasks resolved in upcomming version'=>'Aufgaben, die in der nächsten Version geschlossen sind.',
 
-'Display'                     =>'Darstellen',  # line 734
+'Display'                     =>'Darstellen',
 
-'Create wiki documentation page or start discussion topic'=>'Wikiseite Diskussionsthema erstellen',  # line 163
+'Create wiki documentation page or start discussion topic'=>'Wikiseite Diskussionsthema erstellen',
 
-'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'Aufgrund der MySQL implementierung wurden folgende Wörter bei der Suche ignoriert.',  # line 666
-'Sorry, but there is nothing left to search.'=>'Für die Suche ist nichts übrig geblieben.',  # line 671
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'Aufgrund der MySQL implementierung wurden folgende Wörter bei der Suche ignoriert.',
+'Sorry, but there is nothing left to search.'=>'Für die Suche ist nichts übrig geblieben.',
 
-'New version'                 =>'Neue Version',  # line 334
-'New topic'                   =>'Neues Thema',  # line 337
-'Display as'                  =>'Darstellen als',  # line 403
-'This folder has %s subtasks. Changing category will ungroup them.'=>'Der Ordner hat %s Unteraufgaben, deren Gruppierung beim Ändern der Darstellung aufgehoben wird.',  # line 407
-'Bug Report'                  =>'Fehlerbericht',  # line 619
-'Timing'                      =>'Zeiten',  # line 682
-'Comment has been rejected, because it looks like spam.'=>'Kommentar wurde verweigert, da er wie Werbung aussieht.',  # line 899
-'Not enough rights to edit task'=>'Sie haben nicht genügend Rechte, um diese Aufgabe bearbeiten zu können.',  # line 939
-'Milestones may not have sub tasks'=> 'Milesteine dürfen keine Unteraufgaben haben.',  # line 1210
-'Marked %s tasks to be resolved in this version.'=> '%s Aufgaben wurde als in dieser Version erledigt markiert.',  # line 1394
-'Category'                    =>'Kategorie',  # line 2419
-'Publish to|Form label'       =>'Öffentlich für',  # line 3113
-'New project|form label'      =>'Neues Projekt',  # line 3197
+'New version'                 =>'Neue Version',
+'New topic'                   =>'Neues Thema',
+'Display as'                  =>'Darstellen als',
+'This folder has %s subtasks. Changing category will ungroup them.'=>'Der Ordner hat %s Unteraufgaben, deren Gruppierung beim Ändern der Darstellung aufgehoben wird.',
+'Bug Report'                  =>'Fehlerbericht',
+'Timing'                      =>'Zeiten',
+'Comment has been rejected, because it looks like spam.'=>'Kommentar wurde verweigert, da er wie Werbung aussieht.',
+'Not enough rights to edit task'=>'Sie haben nicht genügend Rechte, um diese Aufgabe bearbeiten zu können.',
+'Milestones may not have sub tasks'=> 'Milesteine dürfen keine Unteraufgaben haben.',
+'Marked %s tasks to be resolved in this version.'=> '%s Aufgaben wurde als in dieser Version erledigt markiert.',
+'Category'                    =>'Kategorie',
+'Publish to|Form label'       =>'Öffentlich für',
+'New project|form label'      =>'Neues Projekt',
 
-'View previous %s versions'   =>'Bisherige %s Versionen',  # line 1143
-'Set to Open'                 =>'Veröffentlichen',  # line 1157
-'Further Documentation'       =>'Weitere Dokumentation',  # line 359
-'Resolved tasks|Block title'  =>'Erledigte Aufgaben',  # line 593
-'Update'                      =>'Aktualisieren',  # line 771
-'Book effort'                 =>'Aufwand buchen',  # line 1095
+'View previous %s versions'   =>'Bisherige %s Versionen',
+'Set to Open'                 =>'Veröffentlichen',
+'Further Documentation'       =>'Weitere Dokumentation',
+'Resolved tasks|Block title'  =>'Erledigte Aufgaben',
+'Update'                      =>'Aktualisieren',
+'Book effort'                 =>'Aufwand buchen',
 
-'Please copy the text'        =>'Bitte kopieren Sie den Text',  # line 62
-'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Dies dient zur Reduzierung von Werbemüll.',  # line 64
+'Please copy the text'        =>'Bitte kopieren Sie den Text',
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Dies dient zur Reduzierung von Werbemüll.',
 
-'Docu|Project option'         =>'Doku',  # line 570
-'Persons|page option'         =>'Personen',  # line 619
-'%b %e, %Y|strftime format string'=>'',  # line 735
-'%I:%M%P|strftime format string'=>'',  # line 749
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
-'%s min'                      =>'%s min',  # line 854
-'%s min ago'                  =>'vor %s Minuten',  # line 967
-'1 hour ago'                  =>'vor 1 Stunde',  # line 970
-'%s hours ago'                =>'vor %s Stunden',  # line 973
-'%s days ago'                 =>'vor %s Tagen',  # line 977
-'%s months ago'               =>'vor %s Monaten',  # line 980
-'%A, %B %e|strftime format string'=>'',  # line 1111
+'Topics|Project option'         =>'Themen',
+'Persons|page option'         =>'Personen',
+'%b %e, %Y|strftime format string'=>'',
+'%I:%M%P|strftime format string'=>'',
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
+'%s min'                      =>'%s min',
+'%s min ago'                  =>'vor %s Minuten',
+'1 hour ago'                  =>'vor 1 Stunde',
+'%s hours ago'                =>'vor %s Stunden',
+'%s days ago'                 =>'vor %s Tagen',
+'%s months ago'               =>'vor %s Monaten',
+'%A, %B %e|strftime format string'=>'',
 
-'rendered in'                 =>'Erstellt in',  # line 1287
-'memory used'                 =>'Speicher gebraucht',  # line 1290
-'%s queries / %s fields '     =>'%s DB-Anfragen / %s Felder',  # line 1293
+'rendered in'                 =>'Erstellt in',
+'memory used'                 =>'Speicher gebraucht',
+'%s queries / %s fields '     =>'%s DB-Anfragen / %s Felder',
 
-'Image details'               =>'Bild-Details',  # line 997
-'Cannot link to item of type %s'=>'Kann nicht zu Element vom Type %s verlinken.',  # line 1075
-'No item matches this name...'=>'Keine Element mit diesem Namen',  # line 1204
-'Unknown Item Id'             =>'Unbekannte Element-Id',  # line 1351
-'Warning: Could not find wiki chapter'=>'Warnung: Konnte Wiki-Kapitel nicht finden.',  # line 1918
+'Image details'               =>'Bild-Details',
+'Cannot link to item of type %s'=>'Kann nicht zu Element vom Type %s verlinken.',
+'No item matches this name...'=>'Keine Element mit diesem Namen',
+'Unknown Item Id'             =>'Unbekannte Element-Id',
+'Warning: Could not find wiki chapter'=>'Warnung: Konnte Wiki-Kapitel nicht finden.',
 
-'Invalid anonymous user'      =>'Ungültiger anonymer Nutzer',  # line 95
-'Anonymous account has been disabled. '=>'Anonymes Konte wurde deaktiviert.',  # line 101
-'Sorry. Authentication failed'=> 'Leider ist die Authentifizierung fehlgeschlagen.',  # line 381
+'Invalid anonymous user'      =>'Ungültiger anonymer Nutzer',
+'Anonymous account has been disabled. '=>'Anonymes Konte wurde deaktiviert.',
+'Sorry. Authentication failed'=> 'Leider ist die Authentifizierung fehlgeschlagen.',
 
-'Latest comment:'             =>'Letzter Kommentar',  # line 261
-'changed File'                =>'Datei geändert',  # line 447
-'deleted File'                =>'Datei gelöscht',  # line 517
+'Latest comment:'             =>'Letzter Kommentar',
+'changed File'                =>'Datei geändert',
+'deleted File'                =>'Datei gelöscht',
 
-'???'                         =>'???',  # line 93
+'???'                         =>'???',
 
-'Sorry, but the entered number did not match'=>'Leider stimmt die eingegebene Zahl nicht überein.',  # line 237
+'Sorry, but the entered number did not match'=>'Leider stimmt die eingegebene Zahl nicht überein.',
 
-'Enable Efforts|Project setting'=> 'Äufwände aktivieren.',  # line 74
-'Enable Milestones|Project setting'=> 'Meilensteine aktvieren.',  # line 75
-'Enable Versions|Project setting'=> 'Versionen aktivieren.',  # line 76
-'Only PM may close tasks|Project setting'=> 'Nur Projektleider dürfen Aufgaben schließen.',  # line 77
-'done|Resolve reason'         =>'erledigt',  # line 160
-'fixed|Resolve reason'        =>'behoben',  # line 161
-'works_for_me|Resolve reason' =>'funktioniert',  # line 162
-'duplicate|Resolve reason'    =>'doppelt',  # line 163
-'bogus|Resolve reason'        =>'fehlerhaft',  # line 164
-'rejected|Resolve reason'     =>'abgelehnt',  # line 165
-'deferred|Resolve reason'     =>'verschoben',  # line 166
-'Task|Task Category'          =>'Aufgabe',  # line 213
-'Bug|Task Category'           =>'Fehler',  # line 214
-'Documentation|Task Category' =>'Dokumentation',  # line 215
-'Event|Task Category'         =>'Ereignis',  # line 216
-'Folder|Task Category'        =>'Ordner',  # line 217
-'Milestone|Task Category'     =>'Meilenstein',  # line 218
-'Version|Task Category'       =>'Version',  # line 219
+'Enable Efforts|Project setting'=> 'Äufwände aktivieren.',
+'Enable Milestones|Project setting'=> 'Meilensteine aktvieren.',
+'Enable Versions|Project setting'=> 'Versionen aktivieren.',
+'Only PM may close tasks|Project setting'=> 'Nur Projektleider dürfen Aufgaben schließen.',
+'done|Resolve reason'         =>'erledigt',
+'fixed|Resolve reason'        =>'behoben',
+'works_for_me|Resolve reason' =>'funktioniert',
+'duplicate|Resolve reason'    =>'doppelt',
+'bogus|Resolve reason'        =>'fehlerhaft',
+'rejected|Resolve reason'     =>'abgelehnt',
+'deferred|Resolve reason'     =>'verschoben',
+'Task|Task Category'          =>'Aufgabe',
+'Bug|Task Category'           =>'Fehler',
+'Documentation|Task Category' =>'Dokumentation',
+'Event|Task Category'         =>'Ereignis',
+'Folder|Task Category'        =>'Ordner',
+'Milestone|Task Category'     =>'Meilenstein',
+'Version|Task Category'       =>'Version',
 
-'Your account at|notification'=>'Ihr Konto auf',  # line 604
-'Your account at %s is still active.|notification'=>'Ihr Konto auf %s ist gültig.',  # line 621
-'Your login name is|notification'=> 'Ihr Kontoname lautet',  # line 622
-'Maybe you want to %s set your password|notification'=> 'Bitte korrigieren Sie Ihr Passwort',  # line 623
-
-
-'Edit multiple bookmarks'     =>'Mehrere Lesezeichen bearbeiten',  # line 133
+'Your account at|notification'=>'Ihr Konto auf',
+'Your account at %s is still active.|notification'=>'Ihr Konto auf %s ist gültig.',
+'Your login name is|notification'=> 'Ihr Kontoname lautet',
+'Maybe you want to %s set your password|notification'=> 'Bitte korrigieren Sie Ihr Passwort',
 
 
-### ../pages/person.inc.php   ###
-'Enable efforts'              =>'Aufwände aktivieren',  # line 2146
-'Enable bookmarks'            =>'Lesezeichen aktivieren',  # line 2147
-
-### ../pages/project_more.inc.php   ###
-
-### ../pages/task_more.inc.php   ###
-'Because task is resolved, its status has been changed to completed.'=> 'Status der behobenen Aufgabe wurde in <b>fertig</b> geändert.',  # line 1162
-'Task has resolved version but is not completed?'=>'Auf wurde einer Version zugewiesen, obwohl sie nicht behoben wurde?',  # line 1168
-'Changed %s %s with ID %s|type,link,id'=>'%s geändert mit ID %s',  # line 1359
-
-### ../pages/task_view.inc.php   ###
-'Edit this %s'           =>'%s bearbeiten',  # line 79
-
-### ../render/render_misc.inc.php   ###
-'%b %e, %Y|strftime format string'=>'',  # line 735
-'%I:%M%P|strftime format string'=>'',  # line 749
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
-'%A, %B %e|strftime format string'=>'',  # line 1111
-
-### ../std/constant_names.inc.php   ###
-'Enable Bugreports|Project setting'=>'Fehlerberichte aktivieren',  # line 77
+'Edit multiple bookmarks'     =>'Mehrere Lesezeichen bearbeiten',
 
 
+
+'Enable efforts'              =>'Aufwände aktivieren',
+'Enable bookmarks'            =>'Lesezeichen aktivieren',
+
+
+
+
+'Because task is resolved, its status has been changed to completed.'=> 'Status der behobenen Aufgabe wurde in <b>fertig</b> geändert.',
+'Task has resolved version but is not completed?'=>'Auf wurde einer Version zugewiesen, obwohl sie nicht behoben wurde?',
+'Changed %s %s with ID %s|type,link,id'=>'%s geändert mit ID %s',
+
+
+'Edit this %s'           =>'%s bearbeiten',
+
+
+
+
+'Enable Bugreports|Project setting'=>'Fehlerberichte aktivieren',
+
+
+
+'Milestones (closed)'         =>'Meilensteine (geschlossen)',
+
+
+'Display in project news'     =>'Als Projektneuigkeit zeigen',
+'List title and description in project overview'=>'',
+
+
+'Recent changes|Page option tab'=>'Letzte Änderungen',
+
+
+'Re: '                        =>'',
+
+
+'Add task for this person (optionally creating project and effort on the fly)|Tooltip for page function' => 'Erstellt eine Aufgabe diese Person betreffend.',
+'Add note|Page function person'=> 'Neue Notiz',
+'Edit profile|Page function edit person'=> 'Profil bearbeiten',
+'Edit user Rights|Page function for edit user rights'=> 'Rechte bearbeiten',
+'Authentication with|form label'=> 'Authentifizierung über',
+
+
+'Topics'                      =>'Themen',
+'No topics yet'               =>'Noch keine Themen',
+'View calculation'            =>'Planung zeigen',
+
+
+'Book Effort'                 =>'Aufwand buchen',
+
+
+'without client|short for client'=>'Ohne Kunde',
+'Calculation|Project option'  =>'Planung',
+
+
+
+'Home|section'                =>'Home',
+
+
+'Enable tasks|Project setting'=>'Funktionen für Aufgaben einblenden',
+'Enable files|Project setting'=>'Dateiuploadmöglichkeiten einblenden',
+'Enable efforts|Project setting'=>'Funktionen für Aufwände einblenden',
+'Enable milestones|Project setting'=>'Funktionen für Meilensteine einblenden',
+'Enable versions|Project setting'=>'Funktionen für Versionen einblenden',
+'Enable bugreports|Project setting'=>'Funktionen für Fehlerberichte einblenden',
+'Enable news|Project setting'  => 'Themen können als News dargestellt werden',
+'Topic|Task Category'         =>'Thema',
+
+
+'Maybe you want to'           =>'Eventuell möchten Sie',
+'set your password'           =>'Ihr Password ändern',
+
+
+'%b %e, %Y|strftime format string'=>'',
+'%I:%M%P|strftime format string'=>'',
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
+'%A, %B %e|strftime format string'=>'',
 
 
 );

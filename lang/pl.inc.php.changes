@@ -1,14 +1,73 @@
 undefined keys:
 ---------------
 
-### ../__obsolete/class_version.inc.php   ###
-'Time Released'               =>'',  # line 50
+### ../db/class_project.inc.php   ###
+'Milestones (closed)'         =>'',  # line 1463
+
+### ../db/class_task.inc.php   ###
+'Display in project news'     =>'',  # line 189
+'List title and description in project overview'=>'',  # line 190
+
+### ../lists/list_forwardedtasks.inc.php   ###
+'Your demand notes'           =>'',  # line 33
+'You have no demand notes'    =>'',  # line 34
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recent changes'              =>'',  # line 51
+
+### ../pages/_handles.inc.php   ###
+'Recent changes|Page option tab'=>'',  # line 19
+'Overall changes'             =>'',  # line 58
+
+### ../pages/comment.inc.php   ###
+'Re: '                        =>'',  # line 242
 
 ### ../pages/project_view.inc.php   ###
-'Book effort'                 =>'',  # line 174
+'Book effort'                 =>'',  # line 179
+
+### ../pages/project_more.inc.php   ###
+'3 weeks'                     =>'',  # line 1546
+'1 month'                     =>'',  # line 1566
+'prior'                       =>'',  # line 1586
+
+### ../pages/person.inc.php   ###
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 706
+'Add note|Page function person'=>'',  # line 707
+'Edit profile|Page function edit person'=>'',  # line 721
+'Edit user Rights|Page function for edit user rights'=>'',  # line 729
+'Authentication with|form label'=>'',  # line 2152
+
+### ../pages/project_more.inc.php   ###
+'Topics'                      =>'',  # line 1108
+'No topics yet'               =>'',  # line 1144
+'View calculation'            =>'',  # line 1669
+'Effort calculations'         =>'',  # line 1852
 
 ### ../pages/task_more.inc.php   ###
-'Because task is resolved, its status has been changed to completed.'=>'',  # line 1162
+'Because task is resolved, its status has been changed to completed.'=>'',  # line 1205
 
 ### ../pages/task_view.inc.php   ###
 'Edit this %s'                =>'',  # line 79
+
+### ../render/render_misc.inc.php   ###
+'without client|short for client'=>'',  # line 539
+'Topics|Project option'       =>'',  # line 603
+'Calculation|Project option'  =>'',  # line 644
+'Changes|Project option'      =>'',  # line 652
+
+### ../render/render_page.inc.php   ###
+'Home|section'                =>'',  # line 247
+
+### ../std/constant_names.inc.php   ###
+'Enable tasks|Project setting'=>'',  # line 74
+'Enable files|Project setting'=>'',  # line 75
+'Enable efforts|Project setting'=>'',  # line 76
+'Enable milestones|Project setting'=>'',  # line 77
+'Enable versions|Project setting'=>'',  # line 78
+'Enable bugreports|Project setting'=>'',  # line 79
+'Enable news|Project setting' =>'',  # line 80
+'Topic|Task Category'         =>'',  # line 219
+
+### ../std/mail.inc.php   ###
+'Maybe you want to'           =>'',  # line 623
+'set your password'           =>'',  # line 626

@@ -71,10 +71,13 @@ $g_pub_level_short_names=array(
 
 global $g_project_setting_names;
 $g_project_setting_names=array(
-    PROJECT_SETTING_ENABLE_EFFORTS     =>__('Enable Efforts','Project setting'),
-    PROJECT_SETTING_ENABLE_MILESTONES  =>__('Enable Milestones','Project setting'),
-    PROJECT_SETTING_ENABLE_VERSIONS    =>__('Enable Versions','Project setting'),
-    PROJECT_SETTING_ENABLE_BUGS    =>__('Enable Bugreports','Project setting'),
+    PROJECT_SETTING_ENABLE_TASKS    =>__('Enable tasks','Project setting'),
+    PROJECT_SETTING_ENABLE_FILES    =>__('Enable files','Project setting'),
+    PROJECT_SETTING_ENABLE_EFFORTS     =>__('Enable efforts','Project setting'),
+    PROJECT_SETTING_ENABLE_MILESTONES  =>__('Enable milestones','Project setting'),
+    PROJECT_SETTING_ENABLE_VERSIONS    =>__('Enable versions','Project setting'),
+    PROJECT_SETTING_ENABLE_BUGS    =>__('Enable bugreports','Project setting'),
+    PROJECT_SETTING_ENABLE_NEWS    =>__('Enable news','Project setting'),
     PROJECT_SETTING_ONLY_PM_MAY_CLOSE=>__('Only PM may close tasks','Project setting'),
 );
 
@@ -213,7 +216,7 @@ global $g_tcategory_names;
 $g_tcategory_names=array(
 TCATEGORY_TASK          => __('Task','Task Category'),
 TCATEGORY_BUG           => __('Bug','Task Category'),
-TCATEGORY_DOCU          => __('Documentation','Task Category'),
+TCATEGORY_DOCU          => __('Topic','Task Category'),
 TCATEGORY_EVENT         => __('Event','Task Category'),
 TCATEGORY_FOLDER        => __('Folder','Task Category'),
 TCATEGORY_MILESTONE     => __('Milestone','Task Category'),

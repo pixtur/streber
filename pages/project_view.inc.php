@@ -141,13 +141,15 @@ function ProjView()
             'name'      =>__('Team member')
         )));
         */
-        $page->add_function(new PageFunction(array(
-            'target'    =>'taskNew',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'new',
-            'tooltip'   =>__('Create task'),
-            'name'      =>__('New task')
-        )));
+        if($project->settings & PROJECT_SETTING_ENABLE_TASKS) {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNew',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'new',
+                'tooltip'   =>__('Create task'),
+                'name'      =>__('New task')
+            )));
+        }
 
         if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
             $page->add_function(new PageFunction(array(
@@ -397,20 +399,78 @@ function ProjView()
         echo "</div>";
 
 
-        #echo "<div class=text>";
-
-        #echo wiki2html($project->description, $project);
-
         ### update task if relative links have been converted to ids ###
         global $g_wiki_auto_adjusted;
         if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
             $project->description= $g_wiki_auto_adjusted;
             $project->update(array('description'),false);
         }
-
-        #echo "</div>";
-
         $block->render_blockEnd();
+    }
+
+
+	#--- news -----------------------------------------------------------
+    if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) {
+        /*if($news= Task::getAll(array(
+            'category'  => TCATEGORY_DOCU,
+            'label'     => 1,
+            'order_by'  => 'created DESC',
+        )))*/
+		if($news= $project->getTasks(array(
+            'category'  => TCATEGORY_DOCU,
+            'is_news'  => 1,
+            'order_by'  => 'created DESC',
+        )))  {
+            
+            $block=new PageBlock(array(
+                'title'=>__('News'),
+                'id'=>'news',
+                #'reduced_header'=>true,
+    
+            ));
+            $block->render_blockStart();
+    
+            #echo $str;
+    
+            echo "<div class='text'>";
+            
+            $count = 0;
+            foreach($news as $n) {
+                if($count++ >= 3) {
+                    break;
+                };
+                echo "<div class='newsBlock'>";
+                if($creator= Person::getVisibleById($n->created_by)) {
+                    $link_creator= ' by '. $creator->getLink();
+                }
+                echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
+                #echo wiki2html($n->description, $project);
+                
+                
+                if($project->validateEditItem($n)) {
+                    echo  wiki2html($n->description, $project, $n->id, 'description');   
+                }
+                else {
+                    echo  wiki2html($n->description, $n);
+                }
+
+
+                
+                echo "<span class=comments>";
+                if($comments= $n->getComments()) {
+                     echo  $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id));
+                }
+                echo " | ";
+                echo $PH->getLink("commentNew", __("Add comment"), array('parent_task' => $n->id) );
+                echo "</span>";
+                
+                echo "</div>";                
+            }   
+            echo "</div>";
+    
+            $block->render_blockEnd();
+        }
+
     }
 
 

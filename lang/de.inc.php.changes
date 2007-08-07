@@ -1,11 +1,17 @@
 undefined keys:
 ---------------
 
-### ../pages/project_view.inc.php   ###
-'Book effort'                 =>'',  # line 174
+### ../db/class_task.inc.php   ###
+'List title and description in project overview'=>'',  # line 190
+
+### ../pages/comment.inc.php   ###
+'Re: '                        =>'',  # line 242
+
+### ../pages/person.inc.php   ###
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 706
 
 ### ../render/render_misc.inc.php   ###
-'%b %e, %Y|strftime format string'=>'',  # line 735
-'%I:%M%P|strftime format string'=>'',  # line 749
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 759
-'%A, %B %e|strftime format string'=>'',  # line 1111
+'%b %e, %Y|strftime format string'=>'',  # line 780
+'%I:%M%P|strftime format string'=>'',  # line 794
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 804
+'%A, %B %e|strftime format string'=>'',  # line 1156
