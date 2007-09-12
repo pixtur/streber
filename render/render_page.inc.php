@@ -114,7 +114,7 @@ class NaviCrumb extends NaviLink
             ? "title=\"" . asHtml($this->tooltip) . "\""
             : '';
 
-        #--- hide if note a valid link ----
+        #--- hide if not a valid link ----
         if(isset($this->target_id) && $this->target_id != "") {
             if($PH->getValidPage($this->target_id)) {
 
@@ -159,7 +159,7 @@ class NaviOption extends NaviLink
             ? "title=\"". asHtml($this->tooltip)."\""
             : '';
 
-        #--- hide if note a valid link ----
+        #--- hide if not a valid link ----
         if(isset($this->target_id) && $this->target_id != "") {
 
             if($PH->getValidPage($this->target_id)) {

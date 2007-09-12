@@ -332,10 +332,4 @@ function filterGlobalArrays()
     $_COOKIE= $_GET= $_POST=array();
 }
 
-
-
 ?>
-
-
-
-

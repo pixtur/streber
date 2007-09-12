@@ -1756,27 +1756,27 @@ class FormatBlockTable extends FormatBlock
                 
                 while($text) {
 
-                    if(preg_match("/(.*?)((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
+                	#scan the current text and return in $matches[1] a wiky-table formatted string.
+					#$matches[1] will contain the text before the table, an $matches[3] will contain the text after the table
+                    if(preg_match("/(.*?[\r\n\s]+)((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
 
-                        $keep_previous_block= new FormatBlock($matches[1]);
+                    	$keep_previous_block= new FormatBlock($matches[1]);
 
                         ### check number of pipes in each line...
 
-                        $lines= explode("\n", $matches[2]);
+                        $lines = explode("\n", $matches[2]);
                         $line_cells=array();
                         $rest= $matches[3];
 
                         $last_num_cells=-1;
                         $syntax_failure= false;
                         foreach($lines as $line) {
-                            if($line= trim($line)) {
-
+                            if($line = trim($line)) {
+                            	
                                 $tmp_cells=array();
-                                $line=trim($line);
-
-                                $line= preg_replace("/\[\[([^\]]*?)\|([^\]]*)\]\]/","[[$1§$2]]",$line);
-
-
+                                
+                                $line= preg_replace("/\[\[([^\]]*?)\|([^\]]*)\]\]/","[[$1ï¿½$2]]",$line); // what is this regexp doing?:) is it correct? i do not see any change in my tests
+								
                                 $cells= array_slice(explode("|", $line) , 1, -1);
 
                                 if($last_num_cells == -1) {
@@ -1789,7 +1789,7 @@ class FormatBlockTable extends FormatBlock
                                 }
 
                                 for($i=0; $i< count($cells); $i++) {
-                                    $cells[$i]= str_replace("§",'|', $cells[$i]);
+                                    $cells[$i]= str_replace("ï¿½",'|', $cells[$i]);
                                 }
 
                                 $line_cells[]= $cells;
@@ -1803,7 +1803,7 @@ class FormatBlockTable extends FormatBlock
                             $found= true;
                         }
                         else {
-                            $blocks_new[]= $b;
+                            $blocks_new[]= $b; //TODO: should a warning message be sent to the user? 
                             #$text= $rest;
                             $found= false;
                             break;
@@ -1826,6 +1826,7 @@ class FormatBlockTable extends FormatBlock
                 $blocks_new[]=$b;
             }
         }
+        
         return $blocks_new;
     }
 }

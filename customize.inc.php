@@ -28,7 +28,7 @@ confChange('REGISTER_NEW_USERS', true);
 confChange('REGISTER_NEW_USERS_TO_PROJECT', 1908);
 
 confChange('THEME_OVERWRITE',1);
-confChange('DEFAULT_LANGUAGE','de');
+confChange('DEFAULT_LANGUAGE','en');
 
 
 confChange('PROJECT_DEFAULT_LABELS', 'Bug,Feature,Enhancement,Refactor,Idea,Research,Organize,Wiki,Docu'); #

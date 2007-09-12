@@ -94,7 +94,6 @@ function addRequestVars(&$referred_vars)
             
             ### remove slashes if magic quotes
             if(get_magic_quotes_gpc()) {
-                echo "%% strip slashes";
                 $value= stripslashes($value);
             }
 
@@ -563,7 +562,7 @@ function asMatchString($str) {
 
 function asCleanString($str)
 {
-    return preg_replace("/[\\\<\>\`\´\"]/",'',$str);
+    return preg_replace("/[\\\<\>\`\ï¿½\"]/",'',$str);
 
 
 }
