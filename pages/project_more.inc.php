@@ -2892,9 +2892,11 @@ function projDuplicate($org_project_id=NULL)
         }
 
         ### pass2: tasks / parent_task ###
+        ### pass2: tasks 2 milestone ###
         foreach($new_tasks as $nt) {
             if(isset($dict_tasks[$nt->parent_task])) {
                 $nt->parent_task= $dict_tasks[$nt->parent_task];
+				$nt->for_milestone= $dict_tasks[$nt->for_milestone];
             }
             else {
                 trigger_error("undefined task-id $nt->parent_task",E_USER_WARNING);
