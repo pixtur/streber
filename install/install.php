@@ -119,7 +119,7 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_SETTINGS'), 0777);
             if(!is_writeable('../'. confGet('DIR_SETTINGS'))){
-                print_testResult(RESULT_FAILED,"Please grand write-permissions for this directory.");
+                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory.");
               $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
@@ -139,7 +139,7 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_TEMP'), 0777);
             if(!is_writeable('../'. confGet('DIR_TEMP'))){
-                print_testResult(RESULT_PROBLEM,"Please grand write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
                 $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
@@ -159,7 +159,7 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_FILES'), 0777);
             if(!is_writeable('../'. confGet('DIR_FILES'))){
-                print_testResult(RESULT_PROBLEM,"Please grand write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
                 $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
@@ -179,7 +179,7 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_RSS'), 0777);
             if(!is_writeable('../'. confGet('DIR_RSS'))){
-                print_testResult(RESULT_PROBLEM,"Please grand write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
                 $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
