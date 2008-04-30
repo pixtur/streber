@@ -29,7 +29,7 @@ class Notifier
                     $last= strToGMTime($p->notification_last);
                     $period= $p->notification_period * 60*60*24;
 					
-                    if(strToGMTime($p->notification_last) + $period  < time()) {
+                    if(strToGMTime($p->notification_last) + $period  < time() || $period == -1) {
                         $result= $this->sendNotifcationForPerson($p);
                         if($result) {
                             if($result === true) {

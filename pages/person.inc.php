@@ -2186,12 +2186,13 @@ function personEdit($person=NULL)
             ### notification ###
             {
                 $a=array(
-                    sprintf(__('daily'),  1)        =>1,
-                    sprintf(__('each 3 days'), 3)   =>3,
-                    sprintf(__('each 7 days'), 7)   =>7,
-                    sprintf(__('each 14 days'), 14)  =>14,
-                    sprintf(__('each 30 days'), 30)  =>30,
-                    __('Never')                     =>0,
+                	sprintf(__('ASAP'),  -1)        => -1,
+                    sprintf(__('daily'),  1)        =>  1,
+                    sprintf(__('each 3 days'), 3)   =>  3,
+                    sprintf(__('each 7 days'), 7)   =>  7,
+                    sprintf(__('each 14 days'), 14) => 14,
+                    sprintf(__('each 30 days'), 30) => 30,
+                    __('Never')                     =>  0,
                 );
                 $p= $person->notification_period;
                 if(!$person->settings & USER_SETTING_NOTIFICATIONS) {
