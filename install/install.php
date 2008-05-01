@@ -372,9 +372,7 @@ function step_02_proceed()
 
             FROM
             {$f_db_table_prefix}db
-
-            WHERE
-            updated is NULL")
+            ORDER BY `updated`, `version` ASC")
             ) {
                 $count=0;
                 $db_version=NULL;
@@ -387,11 +385,24 @@ function step_02_proceed()
                 /**
                 * there should be excactly one row with updated == NULL. Otherwise we a have a problem
                 */
-                if( $count!=1 ) {
-                    print_testResult(RESULT_FAILED,"could not get propper db-version table entry. Please view ".getStreberWikiLink('installation','Installation Guide')." on hints how to proceed.");
-                    return false;
+                
+                if($count <= 0)
+                {
+                	print_testResult(RESULT_FAILED, "Streber is unable to detect your current installed version.<br/>\n"
+                		. "You can work around this by manually adding this information to the db table in your Streber database.");                	
+                	return false;
                 }
-                else if($db_version < confGet('DB_VERSION_REQUIRED')) {
+                
+                else if($count != 1) 
+                {
+                    print_testResult(RESULT_PROBLEM, "Streber has detected a problem with db-version but is attempting to work around it.");
+					$sql_obj->execute("UPDATE {$f_db_table_prefix}db SET version = " 
+						. $db_version . ", version_streber_required = " . $streber_version_required
+						. " WHERE id = 1");
+					$sql_obj->execute("DELETE FROM {$f_db_table_prefix}db WHERE id != " . 1);          
+                }
+                
+                if($db_version < confGet('DB_VERSION_REQUIRED')) {
 
                     ### update ###
                     print_testResult(RESULT_PROBLEM,"version is $db_version. Upgrading...");
@@ -434,6 +445,7 @@ function step_02_proceed()
         print_testStart("creating tables...");
 
         $filename= "./create_structure_v".confGet('DB_CREATE_VERSION').".sql";
+        $upgradeFromVersion = NULL;
 
         if(!file_exists($filename)) {
             $filenames = glob("./create_structure_v*.sql");
@@ -712,10 +724,12 @@ function upgrade($args=NULL) {
     }
 
 
-    ### create new db-version ###
+    ### update db-version ###
     $db_version_new= confGet('DB_CREATE_VERSION');
     $streber_version_required= confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
-    $str_query= "INSERT into {$db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version_new','$streber_version_required',NOW() )";
+    $str_query= "UPDATE {$db_table_prefix}db SET version = " . $db_version_new
+    	. ", version_streber_required = " . $streber_version_required
+    	. ", updated = NOW() WHERE id = 1";
     if(!$sql_obj->execute($str_query)) {
         print_testResult(RESULT_FAILED,"SQL-Error:<pre>".$sql_obj -> error."</pre>Query was:<pre>$str_query</pre>");
         return false;
