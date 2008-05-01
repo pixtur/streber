@@ -276,6 +276,7 @@ define('FORMAT_HTML', 'html');
 define('FORMAT_CSV', 'csv');
 
 define('NOTIFY_NEVER', 0);
+define('NOTIFY_ASAP',  -1);
 define('NOTIFY_1DAY', 1);
 define('NOTIFY_2DAYS', 2);
 define('NOTIFY_3DAYS', 3);

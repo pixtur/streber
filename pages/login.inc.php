@@ -75,7 +75,7 @@ function loginForm() {
 
         $page->cur_tab='login';
         $page->type="";
-        $page->title=__('Welcome to streber','Page title');
+        $page->title=__(sprintf('Welcome to %s', confGet('APP_NAME')),'Page title');
         #$page->title_minor=__('please login');
 
         echo(new PageHeader);
@@ -221,7 +221,7 @@ function loginFormSubmit()
 				$PH->show('projView',array('prj'=>$projects[0]->id));
 			}
 			else {
-				$PH->messages[]=confGet('MESSAGE_WELCOME_HOME');
+				$PH->messages[] = sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME'));
 				$PH->show('home',array());
 			}
 		}
@@ -267,7 +267,7 @@ function loginFormSubmit()
 				$PH->show('projView',array('prj'=>$projects[0]->id));
 			}
 			else {
-				$PH->messages[]=confGet('MESSAGE_WELCOME_HOME');
+				$PH->messages[] = sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME'));
 				$PH->show('home',array());
 			}
 		}

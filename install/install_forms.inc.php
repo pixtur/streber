@@ -59,6 +59,13 @@ $g_form_fields=array(
         'label'     =>'SQL Table prefix (e.g. "streb_")',
         'comment'   =>'',
     ),
+    'continue_on_sql_errors'=>array(
+        'id'        =>'continue_on_sql_errors',
+        'default'   =>'on',
+        'label'     =>'Continue Upgrade on sql errors',
+        'comment'   =>'',
+        'type'      =>'checkbox',
+    ),
     'user_admin_name'=>array(
         'id'        =>'user_admin_name',
         'default'   =>'admin',
@@ -73,12 +80,19 @@ $g_form_fields=array(
         'comment'   =>'',
         'type'      =>'password'
     ),
-    'continue_on_sql_errors'=>array(
-        'id'        =>'continue_on_sql_errors',
-        'default'   =>'on',
-        'label'     =>'Continue Upgrade on sql errors',
-        'comment'   =>'',
-        'type'      =>'checkbox',
+    'site_name' => array(
+    	'id'	  => 'site_name',
+    	'default' => 'Streber',
+    	'label'   => 'Website name',
+    	'comment'  => 'The name of this installation.',
+    	'required'=> true,
+    ),
+    'site_email' => array(
+    	'id'	  => 'site_email',
+    	'defualt' => 'postmaster@' . $_SERVER['HTTP_HOST'],
+    	'label'   => 'Administrator\'s e-mail',
+    	'comment' => 'E-mail address of site Administrator.',
+    	'required'=> true,
     ),
 );
 

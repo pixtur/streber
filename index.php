@@ -49,6 +49,8 @@ else {
     exit();
 }
 
+include_once(confGet('DIR_SETTINGS').confGet('SITE_SETTINGS'));
+
 ### user-settings ##
 if(file_exists('customize.inc.php')) {
     require_once(confGet('DIR_STREBER') . 'customize.inc.php');
@@ -201,7 +203,7 @@ if($user) {
             $PH->show('projView',array('prj'=>$projects[0]->id));
         }
         else {
-            new FeedbackMessage(confGet('MESSAGE_WELCOME_HOME'));
+            new FeedbackMessage(sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME')));
             $PH->show('home',array());
         }
         exit();

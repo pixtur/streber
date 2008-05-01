@@ -227,6 +227,7 @@ TCATEGORY_VERSION       => __('Version','Task Category'),
 global $g_notifychange_period;
 $g_notitychange_period = array(
 NOTIFY_NEVER 	 => __('never','notification period'),
+NOTIFY_ASAP 	 => __('ASAP','notification period'),
 NOTIFY_1DAY 	 => __('one day','notification period'),
 NOTIFY_2DAYS 	 => __('two days','notification period'),
 NOTIFY_3DAYS     => __('three days','notification period'),

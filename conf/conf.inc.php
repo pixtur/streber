@@ -16,18 +16,18 @@ global $g_config;
 $g_config= array(
 
     'STREBER_VERSION'       => '0.0803',
-    'STREBER_VERSION_DATE'  => '2007-08-04',
-
+    'STREBER_VERSION_DATE'  => '2008-05-01',
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
     'PHP_VERSION_REQUIRED'  =>  '5.0.0',
     'INCLUDE_PATH'          => ".",
     'DIR_STREBER'           => "./",
     'DIR_TEMP'              => "./_tmp/",
-    'DIR_RSS'              => "./_tmp/",
+    'DIR_RSS'               => "./_tmp/",
     'DIR_FILES'             => "./_files/",
     'DIR_SETTINGS'          => "./_settings/",
-    'FILE_DB_SETTINGS'      => 'db_settings.php',
+    'FILE_DB_SETTINGS'      => "db_settings.php",
+    'SITE_SETTINGS'         => "site_settings.php",
 
 
     /**
@@ -200,7 +200,7 @@ $g_config= array(
 
 
     'MESSAGE_WELCOME_HOME'=>
-                        "<b>Welcome</b> to streber.",
+                        "<b>Welcome</b> to %s.",
 
     'MESSAGE_WELCOME_ONEPROJECT'=>
                         "Hello <b>%s</b>. Welcome to project <b>%s</b> ",
