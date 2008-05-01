@@ -2153,7 +2153,7 @@ function personEdit($person=NULL)
 			}
 
             ### profile and login ###
-            if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
+            if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS && $person->id != 1) {
                 global $g_user_profile_names;
                 global $g_user_profiles;
 
