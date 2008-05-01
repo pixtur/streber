@@ -1,5 +1,6 @@
 <?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
+require_once("db_item.inc.php");
 
 /**
 * cache some db-elements
