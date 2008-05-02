@@ -2109,7 +2109,7 @@ function personEdit($person=NULL)
 		
 		        
         ### profile and login ###
-        if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
+        if($auth->cur_user->user_rights & RIGHT_PERSON_GRANT_ACCT) {
             /**
             * if checkbox not rendered, submit might reset $person->can_login.
             * ...be sure the user_rights match
@@ -2489,8 +2489,11 @@ function personEditSubmit()
                 }
             }
         }
-
-
+	}
+	
+	
+	if($auth->cur_user->user_rights & RIGHT_PERSON_GRANT_ACCT)
+	{
         /**
         * NOTE, if checkbox is not rendered in editForm, user-account will be disabled!
         * there seems no way the be sure the checkbox has been rendered, if it is not checked in form
