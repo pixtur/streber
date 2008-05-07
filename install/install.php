@@ -528,7 +528,8 @@ function step_02_proceed()
                           can_login,
                           profile,
                           language,
-                          ip_address
+                          ip_address,
+                          office_email
                           )
                           VALUES(
                           1,
@@ -539,7 +540,8 @@ function step_02_proceed()
                           1,
                           1,
                           '".confGet('DEFAULT_LANGUAGE')."',
-                          ''
+                          '',
+                          '" . $g_form_fields["site_email"]["value"] . "'
                           )";
         if(!$sql_obj->execute($str_query)) {
             print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj->error."</pre>");
@@ -556,16 +558,15 @@ function step_02_proceed()
                           type,
                           state,
                           created_by,
-                          modified_by,
-                          office_email
+                          modified_by
                           )
                           VALUES(
                           1,
                           ".ITEM_PERSON.",
                           ".ITEM_STATE_OK.",
                           1,
-                          1,
-                          ". $g_form_fields["site_email"]["value"] ." )";
+                          1
+                          )";
         if(!$sql_obj->execute($str_query)) {
             print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj->error."</pre>");
             return false;
