@@ -1,5 +1,77 @@
 streber-version-history
 
+version: v0.0803 [2008-05-09]
+==========================
+major
+- added is_news option to tasks / topics
+- added project options to hide features like tasks and file uploads
+- fixed table-rendering bug (http://www.streber-pm.org/5217)
+- Added "ASAP" option to mail notifications which will result in mail 
+	notifications being sent out for individuals everytime the sendNotifications
+	function is called when they have their notification interval set to "ASAP".
+	Site admins can create a cron job to visit index.php?go=triggerSendNotifications
+	at regular intervals.
+- Made db-version detection more robust.
+- Fixed bug where two entries of db-version would be inserted on install.
+- Fixed bug where error would result if correct schema file is available.
+- Disabled profile selection drop down if user being edited is the
+	automatic user created at install time. This should prevent situations
+	like in bug #6105 (unless existing install already has deleted but we
+	can't do much about that ;]).
+- Added more options to the install process and changed order of questions. 
+	Site name (sets APP_NAME) and Admin's email (sets ADMINISTRATOR_EMAIL). 
+	New options will be installed to _settings/site_settings.php
+- Changed default conf value for MESSAGE_WELCOME_HOME, replacing streber with 
+	%s. Updated index.php and pages/login.inc.php to replace string token with
+    APP_NAME conf.
+- Updated pages/login.inc.php to use APP_NAME conf instead
+    of the constant "streber". 
+- Added new permission, RIGHT_PERSON_GRANT_ACCT which allows you to set the 
+	"can login?" bit on a user. By default, if you have the ability to create a
+	user you also have the ability to edit a user so I made it the default that
+	if you can create/edit a user, you can also grant them an account 
+	(ie. login). This allows admins to allow people to "really" setup new 
+	accounts without giving them the permissions to edit people's rights 
+	(which you required before).
+
+minor
+- updated languages
+- renamed Home section from User name to "Home"
+- renamed Home to "Recent changes"
+- added news section to projView
+- renamed "Docu" to "Topics"
+- renamed "Documentation" to "Topic"
+- removed a debug message when magic_quotes was enabled
+- default lang is 'en' now
+- bug fix: now the relation between taks and milestone is copied and transposed.
+- fixed typo in install/install.php: grand->grant
+- Created new schema export for 0.803
+- Updated history.txt to include the updates from v0.0801 (as well as this
+	release obvisously. :]).
+
+version: v0.0801 [2007-08-04]
+==========================
+major:
+- fixed missing link in password reminder mail
+- fixed added in of backslashes when ajax editing chapters
+- fixed invalid display of tasks for newly created milestones
+- fixed update trigger of person function (cause fatal error)
+- fixed some js errors in lists
+- fixed http-syntax in wiki rendering
+- fixed Ctrl-Click in firefox (Ctrl-Klick in firefox) / Comments summary (Comments summary)
+- time filter for efforts
+- new page for effort calculations
+- fixed wiki link syntax inside tables and lists 
+
+minor:
+- Wiki Format - link should open in a new window ("Wiki format" link should open in a new window)
+- added more distinctive project name in project selector - More distinctive project name in project selector
+- added configuration variable to enforce a theme
+- added example custom theme
+- added grouped option list for milestones
+- fixed one pixel gap below tabs
+- adjust display of feedback messages 
+
 
 version: v0.08 [2007-05-15]
 ==========================

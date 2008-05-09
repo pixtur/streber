@@ -27,7 +27,7 @@ confChange('SMTP','mail.pixtur.de');
 confChange('REGISTER_NEW_USERS', true);
 confChange('REGISTER_NEW_USERS_TO_PROJECT', 1908);
 
-confChange('THEME_OVERWRITE',1);
+#confChange('THEME_OVERWRITE',1);
 confChange('DEFAULT_LANGUAGE','en');
 
 
