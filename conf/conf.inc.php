@@ -16,7 +16,8 @@ global $g_config;
 $g_config= array(
 
     'STREBER_VERSION'       => '0.0803',
-    'STREBER_VERSION_DATE'  => '2008-05-09',
+    'STREBER_VERSION_DATE'  => '2008-05-09',
+
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
     'PHP_VERSION_REQUIRED'  =>  '5.0.0',
@@ -196,7 +197,8 @@ $g_config= array(
     'MESSAGE_OFFLINE'=>"<h1>Congratulations!</h1>
                     You are one of the few people witnessing this installation of <br>
                     <a href='http://www.streber-pm.org'>streber</a> being offline. <br>Use your chance and contact
-                    the <a href='mailto:admin @ is undefined com'>administrator</a> to get your special price immediately.<br><br>Problem: <b>",
+                    the <a href='mailto:admin @ is undefined com'>administrator</a> to get your special price immediately.<br><br>
+                    Problem: <b>",
 
 
     'MESSAGE_WELCOME_HOME'=>
