@@ -1,5 +1,15 @@
 streber-version-history
 
+version: vXXXXX  [xxxx-xx-xx]
+==========================
+major
+- added user setting to ignore filtering of own changes in recent changes lists
+minor
+- fixed render wiki bug when link with pipe above table
+- fixed several minor typos
+- checked for missing iconf-function when exporting csv
+
+
 version: v0.0803 [2008-05-09]
 ==========================
 major
