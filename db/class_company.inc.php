@@ -602,6 +602,11 @@ class Company extends DbProjectItem
 		$prefix= confGet('DB_TABLE_PREFIX');
 
         ### all ###
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+            return true;
+        }
+        
+        ### all companies ###
         if($auth->cur_user->user_rights & RIGHT_COMPANY_VIEWALL) {
             return true;
         }
@@ -629,7 +634,7 @@ class Company extends DbProjectItem
             return true;
         }
         else if($count > 1) {
-            $PH->abortWarning(__("more than expected"),ERROR_BUG);
+            $PH->abortWarning(__("not available"),ERROR_RIGHTS);
         }
         else{
             $PH->abortWarning(__("not available"),ERROR_RIGHTS);
