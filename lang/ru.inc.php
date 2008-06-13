@@ -1384,7 +1384,7 @@ $g_lang_table= array(
 'Project Efforts'             =>'Работы Проекта',  # line 1407
 'Released Versions'           =>'Выполненные/Выпущенные версии',  # line 1497
 'New released Milestone'      =>'Новый завершенный этап',  # line 1516
-'Tasks resolved in upcomming version'=>'задачи, решенные в предполагаемой версии',  # line 1551
+'Tasks resolved in upcoming version'=>'задачи, решенные в предполагаемой версии',  # line 1551
 'Company|form label'          =>'Компания',  # line 1668
 
 ### ../pages/task_more.inc.php   ###
@@ -1610,7 +1610,7 @@ $g_lang_table= array(
 'attach new'                  =>'присоеденить новый',  # line 1212
 'Severity|label in issue-reports'=>'Серъезность',  # line 503
 'Reproducibility|label in issue-reports'=>'Воспроизводимость',  # line 510
-'Plattform'                   =>'Платформа',  # line 516
+'Platform'                   =>'Платформа',  # line 516
 'OS'                          =>'OS',  # line 519
 'Build'                       =>'Билд',  # line 525
 'Steps to reproduce|label in issue-reports'=>'Шагов к воспроизведению',  # line 530
@@ -1860,7 +1860,7 @@ $g_lang_table= array(
 'deferred|Resolve reason'     =>'отложено',  # line 166
 'Not defined|release type'    =>'Не определено',  # line 172
 'Not planned|release type'    =>'Не запланировано',  # line 173
-'Upcomming|release type'      =>'В планах',  # line 174
+'upcoming|release type'      =>'В планах',  # line 174
 'Internal|release type'       =>'Внутренний',  # line 175
 'Public|release type'         =>'Общедоступный',  # line 176
 'Without support|release type'=>'Без поддержки',  # line 177

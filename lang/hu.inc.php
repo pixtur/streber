@@ -1420,7 +1420,7 @@ $g_lang_table= array(
 'Project Efforts'             =>'',  # line 1407
 'Released Versions'           =>'',  # line 1497
 'New released Milestone'      =>'',  # line 1516
-'Tasks resolved in upcomming version'=>'',  # line 1551
+'Tasks resolved in upcoming version'=>'',  # line 1551
 'Company|form label'          =>'',  # line 1668
 
 ### ../pages/task_more.inc.php   ###
@@ -1646,7 +1646,7 @@ $g_lang_table= array(
 'attach new'                  =>'új fájl csatolása',  # line 1212
 'Severity|label in issue-reports'=>'',  # line 503
 'Reproducibility|label in issue-reports'=>'',  # line 510
-'Plattform'                   =>'',  # line 516
+'Platform'                   =>'',  # line 516
 'OS'                          =>'',  # line 519
 'Build'                       =>'',  # line 525
 'Steps to reproduce|label in issue-reports'=>'',  # line 530
@@ -1895,7 +1895,7 @@ $g_lang_table= array(
 'deferred|Resolve reason'     =>'',  # line 166
 'Not defined|release type'    =>'',  # line 172
 'Not planned|release type'    =>'Nem tervezett',  # line 173
-'Upcomming|release type'      =>'Hamarosan',  # line 174
+'upcoming|release type'      =>'Hamarosan',  # line 174
 'Internal|release type'       =>'Belső',  # line 175
 'Public|release type'         =>'Publikus',  # line 176
 'Without support|release type'=>'Támogatás nélkül',  # line 177

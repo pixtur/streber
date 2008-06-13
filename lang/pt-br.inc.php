@@ -530,7 +530,7 @@ $g_lang_table= array(
 
 ### ../pages/task.inc   ###
 'Issue report'                =>'Relatório de Questões',
-'Plattform'                   =>'Plataforma',
+'Platform'                   =>'Plataforma',
 'OS'                          =>'OS',
 'Version'                     =>'Versão',
 'Build'                       =>'Concebido',
@@ -1480,7 +1480,7 @@ $g_lang_table= array(
 'View closed milestones'      =>'Visualizar marcos fechados',
 'Released Versions'           =>'VersÃµes Publicadas',
 'New released Version'      =>'Novo Marco publicado',
-'Tasks resolved in upcomming version'=>'Tarefa resolvida na prÃ³xima ediÃ§Ã£o',
+'Tasks resolved in upcoming version'=>'Tarefa resolvida na prÃ³xima ediÃ§Ã£o',
 'Company|form label'          =>'Companhia|etiqueta de formulÃ¡rio',
 'Found no persons to add. Go to `People` to create some.'=>'NÃ£o encontrada pessoas para adicionar. VÃ¡ atÃ© `Pessoas` para criar algumas',
 'Add'                         =>'Adicionar',
@@ -1745,7 +1745,7 @@ $g_lang_table= array(
 'deferred|resolve reason'     =>'deferido|razÃ£o da soluÃ§Ã£o',
 'Not defined|release type'    =>'NÃ£o deferido|tipo de lanÃ§amento',
 'Not planned|release type'    =>'NÃ£o panejado|tipo de lanÃ§amento',
-'Upcomming|release type'      =>'Por vir|tipo de lanÃ§amento',
+'upcoming|release type'      =>'Por vir|tipo de lanÃ§amento',
 'Internal|release type'       =>'Interno|tipo de lanÃ§amento',
 'Public|release type'         =>'PÃºblico|tipo de lanÃ§amento',
 'Without support|release type'=>'Sem suporte|tipo de lanÃ§amento',

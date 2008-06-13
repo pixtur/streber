@@ -1404,7 +1404,7 @@ undefined keys:
 'Project Efforts'             =>'',  # line 1407
 'Released Versions'           =>'',  # line 1497
 'New released Version'      =>'',  # line 1516
-'Tasks resolved in upcomming version'=>'',  # line 1551
+'Tasks resolved in upcoming version'=>'',  # line 1551
 'Company|form label'          =>'',  # line 1668
 
 ### ../pages/task_more.inc.php   ###
@@ -1630,7 +1630,7 @@ undefined keys:
 'attach new'                  =>'',  # line 1212
 'Severity|label in issue-reports'=>'',  # line 503
 'Reproducibility|label in issue-reports'=>'',  # line 510
-'Plattform'                   =>'',  # line 516
+'Platform'                   =>'',  # line 516
 'OS'                          =>'',  # line 519
 'Build'                       =>'',  # line 525
 'Steps to reproduce|label in issue-reports'=>'',  # line 530
@@ -1878,7 +1878,7 @@ undefined keys:
 'deferred|Resolve reason'     =>'',  # line 166
 'Not defined|release type'    =>'',  # line 172
 'Not planned|release type'    =>'',  # line 173
-'Upcomming|release type'      =>'',  # line 174
+'upcoming|release type'      =>'',  # line 174
 'Internal|release type'       =>'',  # line 175
 'Public|release type'         =>'',  # line 176
 'Without support|release type'=>'',  # line 177

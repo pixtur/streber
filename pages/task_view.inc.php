@@ -442,7 +442,7 @@ function TaskView()
 
 
         if($issue->plattform) {
-            $buffer.= '<div class=labeled><label>' . __('Plattform') . '</label>'.asHtml($issue->plattform).'</div>';
+            $buffer.= '<div class=labeled><label>' . __('Platform') . '</label>'.asHtml($issue->plattform).'</div>';
         }
         if($issue->os) {
             $buffer.= '<div class=labeled><label>' . __('OS') . '</label>'. asHtml($issue->os).'</div>';

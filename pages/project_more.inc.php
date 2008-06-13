@@ -1988,7 +1988,7 @@ function ProjViewVersions()
 	}
 
 
-	### list changes for upcomming version ###
+	### list changes for upcoming version ###
 	{
 
 	    if($tasks= Task::getAll(array(
@@ -2000,7 +2000,7 @@ function ProjViewVersions()
 	    ))) {
 
             $block=new PageBlock(array(
-                'title'=>__("Tasks resolved in upcomming version"),
+                'title'=>__("Tasks resolved in upcoming version"),
                 'id'=>'resolved_tasks',
             ));
             $block->render_blockStart();

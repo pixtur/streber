@@ -1152,7 +1152,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'attach new'                  =>'allega nuovo',  # line 289
 'Upload'                      =>'Upload',  # line 292
 'Issue report'                =>'Segnala problema',  # line 353
-'Plattform'                   =>'Piattaforma',  # line 362
+'Platform'                   =>'Piattaforma',  # line 362
 'OS'                          =>'Sistema Operativo',  # line 365
 'Build'                       =>'Versione',  # line 371
 'Steps to reproduce|label in issue-reports'=>'Passi per riprodurre il problema',  # line 376
@@ -1734,7 +1734,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'without milestone'           =>'senza evento',  # line 887
 'Released Versions'           =>'Versioni rilasciate',  # line 1553
 'New released Version'      =>'Nuovo evento rilasciato',  # line 1571
-'Tasks resolved in upcomming version'=>'Attività risolte nella prossima versione',  # line 1605
+'Tasks resolved in upcoming version'=>'Attività risolte nella prossima versione',  # line 1605
 'Moved %s projects to trash'  =>'Spostati %s progetti nel cestino',  # line 1916
 
 ### ../pages/search.inc.php   ###
@@ -1870,7 +1870,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'deferred|resolve reason'     =>'rimandato',  # line 160
 'Not defined|release type'    =>'Non definito',  # line 166
 'Not planned|release type'    =>'Non pianificato',  # line 167
-'Upcomming|release type'      =>'In arrivo',  # line 168
+'upcoming|release type'      =>'In arrivo',  # line 168
 'Internal|release type'       =>'Interna',  # line 169
 'Public|release type'         =>'Pubblica',  # line 170
 'Without support|release type'=>'Senza supporto',  # line 171

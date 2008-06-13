@@ -529,7 +529,7 @@ $g_lang_table= array(
 
 ### ../pages/task.inc   ###
 'Issue report'                =>'Rapport du problème',
-'Plattform'                   =>'Plattform',
+'Platform'                   =>'Platform',
 'OS'                          =>'OS',
 'Version'                     =>'Version',
 'Build'                       =>'Build',
@@ -1620,7 +1620,7 @@ $g_lang_table= array(
 'View closed milestones'      =>'Voir objectifs terminé',
 'Released Versions'           =>'Versions révisées',
 'New released Version'      =>'Nouvelle objectif révisé',
-'Tasks resolved in upcomming version'=>'Tâches résolue dans la prochaine version',
+'Tasks resolved in upcoming version'=>'Tâches résolue dans la prochaine version',
 'Found no persons to add. Go to `People` to create some.'=>'Pas de personne trouvée',
 'Select a project to edit description'=>'Séléectionner un projet pour modifier la description',
 
@@ -1851,7 +1851,7 @@ $g_lang_table= array(
 'deferred|resolve reason'     =>'reporté',
 'Not defined|release type'    =>'Pas défini',
 'Not planned|release type'    =>'Pas plannifié',
-'Upcomming|release type'      =>'à venir',
+'upcoming|release type'      =>'à venir',
 'Internal|release type'       =>'Interne',
 'Public|release type'         =>'Public',
 'Without support|release type'=>'Sans support',

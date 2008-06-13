@@ -398,7 +398,7 @@ undefined keys:
 'No topics yet'               =>'',  # line 1144
 'View calculation'            =>'',  # line 1669
 'Effort calculations'         =>'',  # line 1852
-'Tasks resolved in upcomming version'=>'',  # line 2003
+'Tasks resolved in upcoming version'=>'',  # line 2003
 
 ### ../pages/task_more.inc.php   ###
 'Display'                     =>'',  # line 712

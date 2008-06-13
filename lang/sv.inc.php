@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -1127,7 +1128,7 @@ $g_lang_table= array(
 'attach new'                  =>'bifoga fler',  # line 289
 'Upload'                      =>'Ladda upp',  # line 292
 'Issue report'                =>'Problemrapport',  # line 353
-'Plattform'                   =>'Plattform',  # line 362
+'Platform'                   =>'Platform',  # line 362
 'OS'                          =>'O/S',  # line 365
 'Build'                       =>'Version',  # line 371
 'Steps to reproduce|label in issue-reports'=>'Steg att återskapa',  # line 376
@@ -1815,7 +1816,7 @@ $g_lang_table= array(
 'without milestone' =>'utan milstolpe', # line 888
 'Released Versions' =>'Utgivna versioner', # line 1542
 'New released Version' =>'Ny utgiven version', # line 1560
-'Tasks resolved in upcomming version'=>'Uppgift löst i kommande version', # line 1594
+'Tasks resolved in upcoming version'=>'Uppgift löst i kommande version', # line 1594
 'Failed to delete %s projects'=>'Det gick inte att radera %s projekt', # line 1902
 'Failed to change %s projects'=>'Det gick inte att ändra %s projekt', # line 1952
 'Found no persons to add. Go to `People` to create some.'=>'Hittade inga användare att lägga till. Gå till *Användare* för att skapa.', # line 2037
@@ -1989,7 +1990,7 @@ $g_lang_table= array(
 'deferred|resolve reason' =>'Försenad', # line 160
 'Not defined|release type' =>'Ej definierad', # line 166
 'Not planned|release type' =>'Ej planerad', # line 167
-'Upcomming|release type' =>'Kommande', # line 168
+'upcoming|release type' =>'Kommande', # line 168
 'Internal|release type' =>'Intern', # line 169
 'Public|release type' =>'Publik', # line 170
 'Without support|release type'=>'Saknar support', # line 171

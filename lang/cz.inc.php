@@ -1190,7 +1190,7 @@ $g_lang_table= array(
 'attach new'                  =>'připojit úkol',
 'Upload'                      =>'Odeslat',
 'Issue report'                =>'Report problému',
-'Plattform'                   =>'Platforma',
+'Platform'                   =>'Platforma',
 'OS'                          =>'OS',
 'Build'                       =>'Sestavení',
 'Steps to reproduce|label in issue-reports'=>'Kroky k reprodukcií',
@@ -1759,7 +1759,7 @@ $g_lang_table= array(
 'without milestone'           =>'bez milníku',
 'Released Versions'           =>'Vydané verze',
 'New released Version'      =>'Nový vypuštěný milník',
-'Tasks resolved in upcomming version'=>'Úkoly vyřešené v nadcházející verzi',
+'Tasks resolved in upcoming version'=>'Úkoly vyřešené v nadcházející verzi',
 
 ### ../pages/search.inc.php   ###
 'cannot jump to this item type'=>'není možné skočit na takýto typ položky',
@@ -1857,7 +1857,7 @@ $g_lang_table= array(
 'deferred|resolve reason'     =>'odložené',
 'Not defined|release type'    =>'Nedefinované',
 'Not planned|release type'    =>'Neplánované',
-'Upcomming|release type'      =>'Následující',
+'upcoming|release type'      =>'Následující',
 'Internal|release type'       =>'Interní',
 'Public|release type'         =>'Veřejné',
 'Without support|release type'=>'Bez podpory',

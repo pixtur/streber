@@ -527,7 +527,7 @@ $g_lang_table= array(
 
 ### ../pages/task.inc   ###
 'Issue report'                =>'Feilrapport',
-'Plattform'                   =>'Plattform',
+'Platform'                   =>'Platform',
 'OS'                          =>'OS',
 'Version'                     =>'Versjon',
 'Build'                       =>'Build',
@@ -1923,7 +1923,7 @@ $g_lang_table= array(
 'without milestone'           =>'uten milepæl',
 'Released Versions'           =>'Utgitte versjoner',
 'New released Version'      =>'Ny utgitt milepæl',
-'Tasks resolved in upcomming version'=>'Oppgaver løst i komende versjon',
+'Tasks resolved in upcoming version'=>'Oppgaver løst i komende versjon',
 
 ### ../pages/search.inc.php   ###
 'in'                          =>'i',
@@ -2034,7 +2034,7 @@ $g_lang_table= array(
 'deferred|resolve reason'     =>'utsatt',
 'Not defined|release type'    =>'Ikke definert',
 'Not planned|release type'    =>'Ikke planlagt',
-'Upcomming|release type'      =>'Kommende',
+'upcoming|release type'      =>'Kommende',
 'Internal|release type'       =>'Intern',
 'Public|release type'         =>'Offentlig',
 'Without support|release type'=>'Uten støtte',

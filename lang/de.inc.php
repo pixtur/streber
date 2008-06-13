@@ -598,7 +598,7 @@ $g_lang_table= array(
 'Your efforts'                =>'Ihre Aufwände',
 
 'Issue report'                =>'Fehlerbericht',
-'Plattform'                   =>'Plattform',
+'Platform'                   =>'Platform',
 'OS'                          =>'OS',
 'Version'                     =>'Version',
 'Build'                       =>'Build',
@@ -1883,7 +1883,7 @@ $g_lang_table= array(
 'deferred|resolve reason'     =>'verschoben',
 'Not defined|release type'    =>'undefiniert',
 'Not planned|release type'    =>'nicht geplant',
-'Upcomming|release type'      =>'Kommt',
+'upcoming|release type'      =>'Kommt',
 'Internal|release type'       =>'Intern',
 'Public|release type'         =>'Öffentlich',
 'Without support|release type'=>'Ohne Service',
@@ -2024,7 +2024,7 @@ $g_lang_table= array(
 'Marked all previous items as viewed.'=>'Alle Elemente als gelesen markiert.',
 
 'Create a new page'           =>'Eine neue Seite erstellen.',
-'Tasks resolved in upcomming version'=>'Aufgaben, die in der nächsten Version geschlossen sind.',
+'Tasks resolved in upcoming version'=>'Aufgaben, die in der nächsten Version geschlossen sind.',
 
 'Display'                     =>'Darstellen',
 
