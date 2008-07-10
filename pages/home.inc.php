@@ -555,13 +555,69 @@ function homeTasks()
             ),
 
         ),
+        
+        ### my blocked tasks ###
+        'my_blocked_tasks' => array(
+            'name'=> __('my blocked'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array(STATUS_BLOCKED),
+                    'min'       => STATUS_BLOCKED,
+                    'max'       => STATUS_BLOCKED,
+                ),
+                'assigned_to'   => array(
+                    'id'        => 'assigned_to',
+                    'visible'   => true,
+                    'active'    => true,
+                    'value'    =>  $auth->cur_user->id,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                )
+            ),
+            'new_task_options'=> array(
+                'task_assign_to_0'=> $auth->cur_user->id,
+            ),
 
+        ),
 
+        ### blocked tasks ###
+        'blocked_tasks' => array(
+            'name'=> __('blocked'),
+            'filter_empty_folders'=>true,
+            'filters'=> array(
+                'task_status'=> array(
+                    'id'        => 'task_status',
+                    'visible'   => true,
+                    'active'    => true,
+                    'values'    => array(STATUS_BLOCKED),
+                    'min'       => STATUS_BLOCKED,
+                    'max'       => STATUS_BLOCKED,
+                ),
+            ),
+            'list_settings' => array(
+                'tasks' =>array(
+                    'hide_columns'  => array(
+                        ''
+                    ),
+                    'style'=> 'list',
+                ),
+            ),
+        ),
 
 
         ### need Feedback ###
         'needs_feedback' => array(
-            'name'=> __('modified'),
+            'name'=> __('needs feedback'),
             'filter_empty_folders'=>true,
             'filters'=> array(
                 'task_status'=> array(
@@ -778,7 +834,7 @@ function homeTasks()
     unset($list->columns['efforts']);
     unset($list->columns['project']);
     unset($list->columns['pub_level']);
-    unset($list->columns['planned_start']);
+#    unset($list->columns['planned_end']);
     unset($list->block_functions['tree']);
 
     $list->query_options['assigned_to_person'] = $auth->cur_user->id;

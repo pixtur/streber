@@ -53,9 +53,19 @@ function projList()
         $page->options=build_projList_options();
 
         ### page functions ###
+        $page->add_function(new PageFunctionGroup(array(
+				'name'      => __('New project from')
+			)));
+        
         $page->add_function(new PageFunction(array(
-            'target'=>'projNew',
-            'icon'=>'new',
+            'target'=> 'projListTemplates',
+            'name'  => 'template',
+            'icon'  => 'new',
+        )));
+        $page->add_function(new PageFunction(array(
+            'target'=> 'projNew',
+            'name'  => 'scratch',
+            'icon'  => 'new',
         )));
 
     	### render title ###

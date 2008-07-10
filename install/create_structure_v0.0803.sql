@@ -19,7 +19,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE `comment` (
   `id` int(11) NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `occasion` tinyint(4) NOT NULL default '1',
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Table structure for table `company`
 --
 
-CREATE TABLE IF NOT EXISTS `company` (
+CREATE TABLE `company` (
   `id` int(11) NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `tagline` varchar(255) NOT NULL default '',
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 -- Table structure for table `db`
 --
 
-CREATE TABLE IF NOT EXISTS `db` (
+CREATE TABLE `db` (
   `id` int(11) NOT NULL default '0',
   `version` varchar(12) NOT NULL default '',
   `created` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `db` (
 -- Table structure for table `effort`
 --
 
-CREATE TABLE IF NOT EXISTS `effort` (
+CREATE TABLE `effort` (
   `id` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `time_start` datetime default NULL,
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `effort` (
 -- Table structure for table `employment`
 --
 
-CREATE TABLE IF NOT EXISTS `employment` (
+CREATE TABLE `employment` (
   `id` int(11) NOT NULL default '0',
   `person` int(11) NOT NULL default '0',
   `company` int(11) NOT NULL default '0',
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `employment` (
 -- Table structure for table `file`
 --
 
-CREATE TABLE IF NOT EXISTS `file` (
+CREATE TABLE `file` (
   `id` int(4) NOT NULL default '0',
   `name` varchar(128) NOT NULL default '',
   `mimetype` varchar(128) NOT NULL default '',
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `file` (
 -- Table structure for table `issue`
 --
 
-CREATE TABLE IF NOT EXISTS `issue` (
+CREATE TABLE `issue` (
   `id` int(11) NOT NULL default '0',
   `task` int(11) NOT NULL default '0',
   `reproducibility` tinyint(4) NOT NULL default '0',
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `issue` (
 -- Table structure for table `item`
 --
 
-CREATE TABLE IF NOT EXISTS `item` (
+CREATE TABLE `item` (
   `id` int(11) NOT NULL auto_increment,
   `pub_level` tinyint(4) NOT NULL default '4',
   `type` tinyint(4) NOT NULL default '0',
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Table structure for table `itemchange`
 --
 
-CREATE TABLE IF NOT EXISTS `itemchange` (
+CREATE TABLE `itemchange` (
   `id` int(11) NOT NULL auto_increment,
   `item` int(11) NOT NULL default '0',
   `modified_by` int(11) NOT NULL default '0',
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `itemchange` (
 -- Table structure for table `itemperson`
 --
 
-CREATE TABLE IF NOT EXISTS `itemperson` (
+CREATE TABLE `itemperson` (
   `id` int(11) NOT NULL auto_increment,
   `person` int(11) NOT NULL default '0',
   `item` int(11) NOT NULL default '0',
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `itemperson` (
 -- Table structure for table `person`
 --
 
-CREATE TABLE IF NOT EXISTS `person` (
+CREATE TABLE `person` (
   `id` int(11) NOT NULL default '0',
   `state` tinyint(4) NOT NULL default '1',
   `name` varchar(255) NOT NULL default '',
@@ -316,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- Table structure for table `project`
 --
 
-CREATE TABLE IF NOT EXISTS `project` (
+CREATE TABLE `project` (
   `id` int(11) NOT NULL default '0',
   `state` int(11) NOT NULL default '1',
   `name` varchar(255) NOT NULL default '',
@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `project` (
 -- Table structure for table `projectperson`
 --
 
-CREATE TABLE IF NOT EXISTS `projectperson` (
+CREATE TABLE `projectperson` (
   `id` int(11) NOT NULL default '0',
   `state` tinyint(4) NOT NULL default '1',
   `project` int(11) NOT NULL default '0',
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `projectperson` (
 -- Table structure for table `task`
 --
 
-CREATE TABLE IF NOT EXISTS `task` (
+CREATE TABLE `task` (
   `id` int(11) NOT NULL default '0',
   `order_id` int(11) NOT NULL default '0',
   `estimated` int(11) default '0',
@@ -430,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `task` (
 -- Table structure for table `taskperson`
 --
 
-CREATE TABLE IF NOT EXISTS `taskperson` (
+CREATE TABLE `taskperson` (
   `id` int(11) NOT NULL auto_increment,
   `person` int(11) NOT NULL default '0',
   `task` int(11) NOT NULL default '0',

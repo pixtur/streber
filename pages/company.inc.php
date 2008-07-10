@@ -966,12 +966,10 @@ function companyEdit($company=NULL)
         }
 
 		### dropdown menu for company category ###
-		if($c= get('comcat')){
-			$comcat = $c;
-		}
-		else {
-			$comcat = $company->category;
-		}
+		if(get('comcat')) $comcat = get('comcat');
+		else if($company->id) $comcat = $company->category;
+		else $comcat = CCATEGORY_CLIENT;
+		
 		$form->add(new Form_Dropdown('ccategory',  __('Category','form label'),array_flip($g_ccategory_names), $comcat));
 
         ### create another  ###

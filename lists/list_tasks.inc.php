@@ -142,7 +142,7 @@ class ListBlock_tasks extends ListBlock
 		)));
 		$this->add_col( new ListBlockCol_Milestone);
 		$this->add_col( new ListBlockCol_EstimatedComplete);
-		$this->add_col( new ListBlockCol_DaysLeft);
+		$this->add_col( new ListBlockCol_DaysLeft());
 		$this->add_col( new ListBlockCol_TaskSumEfforts());
 		if(confget('TASK_LIST_EFFORT_RELATION_COLUMN')) {
 		    $this->add_col( new ListBlockCol_TaskRelationEfforts);
@@ -662,7 +662,7 @@ class ListBlock_tasks extends ListBlock
 #	        unset($this->columns['pub_level']);
 	        unset($this->columns['created_by']);
 	        unset($this->columns['estimated']);
-	        unset($this->columns['planned_start']);
+#	        unset($this->columns['planned_end']);
 	        unset($this->columns['assigned_to']);
 	        unset($this->columns['status']);
 	        #unset($this->columns['prio']);
@@ -1258,47 +1258,84 @@ class ListBlockCol_TaskRelationEfforts extends ListBlockCol
 
 class ListBlockCol_DaysLeft extends ListBlockCol
 {
-    public $key='planned_start';
+    public $key='planned_end';
 
     public function __construct($args=NULL) {
         parent::__construct($args);
-        $this->tooltip=__("Days until planned start");
-        $this->name=__("Due","column header, days until planned start");
+        $this->tooltip=__("Days until planned end");
+        $this->name=__("Due","column header, days until planned end");
     }
 
 	function render_tr(&$obj, $style="")
 	{
         measure_start('col_timedue');
-        $due_str=$obj->planned_start;
-
-        if($due_str == "0000-00-00" || $due_str == "0000-00-00 00:00:00") {
-		    print "<td></td>";
-        }
-        else {
-            $due_days= floor( (strToGMTime($obj->planned_start) - time())/24/60/60)+1;
-            if($due_days==0) {
-                $value="Today";
-                $title="title='Hurry up!'";
-                $class='';
+        
+        $class = "";
+        $title = "planned end undefined.";
+        $value = "";
+        
+        if($obj->planned_end && $obj->planned_end != '0000-00-00' && $obj->planned_end != '0000-00-00 00:00:00')
+        {
+            $daysLeft = floor((strToGMTime($obj->planned_end) - time())/24/60/60);
+            
+            switch($daysLeft)
+            {
+                case 0 : 
+                {
+                    $value = "Today";
+                    $title = "this task is planned to be completed today.";
+                    break;
+                }
+                case 1 :
+                {
+                    $value = "Tomorrow";
+                    $title = "this task is planned to be completed tomorrow.";
+                    break; 
+                }
+                case 7: case 8: case 9: case 10: case 11: case 12: case 13:
+                case 14:
+                {
+                    $value = "Next week";
+                    $title = "due: " . renderDate($obj->planned_end);
+                    break;
+                }
+                default:
+                {
+                    $value = abs($daysLeft) . " <span class='entity'>days";
+                    if($daysLeft < 0)
+                    {
+                        $class = "overDue";
+                        $title = "this task is overdue!";
+                        $value .= " late";
+                    }
+                    else
+                    {
+                        $value .= " remain";
+                        
+                        if($obj->planned_start && $obj->planned_start != '0000-00-00' && $obj->planned_start != '0000-00-00 00:00:00')
+                        {
+                            if((floor((strToGMTime($obj->planned_start) - time())/24/60/60)+1) >= 1)
+                            {
+                                $value = "Pending";
+                                $title = sprintf(__("planned for %s","a certain date"), renderTimestamp($obj->planned_start));
+                            }
+                            else $title = "start: " . renderDate($obj->planned_start) . 
+                                " / due: ".renderDate($obj->planned_end);
+                        }
+                        else
+                        {
+                            $title = "due: ".renderDate($obj->planned_end);
+                        }
+                    }
+                    break;
+                }
             }
-            else {
-                $class='';
-                if($due_days<0) {
-                    $class='overDue';
-                }
-                $value="$due_days<span class='entity'>D</span>";
-                if(!$obj->planned_end || $obj->planned_end !='0000-00-00' || '0000-00-00 00:00:00') {
-                    $title="title='".renderDate($obj->planned_end)." - ".renderDate($obj->planned_start).  "'";
-                    $value.="+";
-                }
-                else {
-                    $title="'".sprintf(__("planned for %s","a certain date"), renderTimestamp($obj->planned_start))."'";
-                }
-            }
-		    print "<td class='timeDue $class' $title>$value</td>";
         }
+        
+        $value .= "</span>";
+        
+        print "<td class='timeDue $class' title='$title'>$value</td>";
         measure_stop('col_timedue');
-
 	}
 }
 

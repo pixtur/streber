@@ -100,7 +100,7 @@ function step_01_checkEvironment() {
         if(count($g_supported_db_types)) {
             #$sql_obj = new sql_class('mysqli');                #@@@pixtur 2005-01-04: would creating the obj be better???
             #if($sql_obj -> error == false){
-            print_testResult(RESULT_GOOD);
+            print_testResult(RESULT_GOOD, "Database support available.");
         }
         else{
             #print_testResult(RESULT_FAILED, $sql_obj->error);
@@ -112,7 +112,7 @@ function step_01_checkEvironment() {
 
     ### check _settings-directory writeable ###
     {
-        print_testStart("check write-permissions for directory '<b>". confGet('DIR_SETTINGS') ."</b>'?");
+        print_testStart("check write-permissions for settings directory '<b>". confGet('DIR_SETTINGS') ."</b>'?");
         if(!is_writeable('../'. confGet('DIR_SETTINGS'))) {
             if(!is_dir('../'. confGet('DIR_SETTINGS'))){
                 @mkdir('../'. confGet('DIR_SETTINGS'));
@@ -126,33 +126,45 @@ function step_01_checkEvironment() {
             }
         }
         else {
-            print_testResult(RESULT_GOOD);
+            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
         }
     }
 
     ### check _tmp-directory writeable ###
     {
-        print_testStart("check write-permissions for directory '<b>". confGet('DIR_TEMP') ."</b>'?");
+        print_testStart("check write-permissions for temporary files directory '<b>". confGet('DIR_TEMP') ."</b>'?");
         if(!is_writeable('../'. confGet('DIR_TEMP'))) {
             if(!is_dir('../'. confGet('DIR_TEMP'))){
                 @mkdir('../'. confGet('DIR_TEMP'));
             }
             @chmod('../'. confGet('DIR_TEMP'), 0777);
             if(!is_writeable('../'. confGet('DIR_TEMP'))){
-                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory.");
                 $flag_errors= true;
-            }else{
+            }
+            else
+            {
+                if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) 
+                {
+                    @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
+                }    
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
             }
         }
-        else {
-            print_testResult(RESULT_GOOD);
+        else
+        {
+            if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) 
+            {
+                @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
+            } 
+            
+            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
         }
     }
 
-    ### check _tmp-directory writeable ###
+    ### check _files-directory writeable ###
     {
-        print_testStart("check write-permissions for directory '<b>". confGet('DIR_FILES') ."</b>'?");
+        print_testStart("check write-permissions for files directory '<b>". confGet('DIR_FILES') ."</b>'?");
         if(!is_writeable('../'. confGet('DIR_FILES'))) {
             if(!is_dir('../'. confGet('DIR_FILES'))){
                 @mkdir('../'. confGet('DIR_FILES'));
@@ -160,19 +172,18 @@ function step_01_checkEvironment() {
             @chmod('../'. confGet('DIR_FILES'), 0777);
             if(!is_writeable('../'. confGet('DIR_FILES'))){
                 print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-                $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
             }
         }
         else {
-            print_testResult(RESULT_GOOD);
+            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
         }
     }
 
     ### check _rss-directory writeable ###
     {
-        print_testStart("check write-permissions for directory '<b>". confGet('DIR_RSS') ."</b>'?");
+        print_testStart("check write-permissions for RSS directory '<b>". confGet('DIR_RSS') ."</b>'?");
         if(!is_writeable('../'. confGet('DIR_RSS'))) {
             if(!is_dir('../'. confGet('DIR_RSS'))){
                 @mkdir('../'. confGet('DIR_RSS'));
@@ -180,13 +191,12 @@ function step_01_checkEvironment() {
             @chmod('../'. confGet('DIR_RSS'), 0777);
             if(!is_writeable('../'. confGet('DIR_RSS'))){
                 print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-                $flag_errors= true;
             }else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
             }
         }
         else {
-            print_testResult(RESULT_GOOD);
+            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
         }
     }
     ### check db-setting exists ###
@@ -209,13 +219,8 @@ function step_01_checkEvironment() {
                 print_testResult(RESULT_PROBLEM,"Renaming failed. Please remove manually.");
             }
         }
-        else {
-            print_testResult(RESULT_GOOD,"does not exists. Fresh installation");
-            if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) {
-                fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
-            }
-            
-        }
+        
+        else print_testResult(RESULT_GOOD,"does not exists. Fresh installation");        
         global $g_form_fields;
         $g_form_fields['db_username']['value']=     confGet('DB_USERNAME') ? confGet('DB_USERNAME') : NULL;
         $g_form_fields['db_password']['value']=     confGet('DB_PASSWORD') ? confGet('DB_PASSWORD') : NULL;
@@ -310,8 +315,7 @@ function step_02_proceed()
     $f_user_admin_name =        $g_form_fields['user_admin_name']['value'];
     $f_user_admin_password =    $g_form_fields['user_admin_password']['value'];
     $f_continue_on_sql_errors = $g_form_fields['continue_on_sql_errors']['value'];
-
-
+    
     require_once(dirname(__FILE__)."/../db/db_".$f_db_type."_class.php");
 
     ### check mysql-connection ###
@@ -325,7 +329,7 @@ function step_02_proceed()
             # Connection DB
             if(!$sql_obj->connect()) {
                 $hint= 'This could be a problem with incorrect setup of your sql-server. <a href="http://www.streber-pm.org/1176">Read more...</a>';
-                print_testResult(RESULT_FAILED,"mysql-error:<pre>".$sql_obj->error."</pre><br>$hint");
+                print_testResult(RESULT_FAILED,"mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error."</pre><br>$hint");
                 return false;
             }else{
                 print_testResult(RESULT_GOOD, $sql_obj->error);
@@ -442,8 +446,23 @@ function step_02_proceed()
                     print_testResult(RESULT_PROBLEM,"version is $db_version. It's requires Version " .confGet('DB_VERSION_REQUIRED'). " of Streber. Current Version is ".confGet('STREBER_VERSION').". Please download and install the latest version.");
                     return false;
                 }
-                else {
-                    print_testResult(RESULT_GOOD, "Current database (version $db_version) looks fine. Installation finished with nothing changed. Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
+                else 
+                {
+                    $filename= '../'. confGet('DIR_SETTINGS').  confGet('FILE_DB_SETTINGS');
+                    print_testStart("writing configuration file '$filename'...");
+                    $write_ok = writeSettingsFile($filename, array(
+                        'DB_TYPE'       => $f_db_type,
+                        'HOSTNAME'      => $f_hostname,
+                        'DB_USERNAME'   => $f_db_username,
+                        'DB_PASSWORD'   => $f_db_password,
+                        'DB_TABLE_PREFIX'=> $f_db_table_prefix,
+                        'DB_NAME'       => $f_db_name,
+                        'DB_VERSION'    => confGet('DB_CREATE_VERSION'),
+                    ));
+                    
+                    if($write_ok) print_testResult(RESULT_GOOD, "Current database (version $db_version) looks fine. Installation finished with database setting rewritten to file. Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
+                    else print_testResult(RESULT_PROBLEM, "Current database (version $db_version) looks fine. Installation finished with no change (unable to rewrite database setting to file). Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
+                                        
                     return true;
                 }
                 print_testResult(RESULT_PROBLEM,"Installation aborted due to unknown reason.");
@@ -478,9 +497,9 @@ function step_02_proceed()
                 print_testResult(RESULT_FAILED,"Getting sql-code failed. This is an internal error. Look at ". getStreberWikiLink('installation','Installation Guide') ." for clues. ");
                 return false;
             }
-        }
+        }    
         if(!parse_mysql_dump($filename, $f_db_table_prefix)) {
-            print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj->error."</pre>");
+            print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<br><pre>".$sql_obj->error."</pre>");
             return false;
         }
         
@@ -509,7 +528,7 @@ function step_02_proceed()
         $streber_version_required = confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
         $str_query = "INSERT into {$f_db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version','$streber_version_required',NOW() )";
         if(!$sql_obj->execute($str_query)) {
-            print_testResult(RESULT_FAILED,"SQL-Error:<pre>".$sql_obj->error. "</pre>");
+            print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error. "</pre>");
             return false;
         }
         else {
@@ -544,7 +563,7 @@ function step_02_proceed()
                           '" . $g_form_fields["site_email"]["value"] . "'
                           )";
         if(!$sql_obj->execute($str_query)) {
-            print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj->error."</pre>");
+            print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<br><pre>".$sql_obj->error."</pre>");
             return false;
         }
         else {
@@ -568,7 +587,7 @@ function step_02_proceed()
                           1
                           )";
         if(!$sql_obj->execute($str_query)) {
-            print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj->error."</pre>");
+            print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<br><pre>".$sql_obj->error."</pre>");
             return false;
         }
         else {
@@ -680,13 +699,13 @@ function upgrade($args=NULL)
     $sql_obj = new sql_class($hostname, $db_username, $db_password, $db_name);
 
     if($sql_obj -> error != false) {
-        print_testResult(RESULT_FAILED,"mysql-error:<pre>".$sql_obj -> error."</pre>");
+        print_testResult(RESULT_FAILED,"mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj -> error."</pre>");
         return false;
     }
 
     ### select db? ###
     if(!$sql_obj->selectdb()) {
-        print_testResult(RESULT_FAILED,"Database does not exists mysql-error:<pre>".$sql_obj -> error."</pre>");
+        print_testResult(RESULT_FAILED,"Database does not exists mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj -> error."</pre>");
         return false;
     }
 
@@ -770,7 +789,7 @@ function upgrade($args=NULL)
                 SET  updated = now();
                 ";
     if(!$sql_obj->execute($str_query)) {
-        print_testResult(RESULT_FAILED,"SQL-Error:<br><pre>".$sql_obj -> error."</pre><br><br>Querry was:<br>$str_query");
+        print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<br><pre>".$sql_obj -> error."</pre><br><br>Querry was:<br>$str_query");
         return false;
     }
     
@@ -779,7 +798,7 @@ function upgrade($args=NULL)
     $streber_version_required= confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
     $str_query= "INSERT IGNORE into {$db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version_new','$streber_version_required',NOW() )";
     if(!$sql_obj->execute($str_query)) {
-        print_testResult(RESULT_FAILED,"SQL-Error:<pre>".$sql_obj -> error."</pre>Query was:<pre>$str_query</pre>");
+        print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<pre>".$sql_obj -> error."</pre>Query was:<pre>$str_query</pre>");
         return false;
     }
     else {
