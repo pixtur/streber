@@ -552,16 +552,19 @@ function projViewTasks()
 	}
 
     ### get upcoming or selected milestone ###
+    /*
+    pixtur: 2008-09-60
+    WARNING: Selecting a milestone directly to limit the viewed tasks
+    does not work because editing a task with a milestone will compromize
+    the following task list. I have no idea, why this code is in here,
+    or weather it is required at all.
+    */
     $for_milestone= 0;
     $milestone= NULL;
-    if(!$for_milestone=get('for_milestone')) {
-        if($milestone= $project->getNextMilestone()) {
-            $for_milestone= $milestone->id;
-        }
+    if($milestone= $project->getNextMilestone()) {
+        $for_milestone= $milestone->id;
     }
-    else {
-        $milestone= Task::getVisibleById($for_milestone);
-    }
+    
 
     $presets= array(
         ### all ###
@@ -833,10 +836,9 @@ function projViewTasks()
         'active_block_function'=>'tree',
 
     ));
-    $list->filters[]=new ListFilter_for_milestone();
+
     $list->filters[]=new ListFilter_category_in(array(
         'value'=> array(TCATEGORY_TASK,TCATEGORY_BUG)
-
     ));
     {
 
@@ -1374,7 +1376,7 @@ function ProjViewEfforts()
 	$presets= array(
         ### all ###
         'all_efforts' => array(
-            'name'=> __('all'),
+            'name'=> __('all','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1394,7 +1396,7 @@ function ProjViewEfforts()
 
         ### new efforts ###
         'new_efforts' => array(
-            'name'=> __('new'),
+            'name'=> __('new','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1414,7 +1416,7 @@ function ProjViewEfforts()
 		
 		### open efforts ###
         'open_efforts' => array(
-            'name'=> __('open'),
+            'name'=> __('open','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1434,7 +1436,7 @@ function ProjViewEfforts()
 		
 		### discounted efforts ###
         'discounted_efforts' => array(
-            'name'=> __('discounted'),
+            'name'=> __('discounted','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1454,7 +1456,7 @@ function ProjViewEfforts()
 		
 		### not chargeable efforts ###
         'notchargeable_efforts' => array(
-            'name'=> __('not chargeable'),
+            'name'=> __('not chargeable','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1474,7 +1476,7 @@ function ProjViewEfforts()
 		
 		### balanced efforts ###
         'balanced_efforts' => array(
-            'name'=> __('balanced'),
+            'name'=> __('balanced','Filter preset'),
             'filters'=> array(
                 'effort_status'=> array(
                     'id'        => 'effort_status',
@@ -1494,7 +1496,7 @@ function ProjViewEfforts()
 		
 		## last logout ##
 		'last_logout' => array(
-            'name'=> __('last logout'),
+            'name'=> __('last logout','Filter preset'),
             'filters'=> array(
                 'last_logout'   => array(
                     'id'        => 'last_logout',
@@ -1513,7 +1515,7 @@ function ProjViewEfforts()
 		
 		## 1 week ##
 		'last_week' => array(
-            'name'=> __('1 week'),
+            'name'=> __('1 week','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
@@ -1533,7 +1535,7 @@ function ProjViewEfforts()
 		
 		## 2 weeks ##
 		'last_two_weeks' => array(
-            'name'=> __('2 weeks'),
+            'name'=> __('2 weeks','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
@@ -1553,7 +1555,7 @@ function ProjViewEfforts()
 		
 		## 3 weeks ##
 		'last_three_weeks' => array(
-            'name'=> __('3 weeks'),
+            'name'=> __('3 weeks','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
@@ -1573,7 +1575,7 @@ function ProjViewEfforts()
 		
 		## 1 month ##
 		'last_month' => array(
-            'name'=> __('1 month'),
+            'name'=> __('1 month','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
@@ -1593,7 +1595,7 @@ function ProjViewEfforts()
 		
 		## prior ##
 		'prior' => array(
-            'name'=> __('prior'),
+            'name'=> __('prior','Filter preset'),
             'filters'=> array(
                 'prior'    => array(
                     'id'        => 'prior',
@@ -2902,7 +2904,7 @@ function projDuplicate($org_project_id=NULL)
         }
 
         ### pass2: tasks / parent_task ###
-        ### pass2: tasks 2 milestone ###
+
         foreach($new_tasks as $nt) {
             if(isset($dict_tasks[$nt->parent_task])) {
                 $nt->parent_task= $dict_tasks[$nt->parent_task];

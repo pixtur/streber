@@ -172,18 +172,23 @@ function AjaxMoreChanges()
     $count= is_null(get('count'))
           ? 20
           : intval(get('count'));
-        
-    /**
-    * first query all unviewed changes
-    */
-    if($changes= ChangeLine::getChangeLines(array(
-        'not_modified_by'   => $auth->cur_user->id,
+          
+    $options = array(
         'project'           => $project->id,
         'unviewed_only'     => false,
         'limit_rowcount'    => $count,
         'limit_offset'      => $start,
         'type'              => array(ITEM_TASK, ITEM_FILE),
-    ))) {
+    );
+
+    if( $auth->cur_user->settings & USER_SETTING_FILTER_OWN_CHANGES) {
+        $options['not_modified_by'] = $auth->cur_user->id;
+    }
+
+    /**
+    * first query all unviewed changes
+    */
+    if($changes= ChangeLine::getChangeLines($options)) {
         $lines= 0;
         foreach($changes as $c) {
             printChangeLine($c);

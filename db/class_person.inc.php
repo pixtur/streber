@@ -747,7 +747,7 @@ class Person extends DbProjectItem {
     /**
     * get project-persons
     */
-    function &getProjectPersons($args=NULL)
+    function getProjectPersons($args=NULL)
     {
         $prefix= confGet('DB_TABLE_PREFIX');
         global $auth;
@@ -842,7 +842,7 @@ class Person extends DbProjectItem {
         $status_max= intval($f_status_max);
 
         ### all projects ###
-        if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
             $str=
                 "SELECT p.* from {$prefix}project p, {$prefix}projectperson pp
                 WHERE

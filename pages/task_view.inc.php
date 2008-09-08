@@ -28,9 +28,6 @@ function TaskView()
 
     ### get task ####
     $tsk=get('tsk');
-
-    #$tsk=getOnePassedId('tsk','tasks_*');      # causes error if no task found
-
     $editable= false;                           # flag, if this task can be edited
 
     if($task= Task::getEditableById($tsk)) {
@@ -398,11 +395,16 @@ function TaskView()
 
 
     #--- description ----------------------------------------------------------------
-    if($task->description!="") {
+    {
 
         echo "<div class=description>";
+
         if($editable) {
-            echo  wiki2html($task->description, $project, $task->id, 'description');
+			$description= $task->description;
+			if( $description == "" ) {
+				$description = "[quote]" . __("This task has no description.\nDoubleclick to edit.") . "[/quote]";
+			} 
+            echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
             echo  wiki2html($task->description, $project);
@@ -614,7 +616,7 @@ function TaskView()
 
 	#--- task qickedit form -------------------------------------------------------------
 	{
-		if(! $task->isOfCategory(array(TCATEGORY_FOLDER, TCATEGORY_DOCU, TCATEGORY_MILESTONE, TCATEGORY_VERSION))) {
+		if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
 			$block_task_quickedit= new Block_task_quickedit();
     	    $block_task_quickedit->render_quickedit(&$task);
 		}
@@ -674,17 +676,7 @@ class Block_task_quickedit extends PageBlock
 	        return;
 	    }
 
-	    ### abort, if not enough rights ###
-	    #$project->validateEditItem($task);
-
-	    ### set up ListBlock ####
-	    {
-	        #$block=new PageBlock(array(
-	        #    'title'=>__('quick edit'),
-	        #    'id'=>'quick_edit'
-	        #));
-	        $this->render_blockStart();
-	    }
+	    $this->render_blockStart();
 
 		### write form #####
 		{
@@ -715,158 +707,158 @@ class Block_task_quickedit extends PageBlock
     			$tab->add($comment->fields['name']->getFormElement(&$comment,__('Comment')));
     			$e= $comment->fields['description']->getFormElement(&$comment);
     	        $e->rows=8;
+                
+    			#$tab->add( new Form_Input('request_feedback', __('Need feedback from'), '', NULL, false, "request_feedback"));
+
     	        $tab->add($e);
 
             }
 
             ### update ###
-            {
+            if($editable && $task->isOfCategory(array(TCATEGORY_TASK,  TCATEGORY_BUG))) {
                 $tab_group->add($tab=new Page_Tab("update",__("Update")));
 
-                if($editable && $task->isOfCategory(array(TCATEGORY_TASK,  TCATEGORY_BUG))) {
 
 
-                    #$tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
-                    $tab->add( new Form_DropdownGrouped('task_for_milestone', 
-                                __('For Milestone'), 
-                                $project->buildPlannedForMilestoneList(), 
-                                $task->for_milestone
-                             ));
+                #$tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
+                $tab->add( new Form_DropdownGrouped('task_for_milestone', 
+                            __('For Milestone'), 
+                            $project->buildPlannedForMilestoneList(), 
+                            $task->for_milestone
+                         ));
 
-                    $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
+                $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
 
-                    global $g_resolve_reason_names;
-                    $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
-
-
-        	        ### public-level ###
-        	       	#{
-        	 		#	if(($pub_levels=$task->getValidUserSetPublevel()) && count($pub_levels)>1) {
-        	        #    	$form->add(new Form_Dropdown('task_pub_level',  __("Public to"),$pub_levels,$task->pub_level));
-           	        #	}
-        			#}
-
-        	        ### assigned to ###
-        	        {
-        	            ### for existing tasks, get already assigned
-        	            if($task->id) {
-        	                $assigned_persons = $task->getAssignedPersons();
-        	            }
-
-        	            ### for new tasks get the assignments from parent task ###
-        				else {
-        				    trigger_error("view a task with zero id?");
-        	            }
-
-        	            $team=array(__('- select person -')=>0);
-
-        	            ### create team-list ###
-        	            foreach($project->getPersons() as $p) {
-        	                $team[$p->name]= $p->id;
-        	            }
+                global $g_resolve_reason_names;
+                $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
 
 
-        	            ### create drop-down-lists ###
-        	            $count_new=0;
-        	            $count_all=0;
-        	            if(isset($assigned_persons)) {
-        	                foreach($assigned_persons as $ap) {
-        	                    if(!$p= Person::getVisibleById($ap->id)) {
-        	                        continue;                               # skip if invalid person
-        	                    }
+    	        ### public-level ###
+    	       	#{
+    	 		#	if(($pub_levels=$task->getValidUserSetPublevel()) && count($pub_levels)>1) {
+    	        #    	$form->add(new Form_Dropdown('task_pub_level',  __("Public to"),$pub_levels,$task->pub_level));
+       	        #	}
+    			#}
 
-        	                    if($task->id) {
-        	                        $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
-        		                }
-        		                else {
-        	                        $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
-        	                        $count_new++;
-        	                    }
-        	                    $count_all++;
-        	                    unset($team[$ap->name]);
-        	                }
-        	            }
+    	        ### assigned to ###
+    	        {
+    	            ### for existing tasks, get already assigned
+    	            if($task->id) {
+    	                $assigned_persons = $task->getAssignedPersons();
+    	            }
 
+    	            ### for new tasks get the assignments from parent task ###
+    				else {
+    				    trigger_error("view a task with zero id?");
+    	            }
 
-        	            ### add empty drop-downlist for new assignments ###
-        	            $str_label  = ($count_all == 0)
-        	                        ? __("Assign to","Form label")
-        	                        : __("Also assign to","Form label");
-        	            $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
-        	        }
+    	            $team=array(__('- select person -')=>0);
+
+    	            ### create team-list ###
+    	            foreach($project->getPersons() as $p) {
+    	                $team[$p->name]= $p->id;
+    	            }
 
 
-        			### priority ###
-        		    {
-        		    	if(!$task->isMilestoneOrVersion()) {
-        		            $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
-        		        }
-        			}
+    	            ### create drop-down-lists ###
+    	            $count_new=0;
+    	            $count_all=0;
+    	            if(isset($assigned_persons)) {
+    	                foreach($assigned_persons as $ap) {
+    	                    if(!$p= Person::getVisibleById($ap->id)) {
+    	                        continue;                               # skip if invalid person
+    	                    }
 
-        		    ### estimated ###
-        		    {
-        	            #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
-        	            $ar= array(
-        	                __('undefined')=> 0,
-        	                __('30 min')    => 30*60,
-        	                __('1 h')  => 60*60,
-        	                __('2 h') => 2*60*60,
-        	                __('4 h') => 4*60*60,
-        	                __('1 Day')     =>   1 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('2 Days')    =>   2 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('3 Days')    =>   3 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('4 Days')    =>   4 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('1 Week')   =>   1 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                #__('1,5 Weeks')=> 1.5 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('2 Weeks')  =>   2 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	                __('3 Weeks')  =>   3 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-        	            );
-        	            $tab->add(new Form_Dropdown('task_estimated',__("Estimated time"),$ar,  $task->estimated));
-        	            $tab->add(new Form_Dropdown('task_estimated_max',__("Estimated worst case"),$ar,  $task->estimated_max));
-
-        	        }
-
-        	        ### completion ###
-        	        {
-        	            $ar= array(
-        	                __('undefined')=> -1,
-        	                '0%'    => 0,
-        	                '10%'    => 10,
-        	                '20%'    => 20,
-        	                '30%'    => 30,
-        	                '40%'    => 40,
-        	                '50%'    => 50,
-        	                '60%'    => 60,
-        	                '70%'    => 70,
-        	                '80%'    => 80,
-        	                '90%'    => 90,
-        	                '95%'    => 95,
-        	                '98%'    => 98,
-        	                '99%'    => 99,
-        	                '100%'   => 100,
-        	            );
-        	            $tab->add(new Form_Dropdown('task_completion',__("Completed"),$ar,  $task->completion));
-        	        }
-
-        	        $tab->add($task->fields['parent_task']->getFormElement(&$task));
+    	                    if($task->id) {
+    	                        $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
+    		                }
+    		                else {
+    	                        $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
+    	                        $count_new++;
+    	                    }
+    	                    $count_all++;
+    	                    unset($team[$ap->name]);
+    	                }
+    	            }
 
 
-        	        ### status ###
-        	        {
-        	            $st=array();
-        	            foreach($g_status_names as $s=>$n) {
-        	                if($s >= STATUS_NEW) {
-        	                    $st[$s]=$n;
-        	                }
-        	            }
-        	            if($task->isMilestoneOrVersion()) {
-        	                unset($st[STATUS_NEW]);
-        	            }
+    	            ### add empty drop-downlist for new assignments ###
+    	            $str_label  = ($count_all == 0)
+    	                        ? __("Assign to","Form label")
+    	                        : __("Also assign to","Form label");
+    	            $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
+    	        }
 
-        	            $tab->add(new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status));
-        	        }
 
-                }
+    			### priority ###
+    		    {
+    		    	if(!$task->isMilestoneOrVersion()) {
+    		            $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
+    		        }
+    			}
+
+    		    ### estimated ###
+    		    {
+    	            #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
+    	            $ar= array(
+    	                __('undefined')=> 0,
+    	                __('30 min')    => 30*60,
+    	                __('1 h')  => 60*60,
+    	                __('2 h') => 2*60*60,
+    	                __('4 h') => 4*60*60,
+    	                __('1 Day')     =>   1 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('2 Days')    =>   2 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('3 Days')    =>   3 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('4 Days')    =>   4 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('1 Week')   =>   1 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                #__('1,5 Weeks')=> 1.5 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('2 Weeks')  =>   2 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	                __('3 Weeks')  =>   3 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+    	            );
+    	            $tab->add(new Form_Dropdown('task_estimated',__("Estimated time"),$ar,  $task->estimated));
+    	            $tab->add(new Form_Dropdown('task_estimated_max',__("Estimated worst case"),$ar,  $task->estimated_max));
+
+    	        }
+
+    	        ### completion ###
+    	        {
+    	            $ar= array(
+    	                __('undefined')=> -1,
+    	                '0%'    => 0,
+    	                '10%'    => 10,
+    	                '20%'    => 20,
+    	                '30%'    => 30,
+    	                '40%'    => 40,
+    	                '50%'    => 50,
+    	                '60%'    => 60,
+    	                '70%'    => 70,
+    	                '80%'    => 80,
+    	                '90%'    => 90,
+    	                '95%'    => 95,
+    	                '98%'    => 98,
+    	                '99%'    => 99,
+    	                '100%'   => 100,
+    	            );
+    	            $tab->add(new Form_Dropdown('task_completion',__("Completed"),$ar,  $task->completion));
+    	        }
+
+    	        $tab->add($task->fields['parent_task']->getFormElement(&$task));
+
+
+    	        ### status ###
+    	        {
+    	            $st=array();
+    	            foreach($g_status_names as $s=>$n) {
+    	                if($s >= STATUS_NEW) {
+    	                    $st[$s]=$n;
+    	                }
+    	            }
+    	            if($task->isMilestoneOrVersion()) {
+    	                unset($st[STATUS_NEW]);
+    	            }
+
+    	            $tab->add(new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status));
+    	        }
             }
 
             /**
@@ -888,10 +880,8 @@ class Block_task_quickedit extends PageBlock
 		        echo "<input type=hidden name='return' value='$return'>";
 		    }
 
-			### end of ListBlock ###
-			{
-				$this->render_blockEnd();
-			}
+
+		    $this->render_blockEnd();
 	    }
 	}
 }
@@ -1164,11 +1154,15 @@ function taskViewAsDocu()
 
 
     #--- description ----------------------------------------------------------------
-    if($task->description!="") {
+    {
 
         echo "<div class=description>";
         if($editable) {
-            echo  wiki2html($task->description, $project, $task->id, 'description');
+			$description= $task->description;
+			if( $description == "" ) {
+				$description = "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]";
+			} 
+            echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
             echo  wiki2html($task->description, $project);

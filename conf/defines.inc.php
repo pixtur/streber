@@ -212,6 +212,7 @@ define('USER_SETTING_SEND_ACTIVATION',              1<<4);  # flag if next notif
 define('USER_SETTING_EFFORTS_AS_DURATION',          1<<5);  #
 define('USER_SETTING_ENABLE_EFFORTS',               1<<6);  #
 define('USER_SETTING_ENABLE_BOOKMARKS',             1<<7);  #
+define('USER_SETTING_FILTER_OWN_CHANGES',           1<<8);  # filter items changed by current user from recent changes list
 
 define('EFFORT_STYLE_TIMES',1);
 define('EFFORT_STYLE_DURATION',2);

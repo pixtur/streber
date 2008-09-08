@@ -1445,7 +1445,7 @@ class ListBlock extends PageBlock
     *
     * @@@this should RETURN as string not PRINT one
     */
-    public function render_list(&$list=NULL)
+    public function render_list( &$list=NULL )
     {
         switch($this->page->format){
             case FORMAT_CSV:
@@ -1460,7 +1460,7 @@ class ListBlock extends PageBlock
     /*
     *format=csv*
     */
-    function renderListCsv(&$list=NULL)
+    function renderListCsv( $list=NULL )
     {
         if(!count($list)){
             return;
@@ -1565,6 +1565,7 @@ class ListBlock extends PageBlock
         }
 
         ## export function ##
+
         exportToCSV($ids, $values);
     }
 

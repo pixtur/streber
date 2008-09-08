@@ -1166,8 +1166,10 @@ new PageHandleFunc(array('id'=>'personCompaniesDelete',
 new PageHandleFunc(array('id'=>'personAllItemsViewed',
     'req'       =>'pages/person.inc.php',
     'title'     =>__('Mark all items as viewed'),
-
-
+));
+new PageHandleFunc(array('id'=>'personToggleFilterOwnChanges',
+    'req'       =>'pages/person.inc.php',
+    'title'     =>__('Toggle filter own changes'),
     'test'=>'yes',
     'test_params'=>array('person'=>'_personEdit_',),
 ));

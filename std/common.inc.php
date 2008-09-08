@@ -158,6 +158,13 @@ function printFormVars()
     echo "</pre>";
 }
 
+function debugMessage($message)
+{
+    echo "<div class=debugMessage><pre>";
+    print_r( $message );
+    echo "</pre></div>";
+}
+
 
 /**
 * for securing hidden form information do following
@@ -562,7 +569,7 @@ function asMatchString($str) {
 
 function asCleanString($str)
 {
-    return preg_replace("/[\\\<\>\`\ï¿½\"]/",'',$str);
+    return preg_replace("/[\\\<\>\`\´\"]/",'',$str);
 
 
 }

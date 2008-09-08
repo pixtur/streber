@@ -31,7 +31,9 @@ function exportToCSV($header, $content)
 	## build export-string ##
 	foreach($header as $key => $value){
 		$str = $value;
-		$str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
+		if(function_exists('iconv')) {		
+		  $str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
+		}
 		$export .= "" . $str . ";";
 	}
 
@@ -40,13 +42,17 @@ function exportToCSV($header, $content)
 	for($i = 1; $i < $len; $i++)
 	{
 		if(fmod($i, $num_col) == 0){
-			$str = $content[$i-1];
-			$str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
-			$export .= "" . $str . ";\r\n";
+    		$str = $content[$i-1];			
+    		if(function_exists('iconv')) {		
+    		    $str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
+    		}
+    		$export .= "" . $str . ";\r\n";
 		}
 		else{
 			$str = $content[$i-1];
-			$str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
+			if(function_exists('iconv')) {			 
+			     $str = iconv("utf-8", "iso-8859-15//TRANSLIT", $str); /* necessary for German characters like ä and ß*/
+			}
 			$export .= "" . $str . ";";
 		}
 	}

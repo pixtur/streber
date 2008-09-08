@@ -730,6 +730,26 @@ class DbProjectItem extends DbItem {
         return NULL;
     }
 
+    public function isEditable()
+    {
+        if($this->type == ITEM_PROJECT) {
+            global $auth;
+            if($auth->cur_user->user_rights & RIGHT_PROJECT_EDIT) {
+                return true;
+            }
+        }
+        else if($p= Project::getById($this->project)) {
+            if($p->validateEditItem($this)) {
+                return true;
+            }
+        }
+        else {
+            trigger_error("issue without project?",E_USER_WARNING);
+        }
+        return false;
+    }
+
+
     /**
     * query if editable for current user
     */
@@ -737,19 +757,8 @@ class DbProjectItem extends DbItem {
     {
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
         if($i= DbProjectItem::getById($id)) {
-            if($i->type == ITEM_PROJECT) {
-                global $auth;
-                if($auth->cur_user->user_rights & RIGHT_PROJECT_EDIT) {
-                    return $i;
-                }
-            }
-            else if($p= Project::getById($i->project)) {
-                if($p->validateEditItem($i)) {
-                    return $i;
-                }
-            }
-            else {
-                trigger_error("issue without project?",E_USER_WARNING);
+            if($i->isEditable()) {
+                return $i;
             }
         }
         return NULL;

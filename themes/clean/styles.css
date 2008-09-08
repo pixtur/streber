@@ -82,6 +82,13 @@ span.isDone a {
  text-decoration:line-through;
 }
 
+div.debugMessage {
+ border:                1px solid #888;
+ background-color:      #eee;
+ font-size:             80%;
+ padding:               2px;
+ margin:                2px;
+}
 
 
 /*--- section-colors ---*/
@@ -168,9 +175,9 @@ div#sections span.section  input:focus {
 
 
 #header #user_functions {
-    position:absolute;
-    right:0px;
-    z-index:1;
+    position:       absolute;
+    right:          0px;
+    z-index:        1;
 }
 
 
@@ -178,30 +185,30 @@ div#sections span.section  input:focus {
 
 
 /*--- login -------------------------------------------------*/
-	#header #user_functions {
-		float:right;
-		padding:2px 0.61em 0px 0px;
+#header #user_functions {
+    float:          right;
+    padding:        2px 0.61em 0px 0px;
+    
+    color:          #fff;
+    text-align:     right;
+    white-space:    nowrap;
+    font-size:      8pt;
+    line-height:    95%;
+    display:        inline;
+}
 
-		color:#fff;
-		text-align:right;
-	    white-space:nowrap;
-		font-size:8pt;
-        line-height:95%;
-        display:inline;
-	}
+#header #user_functions a {
+    color:          #fff;
+    text-decoration:none;
+}
+#header #user_functions a.name {
+    font-weight:    bold;
+}
 
-	#header #user_functions a {
-		color:#fff;
-		text-decoration:none;
-	}
-	#header #user_functions a.name {
-		font-weight:bold;
-    }
-
-	#header #user_functions a:hover {
-	    color:#ff8;
-	    text-decoration:underline;
-	}
+#header #user_functions a:hover {
+    color:          #ff8;
+    text-decoration:underline;
+}
 
 
 /*--- sub-navigation (breadcrumbs and options) --------------------------*/
@@ -1950,6 +1957,44 @@ div.description {
 
     }
 
+/* === autocomplete ============ */
+.ac_results {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background : Window url('indicator.gif') right center no-repeat;
+}
+
+.ac_over {
+	background-color: Highlight;
+	color: HighlightText;
+} 
+
+
+
 /*---- estimated --------------------*/
 div.estimated {
  background-repeat:repeat-x;
@@ -2580,6 +2625,10 @@ div.recentchanges p.more {
  text-align:        right;
  margin:            1px 1em 1em 1.5em;
  font-size:         10pt;
+}
+
+div.recentchanges li.by_cur_user a {
+  color:            #888;
 }
 
 

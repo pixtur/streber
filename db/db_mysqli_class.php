@@ -116,10 +116,10 @@ class sql_class implements sql_interface{
 
     public function selectdb(){
         if(@mysqli_select_db($this->connect, $this->database)){
-            $this->error('Base '.$this->database.' exists');
+            $this->error('Database '.$this->database.' exists');
             return true;
         }
-        $this->error('Base '.$this->database.' does NOT exist');
+        $this->error('Database '.$this->database.' does NOT exist');
         return false;
     }
 

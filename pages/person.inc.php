@@ -52,85 +52,6 @@ function build_person_options(&$person) {
 }
 
 
-/**
-* personList active (people with account) @ingroup pages
-*/
-/*function personListAccounts()
-{
-    global $PH;
-    global $auth;
-
-    ### create from handle ###
-    $PH->defineFromHandle();
-
-    ### set up page and write header ####
-    {
-        $page= new Page();
-        $page->cur_tab='people';
-        $page->title=__("Active People");
-        if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-            $page->title_minor=sprintf(__('relating to %s','page title add on listing pages relating to current user'), $page->title_minor=$auth->cur_user->name);
-        }
-        else {
-            $page->title_minor=__("admin view");
-        }
-        #$page->type=__("List");
-        $page->type=__('List','page type');
-
-        ### page functions ###
-        $page->add_function(new PageFunction(array(
-            'target'    =>'personNew',
-            'params'    =>array(),
-            'icon'      =>'new',
-            'tooltip'   =>__('New person'),
-        )));
-
-        $page->options=build_personList_options();
-
-
-        ### render title ###
-        echo(new PageHeader);
-    }
-    echo (new PageContentOpen);
-
-    #--- list persons --------------------------------------------------------
-    {
-        if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
-            $order_by= str_replace(",",", ", $order_by);
-        }
-        else {
-            $order_by='name';
-        }
-
-        $persons=Person::getPersons(array('order_by'=>$order_by,'can_login'=>true));
-
-        $list= new ListBlock_persons();
-
-        ## Link to start cvs export ##
-        $format = get('format');
-        if($format == FORMAT_HTML|| $format == ''){
-            $list->footer_links[]= $PH->getCSVLink();
-        }
-
-        $list->reduced_header= true;
-        $list->title= __("People/Project Overview");
-        unset($list->columns['office_phone']);
-        unset($list->columns['tagline']);
-        unset($list->columns['personal_phone']);
-        unset($list->columns['companies']);
-
-        if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
-            $list->no_items_html=$PH->getLink('personNew','');
-        }
-        else {
-            $list->no_items_html=__("no related persons");
-        }
-        $list->print_automatic(&$persons);
-    }
-
-    echo(new PageContentClose);
-    echo(new PageHtmlEnd);
-}*/
 
 /**
 * personList active @ingroup pages
@@ -2109,7 +2030,7 @@ function personEdit($person=NULL)
 		
 		        
         ### profile and login ###
-        if($auth->cur_user->user_rights & RIGHT_PERSON_GRANT_ACCT) {
+        if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
             /**
             * if checkbox not rendered, submit might reset $person->can_login.
             * ...be sure the user_rights match
@@ -2153,7 +2074,7 @@ function personEdit($person=NULL)
 			}
 
             ### profile and login ###
-            if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS && $person->id != 1) {
+            if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
                 global $g_user_profile_names;
                 global $g_user_profiles;
 
@@ -2308,7 +2229,7 @@ function personEdit($person=NULL)
             
 
 
-            
+            $tab->add(new Form_checkbox("person_filter_own_changes",__('Filter own changes from recent changes list'), $person->settings & USER_SETTING_FILTER_OWN_CHANGES));
         }
 		
 		## internal area ##
@@ -2489,11 +2410,8 @@ function personEditSubmit()
                 }
             }
         }
-	}
-	
-	
-	if($auth->cur_user->user_rights & RIGHT_PERSON_GRANT_ACCT)
-	{
+
+
         /**
         * NOTE, if checkbox is not rendered in editForm, user-account will be disabled!
         * there seems no way the be sure the checkbox has been rendered, if it is not checked in form
@@ -2550,6 +2468,15 @@ function personEditSubmit()
             trigger_error("undefined person effort style", E_USER_WARNING);
         }
     }
+
+    ### filter own changes ###
+    if(get('person_filter_own_changes')) {
+        $person->settings |= USER_SETTING_FILTER_OWN_CHANGES;
+    }
+    else {
+        $person->settings &= USER_SETTING_FILTER_OWN_CHANGES ^ RIGHT_ALL;        
+    }
+
     
     ### enable bookmarks ###
     if(get('person_enable_bookmarks')) {
@@ -3780,6 +3707,34 @@ function personAllItemsViewed()
 
 
 
+/**
+* Filter own changes
+*
+*/
+function personToggleFilterOwnChanges()
+{
+    global $PH;
+    global $auth;
+
+    ### get person ####
+    $id= getOnePassedId('person','persons_*');
+
+    if(!$p= Person::getEditableById($id)) {
+        $PH->abortWarning("Invalid person-id!");
+    }
+
+    $p->settings ^= USER_SETTING_FILTER_OWN_CHANGES;
+    $p->update(array('settings'), false);
+
+    if( $auth->cur_user && $p->id == $auth->cur_user->id) {
+      $auth->cur_user->settings ^= USER_SETTING_FILTER_OWN_CHANGES;    
+    }
+
+    ### display taskView ####
+    if(!$PH->showFromPage()) {
+        $PH->show('projView',array('prj'=>$person->project));
+    }
+}
 
 
 ?>

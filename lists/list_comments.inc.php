@@ -111,7 +111,6 @@ class ListBlockCol_CommentPoster extends ListBlockCol
 
         ### get user ###
         {
-
         	if($obj->created_by != 0 && $person=Person::getById($obj->created_by)) {
                 $column_poster.= '<p class="poster">'.$person->getLink().'</p>';
 			}
@@ -151,17 +150,13 @@ class ListBlockCol_CommentPoster extends ListBlockCol
     		{
     			$column_poster.= "<div class=edit_functions>";
 
-
     			# if current user is the creator of the comment
     			if($obj->created_by == $auth->cur_user->id) {
-    			    if($pp= $obj->getProjectPerson()) {
-        			    if($pp->level_edit < $obj->pub_level) {
-        				    $column_poster.= $PH->getLink('commentEdit', __('Edit'), array('comment'=>$obj->id));
-        				}
-        				if($pp->level_delete < $obj->pub_level) {
-        				    $column_poster.= $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$obj->id));
-        				}
-        			}
+
+					if( $obj->isEditable()) {
+        				$column_poster.= $PH->getLink('commentEdit', __('Edit'), array('comment'=>$obj->id));
+        				$column_poster.= $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$obj->id));
+					}
     			}
     			else
     			{

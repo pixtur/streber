@@ -31,10 +31,11 @@ h1,h2,h3,h4,ul, li,div {
 	padding:0px;
 }
 
-.notice, #message {
-    display:none;
-}
 
+div#header, 
+div#b_quick_edit_long,
+.notice, 
+#message,
 div.messages {
  display:none;
 }

@@ -3,9 +3,8 @@
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**
- * classes relating to formating wiki into html
+ * classes related to formating wiki into html
  *
- * called from: -
  * the idea of this parser is splitting the tags until all text-tags are atoms or other tags
  *
  *
@@ -1708,7 +1707,7 @@ class FormatBlockTable extends FormatBlock
 
                 $cell_blocks= FormatBlockLink::parseBlocks($cell_blocks);
                 $cell_blocks= FormatBlockHref::parseBlocks($cell_blocks);
-                $new_cells[]=  FormatBlockItemId::parseBlocks($cell_blocks);
+                $new_cells[]= FormatBlockItemId::parseBlocks($cell_blocks);
 
             }
             $this->line_cells[]= $new_cells;
@@ -1747,6 +1746,7 @@ class FormatBlockTable extends FormatBlock
 
     static function parseBlocks(&$blocks)
     {
+        $placeholder_for_pipes = "\x03";
         $blocks_new= array();
         foreach($blocks as $b) {
             if($b->str && !($b instanceof FormatBlockCode)) {
@@ -1756,27 +1756,28 @@ class FormatBlockTable extends FormatBlock
                 
                 while($text) {
 
-                	#scan the current text and return in $matches[1] a wiky-table formatted string.
-					#$matches[1] will contain the text before the table, an $matches[3] will contain the text after the table
-                    if(preg_match("/(.*?[\r\n\s]+)((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
+                    ### replace pipes inside links with special character ####
+                    $text= FormatBlockTable::replacePipesInsideLinks($text, $placeholder_for_pipes);
 
-                    	$keep_previous_block= new FormatBlock($matches[1]);
+                    if(preg_match("/(.*?)((?:\|.*?\|\s*[\r\n]+)+)\s*\r*\n*(.*)/su", $text, $matches)) {
+
+                        $keep_previous_block= new FormatBlock( str_replace( $placeholder_for_pipes, '|', $matches[1]));
 
                         ### check number of pipes in each line...
 
-                        $lines = explode("\n", $matches[2]);
+                        $lines= explode("\n", $matches[2]);
                         $line_cells=array();
                         $rest= $matches[3];
 
                         $last_num_cells=-1;
                         $syntax_failure= false;
                         foreach($lines as $line) {
-                            if($line = trim($line)) {
-                            	
+                            $line= trim($line);
+                            if( $line ) {
+
                                 $tmp_cells=array();
-                                
-                                $line= preg_replace("/\[\[([^\]]*?)\|([^\]]*)\]\]/","[[$1�$2]]",$line); // what is this regexp doing?:) is it correct? i do not see any change in my tests
-								
+                                $line=trim($line);
+
                                 $cells= array_slice(explode("|", $line) , 1, -1);
 
                                 if($last_num_cells == -1) {
@@ -1784,34 +1785,30 @@ class FormatBlockTable extends FormatBlock
                                 }
                                 else if(count($cells) != $last_num_cells) {
                                     $syntax_failure= true;
-                                    
                                     break;
                                 }
 
-                                for($i=0; $i< count($cells); $i++) {
-                                    $cells[$i]= str_replace("�",'|', $cells[$i]);
-                                }
-
                                 $line_cells[]= $cells;
+                            }
+                            else{
+                                $last_num_cells = -1;
                             }
                         }
 
                         if(!$syntax_failure) {
                             $blocks_new[]= $keep_previous_block;
-                            $blocks_new[]= new FormatBlockTable($line_cells);
+                            $blocks_new[]= new FormatBlockTable( str_replace($placeholder_for_pipes, '|', $line_cells) );
                             $text= $rest;
                             $found= true;
                         }
                         else {
-                            $blocks_new[]= $b; //TODO: should a warning message be sent to the user? 
-                            #$text= $rest;
+                            $blocks_new[]= $b;
                             $found= false;
                             break;
                         }
                     }
                     else if($found) {
-                        $blocks_new[]= new FormatBlock($text);
-                        #$text= $b->str;
+                        $blocks_new[]= new FormatBlock( str_replace($placeholder_for_pipes, '|', $text));
                         $found= false;
                         $syntax_failure= false;
                         break;
@@ -1826,13 +1823,30 @@ class FormatBlockTable extends FormatBlock
                 $blocks_new[]=$b;
             }
         }
-        
         return $blocks_new;
     }
+    
+    
+    static function replacePipesInsideLinks($string, $char){
+        $output = '';
+        $rest = $string;
+
+        while($rest) {
+            if(preg_match("/^(.*?)\[\[([^\]]*)\]\](.*)/s", $rest, $matches)) {
+                $pre = $matches[1];
+                $inside = $matches[2];
+                $rest= $matches[3];
+                
+                $output.= $pre . '[['. str_replace("|", $char, $inside) . ']]';
+            }
+            else {
+                $output.= $rest;
+                $rest = '';
+            }
+        }
+        return $output;
+    }
 }
-
-
-
 
 
 

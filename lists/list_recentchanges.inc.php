@@ -32,19 +32,23 @@ function printRecentChanges($projects, $print_project_headlines= true)
         /**
         * first query all unviewed changes
         */
-        if($changes= ChangeLine::getChangeLines(array(
-            'not_modified_by'   => $auth->cur_user->id,
+        $options = array(
             'project'           => $project->id,
             'unviewed_only'     => false,
             'limit_rowcount'    => confGet('MAX_CHANGELINES')+ 1,  #increased by 1 to get "more link"
             'limit_offset'      => 0,
             'type'              => array(ITEM_TASK, ITEM_FILE),
-        ))) {
+        );
+        if($auth->cur_user->settings&USER_SETTING_FILTER_OWN_CHANGES) {
+            $options['not_modified_by'] = $auth->cur_user->id;
+        }
+        
+        if($changes= ChangeLine::getChangeLines($options)) {
             $projects_with_changes[]= $project;
             $project_changes[$project->id]= $changes;                    
         }
-    }            
-    
+    }
+
     if(count($projects_with_changes)) {
 
         $block=new PageBlock(array(
@@ -83,15 +87,27 @@ function printRecentChanges($projects, $print_project_headlines= true)
                 };
             }
             echo "</ul>";
+            
+            ### more options ###
+            echo "<p class=more>";
+
+            if($auth->cur_user->settings & USER_SETTING_FILTER_OWN_CHANGES) {
+                $link_name = __("Also show your changes");
+            }
+            else {
+                $link_name = __("Hide your changes");
+            }
+            echo $PH->getLink('personToggleFilterOwnChanges', $link_name , array('person'=> $auth->cur_user->id));
+
             if($lines < count($changes)) {
-                echo "<p class=more>"
-                . "<a href='javascript:getMoreChanges($project->id, ". ($lines - 1).", " . confGet('MORE_CHANGELINES') . ");' "
+                echo " | ";
+                echo "<a href='javascript:getMoreChanges($project->id, ". ($lines - 1).", " . confGet('MORE_CHANGELINES') . ");' "
                 . '>'
                 . __('Show more')
-                . '</a>'
-                ."</p>";
-                
+                . '</a>';
             }
+            echo "</p>";
+                
                 
             /**
             * limit number of projects
@@ -113,12 +129,31 @@ function printRecentChanges($projects, $print_project_headlines= true)
 function printChangeLine($c)
 {
     global $PH;
+    global $auth;
+
     
-    if($c->item->type == ITEM_TASK) {
-        echo '<li>' . $c->item->getLink(false);
+    if($c->person_by == $auth->cur_user->id) {
+        $changed_by_current_user= true;
     }
     else {
+        $changed_by_current_user= false;
+    }
+    
+    if($c->item->type == ITEM_TASK) {
+        if($changed_by_current_user) {
+            echo '<li class=by_cur_user>';            
+        }
+        else {            
+            echo '<li>';
+        }
+        echo $c->item->getLink(false);
+    }
+    elseif($c->item->type == ITEM_FILE) {
         echo '<li>' . $PH->getLink('fileView', $c->item->name, array('file' => $c->item->id));        
+    }
+    else {
+        trigger_error('printChangeLine() for unknown item item', E_USER_WARNING);
+        return;
     }
     
     

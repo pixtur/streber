@@ -1000,26 +1000,34 @@ function itemViewDiff()
     require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
     $versions= ItemVersion::getFromItem($item);
 
-
-    if(!$date1=get('date1')) {
-        if(count($versions) > 1) {
-            if($auth->cur_user->last_logout < $versions[count($versions)-2]->date_to)
-            {
-                $date1 = $auth->cur_user->last_logout;
-            }
-            else {
-                $date1 = $versions[count($versions)-2]->date_from;
+    $date1= get('date1');
+    $date2= get('date2');
+    
+    
+    if(!$date1) {
+        #if(count($versions) > 1) {
+        #    if($auth->cur_user->last_logout < $versions[count($versions)-2]->date_to)
+        #    {
+        #        $date1 = $auth->cur_user->last_logout;
+        #    }
+        #    else {
+        #        $date1 = $versions[count($versions)-2]->date_from;
+        #    }
+        #}
+        #else {            
+        foreach(array_reverse($versions) as $v) {
+            if ($v->author == $auth->cur_user->id) {
+                $date1= $v->date_from;
+                break;
             }
         }
-        else {
-            $date1= "2000-01-01 01:01:01";
-        }
+        #}
     }
 
-    if(!$date2=get('date2')) {
+    if(!$date2) {
         $date2 = getGMTString();
     }
-
+    #}
 
     ### set up page and write header ####
     {
@@ -1220,7 +1228,7 @@ function itemViewDiff()
                 . "<select onChange='location.href=this.options[this.selectedIndex].value'>"
                 . join(array_reverse($options_left))
                 . "</select>"
-                . '<br>'
+                . '<br><b class=doclear></b>'
                 . $link_prev
                 . "</td>";
 
@@ -1229,17 +1237,17 @@ function itemViewDiff()
                 . "<select onChange='location.href=this.options[this.selectedIndex].value'>"
                 . join(array_reverse($options_right))
                 . "</select>"
-                . '<br'
+                . '<br><b class=doclear></b>'
                 . $link_next
                 . $link_summary
                 . "</td>";
             echo "</table>";
 
 
-            if(!$date2 || !$date1) {
-                echo sprintf(__("Item did not exists at %s"), renderTime($date2));
-            }
-            else if($old_version == $version_right) {
+            #if(!$date2 || !$date1) {
+            #    echo sprintf(__("Item did not exists at %s"), renderTime($date2));
+            #}
+            if($old_version == $version_right) {
                 echo sprintf(__('no changes between %s and %s'), renderTime($date1), renderTime($date2));
             }
 
@@ -1367,7 +1375,7 @@ function itemViewDiff()
             }
         }
     }
-        echo "</div>";
+    echo "</div>";
 
     echo (new PageContentClose);
 	echo (new PageHtmlEnd);

@@ -171,8 +171,10 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_FILES'), 0777);
             if(!is_writeable('../'. confGet('DIR_FILES'))){
-                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-            }else{
+                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                $flag_errors= true;
+            }
+            else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
             }
         }
@@ -190,8 +192,10 @@ function step_01_checkEvironment() {
             }
             @chmod('../'. confGet('DIR_RSS'), 0777);
             if(!is_writeable('../'. confGet('DIR_RSS'))){
-                print_testResult(RESULT_PROBLEM,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-            }else{
+                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
+                $flag_errors= true;
+            }
+            else{
                 print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
             }
         }
@@ -220,7 +224,8 @@ function step_01_checkEvironment() {
             }
         }
         
-        else print_testResult(RESULT_GOOD,"does not exists. Fresh installation");        
+        else print_testResult(RESULT_GOOD,"does not exists. Fresh installation");
+        
         global $g_form_fields;
         $g_form_fields['db_username']['value']=     confGet('DB_USERNAME') ? confGet('DB_USERNAME') : NULL;
         $g_form_fields['db_password']['value']=     confGet('DB_PASSWORD') ? confGet('DB_PASSWORD') : NULL;
@@ -297,6 +302,7 @@ function step_02_form_submit()
 
 /**
 * proceed with installation
+* - returns true on success
 */
 function step_02_proceed()
 {
@@ -331,10 +337,12 @@ function step_02_proceed()
                 $hint= 'This could be a problem with incorrect setup of your sql-server. <a href="http://www.streber-pm.org/1176">Read more...</a>';
                 print_testResult(RESULT_FAILED,"mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error."</pre><br>$hint");
                 return false;
-            }else{
+            }
+            else{
                 print_testResult(RESULT_GOOD, $sql_obj->error);
             }
-        }else{
+        }
+        else{
             print_testResult(RESULT_FAILED, $sql_obj->error);
             return false;
         }
@@ -460,9 +468,12 @@ function step_02_proceed()
                         'DB_VERSION'    => confGet('DB_CREATE_VERSION'),
                     ));
                     
-                    if($write_ok) print_testResult(RESULT_GOOD, "Current database (version $db_version) looks fine. Installation finished with database setting rewritten to file. Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
-                    else print_testResult(RESULT_PROBLEM, "Current database (version $db_version) looks fine. Installation finished with no change (unable to rewrite database setting to file). Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
-                                        
+                    if($write_ok) {
+                        print_testResult(RESULT_GOOD, "Current database (version $db_version) looks fine. Installation finished with database setting rewritten to file. Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
+                    }
+                    else {
+                        print_testResult(RESULT_PROBLEM, "Current database (version $db_version) looks fine. Installation finished with no change (unable to rewrite database setting to file). Please view ".getStreberWikiLink('installation','Installation Guide')." on how to fix unsolved problems.");
+                    }                
                     return true;
                 }
                 print_testResult(RESULT_PROBLEM,"Installation aborted due to unknown reason.");

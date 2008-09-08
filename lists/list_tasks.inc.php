@@ -275,6 +275,7 @@ class ListBlock_tasks extends ListBlock
             $this->show_project_folder= true;            
         }
 
+
         ### list groupings ###
         $this->groupings->groupings= array(
             new ListGroupingFolder(),
@@ -283,6 +284,7 @@ class ListBlock_tasks extends ListBlock
             new ListGroupingCreatedBy(),
         );
         $this->initOrderQueryOption('order_id, status, prio');
+
     }
 	
 	
@@ -293,6 +295,7 @@ class ListBlock_tasks extends ListBlock
     {
         #global $PH;
         #require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
+
 
 		switch($this->page->format){
 			case FORMAT_CSV:
@@ -573,6 +576,8 @@ class ListBlock_tasks extends ListBlock
             $this->query_options['project']= $project->id;
         }
 
+
+
         if(!$this->no_items_html && $parent_task) {
             $this->no_items_html=
             $PH->getLink('taskNewFolder',__('New folder'),array('parent_task'=>$parent_task->id, 'prj'=>$project->id))
@@ -594,12 +599,9 @@ class ListBlock_tasks extends ListBlock
         if($parent_task) {
             $this->query_options['parent_task']= $parent_task->id;
         }
-
         $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
-
         #$filter_milestone= new ListFilter_for_milestone();
         #$this->filters[]= new ListFilter_for_milestone();
-
 
         ### add filter options ###
         foreach($this->filters as $f) {
@@ -607,6 +609,7 @@ class ListBlock_tasks extends ListBlock
                 $this->query_options[$k]= $v;
             }
         }
+
 
         $sort_cookie= "sort_{$PH->cur_page->id}_{$this->id}_{$this->active_block_function}";
         if($sort= get($sort_cookie)) {
@@ -762,7 +765,6 @@ class ListBlock_tasks extends ListBlock
 	        else {
                 $this->query_options['show_folders']= false;
                 $this->query_options['parent_task']= NULL;
-                                
                 $tasks= Task::getAll($this->query_options);
 
                 ### build hash of tasks appended to a folder ###

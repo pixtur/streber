@@ -215,6 +215,7 @@ class Page
     public  $content_columns=false;
     public  $format         = FORMAT_HTML;
     public  $extra_header_html = '';
+    public  $use_autcomplete = false;
 
     #--- constructor ---------------------------
     public function __construct($args=NULL)
@@ -529,11 +530,21 @@ class PageHtmlStart extends PageElement {
 
 
         $buffer.='
-        <script type="text/javascript" src="js/jquery.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/jeditable.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/jquery-1.2.6.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/jquery.jeditable.1.5.x.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/jquery.bgiframe.min.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/dimensions.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript">';
+        <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
+
+        if($this->page->use_autcomplete) {
+            $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
+        }
+
+        $buffer.='
+        <link rel="stylesheet" type="text/css" href="jquery.autocomplete.css' . "?v=" . confGet('STREBER_VERSION') . '" />         
+        <script type="text/javascript">
+        ';
         
         if(confGet('TASKDETAILS_IN_SIDEBOARD')) {
             $buffer.="var g_enable_sideboard= true;";                    
@@ -542,13 +553,14 @@ class PageHtmlStart extends PageElement {
             $buffer.="var g_enable_sideboard= false;";                    
         }
         
+        ### assemble onLoad function
         $buffer.='
         <!--
 
             //------ on load -------
             //$(document).ready(function(){
-            window.onload = function()
-            {';
+            window.onload = function() {
+        ';
 
         if($this->page->autofocus_field) {
             $buffer.="

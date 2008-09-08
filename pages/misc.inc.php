@@ -18,9 +18,22 @@
 function globalView()
 {
     global $PH;
+    global $auth;
     $id=get('id');
     foreach($PH->hash as $phandle) {
         if($phandle->cleanurl === $id) {
+            
+            if( (! $phandle->valid_for_anonymous) 
+                &&
+                ( 
+                    (!$auth->cur_user) 
+                    || 
+                    ($auth->cur_user->id == 0) 
+                ) 
+             ) {
+                $PH->show('loginForm');
+                return;
+            }
             $PH->show($phandle->id);
             return;
         }
