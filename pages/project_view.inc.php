@@ -416,8 +416,8 @@ function ProjView()
             'label'     => 1,
             'order_by'  => 'created DESC',
         )))*/
-		if($news= $project->getTasks(array(
-            'category'  => TCATEGORY_DOCU,
+        
+		if($news= $project->getTasks(array(  # NOTE: get all items with show news option (not just DOCU)
             'is_news'  => 1,
             'order_by'  => 'created DESC',
         )))  {

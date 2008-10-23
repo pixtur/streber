@@ -200,7 +200,6 @@ class TaskPerson extends DbProjectItem {
 
 		$sth->execute("",1);
 		$tmp=$sth->fetchall_assoc();
-		#echo "%%query: " .$str_query. "<br>";
 		$tps=array();
 		foreach($tmp as $t) {
 			$c=new TaskPerson($t);

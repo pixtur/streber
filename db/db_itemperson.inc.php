@@ -238,7 +238,6 @@ class ItemPerson extends DbItem
 			$sth = $dbh->prepare($str_query);
 			$sth->execute("",1);
 			$tmp = $sth->fetchall_assoc();
-			#echo "%%query: " .$str_query. "<br>";
 			$itempersons = array();
 			foreach($tmp as $t){
 				$itemperson = new ItemPerson($t);
@@ -281,7 +280,6 @@ class ItemPerson extends DbItem
 
 		$sth = $dbh->prepare($str_query);
 		$sth->execute("",1);
-		#echo "%%query: " .$str_query. "<br>";
 		$tmp = $sth->fetchall_assoc();
 		
 		if($tmp){

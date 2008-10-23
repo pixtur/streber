@@ -215,12 +215,11 @@ class Page
     public  $content_columns=false;
     public  $format         = FORMAT_HTML;
     public  $extra_header_html = '';
-    public  $use_autcomplete = false;
-
+    public  $use_autocomplete = false;
     #--- constructor ---------------------------
     public function __construct($args=NULL)
     {
-
+        
         ### set global page-var
         global $_PAGE;
         global $auth;
@@ -273,11 +272,6 @@ class Page
                 'tooltip'   =>__('Your related Companies'),
                 'bg'        =>"people"
             ),
-            #"calendar"=>array(
-            #    'target'    =>"index.php?go=error",
-            #    'title'     =>__("Calendar"),
-            #    'bg'        =>"time"
-            #),
             "search"    =>array(
                 'target'    =>'javascript:document.my_form.go.value=\'search\';document.my_form.submit();',
                 'title'     =>__("<span class=accesskey>S</span>earch:&nbsp;"),
@@ -301,25 +295,34 @@ class Page
         ### put out header, some js-functions and styles for proper error-display
     }
 
-    function __set($nm, $val)   {
-        if (isset($this->$nm)) {
-           $this->$nm = $val;
-       } else {
-            trigger_error("can't set page->$nm", E_USER_WARNING);
-       }
+
+    /**
+    * setter members handler
+    */
+    function __set($name, $val)   {
+        if (isset($this->$name) || is_null($this->$name)) {
+           $this->$name = $val;
+        } 
+        else {
+           trigger_error("can't set page->$name", E_USER_WARNING);
+        }
     }
-
-    #--- get --------------------------------------
-    function __get($nm)
+    
+    
+    /**
+    * setter members handler
+    */
+    function __get($name)
     {
-       if (isset($this->$nm)) {
-           return $r;
-       } else {
-            trigger_error("can't read $nm", E_USER_WARNING);
-       }
-   }
-
-
+        if (isset($this->$name) ) {
+            return $this->$name;
+        } 
+        else {
+            trigger_error("can't read '$name'", E_USER_WARNING);
+        }
+    }
+   
+       
     /**
     * add a page function
     */
@@ -537,12 +540,12 @@ class PageHtmlStart extends PageElement {
         <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
 
-        if($this->page->use_autcomplete) {
+        if($this->page->use_autocomplete) {
             $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
+            $buffer.='<link rel="stylesheet" type="text/css" href="jquery.autocomplete.css' . "?v=" . confGet('STREBER_VERSION') . '" />';
         }
 
         $buffer.='
-        <link rel="stylesheet" type="text/css" href="jquery.autocomplete.css' . "?v=" . confGet('STREBER_VERSION') . '" />         
         <script type="text/javascript">
         ';
         
@@ -556,11 +559,23 @@ class PageHtmlStart extends PageElement {
         ### assemble onLoad function
         $buffer.='
         <!--
-
             //------ on load -------
             //$(document).ready(function(){
             window.onload = function() {
         ';
+
+        if($this->page->use_autocomplete) {
+            $buffer.= 'var months = ["January", "February", "March", "May"];
+
+        	$("#request_feedback").autocomplete(months, {
+        		delay: 150,
+        		selectFirst: false,
+		        multiple: true,
+		        mustMatch: true,
+		        autoFill: true
+		      });
+            ';
+        }
 
         if($this->page->autofocus_field) {
             $buffer.="
@@ -632,10 +647,6 @@ document.my_form." . $this->page->autofocus_field. ".select();";
         return $buffer;
     }
 }
-
-
-
-
 
 
 

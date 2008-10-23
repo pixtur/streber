@@ -58,7 +58,7 @@ function TaskView()
     ### set up page and write header ####
     {
         $page= new Page();
-        
+
         initPageForTask($page, $task, $project);
 
         $page->title_minor_html=$PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
@@ -708,8 +708,9 @@ class Block_task_quickedit extends PageBlock
     			$e= $comment->fields['description']->getFormElement(&$comment);
     	        $e->rows=8;
                 
-    			#$tab->add( new Form_Input('request_feedback', __('Need feedback from'), '', NULL, false, "request_feedback"));
-
+    			if ($form->page->use_autocomplete) {
+    			    $tab->add( new Form_Input('request_feedback', __('Need feedback from'), '', NULL, false, "request_feedback"));
+                }
     	        $tab->add($e);
 
             }

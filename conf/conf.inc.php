@@ -15,7 +15,7 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0803',
+    'STREBER_VERSION'       => '0.0804',
     'STREBER_VERSION_DATE'  => '2008-05-09',
 
     'APP_NAME'              => 'streber',
@@ -24,7 +24,7 @@ $g_config= array(
     'INCLUDE_PATH'          => ".",
     'DIR_STREBER'           => "./",
     'DIR_TEMP'              => "./_tmp/",
-    'DIR_RSS'               => "./_tmp/",
+    'DIR_RSS'               => "./_rss/",
     'DIR_FILES'             => "./_files/",
     'DIR_SETTINGS'          => "./_settings/",
     'FILE_DB_SETTINGS'      => "db_settings.php",

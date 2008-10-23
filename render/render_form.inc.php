@@ -124,7 +124,7 @@ class Form_Input extends PageFormElement
                   ? "title='$this->tooltip'"
                   : "";
                       
-        $buffer= "<p " . $this->renderCssClasses() .  "$str_tooltip $this->id $this->display><label>$this->title</label><input class='inp' name='$this->name' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
+        $buffer= "<p " . $this->renderCssClasses() .  "$str_tooltip $this->id $this->display><label>$this->title</label><input class='inp' name='$this->name' id='$this->id' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
         return $buffer;
     }
 }

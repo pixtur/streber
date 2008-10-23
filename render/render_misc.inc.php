@@ -572,9 +572,22 @@ function buildHomeSelector()
     $buffer.="<span id=homeselector class=selector>&nbsp;</span>";
     $buffer.= "<span style='display:none;' id='homeselectorlist' class=selectorlist><span class=selectorlist_content>";
 
+    /*
     foreach(array('home', 'homeTasks', 'homeBookmarks', 'homeEfforts', 'homeAllChanges') as $p) {
         $buffer.= $PH->getLink($p,NULL, array());
     }
+    */
+    $buffer.= $PH->getLink('home',NULL, array());
+    $buffer.= $PH->getLink('homeTasks',NULL, array());
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+        $buffer.= $PH->getLink('homeEfforts',NULL, array());
+    }
+    
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+        $buffer.= $PH->getLink('homeBookmarks',NULL, array());
+    }
+    $buffer.= $PH->getLink('homeAllChanges',NULL, array());
+
     $buffer.="</span></span>";
     return $buffer;
 }
