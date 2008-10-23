@@ -134,8 +134,16 @@
                             settings.autowidth ? $(self).width()  : settings.width;
                     }
                     if (settings.height != 'none') {
-                        settings.height = 
-                            settings.autoheight ? $(self).height() : settings.height;
+						/*
+						* pixtur: added min size page
+						*/
+						if ($(self).height() < 100) {
+							settings.height = 100;
+						}
+						else {
+                        	settings.height = 
+                            	settings.autoheight ? $(self).height() : settings.height;
+						}
                     }
                 }
                 //$(this).css('visibility', '');
