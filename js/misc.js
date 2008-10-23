@@ -267,7 +267,7 @@ function getMoreChanges(project, start, count)
 
 
 /**
-* add inline edit buttons for wiki chapters
+* add inline edit functions for wiki chapters
 * 
 * read more documentation at http://www.streber-pm.org/3695
 */
@@ -322,6 +322,7 @@ function AjaxEdit(dom_element, item_id, field)
                 chapter:true,
                 obj:dom_element,
                 placeholder:'',
+				onblur:'ignore',
                 event:'dblclick',
                 callback:function(value, settings){
                   keepParentNode = this.parentNode
