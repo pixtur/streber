@@ -359,7 +359,7 @@ function step_02_proceed()
 
             ### create new database ###
             print_testStart("create database");
-            if(!$sql_obj->execute("CREATE DATABASE $f_db_name")) {
+            if(!$sql_obj->execute("CREATE DATABASE IF NOT EXISTS $f_db_name charset utf8 COLLATE utf8_general_ci")) {
                 print_testResult(RESULT_FAILED,"<pre>".$sql_obj->error."</pre>");
                 return false;
             }
