@@ -5,19 +5,26 @@ undefined keys:
 'Milestones (closed)'         =>'',  # line 1463
 
 ### ../db/class_task.inc.php   ###
-'Display in project news'     =>'',  # line 189
-'List title and description in project overview'=>'',  # line 190
+'Display in project news'     =>'',  # line 190
+'List title and description in project overview'=>'',  # line 191
 
 ### ../lists/list_forwardedtasks.inc.php   ###
 'Your demand notes'           =>'',  # line 33
 'You have no demand notes'    =>'',  # line 34
 
 ### ../lists/list_recentchanges.inc.php   ###
-'Recent changes'              =>'',  # line 51
+'Recent changes'              =>'',  # line 55
+'Also show your changes'      =>'',  # line 95
+'Hide your changes'           =>'',  # line 98
+
+### ../lists/list_tasks.inc.php   ###
+'Days until planned end'      =>'',  # line 1267
+'Due|column header, days until planned end'=>'',  # line 1268
 
 ### ../pages/_handles.inc.php   ###
 'Recent changes|Page option tab'=>'',  # line 19
 'Overall changes'             =>'',  # line 58
+'Toggle filter own changes'   =>'',  # line 1172
 
 ### ../pages/comment.inc.php   ###
 'Re: '                        =>'',  # line 242
@@ -25,23 +32,45 @@ undefined keys:
 ### ../pages/project_view.inc.php   ###
 'Book effort'                 =>'',  # line 179
 
-### ../pages/project_more.inc.php   ###
-'3 weeks'                     =>'',  # line 1546
-'1 month'                     =>'',  # line 1566
-'prior'                       =>'',  # line 1586
+### ../pages/home.inc.php   ###
+'my blocked'                  =>'',  # line 561
+'needs feedback'              =>'',  # line 620
 
 ### ../pages/person.inc.php   ###
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 706
-'Add note|Page function person'=>'',  # line 707
-'Edit profile|Page function edit person'=>'',  # line 721
-'Edit user Rights|Page function for edit user rights'=>'',  # line 729
-'Authentication with|form label'=>'',  # line 2152
+'3 weeks'                     =>'',  # line 1534
+'1 month'                     =>'',  # line 1554
+'prior'                       =>'',  # line 1574
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 627
+'Add note|Page function person'=>'',  # line 628
+'Edit profile|Page function edit person'=>'',  # line 642
+'Edit user Rights|Page function for edit user rights'=>'',  # line 650
+'Authentication with|form label'=>'',  # line 2073
+'ASAP'                        =>'',  # line 2110
+'Filter own changes from recent changes list'=>'',  # line 2232
 
 ### ../pages/project_more.inc.php   ###
-'Topics'                      =>'',  # line 1108
-'No topics yet'               =>'',  # line 1144
-'View calculation'            =>'',  # line 1669
-'Effort calculations'         =>'',  # line 1852
+'New project from'            =>'',  # line 57
+'Topics'                      =>'',  # line 1120
+'No topics yet'               =>'',  # line 1156
+'all|Filter preset'           =>'',  # line 1379
+'new|Filter preset'           =>'',  # line 1399
+'open|Filter preset'          =>'',  # line 1419
+'discounted|Filter preset'    =>'',  # line 1439
+'not chargeable|Filter preset'=>'',  # line 1459
+'balanced|Filter preset'      =>'',  # line 1479
+'last logout|Filter preset'   =>'',  # line 1499
+'1 week|Filter preset'        =>'',  # line 1518
+'2 weeks|Filter preset'       =>'',  # line 1538
+'3 weeks|Filter preset'       =>'',  # line 1558
+'1 month|Filter preset'       =>'',  # line 1578
+'prior|Filter preset'         =>'',  # line 1598
+'View calculation'            =>'',  # line 1681
+'Effort calculations'         =>'',  # line 1864
+
+### ../pages/task_view.inc.php   ###
+'This task has no description.\nDoubleclick to edit.'=>'',  # line 405
+'Need feedback from'          =>'',  # line 711
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1163
 
 ### ../render/render_misc.inc.php   ###
 'without client|short for client'=>'',  # line 539
@@ -50,7 +79,7 @@ undefined keys:
 'Changes|Project option'      =>'',  # line 652
 
 ### ../render/render_page.inc.php   ###
-'Home|section'                =>'',  # line 247
+'Home|section'                =>'',  # line 248
 
 ### ../std/constant_names.inc.php   ###
 'Enable tasks|Project setting'=>'',  # line 74
@@ -60,7 +89,9 @@ undefined keys:
 'Enable versions|Project setting'=>'',  # line 78
 'Enable bugreports|Project setting'=>'',  # line 79
 'Enable news|Project setting' =>'',  # line 80
+'Upcomming|release type'      =>'',  # line 178
 'Topic|Task Category'         =>'',  # line 219
+'ASAP|notification period'    =>'',  # line 230
 
 ### ../std/mail.inc.php   ###
 'Maybe you want to'           =>'',  # line 623
