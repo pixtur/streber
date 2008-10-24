@@ -535,8 +535,6 @@ class PageHtmlStart extends PageElement {
         $buffer.='
         <script type="text/javascript" src="js/jquery-1.2.6.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/jquery.jeditable.1.5.x.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/jquery.bgiframe.min.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/dimensions.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
 
