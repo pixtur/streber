@@ -52,8 +52,6 @@ addRequestVars($_GET);
 addRequestVars($_POST);
 addRequestVars($_COOKIE);
 
-
-
 print_InstallationHTMLOpen();
 
 if(!get('install_step')) {
@@ -209,7 +207,7 @@ function step_01_checkEvironment() {
         $filepath_db_settings= '../'. confGet('DIR_SETTINGS'). confGet('FILE_DB_SETTINGS');
 
         if(file_exists($filepath_db_settings)) {
-            print_testResult(RESULT_GOOD,"use settings of previous installation.");
+            print_testResult(RESULT_GOOD,"Good: Upgrading...");
             require_once($filepath_db_settings);
 
         }
@@ -231,6 +229,8 @@ function step_01_checkEvironment() {
         $g_form_fields['db_password']['value']=     confGet('DB_PASSWORD') ? confGet('DB_PASSWORD') : NULL;
         $g_form_fields['db_name']['value']=         confGet('DB_NAME')     ? confGet('DB_NAME') : NULL;
         $g_form_fields['db_table_prefix']['value']= confGet('DB_TABLE_PREFIX') ? confGet('DB_TABLE_PREFIX') : NULL;
+        $g_form_fields['site_name']['value']=confGet('APP_NAME');
+        $g_form_fields['site_email']['value']=confGet('EMAIL_ADMINISTRATOR');
     }
 
     ### abort on errors... ##
@@ -432,7 +432,7 @@ function step_02_proceed()
 						. ", id = 1, updated = ");
                 }
                 
-                if($db_version < confGet('DB_VERSION_REQUIRED')) {
+                if($db_version < confGet('STREBER_VERSION')) {
 
                     ### update ###
                     print_testResult(RESULT_PROBLEM,"version is $db_version. Upgrading...");
@@ -451,7 +451,7 @@ function step_02_proceed()
 
                 }
                 else if($streber_version_required > confGet('STREBER_VERSION')) {
-                    print_testResult(RESULT_PROBLEM,"version is $db_version. It's requires Version " .confGet('DB_VERSION_REQUIRED'). " of Streber. Current Version is ".confGet('STREBER_VERSION').". Please download and install the latest version.");
+                    print_testResult(RESULT_PROBLEM,"version is $db_version. It's requires Version " .confGet('STREBER_VERSION'). " of Streber. Current Version is ".confGet('STREBER_VERSION').". Please download and install the latest version.");
                     return false;
                 }
                 else 
@@ -465,7 +465,7 @@ function step_02_proceed()
                         'DB_PASSWORD'   => $f_db_password,
                         'DB_TABLE_PREFIX'=> $f_db_table_prefix,
                         'DB_NAME'       => $f_db_name,
-                        'DB_VERSION'    => confGet('DB_CREATE_VERSION'),
+                        'DB_VERSION'    => confGet('STREBER_VERSION'),
                     ));
                     
                     if($write_ok) {
@@ -487,12 +487,10 @@ function step_02_proceed()
             }
         }
 
-
-
         ### creating database-structure ###
         print_testStart("creating tables...");
 
-        $filename= "./create_structure_v".confGet('DB_CREATE_VERSION').".sql";
+        $filename= "./create_structure_v".confGet('DB_CREATE_DUMP_VERSION').".sql";
         $upgradeFromVersion = NULL;
 
         if(!file_exists($filename)) {
@@ -535,8 +533,8 @@ function step_02_proceed()
 
         ### create db-version entry ###
         print_testStart("add db-version entry");
-        $db_version = confGet('DB_CREATE_VERSION');
-        $streber_version_required = confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
+        $db_version = confGet('STREBER_VERSION');
+        $streber_version_required = confGet('STREBER_VERSION');
         $str_query = "INSERT into {$f_db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version','$streber_version_required',NOW() )";
         if(!$sql_obj->execute($str_query)) {
             print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error. "</pre>");
@@ -657,7 +655,7 @@ function step_02_proceed()
                 'DB_PASSWORD'   => $f_db_password,
                 'DB_TABLE_PREFIX'=> $f_db_table_prefix,
                 'DB_NAME'       => $f_db_name,
-                'DB_VERSION'    => confGet('DB_CREATE_VERSION'),
+                'DB_VERSION'    => confGet('STREBER_VERSION'),
             );
 
             $write_ok= writeSettingsFile($filename, $settings);
@@ -759,12 +757,6 @@ function upgrade($args=NULL)
     require(dirname(__FILE__)."/db_updates.inc.php");
 
 
-
-
-
-
-
-
     print_testStart("doing " .count($update_queries). " changes to database...");
     foreach($update_queries as $q) {
 
@@ -805,8 +797,8 @@ function upgrade($args=NULL)
     }
     
     ### create new db-version ###
-    $db_version_new= confGet('DB_CREATE_VERSION');
-    $streber_version_required= confGet('DB_CREATE_STREBER_VERSION_REQUIRED');
+    $db_version_new= confGet('STREBER_VERSION');
+    $streber_version_required= confGet('STREBER_VERSION');
     $str_query= "INSERT IGNORE into {$db_table_prefix}db (id,version,version_streber_required,created) VALUES(1,'$db_version_new','$streber_version_required',NOW() )";
     if(!$sql_obj->execute($str_query)) {
         print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<pre>".$sql_obj -> error."</pre>Query was:<pre>$str_query</pre>");
@@ -818,7 +810,6 @@ function upgrade($args=NULL)
     
     ### rewrite setting-file ###
     {
-    
     	$filename = "../" . confGet("DIR_SETTINGS") . confGet("SITE_SETTINGS");
     	print_testStart("writing configuration file '" . $filename . "'...");
     	$write_ok= writeSettingsFile($filename, $settings = array(
@@ -850,7 +841,7 @@ function upgrade($args=NULL)
             'DB_PASSWORD'   => $db_password,
             'DB_TABLE_PREFIX'=> $db_table_prefix,
             'DB_NAME'       => $db_name,
-            'DB_VERSION'    => confGet('DB_CREATE_VERSION'),
+            'DB_VERSION'    => confGet('STREBER_VERSION'),
         ));
 
         if(!$write_ok) {
@@ -868,7 +859,6 @@ function upgrade($args=NULL)
     }
     return true;
 }
-
 
 /**
 * build settings file

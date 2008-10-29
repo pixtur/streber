@@ -41,6 +41,8 @@ class PageFormElement extends PageElement{
 	public  $id;
 	public  $display;
 	public  $func;
+	public  $input_attributes;  # Assoc. array with additional attributes for the input tag
+	                            # Can be used to overwrite arbitrary attributes for jquery features.
 
     PUBLIC function __construct() {
         return;
@@ -105,7 +107,7 @@ class Form_Input extends PageFormElement
 {
     public $required=false;
 
-    PUBLIC function __construct($name=false, $title="", $value=false, $tooltip=NULL, $required=false, $id="", $display="")
+    PUBLIC function __construct($name=false, $title="", $value=false, $tooltip=NULL, $required=false, $id="", $display="", $input_attributes= array())
     {
         $this->type='input';
         parent::__construct();
@@ -116,6 +118,7 @@ class Form_Input extends PageFormElement
         $this->required=$required;
 		$this->id=      $id;
 		$this->display= $display;
+		$this->input_attributes = $input_attributes;
     }
 
     PUBLIC function __toString()
@@ -123,8 +126,21 @@ class Form_Input extends PageFormElement
         $str_tooltip= $this->tooltip
                   ? "title='$this->tooltip'"
                   : "";
-                      
-        $buffer= "<p " . $this->renderCssClasses() .  "$str_tooltip $this->id $this->display><label>$this->title</label><input class='inp' name='$this->name' id='$this->id' value='".htmlspecialchars($this->value, ENT_QUOTES)."'></p>";
+
+        if (isset($this->input_attributes['class'])) {
+            $this->input_attributes['class'] .=' inp';
+        }
+        else {
+            $this->input_attributes['class'] = 'inp';
+        }
+        $html_attributes= "";
+        foreach($this->input_attributes as $attribute_name => $attribute_value) {
+            $html_attributes.= $attribute_name . "='". asHtml($attribute_value) ."'";
+        }
+
+        $buffer= "<p " . $this->renderCssClasses() . " $str_tooltip $this->id $this->display><label>$this->title</label>" 
+               . "<input $html_attributes name='$this->name' id='$this->id' value='".htmlspecialchars($this->value, ENT_QUOTES)."'>" 
+               . "</p>";
         return $buffer;
     }
 }

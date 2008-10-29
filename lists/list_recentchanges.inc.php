@@ -158,10 +158,13 @@ function printChangeLine($c)
     
     
     /**
-    * not viewed
+    * remarks on new, updated or item that require feedback
     */
     if($c->item) {
-        if($new= $c->item->isChangedForUser()) {
+        if($c->item->isFeedbackRequestedForUser()) {
+                echo '<span class=new> (' . __('Needs feedback') . ') </span>';
+        }
+        elseif($new= $c->item->isChangedForUser()) {
             if($new == 1) {
                 echo '<span class=new> (' . __('New') . ') </span>';
             }

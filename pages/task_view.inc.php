@@ -49,8 +49,8 @@ function TaskView()
     ### create from handle ###
     $from_handle= $PH->defineFromHandle(array('tsk'=>$task->id));
 
-	## is viewed by user ##
-	$task->nowViewedByUser();
+    ## is viewed by user ##
+    $task->nowViewedByUser();
 
     global $g_wiki_task;
     $g_wiki_task= $task;
@@ -59,6 +59,7 @@ function TaskView()
     {
         $page= new Page();
 
+        $page->use_autocomplete = true;
         initPageForTask($page, $task, $project);
 
         $page->title_minor_html=$PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
@@ -171,29 +172,29 @@ function TaskView()
             #}
 
             if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
-    			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
-    			if((!$item) || ($item[0]->is_bookmark == 0)){
-    				$page->add_function(new PageFunction(array(
-    					'target'    =>'itemsAsBookmark',
-    					'params'    =>array('task'=>$task->id),
-    					'tooltip'   =>__('Mark this task as bookmark'),
-    					'name'      =>__('Bookmark'),
-            		)));
-    			}
-    			else{
-    				$page->add_function(new PageFunction(array(
-    					'target'    =>'itemsRemoveBookmark',
-    					'params'    =>array('task'=>$task->id),
-    					'tooltip'   =>__('Remove this bookmark'),
-    					'name'      =>__('Remove Bookmark'),
-            		)));
-    			}
-    		}
+                $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
+                if((!$item) || ($item[0]->is_bookmark == 0)){
+                    $page->add_function(new PageFunction(array(
+                        'target'    =>'itemsAsBookmark',
+                        'params'    =>array('task'=>$task->id),
+                        'tooltip'   =>__('Mark this task as bookmark'),
+                        'name'      =>__('Bookmark'),
+                    )));
+                }
+                else{
+                    $page->add_function(new PageFunction(array(
+                        'target'    =>'itemsRemoveBookmark',
+                        'params'    =>array('task'=>$task->id),
+                        'tooltip'   =>__('Remove this bookmark'),
+                        'name'      =>__('Remove Bookmark'),
+                    )));
+                }
+            }
 
         }
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen_Columns);
@@ -381,29 +382,39 @@ function TaskView()
         if($editable) {
             $list->no_items_html= $list->summary='<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
             .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
-    		.'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-    		.'<input id="userfiletask" name="userfile" type="file" size="15" accept="*" /><br />'
+            .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
+            .'<input id="userfiletask" name="userfile" type="file" size="15" accept="*" /><br />'
             .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
             .'</div>';
         }
 
         $list->print_automatic($project);
         $PH->go_submit= $PH->getValidPage('filesUpload')->id;
-	}
+    }
 
     echo(new PageContentNextCol);
 
+    #--- feedback notice ------------------------------------------------------------
+    {
+        if($view = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$task->id, 'feedback_requested_by'=>true))){
+            if ($requested_by= Person::getPersons( array( 'id' => $view[0]->feedback_requested_by ) )) {
+                echo "<div class=item_notice>";
+                echo "<h3>" . sprintf(__("Your feedback is requested by %s."), asHtml($requested_by[0]->nickname) ) . "</h3>";
+                echo __("Please edit or comment this item.");
+                echo "</div>";
+            }
+        } 
+    }  
 
     #--- description ----------------------------------------------------------------
     {
-
         echo "<div class=description>";
 
         if($editable) {
-			$description= $task->description;
-			if( $description == "" ) {
-				$description = "[quote]" . __("This task has no description.\nDoubleclick to edit.") . "[/quote]";
-			} 
+            $description= $task->description;
+            if( $description == "" ) {
+                $description = "[quote]" . __("This task has no description.\nDoubleclick to edit.") . "[/quote]";
+            } 
             echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
@@ -586,41 +597,41 @@ function TaskView()
         }
 
 
-		if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-			$comments= $task->getComments(array(
-	            'order_by'=>$order_str,
-	            'visible_only'=>false,
-	        ));
-		}
-		else{
-	        $comments= $task->getComments(array(
-	            'order_by'=>$order_str,
-	        ));
-		}
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+            $comments= $task->getComments(array(
+                'order_by'=>$order_str,
+                'visible_only'=>false,
+            ));
+        }
+        else{
+            $comments= $task->getComments(array(
+                'order_by'=>$order_str,
+            ));
+        }
         if(count($comments) != 0) {
 
             $list_comments= new ListBlock_comments();
-			if(count($comments) == 1){
-			     $list_comments->title= __("1 Comment") ;
-			}
+            if(count($comments) == 1){
+                 $list_comments->title= __("1 Comment") ;
+            }
             else {
-			     $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
-			}
+                 $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
+            }
 
 
-    		#$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
+            #$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
             $list_comments->render_list(&$comments);
         }
     }
 
 
-	#--- task qickedit form -------------------------------------------------------------
-	{
-		if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
-			$block_task_quickedit= new Block_task_quickedit();
-    	    $block_task_quickedit->render_quickedit(&$task);
-		}
-	}
+    #--- task qickedit form -------------------------------------------------------------
+    {
+        if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
+            $block_task_quickedit= new Block_task_quickedit();
+            $block_task_quickedit->render_quickedit(&$task);
+        }
+    }
 
 
 
@@ -633,7 +644,7 @@ function TaskView()
 
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -646,19 +657,19 @@ function TaskView()
 class Block_task_quickedit extends PageBlock
 {
 
-	public function __construct($args=NULL)
-	{
+    public function __construct($args=NULL)
+    {
         global $PH;
         $this->id='quick_edit';
         $this->bg_style='bg_projects';
-		$this->title= __("Comment / Update");
-		$this->reduced_header = true;
+        $this->title= __("Comment / Update");
+        $this->reduced_header = true;
     }
 
 
 
-	public function render_quickedit($task)
-	{
+    public function render_quickedit($task)
+    {
         global $PH;
 
         $editable= false;
@@ -671,55 +682,76 @@ class Block_task_quickedit extends PageBlock
             return false;
         }
 
-	    ### get parent project ####
-	    if(!$project= Project::getVisibleById($task->project)) {
-	        return;
-	    }
+        ### get parent project ####
+        if(!$project= Project::getVisibleById($task->project)) {
+            return;
+        }
 
-	    $this->render_blockStart();
+        $this->render_blockStart();
 
-		### write form #####
-		{
-		    require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
+        ### write form #####
+        {
+            require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
 
-		    global $REPRODUCIBILITY_VALUES;
+            global $REPRODUCIBILITY_VALUES;
 
-		    global $g_prio_names;
-		    global $g_status_names;
+            global $g_prio_names;
+            global $g_status_names;
 
 
-		    $form=new PageForm();
-		    $form->button_cancel=false;
+            $form=new PageForm();
+            $form->button_cancel=false;
 
-            $form->add($tab_group=new Page_TabGroup());
+            $form->add($tab_group = new Page_TabGroup());
 
             ### add comment ###
             {
-                $tab_group->add($tab=new Page_Tab("comment",__("Add comment")));
+                $tab_group->add($tab = new Page_Tab("comment",__("Add comment")));
 
-    			### Comment ###
-    		    $comment_name= '';
-    			$comment= new Comment(array(
-    		        'id'=>0,
-    		        'name'=>$comment_name,
-    		    ));
+                ### Comment ###
+                $comment_name= '';
+                $comment= new Comment(array(
+                    'id'=>0,
+                    'name'=>$comment_name,
+                ));
 
-    			$tab->add($comment->fields['name']->getFormElement(&$comment,__('Comment')));
-    			$e= $comment->fields['description']->getFormElement(&$comment);
-    	        $e->rows=8;
+                $tab->add($comment->fields['name']->getFormElement(&$comment,__('Comment')));
+                $e= $comment->fields['description']->getFormElement(&$comment);
+                $e->rows=8;
                 
-    			if ($form->page->use_autocomplete) {
-    			    $tab->add( new Form_Input('request_feedback', __('Need feedback from'), '', NULL, false, "request_feedback"));
+                
+                /**
+                * initialize request feedback autocomplete field
+                *
+                */
+                {
+                    $nicknames = array();
+                    $project_persons= $project->getProjectPersons();
+                    foreach( $project_persons as $pp) {
+                        $nicknames[] = $pp->getPerson()->nickname;
+                    }
+                    if ($form->page->use_autocomplete) {
+                        $tab->add( new Form_Input(
+                                        'request_feedback',         # name
+                                        __('Need feedback from'),   # title
+                                        '',                         # value
+                                        NULL,                       # tooltip
+                                        false,                      # required
+                                        "request_feedback",         # id
+                                        "",                         # display
+                                        array(                      # input_attributes
+                                            'class' => 'autocomplete',
+                                            'autocomplete_list'=> join($nicknames, ','),
+                                        )                           
+                                ));
+                    }
+                    $tab->add($e);
                 }
-    	        $tab->add($e);
-
             }
 
             ### update ###
             if($editable && $task->isOfCategory(array(TCATEGORY_TASK,  TCATEGORY_BUG))) {
                 $tab_group->add($tab=new Page_Tab("update",__("Update")));
-
-
 
                 #$tab->add(new Form_Dropdown('task_for_milestone', __('For Milestone'), $project->buildPlannedForMilestoneList(), $task->for_milestone));
                 $tab->add( new Form_DropdownGrouped('task_for_milestone', 
@@ -734,132 +766,132 @@ class Block_task_quickedit extends PageBlock
                 $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
 
 
-    	        ### public-level ###
-    	       	#{
-    	 		#	if(($pub_levels=$task->getValidUserSetPublevel()) && count($pub_levels)>1) {
-    	        #    	$form->add(new Form_Dropdown('task_pub_level',  __("Public to"),$pub_levels,$task->pub_level));
-       	        #	}
-    			#}
+                ### public-level ###
+                #{
+                #   if(($pub_levels=$task->getValidUserSetPublevel()) && count($pub_levels)>1) {
+                #       $form->add(new Form_Dropdown('task_pub_level',  __("Public to"),$pub_levels,$task->pub_level));
+                #   }
+                #}
 
-    	        ### assigned to ###
-    	        {
-    	            ### for existing tasks, get already assigned
-    	            if($task->id) {
-    	                $assigned_persons = $task->getAssignedPersons();
-    	            }
+                ### assigned to ###
+                {
+                    ### for existing tasks, get already assigned
+                    if($task->id) {
+                        $assigned_persons = $task->getAssignedPersons();
+                    }
 
-    	            ### for new tasks get the assignments from parent task ###
-    				else {
-    				    trigger_error("view a task with zero id?");
-    	            }
+                    ### for new tasks get the assignments from parent task ###
+                    else {
+                        trigger_error("view a task with zero id?");
+                    }
 
-    	            $team=array(__('- select person -')=>0);
+                    $team=array(__('- select person -')=>0);
 
-    	            ### create team-list ###
-    	            foreach($project->getPersons() as $p) {
-    	                $team[$p->name]= $p->id;
-    	            }
-
-
-    	            ### create drop-down-lists ###
-    	            $count_new=0;
-    	            $count_all=0;
-    	            if(isset($assigned_persons)) {
-    	                foreach($assigned_persons as $ap) {
-    	                    if(!$p= Person::getVisibleById($ap->id)) {
-    	                        continue;                               # skip if invalid person
-    	                    }
-
-    	                    if($task->id) {
-    	                        $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
-    		                }
-    		                else {
-    	                        $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
-    	                        $count_new++;
-    	                    }
-    	                    $count_all++;
-    	                    unset($team[$ap->name]);
-    	                }
-    	            }
+                    ### create team-list ###
+                    foreach($project->getPersons() as $p) {
+                        $team[$p->name]= $p->id;
+                    }
 
 
-    	            ### add empty drop-downlist for new assignments ###
-    	            $str_label  = ($count_all == 0)
-    	                        ? __("Assign to","Form label")
-    	                        : __("Also assign to","Form label");
-    	            $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
-    	        }
+                    ### create drop-down-lists ###
+                    $count_new=0;
+                    $count_all=0;
+                    if(isset($assigned_persons)) {
+                        foreach($assigned_persons as $ap) {
+                            if(!$p= Person::getVisibleById($ap->id)) {
+                                continue;                               # skip if invalid person
+                            }
+
+                            if($task->id) {
+                                $tab->add(new Form_Dropdown('task_assigned_to_'.$ap->id, __("Assigned to"),$team, $ap->id));
+                            }
+                            else {
+                                $tab->add(new Form_Dropdown('task_assign_to_'.$count_new, __("Assign to"),$team, $ap->id));
+                                $count_new++;
+                            }
+                            $count_all++;
+                            unset($team[$ap->name]);
+                        }
+                    }
 
 
-    			### priority ###
-    		    {
-    		    	if(!$task->isMilestoneOrVersion()) {
-    		            $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
-    		        }
-    			}
-
-    		    ### estimated ###
-    		    {
-    	            #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
-    	            $ar= array(
-    	                __('undefined')=> 0,
-    	                __('30 min')    => 30*60,
-    	                __('1 h')  => 60*60,
-    	                __('2 h') => 2*60*60,
-    	                __('4 h') => 4*60*60,
-    	                __('1 Day')     =>   1 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('2 Days')    =>   2 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('3 Days')    =>   3 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('4 Days')    =>   4 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('1 Week')   =>   1 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                #__('1,5 Weeks')=> 1.5 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('2 Weeks')  =>   2 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	                __('3 Weeks')  =>   3 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-    	            );
-    	            $tab->add(new Form_Dropdown('task_estimated',__("Estimated time"),$ar,  $task->estimated));
-    	            $tab->add(new Form_Dropdown('task_estimated_max',__("Estimated worst case"),$ar,  $task->estimated_max));
-
-    	        }
-
-    	        ### completion ###
-    	        {
-    	            $ar= array(
-    	                __('undefined')=> -1,
-    	                '0%'    => 0,
-    	                '10%'    => 10,
-    	                '20%'    => 20,
-    	                '30%'    => 30,
-    	                '40%'    => 40,
-    	                '50%'    => 50,
-    	                '60%'    => 60,
-    	                '70%'    => 70,
-    	                '80%'    => 80,
-    	                '90%'    => 90,
-    	                '95%'    => 95,
-    	                '98%'    => 98,
-    	                '99%'    => 99,
-    	                '100%'   => 100,
-    	            );
-    	            $tab->add(new Form_Dropdown('task_completion',__("Completed"),$ar,  $task->completion));
-    	        }
-
-    	        $tab->add($task->fields['parent_task']->getFormElement(&$task));
+                    ### add empty drop-downlist for new assignments ###
+                    $str_label  = ($count_all == 0)
+                                ? __("Assign to","Form label")
+                                : __("Also assign to","Form label");
+                    $tab->add(new Form_Dropdown("task_assign_to_$count_new",  $str_label,$team, 0));
+                }
 
 
-    	        ### status ###
-    	        {
-    	            $st=array();
-    	            foreach($g_status_names as $s=>$n) {
-    	                if($s >= STATUS_NEW) {
-    	                    $st[$s]=$n;
-    	                }
-    	            }
-    	            if($task->isMilestoneOrVersion()) {
-    	                unset($st[STATUS_NEW]);
-    	            }
+                ### priority ###
+                {
+                    if(!$task->isMilestoneOrVersion()) {
+                        $tab->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
+                    }
+                }
 
-    	            $tab->add(new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status));
-    	        }
+                ### estimated ###
+                {
+                    #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
+                    $ar= array(
+                        __('undefined')=> 0,
+                        __('30 min')    => 30*60,
+                        __('1 h')  => 60*60,
+                        __('2 h') => 2*60*60,
+                        __('4 h') => 4*60*60,
+                        __('1 Day')     =>   1 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('2 Days')    =>   2 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('3 Days')    =>   3 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('4 Days')    =>   4 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('1 Week')   =>   1 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        #__('1,5 Weeks')=> 1.5 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('2 Weeks')  =>   2 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                        __('3 Weeks')  =>   3 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
+                    );
+                    $tab->add(new Form_Dropdown('task_estimated',__("Estimated time"),$ar,  $task->estimated));
+                    $tab->add(new Form_Dropdown('task_estimated_max',__("Estimated worst case"),$ar,  $task->estimated_max));
+
+                }
+
+                ### completion ###
+                {
+                    $ar= array(
+                        __('undefined')=> -1,
+                        '0%'    => 0,
+                        '10%'    => 10,
+                        '20%'    => 20,
+                        '30%'    => 30,
+                        '40%'    => 40,
+                        '50%'    => 50,
+                        '60%'    => 60,
+                        '70%'    => 70,
+                        '80%'    => 80,
+                        '90%'    => 90,
+                        '95%'    => 95,
+                        '98%'    => 98,
+                        '99%'    => 99,
+                        '100%'   => 100,
+                    );
+                    $tab->add(new Form_Dropdown('task_completion',__("Completed"),$ar,  $task->completion));
+                }
+
+                $tab->add($task->fields['parent_task']->getFormElement(&$task));
+
+
+                ### status ###
+                {
+                    $st=array();
+                    foreach($g_status_names as $s=>$n) {
+                        if($s >= STATUS_NEW) {
+                            $st[$s]=$n;
+                        }
+                    }
+                    if($task->isMilestoneOrVersion()) {
+                        unset($st[STATUS_NEW]);
+                    }
+
+                    $tab->add(new Form_Dropdown('task_status',"Status",array_flip($st),  $task->status));
+                }
             }
 
             /**
@@ -870,21 +902,21 @@ class Block_task_quickedit extends PageBlock
                 $form->addCaptcha();
             }
 
-			### some required hidden fields for correct data passing ###
-			$form->add(new Form_HiddenField('tsk','',$task->id));
-		    echo($form);
+            ### some required hidden fields for correct data passing ###
+            $form->add(new Form_HiddenField('tsk','',$task->id));
+            echo($form);
 
-		    $PH->go_submit= 'taskEditSubmit';
-		    echo "<input type=hidden name='comment' value='$comment->id'>";
+            $PH->go_submit= 'taskEditSubmit';
+            echo "<input type=hidden name='comment' value='$comment->id'>";
 
-			if($return=get('return')) {
-		        echo "<input type=hidden name='return' value='$return'>";
-		    }
+            if($return=get('return')) {
+                echo "<input type=hidden name='return' value='$return'>";
+            }
 
 
-		    $this->render_blockEnd();
-	    }
-	}
+            $this->render_blockEnd();
+        }
+    }
 }
 
 /**
@@ -1020,29 +1052,29 @@ function taskViewAsDocu()
             }
 
             if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
-    			$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
-    			if((!$item) || ($item[0]->is_bookmark == 0)){
-    				$page->add_function(new PageFunction(array(
-    					'target'    =>'itemsAsBookmark',
-    					'params'    =>array('task'=>$task->id),
-    					'tooltip'   =>__('Mark this task as bookmark'),
-    					'name'      =>__('Bookmark'),
-            		)));
-    			}
-    			else{
-    				$page->add_function(new PageFunction(array(
-    					'target'    =>'itemsRemoveBookmark',
-    					'params'    =>array('task'=>$task->id),
-    					'tooltip'   =>__('Remove this bookmark'),
-    					'name'      =>__('Remove Bookmark'),
-            		)));
-    			}
-    		}
+                $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
+                if((!$item) || ($item[0]->is_bookmark == 0)){
+                    $page->add_function(new PageFunction(array(
+                        'target'    =>'itemsAsBookmark',
+                        'params'    =>array('task'=>$task->id),
+                        'tooltip'   =>__('Mark this task as bookmark'),
+                        'name'      =>__('Bookmark'),
+                    )));
+                }
+                else{
+                    $page->add_function(new PageFunction(array(
+                        'target'    =>'itemsRemoveBookmark',
+                        'params'    =>array('task'=>$task->id),
+                        'tooltip'   =>__('Remove this bookmark'),
+                        'name'      =>__('Remove Bookmark'),
+                    )));
+                }
+            }
 
 
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen_Columns);
@@ -1141,14 +1173,14 @@ function taskViewAsDocu()
 
         $list->no_items_html= $list->summary='<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
         .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
-		.'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-		.'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
+        .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
+        .'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
         .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
         .'</div>';
 
         $list->print_automatic($project);
         $PH->go_submit= $PH->getValidPage('filesUpload')->id;
-	}
+    }
 
 
     echo(new PageContentNextCol);
@@ -1159,10 +1191,10 @@ function taskViewAsDocu()
 
         echo "<div class=description>";
         if($editable) {
-			$description= $task->description;
-			if( $description == "" ) {
-				$description = "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]";
-			} 
+            $description= $task->description;
+            if( $description == "" ) {
+                $description = "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]";
+            } 
             echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
@@ -1188,42 +1220,42 @@ function taskViewAsDocu()
         }
 
 
-		if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-			$comments= $task->getComments(array(
-	            'order_by'=>$order_str,
-	            'visible_only'=>false,
-	        ));
-		}
-		else{
-	        $comments= $task->getComments(array(
-	            'order_by'=>$order_str,
-	        ));
-		}
+        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+            $comments= $task->getComments(array(
+                'order_by'=>$order_str,
+                'visible_only'=>false,
+            ));
+        }
+        else{
+            $comments= $task->getComments(array(
+                'order_by'=>$order_str,
+            ));
+        }
         if(count($comments) != 0) {
 
             $list_comments= new ListBlock_comments();
-			if(count($comments) == 1){
-			     $list_comments->title= __("1 Comment") ;
-			}
+            if(count($comments) == 1){
+                 $list_comments->title= __("1 Comment") ;
+            }
             else {
-			     $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
-			}
+                 $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
+            }
 
 
-    		$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
+            $list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
             $list_comments->render_list(&$comments);
         }
     }
 
 
-	#--- task qickedit form -------------------------------------------------------------
-	{
-		$block_task_quickedit= new Block_task_quickedit();
-	    $block_task_quickedit->render_quickedit(&$task);
-	}
+    #--- task qickedit form -------------------------------------------------------------
+    {
+        $block_task_quickedit= new Block_task_quickedit();
+        $block_task_quickedit->render_quickedit(&$task);
+    }
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 

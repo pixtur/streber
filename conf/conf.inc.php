@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0805',
-    'STREBER_VERSION_DATE'  => '2008-05-09',
+    'STREBER_VERSION'       => '0.0807',
+    'STREBER_VERSION_DATE'  => '2008-10-29',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -58,7 +58,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_VERSION_REQUIRED'   => '0.0803',
+    'DB_CREATE_DUMP_VERSION'     => '0.0803',     # sql-dump loaded from /_install/-directory at installation
 
 
     /**
@@ -77,14 +77,13 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-    'DB_CREATE_VERSION'     => '0.0803',     # sql-dump loaded from /_install/-directory at installation
-    'DB_CREATE_STREBER_VERSION_REQUIRED' => '0.0803',
+
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',
     'DB_NAME'               =>'',
     'DB_TABLE_PREFIX'       =>'',
-    'DB_VERSION'            =>'',           # current version (set to DB_CREATE_VERSION at install) / validated at startup to complain for upgrade
+    'DB_VERSION'            =>'',           # current version (set to DB_CREATE_DUMP_VERSION at install) / validated at startup to complain for upgrade
 
     /**
     * if not null, is set on startup. Suggested setting for development with mysql5 is
@@ -195,9 +194,9 @@ $g_config= array(
     * - it's a good habit to give the e-mail adresse of an administrator.
     */
     'MESSAGE_OFFLINE'=>"<h1>Congratulations!</h1>
-                    You are one of the few people witnessing this installation of <br>
-                    <a href='http://www.streber-pm.org'>streber</a> being offline. <br>Use your chance and contact
-                    the <a href='mailto:admin @ is undefined com'>administrator</a> to get your special price immediately.<br><br>
+                    You are one of the few people witnessing this installation<br>
+                    of <a href='http://www.streber-pm.org'>streber</a> being offline.
+                    Use your chance now and <br>send a mail to <a href='%s'>%s</a> to get your special reward immediately.<br><br>
                     Problem: <b>",
 
 

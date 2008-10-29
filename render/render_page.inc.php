@@ -518,8 +518,6 @@ class PageHtmlStart extends PageElement {
 
         $buffer.= "<link rel=\"stylesheet\" title=\"top\" media=\"screen\" type=\"text/css\" href=\"". getThemeFile("styles.css") . "?v=" . confGet('STREBER_VERSION') ."\">"
                .  "<!--[if IE]><link rel=\"stylesheet\" title=\"ie\" media=\"screen\" type=\"text/css\" href=\"". getThemeFile("styles_ie.css") . "?v=" . confGet('STREBER_VERSION') ."\"><![endif]-->";
-        
-
 
 
         ### link print-style ###
@@ -563,16 +561,7 @@ class PageHtmlStart extends PageElement {
         ';
 
         if($this->page->use_autocomplete) {
-            $buffer.= 'var months = ["January", "February", "March", "May"];
-
-        	$("#request_feedback").autocomplete(months, {
-        		delay: 150,
-        		selectFirst: false,
-		        multiple: true,
-		        mustMatch: true,
-		        autoFill: true
-		      });
-            ';
+            $buffer .= 'initAutocompleteFields();';
         }
 
         if($this->page->autofocus_field) {

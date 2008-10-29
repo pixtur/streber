@@ -386,16 +386,53 @@ abstract class DbItem {
         return 1;
     }
 
+    /**
+    * Checks whether another user requested feedback for this item.
+    * return:
+    *   - id - if feedback is required
+    *   - 0  - if not feedback requested
+    */
+    public function isFeedbackRequestedForUser()
+    {
+        global $auth;
+
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+        if($item_persons = ItemPerson::getAll(array(
+            'person'=>$auth->cur_user->id,
+            'item' => $this->id,
+            'feedback_requested_by' => true,
+        ))) {
+            $ip= $item_persons[0];
+            return $ip->feedback_requested_by;
+        }
+        return 0;
+    }
+
+    /**
+    * updates person/item-table
+    * - creates new row (if not existed)
+    * - 
+    */
     public function nowChangedByUser()
     {
         require_once('std/mail.inc.php');
         require_once('db/db_itemperson.inc.php');
-        ### if notify_if_unchanges is set ###
-        if ($ip = ItemPerson::getAll(array('item'=>$this->id,'notify_if_unchanged_min'=>NOTIFY_1DAY))){
-            if(isset($ip)){
-                $ip[0]->notify_date = date('Y-m-d H:i:s', time());
-                $ip[0]->update();
+        global $auth;
+
+        if ($ips = ItemPerson::getAll(array(
+                                        'item'=>$this->id,
+                                        'person'=> $auth->cur_user->id))
+        ) {
+
+            ### if notify_if_unchanged is set ###
+            $ip= $ips[0];
+            if ($ip->notify_if_unchanged) {
+                $ip->notify_date = getGMTString();
             }
+
+            ### remove request feedback
+            $ip->feedback_requested_by = 0;
+            $ip->update();
         }
     }
 

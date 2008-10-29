@@ -3,8 +3,7 @@
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
-/**\file  pages relating to comments  */
-
+/**\file  pages related to comments  */
 
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
@@ -152,9 +151,13 @@ function commentView(){
 /**
 * Create new comment 
 * 
+* New comments have to be attached to an option. So the major part of this code
+* deals with finding out, to what the comment belongs to.
+* 
 * @ingroup pages
 *
-*  - requires comment or task or comments_* - param
+*
+*  - requires comment, task or comments_* - param
 */
 function commentNew() {
     global $PH;
@@ -173,15 +176,13 @@ function commentNew() {
         'name'=>$name,
     ));
 
-
     ### try single project-id ###
     if($id=getOnePassedId('prj','projects_*',false)) { #no not abort if not found
         if($project= Project::getVisibleById($id)) {
             $newComment->project= $project->id;
         }
     }
-
-
+    
     ### try single task-id ###
     $task=NULL;
     if($id=getOnePassedId('tsk','tasks_*',false)) { #no not abort if not found

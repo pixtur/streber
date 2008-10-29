@@ -334,3 +334,23 @@ function AjaxEdit(dom_element, item_id, field)
     }
     this.initEditChapters();
 }
+
+/**
+* initialize handlers for autocompletion input fields on startup
+* 
+* Calledby render_page js-code if page->use_autocomplete enabled
+*/
+function initAutocompleteFields() {
+	$("input.autocomplete").each(function() {
+	    if($(this).attr('autocomplete_list')) {
+	        var autocomplete_list= $(this).attr('autocomplete_list');
+			$(this).autocomplete(autocomplete_list.split(','), {
+        		delay: 150,
+        		selectFirst: false,
+		        multiple: true,
+		        //mustMatch: true,
+		        autoFill: true
+		      });
+	    }
+	});
+}

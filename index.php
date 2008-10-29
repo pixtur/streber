@@ -6,16 +6,15 @@
 * Welcome to the source-code. This is a good point to start reading.
 *
 * This is index.php - the master-control-page. There are NO other php-pages, except from
-* install.php (which should have been delete in normal process).
+* install.php (which should have been deleted in normal installations).
 *
 * index.php does...
 *
-* - initialize the profiler
-* - include config and customize
-* - include core-components
-* - authenticate the user
-* - render a page (which means calling a function defined in a file at pages/*.inc)
-*
+* 1. initialize the profiler
+* 2. include config and customize
+* 3. include core-components
+* 4. authenticate the user
+* 5. render a page (which means calling a function defined in a file at pages/*.inc)
 *
 */
 
@@ -57,7 +56,6 @@ if(file_exists('customize.inc.php')) {
 }
 
 filterGlobalArrays();
-
 
 
 /**

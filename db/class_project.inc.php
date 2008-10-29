@@ -671,7 +671,7 @@ class Project extends DbProjectItem
                         : true;
 		$person_id = NULL;
 
-		### filter parameter ###
+		### filter parameters ###
         if($args) {
             foreach($args as $key=>$value) {
                 if(!isset($$key) && !is_null($$key) && !$$key==="") {

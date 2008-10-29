@@ -317,46 +317,6 @@ function ProjView()
 
 
 
-    ### write list of folders ###
-    /*{
-        $list= new ListBlock_tasks(array(
-            'use_short_names'=>true,
-            'show_summary'  =>false,
-        ));
-        $list->title=__('Folders');
-        $list->query_options['show_folders']= true;
-        $list->query_options['folders_only']= true;
-        $list->query_options['project']= $project->id;
-        $list->groupings= NULL;
-        $list->block_functions= NULL;
-        $list->id= 'folders';
-        $list->show_functions=false;
-        unset($list->columns['status']);
-        unset($list->columns['date_start']);
-        unset($list->columns['days_left']);
-        unset($list->columns['created_by']);
-        unset($list->columns['label']);
-        unset($list->columns['project']);
-        unset($list->columns['modified']);
-        unset($list->columns['assigned_to']);
-        unset($list->columns['planned_start']);
-        unset($list->columns['pub_level']);
-        unset($list->columns['prio']);
-        unset($list->columns['for_milestone']);
-        unset($list->columns['estimate_complete']);
-        unset($list->columns['efforts']);
-
-        unset($list->functions['tasksDelete']);
-        unset($list->functions['tasksCompleted']);
-        unset($list->functions['taskEdit']);
-
-        #$list->functions= array();
-
-        $list->active_block_function = 'tree';
-
-
-        $list->print_automatic($project);
-    }*/
 
     ### write docu structure ###
     {
@@ -411,11 +371,6 @@ function ProjView()
 
 	#--- news -----------------------------------------------------------
     if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) {
-        /*if($news= Task::getAll(array(
-            'category'  => TCATEGORY_DOCU,
-            'label'     => 1,
-            'order_by'  => 'created DESC',
-        )))*/
         
 		if($news= $project->getTasks(array(  # NOTE: get all items with show news option (not just DOCU)
             'is_news'  => 1,
@@ -425,12 +380,8 @@ function ProjView()
             $block=new PageBlock(array(
                 'title'=>__('News'),
                 'id'=>'news',
-                #'reduced_header'=>true,
-    
             ));
             $block->render_blockStart();
-    
-            #echo $str;
     
             echo "<div class='text'>";
             
@@ -444,8 +395,6 @@ function ProjView()
                     $link_creator= ' by '. $creator->getLink();
                 }
                 echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
-                #echo wiki2html($n->description, $project);
-                
                 
                 if($project->validateEditItem($n)) {
                     echo  wiki2html($n->description, $project, $n->id, 'description');   
@@ -454,8 +403,6 @@ function ProjView()
                     echo  wiki2html($n->description, $n);
                 }
 
-
-                
                 echo "<span class=comments>";
                 if($comments= $n->getComments()) {
                      echo  $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id));

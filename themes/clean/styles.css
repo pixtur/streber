@@ -27,9 +27,6 @@ a.extern {
  padding-left:17px;
 }
 
-
-
-
 p,h1,h2,h3,h4,div {
 	margin:0px;
 	padding:0px;
@@ -439,6 +436,17 @@ div.messages a:hover {
         padding-left:15px;
         padding-right:3px;
     }
+
+/* ---- Feedback request box ---- */
+div.item_notice {
+  background-color: #fdd;
+  border: 1px solid #a00;
+  padding: 0.3em 0.5em;
+}
+div.item_notice h3 {
+  color: #800;
+}
+
 
 /* ---- edit functions ----*/
 div.edit_functions {

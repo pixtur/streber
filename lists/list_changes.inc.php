@@ -21,11 +21,6 @@ require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
 require_once(confGet('DIR_STREBER') . 'std/class_changeline.inc.php');
 
 
-
-
-
-
-
 class ListBlock_changes extends ListBlock
 {
     private  $list_changes_newer_than= '';                      # timestamp
@@ -596,15 +591,6 @@ class ListBlockCol_AllChangesItemName extends ListBlockCol
         print "<td><a href='$str_url'>$str_name</a><span class='sub who'> $str_addon</span></td>";
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 ?>

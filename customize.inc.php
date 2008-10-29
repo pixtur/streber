@@ -17,6 +17,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 ### uncomment the following line if you upgraded from mySQL 4
 #confChange('DB_USE_UTF8_ENCODING',false);
 
+#confChange('TASKDETAILS_IN_SIDEBOARD', TRUE);
 confChange('ANONYMOUS_USER', 2203);
 confChange('SQL_MODE', "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION");
 #confChange('SQL_MODE', "STRICT_ALL_TABLES");

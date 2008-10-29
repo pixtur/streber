@@ -1,5 +1,18 @@
 streber-version-history
 
+version v0.0807 [2008-08-28]
+============================
+- MAJOR: first version of feedback request working
+- refactored versions config variables (now there is only STREBER_VERSION)
+- fixed minor bug with bookmarks
+- Code formatting changed TABS into SPACES, argh!
+- fixed minor bugs in the install / upgrade form
+
+version v0.0806 [2008-08-22]
+============================
+- added support of autocomplete input fields
+- added request feedback option items
+
 version: v0.0804  [2008-08-22]
 ==========================
 major

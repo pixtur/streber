@@ -15,27 +15,18 @@
 */
 function validateEnvironment()
 {
-
     $flag_errors= false;
     if(($result= testPhpVersion()) !== true) {
-
         echo confGet('MESSAGE_OFFLINE');
         echo $result;
         exit();
     }
 
-    if(($result= testDbConnection()) !== true) {
-        echo confGet('MESSAGE_OFFLINE');
+    if(($result= testDb()) !== true) {
+        echo sprintf(confGet( 'MESSAGE_OFFLINE'), confGet('EMAIL_ADMINISTRATOR'), confGet('EMAIL_ADMINISTRATOR'));
         echo $result;
         exit();
     }
-
-    #if(($result= testInstallDirectoryExists()) != true) {
-    #    echo $result;
-    #    $flag_errors= true;
-    #}
-
-
 
     if($flag_errors){
         return false;
@@ -71,13 +62,12 @@ function testPhpVersion() {
 /**
 * is db online?
 */
-function testDbConnection() {
+function testDb() {
     require_once(dirname(__FILE__)."/../db/db.inc.php");
     $db= new DB_Mysql();
     if($db=$db->getVersion()) {
-        if($db['version'] < confGet('DB_VERSION_REQUIRED')) {
-
-            return "the version of current database (". $db['version'] .")does not match the current version of streber (". confGet('STREBER_VERSION'). ")<br><a href='install/install.php'>try upgrading</a>";
+        if($db['version'] < confGet('STREBER_VERSION')) {
+            return "the version of current database (". $db['version'] .") does not match the current version of streber (". confGet('STREBER_VERSION'). ")<br><a href='install/install.php'>try upgrading</a>";
         }
         if($db['version_streber_required'] > confGet('STREBER_VERSION')) {
             return "the version of current database (". $db['version'] .") requires at least version ". $db['version_streber_required'] ." of streber to be installed. This is version (". confGet('STREBER_VERSION'). ")";

@@ -864,7 +864,47 @@ function taskEditSubmit()
     */
     $added_comment= false;
     {
-		### only insert the comment, when comment name and description are not NULL
+        ### check for request feedback
+        if($request_feedback= get('request_feedback')) {
+            $team_members_by_nickname = array();
+
+            foreach($project->getProjectPersons() as $pp) {
+                $team_members_by_nickname[ $pp->getPerson()->nickname ] = $pp->getPerson();
+            }
+            $requested_people= array();
+
+            foreach( split('\s*,\s*', $request_feedback) as $nickname) {
+                
+                ### now check if this nickname is a team member
+                if ($nickname = trim($nickname)) {
+                    if ( isset( $team_members_by_nickname[$nickname] )) {
+                        $person = $team_members_by_nickname[$nickname];
+
+                        ### update to itemperson table...
+                        if($view = ItemPerson::getAll(array('person'=>$person->id, 'item'=>$task->id))){
+                            $view[0]->feedback_requested_by = $auth->cur_user->id;
+                            $view[0]->update();
+                        }
+                        else{
+                            $new_view = new ItemPerson(array(
+                            'item'          =>$task->id,
+                            'person'        =>$person->id,
+                            'feedback_requested_by'=> true ));
+                            $new_view->insert();
+                        }
+                        $requested_people[]= "<b>". asHtml($nickname) ."</b>";
+                    }
+                    else {
+                        new FeedbackWarning(sprintf(__("Nickname not known in this project: %s"), "<b>". asHtml($nickname) ."</b>"));
+                    }
+                } 
+            }
+            if( $requested_people ) {
+                new FeedbackMessage(sprintf(__('Requested feedback from: %s.'), join($requested_people, ", ")));
+            }
+        }
+
+		### only insert the comment, when comment name or description are valid
 		if(get('comment_name') || get('comment_description')) {
 
     		require_once(confGet('DIR_STREBER') . 'pages/comment.inc.php');
@@ -1141,13 +1181,12 @@ function taskEditSubmit()
         $task->pub_level = $pub_level;
     }
 
-    #--- check project---
+    ### check project ###
     if($task->id == 0) {
         if(!$task->project=get('task_project')) {
             $PH->abortWarning("task requires project to be set");
         }
     }
-
 
     ### get parent_task ###
     $is_ok= true;
@@ -1155,11 +1194,6 @@ function taskEditSubmit()
     if($task->parent_task) {
         $parent_task= Task::getVisibleById($task->parent_task);
     }
-    #else {
-    #    new FeedbackWarning( __("Failed to retrieve parent task"));
-    #    $is_ok= false;
-    #}
-
 
     ### validate ###
     if(!$task->name) {
@@ -1424,26 +1458,7 @@ function taskEditSubmit()
 	        new FeedbackMessage(sprintf(__('Marked %s tasks to be resolved in this version.'), count($resolved_tasks)));
 	    }
     }
-	
-	### Get and update forwarded tasks ###
-	/*if($task_ass = $task->getAssignments()){
-		foreach($task_ass as $ta){
-			$forward_state = get('task_forward_to_'.$ta->person);
-			if($forward_state){
-				$ta->forward = 1;
-			}
-			else{
-				$ta->forward = 0;
-			}
-			$forward_comment = get('task_forward_comment_to_'.$ta->person);
-			
-			if((!($forward_comment == "") || !(is_null($forward_comment))) && ($forward_state)){
-				$ta->forward_comment = $forward_comment;
-			}
-			$ta->update();
-		}
-	}*/
-	
+
 	### notify on change ###
 	$task->nowChangedByUser();
 
