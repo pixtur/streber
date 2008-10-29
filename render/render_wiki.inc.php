@@ -317,7 +317,7 @@ class FormatBlockHref extends FormatBlock
 
     public function renderAsHtml()
     {
-        return "<a href='{$this->type}{$this->url}'>$this->url</a>";
+        return "<a class=extern href='{$this->type}{$this->url}' target='blank'>{$this->type}{$this->url}</a>";
     }
 
 
