@@ -537,8 +537,8 @@ class PageHtmlStart extends PageElement {
         <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
 
         if($this->page->use_autocomplete) {
-            $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
-            $buffer.='<link rel="stylesheet" type="text/css" href="jquery.autocomplete.css' . "?v=" . confGet('STREBER_VERSION') . '" />';
+            $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
+            $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
         }
 
         $buffer.='

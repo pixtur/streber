@@ -718,35 +718,10 @@ class Block_task_quickedit extends PageBlock
                 $tab->add($comment->fields['name']->getFormElement(&$comment,__('Comment')));
                 $e= $comment->fields['description']->getFormElement(&$comment);
                 $e->rows=8;
-                
-                
-                /**
-                * initialize request feedback autocomplete field
-                *
-                */
-                {
-                    $nicknames = array();
-                    $project_persons= $project->getProjectPersons();
-                    foreach( $project_persons as $pp) {
-                        $nicknames[] = $pp->getPerson()->nickname;
-                    }
-                    if ($form->page->use_autocomplete) {
-                        $tab->add( new Form_Input(
-                                        'request_feedback',         # name
-                                        __('Need feedback from'),   # title
-                                        '',                         # value
-                                        NULL,                       # tooltip
-                                        false,                      # required
-                                        "request_feedback",         # id
-                                        "",                         # display
-                                        array(                      # input_attributes
-                                            'class' => 'autocomplete',
-                                            'autocomplete_list'=> join($nicknames, ','),
-                                        )                           
-                                ));
-                    }
-                    $tab->add($e);
-                }
+                $tab->add($e);
+
+                ### request feedback
+                $tab->add(buildRequestFeedbackInput($project));
             }
 
             ### update ###
@@ -955,6 +930,7 @@ function taskViewAsDocu()
     ### set up page and write header ####
     {
         $page= new Page();
+        $page->use_autocomplete= true;
 
         initPageForTask($page, $task, $project);
 
@@ -1186,6 +1162,18 @@ function taskViewAsDocu()
     echo(new PageContentNextCol);
 
 
+    #--- feedback notice ------------------------------------------------------------
+    {
+        if($view = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$task->id, 'feedback_requested_by'=>true))){
+            if ($requested_by= Person::getPersons( array( 'id' => $view[0]->feedback_requested_by ) )) {
+                echo "<div class=item_notice>";
+                echo "<h3>" . sprintf(__("Your feedback is requested by %s."), asHtml($requested_by[0]->nickname) ) . "</h3>";
+                echo __("Please edit or comment this item.");
+                echo "</div>";
+            }
+        } 
+    }  
+    
     #--- description ----------------------------------------------------------------
     {
 
@@ -1258,6 +1246,29 @@ function taskViewAsDocu()
     echo (new PageHtmlEnd);
 }
 
-
+/**
+* initialize request feedback autocomplete field
+*/
+function buildRequestFeedbackInput( $project ) 
+{
+    $nicknames = array();
+    $project_persons= $project->getProjectPersons();
+    foreach( $project_persons as $pp) {
+        $nicknames[] = $pp->getPerson()->nickname;
+    }
+    return new Form_Input(
+        'request_feedback',         # name
+        __('Request feedback'),   # title
+        '',                         # value
+        NULL,                       # tooltip
+        false,                      # required
+        "request_feedback",         # id
+        "",                         # display
+        array(                      # input_attributes
+            'class' => 'autocomplete',
+            'autocomplete_list'=> join($nicknames, ','),
+        )                           
+    );
+}
 
 ?>

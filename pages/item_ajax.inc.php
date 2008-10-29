@@ -136,9 +136,11 @@ function itemSaveField()
 
         $object->$field_name = $value;
         $object->update(array($field_name));
-
+        
+    
         print wiki2purehtml($object->$field_name); 
     }    
+    $item->nowChangedByUser();
 }
 
 
