@@ -20,7 +20,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('TASKDETAILS_IN_SIDEBOARD', TRUE);
 confChange('ANONYMOUS_USER', 2203);
 confChange('SQL_MODE', "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION");
-#confChange('SQL_MODE', "STRICT_ALL_TABLES");
+confChange('SQL_MODE', "STRICT_ALL_TABLES");
 
 confChange('EMAIL_ADMINISTRATOR','thomas@pixtur.de');
 confChange('SMTP','mail.pixtur.de');

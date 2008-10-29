@@ -2863,13 +2863,15 @@ function taskEditMultipleSubmit()
                         continue;
                     }
                 }
-                if($rv == -1) {
-                    $task->resolved_version= $rv;
-                    $change= true;
-                }
                 else {
-                    $task->resolved_version= 0;
-                    $change= true;
+                    if($rv == -1) {
+                        $task->resolved_version= $rv;
+                        $change= true;
+                    }
+                    else {
+                        $task->resolved_version= 0;
+                        $change= true;
+                    }
                 }
             }
 

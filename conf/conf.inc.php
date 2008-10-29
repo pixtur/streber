@@ -200,9 +200,6 @@ $g_config= array(
                     Problem: <b>",
 
 
-    'MESSAGE_WELCOME_HOME'=>
-                        "<b>Welcome</b> to %s.",
-
     'MESSAGE_WELCOME_ONEPROJECT'=>
                         "Hello <b>%s</b>. Welcome to project <b>%s</b> ",
 

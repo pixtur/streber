@@ -2553,10 +2553,10 @@ function personEditSubmit()
 		### authentication ###
 		$p_auth = get('person_auth');
 		if($p_auth){
-			$person->ldap = true;
+			$person->ldap = 1;
 		}
 		else{
-			$person->ldap = false;
+			$person->ldap = 0;
 		}
 		
         if($p2= Person::getByNickname($t_nickname)) { # another person with this nick?

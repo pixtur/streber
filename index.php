@@ -201,7 +201,7 @@ if($user) {
             $PH->show('projView',array('prj'=>$projects[0]->id));
         }
         else {
-            new FeedbackMessage(sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME')));
+            new FeedbackMessage(sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME')));
             $PH->show('home',array());
         }
         exit();

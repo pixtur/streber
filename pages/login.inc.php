@@ -75,8 +75,7 @@ function loginForm() {
 
         $page->cur_tab='login';
         $page->type="";
-        $page->title=__(sprintf('Welcome to %s', confGet('APP_NAME')),'Page title');
-        #$page->title_minor=__('please login');
+        $page->title= sprintf( __("Welcome to %s", 'Notice after login'), confGet('APP_NAME'));
 
         echo(new PageHeader);
     }
@@ -221,7 +220,7 @@ function loginFormSubmit()
 				$PH->show('projView',array('prj'=>$projects[0]->id));
 			}
 			else {
-				$PH->messages[] = sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME'));
+				$PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
 				$PH->show('home',array());
 			}
 		}
@@ -267,7 +266,7 @@ function loginFormSubmit()
 				$PH->show('projView',array('prj'=>$projects[0]->id));
 			}
 			else {
-				$PH->messages[] = sprintf(confGet('MESSAGE_WELCOME_HOME'), confGet('APP_NAME'));
+				$PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
 				$PH->show('home',array());
 			}
 		}

@@ -59,7 +59,6 @@ define('RIGHT_EDITALL',             1<<6);      # implies editing anything!
 
 define('RIGHT_PERSON_CREATE',       1<<9);      # creating persons includes right-editing
 define('RIGHT_PERSON_EDIT',         1<<9);
-define('RIGHT_PERSON_GRANT_ACCT',	1<<9);		# If you can create and edit a person, you should be able to allow them to login by default.
 define('RIGHT_PERSON_DELETE',       1<<10);
 define('RIGHT_PERSON_VIEWALL',      1<<11);
 define('RIGHT_PERSON_EDIT_RIGHTS',  1<<12);
