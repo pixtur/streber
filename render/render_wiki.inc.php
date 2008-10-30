@@ -982,6 +982,7 @@ class FormatBlockLink extends FormatBlock
         ### id|title ###
         else if(preg_match("/\A([^\|]+)\|([^|]+)$/", $str, $matches)) {
             $this->target=asCleanString($matches[1]);
+            
             $this->name  =$matches[2];
 
         }
