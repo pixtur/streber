@@ -1,4 +1,4 @@
-/**
+﻿/**
 * clean theme from streberPM
 *  (c)2005 thomas@pixtur.de
 */
@@ -2211,6 +2211,7 @@ div.wiki div.frame span {
 div.wiki img {
     margin:1px;
     border-width:0px;
+    clear:both;
 }
 div.wiki img:hover {
     margin:0px;
@@ -2319,6 +2320,10 @@ div.wiki table th {
     margin:0px;
     line-height:130%;
 }
+div.wiki div.chapter {
+    clear:both;
+}
+
 div.wiki .edit_chapter{
     padding: 0px 0px 0px 3px;
     border-width:0px;

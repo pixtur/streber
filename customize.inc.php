@@ -9,41 +9,16 @@
 */
 
 #confChange('USE_PROFILER',TRUE);
-confChange('DISPLAY_ERROR_LIST', 'DETAILS');
-confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
+#confChange('DISPLAY_ERROR_LIST', 'DETAILS');
+#confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('CHECK_IP_ADDRESS', false);
 #confChange('USE_MOD_REWRITE', true);
+#confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
 ### uncomment the following line if you upgraded from mySQL 4
-#confChange('DB_USE_UTF8_ENCODING',false);
+#confChange('DB_USE_UTF8_ENCODING',true);
 
-#confChange('TASKDETAILS_IN_SIDEBOARD', TRUE);
-confChange('ANONYMOUS_USER', 2203);
-confChange('SQL_MODE', "STRICT_ALL_TABLES,STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION");
-confChange('SQL_MODE', "STRICT_ALL_TABLES");
-
-confChange('EMAIL_ADMINISTRATOR','thomas@pixtur.de');
-confChange('SMTP','mail.pixtur.de');
-
-confChange('REGISTER_NEW_USERS', true);
-confChange('REGISTER_NEW_USERS_TO_PROJECT', 1908);
-
-#confChange('THEME_OVERWRITE',1);
-confChange('DEFAULT_LANGUAGE','en');
-
-
-confChange('PROJECT_DEFAULT_LABELS', 'Bug,Feature,Enhancement,Refactor,Idea,Research,Organize,Wiki,Docu'); #
-confChange('PROJECT_DEFAULT_SETTINGS', 0);  # hide all options
-
-
-
-#confChange('LINK_STAR_LIGHT', true);
-
-#function postInitCustomize() 
-#{
-#    global $PH;
-#    $PH->hash['projView']->req= 'pages/custom_projView.inc.php';
-#    $PH->hash['projViewFiles']->req= 'pages/custom_projViewFiles.inc.php';
-#}
+#confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
+#confChange('SMTP','mail.yourdomain.de');
 
 ?>

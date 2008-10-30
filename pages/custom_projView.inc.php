@@ -307,17 +307,6 @@ function ProjView()
     */
     measure_start('team');
 
-    #--- list team -----------------------------------------------------------
-    {
-
-        $list= new ListBlock_projectTeam();
-        $list->title= __('Team members');
-        $list->show_icons=true;
-		$list->active_block_function = 'list';
-		$list->print_automatic($project);
-    }
-
-
 
     ### write list of folders ###
     /*{
@@ -360,16 +349,6 @@ function ProjView()
         $list->print_automatic($project);
     }*/
 
-    ### write docu structure ###
-    {
-        require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
-        if(Task::getDocuTasks($project->id,0)) {
-            $list=new Block_docuNavigation(array(
-                'project_id' => $project->id
-            ));
-            $list->print_all();
-        }
-    }
 
 
 
