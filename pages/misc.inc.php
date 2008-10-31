@@ -420,13 +420,16 @@ function triggerSendNotifications()
     $n->sendNotifications();
 
     global $PH;
-    foreach($PH->messages as $m) {
-        if(is_object($m)) {
-            echo $m->render();
-        }
-        else {
-            echo "<p>$m</p>";
-        }
+    
+    $number = count($PH->messages);
+    if($number == 1) {
+        echo __("One notification sent");
+    }
+    elseif($number > 1) {
+        echo sprintf(__("%s notifications sent"), $count);
+    }
+    else {
+        echo __("No notifications sent");
     }
 }
 
