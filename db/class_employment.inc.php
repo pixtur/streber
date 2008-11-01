@@ -74,7 +74,7 @@ class Employment extends DbProjectItem {
     */
     static function getById($id)
     {
-        $e= new Employment($id);
+        $e= new Employment(intval($id));
         if($e->id) {
             return $e;
         }
@@ -88,7 +88,7 @@ class Employment extends DbProjectItem {
     {
         global $auth;
         if($auth->cur_user->user_rights & RIGHT_COMPANY_EDIT) {
-            return Employment::getById($id);
+            return Employment::getById(intval($id));
         }
         return NULL;
     }

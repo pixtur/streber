@@ -75,7 +75,7 @@ class TaskPerson extends DbProjectItem {
     */
     static function getById($id)
     {
-        $tp= new TaskPerson($id);
+        $tp= new TaskPerson(intval($id));
         if($tp->id) {
             return $tp;
         }
@@ -92,7 +92,7 @@ class TaskPerson extends DbProjectItem {
     */
     static function getVisibleById($id)
     {
-        if($tp= TaskPerson::getById($id)) {
+        if($tp= TaskPerson::getById(intval($id))) {
             if($p= Project::getById($tp->project)) {
                 if($p->validateViewItem($tp)) {
                     return $tp;
@@ -107,7 +107,7 @@ class TaskPerson extends DbProjectItem {
     */
     static function getEditableById($id)
     {
-        if($tp= TaskPerson::getById($id)) {
+        if($tp= TaskPerson::getById(intval($id))) {
             if($p= Project::getById($tp->project)) {
                 if($p->validateEditItem($tp)) {
                     return $tp;

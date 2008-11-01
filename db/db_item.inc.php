@@ -283,6 +283,7 @@ abstract class DbItem {
 
     static function getItemType($id)
     {
+        $id = intval($id);
         $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT  type FROM {$prefix}item i
@@ -298,6 +299,7 @@ abstract class DbItem {
 
     static function getItemState($id)
     {
+        $id= intval($id);
         $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT state FROM {$prefix}item i
@@ -707,7 +709,7 @@ class DbProjectItem extends DbItem {
     */
     static function getById($id)
     {
-        $i= new DbProjectItem($id);
+        $i= new DbProjectItem(intval($id));
         if($i->id) {
             return $i;
         }
@@ -724,7 +726,7 @@ class DbProjectItem extends DbItem {
     */
     static function getVisibleById($id)
     {
-        if($i= DbProjectItem::getById($id)) {
+        if($i= DbProjectItem::getById(intval($id))) {
             if($i->type == ITEM_PROJECT) {
 
                 /**
@@ -793,7 +795,7 @@ class DbProjectItem extends DbItem {
     static function getEditableById($id)
     {
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
-        if($i= DbProjectItem::getById($id)) {
+        if($i= DbProjectItem::getById(intval($id))) {
             if($i->isEditable()) {
                 return $i;
             }
@@ -1453,97 +1455,6 @@ class DbProjectItem extends DbItem {
 
 
 
-/*
-    static function &getChanges($args=array())
-    {
-        global $auth;
-        $prefix = confGet('DB_TABLE_PREFIX');
-
-        ### default params ###
-        $order_by           = "modified DESC";
-        $visible_only       = true;       # use project rights settings
-        $alive_only         = true;       # hide deleted
-        $date_min           = NULL;
-        $date_max           = NULL;
-        $today              = NULL;
-
-        ### filter params ###
-        if($args) {
-            foreach($args as $key=>$value) {
-                if(!isset($$key) && !is_null($$key) && !$$key==="") {
-                    trigger_error("unknown parameter",E_USER_NOTICE);
-                }
-                else {
-                    $$key = $value;
-                }
-            }
-        }
-
-        if($auth->cur_user->user_rights & RIGHT_EDITALL) {
-            $visible_only = false;
-        }
-
-        $str_state = $alive_only
-            ? 'AND i.state = '. ITEM_STATE_OK
-            : '';
-
-        $str_today = $today
-            ? "AND i.modified >= '" . asCleanString($today) . "'"
-            : '';
-
-        $str_date_min = $date_min
-            ? "AND i.modified >= '" . asCleanString($date_min) . "'"
-            : '';
-
-        $str_date_max = $date_max
-            ? "AND i.modified <= '" . asCleanString($date_max) . "'"
-            : '';
-
-
-        ### only visibile for current user ###
-        if($visible_only) {
-            $s_query =
-            "SELECT i.* from {$prefix}item i, {$prefix}projectperson upp
-            WHERE
-            upp.person = {$auth->cur_user->id}
-            AND upp.project = i.project
-            $str_state
-            $str_today
-            $str_date_min
-            $str_date_max
-            AND ( i.pub_level >= upp.level_view
-                  OR
-                  i.created_by = {$auth->cur_user->id}
-                )
-            " . getOrderByString($order_by);
-        }
-        ### all including deleted ###
-        else {
-            $s_query =
-            "SELECT i.*  from {$prefix}item i
-            WHERE 1
-            $str_state
-            $str_today
-            $str_date_min
-            $str_date_max
-            " . getOrderByString($order_by);
-        }
-
-        $dbh = new DB_Mysql;
-
-        $sth = $dbh->prepare($s_query);
-        $sth->execute("",1);
-        $tmp = $sth->fetchall_assoc();
-
-        $items = array();
-        foreach($tmp as $n) {
-            $item = new DbProjectItem($n);
-            $items[] = $item;
-        }
-        return $items;
-    }
-
-    */
 
     /**
     * returns visible object of correct type by an itemId
@@ -1560,6 +1471,7 @@ class DbProjectItem extends DbItem {
     */
     public static function getObjectById($id)
     {
+        $id= intval($id);
         if(!$item = DbProjectItem::getById($id)) {
             return NULL;
         }

@@ -147,7 +147,7 @@ class Company extends DbProjectItem
     */
     static function getById($id)
     {
-        $c= new Company($id);
+        $c= new Company(intval($id));
         if($c->id) {
             return $c;
         }
@@ -166,7 +166,7 @@ class Company extends DbProjectItem
 
         $companies= Company::getAll(array(
 				    'order_str'=>NULL,
-					'has_id'=>$id));
+					'has_id'=>intval($id)));
 
         if(count($companies) == 1) {
             if($companies[0]->id) {
@@ -185,7 +185,7 @@ class Company extends DbProjectItem
     	if(
     		$auth->cur_user->user_rights & RIGHT_COMPANY_EDIT
     	) {
-            return Company::getById($id);
+            return Company::getById(intval($id));
         }
         return NULL;
     }
@@ -461,10 +461,6 @@ class Company extends DbProjectItem
         $status_min= intval($f_status_min);
         $status_max= intval($f_status_max);
 
-
-
-
-
        #"SELECT * FROM {$prefix}project WHERE company = \"$this->id\" AND state=1 ORDER BY name"
 
         ### all projects ###
@@ -584,7 +580,7 @@ class Company extends DbProjectItem
         $num=0;
         foreach($ps as $p) {
             $buffer.= $sep.$p->getLink();
-            if(++$num>$show_max_number) {
+            if(++$num > $show_max_number) {
                 break;
             }
             $sep=", ";

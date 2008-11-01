@@ -103,7 +103,7 @@ class Comment extends DbProjectItem
     */
     static function getById($id)
     {
-        $c= new Comment($id);
+        $c= new Comment(intval($id));
         if($c->id) {
             return $c;
         }
@@ -120,7 +120,7 @@ class Comment extends DbProjectItem
     */
     static function getVisibleById($id)
     {
-        if($c= Comment::getById($id)) {
+        if($c= Comment::getById(intval($id))) {
             if($c->id) {
                 if($p= Project::getById($c->project)) {
                     if($p->validateViewItem($c)) {
@@ -137,7 +137,7 @@ class Comment extends DbProjectItem
     */
     static function getEditableById($id)
     {
-        if($c= Comment::getById($id)) {
+        if($c= Comment::getById(intval($id))) {
             if($p= Project::getById($c->project)) {
                 if($p->validateEditItem($c)) {
                     return $c;

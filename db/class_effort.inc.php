@@ -101,7 +101,7 @@ class Effort extends DbProjectItem
     */
     static function getById($id)
     {
-        $e= new Effort($id);
+        $e= new Effort(intval($id));
         if($e->id) {
             return $e;
         }
@@ -118,7 +118,7 @@ class Effort extends DbProjectItem
     */
     static function getVisibleById($id)
     {
-        if($e= Effort::getById($id)) {
+        if($e= Effort::getById(intval($id))) {
             if($p= Project::getById($e->project)) {
                 if($p->validateViewItem($e)) {
                     return $e;
@@ -133,7 +133,7 @@ class Effort extends DbProjectItem
     */
     static function getEditableById($id)
     {
-        if($e= Effort::getById($id)) {
+        if($e= Effort::getById(intval($id))) {
             if($p= Project::getById($e->project)) {
                 if($p->validateEditItem($e)) {
                     return $e;

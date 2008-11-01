@@ -140,6 +140,7 @@ class Project extends DbProjectItem
     */
     static function getById($id, $use_cache=false)
     {
+        $id = intval($id);
         global $g_cache_projects;
         if($use_cache && isset($g_cache_projects[$id])) {
             $p= $g_cache_projects[$id];
@@ -164,6 +165,8 @@ class Project extends DbProjectItem
     */
     static function getVisibleById($id, $for_person=NULL, $use_cache=true)
     {
+        $id = intval($id);
+        
         if(!$for_person) {
             global $auth;
             $for_person= $auth->cur_user;
@@ -192,6 +195,7 @@ class Project extends DbProjectItem
     */
     static function getEditableById($id)
     {
+        $id = intval($id);
         global $auth;
     	if(
     		$auth->cur_user->user_rights & RIGHT_PROJECT_EDIT
@@ -644,6 +648,7 @@ class Project extends DbProjectItem
     *   supported until mySQL v5.x
     */
     function getVisiblePersonById($id) {
+        $id = intval($id);
         $p=Person::getById($id);
         if($p->id && $this->isPersonVisibleTeamMember($p->id)) {
             return $p;
@@ -688,7 +693,7 @@ class Project extends DbProjectItem
             : "";
 		
 		$s_person = $person_id
-		          ? "AND person.id = " . $person_id
+		          ? "AND person.id = " . intval($person_id)
 				  : "";
 
         ### all users ###
@@ -976,12 +981,12 @@ class Project extends DbProjectItem
 		
 		if(!is_null($person)){
 			$AND_person_all_part1 = " {$prefix}projectperson upp, ";
-			$AND_person_all_part2 = "AND upp.person = '" . $person . "' 
+			$AND_person_all_part2 = "AND upp.person = '" . intval($person) . "' 
 			                         AND upp.state = 1
                                      AND upp.project = p.id";
 			$AND_person_visible_part1 = " {$prefix}projectperson upp2, ";
 			$AND_person_visible_part2 = "AND upp.project = upp2.project
-					                     AND upp2.person = '" . $person . "'" ;
+					                     AND upp2.person = '" . intval($person) . "'" ;
 		}
 		else{
 			$AND_person_all_part1 = "";
@@ -991,7 +996,7 @@ class Project extends DbProjectItem
 		}
 
         $str_limit= $limit
-                ? " LIMIT $limit"
+                ? " LIMIT ". intval($limit). " "
                 : "";
 
 		

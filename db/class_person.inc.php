@@ -384,7 +384,7 @@ class Person extends DbProjectItem {
     */
     static function getById($id, $use_cache= true)
     {
-
+        $id= intval($id);
         global $g_cache_persons;
         if($use_cache && isset($g_cache_persons[$id])) {
             $p= $g_cache_persons[$id];
@@ -410,6 +410,8 @@ class Person extends DbProjectItem {
             trigger_error('Person::getVisibleById() requires int-paramter',E_USER_WARNING);
             return NULL;
         }
+
+        $id = intval($id);
         global $g_cache_persons;
         if($use_cache && isset($g_cache_persons[$id])) {
             $p= $g_cache_persons[$id];
@@ -443,6 +445,7 @@ class Person extends DbProjectItem {
             trigger_error('Person::getVisibleById() requires int-paramter',E_USER_WARNING);
             return NULL;
         }
+        $id = intval($id);
         global $auth;
         if(
             (
@@ -979,7 +982,7 @@ class Person extends DbProjectItem {
     {
         $dbh = new DB_Mysql;
         $prefix= confGet('DB_TABLE_PREFIX');
-
+        $task_id = intval($task_id);
         $sth= $dbh->prepare(
 
         "

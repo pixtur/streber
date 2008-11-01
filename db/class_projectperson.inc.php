@@ -105,7 +105,7 @@ class ProjectPerson extends DbProjectItem {
     */
     static function getById($id)
     {
-        $pp= new ProjectPerson($id);
+        $pp= new ProjectPerson(intval($id));
         if($pp->id) {
             return $pp;
         }

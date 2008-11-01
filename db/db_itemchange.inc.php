@@ -253,29 +253,29 @@ class ItemChange extends DbItem
 
 
         $str_project= $project
-            ? "AND c.project= $project"
+            ? "AND c.project= ". intval($project) 
             : '';
 
 
         $str_item= $item
-            ? "AND c.item=".$item
+            ? "AND c.item=" . intval($item)
             : '';
 
 
         $str_date_min= $date_min
-            ? "AND c.modified >= '$date_min'"
+            ? "AND c.modified >= '" . asCleanString($date_min) . "'"
             : '';
 
         $str_date_max= $date_max
-            ? "AND c.modified <= '$date_max'"
+            ? "AND c.modified <= '" . asCleanString($date_max) . "'"
             : '';
 
         $str_field= $field
-            ? "AND c.field =`$field`"
+            ? "AND c.field =`" . asCleanString($field) . "`"
             : '';
 
         $str_person= $person
-            ? "AND c.modified_by =$person"
+            ? "AND c.modified_by = " . intval($person)
             : '';
 
 

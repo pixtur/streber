@@ -137,7 +137,7 @@ class ItemPerson extends DbItem
     */
     static function getById($id)
     {
-        $i = new ItemPerson($id);
+        $i = new ItemPerson( intval($id));
         if($i->id) {
             return $i;
         }

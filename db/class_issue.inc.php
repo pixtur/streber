@@ -95,7 +95,7 @@ class Issue extends DbProjectItem {
     */
     static function getById($id)
     {
-        $i= new Issue($id);
+        $i= new Issue(intval($id));
         if($i->id) {
             return $i;
         }
@@ -112,7 +112,7 @@ class Issue extends DbProjectItem {
     */
     static function getVisibleById($id)
     {
-        if($i= Issue::getById($id)) {
+        if($i= Issue::getById(intval($id))) {
             if($p= Project::getById($i->project)) {
                 if($p->validateViewItem($i)) {
                     return $i;
@@ -130,7 +130,7 @@ class Issue extends DbProjectItem {
     */
     static function getEditableById($id)
     {
-        if($i= Issue::getById($id)) {
+        if($i= Issue::getById(intval($id))) {
             if($p= Project::getById($i->project)) {
                 if($p->validateEditItem($i)) {
                     return $i;
@@ -243,6 +243,9 @@ class Issue extends DbProjectItem {
         if(!$person_id) {
             global $auth;
             $person_id= $auth->cur_user->id;
+        }
+        else {
+            $person_id= intval($person_id);
         }
 
 		$prefix= confGet('DB_TABLE_PREFIX');

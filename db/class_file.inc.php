@@ -140,7 +140,7 @@ class File extends DbProjectItem
     */
     static function getById($id)
     {
-        $c= new File($id);
+        $c= new File(intval($id));
         if($c->id) {
             return $c;
         }
@@ -150,7 +150,7 @@ class File extends DbProjectItem
 
     static function getVisibleById($id)
     {
-        if($c= File::getById($id)) {
+        if($c= File::getById(intval($id))) {
             if($c->id) {
                 if($p= Project::getById($c->project)) {
                     if($p->validateViewItem($c,false)) {
@@ -168,7 +168,7 @@ class File extends DbProjectItem
     */
     static function getEditableById($id)
     {
-        if($c= File::getById($id)) {
+        if($c= File::getById(intval($id))) {
             if($p= Project::getById($c->project)) {
                 if($p->validateEditItem($c,false)) {
                     return $c;

@@ -252,7 +252,7 @@ foreach($filters_str as $fs=>$value) {
     static function getById($id)
     {
         if($id) {
-            $t= new Task($id);
+            $t= new Task(intval($id));
             if($t->type != ITEM_TASK) {
                 return NULL;
             }
@@ -862,7 +862,11 @@ foreach($filters_str as $fs=>$value) {
             $str_category='';
         }
         if(!is_null($category_in)) {
-            $str_category_in='AND t.category IN('. join(",",$category_in) .')';
+            $clean_array= array();
+            foreach($category_in as $c) {
+                $clean_array[]= intval($c);
+            }
+            $str_category_in='AND t.category IN('. join(",",$clean_array) .')';
         }
         else {
             $str_category_in='';
@@ -980,7 +984,7 @@ foreach($filters_str as $fs=>$value) {
                     AND t.status <= ". intval($status_max)."
 
                     AND i.id = tp.task
-                           AND tp.person = $assigned_to_person
+                           AND tp.person = ". intval($assigned_to_person) ."
                            AND itp.id = tp.id
                            AND itp.state = 1
                            ".
@@ -1066,7 +1070,7 @@ foreach($filters_str as $fs=>$value) {
                 AND t.status <= ".intval($status_max)."
                 $str_match
                 AND i.id = tp.task
-                AND tp.person = $assigned_to_person
+                AND tp.person = " .intval($assigned_to_person) . "
                        AND tp.id = itp.id
                        AND itp.state = 1
                 " . getOrderByString($order_by);
@@ -1318,291 +1322,6 @@ foreach($filters_str as $fs=>$value) {
         }
     }
 
-    /**
-    *   Tino Beirau
-    *
-    *   return tasks of search-query
-    *
-    * @params
-    *   id
-    *   show_folders=true,
-    *   order_by=NULL,
-    *   status_min=2,
-    *   status_max=4,
-    *   visible_only=true,
-    *   alive_only=true,
-    *   parent_task=NULL)  # if NULL parent-task is ignored
-    */
-    static function &getTaskById( $args=NULL)
-    {
-        global $auth;
-        $prefix = confGet('DB_TABLE_PREFIX');
-
-        ### default params ###
-        $id             = NULL;
-        $project        = NULL;
-        $show_folders   = true;
-        $order_by       = "is_folder DESC, parent_task, prio ASC,project,name";
-        $status_min     = STATUS_NEW;
-        $status_max     = STATUS_BLOCKED;
-        $visible_only   = true;       # use project rights settings
-        $alive_only     = true;       # ignore deleted
-        $parent_task    = NULL;       #
-        $sort_hierarchical= false;
-        $use_collapsed  = false;      # by default ignore collapsed folders
-        $issues_only    = false;
-        $folders_only   = false;
-        $level          = 0;         # hierarchical depth in trees
-        $assigned_to_person=0;      # skip by default
-        $search         = NULL;
-        $name           = NULL;
-        $is_milestone   = 0;
-        $for_milestone  = NULL;
-
-        ### filter params ###
-        if($args) {
-            foreach($args as $key=>$value) {
-                if(!isset($$key) && !is_null($$key) && !$$key==="") {
-                    trigger_error("unknown parameter",E_USER_NOTICE);
-                }
-                else {
-                    $$key= $value;
-                }
-            }
-        }
-
-        if($sort_hierarchical && is_null($parent_task)) {
-            $parent_task=0;
-        }
-        $str_project= $project
-            ? 'AND upp.project='.intval($project)
-            : '';
-        $str_project2= $project
-            ? 'AND i.project='.intval($project)
-            : '';
-
-        $str_is_alive= $alive_only
-            ? 'AND i.state='. ITEM_STATE_OK
-            : '';
-
-        $str_is_issue= $issues_only
-            ? 'AND t.issue_report!=0'
-            : '';
-
-        $str_is_folder= $show_folders
-            ? ''
-            : 'AND t.is_folder=0';
-
-
-        $str_id = "AND i.id='" . intval($id) ."'";
-
-
-        if(!is_null($is_milestone)) {
-            $str_is_milestone= $is_milestone
-                ? 'AND t.is_milestone=1'
-                : 'AND t.is_milestone=0';
-        }
-        else {
-            $str_is_milestone='';
-        }
-
-        $str_has_name= $name
-            ? "AND (t.name='".asSecureString($name)."' or t.short='".asSecureString($name)."')"
-            : "";
-
-        if(!is_null($for_milestone)) {
-            $str_for_milestone= $for_milestone
-                ? 'AND t.for_milestone='.intval($for_milestone)
-                : '';
-        }
-        else {
-            $str_for_milestone= '';
-        }
-
-
-        if($folders_only) {
-            $str_is_folder= 'AND t.is_folder=1';
-        }
-
-        $str_parent_task= !is_null($parent_task)
-            ? 'AND t.parent_task='.intval($parent_task)
-            : '';
-
-        $str_match= $search
-        ? "AND MATCH (t.name,t.short,t.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
-        : '';
-
-        if($visible_only) {
-            if($assigned_to_person) {
-                $str_query=
-                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp, {$prefix}projectperson upp, {$prefix}item itp
-                WHERE
-                        upp.person = {$auth->cur_user->id}
-                    $str_project
-                    AND i.type = '".ITEM_TASK."'
-                    AND i.project=upp.project
-                    $str_id
-
-                    $str_is_alive
-                    $str_project2
-
-                    $str_is_issue
-                    AND ( i.pub_level >= upp.level_view
-                          OR
-                          i.created_by = {$auth->cur_user->id}
-                    )
-
-                    AND t.id = i.id
-
-                    $str_is_folder
-                    $str_is_issue
-                    $str_parent_task
-                    $str_has_name
-                    $str_is_milestone
-                    $str_for_milestone
-                    AND t.status >= ". intval($status_min)."
-                    AND t.status <= ". intval($status_max)."
-
-                    AND i.id = tp.task
-                           AND tp.person = $assigned_to_person
-                           AND itp.id = tp.id
-                           AND itp.state = 1
-                                   AND (itp.pub_level >= upp.level_view
-                                       OR
-                                       itp.created_by = {$auth->cur_user->id}
-                                   )
-                    $str_match
-
-                " . getOrderByString($order_by);
-            }
-            else {
-                $str_query=
-                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}projectperson upp
-                WHERE
-
-                    upp.person = {$auth->cur_user->id}
-                    $str_project
-                    AND i.type = '".ITEM_TASK."'
-                    AND i.project = upp.project
-                    $str_id
-                    $str_is_alive
-                    $str_project2
-                    $str_is_issue
-                    $str_is_milestone
-                    $str_for_milestone
-                    AND ( i.pub_level >= upp.level_view
-                          OR
-                          i.created_by = {$auth->cur_user->id}
-                    )
-                    AND t.id = i.id
-                    $str_is_folder
-                    $str_is_issue
-                    $str_parent_task
-                    $str_has_name
-
-                    AND t.status >= ".intval($status_min)."
-                    AND t.status <= ".intval($status_max)."
-                    $str_match
-
-                " . getOrderByString($order_by);
-
-            }
-        }
-        ### show all ###
-        else {
-            if($assigned_to_person) {
-                $str_query=
-                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp ,{$prefix}item itp
-                WHERE
-                    i.type = '".ITEM_TASK."'
-                $str_id
-
-                $str_project2
-                $str_is_alive
-
-                #AND t.id = i.id
-                $str_id
-                $str_is_folder
-                $str_is_issue
-                $str_parent_task
-                $str_has_name
-                $str_is_milestone
-                $str_for_milestone
-
-                AND t.status >= ".intval($status_min)."
-                AND t.status <= ".intval($status_max)."
-                $str_match
-                AND i.id = tp.task
-                AND tp.person = $assigned_to_person
-                       AND tp.id = itp.id
-                       AND itp.state = 1
-                " . getOrderByString($order_by);
-            }
-            else {
-                $str_query=
-                "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t
-                WHERE
-                    i.type = '".ITEM_TASK."'
-                $str_id
-
-                $str_project2
-                $str_is_alive
-
-                #AND t.id = i.id
-                $str_id
-                $str_is_folder
-                $str_is_issue
-                $str_is_milestone
-                $str_for_milestone
-                $str_parent_task
-                $str_has_name
-                AND t.status >= ".intval($status_min)."
-                AND t.status <= ".intval($status_max)."
-                $str_match
-
-                " . getOrderByString($order_by);
-            }
-        }
-
-        $dbh = new DB_Mysql;
-        $sth= $dbh->prepare($str_query);
-
-        $sth->execute("",1);
-        $tmp=$sth->fetchall_assoc();
-        $tasks=array();
-        foreach($tmp as $t) {
-            $task=new Task($t);
-            $task->level= $level;
-            $tasks[]=$task;
-
-            ### hierarchical / recursive sorting ###
-            if(  $sort_hierarchical
-              && $task->category == TCATEGORY_FOLDER
-              && (!$use_collapsed || !$task->view_collapsed)
-            ) {
-                if($sub_tasks=Task::getAll(array(
-                    'sort_hierarchical' =>true,
-
-                    'use_collapsed'=> $use_collapsed,
-                    'parent_task'   => $task->id,
-                    'order_by'      => $order_by,
-                    'visible_only'  => $visible_only,
-                    'alive_only'    => $alive_only,
-                    'issues_only'   => $issues_only,
-                    'status_min'    => $status_min,
-                    'status_max'    => $status_max,
-                    'level'         => $level+1,
-                    'folders_only'  => $folders_only,
-                    'project'       => $project,
-                ))) {
-                    foreach($sub_tasks as &$st) {
-                        $tasks[]= $st;
-                    }
-                }
-            }
-        }
-        return $tasks;
-    }
 
 
     /**
