@@ -711,10 +711,15 @@ function fileDownloadAsImage()
     }
 
     if($max_size = get('max_size')) {
+        if($max_size > 200) {
+            $file->nowViewedByUser();
+        }
         $file->viewAsImage($max_size);
+            
     }
     else {
         $file->view();
+        $file->nowViewedByUser();
     }
 }
 

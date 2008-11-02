@@ -767,40 +767,36 @@ class Project extends DbProjectItem
         return $ppersons;
 	}
 	
-	
     /**
-    * get projectAssigments (not persons but their assigments to the current project)
-    *
-    * @see: getPersons()
-
-    function &getProjectPersons($order_by=NULL, $alive_only=true, $visible_only= true)
+    * optimized query function which only returns the names of visible project members
+    * 
+    * returns list as assoc. array like: ['nickname'=>'name']
+    */
+    function getTeamMemberNames()
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
-
-        $s_alive_only= $alive_only
-            ? "AND i.state=1"
-            : "";
-
+		$prefix= confGet('DB_TABLE_PREFIX');
+        require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
+        $dbh = new DB_Mysql;
 
         ### all users ###
         if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
-            $s_query=
-            "SELECT i.*, pp.* from {$prefix}item i, {$prefix}projectperson pp, {$prefix}person person
+            $str_query=
+            "SELECT person.name, person.nickname from {$prefix}item i, {$prefix}projectperson pp, {$prefix}person person
             WHERE
-
                     i.type = '".ITEM_PROJECTPERSON."'
                 AND i.project = $this->id
-                $s_alive_only
+                AND i.state=1
                 AND pp.id = i.id
                 AND person.id = pp.person
-                ". getOrderByString($order_by, 'person.name')
+				ORDER BY person.name
+			"
                 ;
         }
         ### only visibile for current user ###
-        else if($visible_only) {
-            $s_query=
-            "SELECT i.*, pp.* from {$prefix}item i, {$prefix}projectperson pp, {$prefix}projectperson upp, {$prefix}person person
+        else{
+            $str_query=
+            "SELECT person.name, person.nickname from {$prefix}item i, {$prefix}projectperson pp, {$prefix}projectperson upp, {$prefix}person person
             WHERE
                     upp.person = {$auth->cur_user->id}
                 AND upp.project = $this->id
@@ -808,7 +804,7 @@ class Project extends DbProjectItem
 
                 AND i.type = '".ITEM_PROJECTPERSON."'
                 AND i.project = $this->id
-                $s_alive_only
+                AND i.state=1
                 AND pp.id = i.id
                 AND (
                 	  i.pub_level >= upp.level_view
@@ -818,41 +814,23 @@ class Project extends DbProjectItem
                       pp.person =  {$auth->cur_user->id}
                 )
                 AND person.id = pp.person
-                ". getOrderByString($order_by, 'person.name')
+				ORDER BY person.name
+			"
                 ;
         }
 
-        ### all including deleted ###
-        else {
-            $s_query=
-            "SELECT i.*, pp.* from {$prefix}item i, {$prefix}projectperson pp, {$prefix}person person
-            WHERE
-                i.type = '".ITEM_PROJECTPERSON."'
-                AND i.project = $this->id
-                $s_alive_only
-                AND i.id = pp.id
-                AND person.id = pp.person
-            ";
-        }
-        require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
-
-        $dbh = new DB_Mysql;
-
-
-        $sth= $dbh->prepare($s_query);
+        $sth= $dbh->prepare($str_query);
     	$sth->execute("",1);
-
     	$tmp=$sth->fetchall_assoc();
-    	$ppersons=array();
-        foreach($tmp as $n) {
-            $pperson=new ProjectPerson($n);
-            $ppersons[]= $pperson;
+        
+        $names= array();
+        foreach($tmp as $t) {
+            $names[$t['nickname']] = $t['name'];
         }
+        return $names;
+    }
 
-        return $ppersons;
-    }*/
-
-
+	
     /**
     * get persons (team)
     */

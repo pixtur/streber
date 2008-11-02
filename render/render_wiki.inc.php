@@ -1076,8 +1076,6 @@ class FormatBlockLink extends FormatBlock
                             }
                         }
                         else {
-                            print "width=" . $dimensions['new_width'];
-                            print "height=" . $dimensions['new_height'];
                             $this->html= "<a href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>"
                                        . "<img class='$align'"
                                        .     " title='" . asHtml($file->name) ."'"

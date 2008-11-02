@@ -456,17 +456,34 @@ function commentEditSubmit(){
 
     ### change task update modification date ###
     if(isset($task)) {
+        $parent_task = $task;
+    }
+    ### find parent task of comment
+    elseif(isset($comment->comment)) {
+        $parent_comment_id = $comment->comment;
+        while($parent_comment_id) {
+            if ($next_parent = Comment::getById( $parent_comment_id)) {
+                $parent_comment_id = $next_parent->comment;
+                if($parent_comment_id == 0) {
+                    $parent_task= Task::getById($next_parent->task);
+                }
+            }
+            else {
+                break;
+            }
+        }        
+    }
 
+    if($parent_task) {
         ### Check if now longer new ###
-        if($task->status == STATUS_NEW) {
+        if($parent_task->status == STATUS_NEW) {
             global $auth;
-            if($task->created < $auth->cur_user->last_login) {
-                $task->status = STATUS_OPEN;
+            if($parent_task->created < $auth->cur_user->last_login) {
+                $parent_task->status = STATUS_OPEN;
             }
         }
-        $task->update(array('modified','status'));
-
-
+        $parent_task->update(array('modified','status'));
+        $parent_task->nowChangedByUser();
     }
 
     ### display taskView ####

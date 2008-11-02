@@ -1173,7 +1173,8 @@ function taskViewAsDocu()
             }
         } 
     }  
-    
+
+
     #--- description ----------------------------------------------------------------
     {
 
@@ -1251,11 +1252,11 @@ function taskViewAsDocu()
 */
 function buildRequestFeedbackInput( $project ) 
 {
-    $nicknames = array();
-    $project_persons= $project->getProjectPersons();
-    foreach( $project_persons as $pp) {
-        $nicknames[] = $pp->getPerson()->nickname;
+    $names = $project->getTeamMemberNames();
+    foreach( $names as $nickname => $name) {
+        $nicknames[] = asHtml($nickname) ;
     }
+    
     return new Form_Input(
         'request_feedback',         # name
         __('Request feedback'),   # title

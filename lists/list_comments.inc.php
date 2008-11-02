@@ -243,11 +243,11 @@ class ListBlockCol_CommentText extends ListBlockCol
             ### editable? ###
             $editable= false;
     		if($obj->created_by == $auth->cur_user->id) {
-    		    if($pp= $obj->getProjectPerson()) {
-    			    if($pp->level_edit < $obj->pub_level) {
+    		    #if($pp= $obj->getProjectPerson()) {
+    			#    if($pp->level_edit < $obj->pub_level) {
     				    $editable= true;
-    				}
-    			}
+    			#	}
+    			#}
     		}
             if($editable) {
     		    $diz= wiki2html($obj->description, $project, $obj->id, 'description');

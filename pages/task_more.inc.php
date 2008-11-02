@@ -211,17 +211,14 @@ function TaskNew()
     }
 
 
-    $name=stripslashes(stripslashes(get('new_name')));  # @@@ hack to get rid of slashed strings
+    $name= html_entity_decode(get('new_name'));  # @@@ hack to get rid of slashed strings
     $estimated='00:00:00';
-
-
 
     ### for milestone ###
     $for_milestone_id= 0;
     if( $milestone= Task::getVisibleById(get('for_milestone'))) {
         $for_milestone_id= $milestone->id;
     }
-
 
     ### if parent-task is milestone for some reason, avoid parenting ###
     if($parent_task && ($parent_task->category == TCATEGORY_MILESTONE || $parent_task->category == TCATEGORY_VERSION)) {
