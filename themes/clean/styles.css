@@ -2210,11 +2210,12 @@ div.wiki div.frame span {
 
 div.wiki img {
     margin:1px;
-    border-width:0px;
+    border:1px solid #fff;
     clear:both;
+    background-color: #f8f8f8;
 }
 div.wiki img:hover {
-    margin:0px;
+    margin:1px;
     border-width:1px;
 }
 

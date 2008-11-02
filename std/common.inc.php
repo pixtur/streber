@@ -601,7 +601,7 @@ function getOrderByString($f_order_str=NULL, $default='')
 /**
 * to prevent code injection all user-entered text should be printed asHtml()
 */
-function asHtml(&$str) {
+function asHtml($str) {
 
     #$str= str_replace("\\\"", '"',$str);
 

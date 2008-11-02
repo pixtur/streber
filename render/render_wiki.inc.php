@@ -949,10 +949,9 @@ class FormatBlockLongMinus extends FormatBlock
 }
 
 
-
-
-
-
+/**
+* all tags inside double square brackets like [[...]]
+*/
 class FormatBlockLink extends FormatBlock
 {
 
@@ -962,7 +961,6 @@ class FormatBlockLink extends FormatBlock
     public $target;
     public $options;
     private $html;  # use custom html-code instead of link
-
 
     public function __construct($str)
     {
@@ -1007,24 +1005,18 @@ class FormatBlockLink extends FormatBlock
             else {
                 $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->target) . "</a>";
             }
-                    
-
-            
-
         }
+        /**
+        * type:???
+        */
         else if(preg_match("/\A([\w]+)\:(\d+)/",$this->target, $matches)) {
 
             $type       = asKey($matches[1]);
-
             $target     = $matches[2];
             $target     = asCleanString($matches[2]);
 
-
             switch($type) {
 
-
-                
-                
                 /**
                 * embedding images...
                 */
@@ -1043,22 +1035,16 @@ class FormatBlockLink extends FormatBlock
                             $this->name = asHtml($file->name);
                         }
 
-
-                        $flag_optionized= false;
                         $align='';
-                        $max_size= '';
+                        $max_size= 680;
                         $framed= false;
                         if($this->options) {
                             foreach($this->options as $o) {
                                 if($o == 'left') {
                                     $align= 'left';
-                                    $this->html= "<a href='".$PH->getUrl('fileView',array('file'=>$file->id))."'><img class='left' title='".$file->name."' alt='".$file->name."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>320))."'></a>";
-                                    $flag_optionized= true;
                                 }
                                 else if($o == 'right') {
-                                    $align=' right';
-                                    $this->html= "<a href='".$PH->getUrl('fileView',array('file'=>$file->id))."'><img class='left' title='".$file->name."' alt='".$file->name."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>320))."'></a>";
-                                    $flag_optionized= true;
+                                    $align='right';
                                 }
                                 else if(preg_match('/maxsize=(\d*)/',$o, $matches)) {
                                     $max_size=$matches[1];
@@ -1068,93 +1054,52 @@ class FormatBlockLink extends FormatBlock
                                 }
                             }
                         }
+                        if(!$dimensions = $file->getImageDimensions($max_size)) {
+                            $this->html = '<em>' . sprintf(__("Item #%s is not an image"), $file->id) . "</em>";
+                            return;
+                        }
                         if($framed) {
-                            $this->html= "<div class='frame $align'><a href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'></a>"
-                            . '<span>'.asHtml($this->name)
-                            ." (". "<a href='".$PH->getUrl('fileView',array('file'=>$file->id))."'>" .  __('Image details').   ")</a>"
-                            .'</span>'
-                            ."</div>";
+                            $this->html = "<div class='frame $align'>"
+                                        . "<a href='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>"
+                                        . "<img title='".asHtml($file->name)."'"
+                                        .     " alt='".asHtml($file->name)."'"
+                                        .     " src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
+                                        .     " height=" .intval( $dimensions['new_height'])
+                                        .     " width=" .intval( $dimensions['new_width'])    
+                                        . "></a>"
+                                        . '<span>'.asHtml($this->name)
+                                        . " (". "<a href='".$PH->getUrl('fileView',array('file'=>$file->id))."'>" .  __('Image details').   ")</a>"
+                                        . '</span>'
+                                        . "</div>";
                             if(!$align) {
                                 $this->html.= '<span class=clear>&nbsp;</span>';
                             }
-
                         }
                         else {
-                            $this->html= "<a href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='$align' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'></a>";
-                        }
+                            print "width=" . $dimensions['new_width'];
+                            print "height=" . $dimensions['new_height'];
+                            $this->html= "<a href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>"
+                                       . "<img class='$align'"
+                                       .     " title='" . asHtml($file->name) ."'"
+                                       .     " alt='" . asHtml($file->name) ."'"
+                                       .     " src='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
+                                       .     " height=" .intval( $dimensions['new_height'])    
+                                       .     " width=" .intval( $dimensions['new_width'])    
+                                       . "></a>";
+                        } 
                     }
                     else {
                         $this->name = __("Unknown File-Id:"). ' ' .$target;
                     }
 
                     break;
-                case 'project':
-                    if( $project= Project::getVisibleById(intval($target))) {
-                        $this->name = asHtml($project->name);
-                        $this->target= $PH->getUrl('projView',array('prj'=>intval($target)));
-                    }
-                    else {
-                        $this->name = __("Unknown project-Id:"). ' ' .$target;
-                    }
-                    break;
+
+                /**
+                * item
+                */
                 case 'item':
-                    if($item= DbProjectItem::getVisibleById(intVal($target))) {
-                        switch($item->type) {
-                            case ITEM_TASK:
-
-                                if($task= Task::getVisibleById($item->id)) {
-									if($this->name) {
-										$style_isdone= $task->status >= STATUS_COMPLETED ? 'isDone' : '';
-
-                                        $this->html= $PH->getLink('taskView',$this->name,array('tsk'=>$task->id), $style_isdone);
-                                    }
-                                    else {
-                                        $this->html= $task->getLink(false);
-                                    }
-                                }
-                                break;
-                            case ITEM_FILE:
-                                require_once(confGet('DIR_STREBER') . "db/class_file.inc.php");
-                                if($file= File::getVisibleById($item->id)) {
-                                    if($this->name) {
-                                        $this->html= $PH->getLink('fileView',$this->name,array('file'=>$file->id));
-                                    }
-                                    else {
-                                        $this->html= $PH->getLink('fileView',$file->name,array('file'=>$file->id));
-                                    }
-                                }
-                                break;
-
-                            case ITEM_COMMENT:
-                                require_once(confGet('DIR_STREBER') . "db/class_comment.inc.php");
-                                if($comment= Comment::getVisibleById($item->id)) {
-                                    if($this->name) {
-                                        $this->html= $PH->getLink('commentView',$this->name,array('comment'=>$comment->id));
-                                    }
-                                    else {
-                                        $this->html= $PH->getLink('commentView',$comment->name,array('comment'=>$comment->id));
-                                    }
-                                }
-                                break;
-
-                            case ITEM_PERSON:
-                                if($person= Person::getVisibleById($item->id)) {
-                                    if($this->name) {
-                                        $this->html= $PH->getLink('personView',$this->name,array('person'=>$person->id));
-                                    }
-                                    else {
-                                        $this->html= $PH->getLink('personView',$person->name,array('person'=>$person->id));
-                                    }
-                                }
-                                break;
-
-                            default:
-                                $this->html = '<em>'. sprintf(__('Cannot link to item of type %s'), $item->type). '</em>';
-                                break;
-                        }
-                    }
+                    $this->html= FormatBlockLink::renderLinkFromItemId($target, $this->name);
                     break;
-
 
                 default:
                     /**
@@ -1300,8 +1245,6 @@ class FormatBlockLink extends FormatBlock
                     }
                 }
                 if($g_wiki_project) {
-
-
                     $title= __('No item matches this name. Create new task with this name?');
                     global $g_wiki_task;
                     if(isset($g_wiki_task)) {
@@ -1323,7 +1266,6 @@ class FormatBlockLink extends FormatBlock
                                                 ));
 
                     $this->html= "<a href='$url' title='$title' class=not_found>$this->target</a>";
-
                 }
                 /**
                 * actually we could add a function to create a new task here, but somebody forgot to tell us the project...
@@ -1347,6 +1289,87 @@ class FormatBlockLink extends FormatBlock
         }
     }
 
+    /**
+    * tries to build a valid a href-link to an item.
+    *
+    * - uses $this->name
+    * - sets -this-html
+    * - does all the neccessary security checks, styles and conversions
+    */
+    static function renderLinkFromItemId($target_id, $name="")
+    {
+        global $PH;
+        $target_id = intval($target_id);
+        $html= "";
+        
+        if(!$item= DbProjectItem::getVisibleById($target_id)) {
+            $html= '<em>'. sprintf(   __("Unkwown item %s"), $target_id) . '</em>';
+        }
+        else {          
+            switch($item->type) {
+                case ITEM_TASK:
+                    if($task= Task::getVisibleById($item->id)) {
+                        $style_isdone= $task->status >= STATUS_COMPLETED ? 'isDone' : '';
+                        if($name) {
+                            $html= $PH->getLink('taskView',$name,array('tsk'=>$task->id), $style_isdone, true);
+                        }
+                        else {
+                            $html= $task->getLink(false);
+                        }
+                    }
+                    break;
+
+                case ITEM_FILE:
+                    require_once(confGet('DIR_STREBER') . "db/class_file.inc.php");
+                    if($file= File::getVisibleById($item->id)) {
+                        if($name) {
+                            $html= $PH->getLink('fileDownloadAsImage',$name,array('file'=>$file->id), NULL, true);
+                        }
+                        else {
+                            $html= $PH->getLink('fileDownloadAsImage',$file->name,array('file'=>$file->id));
+                        }
+                    }
+                    break;
+
+                case ITEM_COMMENT:
+                    require_once(confGet('DIR_STREBER') . "db/class_comment.inc.php");
+                    if($comment= Comment::getVisibleById($item->id)) {
+                        if($name) {
+                            $html= $PH->getLink('commentView',$name,array('comment'=>$comment->id), NULL, true);
+                        }
+                        else {
+                            $html= $PH->getLink('commentView',$comment->name,array('comment'=>$comment->id));
+                        }
+                    }
+                    break;
+
+                case ITEM_PERSON:
+                    if($person= Person::getVisibleById($item->id)) {
+                        if($name) {
+                            $html= $PH->getLink('personView',$name,array('person'=>$person->id), NULL, true);
+                        }
+                        else {
+                            $html= $PH->getLink('personView',$person->name,array('person'=>$person->id));
+                        }
+                    }
+                    break;
+
+                case ITEM_PROJECT:
+                    if( $project= Project::getVisibleById($item->id)) {
+                        if($name == "") {
+                            $name = asHtml($project->name);
+                        }
+                        $html= $PH->getLink('projView', $name, array('prj'=>$project->id), NULL, true);
+                    }
+                    break;                
+
+                default:
+                    $html = '<em>'. sprintf(__('Cannot link to item #%s of type %s'), intval($target), $item->type). '</em>';
+                    break;
+            }
+        }
+        return $html;
+    }
 
     static function parseBlocks(&$blocks)
     {
@@ -1390,43 +1413,7 @@ class FormatBlockItemId extends FormatBlock
 {
     public function renderAsHtml()
     {
-        if($item= DbProjectItem::getVisibleById(intVal($this->str))) {
-            global $PH;
-            switch($item->type) {
-            case ITEM_TASK:
-                if($task= Task::getVisibleById(intVal($this->str))) {
-                    $style='';
-                    if(($task->category == TCATEGORY_TASK || $task->category == TCATEGORY_BUG) && $task->status >= STATUS_COMPLETED) {
-                        $style='isDone';
-                    }
-                    return $PH->getLink('taskView', $task->name, array('tsk' => $task->id),$style);
-                }
-                break;
-
-            case ITEM_PROJECT:
-                if($project= Project::getVisibleById(intVal($this->str))) {
-                    $style='';
-                    if($project->status >= STATUS_COMPLETED) {
-                        $style='isDone';
-                    }
-                    return $PH->getLink('projView', $project->name, array('prj' => $project->id),$style);
-                }
-                break;
-
-            case ITEM_COMMENT:
-                require_once(confGet('DIR_STREBER') . './db/class_comment.inc.php');
-                if($comment= Comment::getVisibleById(intVal($this->str))) {
-                    return $PH->getLink('commentView', $comment->name, array('comment' => $comment->id));
-                }
-                break;
-
-            default:
-                return "<em title='".__("Unknown Item Id")."'>Item #".$this->str."?</em>";
-            }
-        }
-        else {
-            return "<em title='".__("Unknown Item Id")."'>Item #".$this->str."?</em>";
-        }
+        return FormatBlockLink::renderLinkFromItemId(intVal($this->str) );
     }
 
     static function parseBlocks(&$blocks)
@@ -1488,17 +1475,13 @@ class FormatBlockListLine extends FormatBlock
 
         $blocks= FormatBlockSub::parseBlocks($blocks);
 
-
-
         $blocks= FormatBlockMonospaced::parseBlocks($blocks);
         $blocks= FormatBlockEmphasize::parseBlocks($blocks);
         $blocks= FormatBlockLongMinus::parseBlocks($blocks);
 
-
         $blocks= FormatBlockLink::parseBlocks($blocks);
         $blocks= FormatBlockHref::parseBlocks($blocks);
         $this->children= FormatBlockItemId::parseBlocks($blocks);
-
 
         $this->str= '';
         $this->level=$level;

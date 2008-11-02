@@ -178,9 +178,6 @@ class File extends DbProjectItem
         return NULL;
     }
 
-
-
-
     /**
     * return files attached to project
     * @@@ todo:
@@ -206,7 +203,7 @@ class File extends DbProjectItem
         $date_max           = NULL;
         $org_file           = NULL;
 		$id			        = NULL;
-	    $created_by     = NULL;
+	    $created_by         = NULL;
 
         ### filter params ###
         if($args) {
@@ -392,7 +389,6 @@ class File extends DbProjectItem
             trigger_error("unexpected number (". join(",",$list) .") of latest files for file id $this->id", E_USER_WARNING);
             $files[0];
         }
-
         return $files[0];
     }
 
@@ -579,125 +575,162 @@ class File extends DbProjectItem
         }
     }
 
-    public function viewAsImage($max_size = 0)
+    /**
+    * return assoc. array with 'height' and 'width'
+    *
+    * - returns NULL on failure
+    */
+    public function getImageDimensions($max_size = 0)
     {
         $filepath= confGet('DIR_FILES') . $this->tmp_dir . '/'. $this->tmp_filename;
-
         if(file_exists($filepath)) {
-
             list($width, $height, $type, $attr) = getimagesize($filepath);
-            if($max_size && ($width > $max_size || $height > $max_size)) {
-                $ratio= $width/$height;
-                if($width > $height) {
-                    $new_width= $max_size;
-                    $new_height= $max_size / $ratio;
-                }
-                else {
-                    $new_height=  $max_size;
-                    $new_width= $max_size * $ratio;
-                }
+        }
+        else {
+            return;
+        }
 
-                ### rescale with gd ###
-                if(function_exists('imagecreatetruecolor')) {
-                    if($this->mimetype == 'image/jpeg'
-                       ||
-                       $this->mimetype == 'image/jpg'
-                       ||
-                       $this->mimetype == 'image/pjpeg'
-                    ) {
-                        header('Content-Type: '     . 'image/jpeg');
-                        header("Cache-Control: public");
-                        header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-
-                        $image=     imagecreatefromjpeg($filepath);
-                        $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-                        if(imagecopyresampled(
-                             $image_new,       #resource dst_im,
-                             $image,       #resource src_im,
-                             0,       #int dstX,
-                             0,       #int dstY,
-                             0,       #int srcX,
-                             0,       #int srcY,
-                             $new_width,       #int dstW,
-                             $new_height,       #int dstH,
-                             $width,       #int srcW,
-                             $height       #int srcH
-                        )) {
-                            imagejpeg($image_new);
-                        }
-                        else {
-                            imagejpeg($image);
-                        }
-                        return;
-                    }
-                    else if($this->mimetype == 'image/png' || $this->mimetype == 'image/x-png') {
-                        header('Content-Type: '     . $this->mimetype);
-                        header("Cache-Control: public");
-                        header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-
-                        #header("Expires: Thu, 01 Dec 2010 16:00:00 GMT");
-
-                        $image=     imagecreatefrompng($filepath);
-                        $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-                        if(imagecopyresampled(
-                             $image_new,       #resource dst_im,
-                             $image,       #resource src_im,
-                             0,       #int dstX,
-                             0,       #int dstY,
-                             0,       #int srcX,
-                             0,       #int srcY,
-                             $new_width,       #int dstW,
-                             $new_height,       #int dstH,
-                             $width,       #int srcW,
-                             $height       #int srcH
-                        )) {
-                            imagejpeg($image_new);
-                        }
-                        else {
-                            imagejpeg($image);
-                        }
-                        return;
-                    }
-                    else if($this->mimetype == 'image/gif') {
-                        header('Content-Type: '     . 'image/gif');
-                        header("Cache-Control: public");
-                        header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-                        $image=     imagecreatefromgif($filepath);
-                        $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-                        if(imagecopyresampled(
-                             $image_new,       #resource dst_im,
-                             $image,       #resource src_im,
-                             0,       #int dstX,
-                             0,       #int dstY,
-                             0,       #int srcX,
-                             0,       #int srcY,
-                             $new_width,       #int dstW,
-                             $new_height,       #int dstH,
-                             $width,       #int srcW,
-                             $height       #int srcH
-                        )) {
-                            imagejpeg($image_new);
-                        }
-                        else {
-                            imagejpeg($image);
-                        }
-                        return;
-                    }
-                    else {
-                         return NULL;
-                    }
-                }
+        if ($max_size && ($width > $max_size || $height > $max_size)) {
+            $ratio= $width/$height;
+            if ($width > $height) {
+                $new_width= $max_size;
+                $new_height= $max_size / $ratio;
             }
+            else {
+                $new_height=  $max_size;
+                $new_width= $max_size * $ratio;
+            }
+            $downscale = true;
+        }
+        else {
+            $downscale = false;
+            $new_width = $width;
+            $new_height = $height;
+        }
+        return array(
+            'new_width' => $new_width, 
+            'new_height'=> $new_height, 
+            'width'     => $width,
+            'height'    => $height,
+            'downscale' => $downscale
+        );
+    }
 
 
+    public function viewAsImage($max_size = 0)
+    {
+        $max_size = intval($max_size);
+        if (!$dimensions= $this->getImageDimensions($max_size)) {
+            log_message("file::viewAsImage($this->id) can not find file1 '$filepath'",LOG_MESSAGE_MISSING_FILES);
+            return;
+        }
+
+        /**
+        * just provide the original file
+        */
+        if (!isset( $dimensions['downscale']) ) {
             header('Content-Length: '   . filesize($filepath));
             header('Content-Type: '     . $this->mimetype);
             header("Content-Disposition: inline; filename=$this->org_filename");
             header('Last-Modified: '    . gmdate("D, j M Y G:i:s T", strToClientTime($this->modified)));
             readfile_chunked($filepath);
+            return;
+        }
+
+        /**
+        * rescale with gd
+        */
+        if(!function_exists('imagecreatetruecolor')) {
+            log_message("file::viewAsImage($this->id) gd not installed",LOG_MESSAGE_MISSING_FILES);
+            return; 
+        }
+
+        if($this->mimetype == 'image/jpeg'
+           ||
+           $this->mimetype == 'image/jpg'
+           ||
+           $this->mimetype == 'image/pjpeg'
+        ) {
+            header('Content-Type: '     . 'image/jpeg');
+            header("Cache-Control: public");
+            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
+
+            $image=     imagecreatefromjpeg($filepath);
+            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
+            if(imagecopyresampled(
+                 $image_new,                    #resource dst_im,
+                 $image,                        #resource src_im,
+                 0,                             #int dstX,
+                 0,                             #int dstY,
+                 0,                             #int srcX,
+                 0,                             #int srcY,
+                 $dimensions['new_width'],      #int dstW,
+                 $dimensions['new_height'],     #int dstH,
+                 $dimensions['width'],          #int srcW,
+                 $dimensions['height']          #int srcH
+            )) {
+                imagejpeg($image_new);
+            }
+            else {
+                imagejpeg($image);
+            }
+            return;
+        }
+        else if($this->mimetype == 'image/png' || $this->mimetype == 'image/x-png') {
+            header('Content-Type: '     . $this->mimetype);
+            header("Cache-Control: public");
+            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
+
+            #header("Expires: Thu, 01 Dec 2010 16:00:00 GMT");
+
+            $image=     imagecreatefrompng($filepath);
+            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
+            if(imagecopyresampled(
+                 $image_new,       #resource dst_im,
+                 $image,       #resource src_im,
+                 0,       #int dstX,
+                 0,       #int dstY,
+                 0,       #int srcX,
+                 0,       #int srcY,
+                 $dimensions['new_width'],      #int dstW,
+                 $dimensions['new_height'],     #int dstH,
+                 $dimensions['width'],          #int srcW,
+                 $dimensions['height']          #int srcH
+            )) {
+                imagejpeg($image_new);
+            }
+            else {
+                imagejpeg($image);
+            }
+            return;
+        }
+        else if($this->mimetype == 'image/gif') {
+            header('Content-Type: '     . 'image/gif');
+            header("Cache-Control: public");
+            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
+            $image=     imagecreatefromgif($filepath);
+            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
+            if(imagecopyresampled(
+                 $image_new,                    #resource dst_im,
+                 $image,                        #resource src_im,
+                 0,                             #int dstX,
+                 0,                             #int dstY,
+                 0,                             #int srcX,
+                 0,                             #int srcY,
+                 $dimensions['new_width'],      #int dstW,
+                 $dimensions['new_height'],     #int dstH,
+                 $dimensions['width'],          #int srcW,
+                 $dimensions['height']          #int srcH
+            )) {
+                imagejpeg($image_new);
+            }
+            else {
+                imagejpeg($image);
+            }
+            return;
         }
         else {
-            log_message("file::viewAsImage($this->id) can not find file '$filepath'",LOG_MESSAGE_MISSING_FILES);
+             return NULL;
         }
     }
     
@@ -723,7 +756,6 @@ class File extends DbProjectItem
 
         if($this->parent_item) {        
             if($task= Task::getVisibleById($this->parent_item)) {
-    
                 if($folders= $task->getFolderLinks()) {
                       $html .= ' &gt; '. $folders;
                 }
