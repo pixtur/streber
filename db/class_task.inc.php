@@ -5,8 +5,7 @@ require_once("db_item.inc.php");
 /**
 * cache some db-elements
 *
-* those assoc. arrays hold references to objects from database
-*  like       $id => object
+* assoc. arrays hold references to objects from database
 *
 */
 global $g_cache_tasks;
@@ -14,9 +13,10 @@ $g_cache_tasks=array();
 
 
 
-//====================================================================
-// Task
-//====================================================================
+/**
+* Task
+* - items holding tasks, bug-reports, folders, milestones or documentation topics
+*/
 class Task extends DbProjectItem
 {
 
@@ -33,7 +33,7 @@ class Task extends DbProjectItem
         addProjectItemFields(&self::$fields_static);
 
         foreach(array(
-            new FieldInternal(array(    'name'=>'id',
+            new FieldInternal(array('name'=>'id',
                 'default'=>0,
                 'in_db_object'=>1,
                 'in_db_item'=>1,
@@ -189,6 +189,12 @@ class Task extends DbProjectItem
             new FieldBool(  array('name'=>'is_news',
                 'title'=>__('Display in project news'),
                 'tooltip'=> __('List title and description in project overview'),
+                'view_in_forms'=> true,
+                'default'   =>0,
+                'log_changes' => true,
+            )),
+            new FieldBool(array('name'=>'show_folder_as_documentation',
+                'title'=>__('Display folder as topic'),
                 'view_in_forms'=> true,
                 'default'   =>0,
                 'log_changes' => true,
@@ -1346,7 +1352,7 @@ foreach($filters_str as $fs=>$value) {
             ### filter only folders with docu ###
             if($p->category == TCATEGORY_FOLDER)
             {
-                $found_docu= false;
+                $found_docu= $p->show_folder_as_documentation;
                 foreach($subtasks= $p->getSubtasksRecursive() as $subtask) {
                     if($subtask->category == TCATEGORY_DOCU) {
                         $found_docu= true;

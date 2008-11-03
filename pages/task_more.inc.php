@@ -41,8 +41,8 @@ function taskNewBug()
 function taskNewDocu()
 {
     $foo=array(
-        'add_issue'=>1,
-        'task_category' =>TCATEGORY_DOCU
+        'task_category' =>TCATEGORY_DOCU,
+        'show_folder_as_documentation' => 1,
         );
     addRequestVars($foo);
 	TaskNew();
@@ -251,6 +251,7 @@ function TaskNew()
         'category'  =>$category,
         'parent_task'=>$parent_task_id,
         'for_milestone'=>$for_milestone_id,
+        'show_folder_as_documentation' =>intval(get('task_show_folder_as_documentation'))
     ));
 
     ### set a valid create-level ###
@@ -719,6 +720,9 @@ function taskEdit($task=NULL)
             ### Shows as news ###
             $tab->add($task->fields['is_news']->getFormElement(&$task));
 
+            ### Shows Folder as documentation ###
+            $tab->add($task->fields['show_folder_as_documentation']->getFormElement(&$task));
+
             ### public-level ###
             if(($pub_levels=$task->getValidUserSetPublevel())
                 && count($pub_levels)>1) {
@@ -764,7 +768,7 @@ function taskEdit($task=NULL)
         #echo "<input type=hidden name='task_project' value='$project->id'>";
         $form->add(new Form_HiddenField('task_project','',$project->id));
 
-        ### create another person ###
+        ### create another task ###
         if($task->id == 0) {
             $checked= get('create_another')
             ? 'checked'
@@ -842,7 +846,6 @@ function taskEditSubmit()
         exit();
     }
 
-
     $was_a_folder= ($task->category == TCATEGORY_FOLDER)
                  ? true
                  : false;
@@ -852,9 +855,7 @@ function taskEditSubmit()
     ### get project ###
     if(!$project= Project::getVisiblebyId($task->project)) {
         $PH->abortWarning("task without project?");
-
     }
-
 
     /**
     * adding comment (from quick edit) does only require view right...
@@ -979,6 +980,7 @@ function taskEditSubmit()
     $task->fields['parent_task']->parseForm(&$task);
 
     ### category ###
+    $was_of_category = $task->category;
     if(!is_null($c= get('task_category'))) {
         global $g_tcategory_names;
         if(isset($g_tcategory_names[$c])) {
@@ -995,8 +997,6 @@ function taskEditSubmit()
     $task->is_folder = ($task->category == TCATEGORY_FOLDER)
                      ? 1
                      : 0;
-
-
 
     ### Check if now longer new ###
     if($status_old == $task->status && $task->status == STATUS_NEW) {

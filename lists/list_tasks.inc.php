@@ -32,9 +32,6 @@ class ListGroupingFolder extends ListGrouping
     }
 }
 
-
-
-
 /**
  * derived ListBlock-class for listing tasks
  *
@@ -52,7 +49,6 @@ class ListBlock_tasks extends ListBlock
     public $tasks_assigned_to       = NULL;
     public $use_short_names         = false;
     public $show_summary            = false;
-
     public $show_project_folder     = false;                                    # set to false to hide project from path in List view (e.g. should be true in lists with tasks from different projects)
 
     public function __construct($args=NULL)
@@ -275,7 +271,6 @@ class ListBlock_tasks extends ListBlock
             $this->show_project_folder= true;            
         }
 
-
         ### list groupings ###
         $this->groupings->groupings= array(
             new ListGroupingFolder(),
@@ -284,10 +279,8 @@ class ListBlock_tasks extends ListBlock
             new ListGroupingCreatedBy(),
         );
         $this->initOrderQueryOption('order_id, status, prio');
-
     }
-	
-	
+
     /**
     * render completely (overwrites original ListBlock::render())
     */
@@ -615,15 +608,11 @@ class ListBlock_tasks extends ListBlock
         if($sort= get($sort_cookie)) {
             $this->query_options['order_by']= $sort;
         }
-                    
-
-
 
         if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
             $this->query_options['visible_only']=false;
         }
         $tasks = array();
-
 
         ### hide columns depending on project options ###
         if($project && !($project->settings & PROJECT_SETTING_ENABLE_MILESTONES)) {
@@ -647,7 +636,6 @@ class ListBlock_tasks extends ListBlock
 
             unset($this->columns['parent_task']);
             unset($this->columns['date_closed']);
-#	        unset($this->columns['pub_level']);
             unset($this->columns['name']);
 	        unset($this->columns['estimated']);
             $tasks= Task::getAll($this->query_options);
@@ -662,13 +650,10 @@ class ListBlock_tasks extends ListBlock
             unset($this->columns['date_closed']);
             unset($this->columns['parent_task']);
             unset($this->columns['name']);
-#	        unset($this->columns['pub_level']);
 	        unset($this->columns['created_by']);
 	        unset($this->columns['estimated']);
-#	        unset($this->columns['planned_end']);
 	        unset($this->columns['assigned_to']);
 	        unset($this->columns['status']);
-	        #unset($this->columns['prio']);
 
 	        ### prepend key to sorting ###
 	        if(isset($this->query_options['order_by'])) {
@@ -685,7 +670,6 @@ class ListBlock_tasks extends ListBlock
             * I am not sure, how we would do this here.
             */
             if($this->groupings->active_grouping_key == 'parent_task') {
-                #$this->query_options['sort_hierarchical']= true;
                 $this->query_options['use_collapsed']    = true;
                 $this->query_options['show_folders']     = true;
                 $this->query_options['order_by'] = 'is_folder' . ",".$this->query_options['order_by'];
@@ -743,12 +727,6 @@ class ListBlock_tasks extends ListBlock
                 $folders[$f->id]= $f;
             }
 
-#            $this->query_options['sort_hierarchical']= true;
-
-#            if(!$this->tasks_assigned_to) {
-#                $this->query_options['use_collapsed']    = true;
-#            }
-
             /**
             * @@@ later use only once...
             *
@@ -757,7 +735,6 @@ class ListBlock_tasks extends ListBlock
             unset($this->columns['parent_task']);
             unset($this->columns['taskwithfolder']);
             unset($this->columns['date_closed']);
-#	        unset($this->columns['pub_level']);
 	        unset($this->columns['estimated']);
 	        if(isset($this->query_options['folders_only'])) {
 	            $full_list= $folders;
@@ -799,7 +776,6 @@ class ListBlock_tasks extends ListBlock
                         $t->level= 0;
                         $full_list[]= $t;
                     }
-
                 }
                 else if(!$parent_task && isset($tasks_for_folder[0])){
                     foreach($tasks_for_folder[0] as $t) {
@@ -810,7 +786,6 @@ class ListBlock_tasks extends ListBlock
 
                 ### for files that have not be added to visible folders yet, try to increase count of visible parent-folders ###
                 foreach($tasks_for_folder as $id=>$ar) {
-
                     if(isset($folders[$id])) {
                          $folders[$id]->num_subtasks= count($tasks_for_folder[$id]);
                     }
@@ -826,10 +801,8 @@ class ListBlock_tasks extends ListBlock
                 }
 	        }
 
-
             ### filter empty folders with wrong status ###
             # (or all empty, if set)
-
             $t_min= isset($this->query_options['status_min'])
                 ? $this->query_options['status_min']
                 : STATUS_NEW;

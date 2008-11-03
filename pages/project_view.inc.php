@@ -322,7 +322,7 @@ function ProjView()
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
         if(Task::getDocuTasks($project->id,0)) {
-            $list=new Block_docuNavigation(array(
+            $list=new Block_DocuNavigation(array(
                 'project_id' => $project->id
             ));
             $list->print_all();

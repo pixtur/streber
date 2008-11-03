@@ -183,7 +183,7 @@ function initPageForTask($page, $task, $project=NULL)
     else if($task->category == TCATEGORY_VERSION) {
         $page->cur_crumb= 'projViewVersions';
     }
-    else if($task->category == TCATEGORY_DOCU) {
+    else if($task->category == TCATEGORY_DOCU || ($task->category == TCATEGORY_FOLDER && $task->show_folder_as_documentation)) {
         $page->cur_crumb= 'projViewDocu';
 
     }

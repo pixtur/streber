@@ -30,21 +30,17 @@ define('LEVEL_CHILDREN',2);
 */
 class Block_DocuNavigation extends PageBlock
 {
-    #public $title          = "bla";
     public  $current_task   = NULL;
     public  $project_id     = NULL;     # object
     public  $reduced_header = true;
     private $tasks          = array();
     public  $root           = NULL;
 
-
-
     public function __construct($args=NULL) {
         $this->title= __("Documentation");
         $this->id = 'parent_task';
         parent::__construct($args);
     }
-
 
     private function initStructure()
     {
@@ -82,7 +78,6 @@ class Block_DocuNavigation extends PageBlock
                 $sp->level = LEVEL_NORMAL;
                 $tasks[]= $sp;
             }
-
         }
         ### with parents ###
         else if($parents= $this->current_task->getFolder()) {

@@ -1097,7 +1097,7 @@ function ProjViewDocu()
         ### page functions ###
         $page->add_function(new PageFunction(array(
             'target'    =>'taskNew',
-            'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU),
+            'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU, 'task_show_folder_as_documentation'=>1),
             'icon'      =>'new',
             'tooltip'   =>__('Create a new page'),
             'name'      =>__('New topic')
@@ -1120,16 +1120,10 @@ function ProjViewDocu()
         $list->title= __('Topics');
 
         $list->reduced_header= true;
-        #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
-
-        #if($for_milestone=get('for_milestone')) {
-        #    $list->filters['for_milestone']= intval($for_milestone);
-        #}
         $list->query_options['category']= TCATEGORY_DOCU;
         $list->query_options['status_min']= 0;
         $list->query_options['status_max']= 10;
         $list->query_options['order_by']= 'order_id';
-
         ### redefine columns ###
         $c_new = array();
         foreach($list->columns as $cname => $c) {
@@ -1139,9 +1133,8 @@ function ProjViewDocu()
         }
         $list->columns= $c_new;
         $list->add_col( new ListBlockCol_TaskAsDocu());
-        
 
-
+        ### redefine list functions ###
         unset($list->functions['taskNew']);
         unset($list->functions['taskNewBug']);
         unset($list->functions['tasksCompleted']);
@@ -1154,7 +1147,7 @@ function ProjViewDocu()
 
 
         $list->no_items_html= __('No topics yet');
-        $list->print_automatic($project, NULL, true);
+        $list->print_automatic($project, NULL, false);
 	}
 
     $PH->go_submit='taskNew';

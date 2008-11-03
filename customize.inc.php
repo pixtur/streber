@@ -15,6 +15,7 @@
 #confChange('USE_MOD_REWRITE', true);
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
+confChange('TASKDETAILS_IN_SIDEBOARD', true);
 ### uncomment the following line if you upgraded from mySQL 4
 #confChange('DB_USE_UTF8_ENCODING',true);
 

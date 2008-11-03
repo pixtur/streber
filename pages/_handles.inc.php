@@ -563,6 +563,7 @@ new PageHandleFunc(array('id'=>'taskNew',
                             'for_milestone'=>'\d*',
                             'task_category'=>'\d*',
                             'task_assign_to_0'=>'\d*',
+                            'task_show_folder_as_documentation'=>'\d*',
     ),
 
     'test'=>'yes',

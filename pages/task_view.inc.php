@@ -37,7 +37,7 @@ function TaskView()
         $PH->abortWarning("invalid task-id",ERROR_FATAL);
     }
 
-    if($task->category == TCATEGORY_DOCU) {
+    if($task->category == TCATEGORY_DOCU || ($task->category == TCATEGORY_FOLDER && $task->show_folder_as_documentation)) {
         TaskViewAsDocu($task, $editable);
         exit();
     }
@@ -339,7 +339,7 @@ function TaskView()
     #--- navigation structure for documentation --------------------------------------------
     if($task->category == TCATEGORY_FOLDER) {
         require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
-        $list=new Block_docuNavigation(array(
+        $list=new Block_DocuNavigation(array(
             'current_task'=> $task,
             'root'          => $task,
         ));
@@ -916,7 +916,6 @@ function taskViewAsDocu()
         $PH->abortWarning("invalid task-id",ERROR_FATAL);
     }
 
-
     if(!$project= Project::getVisibleById($task->project)) {
         $PH->abortWarning("this task has an invalid project id", ERROR_DATASTRUCTURE);
     }
@@ -999,6 +998,7 @@ function taskViewAsDocu()
                     'params'=>array(
                         'parent_task'=>$task->id,
                         'task_category' =>TCATEGORY_DOCU,
+                        'task_show_folder_as_documentation' => 1,
                     ),
                     'icon'=>'edit',
                     'name'=>__('New topic'),
@@ -1010,6 +1010,7 @@ function taskViewAsDocu()
                     'params'=>array(
                         'parent_task' => $task->parent_task,
                         'task_category' =>TCATEGORY_DOCU,
+                        'task_show_folder_as_documentation' => 1,
                     ),
                     'icon'=>'edit',
                     'name'=>__('New topic'),
@@ -1059,7 +1060,7 @@ function taskViewAsDocu()
     #--- navigation structure for documentation --------------------------------------------
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_docustructure.inc.php');
-        $list=new Block_docuNavigation(array(
+        $list=new Block_DocuNavigation(array(
             'current_task'=> $task
         ));
 
