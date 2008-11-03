@@ -547,7 +547,7 @@ class Auth
         if(!Auth::isAnonymousUser()) {
             return false;
         }
-        if(ini_get('browscap')) {
+        if(ini_get('browscap') &&  isset($_SERVER['HTTP_USER_AGENT'])) {
             $browser= get_browser(NULL, true);
             if($browser['crawler']) {
                 return true;
@@ -558,7 +558,7 @@ class Auth
             $crawlers= array(
                 "/Googlebot/",
                 "/Yahoo! Slurp;/",
-                "/msnbot/",
+                "/msnbot/i",
                 "/Mediapartners-Google/",
                 "/Scooter/",
                 "/Yahoo-MMCrawler/",

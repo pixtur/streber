@@ -140,6 +140,7 @@ class SearchResult extends BaseObject
             if($s=trim($s)) {
                 $s=str_replace('+','',$s);
                 $s=str_replace('*','',$s);
+                $s= asMatchString($s);
                 $strings[]= $s;
             }
         }

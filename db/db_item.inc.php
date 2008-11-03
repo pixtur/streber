@@ -778,7 +778,7 @@ class DbProjectItem extends DbItem {
             }
         }
         else if($p= Project::getById($this->project)) {
-            if($p->validateEditItem($this)) {
+            if($p->validateEditItem($this, false)) { # do not abort on error
                 return true;
             }
         }
