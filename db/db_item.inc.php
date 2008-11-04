@@ -12,9 +12,6 @@ require_once(confGet('DIR_STREBER') . "render/render_fields.inc.php");
 
 
 
-
-
-
 //====================================================================
 // DbItem
 // - handles connection of objects to database
@@ -1524,6 +1521,64 @@ class DbProjectItem extends DbItem {
             }
             return $item_full;
         }
+    }
+    
+    public function getTextfieldWithUpdateNotes($fieldname)
+    {
+        require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+
+        global $auth;
+        
+        /**
+        * has user seen item?
+        */
+        if($item_persons = ItemPerson::getAll(array(
+            'person'=>$auth->cur_user->id,
+            'item' => $this->id
+        ))) {
+            $ip= $item_persons[0];
+            if($ip->viewed_last > $this->modified) {
+                return $this->$fieldname;
+            }
+        }
+        
+        $new_version = $this->$fieldname;
+        $changes= ItemChange::getItemChanges(array(
+            'item' => $this->id,
+            'field' => $fieldname,
+            'order_by' => 'modified',
+            'date_min' => $ip->viewed_last,
+        ));
+        if(!$changes) {
+            return $this->$fieldname;
+        }
+        $old_version = $changes[ 0 ]->value_old;
+
+        require_once(confGet('DIR_STREBER') . "std/difference_engine.inc.php");
+
+        $ota = explode( "\n", str_replace( "\r\n", "\n", $old_version ) );
+        $nta = explode( "\n", str_replace( "\r\n", "\n", $new_version ) );
+        $diffs = new Diff( $ota, $nta );
+        
+        $buffer= "";
+        foreach($diffs as $d) {
+            foreach($d as $do) {
+                if($do->type == 'copy') {
+                    $buffer.= join("\n", $do->orig);
+                }
+                else if($do->type == 'add') {
+                    $buffer.= "[added]" . join("\n", $do->closing) . "[/added]\n";
+                }
+                else if($do->type =='delete') {
+                    $buffer.= "[deleted something]\n";
+                }
+                else if($do->type =='change') {
+                    $buffer.= "[changed]" . join("\n", $do->closing) . "[/changed]\n";
+                }
+            }
+        }
+        return $buffer;
     }
 }
 

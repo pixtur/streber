@@ -1,5 +1,11 @@
 streber-version-history
 
+version v0.08081  [2008-10-04]
+==============================
+- MAJOR: option to treat folder as documentation
+- MAJOR: highlight updates in wiki changes
+- 
+
 version v0.0807 [2008-08-28]
 ============================
 - MAJOR: first version of feedback request working

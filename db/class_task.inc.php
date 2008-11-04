@@ -1393,8 +1393,6 @@ foreach($filters_str as $fs=>$value) {
         }
         return false;        
     }
-    
-
 }
 
 Task::init();

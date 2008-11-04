@@ -167,26 +167,47 @@ class FormatBlockLeadingSpaces extends FormatBlock
 }
 
 
-
 /**
-* depreciated
+* highlight changes
+* [added]...[/added]
+* [changed]...[/changed]
 */
-class FormatBlockCodeIndented extends FormatBlockCode
+class FormatBlockChangemarks extends FormatBlock
 {
+    public function renderAsHtml()
+    {
+        if ($this->str == "changed") {
+            return "<span class='updatemarker update open'>" . __('Update') . "&gt;&gt;</span>";
+        }
+        elseif ($this->str == "/changed") {
+            return "<span class='updatemarker update close'>" . "&lt;&lt;" . "</span>";
+        }
+        elseif ($this->str == "added") {
+            return "<span class='updatemarker new open'>" . __('New') . "&gt;&gt;</span>";
+        }
+        elseif ($this->str == "/added") {
+            return "<span class='updatemarker new close'>" . "&lt;&lt;" . "</span>";
+        }
+        elseif ($this->str == "deleted something") {
+            return "<span class='updatemarker deleted'>" . __('Deleted') . "</span>";
+        }
+    }
 
     static function parseBlocks(&$blocks)
     {
         $blocks_new= array();
+
         foreach($blocks as $b) {
+
             if($b->str && !($b instanceof FormatBlockCode)) {
 
                 $text= $b->str;
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/\A(.*?)\r?\n[ \t]*\r?\n((?:[ \t]+[^\n]*\n)+)\r?\n?(.*)/s", $text, $matches)) {
+                    if(preg_match("/^(.*?)\[(\/?changed|\/?added|deleted something)\](.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]."\n");
-                        $blocks_new[]= new FormatBlockCode($matches[2],'');
+                        $blocks_new[]= new FormatBlockChangemarks($matches[2]);
                         $text= $matches[3];
                         $found= true;
                     }
@@ -199,14 +220,17 @@ class FormatBlockCodeIndented extends FormatBlockCode
                         break;
                     }
                 }
+
             }
             else {
                 $blocks_new[]=$b;
             }
         }
         return $blocks_new;
-    }
+    }    
 }
+
+
 
 
 class FormatBlockBold extends FormatBlock
@@ -384,6 +408,7 @@ class FormatBlockQuote extends FormatBlock
 
         $blocks= array(new FormatBlock($str));
 
+        $blocks= FormatBlockChangemarks::parseBlocks($blocks);
 
         $blocks= FormatBlockBold::parseBlocks($blocks);
         $blocks= FormatBlockStrike::parseBlocks($blocks);
@@ -609,12 +634,6 @@ class FormatBlockSub extends FormatBlock
 }
 
 
-
-
-
-
-
-
 class FormatBlockHeadline extends FormatBlock
 {
     public $level;
@@ -624,6 +643,7 @@ class FormatBlockHeadline extends FormatBlock
     {
 
         $blocks= array(new FormatBlock($str));
+        $blocks= FormatBlockChangemarks::parseBlocks($blocks);
 
         $blocks= FormatBlockBold::parseBlocks($blocks);
         $blocks= FormatBlockStrike::parseBlocks($blocks);
@@ -1362,7 +1382,7 @@ class FormatBlockLink extends FormatBlock
                     break;                
 
                 default:
-                    $html = '<em>'. sprintf(__('Cannot link to item #%s of type %s'), intval($target), $item->type). '</em>';
+                    $html = '<em>'. sprintf(__('Cannot link to item #%s of type %s'), intval($target_id), $item->type). '</em>';
                     break;
             }
         }
@@ -1533,9 +1553,6 @@ class FormatBlockList extends FormatBlock
 
         }
 
-        #$tmp= array(new FormatBlock($str));
-        #$this->children= FormatBlockBold::parseBlocks($tmp);
-
         $this->str= '';
     }
 
@@ -1624,18 +1641,12 @@ class FormatBlockList extends FormatBlock
                 $text= $b->str;
                 $found= false;
                 while($text) {
-
-                    #if(preg_match("/\A((?: *\-[ \t][^\r\n]+\r?\n)+)[ \t]*(\r?\n.*)/su", $text, $matches)) {
-                    #
-                    # partly working:
-                    #  if(preg_match("/\A((?:(?:\*|\-|\#) [^\r\n]+\r?\n)+)[ \t]*\r?\n?(.*)/su", $text, $matches)) {
                     if(preg_match("/\A((?:[ \t]*(?:\*|\-|\#|\d+\.) [^\r\n]+\r?\n)+)(.*)/su", $text, $matches)) {
 
                         $blocks_new[]= new FormatBlockList($matches[1]);
                         $text= $matches[2];
                         $found= true;
                     }
-                    #else if(preg_match("/(.*?)\n((?:[ \t]*(\-|\*)[ \t][^\r\n]+\r?\n)+)([ \t]*\r?\n.*)/su", $text, $matches)) {
                     else if(preg_match("/(.*?)\n((?:[ \t]*(\-|\*|\#|\d+\.) [^\r\n]+\r?\n)+)\r?\n?(.*)/su", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
 
@@ -1676,6 +1687,8 @@ class FormatBlockTable extends FormatBlock
             $new_cells= array();
             foreach($cells as $cell) {
                 $cell_blocks= array(new FormatBlock($cell));
+
+                $cell_blocks= FormatBlockChangemarks::parseBlocks($cell_blocks);
 
                 $cell_blocks= FormatBlockBold::parseBlocks($cell_blocks);
                 $cell_blocks= FormatBlockStrike::parseBlocks($cell_blocks);
@@ -1910,6 +1923,7 @@ function &wiki2blocks(&$text)
     ### code-blocks ###
     $blocks= FormatBlockCode::parseBlocks($blocks);
     #$blocks= FormatBlockCodeIndented::parseBlocks($blocks);
+
     
 
     $blocks= FormatBlockTable::parseBlocks($blocks);
@@ -1917,11 +1931,11 @@ function &wiki2blocks(&$text)
     $blocks= FormatBlockQuote::parseBlocks($blocks);
     $blocks= FormatBlockHeadline::parseBlocks($blocks);
 
+    $blocks= FormatBlockChangemarks::parseBlocks($blocks);
     
     $blocks= FormatBlockList::parseBlocks($blocks);
 
     $blocks= FormatBlockLeadingSpaces::parseBlocks($blocks);
-
 
     $blocks= FormatBlockBold::parseBlocks($blocks);
     $blocks= FormatBlockStrike::parseBlocks($blocks);
@@ -1962,12 +1976,8 @@ function wiki2purehtml($text, $project=NULL)
         if(!is_object($project)) {
             $project= Project::getVisibleById($project);
         }
-    
-        
         $g_wiki_project= $project;
     }
-
-
 
     $text= asHtml($text);
     $blocks = wiki2blocks($text);

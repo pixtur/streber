@@ -271,7 +271,7 @@ class ItemChange extends DbItem
             : '';
 
         $str_field= $field
-            ? "AND c.field =`" . asCleanString($field) . "`"
+            ? "AND c.field ='" . asCleanString($field) . "'"
             : '';
 
         $str_person= $person
@@ -292,7 +292,6 @@ class ItemChange extends DbItem
             ". getOrderByString($order_by);
 
             ;
-
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str_query);
 

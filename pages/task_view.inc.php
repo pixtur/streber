@@ -933,7 +933,6 @@ function taskViewAsDocu()
 
         initPageForTask($page, $task, $project);
 
-        $task->nowViewedByUser();
 
         $page->title_minor_html=$PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
         if($task->state == -1) {
@@ -1029,6 +1028,8 @@ function taskViewAsDocu()
             }
 
             if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+                require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+
                 $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$task->id));
                 if((!$item) || ($item[0]->is_bookmark == 0)){
                     $page->add_function(new PageFunction(array(
@@ -1047,8 +1048,6 @@ function taskViewAsDocu()
                     )));
                 }
             }
-
-
         }
 
         ### render title ###
@@ -1066,8 +1065,6 @@ function taskViewAsDocu()
 
         $list->print_all();
     }
-
-
 
     #--- info block ------------
     {
@@ -1112,8 +1109,6 @@ function taskViewAsDocu()
             }
             echo "</div>";
         }
-
-
         echo "</div>";
 
         $block->render_blockEnd();
@@ -1178,17 +1173,18 @@ function taskViewAsDocu()
 
     #--- description ----------------------------------------------------------------
     {
-
+        
+        $descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
         if($editable) {
-            $description= $task->description;
+            $description= $descriptionWithUpdates;
             if( $description == "" ) {
                 $description = "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]";
             } 
             echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
-            echo  wiki2html($task->description, $project);
+            echo  wiki2html($descriptionWithUpdates, $project);
         }
         echo "</div>";
 
@@ -1246,7 +1242,13 @@ function taskViewAsDocu()
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
+
+    $task->nowViewedByUser();
+
 }
+
+
+
 
 /**
 * initialize request feedback autocomplete field

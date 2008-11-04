@@ -2245,9 +2245,6 @@ div.wiki hr {
   display:block;
 }
 
-
-
-
 div.wiki span.end {
     clear:both;
     display:block;
@@ -2332,6 +2329,17 @@ div.wiki .edit_chapter{
 
 div.wiki .edit_chapter:hover {
     background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
+}
+
+div.wiki span.updatemarker {
+  background-color: #ff9000; /*#E57700;*/
+  color: white;
+  text-transform: uppercase;
+  padding: 0.2em 0.4em;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 70%;
+  -moz-border-radius: 4px;
 }
 
 table.list tr.selected div.wiki .edit_chapter:hover {
@@ -2497,7 +2505,7 @@ table.list tr.selected td span{
 
     left:0px;
     margin-right:30%;
-    width:70%;
+    width:60%;
     height:100%;
 
     position:fixed;
@@ -2512,7 +2520,6 @@ table.list tr.selected td span{
 
     background-color:#ccc;
 
-
     position:fixed;
     overflow:auto;
 
@@ -2520,9 +2527,9 @@ table.list tr.selected td span{
     right:0px;
     left:auto;
     height:100%;
-    width:30%;
+    width:40%;
     position:fixed;
-    font-size:70%;
+    font-size:90%;
     background:#D7E1EB url(img/bg_sideboard.png);
     background-repeat:repeat-y;
     background-position:top left;
