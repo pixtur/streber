@@ -494,6 +494,7 @@ class ChangeLine extends BaseObject
                         'timestamp' =>      $i->deleted,
                         'item_id'   =>      $i->id,
                         #'task'      =>      $task,
+                        'txt_what' =>      $txt_what,
                         'html_what' =>      $html_what,
                         'html_assignment'=> $html_assignment,
                         'html_details'=>    $html_details,

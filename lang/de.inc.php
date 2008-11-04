@@ -2196,6 +2196,86 @@ $g_lang_table= array(
 '%a %b %e, %Y %I:%M%P|strftime format string'=>'',
 '%A, %B %e|strftime format string'=>'',
 
+### ../db/class_task.inc.php   ###
+'List title and description in project overview'=>'',  # line 191
+'Display folder as topic'     =>'',  # line 197
+
+### ../lists/list_recentchanges.inc.php   ###
+'Also show your changes'      =>'',  # line 95
+'Hide your changes'           =>'',  # line 98
+'Needs feedback'              =>'',  # line 165
+
+### ../lists/list_tasks.inc.php   ###
+'Days until planned end'      =>'',  # line 1240
+'Due|column header, days until planned end'=>'',  # line 1241
+
+### ../pages/_handles.inc.php   ###
+'Toggle filter own changes'   =>'',  # line 1173
+
+### ../pages/comment.inc.php   ###
+'Re: '                        =>'',  # line 243
+
+### ../pages/home.inc.php   ###
+'my blocked'                  =>'',  # line 561
+'needs feedback'              =>'',  # line 620
+
+### ../pages/login.inc.php   ###
+'Welcome to %s', 'Notice after login'=>'Willkommen auf %s',  # line 78
+
+### ../pages/misc.inc.php   ###
+'One notification sent'       =>'Eine Nachrichtig gesendet',  # line 426
+'%s notifications sent'       =>'%s Nachrichten gesendet',  # line 429
+'No notifications sent'       =>'Keine Nachricht gesendet',  # line 432
+
+### ../pages/person.inc.php   ###
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Aufgabe und Projekt für diese Person erstellen',  # line 627
+'ASAP'                        =>'möglichst Bald',  # line 2110
+'Filter own changes from recent changes list'=>'Eine Änderungen ausblenden',  # line 2232
+
+### ../pages/project_more.inc.php   ###
+'New project from'            =>'Neues Projekt von',  # line 57
+'all|Filter preset'           =>'alle',  # line 1372
+'new|Filter preset'           =>'neu',  # line 1392
+'open|Filter preset'          =>'offen',  # line 1412
+'discounted|Filter preset'    =>'herabgesetzt',  # line 1432
+'not chargeable|Filter preset'=>'nicht anrechenbar',  # line 1452
+'balanced|Filter preset'      =>'ausgeglichen',  # line 1472
+'last logout|Filter preset'   =>'letzter Logout',  # line 1492
+'1 week|Filter preset'        =>'1 Woche',  # line 1511
+'2 weeks|Filter preset'       =>'2 Wochen',  # line 1531
+'3 weeks|Filter preset'       =>'3 Wochen',  # line 1551
+'1 month|Filter preset'       =>'1 Monat',  # line 1571
+'prior|Filter preset'         =>'Davor',  # line 1591
+
+### ../pages/task_more.inc.php   ###
+'Nickname not known in this project: %s'=>'Nickname nicht bekannt.',  # line 896
+'Requested feedback from: %s.'=>'Feedback von %s angefragt.',  # line 901
+
+### ../pages/task_view.inc.php   ###
+'Your feedback is requested by %s.'=>'%s möchte Ihre Meinung wissen.',  # line 1166
+'Please edit or comment this item.'=>'Bitte jetzt bearbeiten oder kommentieren.',  # line 1167
+'This task has no description.\nDoubleclick to edit.'=>'Dieses Objekt hat keine Beschreibung.\nZum Bearbeiten doppelt klicken.',  # line 416
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dieses Thema hat noch keinen Text\nKlicken Sie doppelt, um etwas zu schreiben.',  # line 1182
+'Request feedback'            =>'Nach Meinung fragen',  # line 1265
+
+### ../render/render_misc.inc.php   ###
+'%b %e, %Y|strftime format string'=>'',  # line 793
+'%I:%M%P|strftime format string'=>'',  # line 807
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 817
+'%A, %B %e|strftime format string'=>'',  # line 1169
+
+### ../render/render_wiki.inc.php   ###
+'Update|wiki change marker'   =>'Geändert',  # line 180
+'New|wiki change marker'      =>'Neu',  # line 186
+'Deleted|wiki change marker'  =>'Gelöscht',  # line 192
+'Item #%s is not an image'    =>'Object #%s ist kein Bild',  # line 1078
+'Unkwown item %s'             =>'Unbekanntes Objekt %s',  # line 1324
+'Cannot link to item #%s of type %s'=>'Verknüpfung zu Objekt #%s nicht möglich',  # line 1385
+
+### ../std/constant_names.inc.php   ###
+'Upcomming|release type'      =>'Angekündigt',  # line 178
+'ASAP|notification period'    =>'Sobald wie möglich',  # line 230
+
 
 );
 

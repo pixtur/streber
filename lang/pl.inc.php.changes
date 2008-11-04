@@ -2,11 +2,12 @@ undefined keys:
 ---------------
 
 ### ../db/class_project.inc.php   ###
-'Milestones (closed)'         =>'',  # line 1463
+'Milestones (closed)'         =>'',  # line 1446
 
 ### ../db/class_task.inc.php   ###
 'Display in project news'     =>'',  # line 190
 'List title and description in project overview'=>'',  # line 191
+'Display folder as topic'     =>'',  # line 197
 
 ### ../lists/list_forwardedtasks.inc.php   ###
 'Your demand notes'           =>'',  # line 33
@@ -16,18 +17,19 @@ undefined keys:
 'Recent changes'              =>'',  # line 55
 'Also show your changes'      =>'',  # line 95
 'Hide your changes'           =>'',  # line 98
+'Needs feedback'              =>'',  # line 165
 
 ### ../lists/list_tasks.inc.php   ###
-'Days until planned end'      =>'',  # line 1267
-'Due|column header, days until planned end'=>'',  # line 1268
+'Days until planned end'      =>'',  # line 1240
+'Due|column header, days until planned end'=>'',  # line 1241
 
 ### ../pages/_handles.inc.php   ###
 'Recent changes|Page option tab'=>'',  # line 19
 'Overall changes'             =>'',  # line 58
-'Toggle filter own changes'   =>'',  # line 1172
+'Toggle filter own changes'   =>'',  # line 1173
 
 ### ../pages/comment.inc.php   ###
-'Re: '                        =>'',  # line 242
+'Re: '                        =>'',  # line 243
 
 ### ../pages/project_view.inc.php   ###
 'Book effort'                 =>'',  # line 179
@@ -40,6 +42,17 @@ undefined keys:
 '3 weeks'                     =>'',  # line 1534
 '1 month'                     =>'',  # line 1554
 'prior'                       =>'',  # line 1574
+
+### ../pages/login.inc.php   ###
+'Welcome to %s", 'Notice after login'=>'',  # line 78
+'Welcome to %s|Notice after login'=>'',  # line 269
+
+### ../pages/misc.inc.php   ###
+'One notification sent'       =>'',  # line 426
+'%s notifications sent'       =>'',  # line 429
+'No notifications sent'       =>'',  # line 432
+
+### ../pages/person.inc.php   ###
 'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 627
 'Add note|Page function person'=>'',  # line 628
 'Edit profile|Page function edit person'=>'',  # line 642
@@ -51,39 +64,51 @@ undefined keys:
 ### ../pages/project_more.inc.php   ###
 'New project from'            =>'',  # line 57
 'Topics'                      =>'',  # line 1120
-'No topics yet'               =>'',  # line 1156
-'all|Filter preset'           =>'',  # line 1379
-'new|Filter preset'           =>'',  # line 1399
-'open|Filter preset'          =>'',  # line 1419
-'discounted|Filter preset'    =>'',  # line 1439
-'not chargeable|Filter preset'=>'',  # line 1459
-'balanced|Filter preset'      =>'',  # line 1479
-'last logout|Filter preset'   =>'',  # line 1499
-'1 week|Filter preset'        =>'',  # line 1518
-'2 weeks|Filter preset'       =>'',  # line 1538
-'3 weeks|Filter preset'       =>'',  # line 1558
-'1 month|Filter preset'       =>'',  # line 1578
-'prior|Filter preset'         =>'',  # line 1598
-'View calculation'            =>'',  # line 1681
-'Effort calculations'         =>'',  # line 1864
+'No topics yet'               =>'',  # line 1149
+'all|Filter preset'           =>'',  # line 1372
+'new|Filter preset'           =>'',  # line 1392
+'open|Filter preset'          =>'',  # line 1412
+'discounted|Filter preset'    =>'',  # line 1432
+'not chargeable|Filter preset'=>'',  # line 1452
+'balanced|Filter preset'      =>'',  # line 1472
+'last logout|Filter preset'   =>'',  # line 1492
+'1 week|Filter preset'        =>'',  # line 1511
+'2 weeks|Filter preset'       =>'',  # line 1531
+'3 weeks|Filter preset'       =>'',  # line 1551
+'1 month|Filter preset'       =>'',  # line 1571
+'prior|Filter preset'         =>'',  # line 1591
+'View calculation'            =>'',  # line 1674
+'Effort calculations'         =>'',  # line 1857
 
 ### ../pages/task_more.inc.php   ###
-'Because task is resolved, its status has been changed to completed.'=>'',  # line 1205
+'Nickname not known in this project: %s'=>'',  # line 896
+'Requested feedback from: %s.'=>'',  # line 901
+'Because task is resolved, its status has been changed to completed.'=>'',  # line 1236
 
 ### ../pages/task_view.inc.php   ###
-'Edit this %s'                =>'',  # line 76
-'This task has no description.\nDoubleclick to edit.'=>'',  # line 405
-'Need feedback from'          =>'',  # line 711
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1163
+'Edit this %s'                =>'',  # line 77
+'Your feedback is requested by %s.'=>'',  # line 1166
+'Please edit or comment this item.'=>'',  # line 1167
+'This task has no description.\nDoubleclick to edit.'=>'',  # line 416
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1182
+'Request feedback'            =>'',  # line 1265
 
 ### ../render/render_misc.inc.php   ###
 'without client|short for client'=>'',  # line 539
-'Topics|Project option'       =>'',  # line 603
-'Calculation|Project option'  =>'',  # line 644
-'Changes|Project option'      =>'',  # line 652
+'Topics|Project option'       =>'',  # line 616
+'Calculation|Project option'  =>'',  # line 657
+'Changes|Project option'      =>'',  # line 665
 
 ### ../render/render_page.inc.php   ###
-'Home|section'                =>'',  # line 248
+'Home|section'                =>'',  # line 247
+
+### ../render/render_wiki.inc.php   ###
+'Update|wiki change marker'   =>'',  # line 180
+'New|wiki change marker'      =>'',  # line 186
+'Deleted|wiki change marker'  =>'',  # line 192
+'Item #%s is not an image'    =>'',  # line 1078
+'Unkwown item %s'             =>'',  # line 1324
+'Cannot link to item #%s of type %s'=>'',  # line 1385
 
 ### ../std/constant_names.inc.php   ###
 'Enable tasks|Project setting'=>'',  # line 74

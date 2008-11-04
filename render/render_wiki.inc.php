@@ -177,19 +177,19 @@ class FormatBlockChangemarks extends FormatBlock
     public function renderAsHtml()
     {
         if ($this->str == "changed") {
-            return "<span class='updatemarker update open'>" . __('Update') . "&gt;&gt;</span>";
+            return "<span class='updatemarker update open'>" . __('Update','wiki change marker') . "➜</span>";
         }
         elseif ($this->str == "/changed") {
-            return "<span class='updatemarker update close'>" . "&lt;&lt;" . "</span>";
+            return "<span class='updatemarker update close'>" . "]" . "</span>";
         }
         elseif ($this->str == "added") {
-            return "<span class='updatemarker new open'>" . __('New') . "&gt;&gt;</span>";
+            return "<span class='updatemarker new open'>" . __('New','wiki change marker') . "➜</span>";
         }
         elseif ($this->str == "/added") {
-            return "<span class='updatemarker new close'>" . "&lt;&lt;" . "</span>";
+            return "<span class='updatemarker new close'>" . "]" . "</span>";
         }
         elseif ($this->str == "deleted something") {
-            return "<span class='updatemarker deleted'>" . __('Deleted') . "</span>";
+            return "<span class='updatemarker deleted'>" . __('Deleted','wiki change marker') . "</span>";
         }
     }
 
