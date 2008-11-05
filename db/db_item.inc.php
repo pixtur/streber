@@ -1542,6 +1542,9 @@ class DbProjectItem extends DbItem {
                 return $this->$fieldname;
             }
         }
+        else {
+            return $this->$fieldname;
+        }
         
         $new_version = $this->$fieldname;
         $changes= ItemChange::getItemChanges(array(

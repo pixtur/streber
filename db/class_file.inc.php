@@ -612,7 +612,8 @@ class File extends DbProjectItem
             'new_height'=> $new_height, 
             'width'     => $width,
             'height'    => $height,
-            'downscale' => $downscale
+            'downscale' => $downscale,
+            'filepath'  => $filepath
         );
     }
 
@@ -624,7 +625,12 @@ class File extends DbProjectItem
             log_message("file::viewAsImage($this->id) can not find file1 '$filepath'",LOG_MESSAGE_MISSING_FILES);
             return;
         }
-
+        $filepath   = $dimensions['filepath'];
+        $new_width  = $dimensions['new_width'];
+        $new_height = $dimensions['new_height'];
+        $width  = $dimensions['width'];
+        $height = $dimensions['height'];
+        
         /**
         * just provide the original file
         */
@@ -664,10 +670,10 @@ class File extends DbProjectItem
                  0,                             #int dstY,
                  0,                             #int srcX,
                  0,                             #int srcY,
-                 $dimensions['new_width'],      #int dstW,
-                 $dimensions['new_height'],     #int dstH,
-                 $dimensions['width'],          #int srcW,
-                 $dimensions['height']          #int srcH
+                 $new_width,      #int dstW,
+                 $new_height,     #int dstH,
+                 $width,          #int srcW,
+                 $height          #int srcH
             )) {
                 imagejpeg($image_new);
             }
@@ -692,10 +698,10 @@ class File extends DbProjectItem
                  0,       #int dstY,
                  0,       #int srcX,
                  0,       #int srcY,
-                 $dimensions['new_width'],      #int dstW,
-                 $dimensions['new_height'],     #int dstH,
-                 $dimensions['width'],          #int srcW,
-                 $dimensions['height']          #int srcH
+                 $new_width,      #int dstW,
+                 $new_height,     #int dstH,
+                 $width,          #int srcW,
+                 $height          #int srcH
             )) {
                 imagejpeg($image_new);
             }
@@ -717,10 +723,10 @@ class File extends DbProjectItem
                  0,                             #int dstY,
                  0,                             #int srcX,
                  0,                             #int srcY,
-                 $dimensions['new_width'],      #int dstW,
-                 $dimensions['new_height'],     #int dstH,
-                 $dimensions['width'],          #int srcW,
-                 $dimensions['height']          #int srcH
+                 $new_width,      #int dstW,
+                 $new_height,     #int dstH,
+                 $width,          #int srcW,
+                 $height          #int srcH
             )) {
                 imagejpeg($image_new);
             }
