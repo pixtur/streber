@@ -1224,9 +1224,9 @@ new PageHandleForm(array('id'=>'loginForgotPassword',
     'valid_for_anonymous'=>true,
     'ignore_from_handles'=>true,
     'valid_params'=>array(),
-
-    'cleanurl'=>'loginForgotPassword',
+    #'cleanurl'=>'loginForgotPassword',
 ));
+
 new PageHandleSubm(array('id'=>'loginForgotPasswordSubmit',
     'req'=>'pages/login.inc.php',
     'valid_for_anonymous'=>true,

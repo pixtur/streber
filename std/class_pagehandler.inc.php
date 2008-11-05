@@ -234,10 +234,13 @@ class PageHandler extends BaseObject
 
     /**
     * return valid url to this page, checks rights & param
+    *
+    * for directly referring to a URL overwrite the amp-parameter to "&"
     */
-    public function getUrl($id=NULL, $params=NULL)
+    public function getUrl($id=NULL, $params=NULL, $amp= "&amp;")
     {
         global $auth;
+        
 
         if(!$id || !isset($this->hash[$id]) ) {
             trigger_error("id '$id' is not valid ".confGet('LINK_REPORT_BUGS'),E_USER_WARNING);
@@ -295,14 +298,14 @@ class PageHandler extends BaseObject
                     trigger_error("Undefined paramater for page-handle '$id': '$key'='$value' ", E_USER_WARNING);
                 }
 
-                $str_params.='&amp;' . $key . '=' . $value;
+                $str_params.= $amp . $key . '=' . $value;
             }
         }
 
 
         if(!$phandle->ignore_from_handles && $phandle->called_with_from_handle) {
             if($this->cur_page_md5) {
-                $str_params.= '&amp;from='.$this->cur_page_md5;
+                $str_params.= $amp . 'from=' . $this->cur_page_md5;
             }
             else {
                 /**
@@ -356,10 +359,8 @@ class PageHandler extends BaseObject
                     }
                 }
                 $buffer= $url;
-
             }
         }
-
         return $buffer;
     }
 
@@ -618,6 +619,16 @@ class PageHandler extends BaseObject
                 $go= $PH->getPage($params['go'])->id;       # be sure the page-id is value
                 unset($params['go']);                       # don't pass the id as param
                 $PH->show($go,$params);
+                
+                /**
+                * Although the following alternative works very nice in theory, 
+                * we have to implement a way, to store the flash notices either
+                * in a session variable or somewhere in the database.
+                * 
+                * FlashNotices
+                *  uid, timestamp, message
+                */
+                #header("Location: ".$this->getUrl($go, $params, '&'));
             }
             else {
                 trigger_error("no page-id in params got by from_handle.".confGet('LINK_REPORT_BUGS'));
