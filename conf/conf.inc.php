@@ -321,7 +321,7 @@ $g_config= array(
     /**
     * use mod_rewrite clean urls
     */
-    'USE_MOD_REWRITE'=>false,
+    'USE_MOD_REWRITE'=> true,
 	
 	/**
 	* cost overview

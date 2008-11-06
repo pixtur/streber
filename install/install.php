@@ -487,11 +487,12 @@ function step_02_proceed()
             }
         }
 
+        
         ### creating database-structure ###
-        print_testStart("creating tables...");
+        print_testStart("creating table structure...");
 
         $filename= "./create_structure_v".confGet('DB_CREATE_DUMP_VERSION').".sql";
-        $upgradeFromVersion = NULL;
+        $upgradeFromVersion = confGet('DB_CREATE_DUMP_VERSION');
 
         if(!file_exists($filename)) {
             $filenames = glob("./create_structure_v*.sql");
@@ -511,8 +512,11 @@ function step_02_proceed()
             print_testResult(RESULT_FAILED,"SQL-Error[" . __LINE__ . "]:<br><pre>".$sql_obj->error."</pre>");
             return false;
         }
+        print_testResult(RESULT_GOOD);
         
-        if($upgradeFromVersion) {
+        ### upgrade
+        if($upgradeFromVersion != confGet('STREBER_VERSION')) {
+            print_testStart("updating to latest version...");
             $result= upgrade(array(
                 'db_type'       => $f_db_type,
                 'hostname'      => $f_hostname,
@@ -527,9 +531,9 @@ function step_02_proceed()
                 print_testResult(RESULT_FAILED,"Upgrading failed. This is an internal error. Look at ". getStreberWikiLink('installation','Installation Guide') ." for clues. ");
                 return false;
             }
+            print_testResult(RESULT_GOOD);
         }
         
-        print_testResult(RESULT_GOOD);
 
         ### create db-version entry ###
         print_testStart("add db-version entry");
@@ -703,7 +707,8 @@ function upgrade($args=NULL)
     require_once(dirname(__FILE__)."/../db/db_".$db_type."_class.php");
 
     echo "<h2>Upgrading...</h2>";
-
+    print_testStart("getting original version...");
+    
     ### connect db ###
     $sql_obj = new sql_class($hostname, $db_username, $db_password, $db_name);
 
@@ -721,8 +726,6 @@ function upgrade($args=NULL)
     ### get version ###
     if(!$db_version)
     {
-        print_testStart("getting original version for upgrading database '$db_name' at '$hostname'...");
-
         if(!$result=$sql_obj->execute("SELECT *
                                    FROM {$db_table_prefix}db
                                   WHERE updated is NULL")

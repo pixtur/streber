@@ -1,7 +1,6 @@
+# Cleanurls with Apache 2.0
 RewriteEngine on
-
 RewriteRule ^([0-9]+)$ index.php?go=itemView&id=$1 [L]
-
 RewriteRule ^([a-zA-Z]+)$ index.php?go=globalView&id=$1 [L]
 
 
@@ -20,7 +19,6 @@ ExpiresByType video/x-flv A604800
 ExpiresByType application/pdf A604800
 ExpiresByType text/html A300
 </IfModule>
-
 
 ErrorDocument 400 /streber/index.php
 ErrorDocument 401 /streber/index.php
