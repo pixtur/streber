@@ -2146,30 +2146,31 @@ div.wiki p.code_from span {
 
 
 div.wiki h1,div.wiki h2, div.wiki h3,div.wiki h4, div.wiki h5 {
-    margin:10px 10px 5px 0px;
+    margin:1em 10px 0.4em 0px;
     padding:0px;
     background-image:none;
+    font-weight:normal;
+    font-family: georgia;
 }
 div.wiki h1 {
-    font-size:14pt;
+    font-size:21pt;
 }
 
 div.wiki h2 {
-    font-size:14pt;
+    font-size:21pt;
 }
 
 div.wiki h3 {
-    font-size:12pt;
+    font-size:15pt;
 }
 
 div.wiki ul, div.wiki ol {
-    padding-left:2.4em;
+    padding-left:2.0em;
     margin-left:0px;
 }
 
 div.wiki li{
-    /*padding:0px 0px 2px 0px;
-    margin:0px;*/
+    padding-bottom: 0.4em;
 }
 
 
@@ -2284,7 +2285,7 @@ div.wiki a.person {
     background-position:center left;
 }
 
-div.wiki p.quote {
+div.wiki div.quote blockquote {
     font-family:Georgia, Times;
     color:#444;
     margin:1em 1em 0em 1em;

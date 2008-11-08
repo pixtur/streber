@@ -159,9 +159,6 @@ function ProjView()
         ));
         $block->render_blockStart();
 
-        #echo $str;
-
-
         echo "<div class=description>";
         if($editable) {
             echo  wiki2html($project->description, $project, $project->id, 'description');
@@ -171,57 +168,23 @@ function ProjView()
         }
         echo "</div>";
 
-
-        #echo "<div class=text>";
-
-        #echo wiki2html($project->description, $project);
+        $block->render_blockEnd();
 
         ### update task if relative links have been converted to ids ###
-        global $g_wiki_auto_adjusted;
-        if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-            $project->description= $g_wiki_auto_adjusted;
+        if( checkAutoWikiAdjustments() ) {
+            $project->description= applyAutoWikiAdjustments( $project->description );
             $project->update(array('description'),false);
         }
-
-        #echo "</div>";
-
-        $block->render_blockEnd();
     }
     
-    
-    /**
-    * list folders has become obsolete, since
-    * moving tasks is done by separate dialog
-    */
-    /*
-    measure_start('folders');
-
-    #--- list folders -----------------------------------------------------------
-    $list= new ListBlock_taskFolders($project);
-    $list->render();
-
-    measure_stop('folders');
-    */
     measure_start('team');
-
-
-
-
-
 
     echo(new PageContentNextCol);
     measure_stop('team');
 
 
-
-
 	#--- news -----------------------------------------------------------
     {
-        /*if($news= Task::getAll(array(
-            'category'  => TCATEGORY_DOCU,
-            'label'     => 1,
-            'order_by'  => 'created DESC',
-        )))*/
 		if($news= $project->getTasks(array(
             'order_by'  => 'created DESC',
             'is_news'  => 1,
@@ -230,12 +193,9 @@ function ProjView()
             $block=new PageBlock(array(
                 'title'=>__('News'),
                 'id'=>'news',
-                #'reduced_header'=>true,
     
             ));
             $block->render_blockStart();
-    
-            #echo $str;
     
             echo "<div class='text'>";
             
@@ -273,25 +233,6 @@ function ProjView()
         printRecentChanges(array($project), false);
     }
 
-/*
-    #--- list changes (new) -----------------------------------------------------------
-    #measure_start('changes');
-    #if(!Auth::isAnonymousUser()) {
-    #    require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
-    #
-    #     $list= new ListBlock_changes();
-    #    $list->query_options['date_min']= $auth->cur_user->last_logout;
-    #    $list->query_options['not_modified_by']= $auth->cur_user->id;
-    #    $list->print_automatic($project);
-    #}
-    #measure_stop('changes');
-
-    {
-        require_once(confGet('DIR_STREBER') . './lists/list_recentchanges.inc.php');
-        printRecentChanges(array($project), false);
-    }
-    */
-
     echo "<br><br>";                                        # @@@ hack for firefox overflow problems
     ### HACKING: 'add new task'-field ###
     $PH->go_submit='taskNew';
@@ -300,9 +241,6 @@ function ProjView()
 
     ### rss link ###
     {
-		#$rss_url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-		#$rss_url = str_replace("index.php", "rss/", $rss_url);
-		#$prj_id  = $this->page->options[0]->target_params['prj'];
 		$url= $PH->getUrl('projViewAsRSS',array('prj'=> $project->id));
 		echo  "<a style='margin:0px; border-width:0px;' href='{$url}' target='_blank'>"
 		        ."<img style='margin:0px; border-width:0px;' src='" . getThemeFile("icons/rss_icon.gif") ."'>"

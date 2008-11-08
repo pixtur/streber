@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0809',
-    'STREBER_VERSION_DATE'  => '2008-11-03',
+    'STREBER_VERSION'       => '0.08091',
+    'STREBER_VERSION_DATE'  => '2008-11-08',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -312,11 +312,6 @@ $g_config= array(
     'DAYGRAPH_END_HOUR'   =>22,
     'DAYGRAPH_WIDTH'      =>200,
 
-    /**
-    * automatically insert ids of to links in wiki texts
-    *  e.g. [[blabla]] -> [[item:23|blabla]]
-    */
-    'WIKI_AUTO_INSERT_IDS'      =>true,
 
     /**
     * use mod_rewrite clean urls

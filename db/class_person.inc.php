@@ -110,8 +110,7 @@ class Person extends DbProjectItem {
                 'title'     =>__('Office E-Mail'),
                 'tooltip'   =>__('Optional: (eg. thomas@pixtur.de)'),
             )),
-    
-    
+
             ### personal stuff ###
             new FieldString(array(      'name'=>'personal_phone',
                 'title'     =>__('Personal Phone'),
@@ -297,9 +296,9 @@ class Person extends DbProjectItem {
                              ),
                 'log_changes'   =>false,
                 'export'        =>false,
-    
+
             )),
-    
+
             new FieldInternal(array(    'name'=>'notification_last',
                 'default'       => FINIT_NEVER,
                 'log_changes'   =>false,

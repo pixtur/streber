@@ -18,10 +18,6 @@
 global $g_replace_list;
 $g_replace_list=array();
 
-global $g_wiki_auto_adjusted;
-$g_wiki_auto_adjusted= '';
-
-
 class FormatBlock
 {
     public $str="";
@@ -90,9 +86,7 @@ class FormatBlockCode extends FormatBlock
 
                 $text= $b->str;
                 while($text) {
-                    #quote(\s*[^\]]*)\](.*?)\[\/quote\
                     if(preg_match("/^(.*?)\[code(\s*[^\]]*)\](.*?)\[\/code\]\r?\n?(.*)$/s", $text, $matches)) {
-                    #if(preg_match("/^(.*?)\[code\](.*?)\[\/code\]\r?\n?(.*)$/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockCode($matches[3],$matches[2]);
                         $text= $matches[4];
@@ -443,13 +437,12 @@ class FormatBlockQuote extends FormatBlock
 
             }
         }
-        $buffer= "<p class=quote>".asHtml($this->str);
-
+        $buffer= "<div class=quote><blockquote>" . asHtml($this->str);
         foreach($this->children as $b) {
             $buffer.= $b->renderAsHtml();
         }
-
-        $buffer.= $buffer_from. "</p>";
+        $buffer.= "</blockquote>";
+        $buffer.= $buffer_from. "</div>";
         return $buffer;
 
     }
@@ -1010,6 +1003,7 @@ class FormatBlockLink extends FormatBlock
         }
 
 
+
         /**
         * urls
         */
@@ -1026,6 +1020,14 @@ class FormatBlockLink extends FormatBlock
                 $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->target) . "</a>";
             }
         }
+        /**
+        * short item ala [[#234|some name]]
+        */
+        else if(preg_match("/\A\#(\d+)/",$this->target, $matches)){
+            $id= intVal( $matches[1]);
+            $this->html= FormatBlockLink::renderLinkFromItemId($id, $this->name);
+        }
+        
         /**
         * type:???
         */
@@ -1168,12 +1170,12 @@ class FormatBlockLink extends FormatBlock
                     if($this->name) {
                         $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($this->name)."</a>";
                         global $g_replace_list;
-                        $g_replace_list[$this->target]='item:'. $tasks[0]->id.'|'.$this->name;
+                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$this->name;
                     }
                     else {
                         $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
                         global $g_replace_list;
-                        $g_replace_list[$this->target]='item:'. $tasks[0]->id.'|'.$tasks[0]->name;
+                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$tasks[0]->name;
                     }
                 }
                 ### matches short name ###
@@ -1185,12 +1187,12 @@ class FormatBlockLink extends FormatBlock
                     if($this->name) {
                         $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($this->name)."</a>";
                         global $g_replace_list;
-                        $g_replace_list[$this->target]='item:'. $tasks[0]->id.'|'.$this->name;
+                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$this->name;
                     }
                     else {
                         $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
                         global $g_replace_list;
-                        $g_replace_list[$this->target]='item:'. $tasks[0]->id.'|'.$tasks[0]->short;
+                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$tasks[0]->short;
                     }
                 }
                 else {
@@ -1262,10 +1264,13 @@ class FormatBlockLink extends FormatBlock
                         }
                     }
                 }
+                /**
+                * Link to create new task or topic
+                */
                 if($g_wiki_project) {
                     $title= __('No item matches this name. Create new task with this name?');
                     global $g_wiki_task;
-                    if(isset($g_wiki_task)) {
+                    if(isset($g_wiki_task) && $g_wiki_task->type == ITEM_TASK) {
                         if($g_wiki_task->category == TCATEGORY_FOLDER) {
                             $parent_task= $g_wiki_task->id;
                         }
@@ -1845,7 +1850,7 @@ class FormatBlockTable extends FormatBlock
 
 
 
-function &wiki2html(&$text, $project=NULL, $item_id=NULL, $field_name=NULL)
+function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
 {
 
     $text_org = $text;
@@ -1892,20 +1897,41 @@ function &wiki2html(&$text, $project=NULL, $item_id=NULL, $field_name=NULL)
     $tmp[]= '<span class=end> </span></div>';                # end-span to create image-floats
 
     $out= implode('', $tmp);
-    global $g_wiki_auto_adjusted;
-    $g_wiki_auto_adjusted= '';
-    if(confGet('WIKI_AUTO_INSERT_IDS')) {
-        global $g_replace_list;
-        if(count($g_replace_list)) {
-            foreach($g_replace_list as $org => $new) {
-                $text_org= str_replace('[['.$org.']]', '[['.$new.']]', $text_org);
-            }
-            $g_wiki_auto_adjusted= $text_org;
-        }
-    }
+
     return $out;
 }
 
+/**
+* Automatically add ids or clarifying wiki syntax stuff
+*
+* Returns:
+* - New wiki string if adjustments were necessary
+* - NULL if nothing was changed
+*
+* Notes:
+* This works only for the wiki-text directly rendered before with wiki2html()
+*/
+function applyAutoWikiAdjustments($text_org)
+{
+    global $g_replace_list;
+
+    if(count($g_replace_list)) {
+        $adjusted_text= $text_org;
+        foreach($g_replace_list as $org => $new) {
+            $adjusted_text= str_replace('[['.$org.']]', '[['.$new.']]', $adjusted_text);
+        }
+        $g_replace_list= array();
+        return $adjusted_text;
+    }
+    else {
+        return $text_org;
+    }
+}
+
+function checkAutoWikiAdjustments() {
+    global $g_replace_list;
+    return count($g_replace_list);
+}
 
 /**
 * do actual parsing of wiki text and conversion into blocks
@@ -2108,8 +2134,6 @@ function &getWikiChapters($text)
     }
     $buffer= implode("",$tmp);
     $parts= explode('__SPLITTER__', $buffer);
-    
-
     return $parts;
 }
 

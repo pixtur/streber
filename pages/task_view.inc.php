@@ -423,9 +423,8 @@ function TaskView()
         echo "</div>";
 
         ### update task if relative links have been converted to ids ###
-        global $g_wiki_auto_adjusted;
-        if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-            $task->description= $g_wiki_auto_adjusted;
+        if( checkAutoWikiAdjustments() ) {
+            $task->description= applyAutoWikiAdjustments( $task->description );
             $task->update(array('description'),false);
         }
     }
@@ -1188,10 +1187,9 @@ function taskViewAsDocu()
         }
         echo "</div>";
 
-
-        global $g_wiki_auto_adjusted;
-        if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-            $task->description= $g_wiki_auto_adjusted;
+        ### Apply automatic link conversions
+        if( checkAutoWikiAdjustments() ) {            
+            $task->description= applyAutoWikiAdjustments( $task->description );
             $task->update(array('description'),false);
         }
     }

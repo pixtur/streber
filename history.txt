@@ -1,5 +1,16 @@
 streber-version-history
 
+version v0.08092 [2008-11-5]
+===========================
+- MAJOR: changed default wiki syntax for links from [[item:34]] to [[#23]]
+- MINOR: adjusted wiki css styles
+- MINOR: adjusted rendering of wiki links
+- Refactored autoWikiAdjustments #7034
+- WIKI_AUTO_INSERT_IDS option is now always on and therefore deprecated
+- MAJOR: fixed potential problem with cached ajax request
+- Fixed: Invalid WikiLinkCreate parent after inline edit #7033
+
+
 version v0.08081  [2008-10-04]
 ==============================
 - MAJOR: option to treat folder as documentation

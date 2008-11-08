@@ -160,13 +160,11 @@ function effortView()
             echo '<div class="text">';
             echo wiki2html($effort->description, $project->id);
 
-            ### update effort if relative links have been converted to ids ###
-            global $g_wiki_auto_adjusted;
-            if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-                $effort->description= $g_wiki_auto_adjusted;
+            ### update task if relative links have been converted to ids ###
+            if( checkAutoWikiAdjustments() ) {
+                $effort->description= applyAutoWikiAdjustments( $effort->description );
                 $effort->update(array('description'),false);
             }
-
             echo "</div>";
         }
         else {
@@ -394,13 +392,12 @@ function effortViewMultiple()
                 echo '<div class="text">';
                 echo wiki2html($effort->description, $effort);
 
-                ### update effort if relative links have been converted to ids ###
-                global $g_wiki_auto_adjusted;
-                if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-                    $effort->description= $g_wiki_auto_adjusted;
+
+                ### update task if relative links have been converted to ids ###
+                if( checkAutoWikiAdjustments() ) {
+                    $effort->description= applyAutoWikiAdjustments( $effort->description );
                     $effort->update(array('description'),false);
                 }
-
                 echo "</div>";
             }
             else {

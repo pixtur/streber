@@ -336,7 +336,7 @@ function ProjView()
 
 
     #--- description ----------------------------------------------------------------
-    if($project->description!="") {
+    if($project->description != "") {
         $block=new PageBlock(array(
             'title'=>__('Description'),
             'id'=>'description',
@@ -345,27 +345,22 @@ function ProjView()
         ));
         $block->render_blockStart();
 
-        #echo $str;
-
-
         echo "<div class=description>";
         if($editable) {
             echo  wiki2html($project->description, $project, $project->id, 'description');
-            
         }
         else {
             echo  wiki2html($project->description, $project);
         }
         echo "</div>";
 
+        $block->render_blockEnd();
 
         ### update task if relative links have been converted to ids ###
-        global $g_wiki_auto_adjusted;
-        if(isset($g_wiki_auto_adjusted) && $g_wiki_auto_adjusted) {
-            $project->description= $g_wiki_auto_adjusted;
+        if( checkAutoWikiAdjustments() ) {
+            $project->description= applyAutoWikiAdjustments( $project->description );
             $project->update(array('description'),false);
         }
-        $block->render_blockEnd();
     }
 
 

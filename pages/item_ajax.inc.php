@@ -15,6 +15,11 @@ require_once("db/class_project.inc.php");
 function itemLoadField()
 {
     header("Content-type: text/html; charset=utf-8");
+    header("Expires: -1");
+    header("Cache-Control: post-check=0, pre-check=0");
+    header("Pragma: no-cache");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
     if(!$item_id=get('item')) {
         return NULL;
     }
@@ -27,7 +32,7 @@ function itemLoadField()
 
     $field_name= 'description';
     if(get('field')) {
-        $field_name= get('field');
+        $field_name= asCleanString(get('field'));
     }
 
     
@@ -36,7 +41,7 @@ function itemLoadField()
     }
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
     
-    $chapter= get('chapter');
+    $chapter= intVal(get('chapter'));
     if(is_null($chapter)) {
         print $object->$field_name;        
     }
@@ -54,6 +59,11 @@ function itemLoadField()
 function itemSaveField()
 {
     header("Content-type: text/html; charset=utf-8");
+    header("Expires: -1");
+    header("Cache-Control: post-check=0, pre-check=0");
+    header("Pragma: no-cache");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
     $value= get('value');
     if(is_null($value)) {
         return;
@@ -88,17 +98,21 @@ function itemSaveField()
 
     $field_name= 'description';
     if(get('field')) {
-        $field_name= get('field');
+        $field_name= asCleanString(get('field'));
     }
     if(!isset($object->fields[$field_name])) {
         return NULL;
     }
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
-    $chapter= get('chapter');
+    $chapter= intVal(get('chapter'));
     
+    ### replace complete field ###
+    if(is_null($chapter)) {
+        $object->$field_name = $value;
+    }
     ### only replace chapter ###
-    if(! is_null($chapter)) {
+    else {
 
         require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
         
@@ -106,10 +120,11 @@ function itemSaveField()
         * split originial wiki block into chapters
         * start with headline and belonging text
         */
-        
         $org= $object->$field_name;
-        #$org= str_replace("\\", "\\\\", $org);
-
+        if ($object->type == ITEM_TASK) {
+            global $g_wiki_task;
+            $g_wiki_task = $object;
+        }
         $parts= getWikiChapters($org);
                 
         ### replace last line return (added by textarea) ###
@@ -124,22 +139,11 @@ function itemSaveField()
         $new_wiki_text= implode('', $parts);
         
         $object->$field_name = $new_wiki_text;
-        $object->update(array($field_name));
-
-        #$new_wiki_text =stripslashes($new_wiki_text);
-
-        $result= wiki2purehtml($new_wiki_text);
-        print $result;
     }
-    ### replace complete field ###
-    else {
 
-        $object->$field_name = $value;
-        $object->update(array($field_name));
-        
-    
-        print wiki2purehtml($object->$field_name); 
-    }    
+    ### update 
+    $object->update(array($field_name));
+    print wiki2purehtml($object->$field_name); 
     $item->nowChangedByUser();
 }
 
