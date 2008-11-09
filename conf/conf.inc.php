@@ -162,11 +162,12 @@ $g_config= array(
     /**
     * change this to override the automatic selection of the locale based on the current language
     * value must be a comma-delimited list of locale names, see function setLang() for details
-    * use value 'C' to disable locales entirely, useful if your system doesn't have proper locale support
+    * use value...
+    * - 'C' to disable locales entirely, useful if your system doesn't have proper locale support
+    * - 'de_DE@euro,de_DE,deu_deu,de.utf8,deu,german' - for Germany
+    * - 'USE_TRANSLATION' - to get the translation for the american locale from the current user's language
     */
-    #'FORCE_LOCALE'          =>'de_DE@euro,de_DE,deu_deu,de.utf8,deu,german',
-    'FORCE_LOCALE'          =>'C',
-
+    'DEFAULT_LOCALE'          =>'USE_TRANSLATION',
 
     /**
     * additional message displayed at login-page
@@ -178,7 +179,6 @@ $g_config= array(
     * size short names are truncated to
     */
     'STRING_LENGTH_SHORT'  =>14,
-
 
     /**
     * showing efforts in task list slows down rendering...

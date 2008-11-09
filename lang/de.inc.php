@@ -6,8 +6,7 @@
 
 global $g_lang_table;
 $g_lang_table= array(
-
-'en_US.utf8,en_US,enu|list of locales'=>'de.utf8,deu,german',
+'en_US.utf8,en_US,enu|list of locales'=>'de_DE@euro,de_DE,de,gede.utf8,deu,german',
 
 'Office E-Mail'               =>'Büro E-Mail',
 
@@ -878,13 +877,6 @@ $g_lang_table= array(
 'Delete|context menu function'=>'Löschen',
 'Log hours for select tasks|context menu function'=>'Aufwand für Aufgabe buchen',
 
-'Login|tab in top navigation' =>'',
-'License|tab in top navigation'=>'',
-'Welcome to streber|Page title'=>'',
-'Name|label in login form'    =>'',
-'Password|label in login form'=>'',
-'invalid login|message when login failed'=>'',
-'License|page title'          =>'',
 
 'Admin|top navigation tab'    =>'Admin',
 'System information'          =>'System Information',
@@ -1179,7 +1171,7 @@ $g_lang_table= array(
 'Select some files to delete' =>'Bitte wählen Sie Dateien zum löschen.',
 'Failed to delete %s files'=>'%s Datei(en) konnten nicht gelöscht werden.',
 'Moved %s files to trash'  =>'%s Datei(en) wurden in den Papierkorb verschoben.',
-'Select some file to display' =>'',
+
 'Select one or more files'    =>'Wählen Sie eine oder mehrere Dateien aus',
 'Export files'			      =>'Dateienliste exportieren',
 
@@ -1260,7 +1252,6 @@ $g_lang_table= array(
 'for %s|e.g. new task for something'=>'für %s',
 
 'modified by %s'              =>'geändert von %s',
-'modified by unknown'         =>'',
 
 'new since last logout'       =>'geändert seit letztem abmelden',
 
@@ -1349,7 +1340,7 @@ $g_lang_table= array(
 'Unknown project-Id:'         =>'Unbekannte Projekt-Id',
 'No item matches this name'   =>'Kein Objekt für diesen Namen',
 'No task matches this name exactly'=>'Keine Aufgabe hat diesen Namen',
-'This task seems to be related'=>'',
+
 'No item excactly matches this name.'=>'Kein Objekt hat präzise diesen Namen',
 'List %s related tasks'       =>'%s relevante Aufgaben anzeigen',
 
@@ -1670,8 +1661,6 @@ $g_lang_table= array(
 'item has not been edited history'=>'Element wurde noch nicht bearbeitet',
 'unknown'                     =>'unbekannt',
 ' -- '                        =>' -- ',
-'&lt;&lt; prev change'        =>'',
-'next &gt;&gt;'               =>'',
 'summary'                     =>'Zusammenfassung',
 'Item did not exists at %s'   =>'Element existierte noch nicht am %s',
 'no changes between %s and %s'=>'Keine Änderungen zwischen %s und %s',
@@ -1870,8 +1859,6 @@ $g_lang_table= array(
 
 'All Companies|page option'   =>'Alle Firmen',
 
-'Wiki-format: <b>%s</b> is not a valid link-type'=>'',
-
 'Unable to automatically detect client time zone'=>'Zeitzone konnte nicht automatisch bestimmt werden.',
 
 'done|resolve reason'         =>'fertig',
@@ -2059,16 +2046,14 @@ $g_lang_table= array(
 
 'Topics|Project option'         =>'Themen',
 'Persons|page option'         =>'Personen',
-'%b %e, %Y|strftime format string'=>'',
-'%I:%M%P|strftime format string'=>'',
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
+
 '%s min'                      =>'%s min',
 '%s min ago'                  =>'vor %s Minuten',
 '1 hour ago'                  =>'vor 1 Stunde',
 '%s hours ago'                =>'vor %s Stunden',
 '%s days ago'                 =>'vor %s Tagen',
 '%s months ago'               =>'vor %s Monaten',
-'%A, %B %e|strftime format string'=>'',
+
 
 'rendered in'                 =>'Erstellt in',
 'memory used'                 =>'Speicher gebraucht',
@@ -2130,30 +2115,12 @@ $g_lang_table= array(
 'Because task is resolved, its status has been changed to completed.'=> 'Status der behobenen Aufgabe wurde in <b>fertig</b> geändert.',
 'Task has resolved version but is not completed?'=>'Auf wurde einer Version zugewiesen, obwohl sie nicht behoben wurde?',
 'Changed %s %s with ID %s|type,link,id'=>'%s geändert mit ID %s',
-
-
 'Edit this %s'           =>'%s bearbeiten',
-
-
-
-
 'Enable Bugreports|Project setting'=>'Fehlerberichte aktivieren',
-
-
-
 'Milestones (closed)'         =>'Meilensteine (geschlossen)',
-
-
 'Display in project news'     =>'Als Projektneuigkeit zeigen',
-'List title and description in project overview'=>'',
-
 
 'Recent changes|Page option tab'=>'Letzte Änderungen',
-
-
-'Re: '                        =>'',
-
-
 'Add task for this person (optionally creating project and effort on the fly)|Tooltip for page function' => 'Erstellt eine Aufgabe diese Person betreffend.',
 'Add note|Page function person'=> 'Neue Notiz',
 'Edit profile|Page function edit person'=> 'Profil bearbeiten',
@@ -2191,33 +2158,11 @@ $g_lang_table= array(
 'set your password'           =>'Ihr Password ändern',
 
 
-'%b %e, %Y|strftime format string'=>'',
-'%I:%M%P|strftime format string'=>'',
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
-'%A, %B %e|strftime format string'=>'',
+'%b %e, %Y|strftime format string'=>'%e.%b 2008', # "Oct 13, 2008" -> 13.Okt 2008""
+'%I:%M%P|strftime format string'=>'%H:%M',
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'%a, %e.%b %Y %H:%M', #Mon, 21.Okt 2008 23:34
+'%A, %B %e|strftime format string'=>'%A, %e.%B', # "Monday, October 12" -> ""
 
-### ../db/class_task.inc.php   ###
-'List title and description in project overview'=>'',  # line 191
-'Display folder as topic'     =>'',  # line 197
-
-### ../lists/list_recentchanges.inc.php   ###
-'Also show your changes'      =>'',  # line 95
-'Hide your changes'           =>'',  # line 98
-'Needs feedback'              =>'',  # line 165
-
-### ../lists/list_tasks.inc.php   ###
-'Days until planned end'      =>'',  # line 1240
-'Due|column header, days until planned end'=>'',  # line 1241
-
-### ../pages/_handles.inc.php   ###
-'Toggle filter own changes'   =>'',  # line 1173
-
-### ../pages/comment.inc.php   ###
-'Re: '                        =>'',  # line 243
-
-### ../pages/home.inc.php   ###
-'my blocked'                  =>'',  # line 561
-'needs feedback'              =>'',  # line 620
 
 ### ../pages/login.inc.php   ###
 'Welcome to %s', 'Notice after login'=>'Willkommen auf %s',  # line 78
@@ -2258,11 +2203,7 @@ $g_lang_table= array(
 'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dieses Thema hat noch keinen Text\nKlicken Sie doppelt, um etwas zu schreiben.',  # line 1182
 'Request feedback'            =>'Nach Meinung fragen',  # line 1265
 
-### ../render/render_misc.inc.php   ###
-'%b %e, %Y|strftime format string'=>'',  # line 793
-'%I:%M%P|strftime format string'=>'',  # line 807
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 817
-'%A, %B %e|strftime format string'=>'',  # line 1169
+
 
 ### ../render/render_wiki.inc.php   ###
 'Update|wiki change marker'   =>'Geändert',  # line 180

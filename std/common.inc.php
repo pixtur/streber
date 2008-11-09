@@ -492,7 +492,7 @@ function setLang($lang) {
         }
     }
 
-    $locale = confGet('FORCE_LOCALE');
+    $locale = confGet('DEFAULT_LOCALE');
 
     if($locale != 'C') {
         // setlocale() is used to set the proper locale for date formatting
@@ -503,15 +503,17 @@ function setLang($lang) {
         // Please refer to documentation of function setlocale() for details.
         // TODO: should we set the locale also for LC_CTYPE and/or LC_COLLATE?
 
-        if($locale == '')
+        if( $locale == 'USE_TRANSLATION') {
             $locale = __('en_US.utf8,en_US,enu', 'list of locales');
+        }
 
         $res = setlocale(LC_TIME, explode(',', $locale));
 
         // this warning might be annoying, but we need a way to detect that setlocale failed
         // eventually the list of locales will be long enough to include all supported platforms
-        if($res === FALSE)
+        if($res === FALSE) {
             trigger_error("Could not set locale to '$locale'", E_USER_WARNING);
+        }
     }
 }
 

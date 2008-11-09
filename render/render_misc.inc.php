@@ -811,20 +811,21 @@ function getUserFormatTime()
 
 function getUserFormatTimestamp()
 {
-    global $userFormatTimestamp;
-    if(!$userFormatTimestamp)
+    /**
+    * Note: we cache the format in a global variable to speed things up
+    */
+    global $g_userFormatTimestamp;
+    if(!$g_userFormatTimestamp)
     {
-        $userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
+        $g_userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
 
-        // fix %e formatter if not supported (e.g. on Windows)
-        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1')
-            $userFormatTimestamp = str_replace("%e", "%d", $userFormatTimestamp);
+        # Fix %e formatter if not supported (e.g. on Windows)
+        if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1') {
+            $g_userFormatTimestamp = str_replace("%e", "%d", $g_userFormatTimestamp);
+        }
     }
-    return $userFormatTimestamp;
+    return $g_userFormatTimestamp;
 }
-
-
-
 
 /**
 * NOTE:
@@ -986,23 +987,11 @@ function renderDateHtml($t)
         $t+= $time_offset;
     }
 
-
-
-
     ### tooltip ? ###
     $str_tooltip='';
     if(gmdate('H:i:s',$t) != '00:00:00') {
         $str_tooltip= gmstrftime(getUserFormatTimestamp(), $t);
     }
-
-    ### hilight new dates ###
-    /*
-    if(isset($auth) && isset($auth->cur_user) && getGMTString($t) > $auth->cur_user->last_logout) {
-
-        $str_tooltip .= " ". __("new since last logout");
-        return "<span class='new date' title='$str_tooltip'>$str</span>";
-    }
-    */
 
     if($str_tooltip){
         return "<span class='date' title='$str_tooltip'>$str</span>";
@@ -1010,7 +999,6 @@ function renderDateHtml($t)
     else {
         return $str;
     }
-
 }
 
 
