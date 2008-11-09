@@ -110,6 +110,56 @@ class FormatBlockCode extends FormatBlock
     }
 }
 
+/**
+* we extend from code block to prevent further inline formatting
+*/
+class FormatBlockLatex extends FormatBlockCode
+{
+    public function __construct($str) {
+        $this->str = $str;
+    }
+    public function renderAsHtml() {
+        return '<a title= "Open codecogs latex editor" href="http://www.codecogs.com/components/equationeditor/editor.php" class=latex target=blank>'
+            . '<img  src="http://www.codecogs.com/gif.latex?'
+            . $this->str
+            . '" /></a>';
+    }
+
+    static function parseBlocks(&$blocks)
+    {
+        $blocks_new= array();
+        $found = false;
+        foreach($blocks as $b) {
+
+            if($b->str && !($b instanceof FormatBlockCode)) {
+
+                $text= $b->str;
+                while($text) {
+                    if(preg_match("/^(.*?)\[latex\](.*?)\[\/latex\]\r?\n?(.*)$/s", $text, $matches)) {
+                        $blocks_new[]= new FormatBlock($matches[1]);
+                        $blocks_new[]= new FormatBlockLatex($matches[2]);
+                        $text= $matches[3];
+                        $found = true;
+                    }
+                    else if($found) {
+                        $blocks_new[]= new FormatBlock($text);
+                        break;
+                    }
+                    else {
+                        $blocks_new[]= $b;
+                        break;
+                    }
+                }
+            }
+            else {
+                $blocks_new[]= $b;
+            }
+        }
+        return $blocks_new;
+    }
+}
+
+
 
 /**
 * turn leading spaces into nonbreaking spaces
@@ -1083,7 +1133,7 @@ class FormatBlockLink extends FormatBlock
                         if($framed) {
                             $this->html = "<div class='frame $align'>"
                                         . "<a href='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>"
-                                        . "<img title='".asHtml($file->name)."'"
+                                        . "<img class=uploaded title='".asHtml($file->name)."'"
                                         .     " alt='".asHtml($file->name)."'"
                                         .     " src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
                                         .     " height=" .intval( $dimensions['new_height'])
@@ -1099,7 +1149,7 @@ class FormatBlockLink extends FormatBlock
                         }
                         else {
                             $this->html= "<a href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>"
-                                       . "<img class='$align'"
+                                       . "<img class='$align uploaded'"
                                        .     " title='" . asHtml($file->name) ."'"
                                        .     " alt='" . asHtml($file->name) ."'"
                                        .     " src='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
@@ -1492,7 +1542,7 @@ class FormatBlockListLine extends FormatBlock
     public function __construct($str, $level, $type)
     {
         $blocks= array(new FormatBlock($str));
-
+        $blocks= FormatBlockLatex::parseBlocks($blocks);
         $blocks= FormatBlockBold::parseBlocks($blocks);
         $blocks= FormatBlockStrike::parseBlocks($blocks);
 
@@ -1948,9 +1998,6 @@ function &wiki2blocks(&$text)
 
     ### code-blocks ###
     $blocks= FormatBlockCode::parseBlocks($blocks);
-    #$blocks= FormatBlockCodeIndented::parseBlocks($blocks);
-
-    
 
     $blocks= FormatBlockTable::parseBlocks($blocks);
 
@@ -1960,6 +2007,7 @@ function &wiki2blocks(&$text)
     $blocks= FormatBlockChangemarks::parseBlocks($blocks);
     
     $blocks= FormatBlockList::parseBlocks($blocks);
+    $blocks= FormatBlockLatex::parseBlocks($blocks);
 
     $blocks= FormatBlockLeadingSpaces::parseBlocks($blocks);
 

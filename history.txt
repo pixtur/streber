@@ -1,5 +1,11 @@
 streber-version-history
 
+- Added wiki syntax for rendering latex formulas
+- Refactored some forgotten password link in notification mails
+
+- Refactored locale settings in conf
+- Fixed translation of dates and times in German
+
 version v0.08092 [2008-11-5]
 ===========================
 - MAJOR: changed default wiki syntax for links from [[item:34]] to [[#23]]

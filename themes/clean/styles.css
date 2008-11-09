@@ -2209,12 +2209,36 @@ div.wiki div.frame span {
 }
 
 
-div.wiki img {
+div.wiki img.uploaded {
     margin:1px;
     border:1px solid #fff;
     clear:both;
     background-color: #f8f8f8;
 }
+
+div.wiki a.latex {
+  border:none;
+  margin:0px;
+  padding:0px;
+  vertical-align: middle;
+}
+
+div.wiki a.latex:hover {
+  border:0px solid #fff;
+  margin:0px;
+  padding:0px;
+}
+
+div.wiki a.latex:hover img {
+  border:0px solid #fff;
+  margin:0px;
+  padding:0px;
+}
+
+div.wiki a.latex img  {
+    border:none;
+}
+
 div.wiki img:hover {
     margin:1px;
     border-width:1px;

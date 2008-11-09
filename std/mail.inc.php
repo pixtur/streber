@@ -318,7 +318,7 @@ class Notifier
 										$days = round((time() - strToGMTime($miu->notify_date)) / 60 / 60 / 24);
 										$object = DbProjectItem::getObjectById($pi->id);
 										
-										$unchanged_message_html .= '<li>' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '</li>';
+										$unchanged_message_html .= '<li>' . sprintf(__("%s (not touched since %s day(s))"), asHtml($object->name), $days) . '</li>';
 										$unchanged_message_txt .= '- ' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '\n';
 									}
 								}
@@ -448,9 +448,9 @@ class Notifier
         {
             $message_html.=
               "<br>\r\n"
-              .__('If you do not want to get further notifications or you forgot your password feel free to','notification'). ' '
-              . "<a href='$url?go=activateAccount&amp;tuid={$person->identifier}'>"
-              . __('adjust your profile','notification')
+              .__('Forgot your password or how to log in?','notification'). ' '
+              . "<a href='$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}'>"
+              . __('Request a mail to change your account settings.','notification')
               . "</a>"
               . "."
               . "<br>\r\n"
