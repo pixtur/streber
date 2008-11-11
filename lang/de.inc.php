@@ -6,7 +6,7 @@
 
 global $g_lang_table;
 $g_lang_table= array(
-'en_US.utf8,en_US,enu|list of locales'=>'de_DE@euro,de_DE,de,gede.utf8,deu,german',
+'en_US.utf8,en_US,enu|list of locales'=>'de_DE.UTF8,de_DE@euro,de_DE,de,gede.utf8,deu,german',
 
 'Office E-Mail'               =>'Büro E-Mail',
 

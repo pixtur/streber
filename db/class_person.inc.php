@@ -517,9 +517,9 @@ class Person extends DbProjectItem {
         $can_login          = NULL;
         $id                 = NULL;
         $search             = NULL;
-        $nickname           = NULL;
         $identifier         = NULL;
         $cookie_string      = NULL;
+        $project            = NULL;     # all user projects, 
         $is_alive           = true;
         #$perscat            = NULL;
 		$pcategory_min       = PCATEGORY_UNDEFINED;
@@ -549,6 +549,13 @@ class Person extends DbProjectItem {
             $str_can_login = '';
         }
 
+        if(!is_null($project)) {
+			$str_project = "p.id";
+        }
+        else {
+            $str_project = intVal($project);
+        }
+
 
         $str_id= $id
          ? 'AND pers.id='.intval($id)
@@ -565,6 +572,14 @@ class Person extends DbProjectItem {
                          : true;
         }
 
+        if(!is_null($project)) {
+			$str_project = "p.id";
+        }
+        else {
+            $str_project = intVal($project);
+            $visible_only = true;                   # project filtering only works in this mode
+        }
+
 
         if(is_null($is_alive)) {                            # ignore
             $str_alive= "";
@@ -575,25 +590,6 @@ class Person extends DbProjectItem {
                 : "AND pers.state=-1";
         }
 
-        /*if(is_null($perscat))
-        {
-            $str_perscat = "";
-        }
-        else
-        {
-            if($perscat == PCATEGORY_EMPLOYEE)
-            {
-                $str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_STAFF . " AND " . PCATEGORY_EXEMPLOYEE . ")";
-            }
-            else if($perscat == PCATEGORY_CONTACT)
-            {
-                $str_perscat = "AND (pers.category BETWEEN " . PCATEGORY_CLIENT . " AND " . PCATEGORY_PARTNER . ")";
-            }
-            else
-            {
-                $str_perscat = "";
-            }
-        }*/
 		
 		if(!is_null($pcategory_min) && !is_null($pcategory_max)){
 			$str_pcategory = "AND (pers.category BETWEEN " . $pcategory_min . " AND " . $pcategory_max . ")";
@@ -625,7 +621,7 @@ class Person extends DbProjectItem {
                 WHERE
                         upp.person = {$auth->cur_user->id}
                     AND upp.state = 1           /* upp all user projectpersons */
-                    AND upp.project = p.id        /* all user projects */
+                    AND upp.project = $str_project        /* all user projects */
 
                     AND p.state = 1
                     AND p.status > 0              /* ignore templates */

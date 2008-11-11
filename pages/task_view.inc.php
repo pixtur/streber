@@ -926,6 +926,7 @@ function taskViewAsDocu()
     $g_wiki_task= $task;
 
     ### set up page and write header ####
+    measure_start("page_render");
     {
         $page= new Page();
         $page->use_autocomplete= true;
@@ -1172,7 +1173,6 @@ function taskViewAsDocu()
 
     #--- description ----------------------------------------------------------------
     {
-        
         $descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
         if($editable) {
@@ -1240,6 +1240,8 @@ function taskViewAsDocu()
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
+
+    measure_stop("page_render");
 
     $task->nowViewedByUser();
 

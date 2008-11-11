@@ -6,18 +6,17 @@ RewriteRule ^([a-zA-Z]+)$ index.php?go=globalView&id=$1 [L]
 
 <IfModule mod_expires.c>
 ExpiresActive On
-ExpiresDefault A300
+ExpiresDefault A2592000
 ExpiresByType image/x-icon A2592000
-ExpiresByType application/x-javascript A3600
-ExpiresByType text/css A3600
+ExpiresByType application/x-javascript A2592000
+ExpiresByType text/css A2592000
 ExpiresByType image/gif A604800
 ExpiresByType image/png A604800
 ExpiresByType image/jpeg A604800
-ExpiresByType text/plain A300
 ExpiresByType application/x-shockwave-flash A604800
 ExpiresByType video/x-flv A604800
 ExpiresByType application/pdf A604800
-ExpiresByType text/html A300
+ExpiresByType text/html A2592000
 </IfModule>
 
 ErrorDocument 400 /streber/index.php

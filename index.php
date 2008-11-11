@@ -101,7 +101,7 @@ if ($result = $dbh->prepare('SELECT NOW()')) {
 }
 
 
-measure_stop( confGet('DIR_STREBER') . 'core_includes');
+measure_stop(  'core_includes');
 
 if(!$requested_page_id = get('go')) {
     require_once( confGet('DIR_STREBER') . "./std/check_version.inc.php");

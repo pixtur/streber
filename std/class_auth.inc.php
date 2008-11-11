@@ -547,18 +547,18 @@ class Auth
         if(!Auth::isAnonymousUser()) {
             return false;
         }
-        if(ini_get('browscap') &&  isset($_SERVER['HTTP_USER_AGENT'])) {
-            $browser= get_browser(NULL, true);
-            if($browser['crawler']) {
-                return true;
-            }
-        }
-        else if(isset($_SERVER['HTTP_USER_AGENT'])){
+        #if(ini_get('browscap') &&  isset($_SERVER['HTTP_USER_AGENT'])) {
+        #    $browser= get_browser(NULL, true);
+        #    if($browser['crawler']) {
+        #        return true;
+        #    }
+        #}
+        if(isset($_SERVER['HTTP_USER_AGENT'])){
             $agent= $_SERVER['HTTP_USER_AGENT'];
             $crawlers= array(
                 "/Googlebot/",
                 "/Yahoo! Slurp;/",
-                "/msnbot/i",
+                "/msnbot/",                 # msnbot/1.1 (+http://search.msn.com/msnbot.htm)) 
                 "/Mediapartners-Google/",
                 "/Scooter/",
                 "/Yahoo-MMCrawler/",
@@ -570,21 +570,21 @@ class Auth
                 "/grub-client-/",
                 "/MSIECrawler/",
                 "/NPBot/",
-                "/NameProtect/i",
-                "/ZyBorg/i",
-                "/worio bot heritrix/i",
+                "/NameProtect/",
+                "/ZyBorg/",
+                "/worio bot heritrix/",
                 "/Ask Jeeves/",
-                "/libwww-perl/i",
-                "/Gigabot/i",
-                "/bot@bot.bot/i",
-                "/SeznamBot/i",
-                #"", #(FAST MetaWeb Crawler (helpdesk at fastsearch dot com)) 
-                #"", #(ia_archiver)
-                #"", #(SeznamBot/1.0 (+http://fulltext2.seznam.cz/))
+                "/libwww-perl/",
+                "/Gigabot/",
+                "/bot@bot.bot/",
+                "/SeznamBot/",
+                "/MetaWeb Crawler/", #(FAST MetaWeb Crawler (helpdesk at fastsearch dot com)) 
+                "/ia_archiver/", #(ia_archiver)
+                "/SeznamBot/", #(SeznamBot/1.0 (+http://fulltext2.seznam.cz/))
                 #"", #(Feedfetcher-Google; (+http://www.google.com/feedfetcher.html; 7 subscribers; feed-id=14943301623292076042))
-                #"", #(Speedy Spider (Entireweb; Beta/1.1; http://www.entireweb.com/about/search_tech/speedyspider/)) 
-                #"", #(MJ12bot/v1.2.0 (http://majestic12.co.uk/bot.php?+))
-                #"", #(Gigabot/2.0)
+                "/Speedy Spider/", #(Speedy Spider (Entireweb; Beta/1.1; http://www.entireweb.com/about/search_tech/speedyspider/)) 
+                "/MJ12bot/", #(MJ12bot/v1.2.0 (http://majestic12.co.uk/bot.php?+))
+                "/Gigabot/", #(Gigabot/2.0)
                 #"", #(Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07))
                 #"", #(nestReader/0.2 (discovery; http://echonest.com/reader.shtml; reader at echonest.com))
                 #"", #(bot/1.0 (bot; http://; bot@bot.bot))

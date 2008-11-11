@@ -1027,6 +1027,7 @@ class FormatBlockLink extends FormatBlock
 
     public function __construct($str)
     {
+        measure_start("blockLink::__construct");
         global $PH;
         global $g_wiki_project;
 
@@ -1093,7 +1094,7 @@ class FormatBlockLink extends FormatBlock
                 * embedding images...
                 */
                 case 'image':
-
+                    measure_start("blockLink::__construct::image");
                     require_once(confGet('DIR_STREBER') . './db/class_file.inc.php');
 
                     if( ($item= DbProjectItem::getVisibleById(intVal($target)))
@@ -1161,6 +1162,7 @@ class FormatBlockLink extends FormatBlock
                     else {
                         $this->name = __("Unknown File-Id:"). ' ' .$target;
                     }
+                    measure_stop("blockLink::__construct::image");
 
                     break;
 
@@ -1185,171 +1187,10 @@ class FormatBlockLink extends FormatBlock
         * - we prefer the current project (has to be passed by wiki2html()-callers
         */
         else {
-
-            /**
-            * start with looking for tasks...
-            */
-            $decoded_name=strtr($this->target, array_flip(get_html_translation_table(HTML_SPECIALCHARS, ENT_QUOTES)));
-
-
-            if($g_wiki_project) {
-                $tasks= Task::getAll(array(
-                    #'name'=>$this->target,
-                    'name'=>$decoded_name,
-                    'project'=>$g_wiki_project->id,
-                    'status_max'=>STATUS_CLOSED,
-
-                ));
-            }
-            else {
-                $tasks= Task::getAll(array(
-                    'name'=>$decoded_name,
-                    'status_max'=>STATUS_CLOSED,
-                ));
-            }
-            if(count($tasks) == 1) {
-
-
-                ### matches name ###
-                if(!strcasecmp(asHtml($tasks[0]->name), $this->target)) {
-
-                    $style_isdone= $tasks[0]->status >= STATUS_COMPLETED
-                                ? 'isDone'
-                                : '';
-
-                    if($this->name) {
-                        $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($this->name)."</a>";
-                        global $g_replace_list;
-                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$this->name;
-                    }
-                    else {
-                        $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
-                        global $g_replace_list;
-                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$tasks[0]->name;
-                    }
-                }
-                ### matches short name ###
-                else if(!strcasecmp($tasks[0]->short, $this->target)) {
-                    $style_isdone= $tasks[0]->status >= STATUS_COMPLETED
-                                ? 'isDone'
-                                : '';
-
-                    if($this->name) {
-                        $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($this->name)."</a>";
-                        global $g_replace_list;
-                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$this->name;
-                    }
-                    else {
-                        $this->html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
-                        global $g_replace_list;
-                        $g_replace_list[$this->target]='#'. $tasks[0]->id.'|'.$tasks[0]->short;
-                    }
-                }
-                else {
-                    $title= __('No task matches this name exactly');
-                    $title2= __('This task seems to be related');
-                    $this->html= "<span title='$title' class=not_found>$this->name</span>"
-                               . "<a href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."' title='$title2'>?</a>";
-                }
-            }
-            else if(count($tasks) > 1) {
-                $matches= array();
-                $best= -1;
-                $best_rate= 0;
-
-                foreach($tasks as $t) {
-
-                    if(!strcasecmp($t->name, $this->target) && $g_wiki_project && $t->project == $g_wiki_project->id) {
-                        $matches[]= $t;
-                    }
-                    else if(!strcasecmp($t->short, $this->target)) {
-                        $matches[]= $t;
-                    }
-                }
-                if(count($matches) == 1) {
-                    $this->html= "<a href='"
-                               . $PH->getUrl('taskView',array('tsk'=>intval($matches[0]->id)))
-                               . "'>".$matches[0]->name
-                               ."</a>";
-                }
-                else if(count($matches) > 1) {
-
-                    $title= __('No item excactly matches this name.');
-                    $title2= sprintf(__('List %s related tasks'), count($tasks));
-                    $this->html=
-                               "<a class=not_found title= '$title2' href='"
-                               .$PH->getUrl('search',array('search_query'=>$this->target))
-
-                               ."'> "
-                               . $this->target
-                               . " ("
-                               . count($matches). ' ' . __('identical') .")</a>";
-                }
-                else {
-
-                    if($g_wiki_project) {
-                        $title= __('No item matches this name. Create new task with this name?');
-                        $url= $PH->getUrl('taskNew', asHtml($this->target), array('prj'=>$g_wiki_project->id));
-                        $this->html= "<a href='$url' title='$title' class=not_found>$this->target</a>";
-                    }
-                    else {
-                        $title= __('No item matches this name...');
-                        $this->html= "<span title='$title' class=not_found>$this->target</span>";
-                    }
-                }
-            }
-            else if(!count($tasks)) {
-
-                /**
-                * now check for team-members...
-                */
-                if($g_wiki_project) {
-                    $people= $g_wiki_project->getPersons();
-                    foreach($people as $person) {
-                        if(!strcasecmp($person->nickname, $this->target)) {
-                            $title= asHtml($person->name);
-                            $nick= asHtml($person->nickname);
-                            $this->html=  "<a class='item person' title= '$title' href='".$PH->getUrl('personView',array('person'=>$person->id))."'>$nick</a>";
-                            return;
-                        }
-                    }
-                }
-                /**
-                * Link to create new task or topic
-                */
-                if($g_wiki_project) {
-                    $title= __('No item matches this name. Create new task with this name?');
-                    global $g_wiki_task;
-                    if(isset($g_wiki_task) && $g_wiki_task->type == ITEM_TASK) {
-                        if($g_wiki_task->category == TCATEGORY_FOLDER) {
-                            $parent_task= $g_wiki_task->id;
-                        }
-                        else {
-                            $parent_task= $g_wiki_task->parent_task;
-                        }
-                    }
-                    else {
-                        $parent_task= 0;
-                    }
-
-                    $url= $PH->getUrl('taskNew',  array(
-                                                'prj'=>$g_wiki_project->id,
-                                                'new_name'=>urlencode($this->target),
-                                                'parent_task'=>$parent_task,
-                                                ));
-
-                    $this->html= "<a href='$url' title='$title' class=not_found>$this->target</a>";
-                }
-                /**
-                * actually we could add a function to create a new task here, but somebody forgot to tell us the project...
-                */
-                else {
-                    $title= __('No item matches this name');
-                    $this->html= "<span title='$title' class=not_found>$this->target</span>";
-                    trigger_error('g_wiki_project was not defined. Could not provide create-link.', E_USER_NOTICE);
-                }
-            }
+            $this->html= FormatBlockLink::renderLinkFromTargetName($this->target, $this->name);
         }
+        measure_stop("blockLink::__construct");
+
     }
 
     public function renderAsHtml()
@@ -1441,6 +1282,201 @@ class FormatBlockLink extends FormatBlock
                     break;
             }
         }
+        return $html;
+    }
+    
+    static function renderLinkFromTargetName($target, $name)
+    {
+        measure_start("BlockLink::renderLinkFromTargetName");
+        global $PH;
+        global $g_replace_list;
+        global $g_wiki_project;
+        $html= "";
+
+        /**
+        * start with looking for tasks...
+        */
+        $decoded_name=strtr($target, array_flip(get_html_translation_table(HTML_SPECIALCHARS, ENT_QUOTES)));
+
+        measure_start("BlockLink::renderLinkFromTargetName::getTasks");
+
+        if($g_wiki_project) {
+            $tasks= Task::getAll(array(
+                'name'=>$decoded_name,
+                'project'=>$g_wiki_project->id,
+                'status_max'=>STATUS_CLOSED,
+
+            ));
+        }
+        else {
+            $tasks= Task::getAll(array(
+                'name'=>$decoded_name,
+                'status_max'=>STATUS_CLOSED,
+            ));
+        }
+        measure_stop("BlockLink::renderLinkFromTargetName::getTasks");
+
+        if(count($tasks) == 1) {
+
+
+            ### matches name ###
+            if(!strcasecmp(asHtml($tasks[0]->name), $target)) {
+
+                $style_isdone= $tasks[0]->status >= STATUS_COMPLETED
+                            ? 'isDone'
+                            : '';
+
+                if($name) {
+                    $html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($name)."</a>";
+                    global $g_replace_list;
+                    $g_replace_list[$target]='#'. $tasks[0]->id.'|'.$name;
+                }
+                else {
+                    $html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
+                    global $g_replace_list;
+                    $g_replace_list[$target]='#'. $tasks[0]->id.'|'.$tasks[0]->name;
+                }
+            }
+            ### matches short name ###
+            else if(!strcasecmp($tasks[0]->short, $target)) {
+                $style_isdone= $tasks[0]->status >= STATUS_COMPLETED
+                            ? 'isDone'
+                            : '';
+
+                if($name) {
+                    $html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>". asHtml($name)."</a>";
+                    global $g_replace_list;
+                    $g_replace_list[$target]='#'. $tasks[0]->id.'|'.$name;
+                }
+                else {
+                    $html= "<a  class='item task $style_isdone' href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."'>".asHtml($tasks[0]->name)."</a>";
+                    global $g_replace_list;
+                    $g_replace_list[$target]='#'. $tasks[0]->id.'|'.$tasks[0]->short;
+                }
+            }
+            else {
+                $title= __('No task matches this name exactly');
+                $title2= __('This task seems to be related');
+                $html= "<span title='$title' class=not_found>$name</span>"
+                           . "<a href='".$PH->getUrl('taskView',array('tsk'=>intval($tasks[0]->id)))."' title='$title2'>?</a>";
+            }
+        }
+        else if(count($tasks) > 1) {
+            measure_start("BlockLink::renderLinkFromTargetName::iterateSeveralTasks");
+
+            $matches= array();
+            $best= -1;
+            $best_rate= 0;
+
+            foreach($tasks as $t) {
+
+                if(!strcasecmp($t->name, $target) && $g_wiki_project && $t->project == $g_wiki_project->id) {
+                    $matches[]= $t;
+                }
+                else if(!strcasecmp($t->short, $target)) {
+                    $matches[]= $t;
+                }
+            }
+            if(count($matches) == 1) {
+                $html= "<a href='"
+                           . $PH->getUrl('taskView',array('tsk'=>intval($matches[0]->id)))
+                           . "'>".$matches[0]->name
+                           ."</a>";
+            }
+            else if(count($matches) > 1) {
+
+                $title= __('No item excactly matches this name.');
+                $title2= sprintf(__('List %s related tasks'), count($tasks));
+                $html=
+                           "<a class=not_found title= '$title2' href='"
+                           .$PH->getUrl('search',array('search_query'=>$target))
+
+                           ."'> "
+                           . $target
+                           . " ("
+                           . count($matches). ' ' . __('identical') .")</a>";
+            }
+            else {
+                if($g_wiki_project) {
+                    $title= __('No item matches this name. Create new task with this name?');
+                    $url= $PH->getUrl('taskNew', asHtml($target), array('prj'=>$g_wiki_project->id));
+                    $html= "<a href='$url' title='$title' class=not_found>$target</a>";
+                }
+                else {
+                    $title= __('No item matches this name...');
+                    $html= "<span title='$title' class=not_found>$target</span>";
+                }
+            }
+            measure_stop("BlockLink::renderLinkFromTargetName::iterateSeveralTasks");
+        }
+        else if(!count($tasks)) {
+
+            measure_start("BlockLink::renderLinkFromTargetName::notATaskItem");
+
+            /**
+            * now check for team-members...
+            */
+            if($g_wiki_project) {
+                #$people= $g_wiki_project->getPersons();
+                $people = Person::getPersons(array(
+                                'project'=> $g_wiki_project->id,
+                                'search'=> $target,
+                            ));
+                if(count($people) == 1) {
+                    $html=  "<a class='item person' title= '" .asHtml( $people[0]->name) . "' href='".$PH->getUrl('personView',array('person'=>$people[0]->id))."'>" . asHtml($target) . "</a>";
+                }
+                
+                measure_start("BlockLink::renderLinkFromTargetName::getPersons");
+                foreach($people as $person) {
+                    if(!strcasecmp($person->nickname, $target)) {
+                        $title= asHtml($person->name);
+                        $nick= asHtml($person->nickname);
+                        $html=  "<a class='item person' title= '$title' href='".$PH->getUrl('personView',array('person'=>$person->id))."'>$nick</a>";
+                        measure_stop("BlockLink::renderLinkFromTargetName::getPersons");
+                        return;
+                    }
+                }
+                measure_stop("BlockLink::renderLinkFromTargetName::getPersons");
+            }
+            /**
+            * Link to create new task or topic
+            */
+            if($g_wiki_project) {
+                $title= __('No item matches this name. Create new task with this name?');
+                global $g_wiki_task;
+                if(isset($g_wiki_task) && $g_wiki_task->type == ITEM_TASK) {
+                    if($g_wiki_task->category == TCATEGORY_FOLDER) {
+                        $parent_task= $g_wiki_task->id;
+                    }
+                    else {
+                        $parent_task= $g_wiki_task->parent_task;
+                    }
+                }
+                else {
+                    $parent_task= 0;
+                }
+
+                $url= $PH->getUrl('taskNew',  array(
+                                            'prj'=>$g_wiki_project->id,
+                                            'new_name'=>urlencode($target),
+                                            'parent_task'=>$parent_task,
+                                            ));
+
+                $html= "<a href='$url' title='$title' class=not_found>$target</a>";
+            }
+            /**
+            * actually we could add a function to create a new task here, but somebody forgot to tell us the project...
+            */
+            else {
+                $title= __('No item matches this name');
+                $html= "<span title='$title' class=not_found>$target</span>";
+                trigger_error('g_wiki_project was not defined. Could not provide create-link.', E_USER_NOTICE);
+            }
+            measure_stop("BlockLink::renderLinkFromTargetName::notATaskItem");
+
+        }
+        measure_stop("BlockLink::renderLinkFromTargetName");
+
         return $html;
     }
 
@@ -1902,7 +1938,7 @@ class FormatBlockTable extends FormatBlock
 
 function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
 {
-
+    measure_start("render_wiki");
     $text_org = $text;
     $text.="\n";
 
@@ -1947,6 +1983,7 @@ function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
     $tmp[]= '<span class=end> </span></div>';                # end-span to create image-floats
 
     $out= implode('', $tmp);
+    measure_stop("render_wiki");
 
     return $out;
 }
@@ -1994,20 +2031,37 @@ function &wiki2blocks(&$text)
     #if($convert_special_chars) {
     #    $text= htmlSpecialChars($text);
     #}
+    measure_start("wiki2blocks");
+
     $blocks= array(new FormatBlock(&$text));
 
     ### code-blocks ###
+    measure_start("blockCode");
     $blocks= FormatBlockCode::parseBlocks($blocks);
+    measure_stop("blockCode");
 
+    measure_start("blockTable");
     $blocks= FormatBlockTable::parseBlocks($blocks);
+    measure_stop("blockTable");
 
+    measure_start("blockQuote");
     $blocks= FormatBlockQuote::parseBlocks($blocks);
-    $blocks= FormatBlockHeadline::parseBlocks($blocks);
+    measure_stop("blockQuote");
 
+    measure_start("blockHeadline");
+    $blocks= FormatBlockHeadline::parseBlocks($blocks);
+    measure_stop("blockHeadline");
+
+    measure_start("blockChangemarks");
     $blocks= FormatBlockChangemarks::parseBlocks($blocks);
+    measure_stop("blockChangemarks");
     
+    measure_start("blockLists");
     $blocks= FormatBlockList::parseBlocks($blocks);
+    measure_stop("blockLists");
+    measure_start("blockLatex");
     $blocks= FormatBlockLatex::parseBlocks($blocks);
+    measure_stop("blockLatex");
 
     $blocks= FormatBlockLeadingSpaces::parseBlocks($blocks);
 
@@ -2015,21 +2069,23 @@ function &wiki2blocks(&$text)
     $blocks= FormatBlockStrike::parseBlocks($blocks);
     $blocks= FormatBlockSub::parseBlocks($blocks);
 
-
-    
+    measure_start("blockLink");    
     $blocks= FormatBlockLink::parseBlocks($blocks);
+    measure_stop("blockLink");    
     $blocks= FormatBlockHref::parseBlocks($blocks);
-
 
     $blocks= FormatBlockLinebreak::parseBlocks($blocks);
 
     $blocks= FormatBlockHr::parseBlocks($blocks);
+    measure_start("blockItemId");    
     $blocks= FormatBlockItemId::parseBlocks($blocks);
+    measure_stop("blockItemId");    
 
-    
     $blocks= FormatBlockMonospaced::parseBlocks($blocks);
     $blocks= FormatBlockEmphasize::parseBlocks($blocks);
     $blocks= FormatBlockLongMinus::parseBlocks($blocks);
+
+    measure_stop("wiki2blocks");
 
     return $blocks;
 
