@@ -441,7 +441,7 @@ class File extends DbProjectItem
             return NULL;
         }
 
-        $tmp_filename   = preg_replace("/[^a-z0-9-._]/i", '_', $org_filename);
+        $tmp_filename   = preg_replace("/[^a-z0-9-_]/i", '_', $org_filename);
 
         ### figure mimetype ###
         {
@@ -522,7 +522,7 @@ class File extends DbProjectItem
             trigger_error("inserting file object failed");
             return NULL;
         }
-        $this->tmp_filename= $this->id .".".$this->tmp_filename;
+        $this->tmp_filename= $this->id . "_" .$this->tmp_filename;
 
         ### use original function to write to Db
         parent::update();

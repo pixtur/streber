@@ -635,7 +635,7 @@ function search()
     * adjust query with more than one word...
     * e.g. "admi task" -> "+admi* +task"
     */
-    $search_query = preg_replace("/[\[\]<>;$\t \/(),\*+:\"'.=]/","-",$search_query);
+    $search_query = asSearchQuery( $search_query );
     if(count($ar= explode(' ',$search_query)) >1) {
         $search_query='';
         $sep='+';

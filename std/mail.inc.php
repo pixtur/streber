@@ -123,7 +123,7 @@ class Notifier
                 . "<head>\r\n"
                 . "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\r\n"
                 . "<title>$subject</title>\r\n"
-                . "<style>\r\n body {background-color:#ffffff; color:#000000; font-family:\"Trebuchet MS\", Tahoma, Arial, Verdana,sans-serif; font-size:10pt;}\r\n a {color:#163075; text-decoration:none;}\r\n a:hover{color:#ff0000; text-decoration:underline;}\r\n h3 {font-size:12pt;}\r\n h4 {font-size:11pt;}\r\n ul {margin:0; padding:0px 0px 0px 1em;}\r\n</style>\r\n"
+                . "<style>\r\n \r\n\r\n h4 {font-size:11pt;}\r\n li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;}li span.details { font-size: 10pt; color: #888}\r\n</style>\r\n"
                 . "</head>\r\n"
                 . "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
                 . sprintf(__('Hello %s,','notification'), asHtml($person->name))
@@ -366,38 +366,6 @@ class Notifier
                     $updates_html.="<li>";
                     $updates_txt.="\n- ";
 
-                    ### who...
-                    if($c->person_by) {
-                        if($p_who= Person::getVisibleById($c->person_by)) {
-                    		$updates_html.= "<b>". asHtml($p_who->nickname) ."</b>"
-                    		      ." ";
-                    		$updates_txt.= $p_who->nickname
-                    		      .": ";
-
-                        }
-                        else {
-                        	$updates_html.= '??? ';		# invisible user
-                        	$updates_txt.= '???: ';		# invisible user
-                        }
-                    }
-
-                    ### what...
-                    if($c->html_what) {
-                        $updates_html.= $c->html_what. ' ';
-                        $updates_txt.= isset($c->txt_what)
-                                    ? $c->txt_what
-                                    : strip_tags($c->html_what);
-                    }
-
-                    ### when...
-                    if($c->timestamp) {
-                        $updates_html.= renderTimestamp($c->timestamp) . ': ';
-                        $updates_txt.= isset($c->timestamp)
-                                    ? ' ' . renderTimestamp($c->timestamp)
-                                    : ' ' . strip_tags(renderTimestamp($c->timestamp));
-                        $updates_txt.=' > ';
-                    }
-
                     ### task
                     if($c->item && $c->item->type == ITEM_TASK) {
                         $task= $c->item;
@@ -420,6 +388,41 @@ class Notifier
                         $updates_txt.= $file->name;                        
                     }
 
+                    $updates_html.= '<br><span class=details>';		# invisible user
+                    $updates_txt.= "\r\n";		# invisible user
+                    
+                    ### what...
+                    if($c->html_what) {
+                        $updates_html.= $c->html_what. ' ';
+                        $updates_txt.= isset($c->txt_what)
+                                    ? $c->txt_what
+                                    : strip_tags($c->html_what);
+                    }
+
+                    $updates_html.= ' ' . __("by") . ' ';		# invisible user
+                    $updates_txt .= ' ' . __("by") . ' ';		# invisible user
+
+                    ### who...
+                    if($c->person_by) {
+                        if($p_who= Person::getVisibleById($c->person_by)) {
+                    		$updates_html.= "<b>". asHtml($p_who->nickname) ."</b>"
+                    		      ." ";
+                    		$updates_txt.= $p_who->nickname
+                    		      .": ";
+
+                        }
+                        else {
+                        	$updates_html.= '??? ';		# invisible user
+                        	$updates_txt .= '???: ';		# invisible user
+                        }
+                    }
+
+                    ### when...
+                    if($c->timestamp) {
+                        $updates_html.=  ' - ' . renderTimestamp($c->timestamp);
+                        $updates_txt .=  ' - ' . renderTimestamp($c->timestamp);
+                    }
+
                     ### to...
                     /**
                     * @@@ bug: this contains internal links that can be viewed from mail
@@ -428,9 +431,8 @@ class Notifier
                         $updates_html.= ' ('.$c->html_assignment. ') ';
                         #$updates_txt.= ' '.$c->html_assignment. ' ';
                     }
-                    $updates_html.="</li>\r\n";
+                    $updates_html.="</span></li>\r\n";
                     $updates_txt.="\n";
-
                 }
                 $updates_html.="</ul>\r\n";
                 $updates_txt.="\n";
@@ -459,11 +461,8 @@ class Notifier
               .__('the management', 'notication') . "\r\n";
 
             $message_txt.= ''
-              . __('If you do not want to get further notifications or you forgot your password feel free to','notification')
-              . ' '
-              . __('adjust your profile','notification')
-              . ":\n"
-              . $url."?go=activateAccount&tuid={$person->identifier}"
+              .__('Forgot your password or how to log in?','notification'). ' '
+              .__("Click here:") . ' ' . "$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}"
               . "\n"
               . "\n"
               .'  ' . __('Thanks for your time','notication') . "\n"

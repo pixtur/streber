@@ -565,9 +565,14 @@ function asAlphaNumeric($str) {
     return preg_replace("/[^0-9A-Z_]/i",'',$str);
 }
 
+
+function asSearchQuery($str) {
+    return preg_replace("/[\[\]<>;$\t \/(),\*+:\"'.=]/"," ",$str);
+}
+
 function asMatchString($str) {
-    return preg_replace("/[\<\>\`_\"]/",'', $str); 
-    #return preg_replace("/[^0-9a-z_\*! ]/i",'',strtolower($str));
+    #return preg_replace("/[^0-9A-Z_]/i",' ', $str); 
+    return preg_replace("/[\/\<\>\`_%&?\"\'()\[\]]/",' ', $str); 
 }
 
 function asCleanString($str)
