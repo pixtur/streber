@@ -787,33 +787,34 @@ function renderBacktrace($arr)
 */
 function getUserFormatDate()
 {
-    global $userFormatDate;
-    if(!$userFormatDate)
+    global $g_userFormatDate;
+    if(!$g_userFormatDate)
     {
-        $userFormatDate = __('%b %e, %Y', 'strftime format string');
+        $g_userFormatDate = __('%b %e, %Y', 'strftime format string');
 
         // fix %e formatter if not supported (e.g. on Windows)
         if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1') {
-            $userFormatDate = str_replace("%e", "%d", $userFormatDate);
+            $g_userFormatDate = str_replace("%e", "%d", $g_userFormatDate);
         }
     }
-    return $userFormatDate;
+    return $g_userFormatDate;
 }
 
+/**
+* Note: we cache the format in a global variable to speed things up
+* use clearCachedTimeFormats() when dealing with changing languages.
+*/
 function getUserFormatTime()
 {
-    global $userFormatTime;
-    if(!$userFormatTime) {
-        $userFormatTime = __('%I:%M%P', 'strftime format string');
+    global $g_userFormatTime;
+    if(!$g_userFormatTime) {
+        $g_userFormatTime = __('%I:%M%P', 'strftime format string');
     }
-    return $userFormatTime;
+    return $g_userFormatTime;
 }
 
 function getUserFormatTimestamp()
 {
-    /**
-    * Note: we cache the format in a global variable to speed things up
-    */
     global $g_userFormatTimestamp;
     if(!$g_userFormatTimestamp)
     {
@@ -826,6 +827,7 @@ function getUserFormatTimestamp()
     }
     return $g_userFormatTimestamp;
 }
+
 
 /**
 * NOTE:

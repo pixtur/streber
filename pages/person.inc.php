@@ -2824,6 +2824,7 @@ function personSendActivation()
 function personsFlushNotifications()
 {
     global $PH;
+    global $auth;
 
     ### get person ####
     $ids= getPassedIds('person','persons_*');
@@ -2853,6 +2854,9 @@ function personsFlushNotifications()
         }
     }
 
+    ### reset language ###
+    setLang($auth->cur_user->language);
+    
     if($errors) {
         new FeedbackWarning(sprintf(__("Failed to mail %s persons"), $errors));
     }

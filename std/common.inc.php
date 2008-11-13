@@ -492,6 +492,11 @@ function setLang($lang) {
         }
     }
 
+    /*
+    * reset time format
+    */
+    clearCachedTimeFormats();
+
     $locale = confGet('DEFAULT_LOCALE');
 
     if($locale != 'C') {
@@ -770,6 +775,22 @@ function isSpam($str) {
         $rate= 0;
     }
     return $rate;
+}
+
+
+/**
+* helper function to clear global variables used in render_misc time rendering.
+*/
+function clearCachedTimeFormats() 
+{
+    global $g_userFormatTimestamp;
+    $g_userFormatTimestamp = NULL;
+
+    global $g_userFormatTime;
+    $g_userFormatDate = NULL;
+
+    global $g_userFormatDate;
+    $g_userFormatDate = NULL;
 }
 
 

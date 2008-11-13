@@ -519,7 +519,7 @@ class Person extends DbProjectItem {
         $search             = NULL;
         $identifier         = NULL;
         $cookie_string      = NULL;
-        $project            = NULL;     # all user projects, 
+        $project            = NULL;     # all user projects
         $is_alive           = true;
         #$perscat            = NULL;
 		$pcategory_min       = PCATEGORY_UNDEFINED;
@@ -571,15 +571,13 @@ class Person extends DbProjectItem {
                          ? false
                          : true;
         }
-
-        if(!is_null($project)) {
+        if(is_null($project)) {
 			$str_project = "p.id";
         }
         else {
             $str_project = intVal($project);
             $visible_only = true;                   # project filtering only works in this mode
         }
-
 
         if(is_null($is_alive)) {                            # ignore
             $str_alive= "";
@@ -644,6 +642,7 @@ class Person extends DbProjectItem {
 
                ". getOrderByString($order_by);
         }
+
         $persons = self::queryFromDb($str);                 # store in variable to pass by reference
 		
         /**
