@@ -393,6 +393,10 @@ function commentEditSubmit(){
         exit();
     }
 
+    ### Validate integrety ###
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
 
     ### get comment ####
     $id= getOnePassedId('comment');
@@ -408,9 +412,9 @@ function commentEditSubmit(){
             $PH->abortWarning("Could not get comment");
             return;
         }
+        $comment->validateEditRequestTime();
     }
 
-    $comment->validateEditRequestTime();
     validateFormCaptcha(true);
 
 

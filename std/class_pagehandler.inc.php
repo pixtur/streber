@@ -451,8 +451,6 @@ class PageHandler extends BaseObject
     }
 
 
-
-
     /**
     * getHandle for the current page
     *

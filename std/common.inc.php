@@ -555,6 +555,12 @@ function readfile_chunked($filename, $retbytes=true) {
 }
 
 
+function createRandomString() {
+    return  md5( time().microtime() . rand(12312,time()) . rand(234423,123213));
+}
+
+
+
 /**
 * removes all non-alpha numeric characters
 * - all user-data from user-input that a used to build up sql-queries

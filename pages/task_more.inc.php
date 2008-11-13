@@ -812,11 +812,6 @@ function taskEditSubmit()
     */
     $link_items=array();
 
-    if(!validateFormCrc()) {
-        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
-    }
-
-    validateFormCaptcha(true);
 
     ### temporary object or from database? ###
     $tsk_id=getOnePassedId('tsk','',true,'invalid id');
@@ -834,8 +829,8 @@ function taskEditSubmit()
         }
         $was_category=$task->category;
         $was_resolved_version= $task->resolved_version;
+        $task->validateEditRequestTime();
     }
-
 
 
     ### cancel? ###
@@ -845,6 +840,15 @@ function taskEditSubmit()
         }
         exit();
     }
+
+    ### Validate integrety ###
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
+    
+    validateFormCaptcha(true);
+
+
 
     $was_a_folder= ($task->category == TCATEGORY_FOLDER)
                  ? true

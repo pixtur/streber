@@ -444,6 +444,11 @@ function itemBookmarkEditSubmit()
         exit();
     }
 
+    ### Validate form crc
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
+
     ### get bookmark ####
     $id = getOnePassedId('bookmark');
 	$bm_id = getOnePassedId('bookmark_id');

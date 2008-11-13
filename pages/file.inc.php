@@ -494,17 +494,12 @@ function fileEditSubmit()
 {
     global $PH;
 
-    ### cancel ###
-
-    if(get('form_do_cancel')) {
-        if(!$PH->showFromPage()) {
-            $PH->show('projView',array('prj'=>$file->project));
-        }
-        exit();
+    ### Validate form crc
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
     }
 
     $id=getOnePassedId('file');
-
 
     ### temp new file-object ####
     if($id == 0) {
@@ -548,6 +543,16 @@ function fileEditSubmit()
             return;
         }
     }
+
+    ### cancel ###
+    if(get('form_do_cancel')) {
+        if(!$PH->showFromPage()) {
+            $PH->show('projView',array('prj'=>$file->project));
+        }
+        exit();
+    }
+
+
 
     $file->project=get('file_project');
     if(!$project = Project::getVisibleById($file->project)) {

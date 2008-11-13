@@ -706,6 +706,10 @@ function effortEditSubmit()
 {
     global $PH;
 
+    ### Validate form crc
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
 
     ### get effort ####
     $id= getOnePassedId('effort');
@@ -719,7 +723,9 @@ function effortEditSubmit()
             $PH->abortWarning(__("Could not get effort"));
             return;
         }
+        $effort->validateEditRequestTime();
     }
+
 
     ### cancel ###
     if(get('form_do_cancel')) {
@@ -728,6 +734,8 @@ function effortEditSubmit()
         }
         exit();
     }
+
+
 
     ### get project ###
     $effort->project=get('effort_project');

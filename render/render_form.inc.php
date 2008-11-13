@@ -673,14 +673,16 @@ class Form_CustomHTML extends PageFormElement {
 */
 class PageForm extends PageElement
 {
-    public  $button_cancel= false;    # set to true to render
-    public  $button_apply= false;     # set to true to render
+    public  $button_cancel= false;      # set to true to render
+    public  $button_apply= false;       # set to true to render
     public  $button_submit= "Submit";
 
-    public  $form_options=array();  # currently a list of html-snips
+    public  $form_options=array();      # currently a list of html-snips
 
     PUBLIC function __construct()
     {
+        global $auth;
+        global $PH;
         $this->children=array();
 
         /**
@@ -688,20 +690,29 @@ class PageForm extends PageElement
         * - adding the edit_request_time as form hidden field would
         *   cause additional entries in the from-handle file. So we
         *   add it as a none checked field.
+        *
         */
-        echo "<input type=hidden name=edit_request_time value='" . time(). "'>";
+        #echo "<input type=hidden name=edit_request_time value='" . time(). "'>";
+
+        if(!isset($auth->cur_user)) {
+            $PH->abortWarning(__("can not render form without valid user"));
+        }
+        $this->add(new Form_HiddenField('edit_request_time', '', time()));
+        $this->add(new Form_HiddenField('edit_request_token', '', createRandomString()));
+        
         $this->button_submit= __("Submit");
         parent::__construct();
+
     }
 
     PUBLIC function __toString()
     {
         $buffer= "<div class=form>";
 
-        $hidden= array();
+        $hidden_fields= array();
         foreach($this->children as $key=>$field) {
             if($field instanceof Form_HiddenField) {
-                $hidden[$field->name]= $field->value;
+                $hidden_fields[$field->name]= $field->value;
             }
             $buffer.=$field->render();
         }
@@ -710,11 +721,9 @@ class PageForm extends PageElement
         global $auth;
         if(isset($auth->cur_user)) {
             global $PH;
-            $handle_for_hidden_values= $PH->defineFromHandle($hidden);
+            $handle_for_hidden_values= $PH->defineFromHandle( $hidden_fields );
             echo "<input type=hidden name=hidden_crc value='$handle_for_hidden_values'>";
         }
-
-
         $buffer.="<div class=formbuttons>";
 
         ### form options ###

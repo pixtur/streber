@@ -172,14 +172,7 @@ function projectPersonEditSubmit()
 {
     global $PH;
 
-    ### cancel ###
-    if(get('form_do_cancel')) {
-        if(!$PH->showFromPage()) {
-            $PH->show('projView',array('prj'=>$pp->project));
-        }
-        exit();
-    }
-
+    ### Validate form integrity ###
     if(!validateFormCrc()) {
         $PH->abortWarning(__('Invalid checksum for hidden form elements'));
     }
@@ -196,6 +189,14 @@ function projectPersonEditSubmit()
             $PH->abortWarning("Could not get project person");
             return;
         }
+    }
+
+    ### cancel ###
+    if(get('form_do_cancel')) {
+        if(!$PH->showFromPage()) {
+            $PH->show('projView',array('prj'=>$pp->project));
+        }
+        exit();
     }
 
     ### get project ###

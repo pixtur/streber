@@ -2225,16 +2225,10 @@ function projEditSubmit()
     global $PH;
     global $auth;
 
-    ### cancel ###
-    if(get('form_do_cancel')) {
-        if(!$PH->showFromPage()) {
-            $PH->show('projView',array('prj'=>$project->id));
-        }
-        exit();
-    }
 
     log_message("projEditSubmit()", LOG_MESSAGE_DEBUG);
 
+    ### Validate form integrity ###
     if(!validateFormCrc()) {
         $PH->abortWarning(__('Invalid checksum for hidden form elements'));
     }
@@ -2250,6 +2244,15 @@ function projEditSubmit()
             $PH->abortWarning("Could not get project");
             return;
         }
+    }
+
+
+    ### cancel ###
+    if(get('form_do_cancel')) {
+        if(!$PH->showFromPage()) {
+            $PH->show('projView',array('prj'=>$project->id));
+        }
+        exit();
     }
 
     $project->validateEditRequestTime();

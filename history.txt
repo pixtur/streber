@@ -1,5 +1,7 @@
 streber-version-history
 
+- MAJOR: added random token to forms to prevent from cross site request forgery
+
 - Added wiki syntax for rendering latex formulas
 - Refactored some forgotten password link in notification mails
 

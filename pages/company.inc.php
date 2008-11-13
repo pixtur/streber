@@ -1024,6 +1024,11 @@ function companyEditSubmit()
         exit();
     }
 
+    ### Validate integrety ###
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
+
     ### get company ####
     $id= getOnePassedId('company');
 
@@ -1038,9 +1043,11 @@ function companyEditSubmit()
             $PH->abortWarning("Could not get company");
             return;
         }
+
+        ### Validate item has not been editted since
+        $company->validateEditRequestTime();
     }
 
-    $company->validateEditRequestTime();
 
 	### company category ###
 	$ccategory = get('ccategory');

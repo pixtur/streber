@@ -135,7 +135,6 @@ function versionEditSubmit()
 {
     global $PH;
 
-
     ### get version ####
     $id= getOnePassedId('version');
 
@@ -157,6 +156,14 @@ function versionEditSubmit()
         }
         exit;
     }
+
+    ### Validate integrety ###
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
+    
+    validateFormCaptcha(true);
+
 
     ### get project ###
     $version->project=get('version_project');

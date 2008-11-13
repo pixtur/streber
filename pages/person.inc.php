@@ -2298,6 +2298,7 @@ function personEditSubmit()
         exit();
     }
 
+    ### Validate form integrity
     if(!validateFormCrc()) {
         $PH->abortWarning(__('Invalid checksum for hidden form elements'));
     }
@@ -2323,8 +2324,6 @@ function personEditSubmit()
             return;
         }
     }
-
-    $person->validateEditRequestTime();
 
     ### person category ###
     $pcategory = get('pcategory');
