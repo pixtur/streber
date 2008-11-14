@@ -112,12 +112,12 @@ undefined keys:
 'Book effort'                 =>'',  # line 179
 
 ### ../pages/effort.inc.php   ###
-'Select some efforts(s) to edit'=>'',  # line 1052
-'For editing all efforts must be of same project.'=>'',  # line 884
-'Edit multiple efforts|Page title'=>'',  # line 906
-'Edit %s efforts|Page title'  =>'',  # line 907
-'Edited %s effort(s).'        =>'',  # line 1094
-'Error while editing %s effort(s).'=>'',  # line 1098
+'Select some efforts(s) to edit'=>'',  # line 1057
+'For editing all efforts must be of same project.'=>'',  # line 889
+'Edit multiple efforts|Page title'=>'',  # line 911
+'Edit %s efforts|Page title'  =>'',  # line 912
+'Edited %s effort(s).'        =>'',  # line 1099
+'Error while editing %s effort(s).'=>'',  # line 1103
 
 ### ../pages/home.inc.php   ###
 'Edit your Profile'           =>'',  # line 86
@@ -145,7 +145,6 @@ undefined keys:
 'Your efforts'                =>'',  # line 1145
 
 ### ../pages/login.inc.php   ###
-'Welcome to %s", 'Notice after login'=>'',  # line 78
 'Welcome to %s|Notice after login'=>'',  # line 269
 
 ### ../pages/misc.inc.php   ###
@@ -177,11 +176,11 @@ undefined keys:
 'Internal'                    =>'',  # line 747
 
 ### ../pages/person.inc.php   ###
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 3031
-'Login-accounts require a full name.'=>'',  # line 3313
-'Please enter an e-mail address.'=>'',  # line 3323
-'Please copy the text from the image.'=>'',  # line 3397
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3426
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 3034
+'Login-accounts require a full name.'=>'',  # line 3316
+'Please enter an e-mail address.'=>'',  # line 3326
+'Please copy the text from the image.'=>'',  # line 3400
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3429
 
 ### ../pages/project_more.inc.php   ###
 'New project from'            =>'',  # line 57
@@ -201,27 +200,30 @@ undefined keys:
 'prior|Filter preset'         =>'',  # line 1591
 'View calculation'            =>'',  # line 1674
 'Effort calculations'         =>'',  # line 1857
-'Reanimated person %s as team-member'=>'',  # line 2636
-'Person %s already in project'=>'',  # line 2640
+'Reanimated person %s as team-member'=>'',  # line 2639
+'Person %s already in project'=>'',  # line 2643
 
 ### ../pages/task_more.inc.php   ###
 'New version'                 =>'',  # line 329
-'Nickname not known in this project: %s'=>'',  # line 896
-'Requested feedback from: %s.'=>'',  # line 901
-'Because task is resolved, its status has been changed to completed.'=>'',  # line 1236
-'Task has resolved version but is not completed?'=>'',  # line 1242
-'Changed %s %s with ID %s|type,link,id'=>'',  # line 1437
+'Nickname not known in this project: %s'=>'',  # line 900
+'Requested feedback from: %s.'=>'',  # line 905
+'Because task is resolved, its status has been changed to completed.'=>'',  # line 1240
+'Task has resolved version but is not completed?'=>'',  # line 1246
+'Changed %s %s with ID %s|type,link,id'=>'',  # line 1441
 
 ### ../pages/task_view.inc.php   ###
 'Edit this %s'                =>'',  # line 77
 'Your feedback is requested by %s.'=>'',  # line 1166
 'Please edit or comment this item.'=>'',  # line 1167
 'This task has no description.\nDoubleclick to edit.'=>'',  # line 416
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1182
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1181
 'Request feedback'            =>'',  # line 1265
 
 ### ../pages/version.inc.php   ###
-'Moved %s versions to trash'  =>'',  # line 253
+'Moved %s versions to trash'  =>'',  # line 260
+
+### ../render/render_form.inc.php   ###
+'can not render form without valid user'=>'',  # line 698
 
 ### ../render/render_misc.inc.php   ###
 'without client|short for client'=>'',  # line 539
@@ -229,25 +231,25 @@ undefined keys:
 'Calculation|Project option'  =>'',  # line 657
 'Changes|Project option'      =>'',  # line 665
 'Persons|page option'         =>'',  # line 677
-'%s min ago'                  =>'',  # line 1025
-'1 hour ago'                  =>'',  # line 1028
-'%s hours ago'                =>'',  # line 1031
-'%s days ago'                 =>'',  # line 1035
-'%s months ago'               =>'',  # line 1038
-'%A, %B %e|strftime format string'=>'',  # line 1169
+'%s min ago'                  =>'',  # line 1015
+'1 hour ago'                  =>'',  # line 1018
+'%s hours ago'                =>'',  # line 1021
+'%s days ago'                 =>'',  # line 1025
+'%s months ago'               =>'',  # line 1028
+'%A, %B %e|strftime format string'=>'',  # line 1159
 
 ### ../render/render_page.inc.php   ###
 'Home|section'                =>'',  # line 247
 
 ### ../render/render_wiki.inc.php   ###
-'Update|wiki change marker'   =>'',  # line 180
-'New|wiki change marker'      =>'',  # line 186
-'Deleted|wiki change marker'  =>'',  # line 192
-'Item #%s is not an image'    =>'',  # line 1078
-'No item matches this name...'=>'',  # line 1244
-'Unkwown item %s'             =>'',  # line 1324
-'Cannot link to item #%s of type %s'=>'',  # line 1385
-'Warning: Could not find wiki chapter'=>'',  # line 2014
+'Update|wiki change marker'   =>'',  # line 224
+'New|wiki change marker'      =>'',  # line 230
+'Deleted|wiki change marker'  =>'',  # line 236
+'Item #%s is not an image'    =>'',  # line 1131
+'Unkwown item %s'             =>'',  # line 1220
+'Cannot link to item #%s of type %s'=>'',  # line 1281
+'No item matches this name...'=>'',  # line 1406
+'Warning: Could not find wiki chapter'=>'',  # line 2144
 
 ### ../std/class_changeline.inc.php   ###
 'Latest comment:'             =>'',  # line 261
@@ -276,5 +278,8 @@ undefined keys:
 'balanced|effort status'      =>'',  # line 249
 
 ### ../std/mail.inc.php   ###
-'Maybe you want to'           =>'',  # line 623
-'set your password'           =>'',  # line 626
+'Forgot your password or how to log in?|notification'=>'',  # line 464
+'Request a mail to change your account settings.|notification'=>'',  # line 455
+'Click here:'                 =>'',  # line 465
+'Maybe you want to'           =>'',  # line 622
+'set your password'           =>'',  # line 625

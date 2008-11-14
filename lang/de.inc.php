@@ -2204,7 +2204,6 @@ $g_lang_table= array(
 'Request feedback'            =>'Nach Meinung fragen',  # line 1265
 
 
-
 ### ../render/render_wiki.inc.php   ###
 'Update|wiki change marker'   =>'Geändert',  # line 180
 'New|wiki change marker'      =>'Neu',  # line 186
@@ -2217,6 +2216,42 @@ $g_lang_table= array(
 'Upcomming|release type'      =>'Angekündigt',  # line 178
 'ASAP|notification period'    =>'Sobald wie möglich',  # line 230
 
+
+### ../db/class_task.inc.php   ###
+'List title and description in project overview'=>'',  # line 191
+'Display folder as topic'     =>'Ordner als Thema anzeigen',  # line 197
+
+### ../lists/list_recentchanges.inc.php   ###
+'Also show your changes'      =>'Zeige auch eigene Änderungen',  # line 95
+'Hide your changes'           =>'Verstecke eigene Änderungen',  # line 98
+'Needs feedback'              =>'Braucht Feedback',  # line 165
+
+### ../lists/list_tasks.inc.php   ###
+'Days until planned end'      =>'Tage bis zum Ende',  # line 1240
+'Due|column header, days until planned end'=>'Tage',  # line 1241
+
+### ../pages/_handles.inc.php   ###
+'Toggle filter own changes'   =>'Sichtbarkeit eigener Änderungen umschalten',  # line 1173
+
+### ../pages/comment.inc.php   ###
+'Re: '                        =>'Re:',  # line 243
+
+### ../pages/home.inc.php   ###
+'my blocked'                  =>'Meine Blockiert',  # line 561
+'needs feedback'              =>'Braucht Feedback',  # line 620
+
+'Welcome to %s|Notice after login'=>'Willkommen bei %s',  # line 269
+
+### ../render/render_form.inc.php   ###
+'can not render form without valid user'=>'Formular kann nicht ohne gültigen Anwender bearbeitet werden.',  # line 698
+
+### ../std/mail.inc.php   ###
+'Forgot your password or how to log in?|notification'=>'Passwort vergessen? Keine Ahnung, wie man sich anmeldet? Keine Lust auf diese Mails',  # line 464
+'Request a mail to change your account settings.|notification'=>'Erhalte eine E-Mail, um Password und News-Einstellungen zu ändern.',  # line 455
+'Click here:'                 =>'Hier klicken',  # line 465
+
+### ../db/class_task.inc.php   ###
+'List title and description in project overview'=>'Titel und Beschreibung im Projekt Überblick zeigen',  # line 191
 
 );
 

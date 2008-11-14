@@ -44,7 +44,6 @@ undefined keys:
 'prior'                       =>'',  # line 1574
 
 ### ../pages/login.inc.php   ###
-'Welcome to %s", 'Notice after login'=>'',  # line 78
 'Welcome to %s|Notice after login'=>'',  # line 269
 
 ### ../pages/misc.inc.php   ###
@@ -81,17 +80,20 @@ undefined keys:
 'Effort calculations'         =>'',  # line 1857
 
 ### ../pages/task_more.inc.php   ###
-'Nickname not known in this project: %s'=>'',  # line 896
-'Requested feedback from: %s.'=>'',  # line 901
-'Because task is resolved, its status has been changed to completed.'=>'',  # line 1236
+'Nickname not known in this project: %s'=>'',  # line 900
+'Requested feedback from: %s.'=>'',  # line 905
+'Because task is resolved, its status has been changed to completed.'=>'',  # line 1240
 
 ### ../pages/task_view.inc.php   ###
 'Edit this %s'                =>'',  # line 77
 'Your feedback is requested by %s.'=>'',  # line 1166
 'Please edit or comment this item.'=>'',  # line 1167
 'This task has no description.\nDoubleclick to edit.'=>'',  # line 416
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1182
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1181
 'Request feedback'            =>'',  # line 1265
+
+### ../render/render_form.inc.php   ###
+'can not render form without valid user'=>'',  # line 698
 
 ### ../render/render_misc.inc.php   ###
 'without client|short for client'=>'',  # line 539
@@ -103,12 +105,12 @@ undefined keys:
 'Home|section'                =>'',  # line 247
 
 ### ../render/render_wiki.inc.php   ###
-'Update|wiki change marker'   =>'',  # line 180
-'New|wiki change marker'      =>'',  # line 186
-'Deleted|wiki change marker'  =>'',  # line 192
-'Item #%s is not an image'    =>'',  # line 1078
-'Unkwown item %s'             =>'',  # line 1324
-'Cannot link to item #%s of type %s'=>'',  # line 1385
+'Update|wiki change marker'   =>'',  # line 224
+'New|wiki change marker'      =>'',  # line 230
+'Deleted|wiki change marker'  =>'',  # line 236
+'Item #%s is not an image'    =>'',  # line 1131
+'Unkwown item %s'             =>'',  # line 1220
+'Cannot link to item #%s of type %s'=>'',  # line 1281
 
 ### ../std/constant_names.inc.php   ###
 'Enable tasks|Project setting'=>'',  # line 74
@@ -123,5 +125,8 @@ undefined keys:
 'ASAP|notification period'    =>'',  # line 230
 
 ### ../std/mail.inc.php   ###
-'Maybe you want to'           =>'',  # line 623
-'set your password'           =>'',  # line 626
+'Forgot your password or how to log in?|notification'=>'',  # line 464
+'Request a mail to change your account settings.|notification'=>'',  # line 455
+'Click here:'                 =>'',  # line 465
+'Maybe you want to'           =>'',  # line 622
+'set your password'           =>'',  # line 625
