@@ -315,7 +315,7 @@ function logout(){
     else {
         $nickname= '_nobody_';
     }
-    log_message("'".$nickname."' logged out from:". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGOUT);
+    log_message("'".$nickname."' logged out from:". getServerVar("REMOTE_ADDR", true), LOG_MESSAGE_LOGOUT);
 
     /**
     * send notifications

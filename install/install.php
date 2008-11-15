@@ -487,6 +487,9 @@ function step_02_proceed()
             }
         }
 
+        /**
+        * fresh installation
+        */
         
         ### creating database-structure ###
         print_testStart("creating table structure...");

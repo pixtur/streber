@@ -638,7 +638,6 @@ class PageHandler extends BaseObject
         return true;
     }
 
-
     #--------------------------------------------------------------------
     # show()
     #--------------------------------------------------------------------
@@ -656,7 +655,8 @@ class PageHandler extends BaseObject
         $crawler= Auth::isCrawler()
                 ? 'crawler'
                 : '';
-        log_message($user_name . '@' . asHtml($_SERVER["REMOTE_ADDR"]) . " -> $id ". asHtml($_SERVER["REQUEST_URI"]) . "  (".asHtml($_SERVER["HTTP_USER_AGENT"]).") $crawler"  , LOG_MESSAGE_DEBUG);
+                                  
+        log_message($user_name . '@' .  getServerVar('REMOTE_ADDR', true) . " -> $id ". getServerVar('REQUEST_URI') . "  (" . getServerVar('HTTP_USER_AGENT') . ") $crawler"  , LOG_MESSAGE_DEBUG);
 
         if(!$id) {
             $this->show('home');

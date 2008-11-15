@@ -389,6 +389,9 @@ function ProjView()
                 if($creator= Person::getVisibleById($n->created_by)) {
                     $link_creator= ' by '. $creator->getLink();
                 }
+                else {
+                    $link_creator= '';
+                }
                 echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
                 
                 if($project->validateEditItem($n)) {

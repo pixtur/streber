@@ -23,7 +23,6 @@ require_once("db/class_project.inc.php");
 */
 function taskAjax()
 {
-    trigger_error('blub');
     if($task_id=intval(get('tsk'))) {
         require_once("render/render_wiki.inc.php");
 

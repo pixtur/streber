@@ -389,7 +389,7 @@ if(isset($_SERVER['SCRIPT_NAME']) && $_SERVER['HTTP_HOST'] && preg_match("/\/ind
 *   https://www.somedome.com/
 */
 if(!confGet('SELF_PROTOCOL')) {
-    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+    if(getServerVar('HTTPS') == 'on') {
         confChange('SELF_PROTOCOL','https');
     }
     else {

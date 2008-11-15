@@ -923,7 +923,7 @@ function taskEditSubmit()
             if(confGet('REJECT_SPAM_CONTENT') && $auth->cur_user->id == confGet('ANONYMOUS_USER')) {
                 $propability= (isSpam($comment->description) + isSpam($comment->name)) * 0.5;
                 if($propability  > confGet('REJECT_SPAM_CONTENT')) {
-                    log_message(sprintf("rejected spam comment from %s with %s", $_SERVER['REMOTE_ADDR'], $propability),  LOG_MESSAGE_HACKING_ALERT);
+                    log_message(sprintf("rejected spam comment from %s with %s", getServerVar('REMOTE_ADDR'), $propability),  LOG_MESSAGE_HACKING_ALERT);
                     $PH->abortWarning(__("Comment has been rejected, because it looks like spam.") );
                 }
             }

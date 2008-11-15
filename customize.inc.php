@@ -10,7 +10,7 @@
 
 #confChange('USE_PROFILER',TRUE);
 #confChange('DISPLAY_ERROR_LIST', 'DETAILS');
-#confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
+confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('CHECK_IP_ADDRESS', false);
 #confChange('USE_MOD_REWRITE', false);		# uncomment this for apache 1.x
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers

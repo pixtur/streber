@@ -512,7 +512,7 @@ class PageHtmlStart extends PageElement {
         /**
         * use Starlight syntax highlighting if enabled and client uses Gecko
         */
-        if(confGet('LINK_STAR_LIGHT') && preg_match("/Gecko/i", $_SERVER['HTTP_USER_AGENT'],$matches)) {
+        if(confGet('LINK_STAR_LIGHT') && preg_match("/Gecko/i", getServerVar('HTTP_USER_AGENT'),$matches)) {
             $buffer.= "<link rel=\"stylesheet\" href=\"themes/starlight/star-light.css\" type=\"text/css\"/>";
         }
 

@@ -143,7 +143,15 @@ function get($key) {
     return NULL;
 }
 
-
+function getServerVar($name, $as_html= false)
+{
+    if( isset($_SERVER[$name]) ){
+        if( $as_html) {
+            return asHtml($_SERVER[$name] );
+        }
+        return $_SERVER[$name];
+    }
+}
 /**
 * sometimes useful for debugging
 * - note the print of a double % which will trigger a warning for debug out

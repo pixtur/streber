@@ -54,7 +54,7 @@ class Auth
             return false;
         }
 
-        if(confGet('CHECK_IP_ADDRESS') && $_SERVER['REMOTE_ADDR'] != $user->ip_address) {
+        if(confGet('CHECK_IP_ADDRESS') && getServerVar('REMOTE_ADDR') != $user->ip_address) {
             new FeedbackMessage( __("Your IP-Address changed. Please relogin."));
             log_message(" Failed: IP-Adress changed", LOG_MESSAGE_DEBUG);
             return false;
@@ -145,7 +145,7 @@ class Auth
         $this->cur_user= $user;
 
         $this->cur_user->last_login= getGMTString();
-        $this->cur_user->ip_address= asCleanString($_SERVER['REMOTE_ADDR']);
+        $this->cur_user->ip_address= asCleanString(getServerVar('REMOTE_ADDR'));
 
         if(confGet('CHECK_IP_ADDRESS')) {
           $this->cur_user->cookie_string= $this->cur_user->calcCookieString();
@@ -160,7 +160,7 @@ class Auth
 	public function checkLdapOption($name)
 	{
 		if(!$user=Person::getByNickname($name)) {
-            log_message("login failed, unknown person '$name' from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed, unknown person '$name' from ". getServerVar('REMOTE_ADDR', true) , LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
 		
@@ -176,12 +176,12 @@ class Auth
 		$user = Person::getByNickname($name);
 		
 		if($user->state != ITEM_STATE_OK) {
-            log_message("login failed,  deleted person '$name'/ from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed,  deleted person '$name'/ from ". getServerVar('REMOTE_ADDR', true), LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
 		
         if(!$user->can_login) {
-            log_message("login failed,  person '$name' without account / from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed,  person '$name' without account / from ". getServerVar('REMOTE_ADDR') , LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
 		
@@ -228,7 +228,7 @@ class Auth
             log_message("cookie is (".$this->cur_user->cookie_string.")", LOG_MESSAGE_DEBUG);
         }
 
-        $this->cur_user->ip_address= asCleanString($_SERVER['REMOTE_ADDR']);
+        $this->cur_user->ip_address= asCleanString(getServerVar('REMOTE_ADDR'));
 
         /**
         * guess time client time offset to gmt in seconds
@@ -282,7 +282,7 @@ class Auth
         $this->cur_user->update(array('last_login','cookie_string','ip_address','time_offset'),false);
 
         log_message("tryLoginUser()->success", LOG_MESSAGE_DEBUG);
-        log_message("'$name' logged in from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_SUCCESS);
+        log_message("'$name' logged in from ". getServerVar('REMOTE_ADDR', true), LOG_MESSAGE_LOGIN_SUCCESS);
 		
         return $user;
 		
@@ -302,15 +302,15 @@ class Auth
     {
         log_message("tryLoginUser()", LOG_MESSAGE_DEBUG);
         if(!$user=Person::getByNickname($name)) {
-            log_message("login failed, unknown person '$name' from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed, unknown person '$name' from ". getServerVar('REMOTE_ADDR', true) , LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
         if( $user->state != ITEM_STATE_OK) {
-            log_message("login failed,  deleted person '$name'/ from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed,  deleted person '$name'/ from ". getServerVar('REMOTE_ADDR', true), LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
         if( !$user->can_login) {
-            log_message("login failed,  person '$name' without account / from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed,  person '$name' without account / from ". getServerVar('REMOTE_ADDR', true) , LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
         if( !$user instanceof Person) {
@@ -318,7 +318,7 @@ class Auth
         }
 
         if ($user->password != $password_md5) {
-            log_message("login failed, wrong password for person '$name' / from ". $_SERVER["REMOTE_ADDR"] , LOG_MESSAGE_LOGIN_FAILURE);
+            log_message("login failed, wrong password for person '$name' / from ". getServerVar('REMOTE_ADDR', true) , LOG_MESSAGE_LOGIN_FAILURE);
             return false;
         }
 
@@ -351,7 +351,7 @@ class Auth
             log_message("cookie is (".$this->cur_user->cookie_string.")", LOG_MESSAGE_DEBUG);
         }
 
-        $this->cur_user->ip_address= asCleanString($_SERVER['REMOTE_ADDR']);
+        $this->cur_user->ip_address= asCleanString(getServerVar('REMOTE_ADDR', true));
 
 
 
@@ -409,7 +409,7 @@ class Auth
         $this->cur_user->update(array('last_login','cookie_string','ip_address','time_offset'),false);
 
         log_message("tryLoginUser()->success", LOG_MESSAGE_DEBUG);
-        log_message("'$name' logged in from ". $_SERVER["REMOTE_ADDR"], LOG_MESSAGE_LOGIN_SUCCESS);
+        log_message("'$name' logged in from ". getServerVar('REMOTE_ADDR', true), LOG_MESSAGE_LOGIN_SUCCESS);
         return $user;
     }
 
@@ -553,8 +553,7 @@ class Auth
         #        return true;
         #    }
         #}
-        if(isset($_SERVER['HTTP_USER_AGENT'])){
-            $agent= $_SERVER['HTTP_USER_AGENT'];
+        if($agent= getServerVar('HTTP_USER_AGENT')){
             $crawlers= array(
                 "/Googlebot/",
                 "/Yahoo! Slurp;/",
@@ -593,6 +592,7 @@ class Auth
                 #"", #(www.clamav.net)
                 #"", #(Page2RSS/0.2)
                 #"", #(psbot/0.1 (+http://www.picsearch.com/bot.html)) 
+                '/ Charlotte\/?.?/',  #Mozilla/5.0 (compatible; Charlotte/1.1; http://www.searchme.com/support/)
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {
@@ -610,10 +610,10 @@ class Auth
     */
     public static function isUglyCrawler()
     {
-        if(isset($_SERVER['HTTP_USER_AGENT'])){
-            $agent= $_SERVER['HTTP_USER_AGENT'];
+        if($agent= getServerVar('HTTP_USER_AGENT')){
             $crawlers= array(
                 "/HTTrack/",
+                "/Mozilla\/4.0 \(compatible; MSIE 6.0; Windows NT 5.1; SV1\)/",  #'', #(Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)) 
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {
@@ -623,8 +623,5 @@ class Auth
         }      
     }
 }
-
-
-
 
 $auth= new Auth();
