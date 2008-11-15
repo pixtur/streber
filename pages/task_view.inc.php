@@ -49,8 +49,6 @@ function TaskView()
     ### create from handle ###
     $from_handle= $PH->defineFromHandle(array('tsk'=>$task->id));
 
-    ## is viewed by user ##
-    $task->nowViewedByUser();
 
     global $g_wiki_task;
     $g_wiki_task= $task;
@@ -408,22 +406,22 @@ function TaskView()
 
     #--- description ----------------------------------------------------------------
     {
+        $descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
-
         if($editable) {
-            $description= $task->description;
+            $description= $descriptionWithUpdates;
             if( $description == "" ) {
                 $description = "[quote]" . __("This task has no description.\nDoubleclick to edit.") . "[/quote]";
             } 
             echo  wiki2html($description, $project, $task->id, 'description');
         }
         else {
-            echo  wiki2html($task->description, $project);
+            echo  wiki2html($descriptionWithUpdates, $project);
         }
         echo "</div>";
 
-        ### update task if relative links have been converted to ids ###
-        if( checkAutoWikiAdjustments() ) {
+        ### Apply automatic link conversions
+        if( checkAutoWikiAdjustments() ) {            
             $task->description= applyAutoWikiAdjustments( $task->description );
             $task->update(array('description'),false);
         }
@@ -644,6 +642,10 @@ function TaskView()
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
+
+    ## is viewed by user ##
+    $task->nowViewedByUser();
+
 }
 
 

@@ -556,8 +556,8 @@ class PageHtmlStart extends PageElement {
         $buffer.='
         <!--
             //------ on load -------
-            //$(document).ready(function(){
-            window.onload = function() {
+            $(document).ready(function(){
+            //window.onload = function() { alert("here");
         ';
 
         if($this->page->use_autocomplete) {
@@ -573,23 +573,23 @@ document.my_form." . $this->page->autofocus_field. ".select();";
         $buffer.='initContextMenus();
                 ';
 
-                if($q=get('q')) {
-                    $q= asCleanString($q);
-                    if($ar = explode(" ",$q)) {
-                        foreach($ar as $q) {
-                            $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
-                        }
-                    }
-                    else {
-                        $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
-                    }
+        if($q=get('q')) {
+            $q= asCleanString($q);
+            if($ar = explode(" ",$q)) {
+                foreach($ar as $q) {
+                    $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
                 }
-
-
-                $buffer.= "misc();
-                           listFunctions();
-
             }
+            else {
+                $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
+            }
+        }
+
+
+        $buffer.= "misc();
+                   listFunctions();
+
+            });
 
         //-->
         </script>

@@ -1,5 +1,11 @@
 streber-version-history
 
+
+- MAJOR: fixed stripping of backslashes (make obvious by reoccuring change markers). This involved some changes in the backend which need to be tested on different platforms. 
+- internal: fixed login with random tokens
+- internal: hide own change markers.
+- internal: use ready() function instead of onLoad() this has to be tested!
+
 - MAJOR: added random token to forms to prevent from cross site request forgery
 
 - Added wiki syntax for rendering latex formulas

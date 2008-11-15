@@ -1,5 +1,6 @@
 /* http://www.kryogenix.org/code/browser/searchhi/ */
 /* Modified 20021006 to fix query string parsing and add case insensitivity */
+/* Modified 20070316 to stop highlighting inside nosearchhi nodes */
 function highlightWord(node,word) {
 	// Iterate into this nodes childNodes
 	if (node.hasChildNodes) {
@@ -8,13 +9,21 @@ function highlightWord(node,word) {
 			highlightWord(node.childNodes[hi_cn],word);
 		}
 	}
-
+	
 	// And do this node itself
 	if (node.nodeType == 3) { // text node
 		tempNodeVal = node.nodeValue.toLowerCase();
 		tempWordVal = word.toLowerCase();
 		if (tempNodeVal.indexOf(tempWordVal) != -1) {
 			pn = node.parentNode;
+			// check if we're inside a "nosearchhi" zone
+			checkn = pn;
+			while (checkn.nodeType != 9 && 
+			checkn.nodeName.toLowerCase() != 'body') { 
+			// 9 = top of doc
+				if (checkn.className.match(/\bnosearchhi\b/)) { return; }
+				checkn = checkn.parentNode;
+			}
 			if (pn.className != "searchword") {
 				// word has not already been highlighted!
 				nv = node.nodeValue;
@@ -54,4 +63,4 @@ function googleSearchHighlight() {
 	}
 }
 
-//window.onload = googleSearchHighlight();
+window.onload = googleSearchHighlight;

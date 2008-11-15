@@ -75,7 +75,7 @@ function loginForm() {
 
         $page->cur_tab='login';
         $page->type="";
-        $page->title= sprintf( __("Welcome to %s", 'Notice after login'), confGet('APP_NAME'));
+        $page->title= sprintf( __('Welcome to %s', 'Notice after login'), confGet('APP_NAME'));
 
         echo(new PageHeader);
     }

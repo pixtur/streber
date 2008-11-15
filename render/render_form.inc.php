@@ -692,17 +692,13 @@ class PageForm extends PageElement
         *   add it as a none checked field.
         *
         */
-        #echo "<input type=hidden name=edit_request_time value='" . time(). "'>";
-
-        if(!isset($auth->cur_user)) {
-            $PH->abortWarning(__("can not render form without valid user"));
-        }
-        $this->add(new Form_HiddenField('edit_request_time', '', time()));
-        $this->add(new Form_HiddenField('edit_request_token', '', createRandomString()));
-        
+        ### user might not be defined for anonymus pages like login 
+        if(isset($auth->cur_user)) {
+            $this->add(new Form_HiddenField('edit_request_time', '', time()));
+            $this->add(new Form_HiddenField('edit_request_token', '', createRandomString()));
+        }        
         $this->button_submit= __("Submit");
         parent::__construct();
-
     }
 
     PUBLIC function __toString()

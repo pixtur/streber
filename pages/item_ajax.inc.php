@@ -131,8 +131,8 @@ function itemSaveField()
         if(!preg_match("/\n$/",$value)) {
             $value.="\n";
         }
-        $value= str_replace("\\'", "'", $value);
-        $value= str_replace('\\"', "\"", $value);
+        #$value= str_replace("\\'", "'", $value);
+        #$value= str_replace('\\"', "\"", $value);
         
         $parts[$chapter]= $value;
 

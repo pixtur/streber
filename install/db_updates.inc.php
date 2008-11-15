@@ -343,6 +343,7 @@ if($db_version < 0.0807) {
  	$update_queries[] = "ALTER TABLE `{$db_table_prefix}itemperson` ADD `feedback_requested_by` INT ( 4 ) DEFAULT '0' NOT NULL ";
     $update_queries[] = "ALTER TABLE `{$db_table_prefix}itemperson` ADD INDEX ( `feedback_requested_by` );";
 }
+
 if($db_version < 0.08081) {
     $update_queries[] = "ALTER TABLE `{$db_table_prefix}task` ADD `show_folder_as_documentation` INT ( 1 ) DEFAULT '0' NOT NULL ";
 }

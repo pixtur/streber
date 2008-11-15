@@ -271,8 +271,6 @@ class DB_MysqlStatement implements DB_Statement
 
         if($res=$sql_obj->fetchArray()) {
             foreach($res as $key=>$value) {
-
-                #$row[$key]= stripslashes(stripslashes(stripslashes($value)));
                 $row[$key]= stripslashes($value);
             }
         }
@@ -283,17 +281,16 @@ class DB_MysqlStatement implements DB_Statement
     {
         global $sql_obj;
         $retval = array();
+
+        /**
+        * We do not have to strip slashes here, because this is done by fetch_assoc
+        */
         while($row = $this->fetch_assoc()) {
-            foreach($row as $key=>$value) {
-                #$row[$key]= stripslashes(stripslashes(stripslashes($row[$key])));
-                $row[$key]= stripslashes($row[$key]);
-            }
             $retval[] = $row;
 
             #--- cound traffic for debug-output ----
             global $DB_ITEMS_LOADED;
             $DB_ITEMS_LOADED+= count($row);
-
         }
         return $retval;
     }

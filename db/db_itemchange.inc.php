@@ -181,27 +181,30 @@ class ItemChange extends DbItem
         */
         $this->_type=strtolower(get_class($this));
 
-
         /**
         * add default fields if not overwritten by derived class
         */
         if(!$this->fields) {
-
             global $g_itemchange_fields;
-            $this->fields=&$g_itemchange_fields;
+            $this->fields= &$g_itemchange_fields;
         }
 
-        parent::__construct();
+        #parent::__construct();
 
         /**
         * if array is passed, create a new empty object with default-values
         */
         if(is_array($id_or_array)) {
+
+            ### setup fields
             parent::__construct();
+
+            ### initialize with values
 			foreach($id_or_array as $key => $value) {
 				is_null($this->$key); ### cause E_NOTICE on undefined properties
-				$this->$key=$value;
+				$this->$key = $value;
 			}
+			#debug
         }
 
         /**
@@ -211,8 +214,6 @@ class ItemChange extends DbItem
         */
         else if(is_int($id_or_array)) {
             parent::__construct($id_or_array);
-
-
         }
         #--- just empty ----
         else {
@@ -221,9 +222,6 @@ class ItemChange extends DbItem
             return NULL;
         }
     }
-
-
-
 
     static function &getItemChanges( $args=NULL)
     {

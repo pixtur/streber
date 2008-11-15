@@ -81,7 +81,7 @@ abstract class DbItem {
         $data = $dbh->prepare($query)->execute($id)->fetch_assoc();
         if($data) {
             foreach( $data as $attr => $value ) {
-                $this->$attr = stripslashes($value);
+                $this->$attr = $value;
             }
         }
         else {
@@ -595,20 +595,7 @@ class DbProjectItem extends DbItem {
                 if($data) {
                     foreach( $data as $attr => $value ) {
                         is_null($this->$attr);                                          # cause E_NOTICE if member not defined
-                        #$this->_values_org[$attr]= $this->$attr = stripslashes(stripslashes(stripslashes($value))); #@@@ note this is a weird bug
-
-                        /**
-                        * @@@Pixtur: one strip slashes should be sufficient...
-                        *            only tested with myslq5 / xampp
-                        */
-                        #if(get_magic_quotes_gpc()) {
-                        #    $this->_values_org[$attr]= $this->$attr = stripslashes($value);
-                        #}
-                        #else {
-                        #$this->_values_org[$attr]= $this->$attr = stripslashes($value);
-                        
                         $this->_values_org[$attr]= $this->$attr = $value;
-                        #}
                     }
                 }
 
@@ -947,7 +934,7 @@ class DbProjectItem extends DbItem {
                         trigger_error("$name is not a member of $this and can't be passed to db", E_USER_WARNING);
                     }
 
-                    if (  $this->_values_org[$name] == stripslashes($this->$name)) {
+                    if ($this->_values_org[$name] == $this->$name) {
                         continue;
                     }
                     else if($this->fields[$name]->log_changes) {
@@ -998,7 +985,7 @@ class DbProjectItem extends DbItem {
                         continue;
                     }
                     if(isset($this->_values_org[$name])) {
-                        if (  $this->_values_org[$name] == stripslashes($this->$name)) {
+                        if ($this->_values_org[$name] == $this->$name) {
                             continue;
                         }
                         else if($this->fields[$name]->log_changes) {
@@ -1523,17 +1510,23 @@ class DbProjectItem extends DbItem {
         }
     }
     
+    /**
+    * internal function to add update markers to wiki texts
+    */
     public function getTextfieldWithUpdateNotes($fieldname)
     {
         require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
         require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
         global $auth;
-        
-        /**
-        * has user seen item?
-        */
-        if($item_persons = ItemPerson::getAll(array(
+
+        ### has user last edited this item? ###
+        if($this->modified_by == $auth->cur_user->id) {
+            return $this->$fieldname;            
+        }
+
+        ### has user seen item? ###        
+        else if($item_persons = ItemPerson::getAll(array(
             'person'=>$auth->cur_user->id,
             'item' => $this->id
         ))) {
