@@ -930,7 +930,7 @@ div.block {
         background-color:#fff;
         float:left;
         line-height:0.01;
-        overflow:clipped;
+        overflow:hidden;
         left:-7px;
         top:-6px;
     }
@@ -971,7 +971,7 @@ div.block {
     /* good browsers */
     div.block.reduced_header > div.extra_top {
 		padding:0.4em 2px 0px 0.4em;
-		position:releative;
+		position:relative;
 		height:15px;
      	background: url(layout/bg_block_header.png);
      	background-repeat:no-repeat;
@@ -986,7 +986,7 @@ div.block {
     /* this must be reversed in styles_ie.ccs */
     div.block.reduced_header div.extra_top {
         margin-bottom:-15px;
-    	position:releative;		
+    	position:relative;		
     
     }
 
@@ -1007,7 +1007,7 @@ div.block {
 		cursor:pointer;
         padding-left:16px;
         font-size:11pt;
-		position:releative;
+		position:relative;
 
 	}
 
@@ -1202,7 +1202,7 @@ div.block {
         clear:both;
         margin-right:100px;
         border:0px solid #000;
-        overflow:clipped;
+        overflow:hidden;
     }
 
 
@@ -2598,7 +2598,7 @@ span.selectorlist span.selectorlist_content {
  border:            1px solid #888;
  background:        #eee;
  padding:           2px;
- margin:            20px 0px 0px 0x;
+ margin:            20px 0px 0px 0px;
  /*font-size:         90%;*/
  text-align: 		left;
  width: 			180px;
@@ -2617,7 +2617,7 @@ span.selectorlist span.selectorlist_content div.companies:hover {
 
 span.selectorlist span.selectorlist_content div.companies {
 	padding: 2px;
- 	margin:  0px 0px 0px 0x;	
+ 	margin:  0px 0px 0px 0px;	
 	border-top: 1px dotted #000; 	
 }
 

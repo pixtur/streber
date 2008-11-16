@@ -32,6 +32,11 @@ function startedIndexPhp() {return true; }
 initialBasicFixes();
 initProfiler();
 
+### Instanciate firebug ###
+ob_start();
+require_once('lib/firephp/FirePHP.class.php');
+$firephp = FirePHP::getInstance(true);
+
 ### include std functions ###
 require_once('std/common.inc.php');
 require_once('std/errorhandler.inc.php');
