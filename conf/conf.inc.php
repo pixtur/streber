@@ -15,8 +15,8 @@
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.08091',
-    'STREBER_VERSION_DATE'  => '2008-11-08',
+    'STREBER_VERSION'       => '0.08093',
+    'STREBER_VERSION_DATE'  => '2008-11-15',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',

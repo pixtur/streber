@@ -2311,14 +2311,6 @@ function personEditSubmit()
         $person= new Person(array('id'=>0));
     }
     else {
-        if($tuid= get('tuid')) {
-            // setCurUserByIdentifier have already been called, but somehow it was
-            // called too early. Calling it a second time here won't hurt and fixes bug #3817
-            $user= $auth->setCurUserByIdentifier($tuid); // will call asKey($tuid)
-            if(!$user || $user->id != $id) {
-                $PH->abortWarning(__("Malformed activation url"));
-            }
-        }
         if(!$person= Person::getEditableById($id)) {
             $PH->abortWarning(__("Could not get person"));
             return;
@@ -2579,7 +2571,7 @@ function personEditSubmit()
             $person->fields['password']->required=true;
             $flag_ok = false;
             $flag_password_ok = false;
-            $person->cookie_string= $auth->cur_user->calcCookieString();
+
         }
 
         ### check if password is good enough ###
@@ -2679,6 +2671,7 @@ function personEditSubmit()
 
     ### ... or update existing ###
     else {
+        new FeedbackMessage(sprintf(__('Updated settings for %s.'), $person->getLink()));
         $person->update();
     }
 
@@ -2693,6 +2686,7 @@ function personEditSubmit()
     if(get('tuid')) {
         $auth->removeUserCookie();
         $auth->storeUserCookie();
+        
     }
 
     ### create another person ###

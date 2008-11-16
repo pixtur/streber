@@ -33,9 +33,11 @@ initialBasicFixes();
 initProfiler();
 
 ### Instanciate firebug ###
-ob_start();
-require_once('lib/firephp/FirePHP.class.php');
-$firephp = FirePHP::getInstance(true);
+#ob_start();
+#require_once('lib/firephp/FirePHP.class.php');
+#$firephp = FirePHP::getInstance(true);
+#require_once('lib/firephp/fb.php');
+
 
 ### include std functions ###
 require_once('std/common.inc.php');
@@ -178,13 +180,9 @@ $requested_page= $PH->getRequestedPage();
 
 
 if($requested_page->http_auth) {
-
     if(!$user) {
-
         if($user= Auth::getUserByHttpAuth()) {
-
             $PH->show($requested_page->id);
-
             exit();
         }
         else {
@@ -217,13 +215,13 @@ if($user) {
 }
 
 ### anonymous pages like Login or License ###
-if($requested_page_id && $requested_page && $requested_page->valid_for_anonymous) {
+else if($requested_page_id && $requested_page && $requested_page->valid_for_anonymous) {
     $PH->show($requested_page_id);
     exit();
 }
 
 ### identified by tuid (email notification, etc.)
-if(get('tuid') && $requested_page && $requested_page->valid_for_tuid) {
+else if(get('tuid') && $requested_page && $requested_page->valid_for_tuid) {
     if($auth->setCurUserByIdentifier(get('tuid'))) {
         log_message('...valid identifier-string(' . get('tuid') . ')', LOG_MESSAGE_DEBUG);
 
@@ -243,11 +241,10 @@ if(get('tuid') && $requested_page && $requested_page->valid_for_tuid) {
         exit();
     }
     else {
-        new FeedbackWarning(__("Sorry, but this activation code is no longer valid. If you already have an account, you could enter you name and use the <b>forgot password link</b> below."));
+        new FeedbackWarning(__("Sorry, but this activation code is no longer valid. Please use the <b>forgot password link</b> below."));
         log_message('...invalid identifier-string(' . get('tuid') . ')', LOG_MESSAGE_DEBUG);
     }
 }
-
 
 ### all other request lead to login-form ###
 $PH->show('loginForm');

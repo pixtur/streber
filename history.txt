@@ -1,5 +1,11 @@
 streber-version-history
 
+- MAJOR: fixed changing password and profile from notification mails
+- MINOR: slightly adjusted notification mails
+- Fixed: jumping to item after login with mod_rewrite
+
+version v0.08093 [2008-11-5]
+===========================
 
 - MAJOR: fixed stripping of backslashes (make obvious by reoccuring change markers). This involved some changes in the backend which need to be tested on different platforms. 
 - internal: fixed login with random tokens

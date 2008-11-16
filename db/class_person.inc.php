@@ -695,7 +695,6 @@ class Person extends DbProjectItem {
     {
         $prefix= confGet('DB_TABLE_PREFIX');
 
-
         $tmp=self::queryFromDb("SELECT * FROM {$prefix}person WHERE cookie_string='".asAlphaNumeric($f_cookie_string)."'");
         if(!$tmp || count($tmp)!=1) {
             return false;
@@ -1050,7 +1049,7 @@ class Person extends DbProjectItem {
 
     /**
     * note, if we want to keep the user logged in between sessions (CHECK_IP_ADDRESS == false)
-    * this function must only be used for building new Cookie-strings when logging out.
+    * this function must only be used for building new Cookie-strings when explicitly logging out.
     */
     public function calcCookieString()
     {

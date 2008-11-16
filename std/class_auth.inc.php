@@ -48,21 +48,22 @@ class Auth
         }
 
         if(!$user=Person::getByCookieString(asKey($cookie_string))) {
-            new FeedbackMessage( __("Cookie is no longer valid for this computer."));
             log_message(" Failed: Person::getByCookieString() without result", LOG_MESSAGE_DEBUG);
             $this->removeUserCookie();
             return false;
         }
 
-        if(confGet('CHECK_IP_ADDRESS') && getServerVar('REMOTE_ADDR') != $user->ip_address) {
+        if(confGet('CHECK_IP_ADDRESS') && asCleanString(getServerVar('REMOTE_ADDR')) != $user->ip_address) {
             new FeedbackMessage( __("Your IP-Address changed. Please relogin."));
             log_message(" Failed: IP-Adress changed", LOG_MESSAGE_DEBUG);
+            $this->removeUserCookie();
             return false;
         }
 
         if(!$user->can_login) {
             new FeedbackWarning( __("Your account has been disabled. "));
             log_message(" Failed: User disabled", LOG_MESSAGE_DEBUG);
+            $this->removeUserCookie();
             return false;
         }
 
@@ -72,16 +73,12 @@ class Auth
         $user->last_login= getGMTString();
         $this->cur_user->update(array('last_login'),false);
 
-
-        #log_message("setCurUserByCookie()->success", LOG_MESSAGE_DEBUG);
         return $user;
     }
 
 
     public function setCurUserAsAnonymous($cookie_string= NULL)
     {
-        #log_message("setCurUserByCookie()", LOG_MESSAGE_DEBUG);
-
         measure_start('include Person');
         require_once(confGet('DIR_STREBER') . "db/class_person.inc.php");
         measure_stop('include Person');
@@ -103,9 +100,7 @@ class Auth
             return false;
         }
 
-        /**
-        * disable rendering for traffic exhaustive browsers
-        */
+        ### disable rendering for traffic exhaustive browsers ###
         if($this->isUglyCrawler()) {
             exit();
         }
@@ -116,7 +111,6 @@ class Auth
         $user->last_login= getGMTString();
         $this->cur_user->update(array('last_login'),false);
 
-        #log_message("setCurUserByCookie()->success", LOG_MESSAGE_DEBUG);
         return $user;
     }
 
@@ -147,11 +141,14 @@ class Auth
         $this->cur_user->last_login= getGMTString();
         $this->cur_user->ip_address= asCleanString(getServerVar('REMOTE_ADDR'));
 
+        /**
+        * create new cookie
+        */
         if(confGet('CHECK_IP_ADDRESS')) {
-          $this->cur_user->cookie_string= $this->cur_user->calcCookieString();
+            $this->cur_user->cookie_string= $this->cur_user->calcCookieString();
         }
 
-        $this->cur_user->update(array('last_login','cookie_string','ip_address'),false);
+        $this->cur_user->update(array('last_login','cookie_string','ip_address'), false);
 
         log_message("setCurUserByIdentifier()->success", LOG_MESSAGE_DEBUG);
         return $user;
@@ -426,7 +423,6 @@ class Auth
                 trigger_error("storeUserCookie() could not get current person from db?", E_USER_ERROR);
                 exit();
             }
-
             if(!setcookie(
                 'NORD_UID',
                 $this->cur_user->cookie_string,

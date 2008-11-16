@@ -8,11 +8,10 @@
 * read http://www.streber-pm.org/3719  or have a look at conf/conf.inc
 */
 
-#confChange('USE_PROFILER',TRUE);
+confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('DISPLAY_ERROR_LIST', 'DETAILS');
-#confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('CHECK_IP_ADDRESS', false);
-#confChange('USE_MOD_REWRITE', true);
+#confChange('USE_MOD_REWRITE', false);
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
 ### uncomment the following line if you upgraded from mySQL 4

@@ -1162,6 +1162,7 @@ function taskViewAsDocu()
 
     #--- feedback notice ------------------------------------------------------------
     {
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');        
         if($view = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$task->id, 'feedback_requested_by'=>true))){
             if ($requested_by= Person::getPersons( array( 'id' => $view[0]->feedback_requested_by ) )) {
                 echo "<div class=item_notice>";

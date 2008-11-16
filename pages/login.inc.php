@@ -39,7 +39,7 @@ $g_tabs_login= array(
 * hidden paramter. The following list defines the valid paramters for this.
 */
 global $g_valid_login_params;
-$g_valid_login_params= array('prj','task','tsk','comment','effort','person','client');
+$g_valid_login_params= array('prj','task','tsk','comment','effort','person','client','item');
 
 /**
 * Render login form 
