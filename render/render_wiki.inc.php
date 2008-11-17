@@ -2241,8 +2241,4 @@ function &getWikiChapters($text)
     return $parts;
 }
 
-
-
-
-
 ?>

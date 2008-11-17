@@ -493,7 +493,17 @@ class PageHtmlStart extends PageElement {
         if($theme_config= getThemeFile("theme_config.inc.php")) {
             require_once($theme_config);
         }
+
+        ### Set uft8
         header("Content-type: text/html; charset=utf-8");
+
+        ### Disable page caching ###
+        header("Expires: -1");
+        header("Cache-Control: post-check=0, pre-check=0");
+        header("Pragma: no-cache");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
+
         $title= asHtml($this->page->title) . '/'. asHtml($this->page->title_minor).' - ' . confGet('APP_NAME');
         $buffer= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'
 

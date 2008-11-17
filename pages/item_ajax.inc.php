@@ -59,6 +59,8 @@ function itemLoadField()
 function itemSaveField()
 {
     header("Content-type: text/html; charset=utf-8");
+
+    ### disable page caching ###
     header("Expires: -1");
     header("Cache-Control: post-check=0, pre-check=0");
     header("Pragma: no-cache");

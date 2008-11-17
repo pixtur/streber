@@ -67,7 +67,7 @@ new PageHandle(array('id'=>'playground',
     'test'=>'no',
 
     'cleanurl'=>'playground',
-
+    'valid_for_crawlers'=>false,
 ));
 
 
@@ -189,6 +189,7 @@ new PageHandle(array('id'=>'projListClosed',
     'test'=>'yes',
 
     'cleanurl' => 'projClosed',
+    'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'projListTemplates',
     'req'=>'pages/project_more.inc.php',
@@ -198,6 +199,7 @@ new PageHandle(array('id'=>'projListTemplates',
     ),
     'test'=>'yes',
     'cleanurl' => 'projTemplates',
+    'valid_for_crawlers'=>false,
 ));
 
 new PageHandle(array('id'=>'projView',
@@ -266,6 +268,7 @@ new PageHandle(array('id'=>'projViewEfforts',
                             ),
     'test'=>'yes',
     'test_params'=>array('prj'=>'_projectView_',),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'projViewEffortCalculations',
     'req'       =>'pages/project_more.inc.php',
@@ -277,6 +280,7 @@ new PageHandle(array('id'=>'projViewEffortCalculations',
                             ),
     'test'=>'yes',
     'test_params'=>array('prj'=>'_projectView_',),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'projViewFiles',
     'req'       =>'pages/project_more.inc.php',
@@ -298,6 +302,7 @@ new PageHandle(array('id'=>'projViewChanges',
                             ),
     'test'=>'yes',
     'test_params'=>array('prj'=>'_projectView_',),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'projViewTasks',
     'req'=>'pages/project_more.inc.php',
@@ -319,6 +324,7 @@ new PageHandleFunc(array('id'=>'projNew',
                             'company'=>'\d*',
                             ),
     'test'=>'yes',
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'projCreateTemplate',
     'req'=>'pages/project_more.inc.php',
@@ -327,6 +333,7 @@ new PageHandleFunc(array('id'=>'projCreateTemplate',
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
                             ),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'projNewFromTemplate',
     'req'=>'pages/project_more.inc.php',
@@ -335,6 +342,7 @@ new PageHandleFunc(array('id'=>'projNewFromTemplate',
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
                             ),
+    'valid_for_crawlers'=>false,
 ));
 
 
@@ -347,11 +355,13 @@ new PageHandleForm(array('id'=>'projEdit',
                             ),
     'test'=>'yes',
     'test_params'=>array('prj'=>'_projectEdit_',),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleSubm(array('id'=>'projEditSubmit',
     'req'=>'pages/project_more.inc.php',
     'rights_required'=>RIGHT_PROJECT_EDIT,
     'valid_params'=>array(),
+    'valid_for_crawlers'=>false,
 
 ));
 
@@ -362,6 +372,7 @@ new PageHandleFunc(array('id'=>'projDelete',
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
                             ),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'projChangeStatus',
     'req'=>'pages/project_more.inc.php',
@@ -493,6 +504,7 @@ new PageHandle(array('id'=>'taskViewEfforts',
 
     'test'=>'yes',
     'test_params'=>array('tsk'=>'_taskView_',),
+    'valid_for_crawlers'=>false,
     'valid_for_crawlers'=>false,
 ));
 
@@ -731,6 +743,7 @@ new PageHandle(array('id'=>'effortView',
 
     'cleanurl'=>'_ITEM_',
     'cleanurl_mapping'=>array('effort' => '_ITEM_'),
+    'valid_for_crawlers'=>false,
 
 ));
 new PageHandle(array('id'=>'effortViewMultiple',
@@ -741,6 +754,7 @@ new PageHandle(array('id'=>'effortViewMultiple',
 
     'test'=>'yes',
     'test_params'=>array('effort'=>'_effortViewMultiple_',),
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'effortNew',
     'req'=>'pages/effort.inc.php',
@@ -794,6 +808,7 @@ new PageHandle(array('id'=>'commentView',
 
     'cleanurl'=>'_ITEM_',
     'cleanurl_mapping'=>array('comment' => '_ITEM_'),
+    'valid_for_crawlers'=>false,
     'valid_for_crawlers'=>false,
 ));
 
@@ -885,7 +900,7 @@ new PageHandle(array('id'=>'fileView',
 
     'cleanurl'=>'_ITEM_',
     'cleanurl_mapping'=>array('file' => '_ITEM_'),
-
+    'valid_for_crawlers'=>false,
 ));
 
 new PageHandleFunc(array('id'=>'filesUpload',
@@ -912,6 +927,7 @@ new PageHandleForm(array('id'=>'fileEdit',
 new PageHandle(array('id'=>'fileDownload',
     'req'=>'pages/file.inc.php',
     'title'=>__('Download'),
+    'valid_for_crawlers'=>false,
 ));
 
 new PageHandle(array('id'=>'fileDownloadAsImage',
@@ -999,6 +1015,7 @@ new PageHandle(array('id'=>'companyLinkPersons',
     'test'=>'yes',
     'test_params'=>array('company'=>'_companyEdit_',),      # test aborts / not enough params
     'valid_for_crawlers'=>false,
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleSubm(array('id'=>'companyLinkPersonsSubmit',
     'req'=>'pages/company.inc.php',
@@ -1021,6 +1038,7 @@ new PageHandle(array('id'=>'personList',
     'req'=>'pages/person.inc.php',
     'title'=>__('List Persons'),
     'test'=>'yes',
+    'valid_for_crawlers'=>false,
 
 ));
 
@@ -1106,6 +1124,7 @@ new PageHandle(array('id'=>'personViewEfforts',
                             ),
     'test'=>'yes',
     'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
+    'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'personViewChanges',
     'req'=>'pages/person.inc.php',
@@ -1117,6 +1136,7 @@ new PageHandle(array('id'=>'personViewChanges',
                             ),
     'test'=>'yes',
     'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'personSendActivation',
     'req'       =>'pages/person.inc.php',
@@ -1150,6 +1170,7 @@ new PageHandle(array('id'=>'personLinkCompanies',
 
     'test'=>'yes',
     'test_params'=>array('person'=>'_personEdit_',),      # test aborts / not enough params
+    'valid_for_crawlers'=>false,
 ));
 new PageHandleSubm(array('id'=>'personLinkCompaniesSubmit',
     'req'=>'pages/person.inc.php',
@@ -1363,17 +1384,20 @@ new PageHandle(array('id'=>'search',
 new PageHandle(array('id'=>'taskAjax',
     'req'=>'pages/task_ajax.inc.php',
     'title'=>__('Task Test'),
+    'valid_for_crawlers'=>false,
 ));
 
 
 new PageHandle(array('id'=>'itemLoadField',
     'req'=>'pages/item_ajax.inc.php',
     'title'=>__('Load Field'),
+    'valid_for_crawlers'=>false,
 ));
 
 new PageHandle(array('id'=>'itemSaveField',
     'req'=>'pages/item_ajax.inc.php',
     'title'=>__('Save Field'),
+    'valid_for_crawlers'=>false,
 ));
 
 ?>
