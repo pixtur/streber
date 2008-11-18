@@ -25,6 +25,8 @@ function TaskView()
 
 
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
+    require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+
 
     ### get task ####
     $tsk=get('tsk');
@@ -904,6 +906,7 @@ function taskViewAsDocu()
     global $auth;
 
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
+    require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
 
     ### get task ####
     $tsk=get('tsk');

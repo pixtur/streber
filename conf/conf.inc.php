@@ -118,6 +118,8 @@ $g_config= array(
     * see std/profile.inc
     */
     'USE_PROFILER'          =>false,
+    
+    
 
     /**
     * Display error-output, which would have been written to error.log as html.
@@ -146,6 +148,15 @@ $g_config= array(
     * - LOG_MESSAGE_DEBUG       (will lead to *really* big log-files and shoud only be used for bug-hunting)
     */
     'LOG_LEVEL'     => LOG_MESSAGE_LOGIN_FAILURE|LOG_MESSAGE_LOGIN_SUCCESS|LOG_MESSAGE_LOGOUT|LOG_MESSAGE_HACKING_ALERT|LOG_MESSAGE_MISSING_FILES,
+
+    /**
+    * Include firephp library for debug messages. This is an excellent help
+    * for develeopment but should not be enabled in production environments because
+    * of security and decreased render performance.
+    * - If enabled, the global function trace() will be mapped to fb.
+    * - To used FirePHP you have to install the Firefox extension.
+    */
+    'USE_FIREPHP'           =>false,
 
     /**
     * list undefined language-keys in the page-footer

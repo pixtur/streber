@@ -22,4 +22,5 @@ confChange('TASKDETAILS_IN_SIDEBOARD', true);
 #confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
 #confChange('SMTP','mail.yourdomain.de');
 
+confChange('USE_FIREPHP', true)
 ?>

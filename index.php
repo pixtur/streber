@@ -32,12 +32,6 @@ function startedIndexPhp() {return true; }
 initialBasicFixes();
 initProfiler();
 
-### Instanciate firebug ###
-#ob_start();
-#require_once('lib/firephp/FirePHP.class.php');
-#$firephp = FirePHP::getInstance(true);
-#require_once('lib/firephp/fb.php');
-
 
 ### include std functions ###
 require_once('std/common.inc.php');
@@ -60,6 +54,11 @@ include_once(confGet('DIR_SETTINGS').confGet('SITE_SETTINGS'));
 ### user-settings ##
 if(file_exists('customize.inc.php')) {
     require_once(confGet('DIR_STREBER') . 'customize.inc.php');
+}
+
+### start output-buffering? ###
+if(confGet('USE_FIREPHP')) {
+    ob_start();
 }
 
 filterGlobalArrays();

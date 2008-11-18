@@ -1409,7 +1409,7 @@ class FormatBlockLink extends FormatBlock
             }
             measure_stop("BlockLink::renderLinkFromTargetName::iterateSeveralTasks");
         }
-        else if(!count($tasks)) {
+        else if(0 == count($tasks)) {
 
             measure_start("BlockLink::renderLinkFromTargetName::notATaskItem");
 
@@ -1417,25 +1417,13 @@ class FormatBlockLink extends FormatBlock
             * now check for team-members...
             */
             if($g_wiki_project) {
-                #$people= $g_wiki_project->getPersons();
                 $people = Person::getPersons(array(
                                 'project'=> $g_wiki_project->id,
                                 'search'=> $target,
                             ));
                 if(count($people) == 1) {
-                    $html=  "<a class='item person' title= '" .asHtml( $people[0]->name) . "' href='".$PH->getUrl('personView',array('person'=>$people[0]->id))."'>" . asHtml($target) . "</a>";
-                }
-                
-                measure_start("BlockLink::renderLinkFromTargetName::getPersons");
-                foreach($people as $person) {
-                    if(!strcasecmp($person->nickname, $target)) {
-                        $title= asHtml($person->name);
-                        $nick= asHtml($person->nickname);
-                        $html=  "<a class='item person' title= '$title' href='".$PH->getUrl('personView',array('person'=>$person->id))."'>$nick</a>";
-                        measure_stop("BlockLink::renderLinkFromTargetName::getPersons");
-                        return;
-                    }
-                }
+                    return  "<a class='item person' title= '" .asHtml( $people[0]->name) . "' href='".$PH->getUrl('personView',array('person'=>$people[0]->id))."'>" . asHtml($target) . "</a>";
+                }                
                 measure_stop("BlockLink::renderLinkFromTargetName::getPersons");
             }
             /**

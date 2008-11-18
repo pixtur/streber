@@ -802,5 +802,23 @@ function clearCachedTimeFormats()
     $g_userFormatDate = NULL;
 }
 
+/**
+* Map firephp trace function for easy disabling
+*/
+function trace($message, $options= '')
+{
+    if (confGet('USE_FIREPHP')) {
+        global $g_firephp;
+        if (!isset($g_firephp)) {
+            require_once('lib/firephp/FirePHP.class.php');
+            #require_once('lib/firephp/fb.php');
+            $g_firephp = FirePHP::getInstance(true);            
+        }
+        $g_firephp->trace($message, $options);
+    }
+    else {
+        debugMessage($message);
+    }
+}
 
 ?>

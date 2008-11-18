@@ -622,9 +622,14 @@ function fileEditSubmit()
         if($latest_file) {                
             $latest_file->is_latest= 0;
             $latest_file->update();                    
-        }               
+            new FeedbackMessage(sprintf(__("Uploaded new version of file with Id %s"), $file->id));
+        }
+        else {
+            new FeedbackMessage(sprintf(__("Uploaded new file with Id %s"), $file->id));            
+        }
     }
     else {
+        new FeedbackMessage(sprintf(__("Updated file with Id %s"), $file->id));            
         $file->update();
     }
 

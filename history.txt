@@ -1,5 +1,11 @@
 streber-version-history
 
+- fixed wiki link to person #7068
+- fixed missing include of personitem #7077
+- added first version of firephp support #7058
+- updated swedish language
+- added Feedback-Message after uploading file #7062
+
 - MAJOR: fixed changing password and profile from notification mails
 - MINOR: slightly adjusted notification mails
 - Fixed: jumping to item after login with mod_rewrite

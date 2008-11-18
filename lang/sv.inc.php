@@ -1,11 +1,10 @@
-
 <?php
 
 /**
 *  language:      Swedish
 *  translated by: Mats Djärf <md@webbplatsen.se>
 *                 www.webbplatsen.se
-*  last updated:  2007-05-10
+*  last updated:  2008-11-18
 *
 *  comments: plaese inform me if there is some misspelled words,
 *            wrong translation or text string that is too long etc.
@@ -94,7 +93,7 @@ $g_lang_table= array(
 
 ### ../db/class_person.inc.php   ###
 'Full name'                   =>'Namn',  # line 42
-'Required. Full name like (e.g. Thomas Mann)'=>'Obligatoriskt: (Kalle Andersson)',  # line 43
+'Required. Full name like (e.g. Thomas Mann)'=>'Obligatoriskt: (tex Kalle Andersson)',  # line 43
 'Nickname'                    =>'Användarnamn',  # line 47
 'only required if user can login (e.g. pixtur)'=>'obligatorisk om användaren kan logga in',  # line 48
 
@@ -2590,6 +2589,70 @@ $g_lang_table= array(
 'Unchanged monitored items:|notification'=>'Oförändrade poster för bevakning:',  # line 267
 '%s (not touched since %s day(s))'=>'%s (ej ändrad sedan %s dag/ar)',  # line 322
 
+### ../db/class_project.inc.php   ###
+'Milestones (closed)'         =>'Milstolpe (stängt)',  # line 1463
+
+### ../db/class_task.inc.php   ###
+'Display in project news'     =>'Visa i Nyheter',  # line 189
+'List title and description in project overview'=>'Visa titel och beskrivning i översikt för projekt.',  # line 190
+
+### ../lists/list_forwardedtasks.inc.php   ###
+'Your demand notes'           =>'Dina efterfrågade anteckningar',  # line 33
+'You have no demand notes'    =>'Du har inga efterfrågade anteckningar',  # line 34
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recent changes'              =>'Nyligen ändrat',  # line 51
+
+### ../pages/_handles.inc.php   ###
+'Recent changes|Page option tab'=>'Nyligen ändrat',  # line 19
+'Overall changes'             =>'Ändringar',  # line 58
+
+### ../pages/comment.inc.php   ###
+'Re: '                        =>'sv: ',  # line 242
+
+### ../pages/project_view.inc.php   ###
+'Book effort'                 =>'Boka försök',  # line 179
+
+### ../pages/project_more.inc.php   ###
+'3 weeks'                     =>'3 veckor',  # line 1546
+'1 month'                     =>'1 månad',  # line 1566
+'prior'                       =>'föregående',  # line 1586
+
+### ../pages/person.inc.php   ###
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Lägg till uppgift för denna användare (valfritt att skapa projekt och försök direkt)',  # line 706
+'Add note|Page function person'=>'Lägg till anteckning',  # line 707
+'Edit profile|Page function edit person'=>'Ändra profil',  # line 721
+'Edit user Rights|Page function for edit user rights'=>'Ändra användarrättigheter',  # line 729
+'Authentication with|form label'=>'Autentisera med',  # line 2152
+
+### ../pages/project_more.inc.php   ###
+'Topics'                      =>'Dokument',  # line 1108
+'No topics yet'               =>'Inga Dokument',  # line 1144
+'View calculation'            =>'Visa uträkning',  # line 1669
+'Effort calculations'         =>'Uträkningsförsök',  # line 1852
+
+### ../render/render_misc.inc.php   ###
+'without client|short for client'=>'ej kund',  # line 539
+'Topics|Project option'       =>'Dokument',  # line 603
+'Calculation|Project option'  =>'Uträkning',  # line 644
+'Changes|Project option'      =>'Ändringar',  # line 652
+
+### ../render/render_page.inc.php   ###
+'Home|section'                =>'Startsida',  # line 247
+
+### ../std/constant_names.inc.php   ###
+'Enable tasks|Project setting'=>'Aktivera Uppgifter',  # line 74
+'Enable files|Project setting'=>'Aktivera Filer',  # line 75
+'Enable efforts|Project setting'=>'Aktivera Försök',  # line 76
+'Enable milestones|Project setting'=>'Aktivera Milstolpar',  # line 77
+'Enable versions|Project setting'=>'Aktivera Versioner',  # line 78
+'Enable bugreports|Project setting'=>'Aktivera buggrapport',  # line 79
+'Enable news|Project setting' =>'Aktivera Nyheter',  # line 80
+'Topic|Task Category'         =>'Dokument',  # line 219
+
+### ../std/mail.inc.php   ###
+'Maybe you want to'           =>'Du vill kanske',  # line 623
+'set your password'           =>'ange ditt lösenord',  # line 626
 
 );
 
