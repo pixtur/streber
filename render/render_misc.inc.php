@@ -1011,25 +1011,33 @@ function renderTimeAgo($t)
 {
     $duration= time() - strToGMTime($t);
 
+    if(strToGMTime($t) == 0) {
+        return __("never");
+    }
+
+    if($duration < 60 * 5) {
+        return __('just now');
+    }
     if($duration < 60 * 60) {
-        return sprintf(__('%s min ago'), ceil($duration / 60));
+        return sprintf(__('%smin ago'), ceil($duration / 60));
     }
     if($duration < 60 * 60 * 2) {
         return __('1 hour ago');
     }
     if($duration < 60 * 60 * 24) {
-        return sprintf(__('%s hours ago'), ceil($duration / 60 / 60));
+        return sprintf(__('%sh ago'), ceil($duration / 60 / 60));
     }
 
     if($duration < 60 * 60 * 24 * 62) {
         return sprintf(__('%s days ago'), ceil($duration / 60 / 60 / 24));
     }
-    else {
+    if($duration < 60 * 60 * 24 * 365 * 2) { 
         return sprintf(__('%s months ago'), ceil($duration / 60 / 60 / 24 / 30));
     }
     
-    
-
+    if($duration < 60 * 60 * 24 * 365 * 20) { 
+        return sprintf(__('%s years ago'), ceil($duration / 60 / 60 / 24 / 365));
+    }
 }
 
 

@@ -74,7 +74,7 @@ class ListBlock_persons extends ListBlock
     		'id'=>'companies',
     	)));
     	$this->add_col( new ListBlockCol_PersonProjects());
-    	$this->add_col( new ListBlockColDate(array(
+    	$this->add_col( new ListBlockColTimeAgo(array(
     		'name'=>__("last login"),
     		'key'=>'last_login',
     	)));

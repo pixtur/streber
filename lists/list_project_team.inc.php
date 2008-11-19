@@ -241,7 +241,7 @@ class ListBlockCol_ProjectPersonLastLogin extends ListBlockCol
 
         if($person= $pp->getPerson()) {
 
-		    print "<td class=small>".renderDateHtml($person->last_login)."</td>";
+		    print "<td class='small nobreak'>".renderTimeAgo($person->last_login)."</td>";
         }
 	}
 }

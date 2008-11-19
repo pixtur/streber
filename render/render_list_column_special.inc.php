@@ -215,7 +215,35 @@ class ListBlockColDate extends ListBlockCol
 }
 
 
+/**
+* render list-column as date with distance to today as tooltip
+*/
+class ListBlockColTimeAgo extends ListBlockCol
+{
+    public $key= 'modified';
 
+    function __construct($args=NULL) {
+        parent::__construct($args);
+        if(!$this->name) {
+            $this->name= __('Modified');
+        }
+    }
+
+	function render_tr(&$obj, $style="") {
+	    global $auth;
+
+		if(!isset($obj) || !is_object($obj)) {
+			trigger_error("ListBlockColDate->render_tr() called without valid object", E_USER_WARNING);
+   			return;
+		}
+		$key= $this->key;
+
+        $value_str=renderTimeAgo($obj->$key);
+
+
+		print "<td class='nowrap'>$value_str</td>";
+	}
+}
 
 
 class ListBlockCol_OpenTasks extends ListBlockCol

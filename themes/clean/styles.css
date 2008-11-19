@@ -1284,7 +1284,7 @@ div.block {
 	}
 
 	table.list td.narrow {
-		padding:0px;
+		padding:0px 10px 0px 0px;
 	}
 
     table.list tr.isFolder {
@@ -1415,7 +1415,7 @@ div.block {
         font-weight:bold;
         color:#E57700;
     }
-    /* Topic & Task attachments */
+    /*----- Topic & Task attachments -----*/
     table.list td.summary {
         text-align: center;
     }
@@ -1464,7 +1464,9 @@ div.block {
         font-weight:bold;
     }
 
-
+    table.list td.nobreak {
+        white-space:nowrap;
+    }
 
 
     .list .indention{
@@ -1690,7 +1692,7 @@ div.block {
 
     }
     table#projectpersons td{
-      padding-right:1px;
+      padding-right:5px;
       vertical-align:bottom;
     }
 
