@@ -86,6 +86,8 @@ minor
   yourself or drop the database.
 - Set default company category to client when creating a new company.
 
+
+
 version: v0.0803 [2008-05-09]
 ==========================
 major

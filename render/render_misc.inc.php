@@ -1160,6 +1160,19 @@ function renderTitleDate($t)
     return $str;
 }
 
+function renderFilesize($bytes)
+{
+    $bytes= intval($bytes);
+    if( $bytes < 1024 ) {
+        return $bytes;
+    }
+    else if( $bytes < 1024 * 1024) {
+        return intval($bytes / 1024) . "k";
+    }
+    else {
+        return (intval(($bytes / 1024/1024) * 10) / 10.0) . "mb";
+    }
+}
 
 
 /**

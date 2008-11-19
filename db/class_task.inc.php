@@ -1282,7 +1282,7 @@ foreach($filters_str as $fs=>$value) {
     {
 
         
-        $style_isdone= ($strikeDone && $this->status >= STATUS_COMPLETED)
+        $style_isdone=   ($this->isOfCategory(array(TCATEGORY_TASK, TCATEGORY_BUG))) && ($strikeDone && $this->status >= STATUS_COMPLETED)
                     ? 'isDone'
                     : '';
 

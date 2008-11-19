@@ -1396,7 +1396,7 @@ div.block {
         border-width:2px 2px 2px 2px;*/
 
     }
-
+    
 
 	table.list td a:hover {
 		text-decoration:underline;
@@ -1414,6 +1414,21 @@ div.block {
     table.list tr.changed span.date {
         font-weight:bold;
         color:#E57700;
+    }
+    /* Topic & Task attachments */
+    table.list td.summary {
+        text-align: center;
+    }
+    table.list td.summary img {
+        border: 1px solid #888;
+    }
+
+    table.list td.summary a:hover {
+        text-decoration: none;
+    }
+
+    table.list td.summary a:hover img{
+        border-color:#619DD5 ;
     }
 
 

@@ -442,14 +442,26 @@ class ListBlockCol_FileSummary extends ListBlockCol
 		  $file->mimetype == 'image/gif'
 		)
 		{
-            $buffer.= "<span class=sub><a target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'><br>"
+            if($author= Person::getVisibleById($file->created_by)) {
+                $author_name = $author->nickname;
+            }
+            else {
+                $author_name = "???";
+            }
+            
+            $buffer.= "<span class=sub><a title='" .  sprintf(__("creatd on %s", renderDate($file->created))) .  "'  target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'><br>"
                    .      ""
                    .        asHtml($file->name)
                    .      "</a>"
                    . "<br>"
-                   . "<span class=sub>" . $file->filesize ." bytes" ." / ". sprintf(__("ID %s"), $file->id)  ." / ".  renderDateHtml($file->created) .    "</span>"
+                   . "<span class=sub title='" . __('click to show details')  .  "'>" 
+                   . $PH->getLink('fileView', '#' . $file->id , array('file'=>$file->id))
+                   . ' '
+                   . sprintf( __('by %s', 'person who uploaded a file'), $author_name)
+                   . ', '
+                   . renderFilesize($file->filesize)
+                   .  "</span>"
                    . "<br>"
-                   . $PH->getLink('fileView', __('Show Details'), array('file'=>$file->id))
                    . "</span>";
 
 
