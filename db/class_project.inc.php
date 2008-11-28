@@ -1371,8 +1371,15 @@ class Project extends DbProjectItem
     public function buildResolvedInList()
     {
         $tmp_resolvelist= array(
-                    ('-- ' . __('undefined')             . ' --') => '0',
-                    ('-- ' . __('next released version') . ' --') => -1);
+            NO_OPTION_GROUP => array(
+                                '0'  =>  ('-- ' . __('undefined')   . ' --'),
+                                '-1' =>  ('-- ' . __('next released version') . ' --'),
+                               )
+        );
+
+        #$tmp_resolvelist= array(
+        #            ('-- ' . __('undefined')             . ' --') => '0',
+        #            ('-- ' . __('next released version') . ' --') => -1);
         
         $versions=Task::getAll(array(
             'category'      => TCATEGORY_VERSION,
@@ -1382,10 +1389,16 @@ class Project extends DbProjectItem
             'order_by'      => "name",            
         ));
 
+        $version_options= array();
         foreach($versions as $version) {
-            $tmp_resolvelist[$version->name]= $version->id;
+            $version_options[$version->id]= $version->name;
+        }
+        
+        if($version_options) {
+            $tmp_resolvelist[__('Versions')] = $version_options;
         }
     
+        $milestone_options= array();
         if($milestones =Task::getAll(array(
             'category'      => TCATEGORY_MILESTONE,
             'project'       => $this->id,
@@ -1393,10 +1406,12 @@ class Project extends DbProjectItem
             'status_max'    => 10,
             'order_by'      => "name",
         ))) {
-            $tmp_resolvelist[('-- ' . __('Milestones')             . ' --')] = '-1';
             foreach($milestones as $milestone) {
-                $tmp_resolvelist[$milestone->name]= $milestone->id;
+                $milestone_options[$milestone->id]= $milestone->name;
             }
+        }
+        if($milestone_options) {
+            $tmp_resolvelist[__('Milestones')] = $milestone_options;
         }
         return $tmp_resolvelist;
     }

@@ -1,5 +1,9 @@
 streber-version-history
 
+- recent-change list always visible #7057
+- refactored resolve version dropdown list to grouped style #7088
+- added missing translation to due-column #7156
+
 - fixed wiki link to person #7068
 - fixed missing include of personitem #7077
 - added first version of firephp support #7058

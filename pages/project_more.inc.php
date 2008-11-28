@@ -1028,7 +1028,7 @@ function projViewTasks()
         */
         if(confGet('TASKDETAILS_IN_SIDEBOARD')) {
             unset($list->columns['assigned_to']);
-            unset($list->columns['for_milestone']);
+            #unset($list->columns['for_milestone']);
             unset($list->columns['estimate_complete']);
             unset($list->columns['pub_level']);
             #unset($list->columns['_select_col_']);
@@ -1040,12 +1040,7 @@ function projViewTasks()
 
         $list->no_items_html=__('No tasks');
         $list->print_automatic($project, NULL, $filter_empty_folders);
-
-
-
 	}
-
-
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);

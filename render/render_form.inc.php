@@ -502,7 +502,7 @@ define('NO_OPTION_GROUP', '__NO_GROUP__');
 * Use NO_OPTION_GROUP the group label, to avoid grouping.
 *
 * Important!!!
-* Note that the order of the option hash is reversed compared
+* Note that the key/value-order of the option hash is reversed compared
 * to From_Dropdown.
 */
 class Form_DropdownGrouped extends PageFormElement {

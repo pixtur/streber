@@ -49,7 +49,31 @@ function printRecentChanges($projects, $print_project_headlines= true)
         }
     }
 
-    if(count($projects_with_changes)) {
+    if(0 == count($projects_with_changes)) {
+        $block=new PageBlock(array(
+            'title' =>__('Recent changes'),
+            'id'    =>'recentchanges'
+        ));
+        $block->render_blockStart();
+
+
+
+        if($auth->cur_user->settings & USER_SETTING_FILTER_OWN_CHANGES) {
+            echo "<div class=text>" . __("No changes by others") . "</div>";
+            $link_name = __("Also show your changes");
+        }
+        else {
+            echo "<div class=text>" . __("No changes yet") . "</div>";
+            $link_name = __("Hide your changes");
+        }
+
+        ### more options ###
+        echo "<p class=more>";
+        echo $PH->getLink('personToggleFilterOwnChanges', $link_name , array('person'=> $auth->cur_user->id));
+        echo "</p>";
+        $block->render_blockEnd();
+    } 
+    else {
 
         $block=new PageBlock(array(
             'title' =>__('Recent changes'),

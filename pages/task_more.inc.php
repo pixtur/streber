@@ -418,12 +418,6 @@ function taskEdit($task=NULL)
             ### normaltasks and folders ##
             if(!$task->isMilestoneOrVersion()) {
                 if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
-                    #$tab->add( new Form_Dropdown('task_for_milestone', 
-                    #                                __('For Milestone'), 
-                    #                                $project->buildPlannedForMilestoneList(), 
-                    #                                $task->for_milestone
-                    #                             ));
-
                     $tab->add( new Form_DropdownGrouped('task_for_milestone', 
                                                     __('For Milestone'), 
                                                     $project->buildPlannedForMilestoneList(), 
@@ -583,7 +577,7 @@ function taskEdit($task=NULL)
                 if($project->settings & PROJECT_SETTING_ENABLE_MILESTONES) {
 
                     ### resolved version ###
-                    $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
+                    $tab->add(new Form_DropdownGrouped('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
                 }
 
                 ### resolved reason ###
@@ -2556,8 +2550,6 @@ function TaskEditMultiple()
             $grouped_milestone_options= $project->buildPlannedForMilestoneList();
             if(isset($different_fields['for_milestone'])) {                
                 $grouped_milestone_options[NO_OPTION_GROUP]['__dont_change__']= ('-- ' . __('keep different'). ' --');
-                #$tmp_milestonelist['__dont_change__']= ('-- ' . __('keep different'). ' --');
-
                 $form->add(new Form_DropdownGrouped(
                                 'task_for_milestone',
                                  __('For Milestone'), 
@@ -2577,12 +2569,23 @@ function TaskEditMultiple()
 
         ### resolved_version ###
         {
+            $grouped_resolve_options= $project->buildResolvedInList();
             if(isset($different_fields['resolved_version'])) {
-                $tmp_milestonelist['__dont_change__']= ('-- '. __('keep different') . ' --');
-                $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'), $project->buildResolvedInList(), '__dont_change__'));
+                $grouped_resolve_options[NO_OPTION_GROUP]['__dont_change__']= ('-- ' . __('keep different'). ' --');
+                $form->add(new Form_DropdownGrouped(
+                                'task_resolved_version', 
+                                __('resolved in Version'), 
+                                $grouped_resolve_options,
+                                '__dont_change__'
+                                ));
             }
             else {
-                $form->add(new Form_Dropdown('task_resolved_version', __('resolved in Version'), $project->buildResolvedInList(), $tasks[0]->resolved_version));
+                $form->add(new Form_DropdownGrouped(
+                            'task_resolved_version', 
+                            __('resolved in Version'), 
+                            $project->buildResolvedInList(), 
+                            $tasks[0]->resolved_version
+                            ));
             }
         }
 

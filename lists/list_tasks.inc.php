@@ -1246,64 +1246,65 @@ class ListBlockCol_DaysLeft extends ListBlockCol
         {
             if($obj->status >= STATUS_COMPLETED)
             {
-                if($obj->status == STATUS_COMPLETED) $value = "Review";
-                else $value = "Closed: " . renderDate($obj->date_closed);
-                
-                $title = "Due date: " . renderDate($obj->planned_end);
+                if($obj->status == STATUS_COMPLETED) {
+                    $value = __("Review");
+                    $title = __("Task status set to completed and needs approval.");
+                }
+                else {
+                    $title = sprintf(__("Item was approved on: %s:", "date a task was approved"), renderDate($obj->date_closed));
+                    $value = __("done");
+                }
             }
-            
-            else
-            {
-            
+            else {
                 $daysLeft = floor((strToGMTime($obj->planned_end) - time())/24/60/60);
                 
                 switch($daysLeft)
                 {
                     case 0 : 
                     {
-                        $value = "Today";
-                        $title = "this task is planned to be completed today.";
+                        $value = __("Today");
+                        $title = __("this task is planned to be completed today.");
                         break;
                     }
                     case 1 :
                     {
-                        $value = "Tomorrow";
-                        $title = "this task is planned to be completed tomorrow.";
+                        $value = __("Tomorrow");
+                        $title = __("this task is planned to be completed tomorrow.");
                         break; 
                     }
                     case 7: case 8: case 9: case 10: case 11: case 12: case 13:
                     case 14:
                     {
-                        $value = "Next week";
-                        $title = "due: " . renderDate($obj->planned_end);
+                        $value = __("Next week");
+                        $title = sprintf(__("due: %s"), renderDate($obj->planned_end));
                         break;
                     }
                     default:
                     {
-                        $value = abs($daysLeft) . " <span class='entity'>days";
+                        $value = abs($daysLeft) . " <span class='entity'>" .__("days");
                         if($daysLeft < 0)
                         {
                             $class = "overDue";
-                            $title = "this task is overdue!";
-                            $value .= " late";
+                            $title = __("this task is overdue!");
+                            $value .= __(" late");
                         }
                         else
                         {
-                            $value .= " remain";
+                            $value .= __(" remain");
                             
                             if($obj->planned_start && $obj->planned_start != '0000-00-00' && $obj->planned_start != '0000-00-00 00:00:00')
                             {
                                 if((floor((strToGMTime($obj->planned_start) - time())/24/60/60)+1) >= 1)
                                 {
-                                    $value = "Pending";
+                                    $value = __("Pending");
                                     $title = sprintf(__("planned for %s","a certain date"), renderTimestamp($obj->planned_start));
                                 }
-                                else $title = "start: " . renderDate($obj->planned_start) . 
-                                    " / due: ".renderDate($obj->planned_end);
+                                else $title = sprintf(__("start: %s"), renderDate($obj->planned_start)) . 
+                                    " / " . sprintf(__("due: %s"), renderDate($obj->planned_end));
                             }
                             else
                             {
-                                $title = "due: ".renderDate($obj->planned_end);
+                                $title = sprintf(__("due: %s"), renderDate($obj->planned_end));
                             }
                         }
                         break;
@@ -1315,6 +1316,9 @@ class ListBlockCol_DaysLeft extends ListBlockCol
             
             print "<td class='timeDue $class' title='$title'>$value</td>";
             measure_stop('col_timedue');
+        }
+        else {
+            print "<td></td>";
         }
 	}
 }

@@ -738,7 +738,11 @@ class Block_task_quickedit extends PageBlock
                             $task->for_milestone
                          ));
 
-                $tab->add(new Form_Dropdown('task_resolved_version', __('Resolved in'), $project->buildResolvedInList(), $task->resolved_version));
+                $tab->add(new Form_DropdownGrouped('task_resolved_version', 
+                            __('Resolved in'), 
+                            $project->buildResolvedInList(), 
+                            $task->resolved_version
+                        ));
 
                 global $g_resolve_reason_names;
                 $tab->add(new Form_Dropdown('task_resolve_reason', __('Resolve reason'),array_flip($g_resolve_reason_names), $task->resolve_reason));
