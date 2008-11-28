@@ -1124,6 +1124,7 @@ function ProjViewDocu()
         $list->query_options['status_min']= 0;
         $list->query_options['status_max']= 10;
         $list->query_options['order_by']= 'order_id';
+
         ### redefine columns ###
         $c_new = array();
         foreach($list->columns as $cname => $c) {

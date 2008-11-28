@@ -286,13 +286,8 @@ class ListBlock_tasks extends ListBlock
     */
     public function render_list(&$tasks=NULL)
     {
-        #global $PH;
-        #require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
-
-
 		switch($this->page->format){
 			case FORMAT_CSV:
-				#$this->renderListCsv($list);
 				$this->renderListCSV($tasks);
 				break;
 
@@ -602,7 +597,6 @@ class ListBlock_tasks extends ListBlock
                 $this->query_options[$k]= $v;
             }
         }
-
 
         $sort_cookie= "sort_{$PH->cur_page->id}_{$this->id}_{$this->active_block_function}";
         if($sort= get($sort_cookie)) {
@@ -1094,21 +1088,20 @@ class ListBlockCol_TaskName extends ListBlockCol
 }
 
 
-
 /**
 * reduced display of tasks names for documentation overview
 */
 class ListBlockCol_TaskAsDocu extends ListBlockCol
 {
     public $name;
-    public $key='name';
+    public $key='name'; #for ordering
     public $show_toggles= true;
 
     public function __construct($args=NULL) {
         parent::__construct($args);
         $this->width='90%';
         $this->name=__('Page name');
-        $this->id='name';
+        $this->id='name_topic';
     }
 
 	function render_tr(&$task, $style="")
