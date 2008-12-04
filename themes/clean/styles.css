@@ -985,7 +985,7 @@ div.block {
 
     /* this must be reversed in styles_ie.ccs */
     div.block.reduced_header div.extra_top {
-        margin-bottom:-15px;
+        margin-bottom:-2px;
     	position:relative;		
     
     }
@@ -2170,7 +2170,8 @@ div.wiki h1,div.wiki h2, div.wiki h3,div.wiki h4, div.wiki h5 {
     font-family: georgia;
 }
 div.wiki h1 {
-    font-size:21pt;
+    font-size:20pt;
+    line-height:110%;
 }
 
 div.wiki h2 {

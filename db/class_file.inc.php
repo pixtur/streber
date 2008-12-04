@@ -552,6 +552,7 @@ class File extends DbProjectItem
             header('Content-Length: '   . filesize($filepath));
             header('Content-Type: '     . $this->mimetype);
             header("Content-Disposition: attachment; filename=\"$this->org_filename\"");
+            header("Cache-Control: public");
             readfile_chunked($filepath);
         }
         else {
@@ -562,13 +563,21 @@ class File extends DbProjectItem
     public function view()
     {
         $filepath= confGet('DIR_FILES') . $this->tmp_dir . '/' . $this->tmp_filename;
-
+        $filesize= filesize($filepath);
         if(file_exists($filepath)) {
-            header('Content-Length: '   . filesize($filepath));
+            header('Content-Length: '   . $filesize);
             header('Content-Type: '     . $this->mimetype);
             header("Content-Disposition: inline; filename=\"$this->org_filename\"");
+            header("Cache-Control: public");
             header('Last-Modified: '    . gmdate("D, j M Y G:i:s T", strToClientTime($this->modified)));
-            readfile_chunked($filepath);
+            if( $filesize > 1000000) {
+                readfile_chunked($filepath);
+            }
+            else {
+                ob_clean();
+                flush();
+                readfile($filepath);
+            }
         }
         else {
             log_message("file::download($this->id) can not find file '$filepath'",LOG_MESSAGE_MISSING_FILES);
@@ -630,16 +639,25 @@ class File extends DbProjectItem
         $new_height = $dimensions['new_height'];
         $width  = $dimensions['width'];
         $height = $dimensions['height'];
+        $filesize= filesize($filepath);
         
         /**
         * just provide the original file
         */
-        if (!isset( $dimensions['downscale']) ) {
-            header('Content-Length: '   . filesize($filepath));
+        if (! $dimensions['downscale'] ) {
+            header('Content-Length: '   . $filesize);
             header('Content-Type: '     . $this->mimetype);
             header("Content-Disposition: inline; filename=$this->org_filename");
+            header("Cache-Control: public");
             header('Last-Modified: '    . gmdate("D, j M Y G:i:s T", strToClientTime($this->modified)));
-            readfile_chunked($filepath);
+            if($filesize > 1000000) {
+                readfile_chunked($filepath);
+            }
+            else {
+                ob_clean();
+                flush();
+                readfile($filepath);                
+            }
             return;
         }
 

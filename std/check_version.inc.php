@@ -15,7 +15,6 @@
 */
 function validateEnvironment()
 {
-    $flag_errors= false;
     if(($result= testPhpVersion()) !== true) {
         echo confGet('MESSAGE_OFFLINE');
         echo $result;
@@ -28,9 +27,10 @@ function validateEnvironment()
         exit();
     }
 
-    if($flag_errors){
-        return false;
+    if(!testInstallDirectoryExists()) {
+        exit();
     }
+
     return true;
 }
 
@@ -86,8 +86,10 @@ function testDb() {
 function testInstallDirectoryExists() {
 
     if(file_exists('install')) {
-        echo "<h2>Install-directory still present.</h2> This is a massive security issue (<a href='".confGet('STREBER_WIKI_URL')."installation'>read more</a>).";
-        echo '<ul><li><a href="install/remove_install_dir.php">remove install directory now.</a></ul>';
+        echo "<h2>Install-directory still present</h2>";
+        echo "<ul>"
+              . "<li>For security reasons it needs to be removed before you can proceed. (<a href='" . confGet('STREBER_WIKI_URL') . "3385'>read more</a>)."
+              . "<li>You can try <a href='install/remove_install_dir.php'>remove install directory now</a>. If this fails, please use your FTP-client to delete it manually.</ul>";
         return false;
     }
     return true;

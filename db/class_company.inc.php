@@ -322,7 +322,7 @@ class Company extends DbProjectItem
 		}
 
 		### show all ###
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+        if($auth->cur_user->user_rights & RIGHT_COMPANY_VIEWALL) {
             $str=
                 "SELECT c.*, ic.* from {$prefix}company c, {$prefix}item ic
                 WHERE

@@ -82,7 +82,7 @@ class ListBlock_files extends ListBlock
         $this->id='files';
         $this->bg_style='bg_time';
 		$this->title="Files";
-
+        $this->query_options['order_by']= "created";
 
         $this->query_options['latest_only']=true;
 
@@ -195,6 +195,7 @@ class ListBlock_files extends ListBlock
         if(!$this->active_block_function=$this->getBlockStyleFromCookie()) {
             $this->active_block_function = 'list';
         }
+        
 
         if($project) {
             $this->query_options['project']= $project->id;
@@ -449,7 +450,7 @@ class ListBlockCol_FileSummary extends ListBlockCol
                 $author_name = "???";
             }
             
-            $buffer.= "<span class=sub><a title='" .  sprintf(__("creatd on %s", renderDate($file->created))) .  "'  target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'><br>"
+            $buffer.= "<span class=sub><a title='" .  sprintf(__("creatd on %s", "date a file was created"), renderDate($file->created)) .  "'  target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'><br>"
                    .      ""
                    .        asHtml($file->name)
                    .      "</a>"

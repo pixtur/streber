@@ -101,6 +101,7 @@ $g_user_right_names=array(
     RIGHT_COMPANY_CREATE     =>__('Create Companies', 'a user right'),
     RIGHT_COMPANY_EDIT       =>__('Edit Companies', 'a user right'),
     RIGHT_COMPANY_DELETE     =>__('Delete Companies', 'a user right'),
+    RIGHT_COMPANY_VIEWALL    =>__('View all Companies', 'a user right'),
 );
 
 
