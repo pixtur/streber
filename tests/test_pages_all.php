@@ -1,6 +1,5 @@
 <?php
 
-
 /**
 * intergration-tests
 *
@@ -16,12 +15,14 @@ class TestPagesAll extends WebTestCase {
     *
     */
     function testAllPages() {
+        
+        
         /**
         * we require some valid logins and ids to test all pages
         */
         $login_name     = "admin";
         $login_password = "";
-        $url_streber    = "http://localhost/streber-alpha/";
+        $url_streber    = "http://localhost/streber_head/";
         $url_start      = $url_streber . 'index.php?go=logout';
         $test_params    = array(
                              "_projectView_"=>237,
@@ -42,10 +43,23 @@ class TestPagesAll extends WebTestCase {
                              "_effortEdit_"=>578,
 
                           );
+
+        #require_once('../std/common.inc.php');
+        #require_once('../std/errorhandler.inc.php');
+        #require_once('../conf/defines.inc.php');
+        #require_once('../conf/conf.inc.php');
+        #require_once("../std/class_pagehandler.inc.php");
+        #require_once("../pages/_handles.inc.php");
         
-        require_once("../conf/defines.inc");                # the order of those includes is tricky
-        require_once("../std/class_pagehandler.inc");
-        require_once("../pages/_handles.inc");
+        require_once("../conf/defines.inc.php");                # the order of those includes is tricky
+        require_once('../conf/conf.inc.php');
+        #require_once('../std/common.inc.php');
+        require_once('../std/class_auth.inc.php');
+
+        require_once("../std/class_pagehandler.inc.php");
+        require_once("../pages/_handles.inc.php");
+
+        confChange('USE_MOD_REWRITE', false);		# uncomment this for apache 1.x
         
         /**
         * test all pagehandles for correct rendering
@@ -53,12 +67,13 @@ class TestPagesAll extends WebTestCase {
 
         ### enter login-infos ###
         $this->assertTrue( $this->get($url_start)                   ,'getting logout-page (%s)' );
-        $this->assertTrue( $this->setField('login_name', 'Admin')   ,'set login-name (%s)');
-        $this->assertTrue( $this->setField('login_password', 'admin')    ,'set password (%s)');
-
+        $this->assertTrue( $this->setField('login_name', $login_name)   ,'set login-name (%s)');
+        $this->assertTrue( $this->setField('login_password', $login_password)    ,'set password (%s)');
+        
         ### submit -> login to home ###
         $this->assertTrue( $this->clickSubmit('Submit')             ,'click_submit');
         
+        $this->assertNoUnwantedPattern('/invalid login/i'           ,'Login for testing working (%s)');
 
         ### go though all pagehandles and render ###
         foreach($PH->hash as $key=>$handle) {
@@ -82,9 +97,9 @@ class TestPagesAll extends WebTestCase {
                 $this->assertTrue($this->get($url)         , "getting $url (%s)");
                 $this->assertNoUnwantedPattern('/PHP Error |<b>Fatal error<\/b>|<b>Warning<\/b>|<b>Error<\/b>|<b>Notice<\/b>|<b>Parse error<\/b>/i',    'php-error found (%s)' );
                 $this->assertNoUnwantedPattern('/' . '%' . '%' . '/i',     'debug output found (%s)' );
-                $this->assertValidHtmlStucture("$url");
+                $this->assertValidHtmlStucture($url);
                 $this->assertNoUnwantedPattern('/ERROR:/',                                         'check for streber warnings (%s)');
-                $this->assertWantedPattern('/rendered in \d* ms/',                                         'rendering Complete? (%s)');
+                $this->assertWantedPattern('/<\/html>/',                                         'rendering Complete? (%s)');
 
                 for($i=0;$i<20;$i++) {
                     echo "                       ";

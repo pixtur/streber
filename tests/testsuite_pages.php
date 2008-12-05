@@ -16,7 +16,7 @@
 * - some basic login funcitionality
 *
 */
-error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+error_reporting (E_ALL);
 
 /**
 * create a function to make sure we are starting at index.php
@@ -28,13 +28,13 @@ require_once('simpletest/web_tester.php');
 require_once('simpletest/reporter.php');
 
 
-require_once('../std/common.inc');
+require_once('../std/common.inc.php');
 
-$grouptest = &new GroupTest('Login logic');
+$grouptest = new GroupTest('Login logic');
 $grouptest->addTestFile('test_pages_login.php');
 $result= $grouptest->run(new HtmlReporter());
 
-$grouptest = &new GroupTest('Render all pagehandles');
+$grouptest = new GroupTest('Render all pagehandles');
 $grouptest->addTestFile('test_pages_all.php');
 $result= $grouptest->run(new HtmlReporter());
 
