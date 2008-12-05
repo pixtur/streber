@@ -60,13 +60,6 @@ function loginForm() {
     * the last stored from-handle still contains the recently view site
     */
 
-    ### warn if install-dir present ###
-    if(file_exists('install')) {
-        new FeedbackWarning("<b>Install-directory still present.</b> This is a massive security issue (<a href='".confGet('STREBER_WIKI_URL')."installation'>read more</a>)"
-            .'<ul><li><a href="install/remove_install_dir.php">remove install directory now.</a></ul>');
-    }
-
-
     ### set up page and write header ###
     {
         $page= new Page(array('autofocus_field'=>'login_name'));

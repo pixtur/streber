@@ -951,6 +951,7 @@ new PageHandleFunc(array('id'=>'filesMoveToFolder',
            'from'=>'.*',
            'files_\d+_chk'=>"\S+",
            'file' =>"\d+",
+           'tsk' =>"\d+",
     ),
 
     'test'=>'yes',

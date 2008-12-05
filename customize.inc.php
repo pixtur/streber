@@ -15,6 +15,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('USE_MOD_REWRITE', false);		# uncomment this for apache 1.x
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
+confChange('SQL_MODE', 'STRICT_ALL_TABLES');
 confChange('TASKDETAILS_IN_SIDEBOARD', true);
 ### uncomment the following line if you upgraded from mySQL 4
 #confChange('DB_USE_UTF8_ENCODING',true);
@@ -22,5 +23,6 @@ confChange('TASKDETAILS_IN_SIDEBOARD', true);
 #confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
 #confChange('SMTP','mail.yourdomain.de');
 
+confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 confChange('USE_FIREPHP', true)
 ?>

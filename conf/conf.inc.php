@@ -165,6 +165,11 @@ $g_config= array(
     'LIST_UNDEFINED_LANG_KEYS'=>false,
 
     /**
+    * This check should only be disabled for development convenience
+    */
+    'STOP_IF_INSTALL_DIRECTORY_EXISTS' => true,
+    
+    /**
     * NUMBER in theme-list
     */
     'THEME_DEFAULT'         => 0,

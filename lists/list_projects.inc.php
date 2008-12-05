@@ -352,7 +352,9 @@ class ListBlockCol_ProjectName extends ListBlockCol
     function render_tr(&$project, $style="")
     {
         global $PH;
-        print "<td><b><nobr>". $PH->getLink('projView', $project->name, array('prj' => $project->id)) ."</b></nobr></td>";
+        print "<td><b><nobr>"
+             . $PH->getLink('projView', $project->name, array('prj' => $project->id)) 
+             ."</nobr></b></td>";
     }
 }
 

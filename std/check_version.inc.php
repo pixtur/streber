@@ -27,8 +27,10 @@ function validateEnvironment()
         exit();
     }
 
-    if(!testInstallDirectoryExists()) {
-        exit();
+    if(confGet('STOP_IF_INSTALL_DIRECTORY_EXISTS')) {
+        if(!testInstallDirectoryExists()) {
+            exit();
+        }
     }
 
     return true;
