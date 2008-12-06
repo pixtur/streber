@@ -25,10 +25,11 @@ $dumper->use_gzip = false;
 
 if($dumper->connect(
         'localhost',	    # hostname
-        'username',	            # DB-username
-        'password',	        # DB-password
-        'dbname'	        # DB-name
+        'root',	            # DB-username
+        '',	                # DB-password
+        'streber'	        # DB-name
 )) {
+    $dumper->use_gzip= false;
    $dumper->dump();
    #$dumper->executeFromFile("streber.pixtur.de.sql");
 }
@@ -108,9 +109,14 @@ class MySQLDumper {
     	    $hostname= $_SERVER["HTTP_HOST"];
         }
 
-
-        $filename   = $hostname . "_". $this->db_name.'_'. gmdate("Y-m-d_H:i"). '.gzip';
-        $mime_type  ='application/x-gzip';
+        if($this->use_gzip) {
+            $filename   = $hostname . "_". $this->db_name.'_'. gmdate("Y-m-d_H:i"). '.gzip';
+            $mime_type  ='application/x-gzip';
+        } 
+        else {
+            $filename   = $hostname . "_". $this->db_name.'_'. gmdate("Y-m-d_H:i"). '.sql';
+            $mime_type  ='';            
+        }
 
         ### Send headers
         header('Content-Type: ' . $mime_type);

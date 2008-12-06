@@ -1,5 +1,8 @@
 streber-version-history
 
+- first unit tests working with fixtures
+- some tests of login/logout/change password and correct escaping of user data
+- fixed unescaped userdata in person title
 
 - recent-change list always visible #7057
 - refactored resolve version dropdown list to grouped style #7088

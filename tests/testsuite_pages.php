@@ -4,6 +4,7 @@
 *
 * Some hints:
 *   We use the simpletest as exmplained in the simple-test documentation:
+*
 *   1. include the testing-tools
 *   2. create a new GroupTest
 *   3. add test-file
@@ -23,12 +24,12 @@ error_reporting (E_ALL);
 */
 function startedIndexPhp() {return true; }                     # define function 
 
-
 require_once('simpletest/web_tester.php');
 require_once('simpletest/reporter.php');
 
-
 require_once('../std/common.inc.php');
+
+require_once(dirname(__FILE__) . '/class.test_environment.php');
 
 $grouptest = new GroupTest('Login logic');
 $grouptest->addTestFile('test_pages_login.php');

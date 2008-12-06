@@ -472,10 +472,10 @@ class Person extends DbProjectItem {
     {
         global $PH;
         if($this->nickname) {
-            $out='<span title="'.$this->name.'" class="item person">'.$PH->getLink('personView',$this->nickname,array('person'=>$this->id)).'</span>';
+            $out='<span title="'. asHtml($this->name) . '" class="item person">'.$PH->getLink('personView',$this->nickname,array('person'=>$this->id)).'</span>';
         }
         else {
-            $out='<span  title="'.$this->name.'" class="item person">'.$PH->getLink('personView',$this->getShort(),array('person'=>$this->id)).'</span>';
+            $out='<span  title="'. asHtml( $this->name) . '" class="item person">'.$PH->getLink('personView',$this->getShort(),array('person'=>$this->id)).'</span>';
         }
         return $out;
     }

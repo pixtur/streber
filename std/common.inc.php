@@ -258,6 +258,59 @@ function validateFormCaptcha($abort_on_failure = false)
     return true;
 }
 
+/**
+* parse a mysql-dump with multiple queries and sent it to mysql
+*
+* - adds table-prefix to all select and create-statements
+* - This function is a hack to quicky set up the db-structure. Sooner
+*   or later it will be replaces with a reall table-creation-function.
+*/
+function parse_mysql_dump($url, $table_prefix, $sql_obj)
+{
+    $file_content = file($url);
+    $query = "";
+
+    foreach($file_content as $sql_line){
+        if(trim($sql_line) != "" && strpos($sql_line, "--") === false){
+            $query .= $sql_line;
+            ### query complete ###
+            if(preg_match("/;\s*$/", $sql_line)){
+
+                ### add table-prefixes ###
+                $matches= array();
+                if(preg_match("/(CREATE\s*TABLE\s[`'](.*)[`'])\s*\(/", $query, $matches)) {
+                    $create_string_old= $matches[1];
+                    $table_name_old= $matches[2];
+                    $create_string_new= str_replace($table_name_old, $table_prefix.$table_name_old, $create_string_old);
+                    $query= str_replace($create_string_old, $create_string_new, $query);
+                }
+                if(preg_match("/(DROP\s+TABLE\s+IF\s+EXISTS [`']*(.*)[`']*);/", $query, $matches)) {
+                    $create_string_old= $matches[1];
+                    $table_name_old= $matches[2];
+                    $create_string_new= str_replace($table_name_old, $table_prefix.$table_name_old, $create_string_old);
+                    $query= str_replace($create_string_old, $create_string_new, $query);
+                }
+                if(preg_match("/(INSERT INTO [`']*(.*)[`']*)\s+\(/", $query, $matches)) {
+                    $create_string_old= $matches[1];
+                    $table_name_old= $matches[2];
+                    $create_string_new= str_replace($table_name_old, $table_prefix.$table_name_old, $create_string_old);
+                    $query= str_replace($create_string_old, $create_string_new, $query);
+                }
+                
+
+                ### send query ###
+                if(!$result = $sql_obj->execute($query)) {
+                    print $query;
+                    return false;
+                }
+                $query = "";
+            }
+         }
+    }
+    return true;
+}
+
+
 
 /**
 * Basic object for setting values and passing

@@ -1,6 +1,10 @@
 <?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
 
-
+/**
+* Defines basic interface to mysql
+* - core functionality
+* - required for querying requests to the database
+*/
 
 class MysqlException extends Exception {
   public $backtrace;
@@ -19,8 +23,6 @@ class MysqlException extends Exception {
     if(!$code) {
       $this->code = $sql_obj->errno;
     }
-    #$this->backtrace = debug_backtrace();
-
 
     if(function_exists('mysql_error') && mysql_error()) {
         $mysql_error= mysql_error();
@@ -61,62 +63,72 @@ class DB_Mysql implements DB_Connection
   protected $dbname;
   protected $dbh;
 
-  public function __construct($user=NULL, $pass=NULL, $dbhost=NULL, $dbname=NULL)
-  {
+    public function __construct($user=NULL, $pass=NULL, $dbhost=NULL, $dbname=NULL)
+    {
 
-    if($user) {
-        $this->user= $user;
-    }
-    else {
-        $this->user = confGet('DB_USERNAME');
-    }
+        if($user) {
+            $this->user= $user;
+        }
+        else {
+            $this->user = confGet('DB_USERNAME');
+        }
 
-    if($pass) {
-        $this->pass= $pass;
-    }
-    else {
-        $this->pass = confGet('DB_PASSWORD');
-    }
-    if($dbhost) {
-        $this->dbhost= $dbhost;
-    }
-    else {
-        $this->dbhost = confGet('HOSTNAME');
-    }
+        if($pass) {
+            $this->pass= $pass;
+        }
+        else {
+            $this->pass = confGet('DB_PASSWORD');
+        }
+        if($dbhost) {
+            $this->dbhost= $dbhost;
+        }
+        else {
+            $this->dbhost = confGet('HOSTNAME');
+        }
 
-    if($dbname) {
-        $this->dbname= $dbname;
-    }
-    else {
-        $this->dbname = confGet('DB_NAME');
-    }
-
-
-  }
-
-
-  protected function connect()
-  {
-
-    global $sql_obj;
-    if(!is_object($sql_obj)){
-        $sql_obj = new sql_class($this->dbhost, $this->user, $this->pass, $this->dbname);
+        if($dbname) {
+            $this->dbname= $dbname;
+        }
+        else {
+            $this->dbname = confGet('DB_NAME');
+        }
     }
 
-    if(!$sql_obj->connect()) {
-      throw new MysqlException;
-    }
-    if(!$sql_obj->selectdb()) {
-      throw new MysqlException;
+    /**
+    * tries to connect to database
+    * returns internal sql_obj-handler object
+    */
+    public function connect() 
+    {
+        global $sql_obj;
+        if(!is_object($sql_obj)){
+            $sql_obj = new sql_class($this->dbhost, $this->user, $this->pass, $this->dbname);
+        }
+
+        if(!$sql_obj->connect()) {
+          throw new MysqlException;
+        }
+        if(!$sql_obj->selectdb()) {
+          throw new MysqlException;
+        }
+
+        ### enable utf8 encoding
+        if(confGet('DB_USE_UTF8_ENCODING')) {
+            $sql_obj->execute('SET NAMES utf8;');
+            $sql_obj->execute('SET CHARACTER SET utf8;');
+        }
+        return $sql_obj;
     }
 
-    ### enable utf8 encoding
-    if(confGet('DB_USE_UTF8_ENCODING')) {
-        $sql_obj->execute('SET NAMES utf8;');
-        $sql_obj->execute('SET CHARACTER SET utf8;');
-    }
-  }
+	public function prepare($query)
+	{
+		global $sql_obj;
+        if(!is_object($sql_obj)) {
+		  $this->connect();
+		}
 
+		return new DB_MysqlStatement($sql_obj, $query);
+	}
 
 
     public function execute($query)
@@ -142,15 +154,6 @@ class DB_Mysql implements DB_Connection
         }
     }
 
-	public function prepare($query)
-	{
-		global $sql_obj;
-        if(!is_object($sql_obj)) {
-		  $this->connect();
-		}
-
-		return new DB_MysqlStatement($sql_obj, $query);
-	}
 
 	public function lastId()
 	{
@@ -198,7 +201,6 @@ class DB_Mysql implements DB_Connection
             return NULL;
         }
 	}
-
 }
 
 class DB_MysqlStatement implements DB_Statement
@@ -216,11 +218,11 @@ class DB_MysqlStatement implements DB_Statement
 			throw new MysqlException("Not a valid database connection");
 		}
 	}
+	
 	public function bind_param($ph, $pv) {
-	$this->binds[$ph] = $pv;
-
-	return $this;
-}
+	    $this->binds[$ph] = $pv;
+	    return $this;
+    }
 
   #-------------------------------------------------
   # execute()
@@ -296,7 +298,7 @@ class DB_MysqlStatement implements DB_Statement
     }
 }
 
-class DB_Result {
+class _DB_Result {
   protected $stmt;
   protected $result = array();
   private $rowIndex = 0;
@@ -365,18 +367,5 @@ class DB_Result {
 
 require_once(dirname(__FILE__)."/../".confGet('DIR_SETTINGS').confGet('FILE_DB_SETTINGS'));
 
-
-
-class DB_Mysql_Debug extends DB_Mysql {
-  protected $elapsedTime;
-  public function execute($query) {
-    // set timer;
-    parent::execute($query);
-    // end timer;
-  }
-  public function getElapsedTime() {
-    return $this->$elapsedTime;
-  }
-}
 
 ?>

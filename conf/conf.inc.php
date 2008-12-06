@@ -8,6 +8,7 @@
 * - use "customize.inc.php" in streber's root to overwrite any of this settings
 */
 
+require_once("defines.inc.php");
 
 /**
 * assoc. array holding initial configuration variables

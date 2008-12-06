@@ -11,6 +11,9 @@
 class TestPagesLogin extends WebTestCase {
     
     function testHomepage() {
+
+        TestEnvironment::prepare('fixtures/project_setup.sql');
+
         $g_streber_url= "http://localhost/streber_head";
 
         ### logout first ###
@@ -46,7 +49,55 @@ class TestPagesLogin extends WebTestCase {
         $this->assertTrue( $this->setField('login_password', '') );
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
+        $this->assertNoUnwantedPattern('/<x>/');
         $this->assertWantedPattern('<body class="home">',  'check we are at home');
+
+        ### logout  ###
+        $this->assertTrue($this->get("$g_streber_url/index.php?go=logout"), 'getting logout-page (%s)' );
+        $this->assertWantedPattern('/please login/i',                                            'check content (%s)');
+        $this->assertValidHtmlStucture('login');
+        
+        ### login as pm ###
+        $this->assertTrue( $this->setField('login_name', 'pm'));
+        $this->assertTrue( $this->setField('login_password', 'wrong') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        $this->assertNoUnwantedPattern('/<x>/');
+        $this->assertWantedPattern('/invalid login/i',                                            'check content (%s)');
+
+        $this->assertTrue( $this->setField('login_name', 'pm'));
+        $this->assertTrue( $this->setField('login_password', 'pm_secret') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        $this->assertNoUnwantedPattern('/<x>/');
+        $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
+        $this->assertWantedPattern('<body class="projView">',  'check we are at home');
+
+        ###
+        $this->assertTrue( $this->clickLink('pm'));
+        $this->assertTrue( $this->clickLink('Edit profile'));
+
+        ### can't save if not identical
+        $this->assertTrue( $this->setField('person_password1',      'pm_secret'));
+        $this->assertTrue( $this->setField('person_password2',      'pm_secret_different') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        $this->assertNoUnwantedPattern('/<x>/');
+        $this->assertWantedPattern('<body class="personEdit">',     'check we are still editing');
+
+        ### can't save if not identical
+        $this->assertTrue( $this->setField('person_password1',      'pm_secret_new'));
+        $this->assertTrue( $this->setField('person_password2',      'pm_secret_new') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        $this->assertNoUnwantedPattern('/<x>/');
+        $this->assertNoUnwantedPattern('/<body class="personEdit">/',     'check we are still editing');
+        $this->assertWantedPattern('<body class="personView">',     'check we are still editing');
+
+        ### Try to login with new password
+        $this->assertTrue( $this->clickLink('Logout'));
+        $this->assertTrue( $this->setField('login_name', 'pm'));
+        $this->assertTrue( $this->setField('login_password', 'pm_secret_new') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        $this->assertNoUnwantedPattern('/<x>/');
+        $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
+        $this->assertWantedPattern('<body class="projView">',  'check we are at home');
     }
 }
 ?>
