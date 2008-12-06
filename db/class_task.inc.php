@@ -757,7 +757,7 @@ foreach($filters_str as $fs=>$value) {
     *   alive_only=true,
     *   parent_task=NULL)  # if NULL parent-task is ignored
     */
-    static function &getAll( $args=NULL)
+    static function getAll( $args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');
@@ -805,8 +805,6 @@ foreach($filters_str as $fs=>$value) {
                 }
             }
         }
-
-        
         
         if($sort_hierarchical && is_null($parent_task)) {
             $parent_task=0;
@@ -915,7 +913,6 @@ foreach($filters_str as $fs=>$value) {
             $str_for_milestone= '';
         }
 
-
         if(!is_null($resolved_version)) {
             $str_resolved_version=  'AND t.resolved_version='.intval($resolved_version);
         }
@@ -953,8 +950,9 @@ foreach($filters_str as $fs=>$value) {
                 $str_query=
                 "SELECT i.*, t.* from {$prefix}item i, {$prefix}task t, {$prefix}taskperson tp, {$prefix}projectperson upp, {$prefix}item itp
                 WHERE
-                        /*upp.person = {$auth->cur_user->id}*/
-						upp.person = $str_person
+
+                    upp.person = {$auth->cur_user->id}
+					/*upp.person = $str_person*/
                     $str_project
                     AND i.type = '".ITEM_TASK."'
                     AND i.project=upp.project

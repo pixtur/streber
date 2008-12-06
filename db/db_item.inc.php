@@ -52,8 +52,12 @@ abstract class DbItem {
                 if($auth->cur_user) {
                     $def_value= $auth->cur_user->id;
                 }
+                else {
+                    #trigger_error("can't initialized modified by to current user!",E_USER_WARNING);
+                    $def_value= 0;
+                }
             }
-            $this->$tmp_name=$def_value;
+            $this->$tmp_name= $def_value;
         }
 
         if($id === 0) {
@@ -1256,7 +1260,7 @@ class DbProjectItem extends DbItem {
     *
     * This function is used for getting changed items for projects or by user, etc.
     */
-    static function &getAll($args=array())
+    static function getAll($args=array())
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');

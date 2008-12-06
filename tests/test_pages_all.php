@@ -100,6 +100,8 @@ class TestPagesAll extends WebTestCase {
                 $this->assertValidHtmlStucture($url);
                 $this->assertNoUnwantedPattern('/ERROR:/',                                         'check for streber warnings (%s)');
                 $this->assertWantedPattern('/<\/html>/',                                         'rendering Complete? (%s)');
+                $this->assertNoUnwantedPattern('/<x>/',     'check unescaped data (%s)');
+                $this->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check unescaped data (%s)');
 
                 for($i=0;$i<20;$i++) {
                     echo "                       ";

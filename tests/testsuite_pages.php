@@ -31,6 +31,8 @@ require_once('../std/common.inc.php');
 
 require_once(dirname(__FILE__) . '/class.test_environment.php');
 
+TestEnvironment::prepare('fixtures/project_setup.sql');
+
 $grouptest = new GroupTest('Login logic');
 $grouptest->addTestFile('test_pages_login.php');
 $result= $grouptest->run(new HtmlReporter());
@@ -38,6 +40,8 @@ $result= $grouptest->run(new HtmlReporter());
 $grouptest = new GroupTest('Render all pagehandles');
 $grouptest->addTestFile('test_pages_all.php');
 $result= $grouptest->run(new HtmlReporter());
+
+TestEnvironment::prepare('fixtures/remove_tables.sql');
 
 if($result) {
     exit(0);

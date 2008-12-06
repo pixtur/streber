@@ -267,7 +267,7 @@ class Company extends DbProjectItem
 	#------------------------------------------------------------
     # get specific companies from db
     #------------------------------------------------------------
-	public static function &getAll($args=NULL)
+	public static function getAll($args=NULL)
 	{
 		global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');

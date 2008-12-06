@@ -906,7 +906,7 @@ class Project extends DbProjectItem
     /**
     * get all open & Visible projects from db
     */
-    public static function &getAll($args=NULL)
+    public static function getAll($args=NULL)
     {
         global $auth;
 		$prefix= confGet('DB_TABLE_PREFIX');

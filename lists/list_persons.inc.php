@@ -246,7 +246,7 @@ class ListBlockCol_PersonName extends ListBlockCol
 	    global $PH;
 
 		print "<td><b><nobr>"
-		    . $PH->getLink('personView',asHtml($person->name), array('person' => $person->id)) 
+		    . $PH->getLink('personView', $person->name, array('person' => $person->id)) 
 		    . "</nobr></b></td>";
 	}
 }

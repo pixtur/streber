@@ -170,7 +170,7 @@ class Comment extends DbProjectItem
     /**
     * getComments($project=false)
     */
-    static function &getAll($args=Array())
+    static function getAll($args=Array())
     {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');

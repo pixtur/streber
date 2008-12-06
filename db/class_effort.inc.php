@@ -181,7 +181,7 @@ class Effort extends DbProjectItem
     * - refacture status_min/max evaluation only if !is_null
     *
     */
-    static function &getAll( $args=NULL)
+    static function getAll( $args=NULL)
     {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');
@@ -271,7 +271,8 @@ class Effort extends DbProjectItem
             $str_query=
             "SELECT DISTINCT i.*, e.* from {$prefix}item i, {$prefix}effort e, {$prefix}project p, {$prefix}projectperson upp
             WHERE
-                    i.type = '".ITEM_EFFORT."'
+
+                i.type = '".ITEM_EFFORT."'
                 $str_project
                 $str_projectperson
                 $str_project2
@@ -321,7 +322,7 @@ class Effort extends DbProjectItem
     	$sth->execute("",1);
     	$tmp=$sth->fetchall_assoc();
 		
-    	$files=array();
+    	$efforts=array();
         foreach($tmp as $t) {
             $effort=new Effort($t);
             $efforts[]=$effort;

@@ -184,7 +184,7 @@ class File extends DbProjectItem
     * - refacture status_min/max evaluation only if !is_null
     *
     */
-    static function &getAll( $args=NULL)
+    static function getAll( $args=NULL)
         {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');

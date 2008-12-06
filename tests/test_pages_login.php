@@ -72,7 +72,7 @@ class TestPagesLogin extends WebTestCase {
         $this->assertWantedPattern('<body class="projView">',  'check we are at home');
 
         ###
-        $this->assertTrue( $this->clickLink('pm'));
+        $this->assertTrue( $this->clickLink('Peter Manage <x>'));
         $this->assertTrue( $this->clickLink('Edit profile'));
 
         ### can't save if not identical
@@ -88,7 +88,7 @@ class TestPagesLogin extends WebTestCase {
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/<body class="personEdit">/',     'check we are still editing');
-        $this->assertWantedPattern('<body class="personView">',     'check we are still editing');
+        $this->assertWantedPattern('<body class="projView">',     'check we are no longer editing');
 
         ### Try to login with new password
         $this->assertTrue( $this->clickLink('Logout'));

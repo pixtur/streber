@@ -154,7 +154,7 @@ class ItemPerson extends DbItem
         }
     }
 
-    static function &getAll($args=NULL){
+    static function getAll($args=NULL){
 
         global $auth;
 
