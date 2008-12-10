@@ -413,7 +413,7 @@ function TaskView()
         if($editable) {
             $description= $descriptionWithUpdates;
             if( $description == "" ) {
-                $description = "[quote]" . __("This task has no description.\nDoubleclick to edit.") . "[/quote]";
+                $description = "[quote]" . __("This task has no description. Doubleclick to edit.") . "[/quote]";
             } 
             echo  wiki2html($description, $project, $task->id, 'description');
         }

@@ -2199,7 +2199,7 @@ $g_lang_table= array(
 ### ../pages/task_view.inc.php   ###
 'Your feedback is requested by %s.'=>'%s möchte Ihre Meinung wissen.',  # line 1166
 'Please edit or comment this item.'=>'Bitte jetzt bearbeiten oder kommentieren.',  # line 1167
-'This task has no description.\nDoubleclick to edit.'=>'Dieses Objekt hat keine Beschreibung.\nZum Bearbeiten doppelt klicken.',  # line 416
+'This task has no description. Doubleclick to edit.'=>'Dieses Objekt hat keine Beschreibung. Zum Bearbeiten doppelt klicken.',  # line 416
 'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dieses Thema hat noch keinen Text\nKlicken Sie doppelt, um etwas zu schreiben.',  # line 1182
 'Request feedback'            =>'Nach Meinung fragen',  # line 1265
 
