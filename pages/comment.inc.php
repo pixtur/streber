@@ -266,7 +266,7 @@ function commentNew() {
     if($newComment->pub_level < 1) {
 
         ### abort, if not enough rights ###
-        $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+        $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 
     }
 
@@ -668,7 +668,7 @@ function commentsCollapseView()
 		* if user has not enough rights
 		**/
 		### abort, if not enough rights ###
-        $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+        $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 	}
 
     ### display taskView ####
@@ -713,7 +713,7 @@ function commentsExpandView()
 		* if user has not enough rights
 		**/
 		### abort, if not enough rights ###
-        $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+        $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 	}
 
     ### display taskView ####

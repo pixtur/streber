@@ -1557,5 +1557,6 @@ class WebTestCase extends SimpleTestCase {
                     $message
                );
     }
+
 }
 ?>

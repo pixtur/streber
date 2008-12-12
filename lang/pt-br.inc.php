@@ -201,7 +201,7 @@ $g_lang_table= array(
 'validating invalid item'     =>'validando itens inválidos',
 
 ### ../pages/comment.inc   ###
-'insuffient rights'           =>'Direitos insuficientes',
+'insufficient rights'           =>'Direitos insuficientes',
 
 
 ### ../db/class_projectperson.inc   ###
@@ -668,7 +668,7 @@ $g_lang_table= array(
 
 
 ### ../db/class_project.inc   ###
-'insuffient rights (not in project)'=>'direitos insuficientes (não em projeto).',
+'insufficient rights (not in project)'=>'direitos insuficientes (não em projeto).',
 
 ### ../lists/list_persons.inc   ###
 '(adjusted)'                  =>'(ajustado)',
@@ -717,7 +717,7 @@ $g_lang_table= array(
 
 ### ../std/class_pagehandler.inc   ###
 'Operation aborted (%s)'=>'A operação abortou (%s)',
-'Insuffient rights'    =>'Direitos de Insuficientes.',
+'insufficient rights'    =>'Direitos de Insuficientes.',
 
 ### ../db/class_person.inc   ###
 'only required if use may login (e.g. pixtur)'=>'somente requerido se o usuário pode conectar',

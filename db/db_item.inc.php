@@ -265,7 +265,7 @@ abstract class DbItem {
     function getShortWithTitle()
     {
         if(isset($this->short) && $this->short && $this->short !="") {
-            return "<span title='$this->name'>".asHtml($this->short)."</span>";
+            return "<span title='". asHtml($this->name). "'>".asHtml($this->short)."</span>";
         }
         $length= confGet('STRING_LENGTH_SHORT');
         if(isset($this->name) && $this->name !="") {
@@ -273,7 +273,7 @@ abstract class DbItem {
             if(!$matches[2]) {
                 return $matches[1];
             }
-            return "<span title='$this->name'>".$matches[1]."...</span>";
+            return "<span title='". asHtml($this->name). "'>".$matches[1]."...</span>";
         }
         else {
             return __("unnamed");

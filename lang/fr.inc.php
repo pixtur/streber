@@ -201,7 +201,7 @@ $g_lang_table= array(
 'validating invalid item'     =>'Validation invalide',
 
 ### ../pages/comment.inc   ###
-'insuffient rights'           =>'Droits insuffisants',
+'insufficient rights'           =>'Droits insuffisants',
 
 
 ### ../db/class_projectperson.inc   ###
@@ -671,7 +671,7 @@ $g_lang_table= array(
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 ### ../db/class_project.inc   ###
-'insuffient rights (not in project)'=>'Droits insuffisant (pas dans le projet)',
+'insufficient rights (not in project)'=>'Droits insuffisant (pas dans le projet)',
 
 ### ../lists/list_persons.inc   ###
 '(adjusted)'                  =>'(ajusté)',
@@ -720,7 +720,7 @@ $g_lang_table= array(
 
 ### ../std/class_pagehandler.inc   ###
 'Operation aborted (%s)'=>'Opération abortée (%s)',
-'Insuffient rights'    =>'Droits insuffisant',
+'insufficient rights'    =>'Droits insuffisant',
 
 
 ##############

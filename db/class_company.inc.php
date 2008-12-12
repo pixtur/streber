@@ -131,10 +131,10 @@ class Company extends DbProjectItem
     {
         global $PH;
         if($show_long) {
-            $out='<span class="item company">'. $PH->getLink('companyView',$this->name,array('company'=>$this->id)).'</span>';
+            $out= '<span class="item company">'. $PH->getLink('companyView',$this->name, array('company'=>$this->id)).'</span>';
         }
         else {
-            $out='<span class="item company">'. $PH->getLink('companyView',$this->getShortWithTitle(),array('company'=>$this->id),'item company',true).'</span>';
+            $out= '<span class="item company">'. $PH->getLink('companyView',$this->getShortWithTitle(),array('company'=>$this->id),'item company',true).'</span>';
         }
         return $out;
     }

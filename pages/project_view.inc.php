@@ -394,7 +394,7 @@ function ProjView()
                 }
                 echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
                 
-                if($project->validateEditItem($n)) {
+                if($project->validateEditItem($n, false)) {
                     echo  wiki2html($n->description, $project, $n->id, 'description');   
                 }
                 else {

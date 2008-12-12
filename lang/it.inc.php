@@ -170,7 +170,7 @@ $g_lang_table= array(
 'Theme|Formlabel'             =>'Tema',  # line 161
 
 ### ../pages/comment.inc.php   ###
-'insuffient rights'           =>'permessi utente insufficienti',  # line 237
+'insufficient rights'           =>'permessi utente insufficienti',  # line 237
 
 ### ../db/class_task.inc.php   ###
 'Short'                       =>'Breve',  # line 21
@@ -198,7 +198,7 @@ $g_lang_table= array(
 ### ../db/class_project.inc.php   ###
 'show tasks in home'          =>'Mostra attività in home',  # line 75
 'validating invalid item'     =>'verificando elementi non validi',  # line 1191
-'insuffient rights (not in project)'=>'permessi utente insufficienti (non nel progetto)',  # line 1203
+'insufficient rights (not in project)'=>'permessi utente insufficienti (non nel progetto)',  # line 1203
 
 ### ../pages/proj.inc.php   ###
 'Project Template'            =>'Template di progetto',  # line 1416
@@ -1318,7 +1318,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 ### ../std/class_pagehandler.inc.php   ###
 'WARNING: operation aborted (%s)'=>'ATTENZIONE: operazione abortita (%s)',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'ERRORE FATALE: operazione abortita (%s)',  # line 594
-'Error: Insuffient rights'    =>'Errore: permessi utente insufficienti',  # line 597
+'Error: insufficient rights'    =>'Errore: permessi utente insufficienti',  # line 597
 'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'ERRORE FATALE: operazione abortita con un errore grave nella struttura del database (%s). Questo può essere causato da inconsistenza nel database. E` consigliato di ripristinare un backup recente. ',  # line 600
 'NOTE: %s|Message when operation aborted'=>'NOTA: %s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'ERRORE: %s',  # line 606
@@ -1558,7 +1558,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Operation aborted (%s)'      =>'Operazione abortita (%s)',  # line 673
 'Operation aborted with an fatal error (%s).'=>'Operazione abortita a causa di un errore fatale (%s)',  # line 676
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operazione abortita a causa di un errore fatale causato da un errore di programmazione (%s)',  # line 679
-'Insuffient rights'           =>'Permessi utente non sufficienti',  # line 683
+'insufficient rights'           =>'Permessi utente non sufficienti',  # line 683
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operazione abortita a causa di un errore fatale nella struttura del database (%s). Questo può essere causato da inconsistenza nel database. Noi consigliamo caldamente di ripristinare un backup recente.',  # line 686
 '%s|Message when operation aborted'=>'%s',  # line 692
 

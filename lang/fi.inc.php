@@ -174,10 +174,10 @@ $g_lang_table= array(
 'show tasks in home'          =>'näytä tehtävät aloitussivulla',  # line 75
 'only team members can create items'=>'vain tiimin jäsenet voivat luoda kohteita',  # line 1178
 'validating invalid item'     =>'kohteen varmennus',  # line 1255
-'insuffient rights (not in project)'=>'ei oikeuksia projektiin',  # line 1267
+'insufficient rights (not in project)'=>'ei oikeuksia projektiin',  # line 1267
 
 ### ../pages/task_more.inc.php   ###
-'insuffient rights'           =>'oikeudet eivät riitä',  # line 3050
+'insufficient rights'           =>'oikeudet eivät riitä',  # line 3050
 
 ### ../pages/proj.inc.php   ###
 'Project Template'            =>'Projektipohja',  # line 1557
@@ -1590,7 +1590,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Operaatio keskeytetty (%s)',  # line 733
 'Operation aborted with an fatal error (%s).'=>'Operaatio keskeytetty. Peruuttamaton virhe %s',  # line 736
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Ohjelmavirhe %s',  # line 739
-'Insuffient rights'           =>'Oikeudet eivät riitä',  # line 748
+'insufficient rights'           =>'Oikeudet eivät riitä',  # line 748
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Virhe! Tietokantarakennevirhe %s. Suosittelemme palauttamaan viimeisimmän varmuuskopion tietokannasta.',  # line 752
 
 ### ../std/common.inc.php   ###

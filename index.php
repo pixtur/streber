@@ -56,6 +56,14 @@ if(file_exists('customize.inc.php')) {
     require_once(confGet('DIR_STREBER') . 'customize.inc.php');
 }
 
+/**
+* overwrite db-settings if page requested while unit testing
+* read more at www.streber-pm.org/7276
+*/
+if(getServerVar('HTTP_USER_AGENT') == 'streber_unit_tester') {
+    confChange('DB_TABLE_PREFIX', 'test_' . confGet('DB_TABLE_PREFIX'));
+}
+
 ### start output-buffering? ###
 if(confGet('USE_FIREPHP')) {
     ob_start();

@@ -200,7 +200,7 @@ $g_lang_table= array(
 'validating invalid item'     =>'Sjekker ugyldig Element',
 
 ### ../pages/comment.inc   ###
-'insuffient rights'           =>'Utilstrekkelige rettigheter',
+'insufficient rights'           =>'Utilstrekkelige rettigheter',
 
 
 ### ../db/class_projectperson.inc   ###
@@ -668,7 +668,7 @@ $g_lang_table= array(
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 ### ../db/class_project.inc   ###
-'insuffient rights (not in project)'=>'Manglende tilgangsretter (ikke i prosjekt).',
+'insufficient rights (not in project)'=>'Manglende tilgangsretter (ikke i prosjekt).',
 
 ### ../lists/list_persons.inc   ###
 '(adjusted)'                  =>'(tilpasset)',
@@ -717,7 +717,7 @@ $g_lang_table= array(
 
 ### ../std/class_pagehandler.inc   ###
 'operation aborted (%s)'=>'Operasjon avbrutt (%s)',
-'Insuffient rights'    =>'Manglende rettigheter.',
+'insufficient rights'    =>'Manglende rettigheter.',
 
 
 ##############

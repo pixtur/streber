@@ -128,8 +128,8 @@ function url2linkExtern($url, $show=NULL, $maxlen=20) {
  * convert url to mail link-tag (remove mail:// and reduced to reasonable length)
 */
 function url2linkMail($url,$show=false, $maxlen=32) {
-
     $url= asHtml($url);
+
     if(!preg_match("/^mailto:/",$url)) {
         if(!$show) {
             $show= $url;
@@ -145,7 +145,7 @@ function url2linkMail($url,$show=false, $maxlen=32) {
     if(strlen($show) > $maxlen) {
         $show=substr($show,0,$maxlen)."...";
     }
-    return "<a class='mail' href='".asHtml($url). "'>". asHtml($show)."</a>";
+    return "<a class='mail' href='".$url. "'>". $show."</a>";
 }
 
 

@@ -159,10 +159,10 @@ $g_lang_table= array(
 'show tasks in home'          =>'отображать задачи на главной',  # line 88
 'only team members can create items'=>'только участники команды могут создавать',  # line 1236
 'validating invalid item'     =>'выполнение проверки на неправильность',  # line 1316
-'insuffient rights (not in project)'=>'доступ запрещен (не в проекте)',  # line 1328
+'insufficient rights (not in project)'=>'доступ запрещен (не в проекте)',  # line 1328
 
 ### ../pages/task_more.inc.php   ###
-'insuffient rights'           =>'доступ запрещен',  # line 2877
+'insufficient rights'           =>'доступ запрещен',  # line 2877
 
 ### ../pages/project_view.inc.php   ###
 'Project Template'            =>'Шаблон проекта',  # line 69
@@ -1765,7 +1765,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Опирация прервана (%s)',  # line 742
 'Operation aborted with an fatal error (%s).'=>'Операция прервана с фатальной ошибкой (%s)',  # line 745
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Операция прервана с фатальной ошибкой по причине программной ошибки (%s).',  # line 748
-'Insuffient rights'           =>'Недостаточно прав',  # line 757
+'insufficient rights'           =>'Недостаточно прав',  # line 757
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Операция прервана в связи с фатальной ошибкой структуры базы данных. Настоятельно рекомендуем вам загрузить последнее автосохранение (BackUp)',  # line 761
 
 ### ../std/common.inc.php   ###

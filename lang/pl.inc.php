@@ -156,7 +156,7 @@ $g_lang_table= array(
 'show tasks in home'          =>'wyświetl zadania na stronie startowej',  # line 75
 'only team members can create items'=>'tylko członkowie zespołu mogą tworzyć pozycje',  # line 1178
 'validating invalid item'     =>'sprawdzanie nieprawidłowej pozycji',  # line 1191
-'insuffient rights (not in project)'=>'niewystarczające uprawnienia (nie w projekcie)',  # line 1203
+'insufficient rights (not in project)'=>'niewystarczające uprawnienia (nie w projekcie)',  # line 1203
 'Released versions'           =>'Wydane wersje',  # line 1456
 'Milestones (closed)'         =>'Kamienie milowe (zamknięte)',  # line 1461
 
@@ -730,7 +730,7 @@ $g_lang_table= array(
 'Delete this comment'         =>'Usunięcie tego komentarza',  # line 102
 'New Comment|Default name of new comment'=>'Nowy komentarz',  # line 149
 'Reply to |prefix for name of new comment on another comment'=>'Odpowiedź ',  # line 213
-'insuffient rights'           =>'niewystarczające uprawnienia',  # line 237
+'insufficient rights'           =>'niewystarczające uprawnienia',  # line 237
 'Re: '                        =>'Odp: ',  # line 243
 'Edit Comment|Page title'     =>'Edycja komentarza',  # line 290
 'New Comment|Page title'      =>'Nowy komentarz',  # line 293
@@ -1351,7 +1351,7 @@ $g_lang_table= array(
 ### ../std/class_pagehandler.inc.php   ###
 'WARNING: operation aborted (%s)'=>'OSTRZEŻENIE: Operacja przerwana (%s).',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'KRYTYCZNE: Operacja przerwana z błędem krytycznym (%s).',  # line 594
-'Error: Insuffient rights'    =>'BŁĄD: Niewystarczające uprawnienia.',  # line 597
+'Error: insufficient rights'    =>'BŁĄD: Niewystarczające uprawnienia.',  # line 597
 'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'KRYTYCZNE: Operacja przerwana z krytycznym błędem struktury bazy danych (%s). Może to doprowadzić do utraty spójności bazy danych. Sugerujemy przywrócenie bazy danych do ostatniej wersji kopii (archiwum) bazy danych.',  # line 600
 'NOTE: %s|Message when operation aborted'=>'UWAGA: %s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'BŁĄD: %s',  # line 606
@@ -1868,7 +1868,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Operacja została przerwana (%s)',  # line 733
 'Operation aborted with an fatal error (%s).'=>'Operacja została przerwana z błędem fatalnym (%s).',  # line 736
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operacja została przerwana z błędem fatalnym spowodowanym przez błąd oprogramowania (%s).',  # line 739
-'Insuffient rights'           =>'Niewystarczające uprawnienia',  # line 748
+'insufficient rights'           =>'Niewystarczające uprawnienia',  # line 748
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operacja przerwana z krytycznym błędem struktury bazy danych (%s). Może to doprowadzić do utraty spójności bazy danych. Sugerujemy przywrócenie bazy danych do ostatniej wersji kopii (archiwum) bazy danych.',  # line 752
 
 ### ../pages/proj.inc.php   ###

@@ -15,7 +15,9 @@ class TestPagesAll extends WebTestCase {
     *
     */
     function testAllPages() {
-        
+
+        TestEnvironment::prepare('fixtures/project_setup.sql');
+        $this->addHeader('USER_AGENT: streber_unit_tester');
         
         /**
         * we require some valid logins and ids to test all pages
@@ -25,22 +27,22 @@ class TestPagesAll extends WebTestCase {
         $url_streber    = "http://localhost/streber_head/";
         $url_start      = $url_streber . 'index.php?go=logout';
         $test_params    = array(
-                             "_projectView_"=>237,
-                             "_projectEdit_"=>237,
-                             "_taskView_"=>271,
-                             "_taskEdit_"=>271,
+                             "_projectView_"=>10,
+                             "_projectEdit_"=>10,
+                             "_taskView_"=>18,
+                             "_taskEdit_"=>18,
 
                              "_personView_"=>1,
                              "_personEdit_"=>1,
 
-                             "_companyView_"=>214,
-                             "_companyEdit_"=>214,
+                             "_companyView_"=>8,
+                             "_companyEdit_"=>8,
 
                              "_commentView_"=>241,
                              "_commentEdit_"=>241,
 
-                             "_effortView_"=>578,
-                             "_effortEdit_"=>578,
+                             "_effortView_"=>35,
+                             "_effortEdit_"=>35,
 
                           );
 
@@ -101,7 +103,7 @@ class TestPagesAll extends WebTestCase {
                 $this->assertNoUnwantedPattern('/ERROR:/',                                         'check for streber warnings (%s)');
                 $this->assertWantedPattern('/<\/html>/',                                         'rendering Complete? (%s)');
                 $this->assertNoUnwantedPattern('/<x>/',     'check unescaped data (%s)');
-                $this->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check unescaped data (%s)');
+                $this->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check double escaped data (%s)');
 
                 for($i=0;$i<20;$i++) {
                     echo "                       ";

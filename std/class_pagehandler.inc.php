@@ -773,7 +773,7 @@ class PageHandler extends BaseObject
             if($warning) {
                 $str_reason= ' ('. $warning. ')';
             }
-            new FeedbackWarning(__("Insuffient rights"). $str_reason);
+            new FeedbackWarning(__("insufficient rights"). $str_reason);
         }
         else if($type == ERROR_DATASTRUCTURE) {
             trigger_error("Error data structure", E_USER_WARNING);

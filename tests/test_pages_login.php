@@ -1,7 +1,7 @@
 <?php
 
 /**
-* intergration-tests
+* intergration-tests for login-logic and password changes/validation
 *
 * This test-file is been used by testsuite_pages.php
 * All Functions defined in TestPagesAll which start with "test" will be
@@ -13,6 +13,7 @@ class TestPagesLogin extends WebTestCase {
     function testHomepage() {
 
         TestEnvironment::prepare('fixtures/project_setup.sql');
+        $this->addHeader('USER_AGENT: streber_unit_tester');
 
         $g_streber_url= "http://localhost/streber_head";
 
@@ -69,10 +70,13 @@ class TestPagesLogin extends WebTestCase {
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
-        $this->assertWantedPattern('<body class="projView">',  'check we are at home');
+
+        #$result= $this->get("$g_streber_url");
+        #print "<pre>" . htmlEntities($result) . "</pre>";
+        $this->assertWantedPattern('<body class="home">',  'check we are at home');
 
         ###
-        $this->assertTrue( $this->clickLink('Peter Manage <x>'));
+        $this->assertTrue( $this->clickLink( 'Peter Manage'));
         $this->assertTrue( $this->clickLink('Edit profile'));
 
         ### can't save if not identical
@@ -88,7 +92,7 @@ class TestPagesLogin extends WebTestCase {
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/<body class="personEdit">/',     'check we are still editing');
-        $this->assertWantedPattern('<body class="projView">',     'check we are no longer editing');
+        $this->assertWantedPattern('<body class="home">',     'check we are no longer editing');
 
         ### Try to login with new password
         $this->assertTrue( $this->clickLink('Logout'));
@@ -97,7 +101,7 @@ class TestPagesLogin extends WebTestCase {
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
-        $this->assertWantedPattern('<body class="projView">',  'check we are at home');
+        $this->assertWantedPattern('<body class="home">',  'check we are at home');
     }
 }
 ?>

@@ -2,11 +2,7 @@
 
 /*
  setup test database
-
 */
-
-
-require_once(dirname(__FILE__) . '/../conf/conf.inc.php');
 
 class TestEnvironment extends BaseObject {
     
@@ -32,12 +28,23 @@ class TestEnvironment extends BaseObject {
         ### trigger db request ###
         $dbh = new DB_Mysql;
         $sql_obj= $dbh->connect();
-        
-        if(!parse_mysql_dump($sql_setup_file, "test_", $sql_obj) ) {
+
+        if(!parse_mysql_dump($sql_setup_file, confGet('DB_TABLE_PREFIX_UNITTEST'), $sql_obj) ) {
             print "error setting up database structure";
             print "mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error."</pre>";
         }
     }
 }
+
+function validatePage($handle) {
+    foreach( split(",", "error_list") as $p) {
+        $handle->assertNoUnwantedPattern('/' . $p . '/i');
+    }
+    $handle->assertNoUnwantedPattern('/<x>/', 'check unescaped data');
+    $handle->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check double escaped data (%s)');
+    $handle->assertValidHtmlStucture('login');
+
+}
+
 
 ?>

@@ -1319,7 +1319,6 @@ function personViewTasks()
         'presets' => $presets,
         'person_id' => $person->id));
         
-        
 		$list->query_options['assigned_to_person']= $person->id;
 		$list->query_options['person'] = $person->id;
         $list->print_automatic(NULL, NULL, true);

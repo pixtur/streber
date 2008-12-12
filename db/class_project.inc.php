@@ -1163,7 +1163,7 @@ class Project extends DbProjectItem
 
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {
-                $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
+                $PH->abortWarning(__("insufficient rights (not in project)"),ERROR_RIGHTS);
                 exit();
             }
             return false;
@@ -1176,7 +1176,7 @@ class Project extends DbProjectItem
         # \TODO check different items-types here...
         if($l < $pp->level_view) {
             if($abort_on_error) {
-                $PH->abortWarning(__("insuffient rights"),ERROR_RIGHTS);
+                $PH->abortWarning(__("insufficient rights"),ERROR_RIGHTS);
                 exit();
             }
             return false;
@@ -1212,7 +1212,7 @@ class Project extends DbProjectItem
 
         if(!$pp= $this->getCurrentProjectPerson()) {
             if($abort_on_error) {
-                $PH->abortWarning(__("insuffient rights (not in project)"),ERROR_RIGHTS);
+                $PH->abortWarning(__("insufficient rights (not in project)"),ERROR_RIGHTS);
                 exit();
             }
             return false;
@@ -1227,7 +1227,7 @@ class Project extends DbProjectItem
         # \TODO check different items-types here...
         if($item->id != 0 && $l < $pp->level_edit) {
             if($abort_on_error) {
-                $PH->abortWarning(__("insuffient rights"),ERROR_RIGHTS);
+                $PH->abortWarning(__("insufficient rights"),ERROR_RIGHTS);
                 exit();
             }
 		    return false;
@@ -1273,7 +1273,7 @@ class Project extends DbProjectItem
             return true;
         }
         else if($abort_page) {
-            $PH->abortWarning(__("insuffient rights"),ERROR_RIGHTS);
+            $PH->abortWarning(__("insufficient rights"),ERROR_RIGHTS);
         }
         return NULL;
     }

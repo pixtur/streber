@@ -180,10 +180,10 @@ undefined keys:
 'show tasks in home'          =>'',  # line 88
 'only team members can create items'=>'',  # line 1236
 'validating invalid item'     =>'',  # line 1316
-'insuffient rights (not in project)'=>'',  # line 1328
+'insufficient rights (not in project)'=>'',  # line 1328
 
 ### ../pages/task_more.inc.php   ###
-'insuffient rights'           =>'',  # line 2877
+'insufficient rights'           =>'',  # line 2877
 
 ### ../pages/project_view.inc.php   ###
 'Project Template'            =>'',  # line 69
@@ -1783,7 +1783,7 @@ undefined keys:
 'Operation aborted (%s)'      =>'',  # line 742
 'Operation aborted with an fatal error (%s).'=>'',  # line 745
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'',  # line 748
-'Insuffient rights'           =>'',  # line 757
+'insufficient rights'           =>'',  # line 757
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',  # line 761
 
 ### ../std/common.inc.php   ###

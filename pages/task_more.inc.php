@@ -1690,7 +1690,7 @@ function TasksDelete()
     if(count($ids)==1) {
         $tsk=$ids[0];
         if(!$task= Task::getEditableById($tsk)) {
-            $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+            $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 			$PH->show('home');
             return;
         }
@@ -3000,7 +3000,7 @@ function taskCollapseAllComments()
 		* if user has not enough rights
 		**/
 		### abort, if not enough rights ###
-        $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+        $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 	}
 
     ### display taskView ####
@@ -3052,7 +3052,7 @@ function taskExpandAllComments()
 		* if user has not enough rights
 		**/
 		### abort, if not enough rights ###
-        $PH->abortWarning(__('insuffient rights'),ERROR_RIGHTS);
+        $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
 	}
 
     ### display taskView ####

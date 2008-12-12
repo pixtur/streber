@@ -86,6 +86,7 @@ $g_config= array(
     'DB_TABLE_PREFIX'       =>'',
     'DB_VERSION'            =>'',           # current version (set to DB_CREATE_DUMP_VERSION at install) / validated at startup to complain for upgrade
 
+    'DB_TABLE_PREFIX_UNITTEST' => 'test_',
     /**
     * if not null, is set on startup. Suggested setting for development with mysql5 is
     *

@@ -40,10 +40,10 @@ undefined keys:
 ### ../db/class_project.inc.php   ###
 'show tasks in home'          =>'',  # line 108
 'validating invalid item'     =>'',  # line 1203
-'insuffient rights (not in project)'=>'',  # line 1215
+'insufficient rights (not in project)'=>'',  # line 1215
 
 ### ../pages/task_more.inc.php   ###
-'insuffient rights'           =>'',  # line 3055
+'insufficient rights'           =>'',  # line 3055
 
 ### ../db/class_project.inc.php   ###
 'next released version'       =>'',  # line 1382
@@ -883,7 +883,7 @@ undefined keys:
 'Operation aborted (%s)'      =>'',  # line 761
 'Operation aborted with an fatal error (%s).'=>'',  # line 764
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'',  # line 767
-'Insuffient rights'           =>'',  # line 776
+'insufficient rights'           =>'',  # line 776
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',  # line 780
 
 ### ../std/class_rss.inc.php   ###

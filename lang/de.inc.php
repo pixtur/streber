@@ -208,7 +208,7 @@ $g_lang_table= array(
 'show tasks in home'          =>'Aufgaben in Home zeigen',
 'validating invalid item'     =>'Überprüfung auf ungültiges Element',
 
-'insuffient rights'           =>'Ungenügende Zugriffsrechte',
+'insufficient rights'           =>'Ungenügende Zugriffsrechte',
 
 'job'                         =>'Tätigkeit',
 'role'                        =>'Rolle',
@@ -719,7 +719,7 @@ $g_lang_table= array(
 'Publish to %s'                =>'Sichtbar für %s',
 'Select / Deselect'            =>'Anwählen / Abwählen',
 
-'insuffient rights (not in project)'=>'Fehlende Zugriffsrechte, da nicht im Projekt.',
+'insufficient rights (not in project)'=>'Fehlende Zugriffsrechte, da nicht im Projekt.',
 
 '(adjusted)'                  =>'(angepasst)',
 
@@ -765,7 +765,7 @@ $g_lang_table= array(
 'No element selected? (could not find id)|Message if a function started without items selected'=>'Keine Objekte ausgewählt?',
 
 'operation aborted (%s)'=>'Operation abgebrochen (%s)',
-'Insuffient rights'    =>'Fehlende Berechtigung.',
+'insufficient rights'    =>'Fehlende Berechtigung.',
 
 'Edit team member'            =>'Projektrolle bearbeiten',
 

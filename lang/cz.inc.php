@@ -169,7 +169,7 @@ $g_lang_table= array(
 'Theme|Formlabel'             =>'Téma',
 
 ### ../pages/comment.inc.php   ###
-'insuffient rights'           =>'nedostatočná práva',
+'insufficient rights'           =>'nedostatočná práva',
 
 ### ../db/class_task.inc.php   ###
 'Short'                       =>'Krátký',
@@ -194,7 +194,7 @@ $g_lang_table= array(
 ### ../db/class_project.inc.php   ###
 'show tasks in home'          =>'zobrazit úkoly "doma"',
 'validating invalid item'     =>'vyhodnocení neplatné položky',
-'insuffient rights (not in project)'=>'nedostatočné práva (není v projektu)',
+'insufficient rights (not in project)'=>'nedostatočné práva (není v projektu)',
 
 ### ../pages/proj.inc.php   ###
 'Project Template'            =>'Šablona projektu',
@@ -1356,7 +1356,7 @@ $g_lang_table= array(
 ### ../std/class_pagehandler.inc.php   ###
 'WARNING: operation aborted (%s)'=>'VAROVANIE: operácia byla prerušená (%s)',
 'FATAL: operation aborted with an fatal error (%s).'=>'ZÁVAŽNÉ: operácia byla prerušená kvoli závažnej chybe (%s).',
-'Error: Insuffient rights'    =>'Chyba: nedostatočné oprávnenia',
+'Error: insufficient rights'    =>'Chyba: nedostatočné oprávnenia',
 'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'ZÁVAŽNÉ: operácia byla prerušená kvoli závažnej databázovej chybe štruktúry (%s). K tomuto prichádza pri nekonzistentnosti databázy. Odporúčam ti vrátit se aktuálnej zálohe.',
 'NOTE: %s|Message when operation aborted'=>'OZNAM: %s',
 'ERROR: %s|Message when operation aborted'=>'CHYBA: %s',
@@ -1636,7 +1636,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Operace je prerušena (%s)',
 'Operation aborted with an fatal error (%s).'=>'Operace je prerušena kvůli závažné chybě (%s)',
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operace je prerušena kvůli závažné chybě, kterou způsobila programátorská chyba (%s)',
-'Insuffient rights'           =>'Nedostatečná práva',
+'insufficient rights'           =>'Nedostatečná práva',
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operace je prerušena kvůli závažné chybě databáze (%s). K tomuto prichádza pri nekonzistentnosti databázy. Odporúčam ti vrátit se aktuálnej zálohe.',
 '%s|Message when operation aborted'=>'%s',
 

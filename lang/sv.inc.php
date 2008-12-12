@@ -147,7 +147,7 @@ $g_lang_table= array(
 'Theme|Formlabel'             =>'Tema',  # line 161
 
 ### ../pages/comment.inc.php   ###
-'insuffient rights'           =>'otillräckliga rättighter',  # line 237
+'insufficient rights'           =>'otillräckliga rättighter',  # line 237
 
 ### ../db/class_task.inc.php   ###
 'Short'                       =>'Förkortning',  # line 21
@@ -175,7 +175,7 @@ $g_lang_table= array(
 ### ../db/class_project.inc.php   ###
 'show tasks in home'          =>'visa uppgifter på startsidan',  # line 75
 'validating invalid item'     =>'kontrollerar felaktiga poster',  # line 1191
-'insuffient rights (not in project)'=>'otillräckliga rättigheter (ej i projekt)',  # line 1203
+'insufficient rights (not in project)'=>'otillräckliga rättigheter (ej i projekt)',  # line 1203
 
 ### ../pages/proj.inc.php   ###
 'Project Template'            =>'Projektmall',  # line 1416
@@ -1293,7 +1293,7 @@ $g_lang_table= array(
 ### ../std/class_pagehandler.inc.php   ###
 'WARNING: operation aborted (%s)'=>'VARNING: operationen avbröts (%s)',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'Operationen avbröts med ett fatalt fel (%s).',  # line 594
-'Error: Insuffient rights'    =>'FEL: otillräckliga rättigheter',  # line 597
+'Error: insufficient rights'    =>'FEL: otillräckliga rättigheter',  # line 597
 'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operationen avbröts med ett fatalt databas fel (%s). Detta kan bero på inkompabilitet i databasen. Vi rekommenderar att återställa till en fungerande backup.',  # line 600
 'NOTE: %s|Message when operation aborted'=>'%s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'FEL: %s',  # line 606
@@ -1584,7 +1584,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Operationen avbröts (%s)',  # line 676
 'Operation aborted with an fatal error (%s).'=>'Operationen avbröts med ett fatalt fel (%s).',  # line 679
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operationen avbröts med ett fatalt fel som orsakades av ett programmerings fel (%s)',  # line 682
-'Insuffient rights'           =>'Otillräckliga rättighter',  # line 688
+'insufficient rights'           =>'Otillräckliga rättighter',  # line 688
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operationen avbröts med ett fatalt databas fel (%s). Detta kan bero på inkompabilitet i databasen. Vi rekommenderar att återställa till en fungerande backup.',  # line 692
 
 ### ../std/common.inc.php   ###
@@ -1961,7 +1961,7 @@ $g_lang_table= array(
 'Operation aborted (%s)' =>'Operationen avbröts (%s)', # line 687
 'Operation aborted with an fatal error (%s).'=>'Operationen avbröts med ett fatalt fel (%s)', # line 690
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operationen avbröts med ett fatalt fel som orsakades av ett programmeringsfel (%s)', # line 693
-'Insuffient rights' =>'Otillräckliga rättighter', # line 702
+'insufficient rights' =>'Otillräckliga rättighter', # line 702
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operationen avbröts med ett fatalt databas fel (%s). Detta kan bero på inkompabilitet i databasen. Vi rekommenderar att återställa till en fungerande backup', # line 706
 
 

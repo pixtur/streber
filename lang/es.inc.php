@@ -153,7 +153,7 @@ $g_lang_table= array(
 'Theme|Formlabel'             =>'Tema',  # line 161
 
 ### ../pages/comment.inc.php   ###
-'insuffient rights'           =>'carece de permisos',  # line 237
+'insufficient rights'           =>'carece de permisos',  # line 237
 
 ### ../db/class_task.inc.php   ###
 'Short'                       =>'Corto',  # line 21
@@ -185,7 +185,7 @@ $g_lang_table= array(
 'show tasks in home'          =>'mostrar tareas al inicio',  # line 75
 //***
 'validating invalid item'     =>'validando item inválidos',  # line 1191
-'insuffient rights (not in project)'=>'Permisos insuficientes (no pertenece al proyecto)',  # line 1203
+'insufficient rights (not in project)'=>'Permisos insuficientes (no pertenece al proyecto)',  # line 1203
 
 ### ../pages/proj.inc.php   ###
 'Project Template'            =>'Plantilla del proyecto',  # line 1416
@@ -1316,7 +1316,7 @@ $g_lang_table= array(
 ### ../std/class_pagehandler.inc.php   ###
 'WARNING: operation aborted (%s)'=>'AVISO: Operación abortada',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'FATAL: Operación abortada con error fatal ',  # line 594
-'Error: Insuffient rights'    =>'ERROR: Derechos insuficientes',  # line 597
+'Error: insufficient rights'    =>'ERROR: Derechos insuficientes',  # line 597
 'NOTE: %s|Message when operation aborted'=>'NOTA: %s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'ERROR: &s',  # line 606
 
@@ -1825,7 +1825,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Operación abortada (%s)',  # line 687
 'Operation aborted with an fatal error (%s).'=>'Operación abortada con error fatal (%s)',  # line 690
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Operación abortada con error fatal (%s) provocado por un error de programación',  # line 693
-'Insuffient rights'           =>'Permisos insuficientes',  # line 702
+'insufficient rights'           =>'Permisos insuficientes',  # line 702
 
 ### ../std/common.inc.php   ###
 'only one item expected.'     =>'Solo se esperaba un item.',  # line 345
