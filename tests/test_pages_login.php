@@ -71,12 +71,11 @@ class TestPagesLogin extends WebTestCase {
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
 
-        #$result= $this->get("$g_streber_url");
-        #print "<pre>" . htmlEntities($result) . "</pre>";
         $this->assertWantedPattern('<body class="home">',  'check we are at home');
 
         ###
-        $this->assertTrue( $this->clickLink( 'Peter Manage'));
+        $this->assertTrue( $this->clickLink( 'Peter Manage <x>'));
+        $this->assertWantedPattern( '<body class="personView">');
         $this->assertTrue( $this->clickLink('Edit profile'));
 
         ### can't save if not identical
@@ -86,13 +85,13 @@ class TestPagesLogin extends WebTestCase {
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertWantedPattern('<body class="personEdit">',     'check we are still editing');
 
-        ### can't save if not identical
+        ### save new password
         $this->assertTrue( $this->setField('person_password1',      'pm_secret_new'));
         $this->assertTrue( $this->setField('person_password2',      'pm_secret_new') );
         $this->assertTrue( $this->clickSubmit('Submit'));
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/<body class="personEdit">/',     'check we are still editing');
-        $this->assertWantedPattern('<body class="home">',     'check we are no longer editing');
+        $this->assertNoUnwantedPattern('<body class="personEdit">',     'check we are no longer editing');
 
         ### Try to login with new password
         $this->assertTrue( $this->clickLink('Logout'));

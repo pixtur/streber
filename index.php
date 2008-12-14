@@ -62,6 +62,7 @@ if(file_exists('customize.inc.php')) {
 */
 if(getServerVar('HTTP_USER_AGENT') == 'streber_unit_tester') {
     confChange('DB_TABLE_PREFIX', 'test_' . confGet('DB_TABLE_PREFIX'));
+    confChange('LOG_LEVEL', '');    
 }
 
 ### start output-buffering? ###

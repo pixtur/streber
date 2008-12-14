@@ -24,5 +24,5 @@ confChange('TASKDETAILS_IN_SIDEBOARD', true);
 #confChange('SMTP','mail.yourdomain.de');
 
 confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
-confChange('USE_FIREPHP', true)
+confChange('USE_FIREPHP', true);
 ?>

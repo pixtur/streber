@@ -271,7 +271,7 @@ function parse_mysql_dump($url, $table_prefix, $sql_obj)
     $query = "";
 
     foreach($file_content as $sql_line){
-        if(trim($sql_line) != "" && strpos($sql_line, "--") === false){
+        if(trim($sql_line) != "" && strpos($sql_line, "--") === FALSE){
             $query .= $sql_line;
             ### query complete ###
             if(preg_match("/;\s*$/", $sql_line)){
@@ -296,11 +296,10 @@ function parse_mysql_dump($url, $table_prefix, $sql_obj)
                     $create_string_new= str_replace($table_name_old, $table_prefix.$table_name_old, $create_string_old);
                     $query= str_replace($create_string_old, $create_string_new, $query);
                 }
-                
 
-                ### send query ###
+                ### print errors ###
                 if(!$result = $sql_obj->execute($query)) {
-                    print $query;
+                    trace($sql_obj);
                     return false;
                 }
                 $query = "";

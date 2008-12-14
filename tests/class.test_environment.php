@@ -30,6 +30,7 @@ class TestEnvironment extends BaseObject {
         $sql_obj= $dbh->connect();
 
         if(!parse_mysql_dump($sql_setup_file, confGet('DB_TABLE_PREFIX_UNITTEST'), $sql_obj) ) {
+            #trace("error");
             print "error setting up database structure";
             print "mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error."</pre>";
         }

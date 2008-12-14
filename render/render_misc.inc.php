@@ -105,6 +105,7 @@ class RenderException extends Exception
  * convert url to external link-tag (remove http:/ and reduced to reasonable length)
  *
  * add http:/ if missing
+ * escapes html entities and returns save string
  */
 function url2linkExtern($url, $show=NULL, $maxlen=20) {
     if(!preg_match("/^http:\/\//",$url)) {

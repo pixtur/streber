@@ -541,14 +541,13 @@ class DbProjectItem extends DbItem {
         */
         else if(is_int($id_or_array) || (is_string($id_or_array) and $id_or_array !== "0")){
 
-            parent::__construct();  # call constructor to initialize members from field-array
+            parent::__construct();          # call constructor to initialize members from field-array
             $id=intval($id_or_array);       # construction-param was an id
             if(!$id) {
                 return;
             }
 
             global $g_item_fields;
-
 
             #--- try to find in item-table ---
             {

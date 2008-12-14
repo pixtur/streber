@@ -1,5 +1,10 @@
 streber-version-history
 
+- fixed double escaping html symbols in company list
+- fixed double escaping html symbols in user email addresses
+- fixed minor bug when editing empty bookmark list
+- fixed problem with unit test fixture setup
+
 - first unit tests working with fixtures
 - some tests of login/logout/change password and correct escaping of user data
 - fixed unescaped userdata in person title

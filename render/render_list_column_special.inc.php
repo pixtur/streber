@@ -175,7 +175,7 @@ class ListBlockColLinkExtern extends ListBlockCol
         $value=$obj->$key;
         if($value) {
 
-            $format= url2linkExtern(asHtml($value));
+            $format= url2linkExtern( $value);
     		print "<td class='$this->style $style_overwrite'>". $format ."</td>";
         }
         else {

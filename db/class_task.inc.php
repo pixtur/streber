@@ -277,7 +277,7 @@ foreach($filters_str as $fs=>$value) {
     */
     static function getVisibleById($id)
     {
-        if($id && $t= Task::getById($id)) {
+        if($id && $t= Task::getById(intval($id))) {
             if($p= Project::getById($t->project)) {
                 if($p->validateViewItem($t)) {
                     return $t;
