@@ -80,8 +80,6 @@ function TaskView()
 
             }
 
-
-
             $page->add_function(new PageFunction(array(
                 'target'=>'tasksMoveToFolder',
                 'params'=>array('tsk'=>$task->id),
@@ -189,6 +187,22 @@ function TaskView()
                         'name'      =>__('Remove Bookmark'),
                     )));
                 }
+            }
+
+            if(
+               ($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS)
+                && 
+                ($project->settings & PROJECT_SETTING_ENABLE_EFFORTS)
+            ) {
+                $page->add_function(new PageFunction(array(
+                    'target'=>'effortNew',
+                    'params'=>array(
+                        'parent_task'=>$task->id,
+
+                    ),
+                    'icon'=>'effort',
+                    'name'=>__('Book Effort'),
+                )));
             }
 
         }
@@ -774,7 +788,6 @@ class Block_task_quickedit extends PageBlock
                         $team[$p->name]= $p->id;
                     }
 
-
                     ### create drop-down-lists ###
                     $count_new=0;
                     $count_all=0;
@@ -795,7 +808,6 @@ class Block_task_quickedit extends PageBlock
                             unset($team[$ap->name]);
                         }
                     }
-
 
                     ### add empty drop-downlist for new assignments ###
                     $str_label  = ($count_all == 0)
@@ -832,7 +844,6 @@ class Block_task_quickedit extends PageBlock
                     );
                     $tab->add(new Form_Dropdown('task_estimated',__("Estimated time"),$ar,  $task->estimated));
                     $tab->add(new Form_Dropdown('task_estimated_max',__("Estimated worst case"),$ar,  $task->estimated_max));
-
                 }
 
                 ### completion ###
@@ -886,14 +897,15 @@ class Block_task_quickedit extends PageBlock
 
             ### some required hidden fields for correct data passing ###
             $form->add(new Form_HiddenField('tsk','',$task->id));
+            $form->add(new Form_HiddenField('comment','',$comment->id));
+
+            if($return=get('return')) {
+                $form->add(new Form_HiddenField('return','', asHtml($return)));
+            }
+
             echo($form);
 
             $PH->go_submit= 'taskEditSubmit';
-            echo "<input type=hidden name='comment' value='$comment->id'>";
-
-            if($return=get('return')) {
-                echo "<input type=hidden name='return' value='$return'>";
-            }
 
 
             $this->render_blockEnd();
@@ -986,7 +998,11 @@ function taskViewAsDocu()
                 }
             }
 
-            if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS) {
+            if(
+               ($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS)
+                && 
+                ($project->settings & PROJECT_SETTING_ENABLE_EFFORTS)
+            ) {
                 $page->add_function(new PageFunction(array(
                     'target'=>'effortNew',
                     'params'=>array(

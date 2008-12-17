@@ -611,7 +611,7 @@ class Auth
             $crawlers= array(
                 "/HTTrack/",
                 "/Mozilla\/4.0 \(compatible; MSIE 6.0; Windows NT 5.1; SV1\)/",  #'', #(Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)) 
-                "/Mail\.Ru/1.0/",
+                "/Mail\.Ru\/1.0/",
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {

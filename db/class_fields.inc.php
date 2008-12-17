@@ -25,7 +25,12 @@
 * classes, but refering to existing function allows to overwrite already defined classes by
 * new themes.
 *
-* Mental note: I doubt that overwriting an existing function is easier than overwriting a class-method.
+* Mental note: I doubt that overwriting an existing function is easier than overwriting a 
+* class-method.
+*
+* - Also note the general distinction between Fields and Form-Elements. With some distances
+*   this separation between model/view seems to be overly complex and should be refactored very soon.
+*
 *
 * @see      FieldHidden, FieldString
 * @usedby   all derived DbItem-classes (task, person, etc.)
@@ -42,7 +47,7 @@ class Field
     public      $invalid;                   # current value marked as invalid (use for rerendering forms with invalid data)
 
     public      $func_renderToForm;         # function name for rendering the field / automatically defined
-    public      $func_parseForm;            # functino name for parse entered data / automatically defined
+    public      $func_parseForm;            # function name for parse entered data / automatically defined
     public      $func_renderListHead;
     public      $func_renderListRow;
     public      $func_getFormElement;

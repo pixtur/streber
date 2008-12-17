@@ -90,14 +90,14 @@ new PageHandleFunc(array('id'=>'itemsSetPubLevel',
 ));
 
 new PageHandleFunc(array('id'=>'itemsAsBookmark',
-	'req'=>'pages/item.inc.php',
+	'req'=>'pages/bookmark.inc.php',
     'title'=>__('Mark as bookmark'),
 
     'test'=>'yes',
     'test_params'=>array('item'=>'_itemView_',),
 ));
 new PageHandleFunc(array('id'=>'itemsRemoveBookmark',
-	'req'=>'pages/item.inc.php',
+	'req'=>'pages/bookmark.inc.php',
     'title'=>__('Remove bookmark'),
 
     'test'=>'yes',
@@ -116,7 +116,7 @@ new PageHandleFunc(array('id'=>'itemsRemoveNotification',
     'test_params'=>array('item'=>'_itemView_',),
 ));
 new PageHandleForm(array('id'=>'itemBookmarkEdit',
-    'req'=>'pages/item.inc.php',
+    'req'=>'pages/bookmark.inc.php',
     'title'=>__('Edit bookmarks'),
 	'valid_params'=>array(),
     'test'=>'yes',
@@ -124,12 +124,12 @@ new PageHandleForm(array('id'=>'itemBookmarkEdit',
 ));
 
 new PageHandleSubm(array('id'=>'itemBookmarkEditSubmit',
-    'req'=>'pages/item.inc.php',
+    'req'=>'pages/bookmark.inc.php',
     'valid_params'=>array(),
 ));
 
 new PageHandleForm(array('id'=>'itemBookmarkEditMultiple',
-    'req'=>'pages/item.inc.php',
+    'req'=>'pages/bookmark.inc.php',
     'title'=>__('Edit multiple bookmarks'),
 	'valid_params'=>array(),
     'test'=>'yes',
@@ -137,7 +137,7 @@ new PageHandleForm(array('id'=>'itemBookmarkEditMultiple',
 ));
 
 new PageHandleSubm(array('id'=>'itemBookmarkEditMultipleSubmit',
-    'req'=>'pages/item.inc.php',
+    'req'=>'pages/bookmark.inc.php',
     'valid_params'=>array(),
 ));
 

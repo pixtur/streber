@@ -693,18 +693,12 @@ class FormatBlockHeadline extends FormatBlock
 
         $blocks= FormatBlockSub::parseBlocks($blocks);
 
-
-
         $blocks= FormatBlockMonospaced::parseBlocks($blocks);
         $blocks= FormatBlockEmphasize::parseBlocks($blocks);
 
         $blocks= FormatBlockLink::parseBlocks($blocks);
         $blocks= FormatBlockHref::parseBlocks($blocks);
         $this->children= FormatBlockItemId::parseBlocks($blocks);
-
-
-        #$tmp= array(new FormatBlock($str));
-        #$this->children= FormatBlockStrike::parseBlocks($tmp);
 
         $this->str= '';
         $this->level=$level+1;
@@ -717,10 +711,10 @@ class FormatBlockHeadline extends FormatBlock
         foreach($this->children as $b) {
             $buffer.= $b->renderAsHtml();
         }
+        $buffer.= "<a name='" . asIdentifier($b->renderAsHtml()) .  "'  href='#"  . asIdentifier($b->renderAsHtml())  . "' title='" . __("Link to this chapter")  . "'  class='anchor' >π</a>";        
         $buffer.= "</h$this->level>";
         return $buffer;
     }
-
 
     /**
     * the following code is not really brilliant. Too lazy to optimize
@@ -789,7 +783,6 @@ class FormatBlockHeadline extends FormatBlock
         $blocks= $blocks_new;
         $blocks_new= array();
 
-
         foreach($blocks as $b) {
             if($b->str && !($b instanceof FormatBlockCode)) {
 
@@ -827,10 +820,7 @@ class FormatBlockHeadline extends FormatBlock
                 $text= $b->str;
                 $found= false;
                 while($text) {
-
-                    #if(preg_match("/^(.*?)\n?([^\n]+)\n===+\s*(\n.*)/s", $text, $matches)) {
                     if(preg_match("/(.*?)([^\n\r]+)\r?\n---+[\t]*[\r\n]+(.*)/s", $text, $matches)) {
-                    #if(preg_match("/(.*?)([^\n\r]+)[\r\n]+---+[ \t]*[\r\n]+(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockHeadline($matches[2],2);
                         $text= $matches[3];

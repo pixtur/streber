@@ -29,8 +29,8 @@ function taskNewBug()
         'task_category' =>TCATEGORY_BUG
         );
     addRequestVars($foo);
-	TaskNew();
-	exit();
+    TaskNew();
+    exit();
 }
 
 /**
@@ -45,8 +45,8 @@ function taskNewDocu()
         'show_folder_as_documentation' => 1,
         );
     addRequestVars($foo);
-	TaskNew();
-	exit();
+    TaskNew();
+    exit();
 }
 
 
@@ -315,8 +315,8 @@ function taskEdit($task=NULL)
     {
         $page= new Page(array('use_jscalendar'=>true,'autofocus_field'=>'task_name'));
 
-    	initPageForTask($page, $task, $project);
-    	
+        initPageForTask($page, $task, $project);
+        
         if($task->id) {
             $page->title=$task->name;
             $page->title_minor=$task->short;
@@ -349,8 +349,8 @@ function taskEdit($task=NULL)
     ### write form #####
     {
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
-		
-		global $auth;
+        
+        global $auth;
         global $REPRODUCIBILITY_VALUES;
 
         global $g_prio_names;
@@ -735,13 +735,13 @@ function taskEdit($task=NULL)
             }
         }
 
-		## internal area ##
-		{
-			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
-				$tab->add($task->fields['calculation']->getFormElement(&$task));
-			}
-		}
+        ## internal area ##
+        {
+            if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+                $tab_group->add($tab=new Page_Tab("internal",__("Internal")));
+                $tab->add($task->fields['calculation']->getFormElement(&$task));
+            }
+        }
 
 
         /**
@@ -785,7 +785,7 @@ function taskEdit($task=NULL)
     }
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -900,19 +900,19 @@ function taskEditSubmit()
             }
         }
 
-		### only insert the comment, when comment name or description are valid
-		if(get('comment_name') || get('comment_description')) {
+        ### only insert the comment, when comment name or description are valid
+        if(get('comment_name') || get('comment_description')) {
 
-    		require_once(confGet('DIR_STREBER') . 'pages/comment.inc.php');
-    		$valid_comment= true;
+            require_once(confGet('DIR_STREBER') . 'pages/comment.inc.php');
+            $valid_comment= true;
 
-		    ### new object? ###
-	        $comment= new Comment(array(
-	            'name'=> get('comment_name'),
-	            'description' =>get('comment_description'),
+            ### new object? ###
+            $comment= new Comment(array(
+                'name'=> get('comment_name'),
+                'description' =>get('comment_description'),
                 'project' => $task->project,
                 'task' => $task->id
-	        ));
+            ));
 
             if(confGet('REJECT_SPAM_CONTENT') && $auth->cur_user->id == confGet('ANONYMOUS_USER')) {
                 $propability= (isSpam($comment->description) + isSpam($comment->name)) * 0.5;
@@ -922,28 +922,28 @@ function taskEditSubmit()
                 }
             }
 
-		    ### write to db ###
-		    if($valid_comment) {
-		        if(!$comment->insert()) {
-		            new FeedbackWarning(__("Failed to add comment"));
-		        }
-		        else {
-        		    ### change task update modification date ###
-        		    if(isset($task)) {
-        		        ### Check if now longer new ###
-        		        if($task->status == STATUS_NEW) {
-        		            global $auth;
-        		            if($task->created < $auth->cur_user->last_login) {
-        		                $task->status = STATUS_OPEN;
-        		            }
-        		        }
-        		        $task->update(array('modified','status'));
-        		    }
+            ### write to db ###
+            if($valid_comment) {
+                if(!$comment->insert()) {
+                    new FeedbackWarning(__("Failed to add comment"));
+                }
+                else {
+                    ### change task update modification date ###
+                    if(isset($task)) {
+                        ### Check if now longer new ###
+                        if($task->status == STATUS_NEW) {
+                            global $auth;
+                            if($task->created < $auth->cur_user->last_login) {
+                                $task->status = STATUS_OPEN;
+                            }
+                        }
+                        $task->update(array('modified','status'));
+                    }
 
-		            $added_comment= true;
-    		    }
-		    }
-		}
+                    $added_comment= true;
+                }
+            }
+        }
     }
 
 
@@ -1038,34 +1038,34 @@ function taskEditSubmit()
         }
 
         $new_task_assignments= array();                     # store assigments after(!) validation
-		$forwarded = 0;
-		$forward_comment = '';
-		$old_task_assignments = array();
-		
+        $forwarded = 0;
+        $forward_comment = '';
+        $old_task_assignments = array();
+        
         if(isset($task_assignments)) {
             foreach($task_assignments as $id=>$t_old) {
                 $id_new= get('task_assigned_to_'.$id);
-				$forward_state = get('task_forward_to_'.$id);
-				if($forward_state){
-					$forwarded = 1;
-				}
-				else{
-					$forwarded = 0;
-				}
-				$forward_comment = get('task_forward_comment_to_'.$id);
-				
+                $forward_state = get('task_forward_to_'.$id);
+                if($forward_state){
+                    $forwarded = 1;
+                }
+                else{
+                    $forwarded = 0;
+                }
+                $forward_comment = get('task_forward_comment_to_'.$id);
+                
                 if($id_new === NULL) {
                     log_message("failure. Can't change no longer existing assigment (person-id=$id item-id=$t_old->id)", LOG_MESSAGE_DEBUG);
                     #$PH->abortWarning("failure. Can't change no longer existing assigment",ERROR_NOTE);
                     continue;
                 }
-				
+                
                 if($id == $id_new) {
-					if($tp = TaskPerson::getTaskPersons(array('person'=>$id, 'task'=>$task->id))){
-						$tp[0]->forward = $forwarded;
-						$tp[0]->forward_comment = $forward_comment;
-						$old_task_assignments[] = $tp[0];
-					}
+                    if($tp = TaskPerson::getTaskPersons(array('person'=>$id, 'task'=>$task->id))){
+                        $tp[0]->forward = $forwarded;
+                        $tp[0]->forward_comment = $forward_comment;
+                        $old_task_assignments[] = $tp[0];
+                    }
                     #echo " [$id] {$team[$id]->name} still assigned<br>";
                     continue;
                 }
@@ -1085,7 +1085,7 @@ function taskEditSubmit()
                     $PH->abortWarning("failure during form-value passing",ERROR_BUG);
                 }
                 #echo " [$id] assignment changed from {$team[$id]->name} to {$team[$id_new]->name}<br>";
-	
+    
                 $t_old->comment = sprintf(__("unassigned to %s","task-assignment comment"),$team[$id_new]->name);
                 $t_old->update();
                 $t_old->delete();
@@ -1094,8 +1094,8 @@ function taskEditSubmit()
                     'task'  => $task->id,
                     'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $team[$id]->name),
                     'project'=>$project->id,
-					'forward'=>$forwarded,
-					'forward_comment'=>$forward_comment,
+                    'forward'=>$forwarded,
+                    'forward_comment'=>$forward_comment,
                 ));
 
                 $new_task_assignments[]=$new_assignment;
@@ -1107,24 +1107,24 @@ function taskEditSubmit()
         $count=0;
         while($id_new= get('task_assign_to_'.$count)) {
             
-			$forward_state = get('task_forward_to_'.$count);
-			if($forward_state){
-				$forwarded = 1;
-			}
-			else{
-				$forwarded = 0;
-			}
-			$forward_comment = get('task_forward_comment_to_'.$count);
-			
-			$count++;
-			
+            $forward_state = get('task_forward_to_'.$count);
+            if($forward_state){
+                $forwarded = 1;
+            }
+            else{
+                $forwarded = 0;
+            }
+            $forward_comment = get('task_forward_comment_to_'.$count);
+            
+            $count++;
+            
             ### check if already assigned ###
             if(isset($task_assignments[$id_new])) {
-				if($tp = TaskPerson::getTaskPersons(array('person'=>$id_new,'task'=>$task->id))){
-					$tp[0]->forward = $forwarded;
-					$tp[0]->forward_comment = $forward_comment;
-					$old_task_assignments[] = $tp[0];
-				}
+                if($tp = TaskPerson::getTaskPersons(array('person'=>$id_new,'task'=>$task->id))){
+                    $tp[0]->forward = $forwarded;
+                    $tp[0]->forward_comment = $forward_comment;
+                    $old_task_assignments[] = $tp[0];
+                }
 
                 #new FeedbackMessage(sprintf(__("task was already assigned to %s"),$team[$id_new]->name));
             }
@@ -1138,8 +1138,8 @@ function taskEditSubmit()
                     'task'  => $task->id,
                     'comment'=>"",
                     'project'=>$project->id,
-					'forward'=>$forwarded,
-					'forward_comment'=>$forward_comment,
+                    'forward'=>$forwarded,
+                    'forward_comment'=>$forward_comment,
                 ));
 
                 /**
@@ -1154,7 +1154,7 @@ function taskEditSubmit()
             }
         }
     }
-	
+    
     if($task->isOfCategory(array(TCATEGORY_VERSION, TCATEGORY_MILESTONE))) {
         if($is_released=get('task_is_released')) {
             if(!is_null($is_released)) {
@@ -1249,13 +1249,13 @@ function taskEditSubmit()
     }
 
 
-	### repeat form if invalid data ###
-	if(!$is_ok) {
+    ### repeat form if invalid data ###
+    if(!$is_ok) {
         $PH->show('taskEdit',NULL,$task);
-		exit();
-	}
+        exit();
+    }
 
-	#--- write to database -----------------------------------------------------------------------
+    #--- write to database -----------------------------------------------------------------------
 
     #--- be sure parent-task is folder ---
     if($parent_task) {
@@ -1271,11 +1271,11 @@ function taskEditSubmit()
             $parent_task->category= TCATEGORY_FOLDER;
             $parent_task->is_folder= 1;
             if($parent_task->update()) {
-            	new FeedbackMessage(__("Turned parent task into a folder. Note, that folders are only listed in tree"));
+                new FeedbackMessage(__("Turned parent task into a folder. Note, that folders are only listed in tree"));
             }
             else {
-            	trigger_error(__("Failed, adding to parent-task"),E_USER_WARNING);
-            	$PH->abortWarning(__("Failed, adding to parent-task"));
+                trigger_error(__("Failed, adding to parent-task"),E_USER_WARNING);
+                $PH->abortWarning(__("Failed, adding to parent-task"));
 
             }
         }
@@ -1427,10 +1427,10 @@ function taskEditSubmit()
         foreach($new_task_assignments as $nta) {
             $nta->insert();
         }
-		
-		foreach($old_task_assignments as $ota){
-			$ota->update();
-		}
+        
+        foreach($old_task_assignments as $ota){
+            $ota->update();
+        }
 
         new FeedbackMessage(sprintf(__("Changed %s %s with ID %s","type,link,id"),  $task->getLabel(), $task->getLink(false),$task->id));
         $task->update();
@@ -1440,22 +1440,22 @@ function taskEditSubmit()
 
     ### add any recently resolved tasks if this is a just released version  ###
     if($task->category == TCATEGORY_VERSION && $was_category != TCATEGORY_VERSION) {
-	    if($resolved_tasks= Task::getAll(array(
-	        'project'           => $task->project,
-	        'status_min'        => 0,
-	        'status_max'        => 10,
-	        'resolved_version'  => RESOLVED_IN_NEXT_VERSION,
-	    ))) {
-	        foreach($resolved_tasks as $rt) {
+        if($resolved_tasks= Task::getAll(array(
+            'project'           => $task->project,
+            'status_min'        => 0,
+            'status_max'        => 10,
+            'resolved_version'  => RESOLVED_IN_NEXT_VERSION,
+        ))) {
+            foreach($resolved_tasks as $rt) {
                 $rt->resolved_version= $task->id;
                 $rt->update(array('resolved_version'));
-	        }
-	        new FeedbackMessage(sprintf(__('Marked %s tasks to be resolved in this version.'), count($resolved_tasks)));
-	    }
+            }
+            new FeedbackMessage(sprintf(__('Marked %s tasks to be resolved in this version.'), count($resolved_tasks)));
+        }
     }
 
-	### notify on change ###
-	$task->nowChangedByUser();
+    ### notify on change ###
+    $task->nowChangedByUser();
 
     ### create another task ###
     if(get('create_another')) {
@@ -1475,7 +1475,7 @@ function taskEditSubmit()
         ));
 
 
-		$PH->show('taskEdit',array('tsk'=>$newtask->id),$newtask);
+        $PH->show('taskEdit',array('tsk'=>$newtask->id),$newtask);
     }
     else {
         ### display taskView ####
@@ -1572,7 +1572,7 @@ function TasksMoveToFolder()
                 else {
                     $task->parent_task= $target_id;
                     $task->update();
-					$task->nowChangedByUser();
+                    $task->nowChangedByUser();
                 }
             }
             else {
@@ -1604,7 +1604,7 @@ function TasksMoveToFolder()
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>false));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type= __("Edit tasks");
         $page->title="$project->name";
         $page->title_minor=__("Select folder to move tasks into");
@@ -1666,7 +1666,7 @@ function TasksMoveToFolder()
 
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 
 }
 
@@ -1691,7 +1691,7 @@ function TasksDelete()
         $tsk=$ids[0];
         if(!$task= Task::getEditableById($tsk)) {
             $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
-			$PH->show('home');
+            $PH->show('home');
             return;
         }
         $tasks[]= $task;
@@ -1778,7 +1778,7 @@ function TasksUndelete()
             $task->state=1;
             if($task->update()) {
                 new FeedbackMessage(sprintf(__("Task <b>%s</b> restored"),$task->name));
-				$task->nowChangedByUser();
+                $task->nowChangedByUser();
             }
             else {
                 new FeedbackMessage(sprintf(__("Failed to restore Task <b>%s</b>"),$task->name));
@@ -1862,7 +1862,7 @@ function TasksComplete()
             $task->date_closed= gmdate("Y-m-d", time());
             $task->completion=100;
             $task->update();
-			$task->nowChangedByUser();
+            $task->nowChangedByUser();
 
             ### get all subtasks ###
             if($subtasks= $task->getSubtasks()) {
@@ -1873,8 +1873,8 @@ function TasksComplete()
                         $subtask_editable->date_closed= gmdate("Y-m-d", time());
                         $subtask_editable->completion=100;
                         $subtask_editable->update();
-						$subtask_editable->nowChangedByUser();
-						$subtask_editable->resolved_version= RESOLVED_IN_NEXT_VERSION;
+                        $subtask_editable->nowChangedByUser();
+                        $subtask_editable->resolved_version= RESOLVED_IN_NEXT_VERSION;
                     }
                     else {
                         $num_errors++;
@@ -1927,7 +1927,7 @@ function TasksApproved()
             $task->date_closed = gmdate("Y-m-d", time());
             $task->completion = 100;
             $task->update();
-			$task->nowChangedByUser();
+            $task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -1972,7 +1972,7 @@ function TasksClosed()
             $task->date_closed = gmdate("Y-m-d", time());
             $task->completion = 100;
             $task->update();
-			$task->nowChangedByUser();
+            $task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -2014,7 +2014,7 @@ function TasksReopen()
             $count++;
             $task->status=STATUS_OPEN;
             $task->update();
-			$task->nowChangedByUser();
+            $task->nowChangedByUser();
         }
         else {
             $num_errors++;
@@ -2187,7 +2187,7 @@ function taskEditDescription($task=NULL)
         $PH->go_submit= 'taskEditDescriptionSubmit';
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 
 
 }
@@ -2229,12 +2229,12 @@ function taskEditDescriptionSubmit()
         new FeedbackWarning(__("Task requires name"));
     }
 
-	### repeat form if invalid data ###
-	if(!$task->name) {
+    ### repeat form if invalid data ###
+    if(!$task->name) {
         $PH->show('taskEditDescription',NULL,$task);
 
-		exit();
-	}
+        exit();
+    }
 
 
     ### write to db ###
@@ -2260,12 +2260,12 @@ function TaskViewEfforts()
 
     require_once(confGet('DIR_STREBER') . 'lists/list_efforts.inc.php');
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('task','tasks_*');
     if(!$task=Task::getVisibleById($id)) {
         $PH->abortWarning("invalid task-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array('task'=>$task->id));
@@ -2277,7 +2277,7 @@ function TaskViewEfforts()
     ### set up page ####
     {
         $page= new Page();
-    	initPageForTask($page, $task, $project);
+        initPageForTask($page, $task, $project);
 
         $page->title_minor= __("Task Efforts");
 
@@ -2290,7 +2290,7 @@ function TaskViewEfforts()
         )));
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -2309,14 +2309,14 @@ function TaskViewEfforts()
         $list->reduced_header= true;
 
         $list->render_list(&$efforts);
-	}
+    }
 
     ### 'add new task'-field ###
     $PH->go_submit='effortNew';
     echo '<input type="hidden" name="task" value="'.$id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -2350,9 +2350,9 @@ function TaskEditMultiple()
 
     $tasks= array();
 
-	$task_assignments = array();
-	$task_assignments_count = array();
-	$different_assignments = false;
+    $task_assignments = array();
+    $task_assignments_count = array();
+    $different_assignments = false;
 
     $edit_fields=array(
         'category',
@@ -2373,20 +2373,20 @@ function TaskEditMultiple()
 
             $tasks[]= $task;
 
-			## get assigned persons ##
-			if($task_persons = $task->getAssignedPersons(false))
-			{
-				$counter = 0;
-				foreach($task_persons as $tp){
-					$task_assignments[$task->id][$counter++] = $tp->id;
-				}
-				$task_assignments_count[$task->id] = count($task_persons);
-			}
-			## if nobody is assigned
-			else{
-				$task_assignments[$task->id][0] = '__none__';
-				$task_assignments_count[$task->id] = 0;
-			}
+            ## get assigned persons ##
+            if($task_persons = $task->getAssignedPersons(false))
+            {
+                $counter = 0;
+                foreach($task_persons as $tp){
+                    $task_assignments[$task->id][$counter++] = $tp->id;
+                }
+                $task_assignments_count[$task->id] = count($task_persons);
+            }
+            ## if nobody is assigned
+            else{
+                $task_assignments[$task->id][0] = '__none__';
+                $task_assignments_count[$task->id] = 0;
+            }
 
             ### check project for first task
             if(count($tasks) == 1) {
@@ -2407,17 +2407,17 @@ function TaskEditMultiple()
                     }
                 }
 
-				## check if tasks have different persons assigned ##
-				if($task_assignments_count[$tasks[0]->id] != $task_assignments_count[$task->id]){
-					$different_assignments = true;
-				}
-				else{
-					for($i = 0; $i < $task_assignments_count[$tasks[0]->id]; $i++){
-						if($task_assignments[$tasks[0]->id][$i] != $task_assignments[$task->id][$i]){
-							$different_assignments = true;
-						}
-					}
-				}
+                ## check if tasks have different persons assigned ##
+                if($task_assignments_count[$tasks[0]->id] != $task_assignments_count[$task->id]){
+                    $different_assignments = true;
+                }
+                else{
+                    for($i = 0; $i < $task_assignments_count[$tasks[0]->id]; $i++){
+                        if($task_assignments[$tasks[0]->id][$i] != $task_assignments[$task->id][$i]){
+                            $different_assignments = true;
+                        }
+                    }
+                }
             }
         }
     }
@@ -2426,12 +2426,12 @@ function TaskEditMultiple()
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
 
-    	$page->options[]= new naviOption(array(
-    	    'target_id'     =>'taskEdit',
-    	));
+        $page->options[]= new naviOption(array(
+            'target_id'     =>'taskEdit',
+        ));
 
         $page->type= __("Edit multiple tasks","Page title");
 
@@ -2607,43 +2607,43 @@ function TaskEditMultiple()
             }
         }
 
-		## assignement ##
-		{
-			$ass = array();
-			$ass_also = array();
+        ## assignement ##
+        {
+            $ass = array();
+            $ass_also = array();
 
-			## get project team ##
-			if($proj_persons = $project->getPersons()){
-				foreach($proj_persons as $pp){
-					$ass[$pp->id] = $pp->name;
-					$ass_also[$pp->id] = $pp->name;
-				}
-			}
+            ## get project team ##
+            if($proj_persons = $project->getPersons()){
+                foreach($proj_persons as $pp){
+                    $ass[$pp->id] = $pp->name;
+                    $ass_also[$pp->id] = $pp->name;
+                }
+            }
 
-			## different persons assigend? ##
-			if($different_assignments){
-				$ass['__dont_change__'] = ('-- ' . __('keep different') . ' --');
-				$form->add(new Form_Dropdown('task_assignement_diff', __('Assigned to'), array_flip($ass), '__dont_change__'));
+            ## different persons assigend? ##
+            if($different_assignments){
+                $ass['__dont_change__'] = ('-- ' . __('keep different') . ' --');
+                $form->add(new Form_Dropdown('task_assignement_diff', __('Assigned to'), array_flip($ass), '__dont_change__'));
 
-				$ass_also['__select_person__'] = ('-- ' . __('select person') . ' --');
-				$form->add(new Form_Dropdown('task_assignement_also_diff', __('Also assigned to'), array_flip($ass_also), '__select_person__'));
-			}
-			else{
-				$ass['__none__'] = ('-- ' . __('none') . ' --');
-				foreach($task_assignments[$tasks[0]->id] as $key=>$value)
-				{
-					$form->add(new Form_Dropdown('task_assign_to_'.$task_assignments[$tasks[0]->id][$key], __('Assigned to'), array_flip($ass), $task_assignments[$tasks[0]->id][$key]));
-				}
+                $ass_also['__select_person__'] = ('-- ' . __('select person') . ' --');
+                $form->add(new Form_Dropdown('task_assignement_also_diff', __('Also assigned to'), array_flip($ass_also), '__select_person__'));
+            }
+            else{
+                $ass['__none__'] = ('-- ' . __('none') . ' --');
+                foreach($task_assignments[$tasks[0]->id] as $key=>$value)
+                {
+                    $form->add(new Form_Dropdown('task_assign_to_'.$task_assignments[$tasks[0]->id][$key], __('Assigned to'), array_flip($ass), $task_assignments[$tasks[0]->id][$key]));
+                }
 
-				$ass_also['__select_person__'] = ('-- ' . __('select person') . ' --');
-				$form->add(new Form_Dropdown('task_assign_to_0', __('Also assigned to'), array_flip($ass_also), '__select_person__'));
-			}
-		}
+                $ass_also['__select_person__'] = ('-- ' . __('select person') . ' --');
+                $form->add(new Form_Dropdown('task_assign_to_0', __('Also assigned to'), array_flip($ass_also), '__select_person__'));
+            }
+        }
 
         foreach($tasks as $t) {
             $form->add(new Form_HiddenField("tasks_{$t->id}_chk",'',1));
         }
-		$form->add(new Form_HiddenField('different_ass','',$different_assignments));
+        $form->add(new Form_HiddenField('different_ass','',$different_assignments));
         #$form->add(new Form_HiddenField('task_project','',$project->id));
 
         echo($form);
@@ -2655,7 +2655,7 @@ function TaskEditMultiple()
     }
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 
     exit();
 }
@@ -2680,9 +2680,9 @@ function taskEditMultipleSubmit()
 
     $count=0;
     $errors=0;
-	$number = get('number');
+    $number = get('number');
 
-	### cancel? ###
+    ### cancel? ###
     if(get('form_do_cancel')) {
         if(!$PH->showFromPage()) {
             $PH->show('home');
@@ -2699,98 +2699,98 @@ function taskEditMultipleSubmit()
 
 
             ### status ###
-			if($count == 1){
-				if(!$project = Project::getVisibleById($task->project)) {
+            if($count == 1){
+                if(!$project = Project::getVisibleById($task->project)) {
                     $PH->abortWarning('could not get project');
                 }
 
-				$team= array();
-				foreach($project->getPersons() as $p) {
-					$team[$p->id]= $p;
-				}
-			}
+                $team= array();
+                foreach($project->getPersons() as $p) {
+                    $team[$p->id]= $p;
+                }
+            }
 
             ### assignment ###
             {
-    			$task_assigned_persons = array();
-    			$task_assignments = array();
-    			$task_persons_overwrite = array();
-    			$task_persons_new = array();
-    			$task_persons_delete = array();
+                $task_assigned_persons = array();
+                $task_assignments = array();
+                $task_persons_overwrite = array();
+                $task_persons_new = array();
+                $task_persons_delete = array();
 
-    			## previous assigend persons ##
-    			if($task_persons = $task->getAssignedPersons(false))
-    			{
-    				foreach($task_persons as $tp){
-    					$task_assigned_persons[$tp->id] = $tp;
-    				}
-    			}
+                ## previous assigend persons ##
+                if($task_persons = $task->getAssignedPersons(false))
+                {
+                    foreach($task_persons as $tp){
+                        $task_assigned_persons[$tp->id] = $tp;
+                    }
+                }
 
-    			## previous assignements ##
-    			if($task_assign = $task->getAssignments())
-    			{
-    				foreach($task_assign as $ta){
-    					$task_assignments[$ta->person] = $ta;
-    				}
-    			}
+                ## previous assignements ##
+                if($task_assign = $task->getAssignments())
+                {
+                    foreach($task_assign as $ta){
+                        $task_assignments[$ta->person] = $ta;
+                    }
+                }
 
-    			## different assigned persons ##
-    			## overwrite ?? ##
-    			$ass1 = get('task_assignement_diff');
-    			if($ass1 && $ass1 != '__dont_change__'){
-    				$task_persons_overwrite[] = $ass1;
-    				foreach($task_assignments as $key=>$value){
-    					$task_persons_delete[] = $value;
-    				}
-    				$change = true;
-    			}
+                ## different assigned persons ##
+                ## overwrite ?? ##
+                $ass1 = get('task_assignement_diff');
+                if($ass1 && $ass1 != '__dont_change__'){
+                    $task_persons_overwrite[] = $ass1;
+                    foreach($task_assignments as $key=>$value){
+                        $task_persons_delete[] = $value;
+                    }
+                    $change = true;
+                }
 
-    			## new ?? ##
-    			$ass2 = get('task_assignement_also_diff');
-    			if($ass2 && $ass2 != '__select_person__'){
-    				$task_persons_new[] = $ass2;
-    				$change = true;
-    			}
+                ## new ?? ##
+                $ass2 = get('task_assignement_also_diff');
+                if($ass2 && $ass2 != '__select_person__'){
+                    $task_persons_new[] = $ass2;
+                    $change = true;
+                }
 
-    			$different = get('different_ass');
-    			if(isset($different) && !$different){
-    				if(isset($task_assignments) && count($task_assignments) != 0){
-    					foreach($task_assignments as $tid=>$t_old){
-    						$id_new = get('task_assign_to_'.$tid);
-    						## no changes ##
-    						if($tid == $id_new){
-    							continue;
-    						}
+                $different = get('different_ass');
+                if(isset($different) && !$different){
+                    if(isset($task_assignments) && count($task_assignments) != 0){
+                        foreach($task_assignments as $tid=>$t_old){
+                            $id_new = get('task_assign_to_'.$tid);
+                            ## no changes ##
+                            if($tid == $id_new){
+                                continue;
+                            }
 
-    						if($id_new == '__none__'){
-    							if(!$t_old){
-    								continue;
-    							}
-    							$task_persons_delete[] = $t_old;
-    							continue;
-    						}
+                            if($id_new == '__none__'){
+                                if(!$t_old){
+                                    continue;
+                                }
+                                $task_persons_delete[] = $t_old;
+                                continue;
+                            }
 
-    						$task_persons_delete[] = $t_old;
-    						$task_persons_overwrite[] = $id_new;
-    					}
-    				}
-    				else{
-    					$id_new = get('task_assign_to___none__');
-    					if($id_new && $id_new != '__none__'){
-    						$task_persons_new[] = $id_new;
-    					}
-    				}
+                            $task_persons_delete[] = $t_old;
+                            $task_persons_overwrite[] = $id_new;
+                        }
+                    }
+                    else{
+                        $id_new = get('task_assign_to___none__');
+                        if($id_new && $id_new != '__none__'){
+                            $task_persons_new[] = $id_new;
+                        }
+                    }
 
-    				$id_new = get('task_assign_to_0');
-    				if($id_new != '__select_person__'){
-    					if(!isset($task_assignments[$id_new])){
-    						$task_persons_new[] = $id_new;
-    					}
-    				}
+                    $id_new = get('task_assign_to_0');
+                    if($id_new != '__select_person__'){
+                        if(!isset($task_assignments[$id_new])){
+                            $task_persons_new[] = $id_new;
+                        }
+                    }
 
-    				$change = true;
-    			}
-    		}
+                    $change = true;
+                }
+            }
 
 
             ### category ###
@@ -2896,46 +2896,46 @@ function taskEditMultipleSubmit()
                         $task->status = STATUS_OPEN;
                     }
                 }
-				## overwrite assigend persons ##
-				if(isset($task_persons_overwrite)){
-					if(isset($task_persons_delete)){
-						foreach($task_persons_delete as $tpd){
-							$tpd->delete();
-							
-						}
-					}
-					foreach($task_persons_overwrite as $tpo)
-					{
-						$task_pers_over = new TaskPerson(array(
-										'person'=> $team[$tpo]->id,
-										'task'  => $task->id,
-										'comment'=>'',
-										'project'=>$project->id,
-										));
-						$task_pers_over->insert();
-					}
-				}
+                ## overwrite assigend persons ##
+                if(isset($task_persons_overwrite)){
+                    if(isset($task_persons_delete)){
+                        foreach($task_persons_delete as $tpd){
+                            $tpd->delete();
+                            
+                        }
+                    }
+                    foreach($task_persons_overwrite as $tpo)
+                    {
+                        $task_pers_over = new TaskPerson(array(
+                                        'person'=> $team[$tpo]->id,
+                                        'task'  => $task->id,
+                                        'comment'=>'',
+                                        'project'=>$project->id,
+                                        ));
+                        $task_pers_over->insert();
+                    }
+                }
 
-				## add new person ##
-				if(isset($task_persons_new)){
-					foreach($task_persons_new as $tpn){
-						if(!isset($task_assigned_persons[$tpn]))
-						{
-							$task_pers_new = new TaskPerson(array(
-										 'person'=> $team[$tpn]->id,
-										 'task'  => $task->id,
-										 'comment'=>'',
-										 'project'=>$project->id,
-										  ));
-						   $task_pers_new->insert();
-						}
-					}
+                ## add new person ##
+                if(isset($task_persons_new)){
+                    foreach($task_persons_new as $tpn){
+                        if(!isset($task_assigned_persons[$tpn]))
+                        {
+                            $task_pers_new = new TaskPerson(array(
+                                         'person'=> $team[$tpn]->id,
+                                         'task'  => $task->id,
+                                         'comment'=>'',
+                                         'project'=>$project->id,
+                                          ));
+                           $task_pers_new->insert();
+                        }
+                    }
 
-				}
+                }
 
-				##update##
+                ##update##
                 $task->update();
-				$task->nowChangedByUser();
+                $task->nowChangedByUser();
             }
         }
         else {
@@ -2973,35 +2973,35 @@ function taskCollapseAllComments()
     global $PH;
 
 
-	/**
-	* because there are no checkboxes left anymore, we have to get the comment-ids
-	* directly from the task with the getComments-function
-	**/
+    /**
+    * because there are no checkboxes left anymore, we have to get the comment-ids
+    * directly from the task with the getComments-function
+    **/
     ### get task ###
-	$tsk=get('tsk');
+    $tsk=get('tsk');
 
-	### check sufficient user-rights ###
-	if($task=Task::getEditableById($tsk)) {
-		$ids= $task->getComments();
+    ### check sufficient user-rights ###
+    if($task=Task::getEditableById($tsk)) {
+        $ids= $task->getComments();
 
-    	foreach($ids as $obj) {
-			if(!$comment=Comment::getEditableById($obj->id)) {
-            	$PH->abortWarning('undefined comment','warning');
-        	}
-        	if(! $comment->view_collapsed) {
-            	$comment->view_collapsed=1;
-            	$comment->update();
-        	}
-    	}
-	}
-	else {
-		/**
-		* a better way should be not to display this function
-		* if user has not enough rights
-		**/
-		### abort, if not enough rights ###
+        foreach($ids as $obj) {
+            if(!$comment=Comment::getEditableById($obj->id)) {
+                $PH->abortWarning('undefined comment','warning');
+            }
+            if(! $comment->view_collapsed) {
+                $comment->view_collapsed=1;
+                $comment->update();
+            }
+        }
+    }
+    else {
+        /**
+        * a better way should be not to display this function
+        * if user has not enough rights
+        **/
+        ### abort, if not enough rights ###
         $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
-	}
+    }
 
     ### display taskView ####
     if(!$PH->showFromPage()) {
@@ -3018,42 +3018,42 @@ function taskExpandAllComments()
 {
     global $PH;
 
-	/**
-	* because there are no checkboxes left anymore, we have to get the comment-ids
-	* directly from the task with the getComments-function
-	**/
-	### get task ###
-	$tsk= get('tsk');
+    /**
+    * because there are no checkboxes left anymore, we have to get the comment-ids
+    * directly from the task with the getComments-function
+    **/
+    ### get task ###
+    $tsk= get('tsk');
 
-	### check sufficient user-rights ###
-	if($task=Task::getEditableById($tsk)) {
-		$ids= $task->getComments();
+    ### check sufficient user-rights ###
+    if($task=Task::getEditableById($tsk)) {
+        $ids= $task->getComments();
 
-    	foreach($ids as $obj) {
-			if(!$comment=Comment::getEditableById($obj->id)) {
-	            $PH->abortWarning('undefined comment','warning');
-	        }
+        foreach($ids as $obj) {
+            if(!$comment=Comment::getEditableById($obj->id)) {
+                $PH->abortWarning('undefined comment','warning');
+            }
 
-			### get all comments including all sub-comments
-			$list= $comment->getAll();
-	        $list[]= $comment;
+            ### get all comments including all sub-comments
+            $list= $comment->getAll();
+            $list[]= $comment;
 
-	        foreach($list as $c) {
-	            if($c->view_collapsed) {
-	            	$c->view_collapsed=0;
-	                $c->update();
-	            }
-	        }
-	    }
-	}
-	else {
-		/**
-		* a better way should be not to display this function
-		* if user has not enough rights
-		**/
-		### abort, if not enough rights ###
+            foreach($list as $c) {
+                if($c->view_collapsed) {
+                    $c->view_collapsed=0;
+                    $c->update();
+                }
+            }
+        }
+    }
+    else {
+        /**
+        * a better way should be not to display this function
+        * if user has not enough rights
+        **/
+        ### abort, if not enough rights ###
         $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
-	}
+    }
 
     ### display taskView ####
     if(!$PH->showFromPage()) {
@@ -3068,23 +3068,23 @@ function taskExpandAllComments()
 */
 function taskNoteOnPersonNew()
 {
-	global $PH;
+    global $PH;
 
-	## get person ##
-	$pid = getOnePassedId('person');
-	if(!$person = Person::getById($pid)){
-		$PH->abortWarning(__("ERROR: could not get Person"), ERROR_NOTE);
-		return;
-	}
+    ## get person ##
+    $pid = getOnePassedId('person');
+    if(!$person = Person::getById($pid)){
+        $PH->abortWarning(__("ERROR: could not get Person"), ERROR_NOTE);
+        return;
+    }
 
-	## build new object ##
-	$task_new = new Task(array(
-	        'id'        =>0, 		# temporary new
+    ## build new object ##
+    $task_new = new Task(array(
+            'id'        =>0,        # temporary new
             'name'      =>'',
             'state'     =>1,
-	         ));
+             ));
 
-	$PH->show('taskNoteOnPersonEdit',array('tsk'=>$task_new->id, 'person'=>$person->id), $task_new);
+    $PH->show('taskNoteOnPersonEdit',array('tsk'=>$task_new->id, 'person'=>$person->id), $task_new);
 }
 
 /**
@@ -3094,58 +3094,58 @@ function taskNoteOnPersonNew()
 */
 function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 {
-	global $PH;
-	global $auth;
-	global $g_pub_level_names;
-	global $g_prio_names;
+    global $PH;
+    global $auth;
+    global $g_pub_level_names;
+    global $g_prio_names;
 
-	if(!$task){
-		$id = getOnePassedId('tsk');
+    if(!$task){
+        $id = getOnePassedId('tsk');
 
         if(!$task = Task::getEditableById($id)) {
             $PH->abortWarning(__("Select a note to edit"), ERROR_NOTE);
             return;
         }
-	}
+    }
 
-	## get person ##
-	if(!$person){
-		$pid = getOnePassedId('person');
-		if(!$person = Person::getById($pid)) {
-			$PH->abortWarning(__("ERROR: could not get Person"), ERROR_NOTE);
-			return;
-		}
-	}
+    ## get person ##
+    if(!$person){
+        $pid = getOnePassedId('person');
+        if(!$person = Person::getById($pid)) {
+            $PH->abortWarning(__("ERROR: could not get Person"), ERROR_NOTE);
+            return;
+        }
+    }
 
     ### set up page and write header ####
     {
         $page = new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'task_name'));
-    	$page->cur_tab = 'people';
+        $page->cur_tab = 'people';
 
         if($person->id) {
-    	    $page->crumbs=build_person_crumbs($person);
+            $page->crumbs=build_person_crumbs($person);
         }
-    	$page->crumbs[]=new NaviCrumb(array(
-    	    'target_id' => 'taskNoteOnPersonEdit',
+        $page->crumbs[]=new NaviCrumb(array(
+            'target_id' => 'taskNoteOnPersonEdit',
 
-    	));
+        ));
 
         $page->type=__("Note");
 
-		if(!$task->id) {
-			$page->title = __('Create new note');
-			$page->title_minor=__('Edit');
-			## default title ##
-			$date = gmdate("Y-m-d", time());
-			$time = getGMTString();
-			$dt = $date . " " . renderTime($time);
-			$task->name = sprintf(__("New Note on %s, %s"),$person->name, $dt);
+        if(!$task->id) {
+            $page->title = __('Create new note');
+            $page->title_minor=__('Edit');
+            ## default title ##
+            $date = gmdate("Y-m-d", time());
+            $time = getGMTString();
+            $dt = $date . " " . renderTime($time);
+            $task->name = sprintf(__("New Note on %s, %s"),$person->name, $dt);
         }
-		## eventually needed later when note is a subcategory of task
-		/*else {
-			$page->title=$task->name;
+        ## eventually needed later when note is a subcategory of task
+        /*else {
+            $page->title=$task->name;
             $page->title_minor=$task->short;
-		}*/
+        }*/
 
         echo(new PageHeader);
     }
@@ -3159,160 +3159,160 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
         $form = new PageForm();
         $form->button_cancel=true;
 
-		## name field ##
-		$form->add($task->fields['name']->getFormElement(&$task));
+        ## name field ##
+        $form->add($task->fields['name']->getFormElement(&$task));
 
-		## description field ##
-		$e = $task->fields['description']->getFormElement(&$task);
-		$e->rows = 22;
-		$form->add($e);
+        ## description field ##
+        $e = $task->fields['description']->getFormElement(&$task);
+        $e->rows = 22;
+        $form->add($e);
 
-		### public-level drop down menu ###
+        ### public-level drop down menu ###
         $form->add(new Form_Dropdown('task_pub_level',  __("Publish to","Form label"), array_flip($g_pub_level_names), $task->pub_level));
 
-		## priority drop down menu##
+        ## priority drop down menu##
         $form->add(new Form_Dropdown('task_prio',  __("Prio","Form label"),  array_flip($g_prio_names), $task->prio));
 
-		## project drop down menu ##
-		{
-			if($task->id == 0){
-				$proj_select = 0;
-			}
-			## eventually needed later when note is a subcategory of task
-			/*else {
-				if(!$project = $task->getProject()){
-					$PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
-					$proj_select = 0;
-				}
-				else{
-					$proj_select = $project->id;
-				}
-			}*/
+        ## project drop down menu ##
+        {
+            if($task->id == 0){
+                $proj_select = 0;
+            }
+            ## eventually needed later when note is a subcategory of task
+            /*else {
+                if(!$project = $task->getProject()){
+                    $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
+                    $proj_select = 0;
+                }
+                else{
+                    $proj_select = $project->id;
+                }
+            }*/
 
-			$p_list = array();
-			#$p_list[0] = __('Assigned Projects');
+            $p_list = array();
+            #$p_list[0] = __('Assigned Projects');
 
-			$count = 1;
+            $count = 1;
 
-			$p_projects = $person->getProjects();
-			$num = count($p_projects);
-			/*if($num == 0){
-				$p_list['-1'] = __('- no assigend projects');
-			}
-			else{*/
-			if($num > 0){
-				$p_list[0] = __('Assigned Projects');
-				foreach($p_projects as $pp){
-					$p_list[$pp->id] = "- " . $pp->name;
-					$count++;
-				}
-			}
+            $p_projects = $person->getProjects();
+            $num = count($p_projects);
+            /*if($num == 0){
+                $p_list['-1'] = __('- no assigend projects');
+            }
+            else{*/
+            if($num > 0){
+                $p_list[0] = __('Assigned Projects');
+                foreach($p_projects as $pp){
+                    $p_list[$pp->id] = "- " . $pp->name;
+                    $count++;
+                }
+            }
 
-			#$p_list['-3'] = __('Company Projects');
+            #$p_list['-3'] = __('Company Projects');
 
-			$p_companies = $person->getCompanies();
-			$num = count($p_companies);
-			/*if($num == 0){
-				$p_list['-4'] = __('- no company projects');
-			}
-			elseif($num == 1){
-				$c_id = $p_companies[0]->id;
-				$c_projects = Project::getAll(array('company'=>$c_id));
-				foreach($c_projects as $cp){
-					$p_list[$cp->id] = "- " . $cp->name;
-				}
-			}
-			else*/if($num > 0){
-				$p_list['-1'] = __('Company Projects');
-				foreach($p_companies as $pcs){
-					$c_id = $pcs->id;
-					$c_projects = Project::getAll(array('company'=>$c_id));
-					$count2 = 0;
-					foreach($c_projects as $cp){
-						$p_list[$cp->id] = "- " . $cp->name;
-					}
+            $p_companies = $person->getCompanies();
+            $num = count($p_companies);
+            /*if($num == 0){
+                $p_list['-4'] = __('- no company projects');
+            }
+            elseif($num == 1){
+                $c_id = $p_companies[0]->id;
+                $c_projects = Project::getAll(array('company'=>$c_id));
+                foreach($c_projects as $cp){
+                    $p_list[$cp->id] = "- " . $cp->name;
+                }
+            }
+            else*/if($num > 0){
+                $p_list['-1'] = __('Company Projects');
+                foreach($p_companies as $pcs){
+                    $c_id = $pcs->id;
+                    $c_projects = Project::getAll(array('company'=>$c_id));
+                    $count2 = 0;
+                    foreach($c_projects as $cp){
+                        $p_list[$cp->id] = "- " . $cp->name;
+                    }
 
-				}
-			}
+                }
+            }
 
-			#$p_list['-5'] = __('All other Projects');
+            #$p_list['-5'] = __('All other Projects');
 
-			if(!$projects = Project::getAll(array('order_by'=>'name ASC'))){
-				#$p_list['-6'] = __('- no other projects');
-			}
-			else{
-				$p_list['-2'] = __('All other Projects');
-				foreach($projects as $pj){
-					$p_list[$pj->id] = "- " . $pj->name;
-				}
-			}
+            if(!$projects = Project::getAll(array('order_by'=>'name ASC'))){
+                #$p_list['-6'] = __('- no other projects');
+            }
+            else{
+                $p_list['-2'] = __('All other Projects');
+                foreach($projects as $pj){
+                    $p_list[$pj->id] = "- " . $pj->name;
+                }
+            }
 
-			$form->add(new Form_Dropdown('project',  __('For Project','form label'),array_flip($p_list), $proj_select, "id='proj_list'"));
-		}
+            $form->add(new Form_Dropdown('project',  __('For Project','form label'),array_flip($p_list), $proj_select, "id='proj_list'"));
+        }
 
-		## new project ##
-		if($task->id == 0){
-			$form->add(new Form_checkbox('new_project',__('New project','form label'), false, "id='proj_new_checkbox'"));
-			$form->add(new Form_Input('new_project_name', __('Project name', 'form label'),false,NULL,false, "id='proj_new_input'","style='display:none'"));
-		}
+        ## new project ##
+        if($task->id == 0){
+            $form->add(new Form_checkbox('new_project',__('New project','form label'), false, "id='proj_new_checkbox'"));
+            $form->add(new Form_Input('new_project_name', __('Project name', 'form label'),false,NULL,false, "id='proj_new_input'","style='display:none'"));
+        }
 
-		## Assignements ##
-		{
-			$checked1 = "";
-			$checked2 = "";
+        ## Assignements ##
+        {
+            $checked1 = "";
+            $checked2 = "";
 
-			if($task->id == 0){
-				$checked1 = "checked";
-				$checked2 = "checked";
-				$person_select = -1;
-			}
-			## eventually needed later when note is a subcategory of task
-			/*else {
-				if(!$pperson = $task->getAssignedPersons()){
-					$PH->abortWarning(__("ERROR: could not get assigned persons"), ERROR_NOTE);
-				}
-				else{
-					foreach($pperson as $pp){
-						if($pp->id == $person->id){
-							$checked1= "checked";
-						}
-						elseif($pp->id == $auth->cur_user->id){
-							$checked2= "checked";
-						}
-						else{
-							$person_select = $pp->id;
-						}
-					}
-				}
-			}*/
+            if($task->id == 0){
+                $checked1 = "checked";
+                $checked2 = "checked";
+                $person_select = -1;
+            }
+            ## eventually needed later when note is a subcategory of task
+            /*else {
+                if(!$pperson = $task->getAssignedPersons()){
+                    $PH->abortWarning(__("ERROR: could not get assigned persons"), ERROR_NOTE);
+                }
+                else{
+                    foreach($pperson as $pp){
+                        if($pp->id == $person->id){
+                            $checked1= "checked";
+                        }
+                        elseif($pp->id == $auth->cur_user->id){
+                            $checked2= "checked";
+                        }
+                        else{
+                            $person_select = $pp->id;
+                        }
+                    }
+                }
+            }*/
 
-			$form->add(new Form_customHTML('<p><label>' . __('Assign to') . '</lable></p>', 'assigne_note'));
-			if($person->id != $auth->cur_user->id){
-				$form->add(new Form_customHTML('<span class="checker"><input value="'.$person->id.'" name="task_assignement1" type="checkbox" ' . $checked1 .'><label for="task_assignement1">' . $person->name . '</label></span>', 'assigned_person1'));
-				$form->add(new Form_customHTML('<span class="checker"><input value="'.$auth->cur_user->id.'" name="task_assignement2" type="checkbox" ' . $checked2 .'><label for="task_assignement2">' . $auth->cur_user->name . '</label></span>', 'assigned_person2'));
-			}
-			else {
-				$form->add(new Form_customHTML('<span class="checker"><input value="'.$auth->cur_user->id.'" name="task_assignement2" type="checkbox" ' . $checked2 .'><label for="task_assignement2">' . $auth->cur_user->name . '</label></span>', 'assigned_person'));
-			}
+            $form->add(new Form_customHTML('<p><label>' . __('Assign to') . '</lable></p>', 'assigne_note'));
+            if($person->id != $auth->cur_user->id){
+                $form->add(new Form_customHTML('<span class="checker"><input value="'.$person->id.'" name="task_assignement1" type="checkbox" ' . $checked1 .'><label for="task_assignement1">' . $person->name . '</label></span>', 'assigned_person1'));
+                $form->add(new Form_customHTML('<span class="checker"><input value="'.$auth->cur_user->id.'" name="task_assignement2" type="checkbox" ' . $checked2 .'><label for="task_assignement2">' . $auth->cur_user->name . '</label></span>', 'assigned_person2'));
+            }
+            else {
+                $form->add(new Form_customHTML('<span class="checker"><input value="'.$auth->cur_user->id.'" name="task_assignement2" type="checkbox" ' . $checked2 .'><label for="task_assignement2">' . $auth->cur_user->name . '</label></span>', 'assigned_person'));
+            }
 
-			$pers_list = array();
-			$pers_list[-1] = __('undefined');
-			if($persons = Person::getPersons(array('can_login'=>1))){
-				foreach($persons as $pers){
-					if($auth->cur_user->name <> $pers->name) {
-						$pers_list[$pers->id] = $pers->name;
-					}
-				}
-			}
+            $pers_list = array();
+            $pers_list[-1] = __('undefined');
+            if($persons = Person::getPersons(array('can_login'=>1))){
+                foreach($persons as $pers){
+                    if($auth->cur_user->name <> $pers->name) {
+                        $pers_list[$pers->id] = $pers->name;
+                    }
+                }
+            }
 
-			$form->add(new Form_Dropdown('task_also_assign',  __('Also assign to') ,array_flip($pers_list), $person_select));
-		}
+            $form->add(new Form_Dropdown('task_also_assign',  __('Also assign to') ,array_flip($pers_list), $person_select));
+        }
 
-		## Book effort after submit ##
-		$form->form_options[] = "<span class=option><input id='book_effort' name='book_effort' class='checker' type=checkbox>" . __("Book effort after submit") . "</span>";
+        ## Book effort after submit ##
+        $form->form_options[] = "<span class=option><input id='book_effort' name='book_effort' class='checker' type=checkbox>" . __("Book effort after submit") . "</span>";
 
         $form->add(new Form_HiddenField('tsk','',$task->id));
-		$form->add(new Form_HiddenField('person_id','',$person->id));
+        $form->add(new Form_HiddenField('person_id','',$person->id));
         $form->add(new Form_HiddenField('creation_time','',$time));
 
         echo ($form);
@@ -3320,7 +3320,7 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
         $PH->go_submit = 'taskNoteOnPersonEditSubmit';
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -3331,11 +3331,11 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 */
 function taskNoteOnPersonEditSubmit()
 {
-	global $PH;
-	global $auth;
-	global $g_user_profile_names;
+    global $PH;
+    global $auth;
+    global $g_user_profile_names;
 
-	### cancel? ###
+    ### cancel? ###
     if(get('form_do_cancel')) {
         if(!$PH->showFromPage()) {
             $PH->show('personView',array('person'=>getOnePassedId('person_id')));
@@ -3343,31 +3343,31 @@ function taskNoteOnPersonEditSubmit()
         exit();
     }
 
-	### temporary object or from database? ###
+    ### temporary object or from database? ###
     $tsk_id = getOnePassedId('tsk','',true,'invalid id');
-	if($tsk_id == 0) {
+    if($tsk_id == 0) {
         $task = new Task(array(
                'id'=>0,
                ));
     }
-	## eventually needed later when note is a subcategory of task
+    ## eventually needed later when note is a subcategory of task
     /*else {
         if(!$task= Task::getVisiblebyId($tsk_id)) {
             $PH->abortWarning(__("ERROR: could not get task"), ERROR_NOTE);
-			return;
+            return;
         }
     }*/
 
-	## other parameter ##
-	$person_id = getOnePassedId('person_id');
-	$prj_id = get('project');
-	$prj_new = get('new_project');
-	$prj_name = get('new_project_name');
-	$assignement1 = get('task_assignement1');
-	$assignement2 = get('task_assignement2');
-	$also_assignement = get('task_also_assign');
+    ## other parameter ##
+    $person_id = getOnePassedId('person_id');
+    $prj_id = get('project');
+    $prj_new = get('new_project');
+    $prj_name = get('new_project_name');
+    $assignement1 = get('task_assignement1');
+    $assignement2 = get('task_assignement2');
+    $also_assignement = get('task_also_assign');
 
-	### pub level ###
+    ### pub level ###
     if($pub_level = get('task_pub_level')) {
         if($task->id) {
              if($pub_level > $task->getValidUserSetPublevel() ) {
@@ -3380,211 +3380,211 @@ function taskNoteOnPersonEditSubmit()
         $task->pub_level = $pub_level;
     }
 
-	## prio ##
- 	if($prio = get('task_prio')){
-		$task->prio = $prio;
- 	}
+    ## prio ##
+    if($prio = get('task_prio')){
+        $task->prio = $prio;
+    }
 
-	## status ##
+    ## status ##
     if(!$task->id){
-		$task->status = STATUS_NEW;
-	}
+        $task->status = STATUS_NEW;
+    }
 
-	# retrieve all possible values from post-data (with field->view_in_forms == true)
+    # retrieve all possible values from post-data (with field->view_in_forms == true)
     # NOTE:
     # - this could be an security-issue.
     # @@@ TODO: as some kind of form-edit-behaviour to field-definition
-	foreach($task->fields as $f) {
+    foreach($task->fields as $f) {
         $name=$f->name;
         $f->parseForm(&$task);
     }
 
-	### validate ###
-	$is_ok = true;
+    ### validate ###
+    $is_ok = true;
 
-	## no project ##
-	if(($prj_id <= 0)) {
-		if(((!isset($prj_new)) || (!isset($prj_name)))){
-			new FeedbackWarning(__("Note requires project"));
+    ## no project ##
+    if(($prj_id <= 0)) {
+        if(((!isset($prj_new)) || (!isset($prj_name)))){
+            new FeedbackWarning(__("Note requires project"));
 
-			## and no assignement ##
-			if((!isset($assignement1) && !isset($assignement2) && $also_assignement == -1)) {
-				new FeedbackWarning(__("Note requires assigned person(s)"));
-			}
-        	$is_ok= false;
-		}
+            ## and no assignement ##
+            if((!isset($assignement1) && !isset($assignement2) && $also_assignement == -1)) {
+                new FeedbackWarning(__("Note requires assigned person(s)"));
+            }
+            $is_ok= false;
+        }
     }
 
-	## if project but no assignement ##
-	if((!isset($assignement1) && !isset($assignement2) && $also_assignement == -1)) {
+    ## if project but no assignement ##
+    if((!isset($assignement1) && !isset($assignement2) && $also_assignement == -1)) {
         $assignement1 = $auth->cur_user->id;
     }
 
-	if(!$is_ok) {
+    if(!$is_ok) {
         $PH->show('taskNoteOnPersonEdit',array('tsk'=>$task->id, 'person'=>$person_id), $task);
-		exit();
-	}
+        exit();
+    }
 
-	## new project
-	if(isset($prj_new) && isset($prj_name)){
-		$pperson = Person::getById($person_id);
-		if($companies = $pperson->getCompanies()) {
-		    $company_id= $companies[0]->id;
-		}
-		else {
-		    $company_id= 0;
-		}
+    ## new project
+    if(isset($prj_new) && isset($prj_name)){
+        $pperson = Person::getById($person_id);
+        if($companies = $pperson->getCompanies()) {
+            $company_id= $companies[0]->id;
+        }
+        else {
+            $company_id= 0;
+        }
 
-		$new_project = new Project(array(
-		               'name'=>$prj_name,
-					   'company'=>$company_id,
-					   'status'=>STATUS_NEW,
-					   'prio'=>PRIO_NORMAL,
-					   'pub_level'=>PUB_LEVEL_OPEN
-		             ));
-	    $new_project->insert();
-		$prj_id = $new_project->id;
-		## get project ##
-		if(!$project = Project::getById($prj_id)){
-			 $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
-		}
-	}
-	else {
-		## get project ##
-		if(!$project = Project::getById($prj_id)){
-			 $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
-		}
-	}
+        $new_project = new Project(array(
+                       'name'=>$prj_name,
+                       'company'=>$company_id,
+                       'status'=>STATUS_NEW,
+                       'prio'=>PRIO_NORMAL,
+                       'pub_level'=>PUB_LEVEL_OPEN
+                     ));
+        $new_project->insert();
+        $prj_id = $new_project->id;
+        ## get project ##
+        if(!$project = Project::getById($prj_id)){
+             $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
+        }
+    }
+    else {
+        ## get project ##
+        if(!$project = Project::getById($prj_id)){
+             $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
+        }
+    }
 
     ## set project of task ##
-	if(!$task->id){
-		$task->project = $project->id;
-	}
+    if(!$task->id){
+        $task->project = $project->id;
+    }
 
-	## assigne persons to task##
-	$new_task_assignments = array();
-	$count = 0;
-	if(!$task->id){
-		if(isset($assignement1)){
-			$person = Person::getById($assignement1);
-			$new_assignment1 = new TaskPerson(array(
-							  'person'=> $assignement1,
-							  'task'  => $task->id,
-							  'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
-							  'project'=>$project->id,
-							  ));
-			$new_task_assignments[$count] = $new_assignment1;
-			$count++;
-		}
+    ## assigne persons to task##
+    $new_task_assignments = array();
+    $count = 0;
+    if(!$task->id){
+        if(isset($assignement1)){
+            $person = Person::getById($assignement1);
+            $new_assignment1 = new TaskPerson(array(
+                              'person'=> $assignement1,
+                              'task'  => $task->id,
+                              'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
+                              'project'=>$project->id,
+                              ));
+            $new_task_assignments[$count] = $new_assignment1;
+            $count++;
+        }
 
-		if(isset($assignement2)){
-			$person = Person::getById($assignement2);
-			$new_assignment2 = new TaskPerson(array(
-							  'person'=> $assignement2,
-							  'task'  => $task->id,
-							  'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
-							  'project'=>$project->id,
-							  ));
-			$new_task_assignments[$count] = $new_assignment2;
-			$count++;
-		}
+        if(isset($assignement2)){
+            $person = Person::getById($assignement2);
+            $new_assignment2 = new TaskPerson(array(
+                              'person'=> $assignement2,
+                              'task'  => $task->id,
+                              'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
+                              'project'=>$project->id,
+                              ));
+            $new_task_assignments[$count] = $new_assignment2;
+            $count++;
+        }
 
-		if($also_assignement != -1){
-			$person = Person::getById($also_assignement);
-			$new_assignment_also = new TaskPerson(array(
-							     'person'=> $also_assignement,
-							     'task'  => $task->id,
-							     'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
-							     'project'=>$project->id,
-							     ));
-			$new_task_assignments[$count] = $new_assignment_also;
-			$count++;
-		}
-	}
-	## eventually needed later when note is a subcategory of task
-	/*else {
-		# ToDo: check if persons are assigned
-	}*/
+        if($also_assignement != -1){
+            $person = Person::getById($also_assignement);
+            $new_assignment_also = new TaskPerson(array(
+                                 'person'=> $also_assignement,
+                                 'task'  => $task->id,
+                                 'comment'=>sprintf(__("formerly assigned to %s","task-assigment comment"), $person->name),
+                                 'project'=>$project->id,
+                                 ));
+            $new_task_assignments[$count] = $new_assignment_also;
+            $count++;
+        }
+    }
+    ## eventually needed later when note is a subcategory of task
+    /*else {
+        # ToDo: check if persons are assigned
+    }*/
 
-	## assigne person to project ##
-	$team = array();
-	$new_project_assignments = array();
-	$count = 0;
-	if(!$task->id){
-		$projperson = $project->getPersons(false);
-		foreach($projperson as $projp){
-			$team[$projp->id] = $projp->name;
-		}
+    ## assigne person to project ##
+    $team = array();
+    $new_project_assignments = array();
+    $count = 0;
+    if(!$task->id){
+        $projperson = $project->getPersons(false);
+        foreach($projperson as $projp){
+            $team[$projp->id] = $projp->name;
+        }
 
-		if(isset($assignement1)){
-			if(!isset($team[$assignement1])){
-				$person = Person::getById($assignement1);
-				$effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
+        if(isset($assignement1)){
+            if(!isset($team[$assignement1])){
+                $person = Person::getById($assignement1);
+                $effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
                               ? 2
                               : 1;
-				$pp_new1 = new ProjectPerson(array(
-					'person'                => $person->id,
-					'project'               => $project->id,
-					'name'                  => $g_user_profile_names[$person->profile],
-					'adjust_effort_style'	=> $effort_style,
-				));
-				$new_project_assignments[$count] = $pp_new1;
-				$count++;
-			}
-		}
+                $pp_new1 = new ProjectPerson(array(
+                    'person'                => $person->id,
+                    'project'               => $project->id,
+                    'name'                  => $g_user_profile_names[$person->profile],
+                    'adjust_effort_style'   => $effort_style,
+                ));
+                $new_project_assignments[$count] = $pp_new1;
+                $count++;
+            }
+        }
 
-		if(isset($assignement2)){
-			if(!isset($team[$assignement2])){
-				$effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
+        if(isset($assignement2)){
+            if(!isset($team[$assignement2])){
+                $effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
                               ? 2
                               : 1;
-				$person = Person::getById($assignement2);
-				$pp_new2 = new ProjectPerson(array(
-					'person'                => $person->id,
-					'project'               => $project->id,
-					'name'                  => $g_user_profile_names[$person->profile],
-					'adjust_effort_style'	=> $effort_style,
-				));
-				$new_project_assignments[$count] = $pp_new2;
-				$count++;
-			}
-		}
-		if($also_assignement != -1){
-			if(!isset($team[$also_assignement])){
-				$person = Person::getById($also_assignement);
-				$effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
+                $person = Person::getById($assignement2);
+                $pp_new2 = new ProjectPerson(array(
+                    'person'                => $person->id,
+                    'project'               => $project->id,
+                    'name'                  => $g_user_profile_names[$person->profile],
+                    'adjust_effort_style'   => $effort_style,
+                ));
+                $new_project_assignments[$count] = $pp_new2;
+                $count++;
+            }
+        }
+        if($also_assignement != -1){
+            if(!isset($team[$also_assignement])){
+                $person = Person::getById($also_assignement);
+                $effort_style = ($person->settings & USER_SETTING_EFFORTS_AS_DURATION)
                               ? 2
                               : 1;
-				$pp_new_also = new ProjectPerson(array(
-					'person'                => $person->id,
-					'project'               => $project->id,
-					'name'                  => $g_user_profile_names[$person->profile],
-					'adjust_effort_style'	=> $effort_style,
-				));
-				$new_project_assignments[$count] = $pp_new_also;
-				$count++;
-			}
-		}
+                $pp_new_also = new ProjectPerson(array(
+                    'person'                => $person->id,
+                    'project'               => $project->id,
+                    'name'                  => $g_user_profile_names[$person->profile],
+                    'adjust_effort_style'   => $effort_style,
+                ));
+                $new_project_assignments[$count] = $pp_new_also;
+                $count++;
+            }
+        }
 
-	}
-	## eventually needed later when note is a subcategory of task
-	/*else{
-		# ToDo: check if persons are assigned
-	}*/
+    }
+    ## eventually needed later when note is a subcategory of task
+    /*else{
+        # ToDo: check if persons are assigned
+    }*/
 
 
 
-	## Insert ##
-	if($task->id == 0) {
+    ## Insert ##
+    if($task->id == 0) {
         $task->insert();
 
         ### write task-assigments ###
         foreach($new_task_assignments as $nta) {
-			$nta->task = $task->id;
+            $nta->task = $task->id;
             $nta->insert();
         }
 
-		### write project-assigments ###
+        ### write project-assigments ###
         foreach($new_project_assignments as $npa) {
             $npa->insert();
         }
@@ -3592,57 +3592,57 @@ function taskNoteOnPersonEditSubmit()
         new FeedbackMessage(sprintf(__("Created task %s with ID %s"),  $task->getLink(false),$task->id));
     }
     ## eventually needed later when note is a subcategory of task
-	/*
-	else{
-	}
-	*/
+    /*
+    else{
+    }
+    */
 
-	### book effort ###
-	$book_effort = get('book_effort');
+    ### book effort ###
+    $book_effort = get('book_effort');
     if($book_effort) {
-		$as_duration = 0;
-		if($pperson = $project->getProjectPersons()){
-			foreach($pperson as $pp){
-				if(($pp->project == $project->id) && ($pp->person == $auth->cur_user->id)){
-					if($pp->adjust_effort_style == 1){
-						$as_duration = 0;
-					}
-					else{
-						$as_duration = 1;
-					}
-				}
-			}
-		}
-		else{
-			$as_duration = 0;
-		}
+        $as_duration = 0;
+        if($pperson = $project->getProjectPersons()){
+            foreach($pperson as $pp){
+                if(($pp->project == $project->id) && ($pp->person == $auth->cur_user->id)){
+                    if($pp->adjust_effort_style == 1){
+                        $as_duration = 0;
+                    }
+                    else{
+                        $as_duration = 1;
+                    }
+                }
+            }
+        }
+        else{
+            $as_duration = 0;
+        }
 
-		if(get('creation_time')){
-			$start_time = get('creation_time');
-		}
-		else{
-			$start_time = '';
-		}
+        if(get('creation_time')){
+            $start_time = get('creation_time');
+        }
+        else{
+            $start_time = '';
+        }
 
-		### build new object ###
-		$newEffort= new Effort(array(
-			'id'        =>0,
-			'name'      =>'',
-			'project'   =>$project->id,
-			'task'      =>$task->id,
-			'person'    =>$auth->cur_user->id,
-			'as_duration' =>$as_duration,
-			'time_start' =>$start_time,
-			)
-		);
-		$PH->show('effortEdit',array('effort'=>$newEffort->id),$newEffort);
+        ### build new object ###
+        $newEffort= new Effort(array(
+            'id'        =>0,
+            'name'      =>'',
+            'project'   =>$project->id,
+            'task'      =>$task->id,
+            'person'    =>$auth->cur_user->id,
+            'as_duration' =>$as_duration,
+            'time_start' =>$start_time,
+            )
+        );
+        $PH->show('effortEdit',array('effort'=>$newEffort->id),$newEffort);
         exit();
     }
 
-	### display personList ####
-	if(!$PH->showFromPage()) {
-		$PH->show('personList',array());
-	}
+    ### display personList ####
+    if(!$PH->showFromPage()) {
+        $PH->show('personList',array());
+    }
 
 }
 

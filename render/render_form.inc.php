@@ -550,9 +550,12 @@ class Form_DropdownGrouped extends PageFormElement {
 }
 
 
-#====================================================================================
-# Form_Checkbox
-#====================================================================================
+/**
+* Form_Checkbox
+*
+*
+*
+*/
 class Form_Checkbox extends PageFormElement {
 
     private $options;
@@ -582,6 +585,10 @@ class Form_Checkbox extends PageFormElement {
         $buffer= "<p " . $this->renderCssClasses() .  ">";
         $buffer.="<span class=checker><input type='checkbox' id='$this->name' name='$this->name' $str_value $this->func $checked><label for='$this->name'>$this->title</label></span>";
 
+        /**
+        * add additional hidden field to distinguish 'missing' and 'off' checkbox fields
+        */
+        $buffer.="<input type='hidden' name='" . $this->name . "_was_checkbox" . "' value='1'>";
         $buffer.="</p>";
         return $buffer;
     }

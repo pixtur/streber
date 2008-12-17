@@ -101,7 +101,8 @@ function addRequestVars(&$referred_vars)
     		$value= substr( $value,0,confGet('STRING_SIZE_MAX'));
         }
         else if(! is_numeric($value) ) {
-            trigger_error("Referred value for '$key' is of unknown type: '". gettype($value)."' ", E_USER_NOTICE);
+            trigger_error("Skipping referred value for '$key' of unknown type: '". gettype($value)."' ", E_USER_NOTICE);
+            continue;
         }
     	$g_request_vars[$key] = $value;
 	}
@@ -208,6 +209,7 @@ function validateFormCrc()
             $flag_failure = true;
         }
     }
+
     if($flag_failure) {
         global $auth;
         log_message("HACK?? Failed hidden form CRC ($log_message) by ". $auth->cur_user->name, LOG_MESSAGE_HACKING_ALERT);
@@ -647,6 +649,10 @@ function asMatchString($str) {
     return preg_replace("/[\/\<\>\`_%&?\"\'()\[\]]/",' ', $str); 
 }
 
+function asIdentifier($str) {
+    return strtolower( preg_replace("/[^0-9A-Z_]/i",'_', $str) ); 
+}
+
 function asCleanString($str)
 {
     return preg_replace("/[\\\<\>\`\´\"]/",'',$str);
@@ -864,7 +870,14 @@ function trace($message, $options= '')
         if (!isset($g_firephp)) {
             require_once('lib/firephp/FirePHP.class.php');
             #require_once('lib/firephp/fb.php');
-            $g_firephp = FirePHP::getInstance(true);            
+            $g_firephp = FirePHP::getInstance(true);
+            $options = array('maxObjectDepth' => 1,
+                 'maxArrayDepth' => 1,
+                 'useNativeJsonEncode' => true,
+                 'includeLineNumbers' => true
+                 );
+ 
+             $g_firephp->setOptions($options);
         }
         $g_firephp->trace($message, $options);
     }

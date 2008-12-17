@@ -110,11 +110,13 @@ function FieldBool_parseForm(&$field,&$obj) {
     $name= $field->name;
     $field_id= $obj->_type.'_'.$name;
 
-    if(get($field_id)=="on") {
-        $obj->$name= 1;
-    }
-    else {
-        $obj->$name= 0;
+    if(get($field_id . "_was_checkbox")) {
+        if(get($field_id)=="on") {
+            $obj->$name= 1;
+        }
+        else {
+            $obj->$name= 0;
+        }
     }
 }
 
@@ -379,7 +381,7 @@ function FieldOption_getFormElement(&$field,&$obj) {
 */
 function FieldOption_parseForm(&$field,&$obj) {
     $name= $field->name;
-    $field_id= $obj->_type.'_'.$name;
+    $field_id= $obj->_type . '_' . $name;
 
     $value= get($field_id);
     if(isset($value)) {

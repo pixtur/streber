@@ -92,10 +92,61 @@ class TestItemVisibility extends WebTestCase {
         $this->assertTrue( $this->clickLink('Topics'));
         validatePage($this);
 
+        ### View one topic ###
+        $this->assertTrue( $this->clickLink('why i love the bomb'));
+        $this->assertNoUnwantedPattern('/Book Effort/i',  'Roosevelt does not like efforts (%s)');
+
         ### logout  ###
         $this->assertTrue( $this->clickLink('Logout'));
 
         $this->assertWantedPattern('/please login/i',                                            'check content (%s)');
+        $this->assertValidHtmlStucture('login');
+    }
+
+
+    function testEditTasks()
+    {
+
+        TestEnvironment::prepare('fixtures/project_setup.sql');
+        $this->addHeader('USER_AGENT: streber_unit_tester');
+
+        global $g_streber_url;
+        $g_streber_url= "http://localhost/streber_head";
+
+        ### login as bob ###
+        $this->assertTrue($this->get($g_streber_url),       'getting login page (%s)' );
+        $this->assertTrue( $this->setField('login_name',    'bob'));
+        $this->assertTrue( $this->setField('login_password','bob_secret') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+        validatePage($this);
+
+        ### View topics ###
+        #$this->assertTrue( $this->clickLink('Topics'));
+        #validatePage($this);
+
+        ### View one topic ###
+        $this->assertTrue( $this->clickLink('we will win'));
+
+        ### Add comment ###
+        $this->assertTrue( $this->setField('comment_name',    'comment by bob <x>'));
+        $this->assertTrue( $this->setField('comment_description','description <x>') );
+        $this->assertTrue( $this->clickSubmit('Submit'));
+
+        $this->assertText( "Changed Topic");        
+        $this->assertText( "comment by bob");        
+        $this->assertText( "description");        
+
+        ### Go to project page ###
+        $this->assertTrue( $this->clickLink('m <x>'));
+        validatePage($this);
+        $this->assertText('News',                       'make sure news still there(%s)');
+        $this->assertText('1 comments',                 'make sure news still there(%s)');
+        $this->assertText('Add comment',                'make sure news still there(%s)');
+
+        ### logout  ###
+        $this->assertTrue( $this->clickLink('Logout'));
+
+        $this->assertWantedPattern('/please login/i',                       'check content (%s)');
         $this->assertValidHtmlStucture('login');
     }
 

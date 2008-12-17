@@ -1,5 +1,14 @@
 streber-version-history
 
+- added anchors to headline in wiki texts
+- fixed resetting of is_news flag when adding comment to task with quickEditBlock
+- fixed minor bug in bot detection regex
+- fixed "book effort"-link for people with disabled efforts
+
+
+version v0.08095 [2008-12-16]
+===========================
+
 - fixed double escaping html symbols in company list
 - fixed double escaping html symbols in user email addresses
 - fixed minor bug when editing empty bookmark list

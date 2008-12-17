@@ -6,10 +6,15 @@ error_reporting (E_ALL);
 require_once('simpletest/web_tester.php');
 require_once('simpletest/reporter.php');
 
+/**
+* test installation
+*/
+$grouptest = new GroupTest('Installation');  
+$grouptest->addTestFile('test_install.php');    
+$grouptest->run(new HtmlReporter());
+
 ### create a function to make sure we are starting at index.php ###
 function startedIndexPhp() {return true; }
-
-
 
 ### include some core libraries ###
 require_once('../std/common.inc.php');

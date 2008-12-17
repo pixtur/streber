@@ -27,8 +27,8 @@ class TestPagesAll extends WebTestCase {
         $url_streber    = "http://localhost/streber_head/";
         $url_start      = $url_streber . 'index.php?go=logout';
         $test_params    = array(
-                             "_projectView_"=>10,
-                             "_projectEdit_"=>10,
+                             "_projectView_"=>12,
+                             "_projectEdit_"=>12,
                              "_taskView_"=>18,
                              "_taskEdit_"=>18,
 
@@ -45,17 +45,8 @@ class TestPagesAll extends WebTestCase {
                              "_effortEdit_"=>35,
 
                           );
-
-        #require_once('../std/common.inc.php');
-        #require_once('../std/errorhandler.inc.php');
-        #require_once('../conf/defines.inc.php');
-        #require_once('../conf/conf.inc.php');
-        #require_once("../std/class_pagehandler.inc.php");
-        #require_once("../pages/_handles.inc.php");
         
         require_once("../conf/defines.inc.php");                # the order of those includes is tricky
-        require_once('../conf/conf.inc.php');
-        #require_once('../std/common.inc.php');
         require_once('../std/class_auth.inc.php');
 
         require_once("../std/class_pagehandler.inc.php");
@@ -82,6 +73,8 @@ class TestPagesAll extends WebTestCase {
             
             if($handle->test == 'yes') {
 
+                TestEnvironment::prepare('fixtures/project_setup.sql');
+
                 if(isset($handle->test_params)) {
                     $params=array();
                     foreach($handle->test_params as $param=>$value) {
@@ -100,10 +93,13 @@ class TestPagesAll extends WebTestCase {
                 $this->assertNoUnwantedPattern('/PHP Error |<b>Fatal error<\/b>|<b>Warning<\/b>|<b>Error<\/b>|<b>Notice<\/b>|<b>Parse error<\/b>/i',    'php-error found (%s)' );
                 $this->assertNoUnwantedPattern('/' . '%' . '%' . '/i',     'debug output found (%s)' );
                 $this->assertValidHtmlStucture($url);
-                $this->assertNoUnwantedPattern('/ERROR:/',                                         'check for streber warnings (%s)');
+                $this->assertNoUnwantedPattern('/fatal error \(/i', 'check for streber warnings (%s)');
+                $this->assertNoUnwantedPattern('/Error:/i', 'check for streber warnings (%s)');
                 $this->assertWantedPattern('/<\/html>/',                                         'rendering Complete? (%s)');
                 $this->assertNoUnwantedPattern('/<x>/',     'check unescaped data (%s)');
                 $this->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check double escaped data (%s)');
+                
+                
 
                 for($i=0;$i<20;$i++) {
                     echo "                       ";
