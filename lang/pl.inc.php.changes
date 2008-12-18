@@ -1,0 +1,14 @@
+undefined keys:
+---------------
+
+### ../lists/list_tasks.inc.php   ###
+'This task is planned to be completed today.'=>'',  # line 1266
+'This task is planned to be completed tomorrow.'=>'',  # line 1272
+'late|time status of a task'  =>'',  # line 1289
+'remain|time status of a task'=>'',  # line 1293
+
+### ../pages/bookmark.inc.php   ###
+'Please select some items'    =>'',  # line 509
+
+### ../render/render_wiki.inc.php   ###
+'Link to this chapter'        =>'',  # line 714

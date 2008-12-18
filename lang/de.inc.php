@@ -6,7 +6,21 @@
 
 global $g_lang_table;
 $g_lang_table= array(
+
+### TIME FORMATS ###
 'en_US.utf8,en_US,enu|list of locales'=>'de_DE.UTF8,de_DE@euro,de_DE,de,gede.utf8,deu,german',
+
+### Oct 13, 2008  ->  13.Okt 2008
+'%b %e, %Y|strftime format string'=>'%e.%b 2008', 
+
+### 1:34pm  ->  13:34
+'%I:%M%P|strftime format string'=>'%H:%M',
+
+### Date -> Mon, 21.Okt 2008 23:34
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'%a, %e.%b %Y %H:%M', 
+
+### Monday, October 12 -> "Montag, 12. Oktober"
+'%A, %B %e|strftime format string'=>'%A, %e.%B', 
 
 'Office E-Mail'               =>'Büro E-Mail',
 
@@ -2158,101 +2172,151 @@ $g_lang_table= array(
 'set your password'           =>'Ihr Password ändern',
 
 
-'%b %e, %Y|strftime format string'=>'%e.%b 2008', # "Oct 13, 2008" -> 13.Okt 2008""
-'%I:%M%P|strftime format string'=>'%H:%M',
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'%a, %e.%b %Y %H:%M', #Mon, 21.Okt 2008 23:34
-'%A, %B %e|strftime format string'=>'%A, %e.%B', # "Monday, October 12" -> ""
 
 
 ### ../pages/login.inc.php   ###
-'Welcome to %s', 'Notice after login'=>'Willkommen auf %s',  # line 78
+'Welcome to %s', 'Notice after login'=>'Willkommen auf %s',  
 
 ### ../pages/misc.inc.php   ###
-'One notification sent'       =>'Eine Nachrichtig gesendet',  # line 426
-'%s notifications sent'       =>'%s Nachrichten gesendet',  # line 429
-'No notifications sent'       =>'Keine Nachricht gesendet',  # line 432
+'One notification sent'       =>'Eine Nachrichtig gesendet',  
+'%s notifications sent'       =>'%s Nachrichten gesendet',  
+'No notifications sent'       =>'Keine Nachricht gesendet',  
 
 ### ../pages/person.inc.php   ###
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Aufgabe und Projekt für diese Person erstellen',  # line 627
-'ASAP'                        =>'möglichst Bald',  # line 2110
-'Filter own changes from recent changes list'=>'Eine Änderungen ausblenden',  # line 2232
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Aufgabe und Projekt für diese Person erstellen',  
+'ASAP'                        =>'möglichst Bald',  
+'Filter own changes from recent changes list'=>'Eine Änderungen ausblenden',  
 
 ### ../pages/project_more.inc.php   ###
-'New project from'            =>'Neues Projekt von',  # line 57
-'all|Filter preset'           =>'alle',  # line 1372
-'new|Filter preset'           =>'neu',  # line 1392
-'open|Filter preset'          =>'offen',  # line 1412
-'discounted|Filter preset'    =>'herabgesetzt',  # line 1432
-'not chargeable|Filter preset'=>'nicht anrechenbar',  # line 1452
-'balanced|Filter preset'      =>'ausgeglichen',  # line 1472
-'last logout|Filter preset'   =>'letzter Logout',  # line 1492
-'1 week|Filter preset'        =>'1 Woche',  # line 1511
-'2 weeks|Filter preset'       =>'2 Wochen',  # line 1531
-'3 weeks|Filter preset'       =>'3 Wochen',  # line 1551
-'1 month|Filter preset'       =>'1 Monat',  # line 1571
-'prior|Filter preset'         =>'Davor',  # line 1591
+'New project from'            =>'Neues Projekt von',  
+'all|Filter preset'           =>'alle',  
+'new|Filter preset'           =>'neu',  
+'open|Filter preset'          =>'offen',  
+'discounted|Filter preset'    =>'herabgesetzt',  
+'not chargeable|Filter preset'=>'nicht anrechenbar',  
+'balanced|Filter preset'      =>'ausgeglichen',  
+'last logout|Filter preset'   =>'letzter Logout',  
+'1 week|Filter preset'        =>'1 Woche',  
+'2 weeks|Filter preset'       =>'2 Wochen',  
+'3 weeks|Filter preset'       =>'3 Wochen',  
+'1 month|Filter preset'       =>'1 Monat',  
+'prior|Filter preset'         =>'Davor',  
 
 ### ../pages/task_more.inc.php   ###
-'Nickname not known in this project: %s'=>'Nickname nicht bekannt.',  # line 896
-'Requested feedback from: %s.'=>'Feedback von %s angefragt.',  # line 901
+'Nickname not known in this project: %s'=>'Nickname nicht bekannt.',  
+'Requested feedback from: %s.'=>'Feedback von %s angefragt.',  
 
 ### ../pages/task_view.inc.php   ###
-'Your feedback is requested by %s.'=>'%s möchte Ihre Meinung wissen.',  # line 1166
-'Please edit or comment this item.'=>'Bitte jetzt bearbeiten oder kommentieren.',  # line 1167
-'This task has no description. Doubleclick to edit.'=>'Dieses Objekt hat keine Beschreibung. Zum Bearbeiten doppelt klicken.',  # line 416
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dieses Thema hat noch keinen Text\nKlicken Sie doppelt, um etwas zu schreiben.',  # line 1182
-'Request feedback'            =>'Nach Meinung fragen',  # line 1265
+'Your feedback is requested by %s.'=>'%s möchte Ihre Meinung wissen.',  
+'Please edit or comment this item.'=>'Bitte jetzt bearbeiten oder kommentieren.',  
+'This task has no description. Doubleclick to edit.'=>'Dieses Objekt hat keine Beschreibung. Zum Bearbeiten doppelt klicken.',  
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dieses Thema hat noch keinen Text\nKlicken Sie doppelt, um etwas zu schreiben.',  
+'Request feedback'            =>'Nach Meinung fragen',  
 
 
 ### ../render/render_wiki.inc.php   ###
-'Update|wiki change marker'   =>'Geändert',  # line 180
-'New|wiki change marker'      =>'Neu',  # line 186
-'Deleted|wiki change marker'  =>'Gelöscht',  # line 192
-'Item #%s is not an image'    =>'Object #%s ist kein Bild',  # line 1078
-'Unkwown item %s'             =>'Unbekanntes Objekt %s',  # line 1324
-'Cannot link to item #%s of type %s'=>'Verknüpfung zu Objekt #%s nicht möglich',  # line 1385
+'Update|wiki change marker'   =>'Geändert',  
+'New|wiki change marker'      =>'Neu',  
+'Deleted|wiki change marker'  =>'Gelöscht',  
+'Item #%s is not an image'    =>'Object #%s ist kein Bild',  
+'Unkwown item %s'             =>'Unbekanntes Objekt %s',  
+'Cannot link to item #%s of type %s'=>'Verknüpfung zu Objekt #%s nicht möglich',  
 
 ### ../std/constant_names.inc.php   ###
-'Upcomming|release type'      =>'Angekündigt',  # line 178
-'ASAP|notification period'    =>'Sobald wie möglich',  # line 230
+'Upcomming|release type'      =>'Angekündigt',  
+'ASAP|notification period'    =>'Sobald wie möglich',  
 
 
 ### ../db/class_task.inc.php   ###
-'List title and description in project overview'=>'',  # line 191
-'Display folder as topic'     =>'Ordner als Thema anzeigen',  # line 197
+'List title and description in project overview'=>'',  
+'Display folder as topic'     =>'Ordner als Thema anzeigen',  
 
 ### ../lists/list_recentchanges.inc.php   ###
-'Also show your changes'      =>'Zeige auch eigene Änderungen',  # line 95
-'Hide your changes'           =>'Verstecke eigene Änderungen',  # line 98
-'Needs feedback'              =>'Braucht Feedback',  # line 165
+'Also show your changes'      =>'Zeige auch eigene Änderungen',  
+'Hide your changes'           =>'Verstecke eigene Änderungen',  
+'Needs feedback'              =>'Braucht Feedback',  
 
 ### ../lists/list_tasks.inc.php   ###
-'Days until planned end'      =>'Tage bis zum Ende',  # line 1240
-'Due|column header, days until planned end'=>'Tage',  # line 1241
+'Days until planned end'      =>'Tage bis zum Ende',  
+'Due|column header, days until planned end'=>'Tage',  
 
 ### ../pages/_handles.inc.php   ###
-'Toggle filter own changes'   =>'Sichtbarkeit eigener Änderungen umschalten',  # line 1173
+'Toggle filter own changes'   =>'Sichtbarkeit eigener Änderungen umschalten',  
 
 ### ../pages/comment.inc.php   ###
-'Re: '                        =>'Re:',  # line 243
+'Re: '                        =>'Re:',  
 
 ### ../pages/home.inc.php   ###
-'my blocked'                  =>'Meine Blockiert',  # line 561
-'needs feedback'              =>'Braucht Feedback',  # line 620
+'my blocked'                  =>'Meine Blockiert',  
+'needs feedback'              =>'Braucht Feedback',  
 
-'Welcome to %s|Notice after login'=>'Willkommen bei %s',  # line 269
+'Welcome to %s|Notice after login'=>'Willkommen bei %s',  
 
 ### ../render/render_form.inc.php   ###
-'can not render form without valid user'=>'Formular kann nicht ohne gültigen Anwender bearbeitet werden.',  # line 698
+'can not render form without valid user'=>'Formular kann nicht ohne gültigen Anwender bearbeitet werden.',  
 
 ### ../std/mail.inc.php   ###
-'Forgot your password or how to log in?|notification'=>'Passwort vergessen? Keine Ahnung, wie man sich anmeldet? Keine Lust auf diese Mails',  # line 464
-'Request a mail to change your account settings.|notification'=>'Erhalte eine E-Mail, um Password und News-Einstellungen zu ändern.',  # line 455
-'Click here:'                 =>'Hier klicken',  # line 465
+'Forgot your password or how to log in?|notification'=>'Passwort vergessen? Keine Ahnung, wie man sich anmeldet? Keine Lust auf diese Mails',  
+'Request a mail to change your account settings.|notification'=>'Erhalte eine E-Mail, um Password und News-Einstellungen zu ändern.',  
+'Click here:'                 =>'Hier klicken',  
 
 ### ../db/class_task.inc.php   ###
-'List title and description in project overview'=>'Titel und Beschreibung im Projekt Überblick zeigen',  # line 191
+'List title and description in project overview'=>'Titel und Beschreibung im Projekt Überblick zeigen',  
 
+
+### ../lists/list_files.inc.php   ###
+'creatd on %s|date a file was created'=>'erstell am %s',  
+'click to show details'       =>'Details anzeigen',  
+'by %s|person who uploaded a file'=>'von %s',  
+
+### ../lists/list_recentchanges.inc.php   ###
+'No changes by others'        =>'Keine Änderungen von anderen',  
+'No changes yet'              =>'Keine Änderungen bisher',  
+
+### ../lists/list_tasks.inc.php   ###
+'Review'                      =>'Abnehmen?',  
+'Task status set to completed and needs approval.'=>'Aufgabe wurde fertiggestellt und muss abgenommen werden.',  
+'Item was approved on: %s:|date a task was approved'=>'Element wurde abgenommen am %s',  
+'done'                        =>'fertig',  
+'This task is planned to be completed today.'=>'Diese Aufgabe soll heute fertig werden.',  
+'Tomorrow'                    =>'Morgen',  
+'This task is planned to be completed tomorrow.'=>'Diese Aufgabe soll morgen fertig werden.',  
+'Next week'                   =>'Nächste Woche',  
+'due: %s'                     =>'fällig: %s',  
+'days'                        =>'Tage',  
+'this task is overdue!'       =>'Aufgabe überfällig',  
+'Pending'                     =>'steht aus',  
+'start: %s'                   =>'Start: %s',  
+
+### ../pages/bookmark.inc.php   ###
+'Please select some items'    =>'Bitte wählen Sie einige Objekte.',  
+
+### ../pages/file.inc.php   ###
+'Uploaded new version of file with Id %s'=>'Neue Version mit Id #%s hochgeladen',  
+'Uploaded new file with Id %s'=>'Neue Datei mit Id #%s hochgeladen',  
+'Updated file with Id %s'     =>'Datei mit Id #%s hochgeladen',  
+
+### ../pages/person.inc.php   ###
+'Updated settings for %s.'    =>'Datei #%s aktualisiert.',  
+
+### ../render/render_misc.inc.php   ###
+'never'                       =>'niemals',  
+'just now'                    =>'jetzt',  
+'%smin ago'                   =>'vor %smin',  
+'%sh ago'                     =>'vor %h',  
+'%s years ago'                =>'vor %s Jahren',  
+
+### ../render/render_wiki.inc.php   ###
+'Link to this chapter'        =>'Lesezeichen zu diesem Kapitel',  
+
+### ../std/constant_names.inc.php   ###
+'View all Companies|a user right'=>'Alle Firmen zeigen',  
+
+### ../std/mail.inc.php   ###
+'Please use this link to'     =>'Bitte verwenden Sie diesen Link,',  
+'update your account settings'=>'um Ihre Einstellungen zu bearbeiten.',  
+'late|time status of a task'  =>'verspätet',  
+'remain|time status of a task'=>'bleibt',  
 );
 
 ?>

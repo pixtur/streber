@@ -23,20 +23,23 @@ undefined keys:
 'Task status set to completed and needs approval.'=>'',  # line 1251
 'Item was approved on: %s:|date a task was approved'=>'',  # line 1254
 'done'                        =>'',  # line 1255
-'this task is planned to be completed today.'=>'',  # line 1266
+'This task is planned to be completed today.'=>'',  # line 1266
 'Tomorrow'                    =>'',  # line 1271
-'this task is planned to be completed tomorrow.'=>'',  # line 1272
+'This task is planned to be completed tomorrow.'=>'',  # line 1272
 'Next week'                   =>'',  # line 1278
 'due: %s'                     =>'',  # line 1307
 'days'                        =>'',  # line 1284
 'this task is overdue!'       =>'',  # line 1288
-' late'                       =>'',  # line 1289
-' remain'                     =>'',  # line 1293
+'late|time status of a task'  =>'',  # line 1289
+'remain|time status of a task'=>'',  # line 1293
 'Pending'                     =>'',  # line 1299
 'start: %s'                   =>'',  # line 1302
 
 ### ../pages/_handles.inc.php   ###
 'Toggle filter own changes'   =>'',  # line 1195
+
+### ../pages/bookmark.inc.php   ###
+'Please select some items'    =>'',  # line 509
 
 ### ../pages/file.inc.php   ###
 'Uploaded new version of file with Id %s'=>'',  # line 625
@@ -56,9 +59,9 @@ undefined keys:
 'No notifications sent'       =>'',  # line 432
 
 ### ../pages/person.inc.php   ###
-'ASAP'                        =>'',  # line 2110
-'Filter own changes from recent changes list'=>'',  # line 2232
-'Updated settings for %s.'    =>'',  # line 2674
+'ASAP'                        =>'',  # line 2109
+'Filter own changes from recent changes list'=>'',  # line 2231
+'Updated settings for %s.'    =>'',  # line 2673
 
 ### ../pages/project_more.inc.php   ###
 'New project from'            =>'',  # line 57
@@ -80,26 +83,27 @@ undefined keys:
 'Requested feedback from: %s.'=>'',  # line 899
 
 ### ../pages/task_view.inc.php   ###
-'Your feedback is requested by %s.'=>'',  # line 1176
-'Please edit or comment this item.'=>'',  # line 1177
-'This task has no description. Doubleclick to edit.'=>'',  # line 416
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1191
-'Request feedback'            =>'',  # line 1275
+'Your feedback is requested by %s.'=>'',  # line 1192
+'Please edit or comment this item.'=>'',  # line 1193
+'This task has no description. Doubleclick to edit.'=>'',  # line 430
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1207
+'Request feedback'            =>'',  # line 1291
 
 ### ../render/render_misc.inc.php   ###
-'never'                       =>'',  # line 1015
-'just now'                    =>'',  # line 1019
-'%smin ago'                   =>'',  # line 1022
-'%sh ago'                     =>'',  # line 1028
-'%s years ago'                =>'',  # line 1039
+'never'                       =>'',  # line 1016
+'just now'                    =>'',  # line 1020
+'%smin ago'                   =>'',  # line 1023
+'%sh ago'                     =>'',  # line 1029
+'%s years ago'                =>'',  # line 1040
 
 ### ../render/render_wiki.inc.php   ###
 'Update|wiki change marker'   =>'',  # line 224
 'New|wiki change marker'      =>'',  # line 230
 'Deleted|wiki change marker'  =>'',  # line 236
-'Item #%s is not an image'    =>'',  # line 1131
-'Unkwown item %s'             =>'',  # line 1220
-'Cannot link to item #%s of type %s'=>'',  # line 1281
+'Link to this chapter'        =>'',  # line 714
+'Item #%s is not an image'    =>'',  # line 1121
+'Unkwown item %s'             =>'',  # line 1210
+'Cannot link to item #%s of type %s'=>'',  # line 1271
 
 ### ../std/constant_names.inc.php   ###
 'View all Companies|a user right'=>'',  # line 104

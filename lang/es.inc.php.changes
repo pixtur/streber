@@ -88,15 +88,15 @@ undefined keys:
 'Task status set to completed and needs approval.'=>'',  # line 1251
 'Item was approved on: %s:|date a task was approved'=>'',  # line 1254
 'done'                        =>'',  # line 1255
-'this task is planned to be completed today.'=>'',  # line 1266
+'This task is planned to be completed today.'=>'',  # line 1266
 'Tomorrow'                    =>'',  # line 1271
-'this task is planned to be completed tomorrow.'=>'',  # line 1272
+'This task is planned to be completed tomorrow.'=>'',  # line 1272
 'Next week'                   =>'',  # line 1278
 'due: %s'                     =>'',  # line 1307
 'days'                        =>'',  # line 1284
 'this task is overdue!'       =>'',  # line 1288
-' late'                       =>'',  # line 1289
-' remain'                     =>'',  # line 1293
+'late|time status of a task'  =>'',  # line 1289
+'remain|time status of a task'=>'',  # line 1293
 'Pending'                     =>'',  # line 1299
 'start: %s'                   =>'',  # line 1302
 
@@ -115,6 +115,9 @@ undefined keys:
 'View Changes of Person'      =>'',  # line 1132
 'Toggle filter own changes'   =>'',  # line 1195
 
+### ../pages/bookmark.inc.php   ###
+'Please select some items'    =>'',  # line 509
+
 ### ../pages/comment.inc.php   ###
 'Re: '                        =>'',  # line 243
 
@@ -128,7 +131,7 @@ undefined keys:
 'Create wiki documentation page or start discussion topic'=>'',  # line 168
 
 ### ../pages/task_view.inc.php   ###
-'New topic'                   =>'',  # line 1035
+'New topic'                   =>'',  # line 1051
 
 ### ../pages/project_view.inc.php   ###
 'Book effort'                 =>'',  # line 179
@@ -150,7 +153,7 @@ undefined keys:
 'Edit your Profile'           =>'',  # line 86
 
 ### ../render/render_misc.inc.php   ###
-'for|short for client'        =>'',  # line 526
+'for|short for client'        =>'',  # line 527
 
 ### ../pages/home.inc.php   ###
 'without client'              =>'',  # line 145
@@ -161,12 +164,12 @@ undefined keys:
 'needs feedback'              =>'',  # line 620
 
 ### ../pages/person.inc.php   ###
-'discounted'                  =>'',  # line 1415
-'not chargeable'              =>'',  # line 1435
-'balanced'                    =>'',  # line 1455
-'3 weeks'                     =>'',  # line 1534
-'1 month'                     =>'',  # line 1554
-'prior'                       =>'',  # line 1574
+'discounted'                  =>'',  # line 1414
+'not chargeable'              =>'',  # line 1434
+'balanced'                    =>'',  # line 1454
+'3 weeks'                     =>'',  # line 1533
+'1 month'                     =>'',  # line 1553
+'prior'                       =>'',  # line 1573
 
 ### ../pages/home.inc.php   ###
 'Your efforts'                =>'',  # line 1145
@@ -192,23 +195,23 @@ undefined keys:
 'Projects|Page title add on'  =>'',  # line 1007
 'Tasks|Page title add on'     =>'',  # line 1260
 'no tasks yet'                =>'',  # line 1284
-'Changes|Page title add on'   =>'',  # line 1835
-'Authentication with|form label'=>'',  # line 2073
-'ASAP'                        =>'',  # line 2110
-'Enable efforts'              =>'',  # line 2196
-'Enable bookmarks'            =>'',  # line 2197
-'Filter own changes from recent changes list'=>'',  # line 2232
+'Changes|Page title add on'   =>'',  # line 1834
+'Authentication with|form label'=>'',  # line 2072
+'ASAP'                        =>'',  # line 2109
+'Enable efforts'              =>'',  # line 2195
+'Enable bookmarks'            =>'',  # line 2196
+'Filter own changes from recent changes list'=>'',  # line 2231
 
 ### ../pages/task_more.inc.php   ###
 'Internal'                    =>'',  # line 741
 
 ### ../pages/person.inc.php   ###
-'Updated settings for %s.'    =>'',  # line 2674
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 3028
-'Login-accounts require a full name.'=>'',  # line 3310
-'Please enter an e-mail address.'=>'',  # line 3320
-'Please copy the text from the image.'=>'',  # line 3394
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3423
+'Updated settings for %s.'    =>'',  # line 2673
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 3027
+'Login-accounts require a full name.'=>'',  # line 3309
+'Please enter an e-mail address.'=>'',  # line 3319
+'Please copy the text from the image.'=>'',  # line 3393
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3422
 
 ### ../pages/project_more.inc.php   ###
 'New project from'            =>'',  # line 57
@@ -241,30 +244,30 @@ undefined keys:
 
 ### ../pages/task_view.inc.php   ###
 'Edit this %s'                =>'',  # line 77
-'Your feedback is requested by %s.'=>'',  # line 1176
-'Please edit or comment this item.'=>'',  # line 1177
-'This task has no description. Doubleclick to edit.'=>'',  # line 416
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1191
-'Request feedback'            =>'',  # line 1275
+'Your feedback is requested by %s.'=>'',  # line 1192
+'Please edit or comment this item.'=>'',  # line 1193
+'This task has no description. Doubleclick to edit.'=>'',  # line 430
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1207
+'Request feedback'            =>'',  # line 1291
 
 ### ../pages/version.inc.php   ###
 'Moved %s versions to trash'  =>'',  # line 260
 
 ### ../render/render_misc.inc.php   ###
-'without client|short for client'=>'',  # line 539
-'Topics|Project option'       =>'',  # line 616
-'Calculation|Project option'  =>'',  # line 657
-'Changes|Project option'      =>'',  # line 665
-'Persons|page option'         =>'',  # line 677
-'never'                       =>'',  # line 1015
-'just now'                    =>'',  # line 1019
-'%smin ago'                   =>'',  # line 1022
-'1 hour ago'                  =>'',  # line 1025
-'%sh ago'                     =>'',  # line 1028
-'%s days ago'                 =>'',  # line 1032
-'%s months ago'               =>'',  # line 1035
-'%s years ago'                =>'',  # line 1039
-'%A, %B %e|strftime format string'=>'',  # line 1167
+'without client|short for client'=>'',  # line 540
+'Topics|Project option'       =>'',  # line 617
+'Calculation|Project option'  =>'',  # line 658
+'Changes|Project option'      =>'',  # line 666
+'Persons|page option'         =>'',  # line 678
+'never'                       =>'',  # line 1016
+'just now'                    =>'',  # line 1020
+'%smin ago'                   =>'',  # line 1023
+'1 hour ago'                  =>'',  # line 1026
+'%sh ago'                     =>'',  # line 1029
+'%s days ago'                 =>'',  # line 1033
+'%s months ago'               =>'',  # line 1036
+'%s years ago'                =>'',  # line 1040
+'%A, %B %e|strftime format string'=>'',  # line 1168
 
 ### ../render/render_page.inc.php   ###
 'Home|section'                =>'',  # line 247
@@ -273,11 +276,12 @@ undefined keys:
 'Update|wiki change marker'   =>'',  # line 224
 'New|wiki change marker'      =>'',  # line 230
 'Deleted|wiki change marker'  =>'',  # line 236
-'Item #%s is not an image'    =>'',  # line 1131
-'Unkwown item %s'             =>'',  # line 1220
-'Cannot link to item #%s of type %s'=>'',  # line 1281
-'No item matches this name...'=>'',  # line 1406
-'Warning: Could not find wiki chapter'=>'',  # line 2132
+'Link to this chapter'        =>'',  # line 714
+'Item #%s is not an image'    =>'',  # line 1121
+'Unkwown item %s'             =>'',  # line 1210
+'Cannot link to item #%s of type %s'=>'',  # line 1271
+'No item matches this name...'=>'',  # line 1396
+'Warning: Could not find wiki chapter'=>'',  # line 2122
 
 ### ../std/class_changeline.inc.php   ###
 'Latest comment:'             =>'',  # line 261

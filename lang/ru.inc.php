@@ -3,9 +3,11 @@
 /**
 * translation into: Russian
 *    translated by: Andrew Rumm
-*             date: 28-02-2007
-*lang file version: 1.2.1
-*  streber version: 0.796
+*    		 email: streber@rayz.ru
+*      		  site: http://streber.rayz.ru
+*             date: 12-12-2009
+*lang file version: 1.3.1
+*  streber version: 0.9?
 *
 */
 
@@ -31,9 +33,9 @@ $g_lang_table= array(
 
 ### ../db/class_company.inc.php   ###
 'Required. (e.g. pixtur ag)'  =>'Обязательно.',  # line 34
-'Short|form field for company'=>'Короткое наименование',  # line 39
+'Short|form field for company'=>'Краткое название',  # line 39
 'Optional: Short name shown in lists (eg. pixtur)'=>'Опционально: короткие имена будут показаны в списках',  # line 40
-'Tag line|form field for company'=>'Таг поле компании',  # line 45
+'Tag line|form field for company'=>'Тэг лайн',  # line 45
 
 ### ../db/class_person.inc.php   ###
 'Optional: Additional tagline (eg. multimedia concepts)'=>'Опционально: дополнительный таг',  # line 64
@@ -64,7 +66,7 @@ $g_lang_table= array(
 'not available'               =>'не доступно',  # line 379
 
 ### ../db/class_effort.inc.php   ###
-'optional if tasks linked to this effort'=>'опционально, если задачи назначены к текущим работам',  # line 37
+'optional if tasks linked to this effort'=>'опционально, если задачи назначены к текущим заданиям',  # line 37
 'Time Start'                  =>'Время начала',  # line 44
 'Time End'                    =>'Время окончания',  # line 48
 
@@ -87,13 +89,13 @@ $g_lang_table= array(
 'Tagline'                     =>'Таг',  # line 68
 
 ### ../db/class_person.inc.php   ###
-'Mobile Phone'                =>'Мобильный телефон',  # line 67
+'Mobile Phone'                =>'Телефон (моб.)',  # line 67
 'Optional: Mobile phone (eg. +49-172-12345678)'=>'Опционально: мобильный телефон',  # line 68
-'Office Phone'                =>'рабочий телефон',  # line 73
+'Office Phone'                =>'Телефон (раб.)',  # line 73
 'Optional: Office Phone (eg. +49-30-12345678)'=>'Опционально: рабочий телефон',  # line 74
-'Office Fax'                  =>'Рабочий факс',  # line 77
+'Office Fax'                  =>'Факс (раб.)',  # line 77
 'Optional: Office Fax (eg. +49-30-12345678)'=>'Опционально: рабочий факс',  # line 78
-'Office Street'               =>'Улица',  # line 81
+'Office Street'               =>'Адрес',  # line 81
 'Optional: Official Street and Number (eg. Poststreet 28)'=>'Опционально: Официальный адрес',  # line 82
 'Office Zipcode'              =>'Индекс',  # line 85
 'Optional: Official Zip-Code and City (eg. 12345 Berlin)'=>'Опционально: Индекс офиса',  # line 86
@@ -159,10 +161,10 @@ $g_lang_table= array(
 'show tasks in home'          =>'отображать задачи на главной',  # line 88
 'only team members can create items'=>'только участники команды могут создавать',  # line 1236
 'validating invalid item'     =>'выполнение проверки на неправильность',  # line 1316
-'insufficient rights (not in project)'=>'доступ запрещен (не в проекте)',  # line 1328
+'insuffient rights (not in project)'=>'доступ запрещен (не в проекте)',  # line 1328
 
 ### ../pages/task_more.inc.php   ###
-'insufficient rights'           =>'доступ запрещен',  # line 2877
+'insuffient rights'           =>'доступ запрещен',  # line 2877
 
 ### ../pages/project_view.inc.php   ###
 'Project Template'            =>'Шаблон проекта',  # line 69
@@ -228,14 +230,14 @@ $g_lang_table= array(
 'Comment|form label for items'=>'Комментарий',  # line 45
 
 ### ../lists/list_bookmarks.inc.php   ###
-'Your bookmarks'              =>'Ваши пометки',  # line 32
-'You have no bookmarks'       =>'Пометки отсутствуют',  # line 33
+'Your bookmarks'              =>'Ваши закладки',  # line 32
+'You have no bookmarks'       =>'Закладки отсутствуют',  # line 33
 
 ### ../pages/item.inc.php   ###
-'Edit bookmark'               =>'Изменение пометки',  # line 363
+'Edit bookmark'               =>'Изменение закладки',  # line 363
 
 ### ../pages/_handles.inc.php   ###
-'Remove bookmark'             =>'Удалить пометку',  # line 52
+'Remove bookmark'             =>'Удалить закладку',  # line 52
 
 ### ../pages/search.inc.php   ###
 'Type'                        =>'Наберите',  # line 871
@@ -276,23 +278,23 @@ $g_lang_table= array(
 'to|very short for assigned tasks TO...'=>'=>',  # line 406
 
 ### ../lists/list_projectchanges.inc.php   ###
-'new'                         =>'добавлено',  # line 215
+'new'                         =>'новая(ый/ое)',  # line 215
 
 ### ../pages/project_more.inc.php   ###
-'modified'                    =>'изменено',  # line 690
+'modified'                    =>'изменен(о/на)',  # line 690
 
 ### ../lists/list_comments.inc.php   ###
 'New Comment'                 =>'Новый комментарий',  # line 39
 
 ### ../lists/list_changes.inc.php   ###
-'Last of %s comments:'        =>'Последние % комментариев:',  # line 217
+'Last of %s comments:'        =>'Последние %s комментариев:',  # line 217
 'comment:'                    =>'комментарий:',  # line 220
 'completed'                   =>'завершено',  # line 242
-'Approve Task'                =>'ПОдтвердить Задачу',  # line 243
+'Approve Task'                =>'Подтвердить Задачу',  # line 243
 'approved'                    =>'подтверждено',  # line 247
 
 ### ../pages/project_more.inc.php   ###
-'closed'                      =>'закрыто',  # line 770
+'closed'                      =>'закрытые',  # line 770
 
 ### ../lists/list_changes.inc.php   ###
 'reopened'                    =>'переоткрыто',  # line 255
@@ -332,7 +334,7 @@ $g_lang_table= array(
 'Add Comment'                 =>'Добавить комментарий',  # line 41
 
 ### ../pages/_handles.inc.php   ###
-'Mark as bookmark'            =>'Поменить пометкой',  # line 45
+'Mark as bookmark'            =>'Поменить закладкой',  # line 45
 
 ### ../lists/list_comments.inc.php   ###
 'Shrink All Comments'         =>'Закрыть все комментарии',  # line 58
@@ -385,25 +387,25 @@ $g_lang_table= array(
 'no efforts booked yet'       =>'не производилось никаких действий',  # line 25
 
 ### ../pages/person.inc.php   ###
-'Efforts'                     =>'Работы',  # line 33
+'Efforts'                     =>'Задания',  # line 33
 
 ### ../lists/list_efforts.inc.php   ###
 'person'                      =>'персона',  # line 37
-'Edit effort'                 =>'Редактировать работу',  # line 50
-'New effort'                  =>'Новая работа',  # line 57
-'View selected Efforts'       =>'Просмотреть выбранные работы',  # line 72
-'%s effort(s) with %s hours'  =>'%s работ(а|ы) на %s час(а|ов)',  # line 129
+'Edit effort'                 =>'Изменить задание',  # line 50
+'New effort'                  =>'Новое задание',  # line 57
+'View selected Efforts'       =>'Просмотреть выбранные задания',  # line 72
+'%s effort(s) with %s hours'  =>'%s заданий(е|я) на %s час(а|ов)',  # line 129
 
 ### ../std/constant_names.inc.php   ###
-'Effort'                      =>'Работы',  # line 127
+'Effort'                      =>'Задание',  # line 127
 
 ### ../lists/list_efforts.inc.php   ###
-'Effort name. More Details as tooltips'=>'Наименование работы. ',  # line 143
+'Effort name. More Details as tooltips'=>'Наименование задания.',  # line 143
 'Task|column header'          =>'Задача',  # line 167
 'Start|column header'         =>'Начало',  # line 192
 'D, d.m.Y'                    =>'Дата',  # line 203
 'End|column header'           =>'Конец',  # line 219
-'len|column header of length of effort'=>'===|продолжительность работ',  # line 243
+'len|column header of length of effort'=>'===|долгосрочность задания',  # line 243
 'Daygraph|columnheader'       =>'Гарфик',  # line 263
 
 ### ../lists/list_files.inc.php   ###
@@ -450,7 +452,7 @@ $g_lang_table= array(
 'Tasks open|columnheader'     =>'Открытые Задачи',  # line 375
 
 ### ../pages/project_more.inc.php   ###
-'open'                        =>'открыто',  # line 599
+'open'                        =>'открытые',  # line 599
 
 ### ../lists/list_project_team.inc.php   ###
 'Your related persons'        =>'Ваши контактные лица',  # line 26
@@ -548,7 +550,7 @@ $g_lang_table= array(
 
 ### ../lists/list_projects.inc.php   ###
 'Day the Project state changed to closed'=>'День смены состояния Проекта на Завершено',  # line 128
-'Edit project'                =>'Редактировать Проект',  # line 137
+'Edit project'                =>'Свойства Проекта',  # line 137
 'Delete project'              =>'Удалить проект',  # line 144
 'Log hours for a project'     =>'Уточнить время для проекта',  # line 151
 'Open / Close'                =>'Открыт / Завершен',  # line 159
@@ -594,9 +596,9 @@ $g_lang_table= array(
 'Add comment'                 =>'Добавить комментарий',  # line 746
 
 ### ../lists/list_tasks.inc.php   ###
-'Status->Completed'           =>'Статус -> Завершен',  # line 194
-'Status->Approved'            =>'Статус -> Подтвержден',  # line 201
-'Status->Closed'              =>'Статус -> Закрыт',  # line 208
+'Status->Completed'           =>'Статус &rarr; Завершен',  # line 194
+'Status->Approved'            =>'Статус &rarr; Подтвержден',  # line 201
+'Status->Closed'              =>'Статус &rarr; Закрыт',  # line 208
 'Move tasks'                  =>'Переместить задачи',  # line 216
 'List|List sort mode'         =>'Список',  # line 240
 'Tree|List sort mode'         =>'Дерево',  # line 251
@@ -622,8 +624,8 @@ $g_lang_table= array(
 '- no name -|in task lists'   =>'- без наименования -',  # line 1299
 'number of subtasks'          =>'количество подзадач',  # line 1092
 'Page name'                   =>'Наименование страницы',  # line 1132
-'Sum of all booked efforts (including subtasks)'=>'Сумма всех работ с задачами',  # line 1176
-'Effort in hours'             =>'Работы в часах',  # line 1190
+'Sum of all booked efforts (including subtasks)'=>'Сумма всех заданий с подзадачами',  # line 1176
+'Effort in hours'             =>'Задания в часах',  # line 1190
 'Days until planned start'    =>'Дней с момента планируемого запуска',  # line 1202
 'Due|column header, days until planned start'=>'С',  # line 1203
 'planned for %s|a certain date'=>'запланировано на %s|a certain date',  # line 1232
@@ -667,24 +669,24 @@ $g_lang_table= array(
 'Delete Project'              =>'Удалить Проект',  # line 297
 'Change Project Status'       =>'Изменить статус Проекта',  # line 305
 'Add Team member'             =>'Добавить участника в Команду',  # line 343
-'Edit Team member'            =>'Редактировать участника Команды',  # line 352
+'Edit Team member'            =>'Изменить профиль участника Команды',  # line 352
 'Remove from team'            =>'Удалить из команды',  # line 364
 'View Task'                   =>'Просмотреть задачу',  # line 379
 'View Task As Docu'           =>'Просмотреть задачу в Док.',  # line 391
 
 ### ../pages/task_more.inc.php   ###
-'Edit Task'                   =>'Редактировать Задачу',  # line 313
+'Edit Task'                   =>'Изменить Задачу',  # line 313
 
 ### ../pages/_handles.inc.php   ###
 'Edit multiple Tasks'         =>'Редактировать несколько Задач',  # line 420
-'View Task Efforts'           =>'Просмотреть Работы по Задачам',  # line 429
+'View Task Efforts'           =>'Просмотреть Задания по Задачам',  # line 429
 'Delete Task(s)'              =>'Удалить Задачу(и)',  # line 442
 'Restore Task(s)'             =>'Восстановить Задачу(и)',  # line 447
 'Move tasks to folder'        =>'Переместить задачи в папку',  # line 455
-'Mark tasks as Complete'      =>'Пометить задачу как Завершенную',  # line 463
-'Mark tasks as Approved'      =>'Пометить задачу как Подтвержденную',  # line 471
-'Mark tasks as Closed'        =>'Пометить задачу как Закрытую',  # line 479
-'Mark tasks as Open'          =>'Пометить задачу как Открытую',  # line 485
+'Mark tasks as Complete'      =>'Пометить задачу как Завершенная',  # line 463
+'Mark tasks as Approved'      =>'Пометить задачу как Подтвержденная',  # line 471
+'Mark tasks as Closed'        =>'Пометить задачу как Закрытая',  # line 479
+'Mark tasks as Open'          =>'Пометить задачу как Открытая',  # line 485
 'New Task'                    =>'Новая Задача',  # line 527
 'New bug'                     =>'Новая Ошибка',  # line 511
 
@@ -692,19 +694,19 @@ $g_lang_table= array(
 'New Milestone'               =>'Новый Этап',  # line 37
 
 ### ../pages/_handles.inc.php   ###
-'New Released Milestone'      =>'Новый релиз Этапа',  # line 554
-'Toggle view collapsed'       =>'Переключить в свернутый вид',  # line 769
+'New Released Milestone'      =>'Новый выпуск Этапа',  # line 554
+'Toggle view collapsed'       =>'Переключить в развернутый вид',  # line 769
 'Add issue/bug report'        =>'Добавить рецензию/отчет об ошибке',  # line 598
-'Edit Description'            =>'Редактировать описание',  # line 607
+'Edit Description'            =>'Изменить описание',  # line 607
 'Create Note'                 =>'Создать заметку',  # line 619
-'Edit Note'                   =>'Редактировать Заметку',  # line 633
-'View effort'                 =>'Просмотреть Работы',  # line 644
-'View multiple efforts'       =>'Просмотреть несколько Работ',  # line 657
+'Edit Note'                   =>'Изменить Заметку',  # line 633
+'View effort'                 =>'Просмотреть задания',  # line 644
+'View multiple efforts'       =>'Просмотр нескольких Заданий',  # line 657
 'Log hours'                   =>'Часовой Лог',  # line 666
-'Edit time effort'            =>'Редактировать время работ',  # line 673
+'Edit time effort'            =>'Изменить время заданий',  # line 673
 'View comment'                =>'Просмотреть комментарии',  # line 692
 'Create comment'              =>'Комментировать',  # line 706
-'Edit comment'                =>'Редактировать комментарий',  # line 717
+'Edit comment'                =>'Изменить комментарий',  # line 717
 'Delete comment'              =>'Удалить комментарий',  # line 740
 'View file'                   =>'Просмотреть файл',  # line 785
 'Upload file'                 =>'Загрузить файл',  # line 797
@@ -725,7 +727,7 @@ $g_lang_table= array(
 
 ### ../pages/company.inc.php   ###
 'New company'                 =>'Новая компания',  # line 740
-'Edit Company'                =>'Редактировать компанию',  # line 948
+'Edit Company'                =>'Изменение профиля компании',  # line 948
 
 ### ../pages/_handles.inc.php   ###
 'Delete Company'              =>'Удалить компанию',  # line 920
@@ -742,20 +744,20 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'New person'                  =>'Новый Профиль',  # line 858
-'Edit Person'                 =>'Редактировать Профиль',  # line 2055
+'Edit Person'                 =>'Изменить Профиль',  # line 2055
 
 ### ../pages/_handles.inc.php   ###
-'Delete Person'               =>'Удалить контактное лицо',  # line 1029
-'View Efforts of Person'      =>'Проспотреть Работы Участника',  # line 1034
+'Delete Person'               =>'Удалить Профиль',  # line 1029
+'View Efforts of Person'      =>'Смотреть Задания',  # line 1034
 'Send Activation E-Mail'      =>'Активировать',  # line 1042
-'Flush Notifications'         =>'Сбросить уведомления',  # line 1102
+'Flush Notifications'         =>'Отправить уведомления',  # line 1102
 
 ### ../render/render_page.inc.php   ###
-'Register'                    =>'Зарегистрировать',  # line 724
+'Register'                    =>'Зарегистрироваться',  # line 724
 
 ### ../pages/person.inc.php   ###
 'Link Companies'              =>'Привязать компании',  # line 663
-'Remove companies from person'=>'Убрать компании из профиля контактного лица',  # line 669
+'Remove companies from person'=>'Убрать компании из профиля пользователя',  # line 669
 
 ### ../pages/_handles.inc.php   ###
 'Marks all items viewed'      =>'Пометить объекты как просмотренные',  # line 1088
@@ -795,12 +797,12 @@ $g_lang_table= array(
 
 ### ../pages/comment.inc.php   ###
 'Edit this comment'           =>'Редактировать комментарий',  # line 88
-'Mark this comment as bookmark'=>'Пометить комментарий как пометку',  # line 97
+'Mark this comment as bookmark'=>'Пометить комментарий как закладку',  # line 97
 
 ### ../pages/version.inc.php   ###
-'Bookmark'                    =>'Пометка',  # line 321
-'Remove this bookmark'        =>'Удалить текущую пометку',  # line 328
-'Remove Bookmark'             =>'Удалить пометку',  # line 329
+'Bookmark'                    =>'Закладка',  # line 321
+'Remove this bookmark'        =>'Удалить текущую закладку',  # line 328
+'Remove Bookmark'             =>'Удалить закладку',  # line 329
 
 ### ../pages/comment.inc.php   ###
 'Delete this comment'         =>'Удалить текущий комментарий',  # line 125
@@ -879,8 +881,8 @@ $g_lang_table= array(
 'edit:'                       =>'изменить:',  # line 100
 
 ### ../pages/company.inc.php   ###
-'Edit this company'           =>'редактировать текущую компанию',  # line 501
-'Mark this company as bookmark'=>'Пометить компанию пометкой',  # line 510
+'Edit this company'           =>'Изменить профиль компании',  # line 501
+'Mark this company as bookmark'=>'Поместить компанию в закладки',  # line 510
 'Delete this company'         =>'Удалить текущую компанию',  # line 528
 'Create new person for this company'=>'Создать нового пользователя для этой компании',  # line 541
 'Create new project for this company'=>'Создать новый проект для этой компании',  # line 548
@@ -906,13 +908,13 @@ $g_lang_table= array(
 'Closed projects'             =>'Завершенные проекты',  # line 708
 
 ### ../pages/person.inc.php   ###
-'Category|form label'         =>'Категории',  # line 1983
+'Category|form label'         =>'Категория',  # line 1983
 
 ### ../pages/company.inc.php   ###
-'Create another company after submit'=>'СОздать сдругую компанию после завершения',  # line 822
+'Create another company after submit'=>'Создать еще один профиль компании после завершения',  # line 822
 
 ### ../pages/person.inc.php   ###
-'Edit %s'                     =>'Редактировать: %s',  # line 2056
+'Edit %s'                     =>'Изменить %s',  # line 2056
 
 ### ../pages/company.inc.php   ###
 'Add persons employed or related'=>'Добавить профили сотрудников или относящиеся профили пользователей',  # line 950
@@ -952,7 +954,7 @@ $g_lang_table= array(
 'Closed|Label in summary'     =>'Завершен',  # line 224
 'Created by|Label in summary' =>'Создан',  # line 228
 'Last modified by|Label in summary'=>'Последнее изменение',  # line 233
-'Logged effort'               =>'Записанные работы',  # line 240
+'Logged effort'               =>'Записанные задания',  # line 240
 'hours'                       =>'часы',  # line 242
 
 ### ../pages/task_view.inc.php   ###
@@ -968,11 +970,11 @@ $g_lang_table= array(
 'Downloads'                   =>'Скачано',  # line 62
 
 ### ../pages/effort.inc.php   ###
-'Select one or more efforts'  =>'Выберите одну или несколько работ',  # line 218
+'Select one or more efforts'  =>'Выберите одну или несколько заданий',  # line 218
 'You do not have enough rights'=>'Недостаточно прав',  # line 257
-'Effort of task|page type'    =>'Работы задачи',  # line 70
-'Edit this effort'            =>'Редактировать эту работу',  # line 88
-'Mark this effort as bookmark'=>'Пометить это работу пометкой',  # line 97
+'Effort of task|page type'    =>'Задания по задаче',  # line 70
+'Edit this effort'            =>'Изменить задание',  # line 88
+'Mark this effort as bookmark'=>'Поместить задание в закладки',  # line 97
 'Project|label'               =>'Проект',  # line 358
 'Task|label'                  =>'Задача',  # line 375
 'No task related'             =>'нет относящейся задачи',  # line 375
@@ -982,28 +984,28 @@ $g_lang_table= array(
 'Time start|label'            =>'Время начала',  # line 392
 'Time end|label'              =>'Время завершения',  # line 393
 'No description available'    =>'Нет доступного описания',  # line 430
-'Multiple Efforts|page type'  =>'Перечень Работ',  # line 270
-'Multiple Efforts'            =>'перечень Работ',  # line 291
+'Multiple Efforts|page type'  =>'Перечень Заданий',  # line 270
+'Multiple Efforts'            =>'перечень Заданий',  # line 291
 
 ### ../pages/item.inc.php   ###
 'summary'                     =>'Итог',  # line 1168
 
 ### ../pages/effort.inc.php   ###
 'Information'                 =>'Информация',  # line 307
-'Number of efforts|label'     =>'Количество работ',  # line 316
-'Sum of efforts|label'        =>'Сумма работ',  # line 320
+'Number of efforts|label'     =>'Количество заданий',  # line 316
+'Sum of efforts|label'        =>'Суммарное время заданий',  # line 320
 'from|time label'             =>'с',  # line 327
 'to|time label'               =>'до',  # line 328
 'Time|label'                  =>'Время',  # line 332
-'New Effort'                  =>'Новая Работа',  # line 452
+'New Effort'                  =>'Новое задание',  # line 452
 
 ### ../pages/file.inc.php   ###
-'only expected one task. Used the first one.'=>'только одна задача. Она и используется.',  # line 374
+'only expected one task. Used the first one.'=>'Требуется только одна задача. Используется первая из указанных.',  # line 374
 
 ### ../pages/effort.inc.php   ###
-'Edit Effort|page type'       =>'Редактировать Работу',  # line 583
-'Edit Effort|page title'      =>'Редактировать Работу',  # line 597
-'New Effort|page title'       =>'Новая Работа',  # line 600
+'Edit Effort|page type'       =>'Изменить задание',  # line 583
+'Edit Effort|page title'      =>'Изменение задания',  # line 597
+'New Effort|page title'       =>'Новое Задание',  # line 600
 'Date / Duration|Field label when booking time-effort as duration'=>'Дата / Длительность',  # line 642
 
 ### ../pages/file.inc.php   ###
@@ -1013,17 +1015,17 @@ $g_lang_table= array(
 'Publish to'                  =>'Опубликовать в',  # line 119
 
 ### ../pages/effort.inc.php   ###
-'Could not get effort'        =>'Невозможно получить работу',  # line 727
-'Could not get project of effort'=>'Невозможно получить проект работы',  # line 743
-'Could not get person of effort'=>'невозможно получить профиль пользователя работы',  # line 749
+'Could not get effort'        =>'Невозможно получить задание',  # line 727
+'Could not get project of effort'=>'Невозможно получить проект задания',  # line 743
+'Could not get person of effort'=>'невозможно получить профиль пользователя указанного задания',  # line 749
 
 ### ../pages/version.inc.php   ###
 'Name required'               =>'Требуется наименование',  # line 198
 
 ### ../pages/effort.inc.php   ###
 'Cannot start before end.'    =>'Невозможно начать перед завершением.',  # line 818
-'Select some efforts to delete'=>'Выберите работы для удаления',  # line 852
-'Failed to delete %s efforts' =>'невозможно удалить %s работ',  # line 871
+'Select some efforts to delete'=>'Выберите задания для удаления',  # line 852
+'Failed to delete %s efforts' =>'невозможно удалить %s заданий',  # line 871
 'Moved %s efforts to trash'   =>'Перемещено %s в корзину',  # line 874
 
 ### ../pages/error.inc.php   ###
@@ -1080,12 +1082,12 @@ $g_lang_table= array(
 'Today'                       =>'Сегодня',  # line 730
 
 ### ../pages/playground.inc.php   ###
-'Personal Efforts'            =>'Личные Работы',  # line 205
-'At Home'                     =>'Дома',  # line 212
+'Personal Efforts'            =>'Личные задания',  # line 205
+'At Home'                     =>'Домой',  # line 212
 
 ### ../pages/home.inc.php   ###
 'Functions'                   =>'Функции',  # line 65
-'View your efforts'           =>'Просмотреть свои работы',  # line 76
+'View your efforts'           =>'Просмотреть свои задания',  # line 76
 'Edit your profile'           =>'Редактировать свой профиль',  # line 77
 'Projects'                    =>'Проекты',  # line 110
 
@@ -1127,10 +1129,10 @@ $g_lang_table= array(
 'Removed %s bookmark(s).'     =>'Удалено %s закладок',  # line 197
 'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'ОШИБКА: Невозможно удалить %s закладок. Попробуйте еще раз.',  # line 201
 'An error occured'            =>'Обнаружена ошибка',  # line 246
-'Edit bookmark: "%s"|page title'=>'Изменение пометки: "%s"',  # line 365
-'Bookmark: "%s"'              =>'Пометка: "%s"',  # line 366
-'Notify if unchanged in'      =>'Оповестить, если без изменений в течении срока в',  # line 696
-'Could not get bookmark'      =>'Невозможно получить пометку',  # line 432
+'Edit bookmark: "%s"|page title'=>'Изменение закладки: "%s"',  # line 365
+'Bookmark: "%s"'              =>'Закладка: "%s"',  # line 366
+'Notify if unchanged in'      =>'Оповестить, если нет изменений',  # line 696
+'Could not get bookmark'      =>'Невозможно получить закладку',  # line 432
 'Added %s bookmark(s).'       =>'Добавлено %s закладок',  # line 813
 'Edit bookmarks'              =>'Изменение закладок',  # line 573
 'Edit multiple bookmarks|page title'=>'Изменение нескольких закладок',  # line 575
@@ -1173,7 +1175,7 @@ $g_lang_table= array(
 'Your projects. Alt-P / Option-P'=>'Ваши проекты. Alt-P / Option-P',  # line 231
 
 ### ../pages/login.inc.php   ###
-'Welcome to streber|Page title'=>'M-Design',  # line 81
+'Welcome to streber|Page title'=>'TYPO3lab Project Management System',  # line 81
 'please login'                =>'Авторизация',  # line 100
 'Nickname|label in login form'=>'Логин|a',  # line 336
 'Password|label in login form'=>'Пароль|a',  # line 109
@@ -1229,8 +1231,8 @@ $g_lang_table= array(
 'Profile|Page function edit person'=>'Профиль',  # line 529
 'Edit User Rights|Tooltip for page function'=>'Назначение прав пользователя',  # line 536
 'User Rights|Page function for edit user rights'=>'Права пользователя',  # line 537
-'Mark this person as bookmark'=>'Сделать пометку из профиля',  # line 545
-'notification:'               =>'уведомления',  # line 559
+'Mark this person as bookmark'=>'Поместить профиль в закладки',  # line 545
+'notification:'               =>'уведомления:',  # line 559
 
 ### ../pages/task_view.inc.php   ###
 'Summary|Block title'         =>'Общее',  # line 243
@@ -1261,9 +1263,9 @@ $g_lang_table= array(
 'not allowed to edit'         =>'редактирование не разрешено',  # line 1273
 'Edit Person|Page type'       =>'Редактировать профиль пользователя',  # line 1902
 'Person with account (can login)|form label'=>'Пользователь с аккаунтом (может входить в систему)',  # line 1954
-'Account'                     =>'Аккаунт',  # line 976
+'Account'                     =>'Учетная запись',  # line 976
 'Password|form label'         =>'Пароль',  # line 1968
-'confirm Password|form label' =>'подтверждение Пароля',  # line 1972
+'confirm Password|form label' =>'Подтверждение',  # line 1972
 '-- reset to...--'            =>'-- сбросить на...--',  # line 1021
 'Profile|form label'          =>'Профиль',  # line 1026
 'daily'                       =>'ежедневно',  # line 1988
@@ -1282,9 +1284,9 @@ $g_lang_table= array(
 'Time zone|form label'        =>'Часовой пояс',  # line 2021
 
 ### ../pages/projectperson.inc.php   ###
-'start times and end times'   =>'внемя начала и завершения',  # line 133
+'start times and end times'   =>'начало и завершение',  # line 133
 'duration'                    =>'длительность',  # line 134
-'Log Efforts as'              =>'Записывать Работы как',  # line 137
+'Log Efforts as'              =>'Фиксировать время заданий',  # line 137
 
 ### ../pages/person.inc.php   ###
 'Create another person after submit'=>'Создать еще один профиль после завершения',  # line 1168
@@ -1338,10 +1340,10 @@ $g_lang_table= array(
 'Company already related to person'=>'Компания уже относится к пользователю',  # line 2134
 'Failed to remove %s companies'=>'Невозможно переместить %s компаний',  # line 2198
 'Removed %s companies'        =>'Удалено %s компаний',  # line 2201
-'Marked all previous items as viewed.'=>'Пометить все предыдущие объекты как просмотренные',  # line 2251
+'Marked all previous items as viewed.'=>'Все обозначенные объекты помечены как просмотренные',  # line 2251
 
 ### ../pages/project_more.inc.php   ###
-'Your Active Projects'        =>'Ваш активный Проект',  # line 46
+'Your Active Projects'        =>'Ваши действующие проекты',  # line 46
 'relating to %s'              =>'относится к %s',  # line 196
 'Your Closed Projects'        =>'Ваши завершенные Проекты',  # line 130
 'not assigned to a closed project'=>'не назначенные к завершенному проекту',  # line 166
@@ -1354,7 +1356,9 @@ $g_lang_table= array(
 '2 weeks'                     =>'2 недели',  # line 371
 'changed project-items'       =>'измененые объекты проекта',  # line 531
 'no changes yet'              =>'еще без изменений',  # line 532
-'my open'                     =>'открытые мною',  # line 621
+'my open'                     =>'открытые мной',  # line 621
+'my blocked'                  =>'заблокированные мной',  # line 621
+'needs feedback'              =>'нуждающиеся в рассмотрении',  # line 621
 'for milestone'               =>'для этапов',  # line 657
 'needs approval'              =>'нуждающиеся в подтверждении',  # line 716
 'without milestone'           =>'без этапов',  # line 740
@@ -1374,7 +1378,7 @@ $g_lang_table= array(
 'Page'                        =>'Страница',  # line 1097
 
 ### ../pages/task_more.inc.php   ###
-'new Effort'                  =>'новая Работа',  # line 2124
+'new Effort'                  =>'новое Задание',  # line 2124
 
 ### ../pages/project_more.inc.php   ###
 'Upload file|block title'     =>'Загрузить файл',  # line 1246
@@ -1384,7 +1388,7 @@ $g_lang_table= array(
 'Project Efforts'             =>'Работы Проекта',  # line 1407
 'Released Versions'           =>'Выполненные/Выпущенные версии',  # line 1497
 'New released Milestone'      =>'Новый завершенный этап',  # line 1516
-'Tasks resolved in upcoming version'=>'задачи, решенные в предполагаемой версии',  # line 1551
+'Tasks resolved in upcomming version'=>'задачи, решенные в предполагаемой версии',  # line 1551
 'Company|form label'          =>'Компания',  # line 1668
 
 ### ../pages/task_more.inc.php   ###
@@ -1416,7 +1420,7 @@ $g_lang_table= array(
 
 ### ../pages/project_view.inc.php   ###
 'Mark this project as bookmark'=>'Поменить проект',  # line 97
-'Book effort for this project'=>'Собрание работ по текущему проекту',  # line 154
+'Book effort for this project'=>'Обозначить задания по текущему проекту',  # line 154
 'Comments on project'         =>'Комментарии проекта',  # line 433
 
 ### ../pages/projectperson.inc.php   ###
@@ -1523,7 +1527,7 @@ $g_lang_table= array(
 'Failed to restore Task <b>%s</b>'=>'Невозможно восстановить Задачу <b>%s</b>',  # line 1668
 'Task <b>%s</b> do not need to be restored'=>'Задача <b>%s</b> не нуждается в восстановлении',  # line 1660
 'No task(s) selected for restoring...'=>'Задачи не выбраны для восстановления',  # line 1679
-'Select some task(s) to mark as completed'=>'Выберите задачи для пометки как выполненные',  # line 1697
+'Select some task(s) to mark as completed'=>'Укажите задачи для пометки как выполненные',  # line 1697
 'Marked %s tasks (%s subtasks) as completed.'=>'Помечено %s задач (%s подзадач) как выполненные',  # line 1740
 'Select some task(s) to mark as approved'=>'Выберите задачи для пометки как подтвержденные',  # line 2511
 'Marked %s tasks as approved and hidden from project-view.'=>'Помечено %s задач как подтвержденные и скрытые со страницы Проекта.',  # line 1782
@@ -1576,7 +1580,7 @@ $g_lang_table= array(
 'Project name|form label'     =>'Наименование Проекта',  # line 3071
 'ERROR: could not get assigned persons'=>'ОШИБКА: невозможно получить назначенных пользователей',  # line 3087
 'Also assign to'              =>'Так же назначить на',  # line 3123
-'Book effort after submit'    =>'Создать работы после завершения',  # line 3127
+'Book effort after submit'    =>'Создать задания после завершения',  # line 3127
 'ERROR: could not get task'   =>'ОШИБКА: невозможно получить задачу',  # line 3165
 'Note requires project'       =>'Заметка требует проекта',  # line 3217
 'Note requires assigned person(s)'=>'Заметка требует назначенных пользователей',  # line 3221
@@ -1602,7 +1606,7 @@ $g_lang_table= array(
 'Created|Label in Task summary'=>'Создано',  # line 1144
 'Modified|Label in Task summary'=>'Изменено',  # line 1148
 'View previous %s versions'   =>'Просмотреть %s предыдущих версий',  # line 1157
-'Logged effort|Label in task-summary'=>'Записанные работы',  # line 339
+'Logged effort|Label in task-summary'=>'Записанные задания',  # line 339
 'Publish to|Label in Task summary'=>'Опубликовано в',  # line 1168
 'Set to Open'                 =>'Назначить к Открытию',  # line 1171
 'Further Documentation'       =>'Сопутствующая допументация',  # line 383
@@ -1610,7 +1614,7 @@ $g_lang_table= array(
 'attach new'                  =>'присоеденить новый',  # line 1212
 'Severity|label in issue-reports'=>'Серъезность',  # line 503
 'Reproducibility|label in issue-reports'=>'Воспроизводимость',  # line 510
-'Platform'                   =>'Платформа',  # line 516
+'Plattform'                   =>'Платформа',  # line 516
 'OS'                          =>'OS',  # line 519
 'Build'                       =>'Билд',  # line 525
 'Steps to reproduce|label in issue-reports'=>'Шагов к воспроизведению',  # line 530
@@ -1626,7 +1630,7 @@ $g_lang_table= array(
 'quick edit'                  =>'быстрое редактирование',  # line 723
 'Update'                      =>'Обновить',  # line 764
 'Public to'                   =>'Опубликовать в',  # line 803
-'Book Effort'                 =>'Назначить работы',  # line 1109
+'Book Effort'                 =>'Назначить задания',  # line 1109
 
 ### ../pages/version.inc.php   ###
 'Edit Version|page type'      =>'Изменение Версии',  # line 79
@@ -1649,7 +1653,7 @@ $g_lang_table= array(
 'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'Извините. Что бы снизить эффективность спам ботов, гости должны скопировать текст.',  # line 64
 'Wiki format'                 =>'Формат Wiki',  # line 416
 'Submit'                      =>'Сохранить',  # line 578
-'Cancel'                      =>'Отменить',  # line 618
+'Cancel'                      =>'Отмена',  # line 618
 'Apply'                       =>'Применить',  # line 628
 
 ### ../render/render_list.inc.php   ###
@@ -1684,7 +1688,7 @@ $g_lang_table= array(
 'Partners|page option'        =>'Партнеры',  # line 473
 'Companies|page option'       =>'Компании',  # line 268
 'Tasks|Project option'        =>'Задачи',  # line 374
-'Docu|Project option'         =>'Доки',  # line 380
+'Docu|Project option'         =>'Документация',  # line 380
 'Milestones|Project option'   =>'Этапы',  # line 387
 'Releases|Project option'     =>'Релизы',  # line 395
 'Files|Project option'        =>'Файлы',  # line 404
@@ -1765,7 +1769,7 @@ $g_lang_table= array(
 'Operation aborted (%s)'      =>'Опирация прервана (%s)',  # line 742
 'Operation aborted with an fatal error (%s).'=>'Операция прервана с фатальной ошибкой (%s)',  # line 745
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'Операция прервана с фатальной ошибкой по причине программной ошибки (%s).',  # line 748
-'insufficient rights'           =>'Недостаточно прав',  # line 757
+'Insuffient rights'           =>'Недостаточно прав',  # line 757
 'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Операция прервана в связи с фатальной ошибкой структуры базы данных. Настоятельно рекомендуем вам загрузить последнее автосохранение (BackUp)',  # line 761
 
 ### ../std/common.inc.php   ###
@@ -1780,7 +1784,7 @@ $g_lang_table= array(
 'upcoming|status_name'        =>'входящий',  # line 20
 'new|status_name'             =>'новый',  # line 21
 'open|status_name'            =>'открыт',  # line 22
-'blocked|status_name'         =>'заблокирован',  # line 23
+'blocked|status_name'         =>'заблокированные',  # line 23
 'done?|status_name'           =>'готов?',  # line 24
 'approved|status_name'        =>'подтвержден',  # line 25
 'closed|status_name'          =>'завершен',  # line 26
@@ -1837,15 +1841,15 @@ $g_lang_table= array(
 'Employment'                  =>'Рабочий',  # line 124
 'Issue'                       =>'Отчет',  # line 125
 'Task assignment'             =>'Назначение Задач',  # line 130
-'Nitpicky|severity'           =>'Капризный',  # line 137
+'Nitpicky|severity'           =>'Неустойчивая работа',  # line 137
 'Feature|severity'            =>'Возможность',  # line 138
 'Trivial|severity'            =>'Тривиальный',  # line 139
 'Text|severity'               =>'Текст',  # line 140
-'Tweak|severity'              =>'Надстройка',  # line 141
+'Tweak|severity'              =>'Улучшение',  # line 141
 'Minor|severity'              =>'Второстепенный',  # line 142
 'Major|severity'              =>'Главный',  # line 143
 'Crash|severity'              =>'Сбой',  # line 144
-'Block|severity'              =>'Блок',  # line 145
+'Block|severity'              =>'Блокирует работу',  # line 145
 'Not available|reproducabilty'=>'Недоступно',  # line 150
 'Always|reproducabilty'       =>'Всегда',  # line 151
 'Sometimes|reproducabilty'    =>'Иногда',  # line 152
@@ -1860,7 +1864,7 @@ $g_lang_table= array(
 'deferred|Resolve reason'     =>'отложено',  # line 166
 'Not defined|release type'    =>'Не определено',  # line 172
 'Not planned|release type'    =>'Не запланировано',  # line 173
-'upcoming|release type'      =>'В планах',  # line 174
+'Upcomming|release type'      =>'В планах',  # line 174
 'Internal|release type'       =>'Внутренний',  # line 175
 'Public|release type'         =>'Общедоступный',  # line 176
 'Without support|release type'=>'Без поддержки',  # line 177
@@ -1904,7 +1908,7 @@ $g_lang_table= array(
 
 ### ../std/mail.inc.php   ###
 'Failure sending mail: %s'    =>'Невозможно отправить почтовое сообщение: %s',  # line 49
-'Streber Email Notification|notifcation mail from'=>'Системное уведомление',  # line 572
+'Streber Email Notification|notifcation mail from'=>'System message',  # line 572
 'Updates at %s|notication mail subject'=>'Обновлено в %s',  # line 116
 'Hello %s,|notification'      =>'Приветствую, %s',  # line 607
 'with this automatically created e-mail we want to inform you that|notification'=>'этим автоматическим уведомлением мы хотим уведомить вас в том, что',  # line 135
@@ -1928,27 +1932,233 @@ $g_lang_table= array(
 'Your login name is|notification'=>'Ваш логин',  # line 611
 'Maybe you want to %s set your password|notification'=>'Может вы желаете %s изменить свой пароль?',  # line 612
 
+### ../__obsolete/class_version.inc.php   ###
+'Time Released'               =>'Время выпуска',  # line 50
 
-#-------------------- ADDED NEW
+### ../_docs/changes.inc.php   ###
+'to'                          =>'',  # line 90
+'you'                         =>'вы',  # line 90
+'assign to'                   =>'назначено',  # line 93
 
-'Warning' =>'Внимание',
+### ../db/class_person.inc.php   ###
+'Optional: (eg. thomas@pixtur.de)'=>'Не обязательно',  # line 138
 
+### ../db/class_projectperson.inc.php   ###
+'Salary per hour'             =>'',  # line 91
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'in Euro'                     =>'в Евро',  # line 221
+
+### ../pages/project_more.inc.php   ###
+'Released versions'           =>'Выпущеные версии',  # line 1712
+
+### ../db/class_task.inc.php   ###
+'Calculation'                 =>'Вычисления',  # line 184
+'Topic'                       =>'Статья',  # line 1279
+
+### ../lists/list_efforts.inc.php   ###
+'Status|column header'        =>'Статус',  # line 319
+
+### ../lists/list_effortsperson.inc.php   ###
+'Efforts on team member'      =>'Задания участника команды',  # line 28
+
+### ../lists/list_effortstask.inc.php   ###
+'Total effort sum: %s hours'  =>'Суммарное количество заданий: %s ч.',  # line 98
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Role|columnheader'           =>'Роль',  # line 101
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Sum|columnheader'            =>'Сумм.',  # line 168
+
+### ../lists/list_effortstask.inc.php   ###
+'Effortgraph|columnheader'    =>'Задачеметр',  # line 162
+
+### ../lists/list_effortspersoncalculation.inc.php   ###
+'Calculation on team member'  =>'Вычисления по участнику команды',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Calculation|columnheader'    =>'Вычисления',  # line 221
+'Costgraph|columnheader'      =>'Стоимости',  # line 251
+
+### ../lists/list_effortsprojectcalculation.inc.php   ###
+'Calculation for project'     =>'Вычисления по проекту',  # line 28
+'Project|columnheader'        =>'Проект',  # line 90
+
+### ../lists/list_effortstask.inc.php   ###
+'Efforts on task'             =>'Заданий по задаче',  # line 28
+
+### ../lists/list_effortstaskcalculation.inc.php   ###
+'Task|columnheader'           =>'Задача',  # line 116
+'Calculation on task'         =>'Вычисления по задаче',  # line 28
+
+### ../lists/list_tasks.inc.php   ###
+'Estimated/Booked (Diff.)'    =>'Осталось/Всего (Разница)',  # line 1204
+'Relation between estimated time and booked efforts'=>'Отношение оставшегося времени к обозначеным заданиям',  # line 1257
+'Completion:'                 =>'Завершение:',  # line 1255
+
+### ../pages/task_more.inc.php   ###
+'New folder'                  =>'Новая папка',  # line 337
+
+### ../lists/list_recentchanges.inc.php   ###
+'Recently changes'            =>'Последние изменения',  # line 51
+'Show more'                   =>'Показать больше',  # line 90
+
+### ../std/class_rss.inc.php   ###
+'Updated'                     =>'Обновленные',  # line 105
+
+### ../pages/home.inc.php   ###
+'Your Tasks'                  =>'Ваши задачи',  # line 754
+
+### ../pages/_handles.inc.php   ###
+'Bookmarks'                   =>'Закладки',  # line 42
+'Overall history'             =>'Вся история',  # line 58
+'Edit multiple bookmarks'     =>'Изменить несколько закладок',  # line 133
+
+### ../pages/project_more.inc.php   ###
+'New released Version'        =>'Новые выпущенные Версии',  # line 1731
+
+### ../pages/_handles.inc.php   ###
+'View Projects of Person'     =>'Показать Проекты участника',  # line 1067
+'View Task of Person'         =>'Показать Задачи участника',  # line 1078
+'View Changes of Person'      =>'Показать Изменения участника',  # line 1100
+
+### ../pages/home.inc.php   ###
+'Mark all items as viewed'    =>'Пометить объекты как просмотренные',  # line 94
+
+### ../pages/company.inc.php   ###
+'clients'                     =>'клиенты',  # line 47
+'prospective clients'         =>'потенциальные клиенты',  # line 66
+'supplier'                    =>'поставщик',  # line 85
+'partner'                     =>'партнер',  # line 104
+
+### ../pages/person.inc.php   ###
+'edit'                        =>'изменить',  # line 720
+
+### ../pages/project_view.inc.php   ###
+'Create wiki documentation page or start discussion topic'=>'Создать страницу документации или тему для обсуждения',  # line 163
+
+### ../pages/task_view.inc.php   ###
+'New topic'                   =>'Новая Статья',  # line 1058
+
+### ../pages/project_view.inc.php   ###
+'Book effort'                 =>'Обозначить задание',  # line 174
+
+### ../pages/effort.inc.php   ###
+'Select some efforts(s) to edit'=>'Выберите задания для изменения',  # line 1052
+'For editing all efforts must be of same project.'=>'Что бы изменить несколько заданий, они должны принадлежать одному проекту',  # line 884
+'Edit multiple efforts|Page title'=>'Изменить несколько заданий',  # line 906
+'Edit %s efforts|Page title'  =>'Изменение %s заданий',  # line 907
+'Edited %s effort(s).'        =>'Изменено %s заданий(е/я)',  # line 1094
+'Error while editing %s effort(s).'=>'Ошибка при попытке изменения %s заданий',  # line 1098
+
+### ../pages/home.inc.php   ###
+'Edit your Profile'           =>'Изменить свой профиль',  # line 86
+'for|short for client'        =>'для',  # line 133
+'without client'              =>'без клиента',  # line 145
+'Your Bookmarks'              =>'Ваши закладки',  # line 202
+'Your efforts'                =>'Ваши задания',  # line 963
+
+### ../pages/misc.inc.php   ###
+'Could not find requested page `%s`'=>'Не могу найти запрошенную страницу `%s`',  # line 46
+
+### ../pages/person.inc.php   ###
+'without account'             =>'без аккаунта',  # line 165
+'with account'                =>'с аккаунтом',  # line 183
+'employees'                   =>'работники',  # line 201
+'contact persons'             =>'контактное лицо',  # line 220
+'notification'                =>'уведомление',  # line 757
+'Last login|Label'            =>'Проследний вход',  # line 835
+'Projects|Page title add on'  =>'Проекты',  # line 1095
+'blocked'                     =>'заблокированные',  # line 1243
+'Tasks|Page title add on'     =>'Задачи',  # line 1348
+'no tasks yet'                =>'задач нет',  # line 1372
+'Changes|Page title add on'   =>'Изменения',  # line 1788
+'Enable efforts'              =>'Включить задания',  # line 2146
+'Enable bookmarks'            =>'Включить закладки',  # line 2147
+
+### ../pages/task_more.inc.php   ###
+'Internal'                    =>'Внутренний',  # line 733
+
+### ../pages/person.inc.php   ###
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'Из-за опасения использования регистрации спам-ботами, просим вас указать причину регистрации.',  # line 2963
+'Login-accounts require a full name.'=>'Учетные записи с логином требуют указания полного имени',  # line 3245
+'Please enter an e-mail address.'=>'Укажите электронную почту.',  # line 3255
+'Please copy the text from the image.'=>'Напишите что написано на изображении',  # line 3329
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Спасибо за регистрацию! После подтверждения администрацией вы сможете пользоваться возможностями системы.',  # line 3358
+
+### ../pages/project_more.inc.php   ###
+'Reanimated person %s as team-member'=>'%s Восстановлен как участник Команды',  # line 2388
+'Person %s already in project'=>'%s уже в проекте',  # line 2392
+
+### ../pages/task_more.inc.php   ###
+'New version'                 =>'Новая версия',  # line 331
+'Because task is resolved, its status has been changed to completed.'=>'Задача решена, статус задачи установлен как завершенная',  # line 1162
+'Task has resolved version but is not completed?'=>'Задача решена но не завершена?',  # line 1168
+'Changed %s %s with ID %s|type,link,id'=>'Изменено: %s %s (ID %s)',  # line 1359
+
+### ../pages/task_view.inc.php   ###
+'Edit this %s'                =>'Изменить %s',  # line 79
+'Resolved tasks|Block title'  =>'Решенные задачи',  # line 586
+
+### ../pages/version.inc.php   ###
+'Moved %s versions to trash'  =>'%s Версии перемещены в корзину',  # line 253
+
+### ../render/render_misc.inc.php   ###
+'Versions|Project option'     =>'Версии',  # line 585
+'Persons|page option'         =>'Люди',  # line 619
+'%s min ago'                  =>'%s минут назад',  # line 967
+'1 hour ago'                  =>'1 час назад',  # line 970
+'%s hours ago'                =>'%s часов назад',  # line 973
+'%s days ago'                 =>'%s дней назад',  # line 977
+'%s months ago'               =>'%s месяцев назад',  # line 980
+
+### ../render/render_wiki.inc.php   ###
+'No item matches this name...'=>'Нет объектов, совпажающих с указанным именем...',  # line 1282
+'Warning: Could not find wiki chapter'=>'Внимание! Не могу найти заголовок Wiki-раздела',  # line 2002
+
+### ../std/class_auth.inc.php   ###
+'Sorry. Authentication failed'=>'Авторизация эпически провалилась!',  # line 381
+
+### ../std/class_changeline.inc.php   ###
+'Latest comment:'             =>'Последний комментарий:',  # line 261
+'changed File'                =>'изменил Файл',  # line 447
+'deleted File'                =>'удалил Файл',  # line 517
+
+### ../std/class_rss.inc.php   ###
+'???'                         =>'',  # line 93
+
+### ../std/constant_names.inc.php   ###
+'Enable Bugreports|Project setting'=>'Включить отчеты об ошибках (Bugreports)',  # line 77
+'new|effort status'           =>'новое',  # line 241
+'open|effort status'          =>'открытое',  # line 242
+'discounted|effort status'    =>'отмененное',  # line 243
+'not chargeable|effort status'=>'невыполнимое',  # line 244
+'balanced|effort status'      =>'на балансе',  # line 245
+
+###################################### Totally newwer
+
+'Hide your changes'      	=>'Скрыть Ваши изменения',  
+'Overall Changes'      		=>'Общие изменения',  
+'Recent changes'      		=>'Последние изменения',  
+'Warning' 					=>'Внимание',
 'Edit own profile|a user right' =>'Изменить свой профиль',
-
-'discounted' =>'не принятые',
-
-'not chargeable' =>'не подтвержденные',
-
-'balanced' =>'колеблющиеся',
-
-'Edit multiple efforts' =>'Изменение нескольких работ',
-
-'Hint' =>'Подсказка',
-
-'Homepage' => 'WWW',
-
-'today' =>'сегодня',
-'yesterday' =>'вчера',
+'discounted' 				=>'не принятые',
+'not chargeable' 			=>'не подтвержденные',
+'balanced' 					=>'колеблющиеся',
+'Edit multiple efforts' 	=>'Изменение нескольких заданий',
+'Hint' 						=>'Подсказка',
+'Homepage' 					=> 'WWW',
+'today' 					=>'сегодня',
+'yesterday' 				=>'вчера',
+'Filter own changes from recent changes list' => 'Скрывать собственные изменения из списка последних изменений',
+'Also show your changes' 	=>'Показать так же и Ваши изменения',
+'No changes by others' 		=>'Нет изменений другими',
+'ASAP'						=>'как только, так сразу!',
+'This task has no description. Doubleclick to edit.' => 'Описание задачи отсутствует. Двойной клик для изменения.',
+'Topics'					=> 'Статьи',
+'Versions'					=> 'Версии',
+'Files'						=> 'Файлы',
 );
 
 ?>

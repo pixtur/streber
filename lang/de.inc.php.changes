@@ -1,50 +1,6 @@
 undefined keys:
 ---------------
 
-### ../lists/list_files.inc.php   ###
-'creatd on %s|date a file was created'=>'',  # line 453
-'click to show details'       =>'',  # line 458
-'by %s|person who uploaded a file'=>'',  # line 461
-
-### ../lists/list_recentchanges.inc.php   ###
-'No changes by others'        =>'',  # line 62
-'No changes yet'              =>'',  # line 66
-
 ### ../lists/list_tasks.inc.php   ###
-'Review'                      =>'',  # line 1250
-'Task status set to completed and needs approval.'=>'',  # line 1251
-'Item was approved on: %s:|date a task was approved'=>'',  # line 1254
-'done'                        =>'',  # line 1255
-'this task is planned to be completed today.'=>'',  # line 1266
-'Tomorrow'                    =>'',  # line 1271
-'this task is planned to be completed tomorrow.'=>'',  # line 1272
-'Next week'                   =>'',  # line 1278
-'due: %s'                     =>'',  # line 1307
-'days'                        =>'',  # line 1284
-'this task is overdue!'       =>'',  # line 1288
-' late'                       =>'',  # line 1289
-' remain'                     =>'',  # line 1293
-'Pending'                     =>'',  # line 1299
-'start: %s'                   =>'',  # line 1302
-
-### ../pages/file.inc.php   ###
-'Uploaded new version of file with Id %s'=>'',  # line 625
-'Uploaded new file with Id %s'=>'',  # line 628
-'Updated file with Id %s'     =>'',  # line 632
-
-### ../pages/person.inc.php   ###
-'Updated settings for %s.'    =>'',  # line 2674
-
-### ../render/render_misc.inc.php   ###
-'never'                       =>'',  # line 1015
-'just now'                    =>'',  # line 1019
-'%smin ago'                   =>'',  # line 1022
-'%sh ago'                     =>'',  # line 1028
-'%s years ago'                =>'',  # line 1039
-
-### ../std/constant_names.inc.php   ###
-'View all Companies|a user right'=>'',  # line 104
-
-### ../std/mail.inc.php   ###
-'Please use this link to'     =>'',  # line 621
-'update your account settings'=>'',  # line 624
+'late|time status of a task'  =>'',  # line 1289
+'remain|time status of a task'=>'',  # line 1293
