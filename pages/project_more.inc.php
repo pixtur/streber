@@ -2059,7 +2059,7 @@ function projEdit($project=NULL)
 {
     global $PH;
     global $auth;
-    require_once ("./db/class_company.inc.php");
+    require_once (confGet('DIR_STREBER')."db/class_company.inc.php");
 
     if(!$project) {
 
