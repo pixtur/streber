@@ -1,158 +1,110 @@
 undefined keys:
 ---------------
-
-### ../db/class_projectperson.inc.php   ###
-'Salary per hour'             =>'',  # line 91
-
-### ../db/class_project.inc.php   ###
-'insufficient rights (not in project)'=>'',  # line 1215
-'Milestones (closed)'         =>'',  # line 1461
-
-### ../db/class_task.inc.php   ###
-'Display in project news'     =>'',  # line 190
-'List title and description in project overview'=>'',  # line 191
-'Display folder as topic'     =>'',  # line 197
-
-### ../lists/list_files.inc.php   ###
-'creatd on %s|date a file was created'=>'',  # line 453
-'click to show details'       =>'',  # line 458
-'by %s|person who uploaded a file'=>'',  # line 461
-
-### ../lists/list_forwardedtasks.inc.php   ###
-'Your demand notes'           =>'',  # line 33
-'You have no demand notes'    =>'',  # line 34
-
-### ../lists/list_recentchanges.inc.php   ###
-'No changes yet'              =>'',  # line 66
-'Needs feedback'              =>'',  # line 189
-
-### ../lists/list_tasks.inc.php   ###
-'Days until planned end'      =>'',  # line 1233
-'Due|column header, days until planned end'=>'',  # line 1234
-'Review'                      =>'',  # line 1250
-'Task status set to completed and needs approval.'=>'',  # line 1251
-'Item was approved on: %s:|date a task was approved'=>'',  # line 1254
-'done'                        =>'',  # line 1255
-'This task is planned to be completed today.'=>'',  # line 1266
-'Tomorrow'                    =>'',  # line 1271
-'This task is planned to be completed tomorrow.'=>'',  # line 1272
-'Next week'                   =>'',  # line 1278
-'due: %s'                     =>'',  # line 1307
-'days'                        =>'',  # line 1284
-'this task is overdue!'       =>'',  # line 1288
-'late|time status of a task'  =>'',  # line 1289
-'remain|time status of a task'=>'',  # line 1293
-'Pending'                     =>'',  # line 1299
-'start: %s'                   =>'',  # line 1302
-
-### ../pages/_handles.inc.php   ###
-'Recent changes|Page option tab'=>'',  # line 19
-'Overall changes'             =>'',  # line 58
-'Toggle filter own changes'   =>'',  # line 1195
-
-### ../pages/bookmark.inc.php   ###
-'Please select some items'    =>'',  # line 509
-
-### ../pages/comment.inc.php   ###
-'Re: '                        =>'',  # line 243
-
-### ../pages/file.inc.php   ###
-'Uploaded new version of file with Id %s'=>'',  # line 625
-'Uploaded new file with Id %s'=>'',  # line 628
-'Updated file with Id %s'     =>'',  # line 632
-
-### ../pages/person.inc.php   ###
-'3 weeks'                     =>'',  # line 1533
-'1 month'                     =>'',  # line 1553
-'prior'                       =>'',  # line 1573
-
-### ../pages/login.inc.php   ###
-'Welcome to %s|Notice after login'=>'',  # line 262
-
-### ../pages/misc.inc.php   ###
-'One notification sent'       =>'',  # line 426
-'%s notifications sent'       =>'',  # line 429
-'No notifications sent'       =>'',  # line 432
-
-### ../pages/person.inc.php   ###
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 627
-'Add note|Page function person'=>'',  # line 628
-'Edit profile|Page function edit person'=>'',  # line 642
-'Edit user Rights|Page function for edit user rights'=>'',  # line 650
-'Authentication with|form label'=>'',  # line 2072
-'Updated settings for %s.'    =>'',  # line 2673
-
-### ../pages/project_more.inc.php   ###
-'New project from'            =>'',  # line 57
-'No topics yet'               =>'',  # line 1145
-'all|Filter preset'           =>'',  # line 1368
-'new|Filter preset'           =>'',  # line 1388
-'open|Filter preset'          =>'',  # line 1408
-'discounted|Filter preset'    =>'',  # line 1428
-'not chargeable|Filter preset'=>'',  # line 1448
-'balanced|Filter preset'      =>'',  # line 1468
-'last logout|Filter preset'   =>'',  # line 1488
-'1 week|Filter preset'        =>'',  # line 1507
-'2 weeks|Filter preset'       =>'',  # line 1527
-'3 weeks|Filter preset'       =>'',  # line 1547
-'1 month|Filter preset'       =>'',  # line 1567
-'prior|Filter preset'         =>'',  # line 1587
-'View calculation'            =>'',  # line 1670
-'Effort calculations'         =>'',  # line 1853
-'Tasks resolved in upcoming version'=>'',  # line 2004
-
-### ../pages/task_more.inc.php   ###
-'Nickname not known in this project: %s'=>'',  # line 894
-'Requested feedback from: %s.'=>'',  # line 899
-
-### ../pages/task_view.inc.php   ###
-'Your feedback is requested by %s.'=>'',  # line 1192
-'Please edit or comment this item.'=>'',  # line 1193
-'Platform'                    =>'',  # line 471
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1207
-'Request feedback'            =>'',  # line 1291
-
-### ../render/render_misc.inc.php   ###
-'without client|short for client'=>'',  # line 540
-'Topics|Project option'       =>'',  # line 617
-'Calculation|Project option'  =>'',  # line 658
-'Changes|Project option'      =>'',  # line 666
-'never'                       =>'',  # line 1016
-'just now'                    =>'',  # line 1020
-'%smin ago'                   =>'',  # line 1023
-'%sh ago'                     =>'',  # line 1029
-'%s years ago'                =>'',  # line 1040
-
-### ../render/render_page.inc.php   ###
-'Home|section'                =>'',  # line 247
-
-### ../render/render_wiki.inc.php   ###
-'Update|wiki change marker'   =>'',  # line 224
-'New|wiki change marker'      =>'',  # line 230
-'Deleted|wiki change marker'  =>'',  # line 236
-'Link to this chapter'        =>'',  # line 714
-'Item #%s is not an image'    =>'',  # line 1121
-'Unkwown item %s'             =>'',  # line 1210
-'Cannot link to item #%s of type %s'=>'',  # line 1271
-
-### ../std/class_rss.inc.php   ###
-'???'                         =>'',  # line 93
-
-### ../std/constant_names.inc.php   ###
-'Enable tasks|Project setting'=>'',  # line 74
-'Enable files|Project setting'=>'',  # line 75
-'Enable efforts|Project setting'=>'',  # line 76
-'Enable milestones|Project setting'=>'',  # line 77
-'Enable versions|Project setting'=>'',  # line 78
-'Enable bugreports|Project setting'=>'',  # line 79
-'Enable news|Project setting' =>'',  # line 80
-'View all Companies|a user right'=>'',  # line 104
-'Topic|Task Category'         =>'',  # line 220
-'ASAP|notification period'    =>'',  # line 231
-
-### ../std/mail.inc.php   ###
-'Forgot your password or how to log in?|notification'=>'',  # line 464
-'Request a mail to change your account settings.|notification'=>'',  # line 455
-'Click here:'                 =>'',  # line 465
-'Please use this link to'     =>'',  # line 621
-'update your account settings'=>'',  # line 624
+'Salary per hour'             =>'',
+'insufficient rights (not in project)'=>'',
+'Milestones (closed)'         =>'',
+'Display in project news'     =>'',
+'List title and description in project overview'=>'',
+'Display folder as topic'     =>'',
+'creatd on %s|date a file was created'=>'',
+'click to show details'       =>'',
+'by %s|person who uploaded a file'=>'',
+'Your demand notes'           =>'',
+'You have no demand notes'    =>'',
+'No changes yet'              =>'',
+'Needs feedback'              =>'',
+'Days until planned end'      =>'',
+'Due|column header, days until planned end'=>'',
+'Review'                      =>'',
+'Task status set to completed and needs approval.'=>'',
+'Item was approved on: %s:|date a task was approved'=>'',
+'done'                        =>'',
+'This task is planned to be completed today.'=>'',
+'Tomorrow'                    =>'',
+'This task is planned to be completed tomorrow.'=>'',
+'Next week'                   =>'',
+'due: %s'                     =>'',
+'days'                        =>'',
+'this task is overdue!'       =>'',
+'late|time status of a task'  =>'',
+'remain|time status of a task'=>'',
+'Pending'                     =>'',
+'start: %s'                   =>'',
+'Recent changes|Page option tab'=>'',
+'Overall changes'             =>'',
+'Toggle filter own changes'   =>'',
+'Please select some items'    =>'',
+'Re: '                        =>'',
+'Uploaded new version of file with Id %s'=>'',
+'Uploaded new file with Id %s'=>'',
+'Updated file with Id %s'     =>'',
+'3 weeks'                     =>'',
+'1 month'                     =>'',
+'prior'                       =>'',
+'Welcome to %s|Notice after login'=>'',
+'One notification sent'       =>'',
+'%s notifications sent'       =>'',
+'No notifications sent'       =>'',
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',
+'Add note|Page function person'=>'',
+'Edit profile|Page function edit person'=>'',
+'Edit user Rights|Page function for edit user rights'=>'',
+'Authentication with|form label'=>'',
+'Updated settings for %s.'    =>'',
+'New project from'            =>'',
+'No topics yet'               =>'',
+'all|Filter preset'           =>'',
+'new|Filter preset'           =>'',
+'open|Filter preset'          =>'',
+'discounted|Filter preset'    =>'',
+'not chargeable|Filter preset'=>'',
+'balanced|Filter preset'      =>'',
+'last logout|Filter preset'   =>'',
+'1 week|Filter preset'        =>'',
+'2 weeks|Filter preset'       =>'',
+'3 weeks|Filter preset'       =>'',
+'1 month|Filter preset'       =>'',
+'prior|Filter preset'         =>'',
+'View calculation'            =>'',
+'Effort calculations'         =>'',
+'Tasks resolved in upcoming version'=>'',
+'Nickname not known in this project: %s'=>'',
+'Requested feedback from: %s.'=>'',
+'Your feedback is requested by %s.'=>'',
+'Please edit or comment this item.'=>'',
+'Platform'                    =>'',
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',
+'Request feedback'            =>'',
+'without client|short for client'=>'',
+'Topics|Project option'       =>'',
+'Calculation|Project option'  =>'',
+'Changes|Project option'      =>'',
+'never'                       =>'',
+'just now'                    =>'',
+'%smin ago'                   =>'',
+'%sh ago'                     =>'',
+'%s years ago'                =>'',
+'Home|section'                =>'',
+'Update|wiki change marker'   =>'',
+'New|wiki change marker'      =>'',
+'Deleted|wiki change marker'  =>'',
+'Link to this chapter'        =>'',
+'Item #%s is not an image'    =>'',
+'Unkwown item %s'             =>'',
+'Cannot link to item #%s of type %s'=>'',
+'???'                         =>'',
+'Enable tasks|Project setting'=>'',
+'Enable files|Project setting'=>'',
+'Enable efforts|Project setting'=>'',
+'Enable milestones|Project setting'=>'',
+'Enable versions|Project setting'=>'',
+'Enable bugreports|Project setting'=>'',
+'Enable news|Project setting' =>'',
+'View all Companies|a user right'=>'',
+'Topic|Task Category'         =>'',
+'ASAP|notification period'    =>'',
+'Forgot your password or how to log in?|notification'=>'',
+'Request a mail to change your account settings.|notification'=>'',
+'Click here:'                 =>'',
+'Please use this link to'     =>'',
+'update your account settings'=>'',

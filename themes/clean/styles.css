@@ -144,9 +144,9 @@ div#sections span.section {
  font-weight:   bold;
  background:    #B1B1B1 url(layout/bg_section_tabs.png) bottom left repeat-x;
  padding:       0.0em 0.5em;
- line-height:   160%;
+ line-height:   170%;
  margin:        3px 0px 0px 2px;
- padding-bottom: 2px;
+ padding-bottom: 1px;
 }
 
 div#sections span.section a {                
@@ -215,8 +215,10 @@ div#nav_sub {
  margin:        0px;
  padding:       2px 1.22em 0px 0px;
  background:    #D7DADB url(layout/bg_header_pages.png) repeat-x bottom left;
- font-size:     10pt;
- line-height:   28px;
+ font-size:     13px;
+ line-height:   26px;
+ height:        25px;
+ overflow:      hidden;
 }
 div#nav_sub a {
  color:         #000;

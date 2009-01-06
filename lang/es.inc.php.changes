@@ -1,318 +1,214 @@
 undefined keys:
 ---------------
-
-### ../db/class_projectperson.inc.php   ###
-'Salary per hour'             =>'',  # line 91
-
-### ../lists/list_effortstaskcalculation.inc.php   ###
-'in Euro'                     =>'',  # line 221
-
-### ../db/class_project.inc.php   ###
-'Milestones (closed)'         =>'',  # line 1461
-
-### ../pages/project_more.inc.php   ###
-'Released versions'           =>'',  # line 1949
-
-### ../db/class_task.inc.php   ###
-'Calculation'                 =>'',  # line 185
-'Display in project news'     =>'',  # line 190
-'List title and description in project overview'=>'',  # line 191
-'Display folder as topic'     =>'',  # line 197
-
-### ../lists/list_efforts.inc.php   ###
-'Status|column header'        =>'',  # line 319
-
-### ../lists/list_effortsperson.inc.php   ###
-'Efforts on team member'      =>'',  # line 30
-
-### ../lists/list_effortstask.inc.php   ###
-'Total effort sum: %s hours'  =>'',  # line 98
-
-### ../lists/list_effortspersoncalculation.inc.php   ###
-'Role|columnheader'           =>'',  # line 101
-
-### ../lists/list_effortstaskcalculation.inc.php   ###
-'Sum|columnheader'            =>'',  # line 168
-
-### ../lists/list_effortstask.inc.php   ###
-'Effortgraph|columnheader'    =>'',  # line 162
-
-### ../lists/list_effortspersoncalculation.inc.php   ###
-'Calculation on team member'  =>'',  # line 28
-
-### ../lists/list_effortstaskcalculation.inc.php   ###
-'Calculation|columnheader'    =>'',  # line 221
-'Costgraph|columnheader'      =>'',  # line 251
-
-### ../lists/list_effortsprojectcalculation.inc.php   ###
-'Calculation for project'     =>'',  # line 28
-'Project|columnheader'        =>'',  # line 90
-
-### ../lists/list_effortstask.inc.php   ###
-'Efforts on task'             =>'',  # line 28
-
-### ../lists/list_effortstaskcalculation.inc.php   ###
-'Task|columnheader'           =>'',  # line 116
-'Calculation on task'         =>'',  # line 28
-
-### ../lists/list_tasks.inc.php   ###
-'Estimated/Booked (Diff.)'    =>'',  # line 1169
-'Relation between estimated time and booked efforts'=>'',  # line 1222
-'Completion:'                 =>'',  # line 1220
-
-### ../lists/list_files.inc.php   ###
-'creatd on %s|date a file was created'=>'',  # line 453
-'click to show details'       =>'',  # line 458
-'by %s|person who uploaded a file'=>'',  # line 461
-
-### ../lists/list_forwardedtasks.inc.php   ###
-'Your demand notes'           =>'',  # line 33
-'You have no demand notes'    =>'',  # line 34
-
-### ../lists/list_recentchanges.inc.php   ###
-'Recent changes'              =>'',  # line 79
-'No changes by others'        =>'',  # line 62
-'Also show your changes'      =>'',  # line 119
-'No changes yet'              =>'',  # line 66
-'Hide your changes'           =>'',  # line 122
-'Show more'                   =>'',  # line 130
-'Needs feedback'              =>'',  # line 189
-
-### ../std/class_rss.inc.php   ###
-'Updated'                     =>'',  # line 105
-
-### ../lists/list_tasks.inc.php   ###
-'Days until planned end'      =>'',  # line 1233
-'Due|column header, days until planned end'=>'',  # line 1234
-'Review'                      =>'',  # line 1250
-'Task status set to completed and needs approval.'=>'',  # line 1251
-'Item was approved on: %s:|date a task was approved'=>'',  # line 1254
-'done'                        =>'',  # line 1255
-'This task is planned to be completed today.'=>'',  # line 1266
-'Tomorrow'                    =>'',  # line 1271
-'This task is planned to be completed tomorrow.'=>'',  # line 1272
-'Next week'                   =>'',  # line 1278
-'due: %s'                     =>'',  # line 1307
-'days'                        =>'',  # line 1284
-'this task is overdue!'       =>'',  # line 1288
-'late|time status of a task'  =>'',  # line 1289
-'remain|time status of a task'=>'',  # line 1293
-'Pending'                     =>'',  # line 1299
-'start: %s'                   =>'',  # line 1302
-
-### ../pages/_handles.inc.php   ###
-'Recent changes|Page option tab'=>'',  # line 19
-
-### ../pages/home.inc.php   ###
-'Your Tasks'                  =>'',  # line 817
-
-### ../pages/_handles.inc.php   ###
-'Bookmarks'                   =>'',  # line 42
-'Overall changes'             =>'',  # line 58
-'Edit multiple efforts'       =>'',  # line 786
-'View Projects of Person'     =>'',  # line 1098
-'View Task of Person'         =>'',  # line 1109
-'View Changes of Person'      =>'',  # line 1132
-'Toggle filter own changes'   =>'',  # line 1195
-
-### ../pages/bookmark.inc.php   ###
-'Please select some items'    =>'',  # line 509
-
-### ../pages/comment.inc.php   ###
-'Re: '                        =>'',  # line 243
-
-### ../pages/company.inc.php   ###
-'clients'                     =>'',  # line 47
-'prospective clients'         =>'',  # line 66
-'supplier'                    =>'',  # line 85
-'partner'                     =>'',  # line 104
-
-### ../pages/project_view.inc.php   ###
-'Create wiki documentation page or start discussion topic'=>'',  # line 168
-
-### ../pages/task_view.inc.php   ###
-'New topic'                   =>'',  # line 1051
-
-### ../pages/project_view.inc.php   ###
-'Book effort'                 =>'',  # line 179
-
-### ../pages/effort.inc.php   ###
-'Select some efforts(s) to edit'=>'',  # line 1057
-'For editing all efforts must be of same project.'=>'',  # line 889
-'Edit multiple efforts|Page title'=>'',  # line 911
-'Edit %s efforts|Page title'  =>'',  # line 912
-'Edited %s effort(s).'        =>'',  # line 1099
-'Error while editing %s effort(s).'=>'',  # line 1103
-
-### ../pages/file.inc.php   ###
-'Uploaded new version of file with Id %s'=>'',  # line 625
-'Uploaded new file with Id %s'=>'',  # line 628
-'Updated file with Id %s'     =>'',  # line 632
-
-### ../pages/home.inc.php   ###
-'Edit your Profile'           =>'',  # line 86
-
-### ../render/render_misc.inc.php   ###
-'for|short for client'        =>'',  # line 527
-
-### ../pages/home.inc.php   ###
-'without client'              =>'',  # line 145
-'Your Bookmarks'              =>'',  # line 202
-'today'                       =>'',  # line 263
-'yesterday'                   =>'',  # line 281
-'my blocked'                  =>'',  # line 561
-'needs feedback'              =>'',  # line 620
-
-### ../pages/person.inc.php   ###
-'discounted'                  =>'',  # line 1414
-'not chargeable'              =>'',  # line 1434
-'balanced'                    =>'',  # line 1454
-'3 weeks'                     =>'',  # line 1533
-'1 month'                     =>'',  # line 1553
-'prior'                       =>'',  # line 1573
-
-### ../pages/home.inc.php   ###
-'Your efforts'                =>'',  # line 1145
-
-### ../pages/login.inc.php   ###
-'Welcome to %s|Notice after login'=>'',  # line 262
-
-### ../pages/misc.inc.php   ###
-'One notification sent'       =>'',  # line 426
-'%s notifications sent'       =>'',  # line 429
-'No notifications sent'       =>'',  # line 432
-
-### ../pages/person.inc.php   ###
-'without account'             =>'',  # line 86
-'with account'                =>'',  # line 104
-'employees'                   =>'',  # line 122
-'contact persons'             =>'',  # line 141
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',  # line 627
-'Add note|Page function person'=>'',  # line 628
-'Edit profile|Page function edit person'=>'',  # line 642
-'Edit user Rights|Page function for edit user rights'=>'',  # line 650
-'Last login|Label'            =>'',  # line 747
-'Projects|Page title add on'  =>'',  # line 1007
-'Tasks|Page title add on'     =>'',  # line 1260
-'no tasks yet'                =>'',  # line 1284
-'Changes|Page title add on'   =>'',  # line 1834
-'Authentication with|form label'=>'',  # line 2072
-'ASAP'                        =>'',  # line 2109
-'Enable efforts'              =>'',  # line 2195
-'Enable bookmarks'            =>'',  # line 2196
-'Filter own changes from recent changes list'=>'',  # line 2231
-
-### ../pages/task_more.inc.php   ###
-'Internal'                    =>'',  # line 741
-
-### ../pages/person.inc.php   ###
-'Updated settings for %s.'    =>'',  # line 2673
-'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',  # line 3027
-'Login-accounts require a full name.'=>'',  # line 3309
-'Please enter an e-mail address.'=>'',  # line 3319
-'Please copy the text from the image.'=>'',  # line 3393
-'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',  # line 3422
-
-### ../pages/project_more.inc.php   ###
-'New project from'            =>'',  # line 57
-'Topics'                      =>'',  # line 1115
-'No topics yet'               =>'',  # line 1145
-'all|Filter preset'           =>'',  # line 1368
-'new|Filter preset'           =>'',  # line 1388
-'open|Filter preset'          =>'',  # line 1408
-'discounted|Filter preset'    =>'',  # line 1428
-'not chargeable|Filter preset'=>'',  # line 1448
-'balanced|Filter preset'      =>'',  # line 1468
-'last logout|Filter preset'   =>'',  # line 1488
-'1 week|Filter preset'        =>'',  # line 1507
-'2 weeks|Filter preset'       =>'',  # line 1527
-'3 weeks|Filter preset'       =>'',  # line 1547
-'1 month|Filter preset'       =>'',  # line 1567
-'prior|Filter preset'         =>'',  # line 1587
-'View calculation'            =>'',  # line 1670
-'Effort calculations'         =>'',  # line 1853
-'Reanimated person %s as team-member'=>'',  # line 2635
-'Person %s already in project'=>'',  # line 2639
-
-### ../pages/task_more.inc.php   ###
-'New version'                 =>'',  # line 329
-'Nickname not known in this project: %s'=>'',  # line 894
-'Requested feedback from: %s.'=>'',  # line 899
-'Because task is resolved, its status has been changed to completed.'=>'',  # line 1234
-'Task has resolved version but is not completed?'=>'',  # line 1240
-'Changed %s %s with ID %s|type,link,id'=>'',  # line 1435
-
-### ../pages/task_view.inc.php   ###
-'Edit this %s'                =>'',  # line 77
-'Your feedback is requested by %s.'=>'',  # line 1192
-'Please edit or comment this item.'=>'',  # line 1193
-'This task has no description. Doubleclick to edit.'=>'',  # line 430
-'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',  # line 1207
-'Request feedback'            =>'',  # line 1291
-
-### ../pages/version.inc.php   ###
-'Moved %s versions to trash'  =>'',  # line 260
-
-### ../render/render_misc.inc.php   ###
-'without client|short for client'=>'',  # line 540
-'Topics|Project option'       =>'',  # line 617
-'Calculation|Project option'  =>'',  # line 658
-'Changes|Project option'      =>'',  # line 666
-'Persons|page option'         =>'',  # line 678
-'never'                       =>'',  # line 1016
-'just now'                    =>'',  # line 1020
-'%smin ago'                   =>'',  # line 1023
-'1 hour ago'                  =>'',  # line 1026
-'%sh ago'                     =>'',  # line 1029
-'%s days ago'                 =>'',  # line 1033
-'%s months ago'               =>'',  # line 1036
-'%s years ago'                =>'',  # line 1040
-'%A, %B %e|strftime format string'=>'',  # line 1168
-
-### ../render/render_page.inc.php   ###
-'Home|section'                =>'',  # line 247
-
-### ../render/render_wiki.inc.php   ###
-'Update|wiki change marker'   =>'',  # line 224
-'New|wiki change marker'      =>'',  # line 230
-'Deleted|wiki change marker'  =>'',  # line 236
-'Link to this chapter'        =>'',  # line 714
-'Item #%s is not an image'    =>'',  # line 1121
-'Unkwown item %s'             =>'',  # line 1210
-'Cannot link to item #%s of type %s'=>'',  # line 1271
-'No item matches this name...'=>'',  # line 1396
-'Warning: Could not find wiki chapter'=>'',  # line 2122
-
-### ../std/class_changeline.inc.php   ###
-'Latest comment:'             =>'',  # line 261
-'changed File'                =>'',  # line 447
-'deleted File'                =>'',  # line 518
-
-### ../std/class_rss.inc.php   ###
-'???'                         =>'',  # line 93
-
-### ../std/constant_names.inc.php   ###
-'Enable tasks|Project setting'=>'',  # line 74
-'Enable files|Project setting'=>'',  # line 75
-'Enable efforts|Project setting'=>'',  # line 76
-'Enable milestones|Project setting'=>'',  # line 77
-'Enable versions|Project setting'=>'',  # line 78
-'Enable bugreports|Project setting'=>'',  # line 79
-'Enable news|Project setting' =>'',  # line 80
-'Edit own profile|a user right'=>'',  # line 99
-'View all Companies|a user right'=>'',  # line 104
-'Upcomming|release type'      =>'',  # line 179
-'Topic|Task Category'         =>'',  # line 220
-'ASAP|notification period'    =>'',  # line 231
-'new|effort status'           =>'',  # line 246
-'open|effort status'          =>'',  # line 247
-'discounted|effort status'    =>'',  # line 248
-'not chargeable|effort status'=>'',  # line 249
-'balanced|effort status'      =>'',  # line 250
-
-### ../std/mail.inc.php   ###
-'Forgot your password or how to log in?|notification'=>'',  # line 464
-'Request a mail to change your account settings.|notification'=>'',  # line 455
-'Click here:'                 =>'',  # line 465
-'Please use this link to'     =>'',  # line 621
-'update your account settings'=>'',  # line 624
+'Salary per hour'             =>'',
+'in Euro'                     =>'',
+'Milestones (closed)'         =>'',
+'Released versions'           =>'',
+'Calculation'                 =>'',
+'Display in project news'     =>'',
+'List title and description in project overview'=>'',
+'Display folder as topic'     =>'',
+'Status|column header'        =>'',
+'Efforts on team member'      =>'',
+'Total effort sum: %s hours'  =>'',
+'Role|columnheader'           =>'',
+'Sum|columnheader'            =>'',
+'Effortgraph|columnheader'    =>'',
+'Calculation on team member'  =>'',
+'Calculation|columnheader'    =>'',
+'Costgraph|columnheader'      =>'',
+'Calculation for project'     =>'',
+'Project|columnheader'        =>'',
+'Efforts on task'             =>'',
+'Task|columnheader'           =>'',
+'Calculation on task'         =>'',
+'Estimated/Booked (Diff.)'    =>'',
+'Relation between estimated time and booked efforts'=>'',
+'Completion:'                 =>'',
+'creatd on %s|date a file was created'=>'',
+'click to show details'       =>'',
+'by %s|person who uploaded a file'=>'',
+'Your demand notes'           =>'',
+'You have no demand notes'    =>'',
+'Recent changes'              =>'',
+'No changes by others'        =>'',
+'Also show your changes'      =>'',
+'No changes yet'              =>'',
+'Hide your changes'           =>'',
+'Show more'                   =>'',
+'Needs feedback'              =>'',
+'Updated'                     =>'',
+'Days until planned end'      =>'',
+'Due|column header, days until planned end'=>'',
+'Review'                      =>'',
+'Task status set to completed and needs approval.'=>'',
+'Item was approved on: %s:|date a task was approved'=>'',
+'done'                        =>'',
+'This task is planned to be completed today.'=>'',
+'Tomorrow'                    =>'',
+'This task is planned to be completed tomorrow.'=>'',
+'Next week'                   =>'',
+'due: %s'                     =>'',
+'days'                        =>'',
+'this task is overdue!'       =>'',
+'late|time status of a task'  =>'',
+'remain|time status of a task'=>'',
+'Pending'                     =>'',
+'start: %s'                   =>'',
+'Recent changes|Page option tab'=>'',
+'Your Tasks'                  =>'',
+'Bookmarks'                   =>'',
+'Overall changes'             =>'',
+'Edit multiple efforts'       =>'',
+'View Projects of Person'     =>'',
+'View Task of Person'         =>'',
+'View Changes of Person'      =>'',
+'Toggle filter own changes'   =>'',
+'Please select some items'    =>'',
+'Re: '                        =>'',
+'clients'                     =>'',
+'prospective clients'         =>'',
+'supplier'                    =>'',
+'partner'                     =>'',
+'Create wiki documentation page or start discussion topic'=>'',
+'New topic'                   =>'',
+'Book effort'                 =>'',
+'Select some efforts(s) to edit'=>'',
+'For editing all efforts must be of same project.'=>'',
+'Edit multiple efforts|Page title'=>'',
+'Edit %s efforts|Page title'  =>'',
+'Edited %s effort(s).'        =>'',
+'Error while editing %s effort(s).'=>'',
+'Uploaded new version of file with Id %s'=>'',
+'Uploaded new file with Id %s'=>'',
+'Updated file with Id %s'     =>'',
+'Edit your Profile'           =>'',
+'for|short for client'        =>'',
+'without client'              =>'',
+'Your Bookmarks'              =>'',
+'today'                       =>'',
+'yesterday'                   =>'',
+'my blocked'                  =>'',
+'needs feedback'              =>'',
+'discounted'                  =>'',
+'not chargeable'              =>'',
+'balanced'                    =>'',
+'3 weeks'                     =>'',
+'1 month'                     =>'',
+'prior'                       =>'',
+'Your efforts'                =>'',
+'Welcome to %s|Notice after login'=>'',
+'One notification sent'       =>'',
+'%s notifications sent'       =>'',
+'No notifications sent'       =>'',
+'without account'             =>'',
+'with account'                =>'',
+'employees'                   =>'',
+'contact persons'             =>'',
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',
+'Add note|Page function person'=>'',
+'Edit profile|Page function edit person'=>'',
+'Edit user Rights|Page function for edit user rights'=>'',
+'Last login|Label'            =>'',
+'Projects|Page title add on'  =>'',
+'Tasks|Page title add on'     =>'',
+'no tasks yet'                =>'',
+'Changes|Page title add on'   =>'',
+'Authentication with|form label'=>'',
+'ASAP'                        =>'',
+'Enable efforts'              =>'',
+'Enable bookmarks'            =>'',
+'Filter own changes from recent changes list'=>'',
+'Internal'                    =>'',
+'Updated settings for %s.'    =>'',
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',
+'Login-accounts require a full name.'=>'',
+'Please enter an e-mail address.'=>'',
+'Please copy the text from the image.'=>'',
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',
+'New project from'            =>'',
+'Topics'                      =>'',
+'No topics yet'               =>'',
+'all|Filter preset'           =>'',
+'new|Filter preset'           =>'',
+'open|Filter preset'          =>'',
+'discounted|Filter preset'    =>'',
+'not chargeable|Filter preset'=>'',
+'balanced|Filter preset'      =>'',
+'last logout|Filter preset'   =>'',
+'1 week|Filter preset'        =>'',
+'2 weeks|Filter preset'       =>'',
+'3 weeks|Filter preset'       =>'',
+'1 month|Filter preset'       =>'',
+'prior|Filter preset'         =>'',
+'View calculation'            =>'',
+'Effort calculations'         =>'',
+'Reanimated person %s as team-member'=>'',
+'Person %s already in project'=>'',
+'New version'                 =>'',
+'Nickname not known in this project: %s'=>'',
+'Requested feedback from: %s.'=>'',
+'Because task is resolved, its status has been changed to completed.'=>'',
+'Task has resolved version but is not completed?'=>'',
+'Changed %s %s with ID %s|type,link,id'=>'',
+'Edit this %s'                =>'',
+'Your feedback is requested by %s.'=>'',
+'Please edit or comment this item.'=>'',
+'This task has no description. Doubleclick to edit.'=>'',
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',
+'Request feedback'            =>'',
+'Moved %s versions to trash'  =>'',
+'without client|short for client'=>'',
+'Topics|Project option'       =>'',
+'Calculation|Project option'  =>'',
+'Changes|Project option'      =>'',
+'Persons|page option'         =>'',
+'%b %e, %Y|strftime format string'=>'',
+'%I:%M%P|strftime format string'=>'',
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
+'%s min'                      =>'',
+'never'                       =>'',
+'just now'                    =>'',
+'%smin ago'                   =>'',
+'1 hour ago'                  =>'',
+'%sh ago'                     =>'',
+'%s days ago'                 =>'',
+'%s months ago'               =>'',
+'%s years ago'                =>'',
+'%A, %B %e|strftime format string'=>'',
+'Home|section'                =>'',
+'Update|wiki change marker'   =>'',
+'New|wiki change marker'      =>'',
+'Deleted|wiki change marker'  =>'',
+'Link to this chapter'        =>'',
+'Item #%s is not an image'    =>'',
+'Unkwown item %s'             =>'',
+'Cannot link to item #%s of type %s'=>'',
+'No item matches this name...'=>'',
+'Warning: Could not find wiki chapter'=>'',
+'Latest comment:'             =>'',
+'changed File'                =>'',
+'deleted File'                =>'',
+'???'                         =>'',
+'Enable tasks|Project setting'=>'',
+'Enable files|Project setting'=>'',
+'Enable efforts|Project setting'=>'',
+'Enable milestones|Project setting'=>'',
+'Enable versions|Project setting'=>'',
+'Enable bugreports|Project setting'=>'',
+'Enable news|Project setting' =>'',
+'Edit own profile|a user right'=>'',
+'View all Companies|a user right'=>'',
+'Upcomming|release type'      =>'',
+'Topic|Task Category'         =>'',
+'ASAP|notification period'    =>'',
+'new|effort status'           =>'',
+'open|effort status'          =>'',
+'discounted|effort status'    =>'',
+'not chargeable|effort status'=>'',
+'balanced|effort status'      =>'',
+'Forgot your password or how to log in?|notification'=>'',
+'Request a mail to change your account settings.|notification'=>'',
+'Click here:'                 =>'',
+'Please use this link to'     =>'',
+'update your account settings'=>'',

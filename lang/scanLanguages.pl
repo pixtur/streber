@@ -4,7 +4,7 @@
 use warnings;
 use strict;
 
-my $show_linenumbers=1;
+my $show_linenumbers=0;
 
 my %all_language_keys={};               # keep track of defined keys
 my @all_language_keys_list=[];           # keep list in correct order
@@ -143,7 +143,7 @@ sub scan_language_defs {
                 }
                 if((my $tmp_file, my $line)= $all_language_keys{$key}=~ /(.*)Line (.*)/) {
                     if($tmp_file ne $last_file) {
-                        $buffer_changes.="\n### $tmp_file ###\n";
+                        #$buffer_changes.="\n### $tmp_file ###\n";
                         $last_file= $tmp_file;
                     }
                     my $num_spaces= 28 - length($key);

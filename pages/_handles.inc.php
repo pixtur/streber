@@ -221,7 +221,7 @@ new PageHandle(array('id'=>'projViewAsRSS',
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
                             ),
-    'test'=>'yes',
+    'test'=>'no',
     'test_params'=>array('prj'=>'_projectView_',),
     'http_auth'=>true,                        # implements HTTP Authentification
 ));

@@ -1,6 +1,3 @@
 undefined keys:
 ---------------
-
-### ../lists/list_tasks.inc.php   ###
-'late|time status of a task'  =>'',  # line 1289
-'remain|time status of a task'=>'',  # line 1293
+'Pending'                     =>'',

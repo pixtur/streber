@@ -759,7 +759,7 @@ class PageForm extends PageElement
         }
 
         if($str= $this->button_submit) {
-            $buffer.= "<input class='button submit' type=submit value='$str'>";        #@@@ add correct style h
+            $buffer.= "<input class='button submit' type=submit id='submitbutton' value='$str'>";        #@@@ add correct style h
         }
 
         $buffer.="</div>";

@@ -1,5 +1,10 @@
 streber-version-history
 
+- fixed minor layout problem in header on safari
+- fixed locale setting for spanish translation
+- fixed tests for language settings
+- updated change files for translations
+
 - added anchors to headline in wiki texts
 - fixed resetting of is_news flag when adding comment to task with quickEditBlock
 - fixed minor bug in bot detection regex

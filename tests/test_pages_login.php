@@ -101,6 +101,26 @@ class TestPagesLogin extends WebTestCase {
         $this->assertNoUnwantedPattern('/<x>/');
         $this->assertNoUnwantedPattern('/invalid login/i',                                            'check content (%s)');
         $this->assertWantedPattern('<body class="home">',  'check we are at home');
+        
+        
+        ### test all languages
+        global $g_languages;
+        foreach( $g_languages as $key => $language ) {
+            $this->assertTrue( $this->clickLink( 'Peter Manage <x>'));
+            $this->assertWantedPattern( '<body class="personView">');
+
+            ### set language
+            $this->assertTrue( $this->get("$g_streber_url/index.php?go=personEdit&person=2"), 'getting logout-page (%s)' );
+            $this->assertTrue( $this->setField('person_language', $language) );
+            if(!$this->assertTrue( $this->clickSubmitById('submitbutton'))) {
+                $this->showSource();
+            }
+            print $key;
+            validatePage($this);
+
+            $this->assertNoUnwantedPattern('<body class="personEdit">',     'check we are no longer editing');
+        }
+        
     }
 }
 ?>

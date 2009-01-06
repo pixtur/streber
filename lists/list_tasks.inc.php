@@ -1263,13 +1263,13 @@ class ListBlockCol_DaysLeft extends ListBlockCol
                     case 0 : 
                     {
                         $value = __("Today");
-                        $title = __("this task is planned to be completed today.");
+                        $title = __("This task is planned to be completed today.");
                         break;
                     }
                     case 1 :
                     {
                         $value = __("Tomorrow");
-                        $title = __("this task is planned to be completed tomorrow.");
+                        $title = __("This task is planned to be completed tomorrow.");
                         break; 
                     }
                     case 7: case 8: case 9: case 10: case 11: case 12: case 13:
@@ -1286,11 +1286,11 @@ class ListBlockCol_DaysLeft extends ListBlockCol
                         {
                             $class = "overDue";
                             $title = __("this task is overdue!");
-                            $value .= __(" late");
+                            $value .= __("late", "time status of a task");
                         }
                         else
                         {
-                            $value .= __(" remain");
+                            $value .= __("remain", "time status of a task");
                             
                             if($obj->planned_start && $obj->planned_start != '0000-00-00' && $obj->planned_start != '0000-00-00 00:00:00')
                             {
