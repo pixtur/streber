@@ -1,5 +1,10 @@
 streber-version-history
 
+- fixed caching problem of install-page
+- refacted details of item change
+- added personRevertChanges
+- added some more tests
+
 - fixed minor layout problem in header on safari
 - fixed locale setting for spanish translation
 - fixed tests for language settings

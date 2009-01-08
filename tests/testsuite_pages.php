@@ -30,6 +30,5 @@ $grouptest = new GroupTest('Login logic');      $grouptest->addTestFile('test_pa
 $grouptest = new GroupTest('Render all pages'); $grouptest->addTestFile('test_pages_all.php');          $result= $grouptest->run(new HtmlReporter()); 
 
 TestEnvironment::prepare('fixtures/remove_tables.sql');
-
-
+#
 ?>

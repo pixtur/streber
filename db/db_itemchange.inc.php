@@ -111,62 +111,9 @@ class ItemVersion extends BaseObject
 
 
 
-
-
-
-
-
-
-
-
-
-global $g_itemchange_fields;
-$g_itemchange_fields=array();
-foreach(array(
-            ### internal fields ###
-            new FieldInternal  (array('name'=>'id',
-                'default'=>0,
-            )),
-            /**
-            * id of the item being changed
-            */
-            new FieldInternal  (array('name'=>'item',
-                'default'=>10,
-            )),
-            new FieldUser     (array('name'=>'modified_by',
-                'default'=> FINIT_CUR_USER,
-                'view_in_forms'=>false,
-            )),
-
-            new FieldDatetime( array('name'=>'modified',
-                'default'=>FINIT_NOW,
-                'view_in_forms'=>false,
-            )),
-
-            /**
-            * name of the changed field
-            */
-            new FieldInternal(array(    'name'=>'field',
-                'view_in_forms'=>false,
-            )),
-
-            /**
-            * old value
-            */
-            new FieldInternal  (array('name'=>'value_old',
-                'view_in_forms'=>false,
-            )),
-
-       ) as $f) {
-            $g_itemchange_fields[$f->name]=$f;
-       }
-
-
-
 class ItemChange extends DbItem
 {
-
-    public $fields_itemchange;
+    public static $itemchange_fields_static=array();
 
     /**
     * create empty object-item or querry database
@@ -185,11 +132,10 @@ class ItemChange extends DbItem
         * add default fields if not overwritten by derived class
         */
         if(!$this->fields) {
-            global $g_itemchange_fields;
-            $this->fields= &$g_itemchange_fields;
+            #global $g_itemchange_fields;
+            #$this->fields= &$g_itemchange_fields;
+            $this->fields= &self::$itemchange_fields_static;
         }
-
-        #parent::__construct();
 
         /**
         * if array is passed, create a new empty object with default-values
@@ -204,7 +150,6 @@ class ItemChange extends DbItem
 				is_null($this->$key); ### cause E_NOTICE on undefined properties
 				$this->$key = $value;
 			}
-			#debug
         }
 
         /**
@@ -222,6 +167,57 @@ class ItemChange extends DbItem
             return NULL;
         }
     }
+
+    /**
+    * build translated fields for person class
+    *
+    * NOTE: This is called twice, because it might be translated AFTER a
+    *       the current user has been created.
+    */
+    public static function initFields()
+    {
+
+        foreach(array(
+                    ### internal fields ###
+                    new FieldInternal  (array('name'=>'id',
+                        'default'=>0,
+                    )),
+                    /**
+                    * id of the item being changed
+                    */
+                    
+                    new FieldInternal  (array('name'=>'item',
+                        'default'=>10,
+                    )),
+                    new FieldUser     (array('name'=>'modified_by',
+                        'default'=> FINIT_CUR_USER,
+                        'view_in_forms'=>false,
+                    )),
+
+                    new FieldDatetime( array('name'=>'modified',
+                        'default'=>FINIT_NOW,
+                        'view_in_forms'=>false,
+                    )),
+
+                    /**
+                    * name of the changed field
+                    */
+                    new FieldInternal(array(    'name'=>'field',
+                        'view_in_forms'=>false,
+                    )),
+
+                    /**
+                    * old value
+                    */
+                    new FieldInternal  (array('name'=>'value_old',
+                        'view_in_forms'=>false,
+                    )),
+
+               ) as $f) {
+                   self::$itemchange_fields_static[$f->name] = $f;
+               }
+    }
+
 
     static function &getItemChanges( $args=NULL)
     {
@@ -304,18 +300,6 @@ class ItemChange extends DbItem
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     /**
     * query from db
     *
@@ -331,5 +315,5 @@ class ItemChange extends DbItem
     }
 }
 
-
+ItemChange::initFields();
 ?>

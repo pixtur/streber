@@ -115,7 +115,6 @@ class TestPagesLogin extends WebTestCase {
             if(!$this->assertTrue( $this->clickSubmitById('submitbutton'))) {
                 $this->showSource();
             }
-            print $key;
             validatePage($this);
 
             $this->assertNoUnwantedPattern('<body class="personEdit">',     'check we are no longer editing');

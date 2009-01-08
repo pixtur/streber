@@ -21,7 +21,7 @@ abstract class DbItem {
     public $_type;              # name of table like "user", etc. Needed to be set by derived class
     public $fields;             # reference to global assoc. array of Field-Objects
     private $field_states;      # assoc. array of field-names and field states. Required for lazy loading.
-    public static $fields_static;
+    public static $fields_static;   # do not overwrite in derived classes!
 
 
     public function __construct($id = false)
@@ -130,7 +130,6 @@ abstract class DbItem {
         return true;
     }
 
-
     #-------------------------------------------------
     # update()  / write to db
     #-------------------------------------------------
@@ -177,8 +176,6 @@ abstract class DbItem {
         call_user_func_array(array($statement,'execute'),$values);
         return true;
     }
-
-
 
     /**
     * insert db-project item to db
@@ -879,7 +876,7 @@ class DbProjectItem extends DbItem {
     /***************************************************************
     * update objects in database
     */
-    public function update($args=NULL, $update_modifier=true)
+    public function update($args=NULL, $update_modifier=true, $log_changes= true)
     {
         global $auth;
         global $g_item_fields;
@@ -1009,7 +1006,7 @@ class DbProjectItem extends DbItem {
                 $sth->execute("",1);
             }
 
-            if($log_changed_fields) {
+            if($log_changes && $log_changed_fields) {
                 require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
                 foreach($log_changed_fields as $name) {
 

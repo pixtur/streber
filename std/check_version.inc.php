@@ -12,27 +12,31 @@
 * do some checks before doing anything serious
 *
 * This file is assumed to be php4 valid.
+* - will exit script on errors!
 */
 function validateEnvironment()
 {
-    if(($result= testPhpVersion()) !== true) {
-        echo confGet('MESSAGE_OFFLINE');
-        echo $result;
-        exit();
-    }
+    foreach( array(testPhpVersion, testDb, testInstallDirectoryExists ) as $test_function) {
+        $result = $test_function();
+    
+        if(
+            $result !== true 
+        ) {
+            ### Set uft8
+            header("Content-type: text/html; charset=utf-8");
 
-    if(($result= testDb()) !== true) {
-        echo sprintf(confGet( 'MESSAGE_OFFLINE'), confGet('EMAIL_ADMINISTRATOR'), confGet('EMAIL_ADMINISTRATOR'));
-        echo $result;
-        exit();
-    }
+            ### Disable page caching ###
+            header("Expires: -1");
+            header("Cache-Control: post-check=0, pre-check=0");
+            header("Pragma: no-cache");
+            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
-    if(confGet('STOP_IF_INSTALL_DIRECTORY_EXISTS')) {
-        if(!testInstallDirectoryExists()) {
+            echo sprintf(confGet( 'MESSAGE_OFFLINE'), confGet('EMAIL_ADMINISTRATOR'), confGet('EMAIL_ADMINISTRATOR'));
+
+            echo $result;
             exit();
         }
     }
-
     return true;
 }
 
@@ -86,13 +90,14 @@ function testDb() {
 * check if install-directory exists...
 */
 function testInstallDirectoryExists() {
-
-    if(file_exists('install')) {
-        echo "<h2>Install-directory still present</h2>";
-        echo "<ul>"
-              . "<li>For security reasons it needs to be removed before you can proceed. (<a href='" . confGet('STREBER_WIKI_URL') . "3385'>read more</a>)."
-              . "<li>You can try <a href='install/remove_install_dir.php'>remove install directory now</a>. If this fails, please use your FTP-client to delete it manually.</ul>";
-        return false;
+    if(confGet('STOP_IF_INSTALL_DIRECTORY_EXISTS')) {
+        if(file_exists('install')) {
+            $buffer= "<h2>Install-directory still present</h2>"
+                  . "<ul>"
+                  . "<li>For security reasons it needs to be removed before you can proceed. (<a href='" . confGet('STREBER_WIKI_URL') . "3385'>read more</a>)."
+                  . "<li>You can try <a href='install/remove_install_dir.php'>remove install directory now</a>. If this fails, please use your FTP-client to delete it manually.</ul>";
+            return $buffer;
+        }
     }
     return true;
 }

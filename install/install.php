@@ -21,7 +21,6 @@ function startedIndexPhp() {return true; }                     # define function
 if (function_exists('date_default_timezone_set')) {
     $tz= @date_default_timezone_get();
     date_default_timezone_set($tz);
-    #echo $tz;
 }
 
 /**
@@ -40,6 +39,7 @@ if(function_exists('mysqli_connect')){
 }
 
 
+
 require_once(dirname(__FILE__)."/../std/common.inc.php");
 #require_once(dirname(__FILE__)."/../std/errorhandler.inc.php");
 require_once(dirname(__FILE__)."/../conf/defines.inc.php");
@@ -47,12 +47,13 @@ require_once(dirname(__FILE__)."/../conf/conf.inc.php");
 
 require_once(dirname(__FILE__)."/install_forms.inc.php");
 
+print_InstallationHTMLOpen();
+
 clearRequestVars();
 addRequestVars($_GET);
 addRequestVars($_POST);
 addRequestVars($_COOKIE);
 
-print_InstallationHTMLOpen();
 
 if(!get('install_step')) {
     step_01_checkEvironment();

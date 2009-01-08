@@ -15,8 +15,7 @@
 *
 */
 
-#error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT|E_PARSE|E_CORE_ERROR|E_CORE_WARNING|E_COMPILE_ERROR);
-
+error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT|E_PARSE|E_CORE_ERROR|E_CORE_WARNING|E_COMPILE_ERROR);
 
 ini_set("max_execution_time",300);
 
@@ -27,11 +26,11 @@ if($dumper->connect(
         'localhost',	    # hostname
         'root',	            # DB-username
         '',	                # DB-password
-        'streber'	        # DB-name
+        'streber'	    # DB-name
 )) {
-    $dumper->use_gzip= false;
-   $dumper->dump();
-   #$dumper->executeFromFile("streber.pixtur.de.sql");
+   #$dumper->use_gzip= false;
+   #$dumper->dump();
+   $dumper->executeFromFile("streber-pm.sql");
 }
 
 
@@ -185,13 +184,12 @@ class MySQLDumper {
                 $line_buffer = fgets($handle, 4096);
                 $exec_buffer.= $line_buffer;
 
-                if(preg_match("/;\s*$/s", $line_buffer))     {
+                if(preg_match("/;\s*\n$/s", $line_buffer))     {
                     $result= mysql_query($exec_buffer);
-                    echo $exec_buffer . "<br>";
                     if($result == FALSE) {
-                        echo "<pre>".mysql_error()."</pre>";                        
+                        echo "<pre>" . mysql_error() . "</pre>";                        
+                        echo "<pre>$exec_buffer</pre>";
                     }
-                    
                     $exec_buffer="";
                 }
            }

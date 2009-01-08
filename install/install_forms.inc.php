@@ -105,6 +105,15 @@ $g_form_fields=array(
 * installation header
 */
 function print_InstallationHTMLOpen() {
+    ### Set uft8
+    header("Content-type: text/html; charset=utf-8");
+
+    ### Disable page caching ###
+    header("Expires: -1");
+    header("Cache-Control: post-check=0, pre-check=0");
+    header("Pragma: no-cache");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
   echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
     <head>
@@ -250,4 +259,3 @@ function print_testResult($p_result, $p_message="")
 
 
 ?>
-

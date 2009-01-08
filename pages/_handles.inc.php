@@ -1104,6 +1104,12 @@ new PageHandle(array('id'=>'personViewProjects',
     'test'=>'yes',
     'test_params'=>array('person'=>'_personView_',),      # test aborts / not enough params
 ));
+
+new PageHandleSubm(array('id'=>'personRevertChanges',
+    'req'=>'pages/personRevertChanges.inc.php',
+    'rights_required'=>RIGHT_PROJECT_EDIT,
+));
+
 new PageHandle(array('id'=>'personViewTasks',
     'req'=>'pages/person.inc.php',
     'title'=>__('View Task of Person'),

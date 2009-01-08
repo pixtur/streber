@@ -38,14 +38,12 @@ class TestEnvironment extends BaseObject {
 }
 
 function validatePage($handle) {
-    foreach( split(",", "error_list") as $p) {
-        $handle->assertNoUnwantedPattern('/' . $p . '/i');
+    foreach( split(",", "error:,Error:") as $p) {
+        $handle->assertNoUnwantedText($p);
     }
-    $handle->assertNoUnwantedPattern('/<x>/', 'check unescaped data');
+    $handle->assertNoUnwantedPattern('/<x>/', 'check unescaped data (%s)');
     $handle->assertNoUnwantedPattern('/&amp;lt;x&amp;gt;/',     'check double escaped data (%s)');
     $handle->assertValidHtmlStucture('login');
-
 }
-
 
 ?>
