@@ -2162,6 +2162,13 @@ $g_lang_table= array(
 'The following item was changed:|notification'=>'Następująca pozycja została zmieniona:',  # line 1091
 
 
+'This task is planned to be completed today.'=>'Ukończenie tego zadanie jest zaplanowane na dzisiaj.',
+'This task is planned to be completed tomorrow.'=>'Ukończenie tego zadanie jest zaplanowane na jutro.',
+'late|time status of a task'  =>'opóźnione|time status of a task',
+'remain|time status of a task'=>'trwa|time status of a task',
+'Please select some items'    =>'Proszę zaznaczyć parę pozycji',
+'Link to this chapter'        =>'Odnośnik do tego rozdziału',
+
 );
 
 
