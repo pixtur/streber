@@ -296,7 +296,7 @@ class FormatBlockBold extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/^(.*?)\*([^\*\s][^\*\+\/]*[^\*\s])\*(.*)/s", $text, $matches)) {
+                    if(preg_match("/^(.*?)\*([^\*\s][^\*]*[^\*\s])\*(.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockBold($matches[2]);
                         $text= $matches[3];
@@ -1052,13 +1052,15 @@ class FormatBlockLink extends FormatBlock
             $type       = asKey($matches[1]);
 
             $target     = $matches[2];
-            $target     = asCleanString($matches[2]);
+            
+            ### avoid breaking of url by double encoding of "&"-symbol...
+            $target_url = str_replace( "&amp;" , "&", asHtml($target));
                     
             if($this->name) {
-                $this->html= "<a class=extern title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->name) . "</a>";
+                $this->html= "<a class=extern title='" . asHtml($this->target).  "' href='". $type. "://" . $target_url . "'>" . asHtml($this->name) . "</a>";
             }
             else {
-                $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . asHtml($target) . "'>" . asHtml($this->target) . "</a>";
+                $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . $target_url . "'>" . asHtml($this->target) . "</a>";
             }
         }
         /**

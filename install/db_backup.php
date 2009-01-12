@@ -28,9 +28,9 @@ if($dumper->connect(
         '',	                # DB-password
         'streber'	    # DB-name
 )) {
-   #$dumper->use_gzip= false;
-   #$dumper->dump();
-   $dumper->executeFromFile("streber-pm.sql");
+   $dumper->use_gzip= false;
+   $dumper->dump();
+   #$dumper->executeFromFile("streber-pm.sql");
 }
 
 

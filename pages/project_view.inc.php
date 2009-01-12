@@ -81,103 +81,104 @@ function ProjView()
         }
 
         ### page functions ###
-        
-        if($editable) {
-            $page->add_function(new PageFunction(array(
-                'target'    =>'projEdit',
-                'params'    =>array('prj'=>$project->id),
-                'icon'      =>'edit',
-                'tooltip'   =>__('Edit this project'),
-                'name'      => __('Edit project')
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+            if($editable) {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'projEdit',
+                    'params'    =>array('prj'=>$project->id),
+                    'icon'      =>'edit',
+                    'tooltip'   =>__('Edit this project'),
+                    'name'      => __('Edit project')
     
-            )));
-        }
+                )));
+            }
 
-		/*
-		$item = ItemPerson::getAll(array(
-		    'person'=>$auth->cur_user->id,
-		    'item'=>$project->id
-		));
-		if((!$item) || ($item[0]->is_bookmark == 0)){
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsAsBookmark',
-				'params'    =>array('proj'=>$project->id),
-				'tooltip'   =>__('Mark this project as bookmark'),
-				'name'      =>__('Bookmark'),
-			)));
-		}
-		else{
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsRemoveBookmark',
-				'params'    =>array('proj'=>$project->id),
-				'tooltip'   =>__('Remove this bookmark'),
-				'name'      =>__('Remove Bookmark'),
-			)));
-		}
-		*/
+    		/*
+    		$item = ItemPerson::getAll(array(
+    		    'person'=>$auth->cur_user->id,
+    		    'item'=>$project->id
+    		));
+    		if((!$item) || ($item[0]->is_bookmark == 0)){
+    			$page->add_function(new PageFunction(array(
+    				'target'    =>'itemsAsBookmark',
+    				'params'    =>array('proj'=>$project->id),
+    				'tooltip'   =>__('Mark this project as bookmark'),
+    				'name'      =>__('Bookmark'),
+    			)));
+    		}
+    		else{
+    			$page->add_function(new PageFunction(array(
+    				'target'    =>'itemsRemoveBookmark',
+    				'params'    =>array('proj'=>$project->id),
+    				'tooltip'   =>__('Remove this bookmark'),
+    				'name'      =>__('Remove Bookmark'),
+    			)));
+    		}
+    		*/
 
-		/*
-		if($project->state == 1) {
-				$page->add_function(new PageFunction(array(
-					'target'=>'projDelete',
-					'params'=>array('prj'=>$project->id),
-					'icon'=>'delete',
-					'tooltip'=>__('Delete this project'),
-					'name'=>__('Delete')
-				)));
-		}
-		*/
+    		/*
+    		if($project->state == 1) {
+    				$page->add_function(new PageFunction(array(
+    					'target'=>'projDelete',
+    					'params'=>array('prj'=>$project->id),
+    					'icon'=>'delete',
+    					'tooltip'=>__('Delete this project'),
+    					'name'=>__('Delete')
+    				)));
+    		}
+    		*/
 
 
-        #$page->add_function(new PageFunctionGroup(array(
-        #    'name'      => __('new')
-        #)));
-        /*
-        $page->add_function(new PageFunction(array(
-            'target'    =>'projAddPerson',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'add',
-            'tooltip'   =>__('Add person as team-member to project'),
-            'name'      =>__('Team member')
-        )));
-        */
-        if($project->settings & PROJECT_SETTING_ENABLE_TASKS) {
+            #$page->add_function(new PageFunctionGroup(array(
+            #    'name'      => __('new')
+            #)));
+            /*
             $page->add_function(new PageFunction(array(
-                'target'    =>'taskNew',
+                'target'    =>'projAddPerson',
+                'params'    =>array('prj'=>$project->id),
+                'icon'      =>'add',
+                'tooltip'   =>__('Add person as team-member to project'),
+                'name'      =>__('Team member')
+            )));
+            */
+            if($project->settings & PROJECT_SETTING_ENABLE_TASKS) {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'taskNew',
+                    'params'    =>array('prj'=>$project->id),
+                    'icon'      =>'new',
+                    'tooltip'   =>__('Create task'),
+                    'name'      =>__('New task')
+                )));
+            }
+
+            if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'taskNewBug',
+                    'params'    =>array('prj'=>$project->id,'add_issue'=>1),
+                    'icon'      =>'new',
+                    'tooltip'   =>__('Create task with issue-report'),
+                    'name'      =>__('New bug'),
+                )));
+            }
+    
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNewDocu',
                 'params'    =>array('prj'=>$project->id),
                 'icon'      =>'new',
-                'tooltip'   =>__('Create task'),
-                'name'      =>__('New task')
+                'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
+                'name'      =>__('New topic'),
             )));
-        }
-
-        if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
-            $page->add_function(new PageFunction(array(
-                'target'    =>'taskNewBug',
-                'params'    =>array('prj'=>$project->id,'add_issue'=>1),
-                'icon'      =>'new',
-                'tooltip'   =>__('Create task with issue-report'),
-                'name'      =>__('New bug'),
-            )));
-        }
-    
-        $page->add_function(new PageFunction(array(
-            'target'    =>'taskNewDocu',
-            'params'    =>array('prj'=>$project->id),
-            'icon'      =>'new',
-            'tooltip'   =>__('Create wiki documentation page or start discussion topic'),
-            'name'      =>__('New topic'),
-        )));
         
         
-        if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS && $auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
-            $page->add_function(new PageFunction(array(
-                'target'    =>'effortNew',
-                'params'    =>array('prj'=>$project->id),
-                'icon'      =>'loghours',
-                'tooltip'   =>__('Book effort for this project'),
-                'name'      =>__('Book effort'),
-            )));
+            if($project->settings & PROJECT_SETTING_ENABLE_EFFORTS && $auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'effortNew',
+                    'params'    =>array('prj'=>$project->id),
+                    'icon'      =>'loghours',
+                    'tooltip'   =>__('Book effort for this project'),
+                    'name'      =>__('Book effort'),
+                )));
+            }
         }
 
         $url= $PH->getUrl("projViewAsRSS", array('prj' => $project->id));

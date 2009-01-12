@@ -77,11 +77,12 @@ div.wiki a.anchor:hover {
 
 div.wiki h1 {
     font-size:20pt;
-    line-height:110%;
+    line-height:115%;
 }
 
 div.wiki h2 {
     font-size:21pt;
+    line-height:95%;
 }
 
 div.wiki h3 {

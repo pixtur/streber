@@ -7,42 +7,6 @@
 */
 
 
-
-/**
-* do some checks before doing anything serious
-*
-* This file is assumed to be php4 valid.
-* - will exit script on errors!
-*/
-function validateEnvironment()
-{
-    foreach( array(testPhpVersion, testDb, testInstallDirectoryExists ) as $test_function) {
-        $result = $test_function();
-    
-        if(
-            $result !== true 
-        ) {
-            ### Set uft8
-            header("Content-type: text/html; charset=utf-8");
-
-            ### Disable page caching ###
-            header("Expires: -1");
-            header("Cache-Control: post-check=0, pre-check=0");
-            header("Pragma: no-cache");
-            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-
-            echo sprintf(confGet( 'MESSAGE_OFFLINE'), confGet('EMAIL_ADMINISTRATOR'), confGet('EMAIL_ADMINISTRATOR'));
-
-            echo $result;
-            exit();
-        }
-    }
-    return true;
-}
-
-
-
-
 /**
 * check propper php-version
 */
@@ -101,5 +65,42 @@ function testInstallDirectoryExists() {
     }
     return true;
 }
+
+
+
+/**
+* do some checks before doing anything serious
+*
+* This file is assumed to be php4 valid.
+* - will exit script on errors!
+*/
+function validateEnvironment()
+{
+    foreach( array('testPhpVersion', 'testDb', 'testInstallDirectoryExists' ) as $test_function) {
+        $result = $test_function();
+    
+        if(
+            $result !== true 
+        ) {
+            ### Set uft8
+            header("Content-type: text/html; charset=utf-8");
+
+            ### Disable page caching ###
+            header("Expires: -1");
+            header("Cache-Control: post-check=0, pre-check=0");
+            header("Pragma: no-cache");
+            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
+            echo sprintf(confGet( 'MESSAGE_OFFLINE'), confGet('EMAIL_ADMINISTRATOR'), confGet('EMAIL_ADMINISTRATOR'));
+
+            echo $result;
+            exit();
+        }
+    }
+    return true;
+}
+
+
+
 
 

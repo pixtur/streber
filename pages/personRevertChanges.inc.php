@@ -82,21 +82,29 @@ function personRevertChanges()
             #print "unable to get item %s" % $c->item;
         }
         else {
-            $field_name = $c->field;
-            echo "<li>"
-                . "<strong>" . asHtml($project_item->name) . "." . asHtml($field_name) . "</strong>"
-                . " '" . asHtml($project_item->$field_name) . "' = '" . asHtml($c->value_old) . "'"
-                . "</li>";
-            $count_reverted_fields++;
+            ### Only revert changes, if item has not be editted by other person
+            if( $project_item->modified_by == $person_id) {
+                $field_name = $c->field;
+                echo "<li>"
+                    . "<strong>" . asHtml($project_item->name) . "." . asHtml($field_name) . "</strong>"
+                    . " '" . asHtml($project_item->$field_name) . "' = '" . asHtml($c->value_old) . "'"
+                    . "</li>";
+                $count_reverted_fields++;
 
-            if($field_name == 'state') {
-                if($project_item->state == -1 && $c->value_old == 1) {
-                    $project_item->deleted_by = "0";
-                    $project_item->deleted = "0000-00-00 00-00-00";
+                if($field_name == 'state') {
+                    if($project_item->state == -1 && $c->value_old == 1) {
+                        $project_item->deleted_by = "0";
+                        $project_item->deleted = "0000-00-00 00-00-00";
+                    }
                 }
+                $project_item->$field_name = $c->value_old;
+                $project_item->update(array($field_name, 'deleted_by', 'deleted'), false, false);
             }
-            $project_item->$field_name = $c->value_old;
-            $project_item->update(array($field_name, 'deleted_by', 'deleted'), false, false);
+            else {
+                echo "<li>"
+                    . sprintf(__("Skipped recently editted item #%s: <b>%s<b>"), $project_item->id, asHtml($project_item->name))
+                    . "</li>";
+            }
             $c->deleteFull();
         }
     }

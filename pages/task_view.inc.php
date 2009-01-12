@@ -68,7 +68,7 @@ function TaskView()
         }
 
         ### page functions ###
-        {
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
             if($editable) {
                 $page->add_function(new PageFunction(array(
                     'target'=>'taskEdit',
@@ -268,7 +268,6 @@ function TaskView()
                 echo "<div class=labeled><label>".__("Completed","Label in Task summary")."</label>".$task->completion."%</div>";
             }
 
-
             if($task->planned_start && $task->planned_start != "0000-00-00 00:00:00") {
                 echo "<div class=labeled><label>".__("Planned start","Label in Task summary")."</label>".renderTimestamp($task->planned_start)."</div>";
             }
@@ -276,7 +275,6 @@ function TaskView()
             if($task->planned_end && $task->planned_end != "0000-00-00 00:00:00") {
                 echo "<div class=labeled><label>".__("Planned end","Label in Task summary")."</label>".renderTimestamp($task->planned_end)."</div>";
             }
-
 
             if($task->date_closed !="0000-00-00") {
                 echo "<div class=labeled><label>".__("Closed","Label in Task summary")."</label>". renderDateHtml($task->date_closed) . "</div>";
@@ -287,14 +285,9 @@ function TaskView()
             echo "<div class=labeled><label>".__("Created","Label in Task summary")."</label>". renderDateHtml($task->created) . ' / ' . $person_creator->getLink().'</div>' ;
         }
 
-
-
-
-        #if($task->modified_by != $task->created_by) {
-            if($person_modify= Person::getVisibleById($task->modified_by)) {
-                echo "<div class=labeled><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
-                #echo "<p><label>" . $str_version . "</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
-            }
+        if($person_modify= Person::getVisibleById($task->modified_by)) {
+            echo "<div class=labeled><label>".__("Modified","Label in Task summary")."</label>". renderDateHtml($task->modified) . ' / ' .  $person_modify->getLink() . '</div>' ;
+        }
 
         ### get version ###
         {
@@ -394,12 +387,7 @@ function TaskView()
         $list->title=__('Attached files');
 
         if($editable) {
-            $list->no_items_html= $list->summary='<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
-            .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
-            .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-            .'<input id="userfiletask" name="userfile" type="file" size="15" accept="*" /><br />'
-            .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
-            .'</div>';
+            $list->no_items_html= $list->summary= buildFileUploadForm( $task );
         }
 
         $list->print_automatic($project);
@@ -638,23 +626,13 @@ function TaskView()
     }
 
 
-    #--- task qickedit form -------------------------------------------------------------
-    {
+    #--- task quickedit form -------------------------------------------------------------
+    if($project->isPersonVisibleTeamMember($auth->cur_user)) {
         if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
             $block_task_quickedit= new Block_task_quickedit();
             $block_task_quickedit->render_quickedit(&$task);
         }
     }
-
-
-
-    #echo '<input type="hidden" name="prj" value="'.$task->project.'">';
-
-    /**
-    * give parameter for create of new items (subtasks, efforts, etc)
-    */
-    #echo '<input type="hidden" name="parent_task" value="'.$task->id.'">';
-
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
@@ -961,7 +939,7 @@ function taskViewAsDocu()
         }
 
         ### page functions ###
-        {
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
             ### edit ###
             if($editable) {
                 $page->add_function(new PageFunction(array(
@@ -1168,12 +1146,10 @@ function taskViewAsDocu()
         $list->reduced_header= false;
         $list->title=__('Attached files');
 
-        $list->no_items_html= $list->summary='<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
-        .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
-        .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-        .'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
-        .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
-        .'</div>';
+        if($editable) {
+            $list->no_items_html= $list->summary= buildFileUploadForm( $task );
+        }
+        
 
         $list->print_automatic($project);
         $PH->go_submit= $PH->getValidPage('filesUpload')->id;
@@ -1258,8 +1234,8 @@ function taskViewAsDocu()
     }
 
 
-    #--- task qickedit form -------------------------------------------------------------
-    {
+    #--- task quickedit form -------------------------------------------------------------
+    if($project->isPersonVisibleTeamMember($auth->cur_user)) {
         $block_task_quickedit= new Block_task_quickedit();
         $block_task_quickedit->render_quickedit(&$task);
     }
@@ -1274,13 +1250,12 @@ function taskViewAsDocu()
 }
 
 
-
-
 /**
 * initialize request feedback autocomplete field
 */
 function buildRequestFeedbackInput( $project ) 
 {
+    $nicknames = array();
     $names = $project->getTeamMemberNames();
     foreach( $names as $nickname => $name) {
         $nicknames[] = asHtml($nickname) ;
@@ -1301,4 +1276,16 @@ function buildRequestFeedbackInput( $project )
     );
 }
 
+
+function buildFileUploadForm( $task )
+{
+    return
+        '<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
+        .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
+        .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
+        .'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
+        .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
+        .'</div>';
+
+}
 ?>

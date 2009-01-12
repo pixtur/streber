@@ -438,6 +438,10 @@ function effortNew()
         }
     }
 
+    if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
+        $PH->abortWarning("ERROR: Insufficient rights");        
+    }
+    
     ### try to get task ###
     $task_id=0;
     if($task_ids= getPassedIds('parent_task','tasks_*')) {
@@ -741,6 +745,10 @@ function effortEditSubmit()
     $effort->project=get('effort_project');
     if(!$project = Project::getVisibleById($effort->project)) {
         $PH->abortWarning(__("Could not get project of effort"));
+    }
+
+    if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
+        $PH->abortWarning("ERROR: Insufficient rights");        
     }
 
     ### get person ###

@@ -939,7 +939,7 @@ foreach($filters_str as $fs=>$value) {
 					
         if(is_null($visible_only)) {
 
-            $visible_only   = $auth->cur_user && $auth->cur_user->user_rights & RIGHT_VIEWALL
+            $visible_only   = $auth->cur_user && ($auth->cur_user->user_rights & RIGHT_VIEWALL)
                             ? false
                             : true                            ;
         }
@@ -1336,7 +1336,6 @@ foreach($filters_str as $fs=>$value) {
     {
         $tasks= array();
         $tmp_options= array(
-            'visible_only'      => true,
             'use_collapsed'     => true,
             'order_by'          => 'order_id, i.id',
             'parent_task'       => $parent_task_id,

@@ -780,7 +780,11 @@ class Project extends DbProjectItem
         $dbh = new DB_Mysql;
 
         ### all users ###
-        if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
+        if(
+            ($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN)
+            ||
+            ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+        ) {
             $str_query=
             "SELECT person.name, person.nickname from {$prefix}item i, {$prefix}projectperson pp, {$prefix}person person
             WHERE

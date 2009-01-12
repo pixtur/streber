@@ -1,7 +1,17 @@
 streber-version-history
 
+
+version v0.08099
+=================
+- fixed bold syntax for wiki #7445
+- fixed broken urls in wiki links with & #7350
+- fixed creation of project items if current user has RIGHT_VIEWALL but is not assigned to project #2312
+- CHECK_IP_ADDRESS is not disabled by default
+- fixed rendering of long wiki headlines #7417
+
+
 - fixed caching problem of install-page
-- refacted details of item change
+- refactored details of item change
 - added personRevertChanges
 - added some more tests
 

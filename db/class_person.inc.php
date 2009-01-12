@@ -567,7 +567,9 @@ class Person extends DbProjectItem {
         : "";
 
         if($visible_only == 'auto') {
-            $visible_only= $auth->cur_user->user_rights & RIGHT_PERSON_VIEWALL
+            $visible_only=  (($auth->cur_user->user_rights & RIGHT_PERSON_VIEWALL)
+                            ||
+                            ($auth->cur_user->user_rights & RIGHT_VIEWALL))
                          ? false
                          : true;
         }

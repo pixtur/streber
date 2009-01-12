@@ -921,38 +921,40 @@ function projViewTasks()
                           ? $preset['new_task_options']
                           : array();
 
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
 
-        #$page->add_function(new PageFunctionGroup(array(
-        #    'name'=>__('new'),
-        #)));
-        if($preset_id != 'next_milestone') {
+
+            #$page->add_function(new PageFunctionGroup(array(
+            #    'name'=>__('new'),
+            #)));
+            if($preset_id != 'next_milestone') {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'taskNewFolder',
+                    'params'    =>array('prj'=>$project->id)+ $new_task_options,
+                    'icon'      =>'new',
+                    'tooltip'   =>__('Create a new folder for tasks and files'),
+                    #'name'      =>__('New folder')
+                )));
+            }
+
             $page->add_function(new PageFunction(array(
-                'target'    =>'taskNewFolder',
-                'params'    =>array('prj'=>$project->id)+ $new_task_options,
-                'icon'      =>'new',
-                'tooltip'   =>__('Create a new folder for tasks and files'),
-                #'name'      =>__('New folder')
+                'target'=>'taskNew',
+                'params'=>array('prj'=>$project->id)+ $new_task_options,
+                'icon'=>'new',
+                'tooltip'=>__('new subtask for this folder'),
+                #'name'=>__('Task'),
             )));
+
+            if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'taskNewBug',
+                    'params'    =>array('prj'=>$project->id,'add_issue'=>1)+ $new_task_options,
+                    'icon'      =>'new',
+                    'tooltip'   =>__('Create task with issue-report'),
+                    #'name'      =>__('Bug')
+                )));
+            }
         }
-
-        $page->add_function(new PageFunction(array(
-            'target'=>'taskNew',
-            'params'=>array('prj'=>$project->id)+ $new_task_options,
-            'icon'=>'new',
-            'tooltip'=>__('new subtask for this folder'),
-            #'name'=>__('Task'),
-        )));
-
-        if($project->settings & PROJECT_SETTING_ENABLE_BUGS) {
-            $page->add_function(new PageFunction(array(
-                'target'    =>'taskNewBug',
-                'params'    =>array('prj'=>$project->id,'add_issue'=>1)+ $new_task_options,
-                'icon'      =>'new',
-                'tooltip'   =>__('Create task with issue-report'),
-                #'name'      =>__('Bug')
-            )));
-        }
-
 
     	### render title ###
         echo(new PageHeader);
@@ -1090,14 +1092,16 @@ function ProjViewDocu()
         }
 
         ### page functions ###
-        $page->add_function(new PageFunction(array(
-            'target'    =>'taskNew',
-            'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU, 'task_show_folder_as_documentation'=>1),
-            'icon'      =>'new',
-            'tooltip'   =>__('Create a new page'),
-            'name'      =>__('New topic')
-        )));
-
+        if($project->isPersonVisibleTeamMember($auth->cur_user))  {
+            $page->add_function(new PageFunction(array(
+                'target'    =>'taskNew',
+                'params'    =>array('prj'=>$project->id, 'task_category'=>TCATEGORY_DOCU, 'task_show_folder_as_documentation'=>1),
+                'icon'      =>'new',
+                'tooltip'   =>__('Create a new page'),
+                'name'      =>__('New topic')
+            )));
+        }
+    
     	### render title ###
         echo(new PageHeader);
     }
@@ -1164,6 +1168,7 @@ function ProjViewDocu()
 function ProjViewFiles()
 {
     global $PH;
+    global $auth;
 
 	### get current project ###
     $id=getOnePassedId('prj','projects_*');
@@ -1190,13 +1195,6 @@ function ProjViewFiles()
 
 
         ### page functions ###
-/*        $page->add_function(new PageFunction(array(
-            'target'=>'effortNew',
-            'params'=>array('prj'=>$project->id),
-            'icon'=>'new',
-            'name'=>__('new Effort'),
-        )));
-*/
 
 
     	### render title ###
@@ -1204,11 +1202,8 @@ function ProjViewFiles()
     }
     echo (new PageContentOpen);
 
-#    echo(new PageContentNextCol);
-
-
 	### upload files ###
-    {
+    if($project->isPersonVisibleTeamMember($auth->cur_user))  {
         $block=new PageBlock(array('title'=>__('Upload file','block title'),'id'=>'summary'));
         $block->render_blockStart();
 
@@ -1290,14 +1285,15 @@ function ProjViewMilestones()
 
 
         ### page functions ###
-        if($auth->cur_user->id != confGet('ANONYMOUS_USER')) {
-            $page->add_function(new PageFunction(array(
-                'target'=>'taskNewMilestone',
-                'params'=>array('prj'=>$project->id),
-                'icon'=>'new',
-            )));
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+            if($auth->cur_user->id != confGet('ANONYMOUS_USER')) {
+                $page->add_function(new PageFunction(array(
+                    'target'=>'taskNewMilestone',
+                    'params'=>array('prj'=>$project->id),
+                    'icon'=>'new',
+                )));
+            }
         }
-
 
     	### render title ###
         echo(new PageHeader);
@@ -1658,12 +1654,15 @@ function ProjViewEfforts()
         }
 
         ### page functions ###
-        $page->add_function(new PageFunction(array(
-            'target'    => 'effortNew',
-            'params'    => array('prj'=>$project->id),
-            'icon'      => 'new',
-            'name'      => __('new Effort'),
-        )));
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+            $page->add_function(new PageFunction(array(
+                'target'    => 'effortNew',
+                'params'    => array('prj'=>$project->id),
+                'icon'      => 'new',
+                'name'      => __('new Effort'),
+            )));
+        }
+        
         $page->add_function(new PageFunction(array(
             'target'    => 'projViewEffortCalculations',
             'params'    => array('prj'=>$project->id),
@@ -1960,15 +1959,16 @@ function ProjViewVersions()
         }
 
         ### page functions ###
-        if($auth->cur_user->id != confGet('ANONYMOUS_USER')) {
-            $page->add_function(new PageFunction(array(
-                'target'=>'taskNewVersion',
-                'params'=>array('prj'=>$project->id),
-                'icon'=>'new',
-                'name'=>__('New released Version'),
-            )));
+        if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+            if($auth->cur_user->id != confGet('ANONYMOUS_USER')) {
+                $page->add_function(new PageFunction(array(
+                    'target'=>'taskNewVersion',
+                    'params'=>array('prj'=>$project->id),
+                    'icon'=>'new',
+                    'name'=>__('New released Version'),
+                )));
+            }
         }
-
 
     	### render title ###
         echo(new PageHeader);

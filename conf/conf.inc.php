@@ -16,7 +16,7 @@ require_once("defines.inc.php");
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.08095',
+    'STREBER_VERSION'       => '0.08099',
     'STREBER_VERSION_DATE'  => '2008-12-15',
 
     'APP_NAME'              => 'streber',
@@ -300,7 +300,7 @@ $g_config= array(
     /**
     * check IP-Address (if checked, cookie is depreciated on new computers)
     */
-    'CHECK_IP_ADDRESS' => true,
+    'CHECK_IP_ADDRESS' => false,
 
     /**
     * Allow anonymous browsing for one user

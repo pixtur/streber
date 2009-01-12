@@ -132,8 +132,8 @@ new PageHandleForm(array('id'=>'itemBookmarkEditMultiple',
     'req'=>'pages/bookmark.inc.php',
     'title'=>__('Edit multiple bookmarks'),
 	'valid_params'=>array(),
-    'test'=>'yes',
-    'test_params'=>array('id'=>'_ITEM_',),
+    #'test'=>'yes',
+    #'test_params'=>array('id'=>'_ITEM_',),
 ));
 
 new PageHandleSubm(array('id'=>'itemBookmarkEditMultipleSubmit',
@@ -396,14 +396,6 @@ new PageHandleSubm(array('id'=>'projAddPersonSubmit',
     'req'=>'pages/project_more.inc.php',
     'rights_required'=>RIGHT_PROJECT_EDIT,
     'valid_params'=>array(),
-));
-new PageHandle(array('id'=>'projViewIssues',
-    'req'=>'pages/project_more.inc.php',
-    'valid_params'=>array(  'from'=>'.*',
-                            'prj'=>'\d*',
-                            ),
-    'test'=>'yes',
-    'test_params'=>array('prj'=>'_projectView_',),
 ));
 
 /**
@@ -752,8 +744,8 @@ new PageHandle(array('id'=>'effortViewMultiple',
     'valid_params'=>array(
            'effort'=>'\d*'),
 
-    'test'=>'yes',
-    'test_params'=>array('effort'=>'_effortViewMultiple_',),
+    #'test'=>'no',
+    #'test_params'=>array('effort'=>'_effortViewMultiple_',),
     'valid_for_crawlers'=>false,
 ));
 new PageHandleFunc(array('id'=>'effortNew',
@@ -778,15 +770,15 @@ new PageHandleForm(array('id'=>'effortEditMultiple',
     'req'=>'pages/effort.inc.php',
     'title'=>__('Edit multiple efforts'),
 
-    'test'=>'yes',
-    'test_params'=>array('effort'=>'_effortEdit_',),
+    #'test'=>'yes',
+    #'test_params'=>array('effort'=>'_effortEdit_',),
 ));
 new PageHandleSubm(array('id'=>'effortEditMultipleSubmit',
     'req'=>'pages/effort.inc.php',
 	'title'=>__('Edit multiple efforts'),
 
-    'test'=>'yes',
-    'test_params'=>array('tsk'=>'_effortEdit_',),
+    #'test'=>'yes',
+    #'test_params'=>array('tsk'=>'_effortEdit_',),
 
 ));
 new PageHandleFunc(array('id'=>'effortsDelete',
