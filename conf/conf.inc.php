@@ -495,7 +495,7 @@ $g_user_profiles=array(
         'level_reduce'          => PUB_LEVEL_PRIVATE,
     ),
     PROFILE_PM=>array(
-        'default_user_rights'   => RIGHT_ALL & (~ (RIGHT_PERSON_EDIT_RIGHTS|RIGHT_VIEWALL)) ,
+        'default_user_rights'   => RIGHT_ALL & (~ (RIGHT_PERSON_EDIT_RIGHTS|RIGHT_VIEWALL|RIGHT_EDITALL)) ,
         'level_view'            => PUB_LEVEL_SUGGESTED,
         'level_create'          => PUB_LEVEL_CLIENTEDIT,
         'level_edit'            => PUB_LEVEL_SUGGESTED,

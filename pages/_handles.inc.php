@@ -119,8 +119,8 @@ new PageHandleForm(array('id'=>'itemBookmarkEdit',
     'req'=>'pages/bookmark.inc.php',
     'title'=>__('Edit bookmarks'),
 	'valid_params'=>array(),
-    'test'=>'yes',
-    'test_params'=>array('id'=>'_ITEM_',),
+#    'test'=>'yes',
+#    'test_params'=>array('id'=>'_ITEM_',),
 ));
 
 new PageHandleSubm(array('id'=>'itemBookmarkEditSubmit',
@@ -730,8 +730,8 @@ new PageHandle(array('id'=>'effortView',
     'valid_params'=>array(
            'effort'=>'\d*'),
 
-    'test'=>'yes',
-    'test_params'=>array('effort'=>'_effortView_',),
+#    'test'=>'yes',
+#    'test_params'=>array('effort'=>'_effortView_',),
 
     'cleanurl'=>'_ITEM_',
     'cleanurl_mapping'=>array('effort' => '_ITEM_'),
@@ -759,8 +759,8 @@ new PageHandleForm(array('id'=>'effortEdit',
     'req'=>'pages/effort.inc.php',
     'title'=>__('Edit time effort'),
 
-    'test'=>'yes',
-    'test_params'=>array('effort'=>'_effortEdit_',),
+#    'test'=>'yes',
+#    'test_params'=>array('effort'=>'_effortEdit_',),
 ));
 new PageHandleSubm(array('id'=>'effortEditSubmit',
     'req'=>'pages/effort.inc.php',
@@ -813,7 +813,7 @@ new PageHandleFunc(array('id'=>'commentNew',
            'prj'=>'\d*'),
 
     'test'=>'yes',
-    'test_params'=>array('prj'=>'_projectEdit_',),
+    'test_params'=>array('prj'=>'_projectEdit_', 'tsk'=>'_taskEdit_'),
 ));
 new PageHandleForm(array('id'=>'commentEdit',
     'req'=>'pages/comment.inc.php',

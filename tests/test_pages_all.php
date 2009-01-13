@@ -38,8 +38,8 @@ class TestPagesAll extends WebTestCase {
                              "_companyView_"=>8,
                              "_companyEdit_"=>8,
 
-                             "_commentView_"=>241,
-                             "_commentEdit_"=>241,
+                             "_commentView_"=>39,
+                             "_commentEdit_"=>39,
 
                              "_effortView_"=>35,
                              "_effortEdit_"=>35,
@@ -58,18 +58,19 @@ class TestPagesAll extends WebTestCase {
         * test all pagehandles for correct rendering
         */
 
-        ### enter login-infos ###
-        $this->assertTrue( $this->get($url_start)                   ,'getting logout-page (%s)' );
-        $this->assertTrue( $this->setField('login_name', $login_name)   ,'set login-name (%s)');
-        $this->assertTrue( $this->setField('login_password', $login_password)    ,'set password (%s)');
-        
-        ### submit -> login to home ###
-        $this->assertTrue( $this->clickSubmit('Submit')             ,'click_submit');
-        
-        $this->assertNoUnwantedPattern('/invalid login/i'           ,'Login for testing working (%s)');
 
         ### go though all pagehandles and render ###
         foreach($PH->hash as $key=>$handle) {
+
+            ### enter login-infos ###
+            $this->assertTrue( $this->get($url_start)                   ,'getting logout-page (%s)' );
+            $this->assertTrue( $this->setField('login_name', $login_name)   ,'set login-name (%s)');
+            $this->assertTrue( $this->setField('login_password', $login_password)    ,'set password (%s)');
+        
+            ### submit -> login to home ###
+            $this->assertTrue( $this->clickSubmit('Submit')             ,'click_submit');
+        
+            $this->assertNoUnwantedPattern('/invalid login/i'           ,'Login for testing working (%s)');
             
             if($handle->test == 'yes') {
 

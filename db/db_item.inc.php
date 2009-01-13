@@ -1266,7 +1266,7 @@ class DbProjectItem extends DbItem {
         $order_by           = "modified DESC";
         $status_min         = STATUS_UNDEFINED;
         $status_max         = STATUS_CLOSED;
-        $visible_only       = true;       # use project rights settings
+        $visible_only       = NULL;       # use project rights settings
         $alive_only         = true;       # hide deleted
         $date_min           = NULL;
         $date_max           = NULL;
@@ -1346,8 +1346,13 @@ class DbProjectItem extends DbItem {
             }
         }
 
+        if(is_null($visible_only)) {
 
-
+            $visible_only   = $auth->cur_user && ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+                            ? false
+                            : true                            ;
+        }
+        
         ### only visibile for current user ###
         if($visible_only) {
             $s_query=

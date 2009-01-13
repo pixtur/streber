@@ -82,7 +82,7 @@ class ChangeLine extends BaseObject
     }
 
 
-    static function &getChangeLines($query_options)
+    static function getChangeLines($query_options)
     {
         global $PH;
 

@@ -438,9 +438,6 @@ function effortNew()
         }
     }
 
-    if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
-        $PH->abortWarning("ERROR: Insufficient rights");        
-    }
     
     ### try to get task ###
     $task_id=0;
@@ -471,6 +468,10 @@ function effortNew()
         if(!$project= Project::getVisibleById($task->project)) {
             $PH->abortWarning("Invalid project for task?", ERROR_BUG);
         }
+    }
+
+    if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
+        $PH->abortWarning("ERROR: Insufficient rights");        
     }
 
     $now= getGMTString();

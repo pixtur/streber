@@ -1,8 +1,14 @@
 streber-version-history
 
+- fixed feedback-often-requested-by-admin bug
+- fixed visibily of changed items for admins
+- disabled right to edit everthing for PMs
+- fixed locale-setting of russian translation
+- fixed more unit-tests
 
 version v0.08099
 =================
+- changed version to v0.08099
 - fixed bold syntax for wiki #7445
 - fixed broken urls in wiki links with & #7350
 - fixed creation of project items if current user has RIGHT_VIEWALL but is not assigned to project #2312

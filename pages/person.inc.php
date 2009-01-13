@@ -211,10 +211,10 @@ function personList()
 		$page->cur_tab='people';
         $page->title=__('Persons','Pagetitle for person list');
         if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
-            $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), asHtml($auth->cur_user->name));
+            $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), $auth->cur_user->name);
         }
         else {
-            $page->title_minor=__("admin view","Page title add on if admin");
+            $page->title_minor=__("admin view", "Page title add on if admin");
         }
      
         $page->type=__('List','page type');

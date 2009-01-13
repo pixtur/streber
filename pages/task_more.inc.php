@@ -885,7 +885,7 @@ function taskEditSubmit()
                             $new_view = new ItemPerson(array(
                             'item'          =>$task->id,
                             'person'        =>$person->id,
-                            'feedback_requested_by'=> true ));
+                            'feedback_requested_by'=> $auth->cur_user->id ));
                             $new_view->insert();
                         }
                         $requested_people[]= "<b>". asHtml($nickname) ."</b>";

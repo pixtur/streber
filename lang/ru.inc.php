@@ -11,13 +11,6 @@
 *
 */
 
-
-// defaut Streber language set to russian
-confChange('DEFAULT_LANGUAGE','ru');
-
-// uncomment 2 set default locale to russian
-confChange('DEFAULT_LOCALE','ru_RU.utf8,ru-RU,ru,rus,russian');
-
 global $g_lang_table;$g_lang_table= array(
 
 #------------------------------

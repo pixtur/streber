@@ -185,6 +185,7 @@ function commentNew() {
     
     ### try single task-id ###
     $task=NULL;
+    $comment = NULL;
     if($id=getOnePassedId('tsk','tasks_*',false)) { #no not abort if not found
 		if($task= Task::getVisibleById($id)) {
             $newComment->task= $task->id;
@@ -258,6 +259,9 @@ function commentNew() {
         else {
             $PH->abortWarning('can´t access project',ERROR_BUG);
         }
+    }
+    if(!$task && !$comment) {
+        $PH->abortWarning('need at least comment or task',ERROR_WARNING);
     }
 
 

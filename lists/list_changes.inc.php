@@ -68,8 +68,6 @@ class ListBlock_changes extends ListBlock
         else{
             $this->query_options['visible_only'] = true;
         }
-        #$changes= ChangeLine::getChangeLinesForPerson($auth->cur_user, NULL);
-        #$this->query_options['not_modified_by']= $auth->cur_user->id;
         $changes= ChangeLine::getChangeLines($this->query_options);
 
         $this->render_list(&$changes);
