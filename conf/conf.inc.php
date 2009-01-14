@@ -16,8 +16,8 @@ require_once("defines.inc.php");
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.08099',
-    'STREBER_VERSION_DATE'  => '2008-12-15',
+    'STREBER_VERSION'       => '0.09',
+    'STREBER_VERSION_DATE'  => '2009-12-15',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',

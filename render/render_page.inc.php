@@ -488,6 +488,7 @@ class PageHtmlStart extends PageElement {
     public function __toString()
     {
         global $auth;
+        $onload_javascript = "";
 
         ### include theme-config ###
         if($theme_config= getThemeFile("theme_config.inc.php")) {
@@ -513,6 +514,9 @@ class PageHtmlStart extends PageElement {
         if(isset($auth->cur_user->language)) {
             $buffer.='<meta http-equiv="Content-Language" content="'.$auth->cur_user->language.'">';
         }
+        
+
+        
         $buffer.='<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">'
         .'<META HTTP-EQUIV="EXPIRES" CONTENT="-1">'
         .'<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">'
@@ -534,11 +538,13 @@ class PageHtmlStart extends PageElement {
         if(confGet('LINK_STYLE_PRINT')) {
             $buffer.="<link rel=\"stylesheet\" media=\"print, embossed\" type=\"text/css\" href=\"". getThemeFile("styles_print.css") . "?v=".confGet('STREBER_VERSION')."\">";
         }
-        ### link alternative style (for development only) ###
-        if(0) {
-            $buffer.= "<link rel=\"alternate stylesheet\" title=\"Mozilla Lefthand\" media=\"screen\" type=\"text/css\"  href=\"themes/".getCurTheme()."/styles_left.css\">";
-        }
 
+        ### Add iphone layout hints
+        if( stristr(getServerVar('HTTP_USER_AGENT'), "iPhone" ) ) {
+            $buffer .= '<meta name = "viewport"  content = "initial-scale = 0.7, user-scalable = no">';
+            $buffer .= '<link rel="stylesheet"  media="screen" type="text/css" href="'. getThemeFile("iphone.css") . "?v=" . confGet('STREBER_VERSION') .'">';
+            $onload_javascript = 'window.scrollTo(0, 1);';
+        }
 
         $buffer.='
         <script type="text/javascript" src="js/jquery-1.2.6.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
@@ -567,9 +573,9 @@ class PageHtmlStart extends PageElement {
         <!--
             //------ on load -------
             $(document).ready(function(){
-            //window.onload = function() { alert("here");
         ';
 
+        $buffer.= $onload_javascript;
         if($this->page->use_autocomplete) {
             $buffer .= 'initAutocompleteFields();';
         }

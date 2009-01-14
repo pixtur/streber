@@ -217,14 +217,15 @@ div#nav_sub {
  background:    #D7DADB url(layout/bg_header_pages.png) repeat-x bottom left;
  font-size:     13px;
  line-height:   26px;
- height:        25px;
- overflow:      hidden;
+ /*height:        25px;*/
+ /*overflow:      hidden;*/
 }
 div#nav_sub a {
  color:         #000;
  text-decoration:none;
  padding:       5px 3px 5px 6px;
  font-weight:   bold;
+ white-space: nowrap;
 }
 
 /*
@@ -541,7 +542,7 @@ body.loginForm div.block,
 body.loginForgotPassword div.block
  {
  margin: 4em auto 10em auto;
- width:32em;
+ max-width:32em;
 }
 
 body.loginForm .form label {

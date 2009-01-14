@@ -1,0 +1,19 @@
+/**
+* overwrite attributes for iphone safari
+*/
+
+div#layout > div#c1 {
+	display:none;
+}
+
+div#layout  div#c2 {
+	width:430px;
+}
+
+div#logo {
+  display:none;
+}
+
+div#headline {
+  padding-top:2em;;
+}

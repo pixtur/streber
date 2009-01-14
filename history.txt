@@ -1,5 +1,7 @@
 streber-version-history
 
+- added some layout hints and styling for iphone user client
+
 - fixed feedback-often-requested-by-admin bug
 - fixed visibily of changed items for admins
 - disabled right to edit everthing for PMs
@@ -14,7 +16,6 @@ version v0.08099
 - fixed creation of project items if current user has RIGHT_VIEWALL but is not assigned to project #2312
 - CHECK_IP_ADDRESS is not disabled by default
 - fixed rendering of long wiki headlines #7417
-
 
 - fixed caching problem of install-page
 - refactored details of item change
