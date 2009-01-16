@@ -1,1 +1,7 @@
-
+undefined keys:
+---------------
+'invalid Person #%s'          =>'',
+'Reverting user changes'      =>'',
+'Skipped recently editted item #%s: <b>%s<b>'=>'',
+'Reverted all changes (%s) of user %s'=>'',
+'newly created items by this user remain unaffected.'=>'',
