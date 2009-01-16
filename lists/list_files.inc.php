@@ -454,6 +454,7 @@ class ListBlockCol_FileSummary extends ListBlockCol
                    .      ""
                    .        asHtml($file->name)
                    .      "</a>"
+                   .  "</span>"
                    . "<br>"
                    . "<span class=sub title='" . __('click to show details')  .  "'>" 
                    . $PH->getLink('fileView', '#' . $file->id , array('file'=>$file->id))
@@ -461,7 +462,6 @@ class ListBlockCol_FileSummary extends ListBlockCol
                    . sprintf( __('by %s', 'person who uploaded a file'), $author_name)
                    . ', '
                    . renderFilesize($file->filesize)
-                   .  "</span>"
                    . "<br>"
                    . "</span>";
 

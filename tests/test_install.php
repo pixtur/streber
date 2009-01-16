@@ -19,8 +19,8 @@ class TestInstall extends WebTestCase {
 
         #saveOriginalConfiguration();
         
-        #TestEnvironment::prepare('fixtures/project_setup.sql');
-        #$this->addHeader('USER_AGENT: streber_unit_tester');
+        TestEnvironment::prepare('fixtures/project_setup.sql');
+        $this->addHeader('USER_AGENT: streber_unit_tester');
         #
         #$g_streber_url= "http://localhost/streber_head";
         #

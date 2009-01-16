@@ -38,7 +38,7 @@ class TestEnvironment extends BaseObject {
 }
 
 function validatePage($handle) {
-    foreach( split(",", "error:,Error:") as $p) {
+    foreach( array("error:", "Error:", "error_list", "NOTICE:") as $p) {
         $handle->assertNoUnwantedText($p);
     }
     $handle->assertNoUnwantedPattern('/<x>/', 'check unescaped data (%s)');

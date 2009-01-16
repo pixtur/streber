@@ -710,6 +710,7 @@ function effortEdit($effort=NULL)
 function effortEditSubmit()
 {
     global $PH;
+    global $auth;
 
     ### Validate form crc
     if(!validateFormCrc()) {
