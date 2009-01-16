@@ -69,7 +69,7 @@ CREATE TABLE `db` (
   `updated` datetime default NULL,
   `version_streber_required` varchar(12) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-INSERT INTO db (id, version, created, updated, version_streber_required) VALUES (1, '0.09.01', '2008-12-12 15:41:37', NULL, '0.09.01');
+INSERT INTO db (id, version, created, updated, version_streber_required) VALUES (1, '0.0901', '2008-12-12 15:41:37', NULL, '0.0901');
 
 #
 #effort
