@@ -412,7 +412,7 @@ $g_lang_table= array(
 'no efforts booked yet'       =>'nie zarejestrowano jeszcze żadnych wysiłków',  # line 24
 
 ### ../lists/list_efforts.inc.php   ###
-'person'                      =>'Osoba',  # line 38
+'person'                      =>'osoba',  # line 38
 
 ### ../lists/list_projects.inc.php   ###
 'Task name. More Details as tooltips'=>'Nazwa zadania. Więcej szczegółów w tooltipie',  # line 87
@@ -498,7 +498,7 @@ $g_lang_table= array(
 
 ### ../lists/list_projectchanges.inc.php   ###
 'by Person'                   =>'przez osobę',  # line 229
-'Person who did the last change'=>'Osobam która dokonała ostatniej zmiany',  # line 230
+'Person who did the last change'=>'Osoba która dokonała ostatniej zmiany',  # line 230
 'Type|Column header'          =>'Typ',  # line 288
 'Item of item: [T]ask, [C]omment, [E]ffort, etc '=>'Kolumna składająca się z pozycji: [Z]adanie, [K]omentarz, [W]ysiłek, itd.',  # line 289
 'item %s has undefined type'  =>'pozycja %s posiada nie zdefiniowany typ',  # line 297
@@ -1419,7 +1419,7 @@ $g_lang_table= array(
 'Enable milestones|Project setting'=>'Włącz kamienie milowe|Project setting',  # line 77
 'Enable versions|Project setting'=>'Włącz wersje|Project setting',  # line 78
 'Enable bugreports|Project setting'=>'Włącz raporty błędów|Project setting',  # line 79
-'Enable news|Project setting' =>'Włącz altualności|Project setting',  # line 80
+'Enable news|Project setting' =>'Włącz aktualności|Project setting',  # line 80
 'undefined|priority'          =>'niezdefiniowany',  # line 84
 'urgent|priority'             =>'najwyższy',  # line 85
 'high|priority'               =>'wysoki',  # line 86
@@ -1966,7 +1966,7 @@ $g_lang_table= array(
 'Could not get bookmark'      =>'Nie znaleziono zakładki',  # line 456
 
 ### ../std/common.inc.php   ###
-'en_US.utf8,en_US,enu|list of locales'=>'pl_PL.utf8,pl_PL,plk',  # line 482
+'en_US.utf8,en_US,enu|list of locales'=>'pl_PL.UTF8,pl_PL,pl,plk,polish_pol,Polish_Poland.28592',  # line 482
 
 ### ../pages/version.inc.php   ###
 'Bookmark'                    =>'Zakładka',  # line 321
@@ -2168,6 +2168,12 @@ $g_lang_table= array(
 'remain|time status of a task'=>'trwa|time status of a task',
 'Please select some items'    =>'Proszę zaznaczyć parę pozycji',
 'Link to this chapter'        =>'Odnośnik do tego rozdziału',
+
+'invalid Person #%s'          =>'nieprawidłowa osoba #%s',
+'Reverting user changes'      =>'Przywrócenie zmian użytkownika',
+'Skipped recently editted item #%s: <b>%s<b>'=>'Pominięto poprzednio wyedytowaną pozycję #%s: <b>%s<b>',
+'Reverted all changes (%s) of user %s'=>'Przywrócenie wszystkich zmian (%s) użytkownika %s',
+'newly created items by this user remain unaffected.'=>'pozycje nowo stworzone przez tego użytkownika pozostaną nie zmienione.',
 
 );
 
