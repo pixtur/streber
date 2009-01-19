@@ -20,39 +20,37 @@ class Notifier
     public function sendNotifications()
     {
         global $PH;
-    	$persons=Person::getPersons(array('visible_only'=>false, 'can_login'=>true));
+        $persons=Person::getPersons(array('visible_only'=>false, 'can_login'=>true));
 
+        $notificationsSent = 0;
+        $warnings = 0;
         foreach($persons as $p) {
             if($p->settings & USER_SETTING_NOTIFICATIONS) {
                 if($p->office_email  || $p->personal_email )  {
                     $now= time();
                     $last= strToGMTime($p->notification_last);
                     $period= $p->notification_period * 60*60*24;
-					
+
                     if(strToGMTime($p->notification_last) + $period  < time() || $period == -1) {
                         $result= $this->sendNotifcationForPerson($p);
                         if($result) {
+                            ### reset activation-flag ###
+                            $p->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
+                            $p->notification_last= gmdate("Y-m-d H:i:s");
+                            $p->update();
                             if($result === true) {
-                                $p->notification_last= gmdate("Y-m-d H:i:s");
-
-                                ### reset activation-flag ###
-                                $p->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
-                                $p->notification_last= gmdate("Y-m-d H:i:s");
-                                $p->update();
-
+                                $notificationsSent++;
                             }
-                            else  {
-                                ### reset activation-flag ###
-                                $p->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
-                                $p->notification_last= gmdate("Y-m-d H:i:s");
-                                $p->update();
-	                            new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
+                            else {
+                                $warnings++;
+                                new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
                             }
                         }
                     }
                 }
             }
         }
+        return array($notificationsSent, $warnings);
     }
 
 
