@@ -918,7 +918,7 @@ function checkLogfileIsSecure()
     print_testStart("Check errors.inc.php is secure");
 
     ### check if errors.log.php is secure
-    if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "r")) {
+    if($FO = @fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "r")) {
         $first_line= fgets  ( $FO );
         fclose( $FO );
 
@@ -929,14 +929,14 @@ function checkLogfileIsSecure()
     }
 
     ### try to create
-    if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) {
+    if($FO = @fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) {
         @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
+        fclose($FO);
     }
     else {
         print_testResult(RESULT_FAILED,"Failed to create secure version of error.log.php.");
         $error_flag = true;
     }
-    fclose($FO);
 
     return $error_flag;
 }
