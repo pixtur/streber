@@ -165,7 +165,7 @@ div.edit_functions {
     display:none;
 }
 
-.reduced_header {
+.reduced_header.closed {
     display:none;
 }
 

@@ -4,7 +4,7 @@
 *  language:      Swedish
 *  translated by: Mats Djärf <md@webbplatsen.se>
 *                 www.webbplatsen.se
-*  last updated:  2008-11-18
+*  last updated:  2009-01-20 (Streber v0.0901)
 *
 *  comments: plaese inform me if there is some misspelled words,
 *            wrong translation or text string that is too long etc.
@@ -273,7 +273,7 @@ $g_lang_table= array(
 'Move to Folder'              =>'Flytta till mapp',  # line 61
 'Shrink View'                 =>'Kollapsa',  # line 67
 'Expand View'                 =>'Expandera',  # line 73
-'Topic'                       =>'Rubrik',  # line 93
+'Topic'                       =>'Dokument',  # line 93
 'Date|column header'          =>'Datum',  # line 145
 'By|column header'            =>'Skapare',  # line 190
 
@@ -416,7 +416,7 @@ $g_lang_table= array(
 'Created by'                  =>'Skapad av',  # line 386
 
 ### ../lists/list_projectchanges.inc.php   ###
-'Item was originally created by'=>'Ursprunligen skapad av',  # line 42
+'Item was originally created by'=>'Ursprungligen skapad av',  # line 42
 'C'                           =>'C',  # line 191
 'Created,Modified or Deleted' =>'Skapad, ändrad eller raderad',  # line 192
 'Deleted'                     =>'Raderad',  # line 205
@@ -1294,7 +1294,7 @@ $g_lang_table= array(
 'WARNING: operation aborted (%s)'=>'VARNING: operationen avbröts (%s)',  # line 588
 'FATAL: operation aborted with an fatal error (%s).'=>'Operationen avbröts med ett fatalt fel (%s).',  # line 594
 'Error: insufficient rights'    =>'FEL: otillräckliga rättigheter',  # line 597
-'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operationen avbröts med ett fatalt databas fel (%s). Detta kan bero på inkompabilitet i databasen. Vi rekommenderar att återställa till en fungerande backup.',  # line 600
+'FATAL: operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'Operationen avbröts med ett fatalt databasfel (%s). Detta kan bero på inkompabilitet i databasen. Vi rekommenderar att återställa till en fungerande backup.',  # line 600
 'NOTE: %s|Message when operation aborted'=>'%s',  # line 603
 'ERROR: %s|Message when operation aborted'=>'FEL: %s',  # line 606
 
@@ -1370,8 +1370,8 @@ $g_lang_table= array(
 'Failure sending mail: %s'    =>'Det gick inte att mejla: %s',  # line 49
 'Streber Email Notification|notifcation mail from'=>'Streber email',  # line 85
 'Updates at %s|notication mail subject'=>'%s (UPPDATERAT)',  # line 105
-'Hello %s,|notification'      =>'Hej %s',  # line 117
-'with this automatically created e-mail we want to inform you that|notification'=>'med detta automatiskt skapade mejl vill vi informera dig att',  # line 119
+'Hello %s,|notification'      =>'Hej %s,',  # line 117
+'with this automatically created e-mail we want to inform you that|notification'=>'med detta automatiska mejl vill vi informera att',  # line 119
 'since %s'                    =>'sedan %s',  # line 123
 'following happened at %s |notification'=>'har följande hänt på %s',  # line 126
 'Your account has been created.|notification'=>'Ditt konto har skapats.',  # line 133
@@ -1380,7 +1380,7 @@ $g_lang_table= array(
 'Project Updates'             =>'Projektuppdateringar',  # line 174
 'If you do not want to get further notifications feel free to|notification'=>'Om du inte vill ha fler meddelanden går det bra att',  # line 221
 'adjust your profile|notification'=>'anpassa din profil',  # line 223
-'Thanks for your time|notication'=>'Tack för din uppmärksamhet',  # line 228
+'Thanks for your time|notication'=>'Tack för din uppmärksamhet,',  # line 228
 'the management|notication'   =>'Administratören',  # line 229
 'No news for <b>%s</b>'       =>'Inga nyheter för <b>%s</b>',  # line 275
 
@@ -2182,7 +2182,7 @@ $g_lang_table= array(
 'Modified by'                 =>'Ändrad av',  # line 744
 
 ### ../lists/list_projectchanges.inc.php   ###
-'Nothing has changed.'        =>'Ingenting har änfrats.',  # line 33
+'Nothing has changed.'        =>'Ingenting har ändrats.',  # line 33
 
 ### ../lists/list_tasks.inc.php   ###
 'Status->Closed'              =>'Status --> Stängd',  # line 208
@@ -2195,7 +2195,7 @@ $g_lang_table= array(
 'Playground'                  =>'Lekplats',  # line 17
 'Send notification'           =>'Skicka meddelande',  # line 59
 'Remove notification'         =>'Ta bort meddelande',  # line 65
-'Edit bookmarks'        =>'Ändra bevakades poster',  # line 71
+'Edit bookmarks'              =>'Ändra bevakades poster',  # line 71
 
 ### ../pages/project_more.inc.php   ###
 'Documentation'               =>'Dokumentation',  # line 1091
@@ -2414,7 +2414,7 @@ $g_lang_table= array(
 'Completion:'                 =>'Komplettering:',  # line 1255
 
 ### ../lists/list_recentchanges.inc.php   ###
-'Recently changes'            =>'Nyligen uppdaterat',  # line 51
+'Recently changes'            =>'Nyligen ändrat',  # line 51
 'Show more'                   =>'Visa mer',  # line 90
 
 ### ../std/class_rss.inc.php   ###
@@ -2440,7 +2440,7 @@ $g_lang_table= array(
 
 ### ../pages/version.inc.php   ###
 'Bookmark'                    =>'Bokmärke',  # line 325
-'Remove this bookmark'        =>'Ta bort bokmärke',  # line 332
+'Remove this bookmark'        =>'Ta bort bokmärket',  # line 332
 'Remove Bookmark'             =>'Ta bort bokmärke',  # line 333
 
 ### ../pages/company.inc.php   ###
@@ -2514,7 +2514,7 @@ $g_lang_table= array(
 'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'Tack för din registrering! När din registering blivit godkänd kommer du få ett  e-postmeddelande.',  # line 3356
 
 ### ../pages/task_view.inc.php   ###
-'New topic'                   =>'Nytt ämne',  # line 1058
+'New topic'                   =>'Nytt dokument',  # line 1058
 
 ### ../pages/project_more.inc.php   ###
 'Reanimated person %s as team-member'=>'Återuppliva användare %s som gruppmedlem',  # line 2388
@@ -2573,7 +2573,7 @@ $g_lang_table= array(
 '???'                         =>'???',  # line 93
 
 ### ../std/common.inc.php   ###
-'en_US.utf8,en_US,enu|list of locales'=>'sv_SE.utf8,sv_SE,swe',  # line 500
+'en_US.utf8,en_US,enu|list of locales'=>'sv_SE.UTF8,sv_SE@euro,sv_SE,sv,svse.utf8,swe',  # line 500
 
 ### ../std/constant_names.inc.php   ###
 'Enable Bugreports|Project setting'=>'Aktivera bugrapportering',  # line 77
@@ -2654,6 +2654,92 @@ $g_lang_table= array(
 'Maybe you want to'           =>'Du vill kanske',  # line 623
 'set your password'           =>'ange ditt lösenord',  # line 626
 
+### NEW ####
+'Display folder as topic'     =>'Visa mapp som dokument',
+'creatd on %s|date a file was created'=>'Skapad %s',
+'click to show details'       =>'klicka för att visa detaljer',
+'by %s|person who uploaded a file'=>'av %s',
+'No changes by others'        =>'Inga ändringar av andra användare',
+'Also show your changes'      =>'Visa även dina ändringar',
+'No changes yet'              =>'Inga ändringar',
+'Hide your changes'           =>'Dölj dina ändringar',
+'Needs feedback'              =>'Behöver återkoppling',
+'Days until planned end'      =>'Dagar till slutdatum',
+'Due|column header, days until planned end'=>'Dts',
+'Review'                      =>'Granska',
+'Task status set to completed and needs approval.'=>'Uppgift är satt som slutförd och behöver godkännande.',
+'Item was approved on: %s:|date a task was approved'=>'Posten granskades %s',
+'done'                        =>'Slutförd',
+'This task is planned to be completed today.'=>'Uppgiften är planerad att vara slutförd idag.',
+'Tomorrow'                    =>'I morgon',
+'This task is planned to be completed tomorrow.'=>'Uppgiften är planerad att vara slutförd i morgon.',
+'Next week'                   =>'Nästa vecka',
+'due: %s'                     =>'dts: %s',
+'days'                        =>'dagar ',
+'this task is overdue!'       =>'uppgiften är försenad',
+'late|time status of a task'  =>'försenad',
+'remain|time status of a task'=>'återstår',
+'Pending'                     =>'Avvaktar',
+'start: %s'                   =>'start: %s',
+'Toggle filter own changes'   =>'Ändra filter för egna ändringar',
+'Please select some items'    =>'Välj någon post',
+'Uploaded new version of file with Id %s'=>'Laddat upp ny version av fil (ID, %s)',
+'Uploaded new file with Id %s'=>'Laddat upp ny fil (ID, %s)',
+'Updated file with Id %s'     =>'Uppdaterat fil (ID, %s)',
+'my blocked'                  =>'mina blockerade',
+'needs feedback'              =>'behöver återkoppling',
+'Welcome to %s|Notice after login'=>'Välkommen till %s',
+'One notification sent'       =>'Ett meddelande skickat',
+'%s notifications sent'       =>'%s meddelande skickat',
+'No notifications sent'       =>'Inga meddelanden skickade',
+'ASAP'                        =>'ASAP',
+'Filter own changes from recent changes list'=>'Filtrera egna ändringar i listan Nyligen ändrat',
+'Updated settings for %s.'    =>'Uppdaterade inställningar för %s.',
+'New project from'            =>'Nytt projekt från',
+'all|Filter preset'           =>'alla',
+'new|Filter preset'           =>'ny',
+'open|Filter preset'          =>'öppna',
+'discounted|Filter preset'    =>'rabatterad',
+'not chargeable|Filter preset'=>'ej debiterbar',
+'balanced|Filter preset'      =>'balancerad',
+'last logout|Filter preset'   =>'senast utloggad',
+'1 week|Filter preset'        =>'1 vecka',
+'2 weeks|Filter preset'       =>'2 veckor',
+'3 weeks|Filter preset'       =>'3 veckor',
+'1 month|Filter preset'       =>'1 månad',
+'prior|Filter preset'         =>'prio',
+'Nickname not known in this project: %s'=>'%s, okänt namn för detta projekt',
+'Requested feedback from: %s.'=>'Begärd återkoppling av %s.',
+'Your feedback is requested by %s.'=>'Din begärda återkoppling är besvarad av %s.',
+'Please edit or comment this item.'=>'Ändra eller kommentera denna post.',
+'This task has no description. Doubleclick to edit.'=>'Uppgiften har ingen beskrivning. Dubbelklicka för att ändra.',
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'Dokumentet har ingen text. Dubbelklicka för att lägga till text.',
+'Request feedback'            =>'Begär återkoppling',
+'never'                       =>'aldrig',
+'just now'                    =>'just nu',
+'%smin ago'                   =>'%s min sedan',
+'%sh ago'                     =>'%s tim sedan',
+'%s years ago'                =>'%s år sedan',
+'Update|wiki change marker'   =>'Uppdaterat',
+'New|wiki change marker'      =>'Nytt',
+'Deleted|wiki change marker'  =>'Raderat',
+'Link to this chapter'        =>'Länka till detta kapitel',
+'Item #%s is not an image'    =>'Posten #%s är ingen bild',
+'Unkwown item %s'             =>'Okänd post %s',
+'Cannot link to item #%s of type %s'=>'Kan inte länka till posten #%s av typen %s',
+'View all Companies|a user right'=>'Visa alla företag',
+'Upcomming|release type'      =>'Kommande',
+'ASAP|notification period'    =>'ASAP',
+'Forgot your password or how to log in?|notification'=>'Glömt lösenord eller hur du loggar in?',
+'Request a mail to change your account settings.|notification'=>'Klicka här för att få mejl för att ändra kontoinställningar.',
+'Click here:'                 =>'Klicka här:',
+'Please use this link to'     =>'Använd denna länk för',
+'update your account settings'=>'uppdatera dina kontoinställningar',
+'invalid Person #%s'          =>'Ej giltig användare, #%s',
+'Reverting user changes'      =>'Återkallar ändringar',
+'Skipped recently editted item #%s: <b>%s<b>'=>'Hoppade över nyligen ändrade posten #%s <b>%s<b>',
+'Reverted all changes (%s) of user %s'=>'Återkalla alla ändringar (%s) av %s',
+'newly created items by this user remain unaffected.'=>'nyligen skapade poster av denna användare är fortfarande ej påverkade'
 );
 
 ?>

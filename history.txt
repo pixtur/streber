@@ -1,5 +1,13 @@
 streber-version-history
 
+version v0.0902
+===============
+- fix deletion of error.log.php at upgrades
+- fixed minor language problems
+- fixed minor problem in triggerSendNotification
+- fixed ob_clean() warning
+- reduced warnings for missing locale-settings
+- updated languages
 
 version v0.09
 =================

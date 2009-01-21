@@ -132,7 +132,10 @@ function step_01_checkEvironment() {
     ### check _tmp-directory writeable ###
     {
         print_testStart("check write-permissions for temporary files directory '<b>". confGet('DIR_TEMP') ."</b>'?");
-        if(!is_writeable('../'. confGet('DIR_TEMP'))) {
+        if(is_writeable('../'. confGet('DIR_TEMP'))) {
+            print_testResult(RESULT_GOOD, 'Fine.');                            
+        }
+        else {
             if(!is_dir('../'. confGet('DIR_TEMP'))){
                 @mkdir('../'. confGet('DIR_TEMP'));
             }
@@ -141,25 +144,16 @@ function step_01_checkEvironment() {
                 print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory.");
                 $flag_errors= true;
             }
-            else
-            {
-                if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) 
-                {
-                    @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
-                }    
-                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
-            }
-        }
-        else
-        {
-            if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) 
-            {
-                @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
-            } 
-            
-            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
+            else {
+                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');                
+            }            
         }
     }
+
+    if( checkLogfileIsSecure()) {
+        $flag_errors= true;
+    }
+    
 
     ### check _files-directory writeable ###
     {
@@ -913,5 +907,38 @@ function writeSettingsFile($filename, $args) {
 
 }
 
+
+/**
+* make sure, errors.log.php is secure by adding a forward-line to beginning of file
+*
+*/
+function checkLogfileIsSecure()
+{
+    $error_flag = false;
+    print_testStart("Check errors.inc.php is secure");
+
+    ### check if errors.log.php is secure
+    if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "r")) {
+        $first_line= fgets  ( $FO );
+        fclose( $FO );
+
+        if(stristr($first_line, "../index.php") ) {
+            print_testResult(RESULT_GOOD,"Already secure");
+            return $error_flag;
+        }
+    }
+
+    ### try to create
+    if($FO = fopen("../" . confGet('DIR_TEMP') . "/errors.log.php", "w")) {
+        @fputs($FO,'<? header("Location: ../index.php");exit(); ?>');
+    }
+    else {
+        print_testResult(RESULT_FAILED,"Failed to create secure version of error.log.php.");
+        $error_flag = true;
+    }
+    fclose($FO);
+
+    return $error_flag;
+}
 
 

@@ -577,10 +577,14 @@ function setLang($lang) {
 
         $res = setlocale(LC_TIME, explode(',', $locale));
 
-        // this warning might be annoying, but we need a way to detect that setlocale failed
-        // eventually the list of locales will be long enough to include all supported platforms
+        # this warning might be annoying, but we need a way to detect that setlocale failed
+        # eventually the list of locales will be long enough to include all supported platforms
+        # 
+        # pixtur: changed from warning to log_message that will only be displayed when
+        # 
+        
         if($res === FALSE) {
-            trigger_error("Could not set locale to '$locale'", E_USER_WARNING);
+            log_message("Could not set locale to '$locale'", E_USER_WARNING);
         }
     }
 }

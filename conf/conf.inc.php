@@ -16,8 +16,8 @@ require_once("defines.inc.php");
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0901',
-    'STREBER_VERSION_DATE'  => '2009-12-16',
+    'STREBER_VERSION'       => '0.0902',
+    'STREBER_VERSION_DATE'  => '2009-12-21',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -336,7 +336,7 @@ $g_config= array(
     /**
     * use mod_rewrite clean urls
     */
-    'USE_MOD_REWRITE'=> true,
+    'USE_MOD_REWRITE'=> false,
 	
 	/**
 	* cost overview

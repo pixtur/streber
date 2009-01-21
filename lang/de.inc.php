@@ -2303,7 +2303,7 @@ $g_lang_table= array(
 'never'                       =>'niemals',  
 'just now'                    =>'jetzt',  
 '%smin ago'                   =>'vor %smin',  
-'%sh ago'                     =>'vor %h',  
+'%sh ago'                     =>'vor %s h',  
 '%s years ago'                =>'vor %s Jahren',  
 
 ### ../render/render_wiki.inc.php   ###

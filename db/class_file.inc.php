@@ -574,8 +574,8 @@ class File extends DbProjectItem
                 readfile_chunked($filepath);
             }
             else {
-                ob_clean();
-                flush();
+                #ob_clean();
+                #flush();
                 readfile($filepath);
             }
         }
@@ -654,8 +654,8 @@ class File extends DbProjectItem
                 readfile_chunked($filepath);
             }
             else {
-                ob_clean();
-                flush();
+                #ob_clean();
+                #flush();
                 readfile($filepath);                
             }
             return;

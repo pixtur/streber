@@ -417,9 +417,9 @@ function triggerSendNotifications()
     require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
     log_message('triggerSendNotifications()');
     $n= new Notifier();
-    list($notifications, $warnings) = $n->sendNotifications();
-    echo sprintf("Notifications sent: %s\nWarnings: %s\n", $notifications, $warnings);
-    if($warnings) {
+    list($num_notifications_sent, $num_warnings) = $n->sendNotifications();
+    echo sprintf("Notifications sent: %s\nWarnings: %s\n", $num_notifications_sent, $num_warnings);
+    if($num_warnings) {
         echo "# Please check errors.log.php for details\n";
     }
 }

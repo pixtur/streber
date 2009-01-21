@@ -35,1918 +35,1439 @@
 global $g_lang_table;
 $g_lang_table= array(
 
-undefined keys:
----------------
-
-### ../conf/defines.inc.php   ###
-'autodetect'                  =>'',  # line 304
-
-### ../pages/company.inc.php   ###
-'Summary'                     =>'',  # line 570
-
-### ../pages/person.inc.php   ###
-'Details'                     =>'',  # line 1079
-
-### ../pages/search.inc.php   ###
-'Name'                        =>'',  # line 900
-
-### ../db/class_company.inc.php   ###
-'Required. (e.g. pixtur ag)'  =>'',  # line 34
-'Short|form field for company'=>'',  # line 39
-'Optional: Short name shown in lists (eg. pixtur)'=>'',  # line 40
-'Tag line|form field for company'=>'',  # line 45
-
-### ../db/class_person.inc.php   ###
-'Optional: Additional tagline (eg. multimedia concepts)'=>'',  # line 64
-
-### ../db/class_company.inc.php   ###
-'Phone|form field for company'=>'',  # line 51
-'Optional: Phone (eg. +49-30-12345678)'=>'',  # line 52
-'Fax|form field for company'  =>'',  # line 57
-'Optional: Fax (eg. +49-30-12345678)'=>'',  # line 58
-'Street'                      =>'',  # line 63
-'Optional: (eg. Poststreet 28)'=>'',  # line 64
-'Zipcode'                     =>'',  # line 69
-'Optional: (eg. 12345 Berlin)'=>'',  # line 70
-'Website'                     =>'',  # line 75
-'Optional: (eg. http://www.pixtur.de)'=>'',  # line 76
-'Intranet'                    =>'',  # line 81
-'Optional: (eg. http://www.pixtur.de/login.php?name=someone)'=>'',  # line 88
-'E-Mail'                      =>'',  # line 87
-'Comments|form label for company'=>'',  # line 93
-
-### ../db/db_itemperson.inc.php   ###
-'Optional'                    =>'',  # line 46
-
-### ../db/class_company.inc.php   ###
-'more than expected'          =>'',  # line 623
-
-### ../pages/effort.inc.php   ###
-'not available'               =>'',  # line 379
-
-### ../db/class_effort.inc.php   ###
-'optional if tasks linked to this effort'=>'',  # line 37
-'Time Start'                  =>'',  # line 44
-'Time End'                    =>'',  # line 48
-
-### ../pages/version.inc.php   ###
-'Description'                 =>'',  # line 342
-
-### ../db/class_issue.inc.php   ###
-'Production build'            =>'',  # line 53
-'Steps to reproduce'          =>'',  # line 57
-'Expected result'             =>'',  # line 60
-'Suggested Solution'          =>'',  # line 63
-
-### ../db/class_person.inc.php   ###
-'Full name'                   =>'',  # line 54
-'Required. Full name like (e.g. Thomas Mann)'=>'',  # line 55
-'Nickname'                    =>'',  # line 59
-'only required if user can login (e.g. pixtur)'=>'',  # line 60
-
-### ../lists/list_persons.inc.php   ###
-'Tagline'                     =>'',  # line 68
-
-### ../db/class_person.inc.php   ###
-'Mobile Phone'                =>'',  # line 67
-'Optional: Mobile phone (eg. +49-172-12345678)'=>'',  # line 68
-'Office Phone'                =>'',  # line 73
-'Optional: Office Phone (eg. +49-30-12345678)'=>'',  # line 74
-'Office Fax'                  =>'',  # line 77
-'Optional: Office Fax (eg. +49-30-12345678)'=>'',  # line 78
-'Office Street'               =>'',  # line 81
-'Optional: Official Street and Number (eg. Poststreet 28)'=>'',  # line 82
-'Office Zipcode'              =>'',  # line 85
-'Optional: Official Zip-Code and City (eg. 12345 Berlin)'=>'',  # line 86
-'Office Page'                 =>'',  # line 89
-'Optional: (eg. www.pixtur.de)'=>'',  # line 117
-'Office E-Mail'               =>'',  # line 93
-'Optional: (eg. thomas@pixtur.de)'=>'',  # line 121
-'Personal Phone'              =>'',  # line 100
-'Optional: Private Phone (eg. +49-30-12345678)'=>'',  # line 101
-'Personal Fax'                =>'',  # line 104
-'Optional: Private Fax (eg. +49-30-12345678)'=>'',  # line 105
-'Personal Street'             =>'',  # line 108
-'Optional:  Private (eg. Poststreet 28)'=>'',  # line 109
-'Personal Zipcode'            =>'',  # line 112
-'Optional: Private (eg. 12345 Berlin)'=>'',  # line 113
-'Personal Page'               =>'',  # line 116
-'Personal E-Mail'             =>'',  # line 120
-'Birthdate'                   =>'',  # line 124
-
-### ../db/class_project.inc.php   ###
-'Color'                       =>'',  # line 56
-
-### ../db/class_person.inc.php   ###
-'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'',  # line 130
-
-### ../lists/list_comments.inc.php   ###
-'Comments'                    =>'',  # line 29
-
-### ../db/class_person.inc.php   ###
-'Password'                    =>'',  # line 140
-'Only required if user can login|tooltip'=>'',  # line 141
-
-### ../render/render_page.inc.php   ###
-'Profile'                     =>'',  # line 714
-
-### ../db/class_person.inc.php   ###
-'Theme|Formlabel'             =>'',  # line 175
-
-### ../db/class_task.inc.php   ###
-'Short'                       =>'',  # line 47
-
-### ../db/class_project.inc.php   ###
-'Status summary'              =>'',  # line 53
-
-### ../db/class_task.inc.php   ###
-'Date start'                  =>'',  # line 51
-'Date closed'                 =>'',  # line 57
-
-### ../pages/task_more.inc.php   ###
-'Status'                      =>'',  # line 2335
-
-### ../db/class_project.inc.php   ###
-'Project page'                =>'',  # line 71
-'Wiki page'                   =>'',  # line 74
-
-### ../pages/home.inc.php   ###
-'Priority'                    =>'',  # line 177
-
-### ../std/constant_names.inc.php   ###
-'Company'                     =>'',  # line 123
-
-### ../db/class_project.inc.php   ###
-'show tasks in home'          =>'',  # line 88
-'only team members can create items'=>'',  # line 1236
-'validating invalid item'     =>'',  # line 1316
-'insufficient rights (not in project)'=>'',  # line 1328
-
-### ../pages/task_more.inc.php   ###
-'insufficient rights'           =>'',  # line 2877
-
-### ../pages/project_view.inc.php   ###
-'Project Template'            =>'',  # line 69
-'Inactive Project'            =>'',  # line 72
-'Project|Page Type'           =>'',  # line 75
-
-### ../lists/list_project_team.inc.php   ###
-'job'                         =>'',  # line 219
-
-### ../db/class_projectperson.inc.php   ###
-'role'                        =>'',  # line 57
-
-### ../pages/task_view.inc.php   ###
-'For Milestone'               =>'',  # line 790
-
-### ../db/class_task.inc.php   ###
-'resolved in version'         =>'',  # line 79
-
-### ../pages/task_view.inc.php   ###
-'Resolve reason'              =>'',  # line 796
-
-### ../db/class_task.inc.php   ###
-'show as folder (may contain other tasks)'=>'',  # line 98
-'is a milestone'              =>'',  # line 103
-'milestones are shown in a different list'=>'',  # line 104
-'released'                    =>'',  # line 110
-'release time'                =>'',  # line 116
-'Completion'                  =>'',  # line 122
-
-### ../pages/task_view.inc.php   ###
-'Estimated time'              =>'',  # line 882
-'Estimated worst case'        =>'',  # line 883
-
-### ../pages/task_more.inc.php   ###
-'Label'                       =>'',  # line 2364
-
-### ../db/class_task.inc.php   ###
-'Planned Start'               =>'',  # line 153
-'Planned End'                 =>'',  # line 158
-'Order Id'                    =>'',  # line 175
-
-### ../pages/task_more.inc.php   ###
-'task without project?'       =>'',  # line 1942
-
-### ../pages/task_view.inc.php   ###
-'Folder'                      =>'',  # line 108
-
-### ../lists/list_versions.inc.php   ###
-'Released Milestone'          =>'',  # line 180
-
-### ../pages/project_more.inc.php   ###
-'Milestone'                   =>'',  # line 908
-
-### ../db/db.inc.php   ###
-'Database exception. Please read %s next steps on database errors.%s'=>'',  # line 38
-
-### ../db/db_item.inc.php   ###
-'unnamed'                     =>'',  # line 563
-'Unknown'                     =>'',  # line 1452
-'Item has been modified during your editing by %s (%s minutes ago). Your changes can not be submitted.'=>'',  # line 1457
-
-### ../db/db_itemperson.inc.php   ###
-'Comment|form label for items'=>'',  # line 45
-
-### ../lists/list_bookmarks.inc.php   ###
-'Your bookmarks'              =>'',  # line 32
-'You have no bookmarks'       =>'',  # line 33
-
-### ../pages/item.inc.php   ###
-'Edit bookmark'               =>'',  # line 363
-
-### ../pages/_handles.inc.php   ###
-'Remove bookmark'             =>'',  # line 52
-
-### ../pages/search.inc.php   ###
-'Type'                        =>'',  # line 871
-
-### ../pages/person.inc.php   ###
-'deleted'                     =>'',  # line 424
-
-### ../pages/item.inc.php   ###
-'Notify on change'            =>'',  # line 681
-
-### ../lists/list_tasks.inc.php   ###
-'in|very short for IN folder...'=>'',  # line 1304
-
-### ../lists/list_projectchanges.inc.php   ###
-'(on comment)'                =>'',  # line 376
-'(on task)'                   =>'',  # line 381
-'(on project)'                =>'',  # line 387
-
-### ../std/constant_names.inc.php   ###
-'Comment'                     =>'',  # line 128
-
-### ../lists/list_bookmarks.inc.php   ###
-'Remind'                      =>'',  # line 422
-'in %s day(s)'                =>'',  # line 471
-'since %s day(s)'             =>'',  # line 475
-
-### ../render/render_list_column_special.inc.php   ###
-'Modified'                    =>'',  # line 197
-
-### ../std/constant_names.inc.php   ###
-'Project'                     =>'',  # line 119
-
-### ../lists/list_bookmarks.inc.php   ###
-'State'                       =>'',  # line 718
-'Modified by'                 =>'',  # line 751
-
-### ../lists/list_changes.inc.php   ###
-'to|very short for assigned tasks TO...'=>'',  # line 406
-
-### ../lists/list_projectchanges.inc.php   ###
-'new'                         =>'',  # line 215
-
-### ../pages/project_more.inc.php   ###
-'modified'                    =>'',  # line 690
-
-### ../lists/list_comments.inc.php   ###
-'New Comment'                 =>'',  # line 39
-
-### ../lists/list_changes.inc.php   ###
-'Last of %s comments:'        =>'',  # line 217
-'comment:'                    =>'',  # line 220
-'completed'                   =>'',  # line 242
-'Approve Task'                =>'',  # line 243
-'approved'                    =>'',  # line 247
-
-### ../pages/project_more.inc.php   ###
-'closed'                      =>'',  # line 770
-
-### ../lists/list_changes.inc.php   ###
-'reopened'                    =>'',  # line 255
-'is blocked'                  =>'',  # line 262
-'moved'                       =>'',  # line 268
-'renamed'                     =>'',  # line 273
-'edit wiki'                   =>'',  # line 276
-'changed:'                    =>'',  # line 280
-'commented'                   =>'',  # line 290
-'assigned'                    =>'',  # line 329
-'attached'                    =>'',  # line 348
-'attached file to'            =>'',  # line 358
-
-### ../lists/list_projectchanges.inc.php   ###
-'restore'                     =>'',  # line 332
-
-### ../pages/search.inc.php   ###
-'Changes'                     =>'',  # line 752
-'Other team members changed nothing since last logout (%s)'=>'',  # line 754
-
-### ../lists/list_changes.inc.php   ###
-'Date'                        =>'',  # line 564
-
-### ../pages/search.inc.php   ###
-'Who changed what when...'    =>'',  # line 833
-
-### ../lists/list_changes.inc.php   ###
-'what|column header in change list'=>'',  # line 598
-
-### ../std/constant_names.inc.php   ###
-'Task'                        =>'',  # line 120
-
-### ../lists/list_changes.inc.php   ###
-'Date / by'                   =>'',  # line 695
-
-### ../lists/list_comments.inc.php   ###
-'Add Comment'                 =>'',  # line 41
-
-### ../pages/_handles.inc.php   ###
-'Mark as bookmark'            =>'',  # line 45
-
-### ../lists/list_comments.inc.php   ###
-'Shrink All Comments'         =>'',  # line 58
-'Collapse All Comments'       =>'',  # line 60
-'Expand All Comments'         =>'',  # line 67
-'By|column header'            =>'',  # line 88
-'version %s'                  =>'',  # line 140
-
-### ../render/render_page.inc.php   ###
-'Edit'                        =>'',  # line 627
-
-### ../pages/task_view.inc.php   ###
-'Delete'                      =>'',  # line 1048
-
-### ../lists/list_comments.inc.php   ###
-'Reply'                       =>'',  # line 170
-'Publish'                     =>'',  # line 173
-'1 sub comment'               =>'',  # line 230
-'%s sub comments'             =>'',  # line 233
-
-### ../lists/list_companies.inc.php   ###
-'related companies'           =>'',  # line 28
-
-### ../lists/list_persons.inc.php   ###
-'Name Short'                  =>'',  # line 34
-'Shortnames used in other lists'=>'',  # line 35
-
-### ../pages/company.inc.php   ###
-'Phone'                       =>'',  # line 584
-
-### ../lists/list_companies.inc.php   ###
-'Phone-Number'                =>'',  # line 42
-'Proj'                        =>'',  # line 50
-'Number of open Projects'     =>'',  # line 51
-
-### ../render/render_page.inc.php   ###
-'People'                      =>'',  # line 237
-
-### ../lists/list_companies.inc.php   ###
-'People working for this person'=>'',  # line 58
-'Edit company'                =>'',  # line 91
-'Delete company'              =>'',  # line 98
-'Create new company'          =>'',  # line 104
-'Company|Column header'       =>'',  # line 127
-
-### ../pages/project_more.inc.php   ###
-'Documentation'               =>'',  # line 1091
-
-### ../lists/list_efforts.inc.php   ###
-'no efforts booked yet'       =>'',  # line 25
-
-### ../pages/person.inc.php   ###
-'Efforts'                     =>'',  # line 33
-
-### ../lists/list_efforts.inc.php   ###
-'person'                      =>'',  # line 37
-'Edit effort'                 =>'',  # line 50
-'New effort'                  =>'',  # line 57
-'View selected Efforts'       =>'',  # line 72
-'%s effort(s) with %s hours'  =>'',  # line 129
-
-### ../std/constant_names.inc.php   ###
-'Effort'                      =>'',  # line 127
-
-### ../lists/list_efforts.inc.php   ###
-'Effort name. More Details as tooltips'=>'',  # line 143
-'Task|column header'          =>'',  # line 167
-'Start|column header'         =>'',  # line 192
-'D, d.m.Y'                    =>'',  # line 203
-'End|column header'           =>'',  # line 219
-'len|column header of length of effort'=>'',  # line 243
-'Daygraph|columnheader'       =>'',  # line 263
-
-### ../lists/list_files.inc.php   ###
-'Parent item'                 =>'',  # line 39
-
-### ../pages/task_view.inc.php   ###
-'Version'                     =>'',  # line 522
-
-### ../pages/_handles.inc.php   ###
-'Edit file'                   =>'',  # line 811
-
-### ../lists/list_files.inc.php   ###
-'Move files'                  =>'',  # line 121
-'New file'                    =>'',  # line 134
-'No files uploaded'           =>'',  # line 219
-'Download|Column header'      =>'',  # line 262
-'File|Column header'          =>'',  # line 304
-'in|... folder'               =>'',  # line 341
-'ID %s'                       =>'',  # line 457
-'Show Details'                =>'',  # line 459
-'Attached to|Column header'   =>'',  # line 383
-'Summary|Column header'       =>'',  # line 414
-'Thumbnail|Column header'     =>'',  # line 475
-
-### ../pages/project_more.inc.php   ###
-'Milestones'                  =>'',  # line 1324
-
-### ../pages/task_more.inc.php   ###
-'New folder'                  =>'',  # line 111
-
-### ../pages/person.inc.php   ###
-'or'                          =>'',  # line 678
-
-### ../lists/list_milestones.inc.php   ###
-'Planned for'                 =>'',  # line 309
-'Due Today'                   =>'',  # line 333
-'%s days late'                =>'',  # line 338
-'%s days left'                =>'',  # line 342
-
-### ../lists/list_versions.inc.php   ###
-'%s required'                 =>'',  # line 262
-
-### ../lists/list_milestones.inc.php   ###
-'Tasks open|columnheader'     =>'',  # line 375
-
-### ../pages/project_more.inc.php   ###
-'open'                        =>'',  # line 599
-
-### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'',  # line 26
-
-### ../std/constant_names.inc.php   ###
-'Person'                      =>'',  # line 121
-
-### ../lists/list_versions.inc.php   ###
-'Task name. More Details as tooltips'=>'',  # line 54
-
-### ../lists/list_persons.inc.php   ###
-'Private'                     =>'',  # line 53
-'Mobil'                       =>'',  # line 58
-'Office'                      =>'',  # line 63
-
-### ../render/render_page.inc.php   ###
-'Companies'                   =>'',  # line 243
-
-### ../lists/list_persons.inc.php   ###
-'last login'                  =>'',  # line 78
-'Edit person'                 =>'',  # line 110
-
-### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'',  # line 1016
-
-### ../lists/list_persons.inc.php   ###
-'Delete person'               =>'',  # line 123
-'Create new person'           =>'',  # line 129
-'Nickname|column header'      =>'',  # line 217
-'Name|column header'          =>'',  # line 239
-'Profile|column header'       =>'',  # line 265
-'Account settings for user (do not confuse with project rights)'=>'',  # line 267
-'(adjusted)'                  =>'',  # line 282
-'Active Projects|column header'=>'',  # line 304
-
-### ../render/render_list_column_special.inc.php   ###
-'Priority is %s'              =>'',  # line 255
-
-### ../lists/list_persons.inc.php   ###
-'recent changes|column header'=>'',  # line 349
-'changes since YOUR last logout'=>'',  # line 351
-
-### ../lists/list_project_team.inc.php   ###
-'Rights'                      =>'',  # line 42
-'Persons rights in this project'=>'',  # line 43
-'Edit team member'            =>'',  # line 100
-'Add team member'             =>'',  # line 107
-'Remove person from team'     =>'',  # line 114
-
-### ../pages/project_view.inc.php   ###
-'Team members'                =>'',  # line 287
-
-### ../lists/list_project_team.inc.php   ###
-'Role'                        =>'',  # line 194
-'last Login|column header'    =>'',  # line 234
-
-### ../lists/list_projectchanges.inc.php   ###
-'Nothing has changed.'        =>'',  # line 33
-
-### ../render/render_list_column_special.inc.php   ###
-'Created by'                  =>'',  # line 391
-
-### ../lists/list_projectchanges.inc.php   ###
-'Item was originally created by'=>'',  # line 46
-'C'                           =>'',  # line 195
-'Created,Modified or Deleted' =>'',  # line 196
-'Deleted'                     =>'',  # line 209
-'by Person'                   =>'',  # line 233
-'Person who did the last change'=>'',  # line 234
-'Type|Column header'          =>'',  # line 293
-'item %s has undefined type'  =>'',  # line 301
-'Del'                         =>'',  # line 319
-'shows if item is deleted'    =>'',  # line 320
-
-### ../lists/list_projects.inc.php   ###
-'Project priority (the icons have tooltips, too)'=>'',  # line 64
-
-### ../pages/home.inc.php   ###
-'Task-Status'                 =>'',  # line 184
-
-### ../lists/list_projects.inc.php   ###
-'Status Summary'              =>'',  # line 102
-'Short discription of the current status'=>'',  # line 103
-
-### ../pages/project_view.inc.php   ###
-'Tasks'                       =>'',  # line 253
-
-### ../lists/list_projects.inc.php   ###
-'Number of open Tasks'        =>'',  # line 113
-'Opened'                      =>'',  # line 121
-'Day the Project opened'      =>'',  # line 122
-
-### ../render/render_misc.inc.php   ###
-'Closed'                      =>'',  # line 492
-
-### ../lists/list_projects.inc.php   ###
-'Day the Project state changed to closed'=>'',  # line 128
-'Edit project'                =>'',  # line 137
-'Delete project'              =>'',  # line 144
-'Log hours for a project'     =>'',  # line 151
-'Open / Close'                =>'',  # line 159
-
-### ../pages/company.inc.php   ###
-'Create new project'          =>'',  # line 690
-
-### ../pages/_handles.inc.php   ###
-'Create Template'             =>'',  # line 262
-'Project from Template'       =>'',  # line 270
-
-### ../lists/list_projects.inc.php   ###
-'... working in project'      =>'',  # line 310
-
-### ../pages/home.inc.php   ###
-'Project|column header'       =>'',  # line 191
-
-### ../pages/project_view.inc.php   ###
-'Folders'                     =>'',  # line 301
-
-### ../lists/list_taskfolders.inc.php   ###
-'Number of subtasks'          =>'',  # line 87
-'New'                         =>'',  # line 105
-'Create new folder under selected task'=>'',  # line 108
-'Move selected to folder'     =>'',  # line 113
-
-### ../lists/list_tasks.inc.php   ###
-'Log hours for select tasks'  =>'',  # line 223
-'Priority of task'            =>'',  # line 97
-'Status|Columnheader'         =>'',  # line 108
-'Started'                     =>'',  # line 129
-'Modified|Column header'      =>'',  # line 133
-'Est.'                        =>'',  # line 144
-
-### ../pages/home.inc.php   ###
-'Estimated time in hours'     =>'',  # line 223
-
-### ../lists/list_tasks.inc.php   ###
-'Add new Task'                =>'',  # line 166
-'Report new Bug'              =>'',  # line 173
-
-### ../pages/task_view.inc.php   ###
-'Add comment'                 =>'',  # line 746
-
-### ../lists/list_tasks.inc.php   ###
-'Status->Completed'           =>'',  # line 194
-'Status->Approved'            =>'',  # line 201
-'Status->Closed'              =>'',  # line 208
-'Move tasks'                  =>'',  # line 216
-'List|List sort mode'         =>'',  # line 240
-'Tree|List sort mode'         =>'',  # line 251
-'Grouped|List sort mode'      =>'',  # line 262
-'%s hidden'                   =>'',  # line 375
-'Latest Comment'              =>'',  # line 502
-'by'                          =>'',  # line 504
-
-### ../pages/search.inc.php   ###
-'for'                         =>'',  # line 281
-
-### ../lists/list_tasks.inc.php   ###
-'%s open tasks / %s h'        =>'',  # line 545
-'Label|Columnheader'          =>'',  # line 890
-
-### ../pages/task_view.inc.php   ###
-'Assigned to'                 =>'',  # line 837
-
-### ../lists/list_tasks.inc.php   ###
-'Task name'                   =>'',  # line 1017
-'has %s comments'             =>'',  # line 1047
-'Task has %s attachments'     =>'',  # line 1060
-'- no name -|in task lists'   =>'',  # line 1299
-'number of subtasks'          =>'',  # line 1092
-'Page name'                   =>'',  # line 1132
-'Sum of all booked efforts (including subtasks)'=>'',  # line 1176
-'Effort in hours'             =>'',  # line 1190
-'Days until planned start'    =>'',  # line 1202
-'Due|column header, days until planned start'=>'',  # line 1203
-'planned for %s|a certain date'=>'',  # line 1232
-'Est/Compl'                   =>'',  # line 1248
-'Estimated time / completed'  =>'',  # line 1250
-
-### ../lists/list_versions.inc.php   ###
-'Release Date'                =>'',  # line 240
-
-### ../pages/_handles.inc.php   ###
-'Home'                        =>'',  # line 7
-'Playground'                  =>'',  # line 17
-
-### ../pages/item.inc.php   ###
-'View item'                   =>'',  # line 1004
-
-### ../pages/_handles.inc.php   ###
-'Set Public Level'            =>'',  # line 37
-'Send notification'           =>'',  # line 59
-'Remove notification'         =>'',  # line 65
-'Edit bookmarks'        =>'',  # line 71
-'Edit multiple bookmarks'=>'',  # line 84
-'view changes'                =>'',  # line 97
-'Active Projects'             =>'',  # line 129
-'Closed Projects'             =>'',  # line 137
-
-### ../pages/project_more.inc.php   ###
-'Project Templates'           =>'',  # line 194
-
-### ../pages/_handles.inc.php   ###
-'View Project'                =>'',  # line 231
-'View Project as RSS'         =>'',  # line 169
-'Versions'                    =>'',  # line 201
-
-### ../pages/project_more.inc.php   ###
-'Uploaded Files'              =>'',  # line 1220
-'New project'                 =>'',  # line 1589
-'Edit Project'                =>'',  # line 2014
-
-### ../pages/_handles.inc.php   ###
-'Delete Project'              =>'',  # line 297
-'Change Project Status'       =>'',  # line 305
-'Add Team member'             =>'',  # line 343
-'Edit Team member'            =>'',  # line 352
-'Remove from team'            =>'',  # line 364
-'View Task'                   =>'',  # line 379
-'View Task As Docu'           =>'',  # line 391
-
-### ../pages/task_more.inc.php   ###
-'Edit Task'                   =>'',  # line 313
-
-### ../pages/_handles.inc.php   ###
-'Edit multiple Tasks'         =>'',  # line 420
-'View Task Efforts'           =>'',  # line 429
-'Delete Task(s)'              =>'',  # line 442
-'Restore Task(s)'             =>'',  # line 447
-'Move tasks to folder'        =>'',  # line 455
-'Mark tasks as Complete'      =>'',  # line 463
-'Mark tasks as Approved'      =>'',  # line 471
-'Mark tasks as Closed'        =>'',  # line 479
-'Mark tasks as Open'          =>'',  # line 485
-'New Task'                    =>'',  # line 527
-'New bug'                     =>'',  # line 511
-
-### ../pages/task_more.inc.php   ###
-'New Milestone'               =>'',  # line 37
-
-### ../pages/_handles.inc.php   ###
-'New released Version'      =>'',  # line 554
-'Toggle view collapsed'       =>'',  # line 769
-'Add issue/bug report'        =>'',  # line 598
-'Edit Description'            =>'',  # line 607
-'Create Note'                 =>'',  # line 619
-'Edit Note'                   =>'',  # line 633
-'View effort'                 =>'',  # line 644
-'View multiple efforts'       =>'',  # line 657
-'Log hours'                   =>'',  # line 666
-'Edit time effort'            =>'',  # line 673
-'View comment'                =>'',  # line 692
-'Create comment'              =>'',  # line 706
-'Edit comment'                =>'',  # line 717
-'Delete comment'              =>'',  # line 740
-'View file'                   =>'',  # line 785
-'Upload file'                 =>'',  # line 797
-'Update file'                 =>'',  # line 803
-
-### ../pages/file.inc.php   ###
-'Download'                    =>'',  # line 197
-
-### ../pages/_handles.inc.php   ###
-'Show file scaled'            =>'',  # line 823
-'Move files to folder'        =>'',  # line 836
-'List Companies'              =>'',  # line 856
-'List Clients'                =>'',  # line 864
-'List Prospective Clients'    =>'',  # line 870
-'List Suppliers'              =>'',  # line 877
-'List Partners'               =>'',  # line 884
-'View Company'                =>'',  # line 890
-
-### ../pages/company.inc.php   ###
-'New company'                 =>'',  # line 740
-'Edit Company'                =>'',  # line 948
-
-### ../pages/_handles.inc.php   ###
-'Delete Company'              =>'',  # line 920
-
-### ../pages/company.inc.php   ###
-'Link Persons'                =>'',  # line 637
-
-### ../pages/_handles.inc.php   ###
-'Remove persons from company' =>'',  # line 940
-'List Persons'                =>'',  # line 973
-'List Employees'              =>'',  # line 966
-'List Deleted Persons'        =>'',  # line 979
-'View Person'                 =>'',  # line 985
-
-### ../pages/person.inc.php   ###
-'New person'                  =>'',  # line 858
-'Edit Person'                 =>'',  # line 2055
-
-### ../pages/_handles.inc.php   ###
-'Delete Person'               =>'',  # line 1029
-'View Efforts of Person'      =>'',  # line 1034
-'Send Activation E-Mail'      =>'',  # line 1042
-'Flush Notifications'         =>'',  # line 1102
-
-### ../render/render_page.inc.php   ###
-'Register'                    =>'',  # line 724
-
-### ../pages/person.inc.php   ###
-'Link Companies'              =>'',  # line 663
-'Remove companies from person'=>'',  # line 669
-
-### ../pages/_handles.inc.php   ###
-'Mark all items as viewed'      =>'',  # line 1088
-
-### ../render/render_page.inc.php   ###
-'Login'                       =>'',  # line 695
-
-### ../pages/_handles.inc.php   ###
-'Forgot your password?'       =>'',  # line 1148
-
-### ../render/render_page.inc.php   ###
-'Logout'                      =>'',  # line 716
-
-### ../pages/_handles.inc.php   ###
-'License'                     =>'',  # line 1175
-'restore Item'                =>'',  # line 1214
-
-### ../pages/error.inc.php   ###
-'Error'                       =>'',  # line 39
-
-### ../pages/_handles.inc.php   ###
-'Activate an account'         =>'',  # line 1228
-'System Information'          =>'',  # line 1241
-'PhpInfo'                     =>'',  # line 1253
-'Filter errors.log'           =>'',  # line 1265
-'Delete errors.log'           =>'',  # line 1274
-'Search'                      =>'',  # line 1281
-'Task Test'                   =>'',  # line 1290
-'Load Field'                  =>'',  # line 1296
-'Save Field'                  =>'',  # line 1301
-
-### ../pages/comment.inc.php   ###
-'Comment on task|page type'   =>'',  # line 67
-
-### ../pages/version.inc.php   ###
-'(deleted %s)|page title add on with date of deletion'=>'',  # line 303
-
-### ../pages/comment.inc.php   ###
-'Edit this comment'           =>'',  # line 88
-'Mark this comment as bookmark'=>'',  # line 97
-
-### ../pages/version.inc.php   ###
-'Bookmark'                    =>'',  # line 321
-'Remove this bookmark'        =>'',  # line 328
-'Remove Bookmark'             =>'',  # line 329
-
-### ../pages/comment.inc.php   ###
-'Delete this comment'         =>'',  # line 125
-'Restore'                     =>'',  # line 117
-'New Comment|Default name of new comment'=>'',  # line 192
-'Reply to |prefix for name of new comment on another comment'=>'',  # line 256
-'Edit Comment|Page title'     =>'',  # line 334
-'New Comment|Page title'      =>'',  # line 337
-'On task %s|page title add on'=>'',  # line 341
-
-### ../pages/version.inc.php   ###
-'On project %s|page title add on'=>'',  # line 94
-
-### ../pages/comment.inc.php   ###
-'Occasion|form label'         =>'',  # line 384
-'Publish to|form label'       =>'',  # line 389
-'Select some comments to delete'=>'',  # line 517
-'Failed to delete %s comments'=>'',  # line 549
-'Moved %s comments to trash'  =>'',  # line 552
-'Select some comments to restore'=>'',  # line 572
-'Failed to restore %s comments'=>'',  # line 598
-'Restored %s comments'        =>'',  # line 601
-'Select some comments to move'=>'',  # line 749
-
-### ../pages/task_more.inc.php   ###
-'insufficient rights'         =>'',  # line 1399
-
-### ../pages/comment.inc.php   ###
-'Can not edit comment %s'     =>'',  # line 790
-
-### ../pages/task_more.inc.php   ###
-'Edit tasks'                  =>'',  # line 1462
-
-### ../pages/comment.inc.php   ###
-'Select one folder to move comments into'=>'',  # line 823
-'... or select nothing to move to project root'=>'',  # line 835
-'No folders in this project...'=>'',  # line 863
-
-### ../pages/task_more.inc.php   ###
-'Move items'                  =>'',  # line 1516
-
-### ../pages/company.inc.php   ###
-'related projects of %s'      =>'',  # line 41
-
-### ../pages/project_more.inc.php   ###
-'admin view'                  =>'',  # line 199
-
-### ../pages/person.inc.php   ###
-'List'                        =>'',  # line 395
-
-### ../pages/task_view.inc.php   ###
-'new'                        =>'',  # line 1064
-
-### ../pages/company.inc.php   ###
-'no companies'                =>'',  # line 423
-
-### ../std/class_pagehandler.inc.php   ###
-'Export as CSV'               =>'',  # line 817
-
-### ../pages/company.inc.php   ###
-'Clients'                     =>'',  # line 124
-'related companies of %s'     =>'',  # line 386
-
-### ../pages/project_more.inc.php   ###
-'List|page type'              =>'',  # line 201
-
-### ../pages/company.inc.php   ###
-'Prospective Clients'         =>'',  # line 212
-'Suppliers'                   =>'',  # line 298
-'Partners'                    =>'',  # line 384
-
-### ../pages/project_view.inc.php   ###
-'Overview'                    =>'',  # line 66
-
-### ../pages/task_view.inc.php   ###
-'edit'                       =>'',  # line 100
-
-### ../pages/company.inc.php   ###
-'Edit this company'           =>'',  # line 501
-'Mark this company as bookmark'=>'',  # line 510
-'Delete this company'         =>'',  # line 528
-'Create new person for this company'=>'',  # line 541
-'Create new project for this company'=>'',  # line 548
-'Add existing persons to this company'=>'',  # line 555
-'Persons'                     =>'',  # line 556
-'Adress'                      =>'',  # line 578
-'Fax'                         =>'',  # line 587
-'Web'                         =>'',  # line 592
-'Intra'                       =>'',  # line 595
-'Mail'                        =>'',  # line 598
-'related Persons'             =>'',  # line 613
-'Remove person from company'  =>'',  # line 643
-'link existing Person'        =>'',  # line 651
-
-### ../pages/person.inc.php   ###
-'create new'                  =>'',  # line 679
-
-### ../pages/company.inc.php   ###
-'no persons related'          =>'',  # line 656
-'Active projects'             =>'',  # line 675
-' Hint: for already existing projects please edit those and adjust company-setting.'=>'',  # line 691
-'no projects yet'             =>'',  # line 694
-'Closed projects'             =>'',  # line 708
-
-### ../pages/person.inc.php   ###
-'Category|form label'         =>'',  # line 1983
-
-### ../pages/company.inc.php   ###
-'Create another company after submit'=>'',  # line 822
-
-### ../pages/person.inc.php   ###
-'Edit %s'                     =>'',  # line 2056
-
-### ../pages/company.inc.php   ###
-'Add persons employed or related'=>'',  # line 950
-
-### ../pages/project_more.inc.php   ###
-'No persons selected...'      =>'',  # line 2095
-
-### ../pages/company.inc.php   ###
-'Person already related to company'=>'',  # line 1030
-'Failed to remove %s contact person(s)'=>'',  # line 1094
-'Removed %s contact person(s)'=>'',  # line 1097
-'Select some companies to delete'=>'',  # line 1116
-'Failed to delete %s companies'=>'',  # line 1136
-'Moved %s companies to trash' =>'',  # line 1139
-
-### ../pages/project_view.inc.php   ###
-'invalid project-id'          =>'',  # line 44
-'Edit this project'           =>'',  # line 86
-'Delete this project'         =>'',  # line 117
-'Add person as team-member to project'=>'',  # line 132
-'Team member'                 =>'',  # line 133
-'Create task'                 =>'',  # line 140
-'Create task with issue-report'=>'',  # line 147
-
-### ../pages/task_view.inc.php   ###
-'Bug'                         =>'',  # line 175
-
-### ../pages/project_view.inc.php   ###
-'Details|block title'         =>'',  # line 173
-'Client|label'                =>'',  # line 187
-'Phone|label'                 =>'',  # line 189
-'E-Mail|label'                =>'',  # line 192
-'Status|Label in summary'     =>'',  # line 205
-'Wikipage|Label in summary'   =>'',  # line 210
-'Projectpage|Label in summary'=>'',  # line 214
-'Opened|Label in summary'     =>'',  # line 219
-'Closed|Label in summary'     =>'',  # line 224
-'Created by|Label in summary' =>'',  # line 228
-'Last modified by|Label in summary'=>'',  # line 233
-'Logged effort'               =>'',  # line 240
-'hours'                       =>'',  # line 242
-
-### ../pages/task_view.inc.php   ###
-'Completed'                   =>'',  # line 906
-
-### ../pages/project_view.inc.php   ###
-'News'                        =>'',  # line 160
-
-### ../pages/custom_projView.inc.php   ###
-'%s comments'                 =>'',  # line 389
-
-### ../pages/custom_projViewFiles.inc.php   ###
-'Downloads'                   =>'',  # line 62
-
-### ../pages/effort.inc.php   ###
-'Select one or more efforts'  =>'',  # line 218
-'You do not have enough rights'=>'',  # line 257
-'Effort of task|page type'    =>'',  # line 70
-'Edit this effort'            =>'',  # line 88
-'Mark this effort as bookmark'=>'',  # line 97
-'Project|label'               =>'',  # line 358
-'Task|label'                  =>'',  # line 375
-'No task related'             =>'',  # line 375
-'Created by|label'            =>'',  # line 382
-'Created at|label'            =>'',  # line 388
-'Duration|label'              =>'',  # line 394
-'Time start|label'            =>'',  # line 392
-'Time end|label'              =>'',  # line 393
-'No description available'    =>'',  # line 430
-'Multiple Efforts|page type'  =>'',  # line 270
-'Multiple Efforts'            =>'',  # line 291
-
-### ../pages/item.inc.php   ###
-'summary'                     =>'',  # line 1168
-
-### ../pages/effort.inc.php   ###
-'Information'                 =>'',  # line 307
-'Number of efforts|label'     =>'',  # line 316
-'Sum of efforts|label'        =>'',  # line 320
-'from|time label'             =>'',  # line 327
-'to|time label'               =>'',  # line 328
-'Time|label'                  =>'',  # line 332
-'New Effort'                  =>'',  # line 452
-
-### ../pages/file.inc.php   ###
-'only expected one task. Used the first one.'=>'',  # line 374
-
-### ../pages/effort.inc.php   ###
-'Edit Effort|page type'       =>'',  # line 583
-'Edit Effort|page title'      =>'',  # line 597
-'New Effort|page title'       =>'',  # line 600
-'Date / Duration|Field label when booking time-effort as duration'=>'',  # line 642
-
-### ../pages/file.inc.php   ###
-'For task'                    =>'',  # line 186
-
-### ../pages/version.inc.php   ###
-'Publish to'                  =>'',  # line 119
-
-### ../pages/effort.inc.php   ###
-'Could not get effort'        =>'',  # line 727
-'Could not get project of effort'=>'',  # line 743
-'Could not get person of effort'=>'',  # line 749
-
-### ../pages/version.inc.php   ###
-'Name required'               =>'',  # line 198
-
-### ../pages/effort.inc.php   ###
-'Cannot start before end.'    =>'',  # line 818
-'Select some efforts to delete'=>'',  # line 852
-'Failed to delete %s efforts' =>'',  # line 871
-'Moved %s efforts to trash'   =>'',  # line 874
-
-### ../pages/error.inc.php   ###
-'Error|top navigation tab'    =>'',  # line 29
-'Unknown Page'                =>'',  # line 32
-
-### ../pages/file.inc.php   ###
-'Could not access parent task Id:%s'=>'',  # line 53
-
-### ../std/constant_names.inc.php   ###
-'File'                        =>'',  # line 129
-
-### ../pages/task_view.inc.php   ###
-'Item-ID %d'                  =>'',  # line 1019
-
-### ../pages/file.inc.php   ###
-'Edit this file'              =>'',  # line 116
-'Move this file to another task'=>'',  # line 123
-'Move'                        =>'',  # line 124
-'Mark this file as bookmark'  =>'',  # line 132
-'Upload new version|block title'=>'',  # line 154
-
-### ../pages/task_view.inc.php   ###
-'Upload'                      =>'',  # line 1216
-
-### ../pages/file.inc.php   ###
-'Version #%s (current): %s'   =>'',  # line 171
-'Filesize'                    =>'',  # line 247
-'Uploaded'                    =>'',  # line 249
-'Uploaded by'                 =>'',  # line 192
-'Version #%s : %s'            =>'',  # line 230
-'Could not edit task'         =>'',  # line 383
-'Edit File|page type'         =>'',  # line 428
-'Edit File|page title'        =>'',  # line 438
-'New file|page title'         =>'',  # line 441
-'Could not get file'          =>'',  # line 563
-'Could not get project of file'=>'',  # line 570
-'Please enter a proper filename'=>'',  # line 607
-'Select some files to delete' =>'',  # line 660
-'Failed to delete %s files'   =>'',  # line 679
-'Moved %s files to trash'     =>'',  # line 682
-'Select some file to display' =>'',  # line 720
-'Select some files to move'   =>'',  # line 760
-'Can not edit file %s'        =>'',  # line 814
-'insufficient rights to edit any of the selected items'=>'',  # line 825
-'Edit files'                  =>'',  # line 849
-'Select folder to move files into'=>'',  # line 851
-'No folders available'        =>'',  # line 885
-
-### ../pages/task_more.inc.php   ###
-'(or select nothing to move to project root)'=>'',  # line 1512
-
-### ../render/render_misc.inc.php   ###
-'Today'                       =>'',  # line 730
-
-### ../pages/playground.inc.php   ###
-'Personal Efforts'            =>'',  # line 205
-'At Home'                     =>'',  # line 212
-
-### ../pages/home.inc.php   ###
-'Functions'                   =>'',  # line 65
-'View your efforts'           =>'',  # line 76
-'Edit your profile'           =>'',  # line 77
-'Projects'                    =>'',  # line 110
-
-### ../pages/project_more.inc.php   ###
-'<b>NOTE</b>: Some projects are hidden from your view. Please ask an administrator to adjust you rights to avoid double-creation of projects'=>'',  # line 94
-'create new project'          =>'',  # line 97
-'not assigned to a project'   =>'',  # line 100
-
-### ../pages/home.inc.php   ###
-'You have no open tasks'      =>'',  # line 149
-'Open tasks assigned to you'  =>'',  # line 154
-'Open tasks (including unassigned)'=>'',  # line 157
-'All open tasks'              =>'',  # line 160
-'Select lines to use functions at end of list'=>'',  # line 172
-'P|column header'             =>'',  # line 176
-'S|column header'             =>'',  # line 183
-'Folder|column header'        =>'',  # line 196
-'Modified|column header'      =>'',  # line 214
-'Est.|column header estimated time'=>'',  # line 222
-'Edit|context menu function'  =>'',  # line 241
-'status->Completed|context menu function'=>'',  # line 248
-'status->Approved|context menu function'=>'',  # line 256
-'status->Closed|context menu function'=>'',  # line 264
-'Delete|context menu function'=>'',  # line 273
-'Log hours for select tasks|context menu function'=>'',  # line 281
-'%s tasks with estimated %s hours of work'=>'',  # line 309
-
-### ../pages/item.inc.php   ###
-'Select some items(s) to change pub level'=>'',  # line 61
-'itemsSetPubLevel requires item_pub_level'=>'',  # line 68
-'Made %s items public to %s'  =>'',  # line 86
-
-### ../pages/task_more.inc.php   ###
-'%s error(s) occured'         =>'',  # line 1913
-
-### ../pages/item.inc.php   ###
-'No item(s) selected.'        =>'',  # line 916
-'Select one or more bookmark(s)'=>'',  # line 222
-'Removed %s bookmark(s).'     =>'',  # line 197
-'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'',  # line 201
-'An error occured'            =>'',  # line 246
-'Edit bookmark: "%s"|page title'=>'',  # line 365
-'Bookmark: "%s"'              =>'',  # line 366
-'Notify if unchanged in'      =>'',  # line 696
-'Could not get bookmark'      =>'',  # line 432
-'Added %s bookmark(s).'       =>'',  # line 813
-'Edit bookmarks'              =>'',  # line 573
-'Edit multiple bookmarks|page title'=>'',  # line 575
-'Edit %s bookmark(s)'         =>'',  # line 576
-'no'                          =>'',  # line 674
-'yes'                         =>'',  # line 675
-
-### ../pages/task_more.inc.php   ###
-
-### ../pages/item.inc.php   ###
-'Edited %s bookmark(s).'      =>'',  # line 817
-'%s bookmark(s) could not be added.'=>'',  # line 821
-'changes'                     =>'',  # line 994
-'date1 should be smaller than date2. Swapped'=>'',  # line 1018
-'item has not been edited history'=>'',  # line 1026
-'unknown'                     =>'',  # line 1104
-' -- '                        =>'',  # line 1126
-'prev change'                 =>'',  # line 1138
-'next'                        =>'',  # line 1154
-'Item did not exists at %s'   =>'',  # line 1200
-'no changes between %s and %s'=>'',  # line 1203
-
-### ../std/constant_names.inc.php   ###
-'undefined'                   =>'',  # line 159
-
-### ../pages/item.inc.php   ###
-'ok'                          =>'',  # line 1295
-
-### ../pages/login.inc.php   ###
-'Login|tab in top navigation' =>'',  # line 26
-
-### ../render/render_page.inc.php   ###
-'Go to your home. Alt-h / Option-h'=>'',  # line 225
-
-### ../pages/login.inc.php   ###
-'License|tab in top navigation'=>'',  # line 32
-
-### ../render/render_page.inc.php   ###
-'Your projects. Alt-P / Option-P'=>'',  # line 231
-
-### ../pages/login.inc.php   ###
-'Welcome to streber|Page title'=>'',  # line 81
-'please login'                =>'',  # line 100
-'Nickname|label in login form'=>'',  # line 336
-'Password|label in login form'=>'',  # line 109
-'I forgot my password'        =>'',  # line 337
-'Continue anonymously'        =>'',  # line 114
-'invalid login|message when login failed'=>'',  # line 229
-'Password reminder|Page title'=>'',  # line 307
-'Please enter your nickname'  =>'',  # line 319
-'We will then sent you an E-mail with a link to adjust your password.'=>'',  # line 329
-'If you do not know your nickname, please contact your administrator: %s.'=>'',  # line 331
-'If you remember your name, please enter it and try again.'=>'',  # line 368
-'A notification mail has been sent.'=>'',  # line 390
-'Welcome %s. Please adjust your profile and insert a good password to activate your account.'=>'',  # line 411
-'Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.'=>'',  # line 417
-'License|page title'          =>'',  # line 440
-
-### ../pages/misc.inc.php   ###
-'Could not find requested page `%s`'=>'',  # line 47
-'Select some items to restore'=>'',  # line 216
-'Item %s does not need to be restored'=>'',  # line 228
-'Failed to restore %s items'  =>'',  # line 241
-'Restored %s items'           =>'',  # line 244
-'Admin|top navigation tab'    =>'',  # line 269
-'System information'          =>'',  # line 275
-'Admin'                       =>'',  # line 276
-'Database Type'               =>'',  # line 334
-'Error-Log'                   =>'',  # line 345
-'PHP Version'                 =>'',  # line 347
-'extension directory'         =>'',  # line 350
-'loaded extensions'           =>'',  # line 352
-'include path'                =>'',  # line 354
-'register globals'            =>'',  # line 356
-'magic quotes gpc'            =>'',  # line 358
-'magic quotes runtime'        =>'',  # line 360
-'safe mode'                   =>'',  # line 362
-'hide'                        =>'',  # line 479
-
-### ../pages/person.inc.php   ###
-'Active People'               =>'',  # line 55
-'relating to %s|page title add on listing pages relating to current user'=>'',  # line 390
-'People/Project Overview'     =>'',  # line 431
-'no related persons'          =>'',  # line 442
-'Persons|Pagetitle for person list'=>'',  # line 135
-'relating to %s|Page title Person list title add on'=>'',  # line 306
-'admin view|Page title add on if admin'=>'',  # line 309
-'Employees|Pagetitle for person list'=>'',  # line 221
-'Contact Persons|Pagetitle for person list'=>'',  # line 304
-'Deleted People'              =>'',  # line 388
-'Create Note|Tooltip for page function'=>'',  # line 511
-'Note|Page function person'   =>'',  # line 512
-'Add existing companies to this person'=>'',  # line 517
-'Edit this person|Tooltip for page function'=>'',  # line 528
-'Profile|Page function edit person'=>'',  # line 529
-'Edit User Rights|Tooltip for page function'=>'',  # line 536
-'User Rights|Page function for edit user rights'=>'',  # line 537
-'Mark this person as bookmark'=>'',  # line 545
-'notification:'               =>'',  # line 559
-
-### ../pages/task_view.inc.php   ###
-'Summary|Block title'         =>'',  # line 243
-
-### ../pages/person.inc.php   ###
-'Mobile|Label mobilephone of person'=>'',  # line 591
-'Office|label for person'     =>'',  # line 594
-'Private|label for person'    =>'',  # line 597
-'Fax (office)|label for person'=>'',  # line 600
-'Website|label for person'    =>'',  # line 605
-'Personal|label for person'   =>'',  # line 608
-'E-Mail|label for person office email'=>'',  # line 612
-'E-Mail|label for person personal email'=>'',  # line 615
-'Adress Personal|Label'       =>'',  # line 620
-'Adress Office|Label'         =>'',  # line 627
-'Birthdate|Label'             =>'',  # line 634
-'works for|List title'        =>'',  # line 649
-'link existing Company'       =>'',  # line 677
-'no companies related'        =>'',  # line 682
-'no company'                  =>'',  # line 684
-'Person details'              =>'',  # line 694
-'works in Projects|list title for person projects'=>'',  # line 730
-'no active projects'          =>'',  # line 744
-'Assigned tasks'              =>'',  # line 762
-'No open tasks assigned'      =>'',  # line 763
-'Efforts|Page title add on'   =>'',  # line 805
-'no efforts yet'              =>'',  # line 833
-'not allowed to edit'         =>'',  # line 1273
-'Edit Person|Page type'       =>'',  # line 1902
-'Person with account (can login)|form label'=>'',  # line 1954
-'Account'                     =>'',  # line 976
-'Password|form label'         =>'',  # line 1968
-'confirm Password|form label' =>'',  # line 1972
-'-- reset to...--'            =>'',  # line 1021
-'Profile|form label'          =>'',  # line 1026
-'daily'                       =>'',  # line 1988
-'each 3 days'                 =>'',  # line 1989
-'each 7 days'                 =>'',  # line 1990
-'each 14 days'                =>'',  # line 1991
-'each 30 days'                =>'',  # line 1992
-'Never'                       =>'',  # line 1993
-'Send notifications|form label'=>'',  # line 1999
-'Send mail as html|form label'=>'',  # line 2000
-'- no -'                      =>'',  # line 1057
-'Assigne to project|form label'=>'',  # line 1066
-'Options'                     =>'',  # line 1120
-'Theme|form label'            =>'',  # line 2009
-'Language|form label'         =>'',  # line 2013
-'Time zone|form label'        =>'',  # line 2021
-
-### ../pages/projectperson.inc.php   ###
-'start times and end times'   =>'',  # line 133
-'duration'                    =>'',  # line 134
-'Log Efforts as'              =>'',  # line 137
-
-### ../pages/person.inc.php   ###
-'Create another person after submit'=>'',  # line 1168
-
-### ../pages/task_more.inc.php   ###
-'Invalid checksum for hidden form elements'=>'',  # line 777
-
-### ../pages/person.inc.php   ###
-'Malformed activation url'    =>'',  # line 1225
-'Could not get person'        =>'',  # line 1833
-'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'=>'',  # line 1314
-'Sending notifactions requires an email-address.'=>'',  # line 1655
-'Using auto detection of time zone requires this user to relogin.'=>'',  # line 1388
-'Nickname has been converted to lowercase'=>'',  # line 1433
-'Nickname has to be unique'   =>'',  # line 1439
-'Passwords do not match'      =>'',  # line 1454
-'Password is too weak (please add numbers, special chars or length)'=>'',  # line 1469
-'Login-accounts require a unique nickname'=>'',  # line 1483
-'A notification / activation  will be mailed to <b>%s</b> when you log out.'=>'',  # line 1509
-
-### ../render/render_wiki.inc.php   ###
-'Read more about %s.'         =>'',  # line 1088
-
-### ../pages/person.inc.php   ###
-'Person %s created'           =>'',  # line 1549
-'Could not insert object'     =>'',  # line 1552
-'Select some persons to delete'=>'',  # line 1599
-'<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'',  # line 1616
-'Failed to delete %s persons' =>'',  # line 1628
-'Moved %s persons to trash'   =>'',  # line 1631
-'Insufficient rights'         =>'',  # line 1649
-'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 1661
-'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 1666
-'Activation mail has been sent.'=>'',  # line 1677
-'Sending notification e-mail failed.'=>'',  # line 1680
-'Select some persons to notify'=>'',  # line 1701
-'Failed to mail %s persons'   =>'',  # line 1726
-'Sent notification to %s person(s)'=>'',  # line 1729
-'Select some persons to edit' =>'',  # line 1755
-'Could not get Person'        =>'',  # line 1759
-'Edit Person|page type'       =>'',  # line 1775
-'Adjust user-rights'          =>'',  # line 1777
-'Please consider that activating login-accounts might trigger security-issues.'=>'',  # line 1787
-'Person can login|form label' =>'',  # line 1793
-'User rights changed'         =>'',  # line 1865
-'Registering is not enabled'  =>'',  # line 1890
-'Please provide information, why you want to register.'=>'',  # line 1895
-'Register as a new user'      =>'',  # line 1903
-'Add related companies'       =>'',  # line 2057
-'No companies selected...'    =>'',  # line 2158
-'Company already related to person'=>'',  # line 2134
-'Failed to remove %s companies'=>'',  # line 2198
-'Removed %s companies'        =>'',  # line 2201
-'Marked all previous items as viewed.'=>'',  # line 2251
-
-### ../pages/project_more.inc.php   ###
-'Your Active Projects'        =>'',  # line 46
-'relating to %s'              =>'',  # line 196
-'Your Closed Projects'        =>'',  # line 130
-'not assigned to a closed project'=>'',  # line 166
-'no project templates'        =>'',  # line 230
-'all'                         =>'',  # line 577
-'modified by me'              =>'',  # line 284
-'modified by others'          =>'',  # line 309
-'last logout'                 =>'',  # line 334
-'1 week'                      =>'',  # line 352
-'2 weeks'                     =>'',  # line 371
-'changed project-items'       =>'',  # line 531
-'no changes yet'              =>'',  # line 532
-'my open'                     =>'',  # line 621
-'for milestone'               =>'',  # line 657
-'needs approval'              =>'',  # line 716
-'without milestone'           =>'',  # line 740
-'Create a new folder for tasks and files'=>'',  # line 940
-
-### ../pages/task_view.inc.php   ###
-'new subtask for this folder' =>'',  # line 143
-
-### ../render/render_page.inc.php   ###
-'Filter-Preset:'              =>'',  # line 366
-
-### ../pages/project_more.inc.php   ###
-'No tasks'                    =>'',  # line 1170
-'Create a new page'           =>'',  # line 1111
-
-### ../pages/task_view.inc.php   ###
-'Page'                        =>'',  # line 1097
-
-### ../pages/task_more.inc.php   ###
-'new Effort'                  =>'',  # line 2124
-
-### ../pages/project_more.inc.php   ###
-'Upload file|block title'     =>'',  # line 1246
-'new Milestone'               =>'',  # line 1333
-'View open milestones'        =>'',  # line 1359
-'View closed milestones'      =>'',  # line 1365
-'Project Efforts'             =>'',  # line 1407
-'Released Versions'           =>'',  # line 1497
-'New released Version'      =>'',  # line 1516
-'Tasks resolved in upcoming version'=>'',  # line 1551
-'Company|form label'          =>'',  # line 1668
-
-### ../pages/task_more.inc.php   ###
-'Display'                     =>'',  # line 681
-
-### ../pages/project_more.inc.php   ###
-'Create another project after submit'=>'',  # line 1728
-'Select some projects to delete'=>'',  # line 1907
-'Failed to delete %s projects'=>'',  # line 1927
-'Moved %s projects to trash'  =>'',  # line 1930
-'Select some projects...'     =>'',  # line 1950
-'Invalid project-id!'         =>'',  # line 1960
-'Y-m-d'                       =>'',  # line 1965
-'Failed to change %s projects'=>'',  # line 1975
-'Closed %s projects'          =>'',  # line 1979
-'Reactivated %s projects'     =>'',  # line 1982
-'Select new team members'     =>'',  # line 2016
-'Found no persons to add. Go to `People` to create some.'=>'',  # line 2060
-'Add'                         =>'',  # line 2072
-'Could not access person by id'=>'',  # line 2104
-'Reanimated person as team-member'=>'',  # line 2150
-'Person already in project'   =>'',  # line 2154
-'Template|as addon to project-templates'=>'',  # line 2237
-'Failed to insert new project person. Data structure might have been corrupted'=>'',  # line 2350
-'Failed to insert new issue. DB structure might have been corrupted.'=>'',  # line 2368
-'Failed to update new task. DB structure might have been corrupted.'=>'',  # line 2423
-'Failed to insert new comment. DB structure might have been corrupted.'=>'',  # line 2520
-'Project duplicated (including %s items)'=>'',  # line 2541
-
-### ../pages/project_view.inc.php   ###
-'Mark this project as bookmark'=>'',  # line 97
-'Book effort for this project'=>'',  # line 154
-'Comments on project'         =>'',  # line 433
-
-### ../pages/projectperson.inc.php   ###
-'Edit Team Member'            =>'',  # line 46
-'role of %s in %s|edit team-member title'=>'',  # line 47
-'Role in this project'        =>'',  # line 115
-'Changed role of <b>%s</b> to <b>%s</b>'=>'',  # line 222
-'Failed to remove %s members from team'=>'',  # line 291
-'Unassigned %s team member(s) from project'=>'',  # line 294
-
-### ../pages/search.inc.php   ###
-'in'                          =>'',  # line 349
-'on'                          =>'',  # line 460
-'cannot jump to this item type'=>'',  # line 608
-'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',  # line 660
-'Sorry, but there is nothing left to search.'=>'',  # line 665
-'jumped to best of %s search results'=>'',  # line 680
-'Add an ! to your search request to jump to the best result.'=>'',  # line 688
-'%s search results for `%s`'  =>'',  # line 706
-'No search results for `%s`'  =>'',  # line 709
-'Searching'                   =>'',  # line 711
-'Sorry. Could not find anything.'=>'',  # line 719
-'Due to limitations of MySQL fulltext search, searching will not work for...<br>- words with 3 or less characters<br>- Lists with less than 3 entries<br>- words containing special charaters'=>'',  # line 720
-
-### ../pages/task_more.inc.php   ###
-'No project selected?'        =>'',  # line 85
-
-### ../pages/version.inc.php   ###
-'New Version'                 =>'',  # line 32
-
-### ../pages/task_more.inc.php   ###
-'Please select only one item as parent'=>'',  # line 138
-'Insufficient rights for parent item.'=>'',  # line 142
-'could not find project'      =>'',  # line 164
-'Parent task not found.'      =>'',  # line 169
-'Select some task(s) to edit' =>'',  # line 249
-'You do not have enough rights to edit this task'=>'',  # line 257
-'Edit %s|Page title'          =>'',  # line 282
-'New milestone'               =>'',  # line 289
-'New task'                    =>'',  # line 1322
-'for %s|e.g. new task for something'=>'',  # line 294
-'Display as'                  =>'',  # line 354
-'This folder has %s subtasks. Changing category will ungroup them.'=>'',  # line 358
-'-- next released version --' =>'',  # line 391
-
-### ../pages/task_view.inc.php   ###
-'Prio|Form label'             =>'',  # line 860
-'- select person -'           =>'',  # line 819
-'Assign to'                   =>'',  # line 840
-'Assign to|Form label'        =>'',  # line 851
-'Also assign to|Form label'   =>'',  # line 852
-'Resolved in'                 =>'',  # line 793
-
-### ../pages/task_more.inc.php   ###
-'Bug Report'                  =>'',  # line 566
-'Severity|Form label, attribute of issue-reports'=>'',  # line 612
-'Reproducibility|Form label, attribute of issue-reports'=>'',  # line 613
-'Timing'                      =>'',  # line 629
-
-### ../pages/task_view.inc.php   ###
-'30 min'                      =>'',  # line 869
-'1 h'                         =>'',  # line 870
-'2 h'                         =>'',  # line 871
-'4 h'                         =>'',  # line 872
-'1 Day'                       =>'',  # line 873
-'2 Days'                      =>'',  # line 874
-'3 Days'                      =>'',  # line 875
-'4 Days'                      =>'',  # line 876
-'1 Week'                      =>'',  # line 877
-'1,5 Weeks'                   =>'',  # line 878
-'2 Weeks'                     =>'',  # line 879
-'3 Weeks'                     =>'',  # line 880
-
-### ../pages/task_more.inc.php   ###
-'Release as version|Form label, attribute of issue-reports'=>'',  # line 663
-'Create another task after submit'=>'',  # line 737
-'Comment has been rejected, because it looks like spam.'=>'',  # line 841
-'Failed to add comment'       =>'',  # line 848
-'Not enough rights to edit task'=>'',  # line 881
-'unassigned to %s|task-assignment comment'=>'',  # line 993
-'formerly assigned to %s|task-assigment comment'=>'',  # line 3306
-'task was already assigned to %s'=>'',  # line 1017
-'Failed to retrieve parent task'=>'',  # line 1082
-'Task requires name'          =>'',  # line 2062
-'Task called %s already exists'=>'',  # line 1119
-'Milestones may not have sub tasks'=>'',  # line 1147
-'Turned parent task into a folder. Note, that folders are only listed in tree'=>'',  # line 1153
-'Failed, adding to parent-task'=>'',  # line 1157
-'NOTICE: Ungrouped %s subtasks to <b>%s</b>'=>'',  # line 1178
-'Created task %s with ID %s'  =>'',  # line 3401
-'Changed task %s with ID %s'  =>'',  # line 1291
-'Marked %s tasks to be resolved in this version.'=>'',  # line 1309
-'Select some tasks to move'   =>'',  # line 2173
-'Can not move task <b>%s</b> to own child.'=>'',  # line 1424
-'Can not edit tasks %s'       =>'',  # line 1433
-'Select folder to move tasks into'=>'',  # line 1464
-'Failed to delete task %s'    =>'',  # line 1573
-'Moved %s tasks to trash'     =>'',  # line 1579
-' ungrouped %s subtasks to above parents.'=>'',  # line 1582
-'No task(s) selected for deletion...'=>'',  # line 1591
-'Could not find task'         =>'',  # line 1952
-'Task <b>%s</b> does not need to be restored'=>'',  # line 1625
-'Task <b>%s</b> restored'     =>'',  # line 1665
-'Failed to restore Task <b>%s</b>'=>'',  # line 1668
-'Task <b>%s</b> do not need to be restored'=>'',  # line 1660
-'No task(s) selected for restoring...'=>'',  # line 1679
-'Select some task(s) to mark as completed'=>'',  # line 1697
-'Marked %s tasks (%s subtasks) as completed.'=>'',  # line 1740
-'Select some task(s) to mark as approved'=>'',  # line 2511
-'Marked %s tasks as approved and hidden from project-view.'=>'',  # line 1782
-'Select some task(s) to mark as closed'=>'',  # line 1804
-'Marked %s tasks as closed.'  =>'',  # line 1825
-'Not enough rights to close %s tasks.'=>'',  # line 1827
-'Select some task(s) to reopen'=>'',  # line 1843
-'Reopened %s tasks.'          =>'',  # line 1862
-'Select some task(s)'         =>'',  # line 1885
-'Could not update task'       =>'',  # line 1901
-'No task selected to add issue-report?'=>'',  # line 1932
-'Task already has an issue-report'=>'',  # line 1936
-'Adding issue-report to task' =>'',  # line 1946
-'Select a task to edit description'=>'',  # line 1973
-'Edit description'            =>'',  # line 1994
-'Task Efforts'                =>'',  # line 2115
-'For editing all tasks must be of same project.'=>'',  # line 2239
-'Edit multiple tasks|Page title'=>'',  # line 2275
-'Edit %s tasks|Page title'    =>'',  # line 2277
-'keep different'              =>'',  # line 2464
-'Category'                    =>'',  # line 2317
-'Prio'                        =>'',  # line 2381
-'none'                        =>'',  # line 2471
-
-### ../pages/task_view.inc.php   ###
-'next released version'       =>'',  # line 781
-
-### ../pages/task_more.inc.php   ###
-'resolved in Version'         =>'',  # line 2426
-'Resolve Reason'              =>'',  # line 2445
-'select person'               =>'',  # line 2477
-'Also assigned to'            =>'',  # line 2478
-'%s tasks could not be written'=>'',  # line 2780
-'Updated %s tasks tasks'      =>'',  # line 2783
-'ERROR: could not get Person' =>'',  # line 2930
-'Select a note to edit'       =>'',  # line 2921
-'Note'                        =>'',  # line 2948
-'Create new note'             =>'',  # line 2951
-'New Note on %s, %s'          =>'',  # line 2957
-'Publish to|Form label'       =>'',  # line 2986
-'ERROR: could not get project'=>'',  # line 3264
-'Assigned Projects'           =>'',  # line 3019
-'- no assigend projects'      =>'',  # line 3015
-'Company Projects'            =>'',  # line 3041
-'- no company projects'       =>'',  # line 3031
-'All other Projects'          =>'',  # line 3059
-'- no other projects'         =>'',  # line 3056
-'For Project|form label'      =>'',  # line 3065
-'New project|form label'      =>'',  # line 3070
-'Project name|form label'     =>'',  # line 3071
-'ERROR: could not get assigned persons'=>'',  # line 3087
-'Also assign to'              =>'',  # line 3123
-'Book effort after submit'    =>'',  # line 3127
-'ERROR: could not get task'   =>'',  # line 3165
-'Note requires project'       =>'',  # line 3217
-'Note requires assigned person(s)'=>'',  # line 3221
-
-### ../pages/task_view.inc.php   ###
-'Edit this task'              =>'',  # line 1032
-'Move|page function to move current task'=>'',  # line 1039
-'new bug for this folder'     =>'',  # line 174
-'new task for this milestone' =>'',  # line 166
-'Mark this task as bookmark'  =>'',  # line 197
-'Delete this task'            =>'',  # line 1047
-'Restore this task'           =>'',  # line 1056
-'Undelete'                    =>'',  # line 1057
-'Released as|Label in Task summary'=>'',  # line 256
-'For Milestone|Label in Task summary'=>'',  # line 267
-'Status|Label in Task summary'=>'',  # line 274
-'Opened|Label in Task summary'=>'',  # line 278
-'Estimated|Label in Task summary'=>'',  # line 281
-'Completed|Label in Task summary'=>'',  # line 290
-'Planned start|Label in Task summary'=>'',  # line 295
-'Planned end|Label in Task summary'=>'',  # line 299
-'Closed|Label in Task summary'=>'',  # line 304
-'Created|Label in Task summary'=>'',  # line 1144
-'Modified|Label in Task summary'=>'',  # line 1148
-'View previous %s versions'   =>'',  # line 1157
-'Logged effort|Label in task-summary'=>'',  # line 339
-'Publish to|Label in Task summary'=>'',  # line 1168
-'Set to Open'                 =>'',  # line 1171
-'Further Documentation'       =>'',  # line 383
-'Attached files'              =>'',  # line 1210
-'attach new'                  =>'',  # line 1212
-'Severity|label in issue-reports'=>'',  # line 503
-'Reproducibility|label in issue-reports'=>'',  # line 510
-'Platform'                   =>'',  # line 516
-'OS'                          =>'',  # line 519
-'Build'                       =>'',  # line 525
-'Steps to reproduce|label in issue-reports'=>'',  # line 530
-'Expected result|label in issue-reports'=>'',  # line 534
-'Suggested Solution|label in issue-reports'=>'',  # line 538
-'Issue report'                =>'',  # line 546
-'Sub tasks'                   =>'',  # line 566
-'Open tasks for milestone'    =>'',  # line 589
-'No open tasks for this milestone'=>'',  # line 592
-'1 Comment'                   =>'',  # line 1278
-'%s Comments'                 =>'',  # line 1281
-'Comment / Update'            =>'',  # line 692
-'quick edit'                  =>'',  # line 723
-'Update'                      =>'',  # line 764
-'Public to'                   =>'',  # line 803
-'Book Effort'                 =>'',  # line 1109
-
-### ../pages/version.inc.php   ###
-'Edit Version|page type'      =>'',  # line 79
-'Edit Version|page title'     =>'',  # line 88
-'New Version|page title'      =>'',  # line 91
-'Could not get version'       =>'',  # line 148
-'Could not get project of version'=>'',  # line 164
-'Select some versions to delete'=>'',  # line 229
-'Failed to delete %s versions'=>'',  # line 248
-'Moved %s versions to dumpster'=>'',  # line 251
-'Version|page type'           =>'',  # line 290
-'Edit this version'           =>'',  # line 311
-'Mark this version as bookmark'=>'',  # line 320
-
-### ../render/render_fields.inc.php   ###
-'<b>%s</b> is not a known format for date.'=>'',  # line 307
-
-### ../render/render_form.inc.php   ###
-'Please copy the text'        =>'',  # line 62
-'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',  # line 64
-'Wiki format'                 =>'',  # line 416
-'Submit'                      =>'',  # line 578
-'Cancel'                      =>'',  # line 618
-'Apply'                       =>'',  # line 628
-
-### ../render/render_list.inc.php   ###
-'for milestone %s'            =>'',  # line 186
-'changed today'               =>'',  # line 430
-'changed since yesterday'     =>'',  # line 433
-'changed since <b>%d days</b>'=>'',  # line 436
-'changed since <b>%d weeks</b>'=>'',  # line 439
-'created by %s'               =>'',  # line 715
-'created by unknown'          =>'',  # line 718
-'modified by %s'              =>'',  # line 741
-'modified by unknown'         =>'',  # line 744
-'item #%s has undefined type' =>'',  # line 767
-'do...'                       =>'',  # line 1024
-
-### ../render/render_list_column_special.inc.php   ###
-'Tasks|short column header'   =>'',  # line 226
-'Number of open tasks is hilighted if shown home.'=>'',  # line 227
-'Status|Short status column header'=>'',  # line 273
-'Status is %s'                =>'',  # line 291
-'Item is published to'        =>'',  # line 330
-'Pub|column header for public level'=>'',  # line 331
-'Publish to %s'               =>'',  # line 347
-'Select / Deselect'           =>'',  # line 364
-
-### ../render/render_misc.inc.php   ###
-'With Account|page option'    =>'',  # line 430
-'Other Persons|page option'   =>'',  # line 434
-'Clients|page option'         =>'',  # line 461
-'Prospective Clients|page option'=>'',  # line 465
-'Suppliers|page option'       =>'',  # line 469
-'Partners|page option'        =>'',  # line 473
-'Companies|page option'       =>'',  # line 268
-'Tasks|Project option'        =>'',  # line 374
-'Docu|Project option'         =>'',  # line 380
-'Milestones|Project option'   =>'',  # line 387
-'Versions|Project option'     =>'',  # line 395
-'Files|Project option'        =>'',  # line 404
-'Efforts|Project option'      =>'',  # line 411
-'History|Project option'      =>'',  # line 417
-'Employees|page option'       =>'',  # line 438
-'Contact Persons|page option' =>'',  # line 442
-'Deleted|page option'         =>'',  # line 446
-'All Companies|page option'   =>'',  # line 457
-'Active'                      =>'',  # line 488
-'Templates'                   =>'',  # line 496
-'%b %e, %Y|strftime format string'=>'',  # line 579
-'%I:%M%P|strftime format string'=>'',  # line 592
-'%a %b %e, %Y %I:%M%P|strftime format string'=>'',  # line 601
-'new since last logout'       =>'',  # line 784
-'%s weeks'                    =>'',  # line 823
-'%s days'                     =>'',  # line 819
-'%s hours'                    =>'',  # line 815
-'%s min'                      =>'',  # line 696
-'Yesterday'                   =>'',  # line 736
-'estimated %s hours'          =>'',  # line 851
-'%s hours max'                =>'',  # line 853
-'estimated %s days'           =>'',  # line 860
-'%s days max'                 =>'',  # line 863
-'estimated %s weeks'          =>'',  # line 872
-'%s weeks max'                =>'',  # line 874
-'%2.0f%% completed'           =>'',  # line 878
-'%A, %B %e|strftime format string'=>'',  # line 921
-
-### ../render/render_page.inc.php   ###
-'<span class=accesskey>H</span>ome'=>'',  # line 222
-'<span class=accesskey>P</span>rojects'=>'',  # line 229
-'Your related People'         =>'',  # line 238
-'Your related Companies'      =>'',  # line 244
-'Calendar'                    =>'',  # line 249
-'<span class=accesskey>S</span>earch:&nbsp;'=>'',  # line 254
-'Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`'=>'',  # line 257
-'This page requires java-script to be enabled. Please adjust your browser-settings.'=>'',  # line 565
-'Add Now'                     =>'',  # line 626
-'you are'                     =>'',  # line 710
-'Go to parent / alt-U'        =>'',  # line 990
-'Documentation and Discussion about this page'=>'',  # line 961
-'Help'                        =>'',  # line 963
-'rendered in'                 =>'',  # line 1316
-'memory used'                 =>'',  # line 1319
-'%s queries / %s fields '     =>'',  # line 1322
-
-### ../render/render_wiki.inc.php   ###
-'from'                        =>'',  # line 366
-'Image details'               =>'',  # line 997
-'Unknown File-Id:'            =>'',  # line 1010
-'Unknown project-Id:'         =>'',  # line 1020
-'Cannot link to item of type %s'=>'',  # line 1075
-'Wiki-format: <b>%s</b> is not a valid link-type'=>'',  # line 1087
-'No task matches this name exactly'=>'',  # line 1157
-'This task seems to be related'=>'',  # line 1158
-'No item excactly matches this name.'=>'',  # line 1185
-'List %s related tasks'       =>'',  # line 1186
-'identical'                   =>'',  # line 1194
-'No item matches this name. Create new task with this name?'=>'',  # line 1228
-'No item matches this name.'  =>'',  # line 1204
-'No item matches this name'   =>'',  # line 1255
-'Unknown Item Id'             =>'',  # line 1351
-
-### ../std/class_auth.inc.php   ###
-'Cookie is no longer valid for this computer.'=>'',  # line 51
-'Your IP-Address changed. Please relogin.'=>'',  # line 57
-'Your account has been disabled. '=>'',  # line 63
-'Invalid anonymous user'      =>'',  # line 94
-'Anonymous account has been disabled. '=>'',  # line 100
-'Unable to automatically detect client time zone'=>'',  # line 262
-'Could not set cookie.'       =>'',  # line 304
-'Sorry. Authentication failed'=>'',  # line 373
-
-### ../std/class_pagehandler.inc.php   ###
-'Operation aborted (%s)'      =>'',  # line 742
-'Operation aborted with an fatal error (%s).'=>'',  # line 745
-'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'',  # line 748
-'insufficient rights'           =>'',  # line 757
-'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',  # line 761
-
-### ../std/common.inc.php   ###
-'Sorry, but the entered number did not match'=>'',  # line 236
-'No element selected? (could not find id)|Message if a function started without items selected'=>'',  # line 374
-'only one item expected.'     =>'',  # line 385
-'en_US.utf8,en_US,enu|list of locales'=>'',  # line 482
-
-### ../std/constant_names.inc.php   ###
-'template|status name'        =>'',  # line 18
-'undefined|status_name'       =>'',  # line 19
-'upcoming|status_name'        =>'',  # line 20
-'new|status_name'             =>'',  # line 21
-'open|status_name'            =>'',  # line 22
-'blocked|status_name'         =>'',  # line 23
-'done?|status_name'           =>'',  # line 24
-'approved|status_name'        =>'',  # line 25
-'closed|status_name'          =>'',  # line 26
-'Member|profile name'         =>'',  # line 32
-'Admin|profile name'          =>'',  # line 33
-'Project manager|profile name'=>'',  # line 34
-'Developer|profile name'      =>'',  # line 35
-'Artist|profile name'         =>'',  # line 36
-'Tester|profile name'         =>'',  # line 37
-'Client|profile name'         =>'',  # line 38
-'Client trusted|profile name' =>'',  # line 39
-'Guest|profile name'          =>'',  # line 40
-'undefined|pub_level_name'    =>'',  # line 47
-'private|pub_level_name'      =>'',  # line 48
-'suggested|pub_level_name'    =>'',  # line 49
-'internal|pub_level_name'     =>'',  # line 50
-'open|pub_level_name'         =>'',  # line 51
-'client|pub_level_name'       =>'',  # line 52
-'client_edit|pub_level_name'  =>'',  # line 53
-'assigned|pub_level_name'     =>'',  # line 54
-'owned|pub_level_name'        =>'',  # line 55
-'priv|short for public level private'=>'',  # line 62
-'int|short for public level internal'=>'',  # line 64
-'pub|short for public level client'=>'',  # line 66
-'PUB|short for public level client edit'=>'',  # line 67
-'A|short for public level assigned'=>'',  # line 68
-'O|short for public level owned'=>'',  # line 69
-'Enable Efforts|Project setting'=>'',  # line 74
-'Enable Milestones|Project setting'=>'',  # line 75
-'Enable Versions|Project setting'=>'',  # line 76
-'Only PM may close tasks|Project setting'=>'',  # line 77
-'Create projects|a user right'=>'',  # line 83
-'Edit projects|a user right'  =>'',  # line 84
-'Delete projects|a user right'=>'',  # line 85
-'Edit project teams|a user right'=>'',  # line 86
-'View anything|a user right'  =>'',  # line 87
-'Edit anything|a user right'  =>'',  # line 88
-'Create Persons|a user right' =>'',  # line 90
-'Create & Edit Persons|a user right'=>'',  # line 91
-'Delete Persons|a user right' =>'',  # line 92
-'View all Persons|a user right'=>'',  # line 93
-'Edit User Rights|a user right'=>'',  # line 94
-'Edit own profile|a user right'=>'',  # line 95
-'Create Companies|a user right'=>'',  # line 97
-'Edit Companies|a user right' =>'',  # line 98
-'Delete Companies|a user right'=>'',  # line 99
-'undefined|priority'          =>'',  # line 105
-'urgent|priority'             =>'',  # line 106
-'high|priority'               =>'',  # line 107
-'normal|priority'             =>'',  # line 108
-'lower|priority'              =>'',  # line 109
-'lowest|priority'             =>'',  # line 110
-'Team Member'                 =>'',  # line 122
-'Employment'                  =>'',  # line 124
-'Issue'                       =>'',  # line 125
-'Task assignment'             =>'',  # line 130
-'Nitpicky|severity'           =>'',  # line 137
-'Feature|severity'            =>'',  # line 138
-'Trivial|severity'            =>'',  # line 139
-'Text|severity'               =>'',  # line 140
-'Tweak|severity'              =>'',  # line 141
-'Minor|severity'              =>'',  # line 142
-'Major|severity'              =>'',  # line 143
-'Crash|severity'              =>'',  # line 144
-'Block|severity'              =>'',  # line 145
-'Not available|reproducabilty'=>'',  # line 150
-'Always|reproducabilty'       =>'',  # line 151
-'Sometimes|reproducabilty'    =>'',  # line 152
-'Have not tried|reproducabilty'=>'',  # line 153
-'Unable to reproduce|reproducabilty'=>'',  # line 154
-'done|Resolve reason'         =>'',  # line 160
-'fixed|Resolve reason'        =>'',  # line 161
-'works_for_me|Resolve reason' =>'',  # line 162
-'duplicate|Resolve reason'    =>'',  # line 163
-'bogus|Resolve reason'        =>'',  # line 164
-'rejected|Resolve reason'     =>'',  # line 165
-'deferred|Resolve reason'     =>'',  # line 166
-'Not defined|release type'    =>'',  # line 172
-'Not planned|release type'    =>'',  # line 173
-'upcoming|release type'      =>'',  # line 174
-'Internal|release type'       =>'',  # line 175
-'Public|release type'         =>'',  # line 176
-'Without support|release type'=>'',  # line 177
-'No longer supported|release type'=>'',  # line 178
-'undefined|company category'  =>'',  # line 184
-'client|company category'     =>'',  # line 185
-'prospective client|company category'=>'',  # line 186
-'supplier|company category'   =>'',  # line 187
-'partner|company category'    =>'',  # line 188
-'undefined|person category'   =>'',  # line 194
-'- employee -|person category'=>'',  # line 195
-'staff|person category'       =>'',  # line 196
-'freelancer|person category'  =>'',  # line 197
-'working student|person category'=>'',  # line 198
-'apprentice|person category'  =>'',  # line 199
-'intern|person category'      =>'',  # line 200
-'ex-employee|person category' =>'',  # line 201
-'- contact person -|person category'=>'',  # line 202
-'client|person category'      =>'',  # line 203
-'prospective client|person category'=>'',  # line 204
-'supplier|person category'    =>'',  # line 205
-'partner|person category'     =>'',  # line 206
-'Task|Task Category'          =>'',  # line 213
-'Bug|Task Category'           =>'',  # line 214
-'Documentation|Task Category' =>'',  # line 215
-'Event|Task Category'         =>'',  # line 216
-'Folder|Task Category'        =>'',  # line 217
-'Milestone|Task Category'     =>'',  # line 218
-'Version|Task Category'       =>'',  # line 219
-'never|notification period'   =>'',  # line 225
-'one day|notification period' =>'',  # line 226
-'two days|notification period'=>'',  # line 227
-'three days|notification period'=>'',  # line 228
-'four days|notification period'=>'',  # line 229
-'five days|notification period'=>'',  # line 230
-'one week|notification period'=>'',  # line 231
-'two weeks|notification period'=>'',  # line 232
-'three weeks|notification period'=>'',  # line 233
-'one month|notification period'=>'',  # line 234
-'two months|notification period'=>'',  # line 235
-
-### ../std/mail.inc.php   ###
-'Failure sending mail: %s'    =>'',  # line 49
-'Streber Email Notification|notifcation mail from'=>'',  # line 572
-'Updates at %s|notication mail subject'=>'',  # line 116
-'Hello %s,|notification'      =>'',  # line 607
-'with this automatically created e-mail we want to inform you that|notification'=>'',  # line 135
-'since %s'                    =>'',  # line 140
-'following happened at %s |notification'=>'',  # line 147
-'Your account has been created.|notification'=>'',  # line 157
-'Please set a password to activate it.|notification'=>'',  # line 159
-'You have been assigned to projects:|notification'=>'',  # line 174
-'Changed monitored items:|notification'=>'',  # line 229
-'%s edited > %s'              =>'',  # line 239
-'Unchanged monitored items:|notification'=>'',  # line 267
-'%s (not touched since %s day(s))'=>'',  # line 322
-'Project Updates'             =>'',  # line 431
-'If you do not want to get further notifications or you forgot your password feel free to|notification'=>'',  # line 451
-'adjust your profile|notification'=>'',  # line 453
-'Thanks for your time|notication'=>'',  # line 618
-'the management|notication'   =>'',  # line 619
-'No news for <b>%s</b>'       =>'',  # line 541
-'Your account at|notification'=>'',  # line 593
-'Your account at %s is still active.|notification'=>'',  # line 610
-'Your login name is|notification'=>'',  # line 611
-'Maybe you want to %s set your password|notification'=>'',  # line 612
-
-
+'autodetect'                  =>'',
+'Summary'                     =>'',
+'Details'                     =>'',
+'Name'                        =>'',
+'Required. (e.g. pixtur ag)'  =>'',
+'Short|form field for company'=>'',
+'Optional: Short name shown in lists (eg. pixtur)'=>'',
+'Tag line|form field for company'=>'',
+'Optional: Additional tagline (eg. multimedia concepts)'=>'',
+'Phone|form field for company'=>'',
+'Optional: Phone (eg. +49-30-12345678)'=>'',
+'Fax|form field for company'  =>'',
+'Optional: Fax (eg. +49-30-12345678)'=>'',
+'Street'                      =>'',
+'Optional: (eg. Poststreet 28)'=>'',
+'Zipcode'                     =>'',
+'Optional: (eg. 12345 Berlin)'=>'',
+'Website'                     =>'',
+'Optional: (eg. http://www.pixtur.de)'=>'',
+'Intranet'                    =>'',
+'Optional: (eg. http://www.pixtur.de/login.php?name=someone)'=>'',
+'E-Mail'                      =>'',
+'Comments|form label for company'=>'',
+'Optional'                    =>'',
+'not available'               =>'',
+'optional if tasks linked to this effort'=>'',
+'Time Start'                  =>'',
+'Time End'                    =>'',
+'Description'                 =>'',
+'Status'                      =>'',
+'in'                          =>'',
+'Production build'            =>'',
+'Steps to reproduce'          =>'',
+'Expected result'             =>'',
+'Suggested Solution'          =>'',
+'Full name'                   =>'',
+'Required. Full name like (e.g. Thomas Mann)'=>'',
+'Nickname'                    =>'',
+'only required if user can login (e.g. pixtur)'=>'',
+'Tagline'                     =>'',
+'Mobile Phone'                =>'',
+'Optional: Mobile phone (eg. +49-172-12345678)'=>'',
+'Office Phone'                =>'',
+'Optional: Office Phone (eg. +49-30-12345678)'=>'',
+'Office Fax'                  =>'',
+'Optional: Office Fax (eg. +49-30-12345678)'=>'',
+'Office Street'               =>'',
+'Optional: Official Street and Number (eg. Poststreet 28)'=>'',
+'Office Zipcode'              =>'',
+'Optional: Official Zip-Code and City (eg. 12345 Berlin)'=>'',
+'Office Page'                 =>'',
+'Optional: (eg. www.pixtur.de)'=>'',
+'Office E-Mail'               =>'',
+'Optional: (eg. thomas@pixtur.de)'=>'',
+'Personal Phone'              =>'',
+'Optional: Private Phone (eg. +49-30-12345678)'=>'',
+'Personal Fax'                =>'',
+'Optional: Private Fax (eg. +49-30-12345678)'=>'',
+'Personal Street'             =>'',
+'Optional:  Private (eg. Poststreet 28)'=>'',
+'Personal Zipcode'            =>'',
+'Optional: Private (eg. 12345 Berlin)'=>'',
+'Personal Page'               =>'',
+'Personal E-Mail'             =>'',
+'Birthdate'                   =>'',
+'Color'                       =>'',
+'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'',
+'Comments'                    =>'',
+'Password'                    =>'',
+'Only required if user can login|tooltip'=>'',
+'Profile'                     =>'',
+'Theme|Formlabel'             =>'',
+'Salary per hour'             =>'',
+'in Euro'                     =>'',
+'Short'                       =>'',
+'Status summary'              =>'',
+'Date start'                  =>'',
+'Date closed'                 =>'',
+'Project page'                =>'',
+'Wiki page'                   =>'',
+'Priority'                    =>'',
+'Company'                     =>'',
+'show tasks in home'          =>'',
+'only team members can create items'=>'',
+'validating invalid item'     =>'',
+'insufficient rights (not in project)'=>'',
+'insufficient rights'         =>'',
+'Project Template'            =>'',
+'Inactive Project'            =>'',
+'Project|Page Type'           =>'',
+'undefined'                   =>'',
+'next released version'       =>'',
+'Versions'                    =>'',
+'Milestones'                  =>'',
+'Milestones (closed)'         =>'',
+'Released versions'           =>'',
+'job'                         =>'',
+'role'                        =>'',
+'For Milestone'               =>'',
+'resolved in version'         =>'',
+'Resolve reason'              =>'',
+'show as folder (may contain other tasks)'=>'',
+'is a milestone'              =>'',
+'milestones are shown in a different list'=>'',
+'released'                    =>'',
+'release time'                =>'',
+'Completion'                  =>'',
+'Estimated time'              =>'',
+'Estimated worst case'        =>'',
+'Label'                       =>'',
+'Planned Start'               =>'',
+'Planned End'                 =>'',
+'Order Id'                    =>'',
+'Calculation'                 =>'',
+'Display in project news'     =>'',
+'List title and description in project overview'=>'',
+'Display folder as topic'     =>'',
+'task without project?'       =>'',
+'Folder'                      =>'',
+'Milestone'                   =>'',
+'Released Milestone'          =>'',
+'Topic'                       =>'',
+'Bug'                         =>'',
+'Task'                        =>'',
+'Database exception. Please read %s next steps on database errors.%s'=>'',
+'unnamed'                     =>'',
+'Unknown'                     =>'',
+'Item has been modified during your editing by %s (%s minutes ago). Your changes can not be submitted.'=>'',
+'Comment|form label for items'=>'',
+'Your bookmarks'              =>'',
+'You have no bookmarks'       =>'',
+'Edit bookmark'               =>'',
+'Remove bookmark'             =>'',
+'Type'                        =>'',
+'deleted'                     =>'',
+'Notify on change'            =>'',
+'in|very short for IN folder...'=>'',
+'(on comment)'                =>'',
+'(on task)'                   =>'',
+'(on project)'                =>'',
+'Comment'                     =>'',
+'Remind'                      =>'',
+'in %s day(s)'                =>'',
+'since %s day(s)'             =>'',
+'Modified'                    =>'',
+'Project'                     =>'',
+'State'                       =>'',
+'Modified by'                 =>'',
+'Changes'                     =>'',
+'Other team members changed nothing since last logout (%s)'=>'',
+'Date'                        =>'',
+'Who changed what when...'    =>'',
+'what|column header in change list'=>'',
+'Date / by'                   =>'',
+'Nothing has changed.'        =>'',
+'modified'                    =>'',
+'New Comment'                 =>'',
+'Add Comment'                 =>'',
+'Mark as bookmark'            =>'',
+'Shrink All Comments'         =>'',
+'Collapse All Comments'       =>'',
+'Expand All Comments'         =>'',
+'By|column header'            =>'',
+'version %s'                  =>'',
+'Edit'                        =>'',
+'Delete'                      =>'',
+'Reply'                       =>'',
+'Publish'                     =>'',
+'1 sub comment'               =>'',
+'%s sub comments'             =>'',
+'related companies'           =>'',
+'Name Short'                  =>'',
+'Shortnames used in other lists'=>'',
+'Phone'                       =>'',
+'Phone-Number'                =>'',
+'Proj'                        =>'',
+'Number of open Projects'     =>'',
+'People'                      =>'',
+'People working for this person'=>'',
+'Edit company'                =>'',
+'Delete company'              =>'',
+'Create new company'          =>'',
+'Company|Column header'       =>'',
+'Documentation'               =>'',
+'no efforts booked yet'       =>'',
+'Efforts'                     =>'',
+'person'                      =>'',
+'Edit effort'                 =>'',
+'New effort'                  =>'',
+'View selected Efforts'       =>'',
+'%s effort(s) with %s hours'  =>'',
+'Effort'                      =>'',
+'Effort name. More Details as tooltips'=>'',
+'Task|column header'          =>'',
+'Status|column header'        =>'',
+'Start|column header'         =>'',
+'D, d.m.Y'                    =>'',
+'End|column header'           =>'',
+'len|column header of length of effort'=>'',
+'Daygraph|columnheader'       =>'',
+'Efforts on team member'      =>'',
+'Total effort sum: %s hours'  =>'',
+'Role|columnheader'           =>'',
+'Sum|columnheader'            =>'',
+'Effortgraph|columnheader'    =>'',
+'Calculation on team member'  =>'',
+'Calculation|columnheader'    =>'',
+'Costgraph|columnheader'      =>'',
+'Calculation for project'     =>'',
+'Project|columnheader'        =>'',
+'Efforts on task'             =>'',
+'Task|columnheader'           =>'',
+'Calculation on task'         =>'',
+'Estimated/Booked (Diff.)'    =>'',
+'Relation between estimated time and booked efforts'=>'',
+'Completion:'                 =>'',
+'Parent item'                 =>'',
+'Version'                     =>'',
+'Edit file'                   =>'',
+'Move files'                  =>'',
+'New file'                    =>'',
+'No files uploaded'           =>'',
+'Download|Column header'      =>'',
+'File|Column header'          =>'',
+'in|... folder'               =>'',
+'ID %s'                       =>'',
+'Show Details'                =>'',
+'Attached to|Column header'   =>'',
+'Summary|Column header'       =>'',
+'creatd on %s|date a file was created'=>'',
+'click to show details'       =>'',
+'by %s|person who uploaded a file'=>'',
+'Thumbnail|Column header'     =>'',
+'Your demand notes'           =>'',
+'You have no demand notes'    =>'',
+'New folder'                  =>'',
+'or'                          =>'',
+'Planned for'                 =>'',
+'Due Today'                   =>'',
+'%s days late'                =>'',
+'%s days left'                =>'',
+'%s required'                 =>'',
+'Tasks open|columnheader'     =>'',
+'closed'                      =>'',
+'open'                        =>'',
+'Your related persons'        =>'',
+'Person'                      =>'',
+'Task name. More Details as tooltips'=>'',
+'Private'                     =>'',
+'Mobil'                       =>'',
+'Office'                      =>'',
+'Companies'                   =>'',
+'last login'                  =>'',
+'Edit person'                 =>'',
+'Edit User Rights'            =>'',
+'Delete person'               =>'',
+'Create new person'           =>'',
+'Nickname|column header'      =>'',
+'Name|column header'          =>'',
+'Profile|column header'       =>'',
+'Account settings for user (do not confuse with project rights)'=>'',
+'(adjusted)'                  =>'',
+'Active Projects|column header'=>'',
+'Priority is %s'              =>'',
+'recent changes|column header'=>'',
+'changes since YOUR last logout'=>'',
+'Rights'                      =>'',
+'Persons rights in this project'=>'',
+'Edit team member'            =>'',
+'Add team member'             =>'',
+'Remove person from team'     =>'',
+'Role'                        =>'',
+'last Login|column header'    =>'',
+'Project priority (the icons have tooltips, too)'=>'',
+'Task-Status'                 =>'',
+'Status Summary'              =>'',
+'Short discription of the current status'=>'',
+'Tasks'                       =>'',
+'Number of open Tasks'        =>'',
+'Opened'                      =>'',
+'Day the Project opened'      =>'',
+'Closed'                      =>'',
+'Day the Project state changed to closed'=>'',
+'Edit project'                =>'',
+'Delete project'              =>'',
+'Log hours for a project'     =>'',
+'Open / Close'                =>'',
+'Create new project'          =>'',
+'Create Template'             =>'',
+'Project from Template'       =>'',
+'... working in project'      =>'',
+'Project|column header'       =>'',
+'Recent changes'              =>'',
+'No changes by others'        =>'',
+'Also show your changes'      =>'',
+'No changes yet'              =>'',
+'Hide your changes'           =>'',
+'Show more'                   =>'',
+'Needs feedback'              =>'',
+'New'                         =>'',
+'Updated'                     =>'',
+'by'                          =>'',
+'Folders'                     =>'',
+'Number of subtasks'          =>'',
+'Create new folder under selected task'=>'',
+'Move selected to folder'     =>'',
+'Log hours for select tasks'  =>'',
+'Priority of task'            =>'',
+'Status|Columnheader'         =>'',
+'Modified|Column header'      =>'',
+'Est.'                        =>'',
+'Estimated time in hours'     =>'',
+'Add new Task'                =>'',
+'Report new Bug'              =>'',
+'Add comment'                 =>'',
+'Status->Completed'           =>'',
+'Status->Approved'            =>'',
+'Status->Closed'              =>'',
+'Move tasks'                  =>'',
+'List|List sort mode'         =>'',
+'Tree|List sort mode'         =>'',
+'Grouped|List sort mode'      =>'',
+'%s hidden'                   =>'',
+'Latest Comment'              =>'',
+'for'                         =>'',
+'%s open tasks / %s h'        =>'',
+'Label|Columnheader'          =>'',
+'Created by'                  =>'',
+'Assigned to'                 =>'',
+'Task name'                   =>'',
+'has %s comments'             =>'',
+'Task has %s attachments'     =>'',
+'- no name -|in task lists'   =>'',
+'number of subtasks'          =>'',
+'Page name'                   =>'',
+'Sum of all booked efforts (including subtasks)'=>'',
+'Effort in hours'             =>'',
+'Days until planned end'      =>'',
+'Due|column header, days until planned end'=>'',
+'Review'                      =>'',
+'Task status set to completed and needs approval.'=>'',
+'Item was approved on: %s:|date a task was approved'=>'',
+'done'                        =>'',
+'Today'                       =>'',
+'This task is planned to be completed today.'=>'',
+'Tomorrow'                    =>'',
+'This task is planned to be completed tomorrow.'=>'',
+'Next week'                   =>'',
+'due: %s'                     =>'',
+'days'                        =>'',
+'this task is overdue!'       =>'',
+'late|time status of a task'  =>'',
+'remain|time status of a task'=>'',
+'Pending'                     =>'',
+'planned for %s|a certain date'=>'',
+'start: %s'                   =>'',
+'Est/Compl'                   =>'',
+'Estimated time / completed'  =>'',
+'Release Date'                =>'',
+'Recent changes|Page option tab'=>'',
+'Your Tasks'                  =>'',
+'Bookmarks'                   =>'',
+'Overall changes'             =>'',
+'Playground'                  =>'',
+'View item'                   =>'',
+'Set Public Level'            =>'',
+'Send notification'           =>'',
+'Remove notification'         =>'',
+'Edit bookmarks'              =>'',
+'Edit multiple bookmarks'     =>'',
+'view changes'                =>'',
+'Active Projects'             =>'',
+'Closed Projects'             =>'',
+'Project Templates'           =>'',
+'View Project'                =>'',
+'View Project as RSS'         =>'',
+'Uploaded Files'              =>'',
+'New project'                 =>'',
+'Edit Project'                =>'',
+'Delete Project'              =>'',
+'Change Project Status'       =>'',
+'Add Team member'             =>'',
+'Edit Team member'            =>'',
+'Remove from team'            =>'',
+'View Task'                   =>'',
+'View Task As Docu'           =>'',
+'Edit Task'                   =>'',
+'Edit multiple Tasks'         =>'',
+'View Task Efforts'           =>'',
+'Delete Task(s)'              =>'',
+'Restore Task(s)'             =>'',
+'Move tasks to folder'        =>'',
+'Mark tasks as Complete'      =>'',
+'Mark tasks as Approved'      =>'',
+'Mark tasks as Closed'        =>'',
+'Mark tasks as Open'          =>'',
+'New task'                    =>'',
+'New bug'                     =>'',
+'New milestone'               =>'',
+'New released Version'        =>'',
+'Toggle view collapsed'       =>'',
+'Add issue/bug report'        =>'',
+'Edit Description'            =>'',
+'Create Note'                 =>'',
+'Edit Note'                   =>'',
+'View effort'                 =>'',
+'View multiple efforts'       =>'',
+'Log hours'                   =>'',
+'Edit time effort'            =>'',
+'Edit multiple efforts'       =>'',
+'View comment'                =>'',
+'Create comment'              =>'',
+'Edit comment'                =>'',
+'Delete comment'              =>'',
+'View file'                   =>'',
+'Upload file'                 =>'',
+'Update file'                 =>'',
+'Download'                    =>'',
+'Show file scaled'            =>'',
+'Move files to folder'        =>'',
+'List Companies'              =>'',
+'View Company'                =>'',
+'New company'                 =>'',
+'Edit Company'                =>'',
+'Delete Company'              =>'',
+'Link Persons'                =>'',
+'Remove persons from company' =>'',
+'List Persons'                =>'',
+'View Person'                 =>'',
+'New person'                  =>'',
+'Edit Person'                 =>'',
+'Delete Person'               =>'',
+'View Projects of Person'     =>'',
+'View Task of Person'         =>'',
+'View Efforts of Person'      =>'',
+'View Changes of Person'      =>'',
+'Send Activation E-Mail'      =>'',
+'Flush Notifications'         =>'',
+'Register'                    =>'',
+'Link Companies'              =>'',
+'Remove companies from person'=>'',
+'Mark all items as viewed'    =>'',
+'Toggle filter own changes'   =>'',
+'Login'                       =>'',
+'Forgot your password?'       =>'',
+'Logout'                      =>'',
+'License'                     =>'',
+'restore Item'                =>'',
+'Error'                       =>'',
+'Activate an account'         =>'',
+'System Information'          =>'',
+'PhpInfo'                     =>'',
+'Filter errors.log'           =>'',
+'Delete errors.log'           =>'',
+'Search'                      =>'',
+'Task Test'                   =>'',
+'Load Field'                  =>'',
+'Save Field'                  =>'',
+'No item(s) selected.'        =>'',
+'Select one or more bookmark(s)'=>'',
+'Removed %s bookmark(s).'     =>'',
+'ERROR: Cannot remove %s bookmark(s). Please try again.'=>'',
+'An error occured'            =>'',
+'Bookmark'                    =>'',
+'Notify if unchanged in'      =>'',
+'Invalid checksum for hidden form elements'=>'',
+'Could not get bookmark'      =>'',
+'Added %s bookmark(s).'       =>'',
+'Please select some items'    =>'',
+'Edit multiple bookmarks|page title'=>'',
+'Edit %s bookmark(s)'         =>'',
+'no'                          =>'',
+'yes'                         =>'',
+'keep different'              =>'',
+'Edited %s bookmark(s).'      =>'',
+'%s bookmark(s) could not be added.'=>'',
+'(deleted %s)|page title add on with date of deletion'=>'',
+'Edit this comment'           =>'',
+'Mark this comment as bookmark'=>'',
+'Remove this bookmark'        =>'',
+'Remove Bookmark'             =>'',
+'Delete this comment'         =>'',
+'Restore'                     =>'',
+'New Comment|Default name of new comment'=>'',
+'Re: '                        =>'',
+'Reply to |prefix for name of new comment on another comment'=>'',
+'Edit Comment|Page title'     =>'',
+'New Comment|Page title'      =>'',
+'Occasion|form label'         =>'',
+'Publish to|form label'       =>'',
+'Select some comments to delete'=>'',
+'Failed to delete %s comments'=>'',
+'Moved %s comments to trash'  =>'',
+'Select some comments to restore'=>'',
+'Failed to restore %s comments'=>'',
+'Restored %s comments'        =>'',
+'Select some comments to move'=>'',
+'Can not edit comment %s'     =>'',
+'Edit tasks'                  =>'',
+'Select one folder to move comments into'=>'',
+'... or select nothing to move to project root'=>'',
+'No folders in this project...'=>'',
+'Move items'                  =>'',
+'all'                         =>'',
+'clients'                     =>'',
+'prospective clients'         =>'',
+'supplier'                    =>'',
+'partner'                     =>'',
+'related projects of %s'      =>'',
+'admin view'                  =>'',
+'List'                        =>'',
+'new'                         =>'',
+'no companies'                =>'',
+'Clients'                     =>'',
+'related companies of %s'     =>'',
+'List|page type'              =>'',
+'Export as CSV'               =>'',
+'Prospective Clients'         =>'',
+'Suppliers'                   =>'',
+'Partners'                    =>'',
+'Overview'                    =>'',
+'edit'                        =>'',
+'Edit this company'           =>'',
+'Mark this company as bookmark'=>'',
+'Delete this company'         =>'',
+'Create new person for this company'=>'',
+'Create new project for this company'=>'',
+'Add existing persons to this company'=>'',
+'Persons'                     =>'',
+'Adress'                      =>'',
+'Fax'                         =>'',
+'Web'                         =>'',
+'Intra'                       =>'',
+'Mail'                        =>'',
+'related Persons'             =>'',
+'Remove person from company'  =>'',
+'link existing Person'        =>'',
+'create new'                  =>'',
+'no persons related'          =>'',
+'Active projects'             =>'',
+' Hint: for already existing projects please edit those and adjust company-setting.'=>'',
+'no projects yet'             =>'',
+'Closed projects'             =>'',
+'Category|form label'         =>'',
+'Create another company after submit'=>'',
+'Edit %s'                     =>'',
+'Add persons employed or related'=>'',
+'No persons selected...'      =>'',
+'Person already related to company'=>'',
+'Failed to remove %s contact person(s)'=>'',
+'Removed %s contact person(s)'=>'',
+'Select some companies to delete'=>'',
+'Failed to delete %s companies'=>'',
+'Moved %s companies to trash' =>'',
+'invalid project-id'          =>'',
+'Edit this project'           =>'',
+'Create task'                 =>'',
+'Create task with issue-report'=>'',
+'Create wiki documentation page or start discussion topic'=>'',
+'New topic'                   =>'',
+'Book effort for this project'=>'',
+'Book effort'                 =>'',
+'News'                        =>'',
+'%s comments'                 =>'',
+'Downloads'                   =>'',
+'Select one or more efforts'  =>'',
+'You do not have enough rights'=>'',
+'Edit this effort'            =>'',
+'Mark this effort as bookmark'=>'',
+'Project|label'               =>'',
+'Task|label'                  =>'',
+'No task related'             =>'',
+'Created by|label'            =>'',
+'Created at|label'            =>'',
+'Duration|label'              =>'',
+'Time start|label'            =>'',
+'Time end|label'              =>'',
+'No description available'    =>'',
+'Multiple Efforts|page type'  =>'',
+'Multiple Efforts'            =>'',
+'summary'                     =>'',
+'Information'                 =>'',
+'Number of efforts|label'     =>'',
+'Sum of efforts|label'        =>'',
+'from|time label'             =>'',
+'to|time label'               =>'',
+'Time|label'                  =>'',
+'New Effort'                  =>'',
+'only expected one task. Used the first one.'=>'',
+'Select some efforts(s) to edit'=>'',
+'Edit Effort|page type'       =>'',
+'Edit Effort|page title'      =>'',
+'New Effort|page title'       =>'',
+'On project %s|page title add on'=>'',
+'Date / Duration|Field label when booking time-effort as duration'=>'',
+'For task'                    =>'',
+'Publish to'                  =>'',
+'Could not get effort'        =>'',
+'Could not get project of effort'=>'',
+'Could not get person of effort'=>'',
+'Name required'               =>'',
+'Cannot start before end.'    =>'',
+'For editing all efforts must be of same project.'=>'',
+'Edit multiple efforts|Page title'=>'',
+'Edit %s efforts|Page title'  =>'',
+'Edited %s effort(s).'        =>'',
+'Error while editing %s effort(s).'=>'',
+'Select some efforts to delete'=>'',
+'Failed to delete %s efforts' =>'',
+'Moved %s efforts to trash'   =>'',
+'Error|top navigation tab'    =>'',
+'Unknown Page'                =>'',
+'Could not access parent task Id:%s'=>'',
+'Edit this file'              =>'',
+'Move this file to another task'=>'',
+'Move'                        =>'',
+'Mark this file as bookmark'  =>'',
+'Upload new version|block title'=>'',
+'Upload'                      =>'',
+'Version #%s (current): %s'   =>'',
+'Filesize'                    =>'',
+'Uploaded'                    =>'',
+'Uploaded by'                 =>'',
+'Version #%s : %s'            =>'',
+'Could not edit task'         =>'',
+'Edit File|page title'        =>'',
+'New file|page title'         =>'',
+'Could not get file'          =>'',
+'Could not get project of file'=>'',
+'Please enter a proper filename'=>'',
+'Uploaded new version of file with Id %s'=>'',
+'Uploaded new file with Id %s'=>'',
+'Updated file with Id %s'     =>'',
+'Select some files to delete' =>'',
+'Failed to delete %s files'   =>'',
+'Moved %s files to trash'     =>'',
+'Select some file to display' =>'',
+'Select some files to move'   =>'',
+'Can not edit file %s'        =>'',
+'insufficient rights to edit any of the selected items'=>'',
+'Edit files'                  =>'',
+'Select folder to move files into'=>'',
+'No folders available'        =>'',
+'(or select nothing to move to project root)'=>'',
+'At Home'                     =>'',
+'Edit your Profile'           =>'',
+'for|short for client'        =>'',
+'without client'              =>'',
+'Your Bookmarks'              =>'',
+'last logout'                 =>'',
+'today'                       =>'',
+'yesterday'                   =>'',
+'1 week'                      =>'',
+'2 weeks'                     =>'',
+'my open'                     =>'',
+'my blocked'                  =>'',
+'blocked'                     =>'',
+'needs feedback'              =>'',
+'needs approval'              =>'',
+'without milestone'           =>'',
+'discounted'                  =>'',
+'not chargeable'              =>'',
+'balanced'                    =>'',
+'3 weeks'                     =>'',
+'1 month'                     =>'',
+'prior'                       =>'',
+'Your efforts'                =>'',
+'Efforts|Page title add on'   =>'',
+'no efforts yet'              =>'',
+'Select some items(s) to change pub level'=>'',
+'Made %s items public to %s'  =>'',
+'%s error(s) occured'         =>'',
+'changes'                     =>'',
+'date1 should be smaller than date2. Swapped'=>'',
+'item has not been edited history'=>'',
+'unknown'                     =>'',
+'prev change'                 =>'',
+'next'                        =>'',
+'Item did not exists at %s'   =>'',
+'no changes between %s and %s'=>'',
+'ok'                          =>'',
+'Login|tab in top navigation' =>'',
+'Go to your home. Alt-h / Option-h'=>'',
+'License|tab in top navigation'=>'',
+'Your projects. Alt-P / Option-P'=>'',
+'Welcome to %s|Notice after login'=>'',
+'please login'                =>'',
+'Nickname|label in login form'=>'',
+'Password|label in login form'=>'',
+'I forgot my password'        =>'',
+'Continue anonymously'        =>'',
+'invalid login|message when login failed'=>'',
+'Password reminder|Page title'=>'',
+'Please enter your nickname'  =>'',
+'We will then sent you an E-mail with a link to adjust your password.'=>'',
+'If you do not know your nickname, please contact your administrator: %s.'=>'',
+'If you remember your name, please enter it and try again.'=>'',
+'A notification mail has been sent.'=>'',
+'Welcome %s. Please adjust your profile and insert a good password to activate your account.'=>'',
+'Sorry, but this activation code is no longer valid. If you already have an account, you could enter your name and use the <b>forgot password link</b> below.'=>'',
+'License|page title'          =>'',
+'Could not find requested page `%s`'=>'',
+'Select some items to restore'=>'',
+'Item %s does not need to be restored'=>'',
+'Failed to restore %s items'  =>'',
+'Restored %s items'           =>'',
+'Admin|top navigation tab'    =>'',
+'System information'          =>'',
+'Admin'                       =>'',
+'Database Type'               =>'',
+'Error-Log'                   =>'',
+'PHP Version'                 =>'',
+'extension directory'         =>'',
+'loaded extensions'           =>'',
+'include path'                =>'',
+'register globals'            =>'',
+'magic quotes gpc'            =>'',
+'magic quotes runtime'        =>'',
+'safe mode'                   =>'',
+'hide'                        =>'',
+'Projects'                    =>'',
+'without account'             =>'',
+'with account'                =>'',
+'employees'                   =>'',
+'contact persons'             =>'',
+'Persons|Pagetitle for person list'=>'',
+'relating to %s|Page title Person list title add on'=>'',
+'admin view|Page title add on if admin'=>'',
+'no related persons'          =>'',
+'Employees|Pagetitle for person list'=>'',
+'Contact Persons|Pagetitle for person list'=>'',
+'Deleted People'              =>'',
+'relating to %s|page title add on listing pages relating to current user'=>'',
+'People/Project Overview'     =>'',
+'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',
+'Add note|Page function person'=>'',
+'Add existing companies to this person'=>'',
+'Edit this person|Tooltip for page function'=>'',
+'Edit profile|Page function edit person'=>'',
+'Edit User Rights|Tooltip for page function'=>'',
+'Edit user Rights|Page function for edit user rights'=>'',
+'Mark this person as bookmark'=>'',
+'Summary|Block title'         =>'',
+'Mobile|Label mobilephone of person'=>'',
+'Office|label for person'     =>'',
+'Private|label for person'    =>'',
+'Fax (office)|label for person'=>'',
+'Website|label for person'    =>'',
+'Personal|label for person'   =>'',
+'E-Mail|label for person office email'=>'',
+'E-Mail|label for person personal email'=>'',
+'Adress Personal|Label'       =>'',
+'Adress Office|Label'         =>'',
+'Birthdate|Label'             =>'',
+'Last login|Label'            =>'',
+'works for|List title'        =>'',
+'link existing Company'       =>'',
+'no companies related'        =>'',
+'no company'                  =>'',
+'Person details'              =>'',
+'works in Projects|list title for person projects'=>'',
+'no active projects'          =>'',
+'Assigned tasks'              =>'',
+'No open tasks assigned'      =>'',
+'Projects|Page title add on'  =>'',
+'Tasks|Page title add on'     =>'',
+'no tasks yet'                =>'',
+'Changes|Page title add on'   =>'',
+'no changes yet'              =>'',
+'not allowed to edit'         =>'',
+'Edit Person|Page type'       =>'',
+'Person with account (can login)|form label'=>'',
+'Account'                     =>'',
+'Password|form label'         =>'',
+'confirm Password|form label' =>'',
+'Authentication with|form label'=>'',
+'-- reset to...--'            =>'',
+'Profile|form label'          =>'',
+'ASAP'                        =>'',
+'daily'                       =>'',
+'each 3 days'                 =>'',
+'each 7 days'                 =>'',
+'each 14 days'                =>'',
+'each 30 days'                =>'',
+'Never'                       =>'',
+'Send notifications|form label'=>'',
+'Send mail as html|form label'=>'',
+'- no -'                      =>'',
+'Assigne to project|form label'=>'',
+'Options'                     =>'',
+'Enable efforts'              =>'',
+'Enable bookmarks'            =>'',
+'Theme|form label'            =>'',
+'Language|form label'         =>'',
+'Time zone|form label'        =>'',
+'start times and end times'   =>'',
+'duration'                    =>'',
+'Log Efforts as'              =>'',
+'Filter own changes from recent changes list'=>'',
+'Internal'                    =>'',
+'Create another person after submit'=>'',
+'Could not get person'        =>'',
+'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'=>'',
+'Sending notifactions requires an email-address.'=>'',
+'Using auto detection of time zone requires this user to relogin.'=>'',
+'Nickname has been converted to lowercase'=>'',
+'Nickname has to be unique'   =>'',
+'Passwords do not match'      =>'',
+'Password is too weak (please add numbers, special chars or length)'=>'',
+'Login-accounts require a unique nickname'=>'',
+'A notification / activation  will be mailed to <b>%s</b> when you log out.'=>'',
+'Read more about %s.'         =>'',
+'Person %s created'           =>'',
+'Could not insert object'     =>'',
+'Updated settings for %s.'    =>'',
+'Select some persons to delete'=>'',
+'<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'',
+'Failed to delete %s persons' =>'',
+'Moved %s persons to trash'   =>'',
+'Insufficient rights'         =>'',
+'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',
+'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',
+'Activation mail has been sent.'=>'',
+'Sending notification e-mail failed.'=>'',
+'Select some persons to notify'=>'',
+'Failed to mail %s persons'   =>'',
+'Sent notification to %s person(s)'=>'',
+'Select some persons to edit' =>'',
+'Could not get Person'        =>'',
+'Edit Person|page type'       =>'',
+'Adjust user-rights'          =>'',
+'Please consider that activating login-accounts might trigger security-issues.'=>'',
+'Person can login|form label' =>'',
+'User rights changed'         =>'',
+'Registering is not enabled'  =>'',
+'Because we are afraid of spam bots, please provide some information about you and why you want to register.'=>'',
+'Register as a new user'      =>'',
+'Login-accounts require a full name.'=>'',
+'Please enter an e-mail address.'=>'',
+'Please copy the text from the image.'=>'',
+'Thank you for registration! After your request has been approved by a moderator, you will can an email.'=>'',
+'Add related companies'       =>'',
+'No companies selected...'    =>'',
+'Company already related to person'=>'',
+'Failed to remove %s companies'=>'',
+'Removed %s companies'        =>'',
+'Marked all previous items as viewed.'=>'',
+'invalid Person #%s'          =>'',
+'Reverting user changes'      =>'',
+'Skipped recently editted item #%s: <b>%s<b>'=>'',
+'Reverted all changes (%s) of user %s'=>'',
+'newly created items by this user remain unaffected.'=>'',
+'Personal Efforts'            =>'',
+'Your Active Projects'        =>'',
+'relating to %s'              =>'',
+'New project from'            =>'',
+'<b>NOTE</b>: Some projects are hidden from your view. Please ask an administrator to adjust you rights to avoid double-creation of projects'=>'',
+'create new project'          =>'',
+'not assigned to a project'   =>'',
+'Your Closed Projects'        =>'',
+'not assigned to a closed project'=>'',
+'no project templates'        =>'',
+'modified by me'              =>'',
+'modified by others'          =>'',
+'for milestone'               =>'',
+'Create a new folder for tasks and files'=>'',
+'new subtask for this folder' =>'',
+'Filter-Preset:'              =>'',
+'No tasks'                    =>'',
+'Topics'                      =>'',
+'Create a new page'           =>'',
+'No topics yet'               =>'',
+'Upload file|block title'     =>'',
+'View open milestones'        =>'',
+'View closed milestones'      =>'',
+'all|Filter preset'           =>'',
+'new|Filter preset'           =>'',
+'open|Filter preset'          =>'',
+'discounted|Filter preset'    =>'',
+'not chargeable|Filter preset'=>'',
+'balanced|Filter preset'      =>'',
+'last logout|Filter preset'   =>'',
+'1 week|Filter preset'        =>'',
+'2 weeks|Filter preset'       =>'',
+'3 weeks|Filter preset'       =>'',
+'1 month|Filter preset'       =>'',
+'prior|Filter preset'         =>'',
+'Project Efforts'             =>'',
+'new Effort'                  =>'',
+'View calculation'            =>'',
+'Effort calculations'         =>'',
+'Tasks resolved in upcoming version'=>'',
+'Company|form label'          =>'',
+'Display'                     =>'',
+'Create another project after submit'=>'',
+'Select some projects to delete'=>'',
+'Failed to delete %s projects'=>'',
+'Moved %s projects to trash'  =>'',
+'Select some projects...'     =>'',
+'Invalid project-id!'         =>'',
+'Y-m-d'                       =>'',
+'Failed to change %s projects'=>'',
+'Closed %s projects'          =>'',
+'Reactivated %s projects'     =>'',
+'Select new team members'     =>'',
+'Found no persons to add. Go to `People` to create some.'=>'',
+'Add'                         =>'',
+'Could not access person by id'=>'',
+'Reanimated person %s as team-member'=>'',
+'Person %s already in project'=>'',
+'Template|as addon to project-templates'=>'',
+'Failed to insert new project person. Data structure might have been corrupted'=>'',
+'Failed to insert new issue. DB structure might have been corrupted.'=>'',
+'Failed to update new task. DB structure might have been corrupted.'=>'',
+'Failed to insert new comment. DB structure might have been corrupted.'=>'',
+'Project duplicated (including %s items)'=>'',
+'Mark this project as bookmark'=>'',
+'Delete this project'         =>'',
+'Add person as team-member to project'=>'',
+'Team member'                 =>'',
+'Details|block title'         =>'',
+'Client|label'                =>'',
+'Phone|label'                 =>'',
+'E-Mail|label'                =>'',
+'Status|Label in summary'     =>'',
+'Wikipage|Label in summary'   =>'',
+'Projectpage|Label in summary'=>'',
+'Opened|Label in summary'     =>'',
+'Closed|Label in summary'     =>'',
+'Created by|Label in summary' =>'',
+'Last modified by|Label in summary'=>'',
+'Logged effort'               =>'',
+'hours'                       =>'',
+'Completed'                   =>'',
+'Team members'                =>'',
+'Edit Team Member'            =>'',
+'role of %s in %s|edit team-member title'=>'',
+'Role in this project'        =>'',
+'Changed role of <b>%s</b> to <b>%s</b>'=>'',
+'Failed to remove %s members from team'=>'',
+'Unassigned %s team member(s) from project'=>'',
+'on'                          =>'',
+'cannot jump to this item type'=>'',
+'Due to the implementation of MySQL following words cannot be searched and have been ignored: %s'=>'',
+'Sorry, but there is nothing left to search.'=>'',
+'jumped to best of %s search results'=>'',
+'Add an ! to your search request to jump to the best result.'=>'',
+'%s search results for `%s`'  =>'',
+'No search results for `%s`'  =>'',
+'Searching'                   =>'',
+'Sorry. Could not find anything.'=>'',
+'Due to limitations of MySQL fulltext search, searching will not work for...<br>- words with 3 or less characters<br>- Lists with less than 3 entries<br>- words containing special charaters'=>'',
+'No project selected?'        =>'',
+'New Milestone'               =>'',
+'New Version'                 =>'',
+'Please select only one item as parent'=>'',
+'Insufficient rights for parent item.'=>'',
+'could not find project'      =>'',
+'Parent task not found.'      =>'',
+'Select some task(s) to edit' =>'',
+'You do not have enough rights to edit this task'=>'',
+'New version'                 =>'',
+'for %s|e.g. new task for something'=>'',
+'Display as'                  =>'',
+'This folder has %s subtasks. Changing category will ungroup them.'=>'',
+'Prio|Form label'             =>'',
+'- select person -'           =>'',
+'Assign to'                   =>'',
+'Assign to|Form label'        =>'',
+'Also assign to|Form label'   =>'',
+'Resolved in'                 =>'',
+'Bug Report'                  =>'',
+'Severity|Form label, attribute of issue-reports'=>'',
+'Reproducibility|Form label, attribute of issue-reports'=>'',
+'Timing'                      =>'',
+'30 min'                      =>'',
+'1 h'                         =>'',
+'2 h'                         =>'',
+'4 h'                         =>'',
+'1 Day'                       =>'',
+'2 Days'                      =>'',
+'3 Days'                      =>'',
+'4 Days'                      =>'',
+'1 Week'                      =>'',
+'1,5 Weeks'                   =>'',
+'2 Weeks'                     =>'',
+'3 Weeks'                     =>'',
+'Release as version|Form label, attribute of issue-reports'=>'',
+'Create another task after submit'=>'',
+'Nickname not known in this project: %s'=>'',
+'Requested feedback from: %s.'=>'',
+'Comment has been rejected, because it looks like spam.'=>'',
+'Failed to add comment'       =>'',
+'Not enough rights to edit task'=>'',
+'unassigned to %s|task-assignment comment'=>'',
+'formerly assigned to %s|task-assigment comment'=>'',
+'task was already assigned to %s'=>'',
+'Task requires name'          =>'',
+'Task called %s already exists'=>'',
+'Because task is resolved, its status has been changed to completed.'=>'',
+'Task has resolved version but is not completed?'=>'',
+'Milestones may not have sub tasks'=>'',
+'Turned parent task into a folder. Note, that folders are only listed in tree'=>'',
+'Failed, adding to parent-task'=>'',
+'NOTICE: Ungrouped %s subtasks to <b>%s</b>'=>'',
+'Created task %s with ID %s'  =>'',
+'Changed %s %s with ID %s|type,link,id'=>'',
+'Marked %s tasks to be resolved in this version.'=>'',
+'Select some tasks to move'   =>'',
+'Can not move task <b>%s</b> to own child.'=>'',
+'Can not edit tasks %s'       =>'',
+'Select folder to move tasks into'=>'',
+'Failed to delete task %s'    =>'',
+'Moved %s tasks to trash'     =>'',
+' ungrouped %s subtasks to above parents.'=>'',
+'No task(s) selected for deletion...'=>'',
+'Could not find task'         =>'',
+'Task <b>%s</b> does not need to be restored'=>'',
+'Task <b>%s</b> restored'     =>'',
+'Failed to restore Task <b>%s</b>'=>'',
+'Task <b>%s</b> do not need to be restored'=>'',
+'No task(s) selected for restoring...'=>'',
+'Select some task(s) to mark as completed'=>'',
+'Marked %s tasks (%s subtasks) as completed.'=>'',
+'Select some task(s) to mark as approved'=>'',
+'Marked %s tasks as approved and hidden from project-view.'=>'',
+'Select some task(s) to mark as closed'=>'',
+'Marked %s tasks as closed.'  =>'',
+'Not enough rights to close %s tasks.'=>'',
+'Select some task(s) to reopen'=>'',
+'Reopened %s tasks.'          =>'',
+'Select some task(s)'         =>'',
+'Could not update task'       =>'',
+'No task selected to add issue-report?'=>'',
+'Task already has an issue-report'=>'',
+'Adding issue-report to task' =>'',
+'Select a task to edit description'=>'',
+'Edit description'            =>'',
+'Task Efforts'                =>'',
+'For editing all tasks must be of same project.'=>'',
+'Edit multiple tasks|Page title'=>'',
+'Edit %s tasks|Page title'    =>'',
+'Category'                    =>'',
+'Prio'                        =>'',
+'resolved in Version'         =>'',
+'Resolve Reason'              =>'',
+'select person'               =>'',
+'Also assigned to'            =>'',
+'none'                        =>'',
+'%s tasks could not be written'=>'',
+'Updated %s tasks tasks'      =>'',
+'ERROR: could not get Person' =>'',
+'Select a note to edit'       =>'',
+'Note'                        =>'',
+'Create new note'             =>'',
+'New Note on %s, %s'          =>'',
+'Publish to|Form label'       =>'',
+'ERROR: could not get project'=>'',
+'Assigned Projects'           =>'',
+'- no assigend projects'      =>'',
+'Company Projects'            =>'',
+'- no company projects'       =>'',
+'All other Projects'          =>'',
+'- no other projects'         =>'',
+'For Project|form label'      =>'',
+'New project|form label'      =>'',
+'Project name|form label'     =>'',
+'ERROR: could not get assigned persons'=>'',
+'Also assign to'              =>'',
+'Book effort after submit'    =>'',
+'ERROR: could not get task'   =>'',
+'Note requires project'       =>'',
+'Note requires assigned person(s)'=>'',
+'Edit this %s'                =>'',
+'Move|page function to move current task'=>'',
+'Delete this task'            =>'',
+'Restore this task'           =>'',
+'Undelete'                    =>'',
+'new bug for this folder'     =>'',
+'new task for this milestone' =>'',
+'Mark this task as bookmark'  =>'',
+'Book Effort'                 =>'',
+'Released as|Label in Task summary'=>'',
+'For Milestone|Label in Task summary'=>'',
+'Status|Label in Task summary'=>'',
+'Opened|Label in Task summary'=>'',
+'Estimated|Label in Task summary'=>'',
+'Completed|Label in Task summary'=>'',
+'Planned start|Label in Task summary'=>'',
+'Planned end|Label in Task summary'=>'',
+'Closed|Label in Task summary'=>'',
+'Created|Label in Task summary'=>'',
+'Modified|Label in Task summary'=>'',
+'View previous %s versions'   =>'',
+'Logged effort|Label in task-summary'=>'',
+'Publish to|Label in Task summary'=>'',
+'Set to Open'                 =>'',
+'Further Documentation'       =>'',
+'Attached files'              =>'',
+'Your feedback is requested by %s.'=>'',
+'Please edit or comment this item.'=>'',
+'This task has no description. Doubleclick to edit.'=>'',
+'Severity|label in issue-reports'=>'',
+'Reproducibility|label in issue-reports'=>'',
+'Platform'                    =>'',
+'OS'                          =>'',
+'Build'                       =>'',
+'Steps to reproduce|label in issue-reports'=>'',
+'Expected result|label in issue-reports'=>'',
+'Suggested Solution|label in issue-reports'=>'',
+'Issue report'                =>'',
+'Sub tasks'                   =>'',
+'Open tasks for milestone'    =>'',
+'No open tasks for this milestone'=>'',
+'Resolved tasks|Block title'  =>'',
+'1 Comment'                   =>'',
+'%s Comments'                 =>'',
+'Comment / Update'            =>'',
+'Update'                      =>'',
+'Public to'                   =>'',
+'Edit this task'              =>'',
+'This topic does not have any text yet.\nDoubleclick here to add some.'=>'',
+'Request feedback'            =>'',
+'attach new'                  =>'',
+'Edit Version|page type'      =>'',
+'Edit Version|page title'     =>'',
+'New Version|page title'      =>'',
+'Could not get version'       =>'',
+'Could not get project of version'=>'',
+'Select some versions to delete'=>'',
+'Failed to delete %s versions'=>'',
+'Moved %s versions to trash'  =>'',
+'Version|page type'           =>'',
+'Edit this version'           =>'',
+'Mark this version as bookmark'=>'',
+'<b>%s</b> is not a known format for date.'=>'',
+'Please copy the text'        =>'',
+'Sorry. To reduce the efficiency of spam bots, guests have to copy the text'=>'',
+'Wiki format'                 =>'',
+'Submit'                      =>'',
+'Cancel'                      =>'',
+'Apply'                       =>'',
+'for milestone %s'            =>'',
+'changed today'               =>'',
+'changed since yesterday'     =>'',
+'changed since <b>%d days</b>'=>'',
+'changed since <b>%d weeks</b>'=>'',
+'created by %s'               =>'',
+'created by unknown'          =>'',
+'modified by %s'              =>'',
+'modified by unknown'         =>'',
+'item #%s has undefined type' =>'',
+'do...'                       =>'',
+'Tasks|short column header'   =>'',
+'Number of open tasks is hilighted if shown home.'=>'',
+'Status|Short status column header'=>'',
+'Status is %s'                =>'',
+'Item is published to'        =>'',
+'Pub|column header for public level'=>'',
+'Publish to %s'               =>'',
+'Select / Deselect'           =>'',
+'File'                        =>'',
+'Other Persons|page option'   =>'',
+'without client|short for client'=>'',
+'Tasks|Project option'        =>'',
+'Topics|Project option'       =>'',
+'Milestones|Project option'   =>'',
+'Versions|Project option'     =>'',
+'Files|Project option'        =>'',
+'Efforts|Project option'      =>'',
+'Calculation|Project option'  =>'',
+'Changes|Project option'      =>'',
+'Persons|page option'         =>'',
+'Companies|page option'       =>'',
+'Active'                      =>'',
+'Templates'                   =>'',
+'%b %e, %Y|strftime format string'=>'',
+'%I:%M%P|strftime format string'=>'',
+'%a %b %e, %Y %I:%M%P|strftime format string'=>'',
+'new since last logout'       =>'',
+'%s weeks'                    =>'',
+'%s days'                     =>'',
+'%s hours'                    =>'',
+'%s min'                      =>'',
+'Yesterday'                   =>'',
+'never'                       =>'',
+'just now'                    =>'',
+'%smin ago'                   =>'',
+'1 hour ago'                  =>'',
+'%sh ago'                     =>'',
+'%s days ago'                 =>'',
+'%s months ago'               =>'',
+'%s years ago'                =>'',
+'estimated %s hours'          =>'',
+'%s hours max'                =>'',
+'estimated %s days'           =>'',
+'%s days max'                 =>'',
+'estimated %s weeks'          =>'',
+'%s weeks max'                =>'',
+'%2.0f%% completed'           =>'',
+'%A, %B %e|strftime format string'=>'',
+'Home|section'                =>'',
+'<span class=accesskey>H</span>ome'=>'',
+'<span class=accesskey>P</span>rojects'=>'',
+'Your related People'         =>'',
+'Your related Companies'      =>'',
+'<span class=accesskey>S</span>earch:&nbsp;'=>'',
+'Click Tab for complex search or enter word* or Id and hit return. Use ALT-S as shortcut. Use `Search!` for `Good Luck`'=>'',
+'This page requires java-script to be enabled. Please adjust your browser-settings.'=>'',
+'you are'                     =>'',
+'Documentation and Discussion about this page'=>'',
+'Help'                        =>'',
+'rendered in'                 =>'',
+'memory used'                 =>'',
+'%s queries / %s fields '     =>'',
+'Update|wiki change marker'   =>'',
+'New|wiki change marker'      =>'',
+'Deleted|wiki change marker'  =>'',
+'from'                        =>'',
+'Link to this chapter'        =>'',
+'Item #%s is not an image'    =>'',
+'Image details'               =>'',
+'Unknown File-Id:'            =>'',
+'Wiki-format: <b>%s</b> is not a valid link-type'=>'',
+'Unkwown item %s'             =>'',
+'Cannot link to item #%s of type %s'=>'',
+'No task matches this name exactly'=>'',
+'This task seems to be related'=>'',
+'No item excactly matches this name.'=>'',
+'List %s related tasks'       =>'',
+'identical'                   =>'',
+'No item matches this name. Create new task with this name?'=>'',
+'No item matches this name...'=>'',
+'No item matches this name'   =>'',
+'Warning: Could not find wiki chapter'=>'',
+'Your IP-Address changed. Please relogin.'=>'',
+'Your account has been disabled. '=>'',
+'Invalid anonymous user'      =>'',
+'Anonymous account has been disabled. '=>'',
+'Unable to automatically detect client time zone'=>'',
+'Could not set cookie.'       =>'',
+'Sorry. Authentication failed'=>'',
+'to|very short for assigned tasks TO...'=>'',
+'Latest comment:'             =>'',
+'comment:'                    =>'',
+'completed'                   =>'',
+'Approve Task'                =>'',
+'approved'                    =>'',
+'reopened'                    =>'',
+'is blocked'                  =>'',
+'moved'                       =>'',
+'renamed'                     =>'',
+'edit wiki'                   =>'',
+'changed:'                    =>'',
+'commented'                   =>'',
+'assigned'                    =>'',
+'attached'                    =>'',
+'attached file to'            =>'',
+'changed File'                =>'',
+'restore'                     =>'',
+'deleted File'                =>'',
+'Operation aborted (%s)'      =>'',
+'Operation aborted with an fatal error (%s).'=>'',
+'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'',
+'Operation aborted with an fatal data-base structure error (%s). This may have happened do to an inconsistency in your database. We strongly suggest to rewind to a recent back-up.'=>'',
+'???'                         =>'',
+'Sorry, but the entered number did not match'=>'',
+'No element selected? (could not find id)|Message if a function started without items selected'=>'',
+'only one item expected.'     =>'',
+'en_US.utf8,en_US,enu|list of locales'=>'',
+'template|status name'        =>'',
+'undefined|status_name'       =>'',
+'upcoming|status_name'        =>'',
+'new|status_name'             =>'',
+'open|status_name'            =>'',
+'blocked|status_name'         =>'',
+'done?|status_name'           =>'',
+'approved|status_name'        =>'',
+'closed|status_name'          =>'',
+'Member|profile name'         =>'',
+'Admin|profile name'          =>'',
+'Project manager|profile name'=>'',
+'Developer|profile name'      =>'',
+'Artist|profile name'         =>'',
+'Tester|profile name'         =>'',
+'Client|profile name'         =>'',
+'Client trusted|profile name' =>'',
+'Guest|profile name'          =>'',
+'undefined|pub_level_name'    =>'',
+'private|pub_level_name'      =>'',
+'suggested|pub_level_name'    =>'',
+'internal|pub_level_name'     =>'',
+'open|pub_level_name'         =>'',
+'client|pub_level_name'       =>'',
+'client_edit|pub_level_name'  =>'',
+'assigned|pub_level_name'     =>'',
+'owned|pub_level_name'        =>'',
+'priv|short for public level private'=>'',
+'int|short for public level internal'=>'',
+'pub|short for public level client'=>'',
+'PUB|short for public level client edit'=>'',
+'A|short for public level assigned'=>'',
+'O|short for public level owned'=>'',
+'Enable tasks|Project setting'=>'',
+'Enable files|Project setting'=>'',
+'Enable efforts|Project setting'=>'',
+'Enable milestones|Project setting'=>'',
+'Enable versions|Project setting'=>'',
+'Enable bugreports|Project setting'=>'',
+'Enable news|Project setting' =>'',
+'Only PM may close tasks|Project setting'=>'',
+'Create projects|a user right'=>'',
+'Edit projects|a user right'  =>'',
+'Delete projects|a user right'=>'',
+'Edit project teams|a user right'=>'',
+'View anything|a user right'  =>'',
+'Edit anything|a user right'  =>'',
+'Create Persons|a user right' =>'',
+'Create & Edit Persons|a user right'=>'',
+'Delete Persons|a user right' =>'',
+'View all Persons|a user right'=>'',
+'Edit User Rights|a user right'=>'',
+'Edit own profile|a user right'=>'',
+'Create Companies|a user right'=>'',
+'Edit Companies|a user right' =>'',
+'Delete Companies|a user right'=>'',
+'View all Companies|a user right'=>'',
+'undefined|priority'          =>'',
+'urgent|priority'             =>'',
+'high|priority'               =>'',
+'normal|priority'             =>'',
+'lower|priority'              =>'',
+'lowest|priority'             =>'',
+'Team Member'                 =>'',
+'Employment'                  =>'',
+'Issue'                       =>'',
+'Task assignment'             =>'',
+'Nitpicky|severity'           =>'',
+'Feature|severity'            =>'',
+'Trivial|severity'            =>'',
+'Text|severity'               =>'',
+'Tweak|severity'              =>'',
+'Minor|severity'              =>'',
+'Major|severity'              =>'',
+'Crash|severity'              =>'',
+'Block|severity'              =>'',
+'Not available|reproducabilty'=>'',
+'Always|reproducabilty'       =>'',
+'Sometimes|reproducabilty'    =>'',
+'Have not tried|reproducabilty'=>'',
+'Unable to reproduce|reproducabilty'=>'',
+'done|Resolve reason'         =>'',
+'fixed|Resolve reason'        =>'',
+'works_for_me|Resolve reason' =>'',
+'duplicate|Resolve reason'    =>'',
+'bogus|Resolve reason'        =>'',
+'rejected|Resolve reason'     =>'',
+'deferred|Resolve reason'     =>'',
+'Not defined|release type'    =>'',
+'Not planned|release type'    =>'',
+'Upcomming|release type'      =>'',
+'Internal|release type'       =>'',
+'Public|release type'         =>'',
+'Without support|release type'=>'',
+'No longer supported|release type'=>'',
+'undefined|company category'  =>'',
+'client|company category'     =>'',
+'prospective client|company category'=>'',
+'supplier|company category'   =>'',
+'partner|company category'    =>'',
+'undefined|person category'   =>'',
+'- employee -|person category'=>'',
+'staff|person category'       =>'',
+'freelancer|person category'  =>'',
+'working student|person category'=>'',
+'apprentice|person category'  =>'',
+'intern|person category'      =>'',
+'ex-employee|person category' =>'',
+'- contact person -|person category'=>'',
+'client|person category'      =>'',
+'prospective client|person category'=>'',
+'supplier|person category'    =>'',
+'partner|person category'     =>'',
+'Task|Task Category'          =>'',
+'Bug|Task Category'           =>'',
+'Topic|Task Category'         =>'',
+'Event|Task Category'         =>'',
+'Folder|Task Category'        =>'',
+'Milestone|Task Category'     =>'',
+'Version|Task Category'       =>'',
+'never|notification period'   =>'',
+'ASAP|notification period'    =>'',
+'one day|notification period' =>'',
+'two days|notification period'=>'',
+'three days|notification period'=>'',
+'four days|notification period'=>'',
+'five days|notification period'=>'',
+'one week|notification period'=>'',
+'two weeks|notification period'=>'',
+'three weeks|notification period'=>'',
+'one month|notification period'=>'',
+'two months|notification period'=>'',
+'new|effort status'           =>'',
+'open|effort status'          =>'',
+'discounted|effort status'    =>'',
+'not chargeable|effort status'=>'',
+'balanced|effort status'      =>'',
+'Failure sending mail: %s'    =>'',
+'Streber Email Notification|notifcation mail from'=>'',
+'Updates at %s|notication mail subject'=>'',
+'Hello %s,|notification'      =>'',
+'with this automatically created e-mail we want to inform you that|notification'=>'',
+'since %s'                    =>'',
+'following happened at %s |notification'=>'',
+'Your account has been created.|notification'=>'',
+'Please set a password to activate it.|notification'=>'',
+'You have been assigned to projects:|notification'=>'',
+'Changed monitored items:|notification'=>'',
+'%s edited > %s'              =>'',
+'Unchanged monitored items:|notification'=>'',
+'%s (not touched since %s day(s))'=>'',
+'Project Updates'             =>'',
+'Forgot your password or how to log in?|notification'=>'',
+'Request a mail to change your account settings.|notification'=>'',
+'Thanks for your time|notication'=>'',
+'the management|notication'   =>'',
+'Click here:'                 =>'',
+'No news for <b>%s</b>'       =>'',
+'Your account at|notification'=>'',
+'Your account at %s is still active.|notification'=>'',
+'Your login name is|notification'=>'',
+'Please use this link to'     =>'',
+'update your account settings'=>'',
 
 
 );

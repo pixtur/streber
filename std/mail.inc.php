@@ -16,14 +16,16 @@ class Notifier
 
     /**
     * go through all accounts and collect information
+    *
+    * returns array of count of... [$num_notification_sent, $num_warnings]
     */
     public function sendNotifications()
     {
         global $PH;
         $persons=Person::getPersons(array('visible_only'=>false, 'can_login'=>true));
 
-        $notificationsSent = 0;
-        $warnings = 0;
+        $num_notifications_sent = 0;
+        $num_warnings = 0;
         foreach($persons as $p) {
             if($p->settings & USER_SETTING_NOTIFICATIONS) {
                 if($p->office_email  || $p->personal_email )  {
@@ -39,10 +41,10 @@ class Notifier
                             $p->notification_last= gmdate("Y-m-d H:i:s");
                             $p->update();
                             if($result === true) {
-                                $notificationsSent++;
+                                $num_notifications_sent++;
                             }
                             else {
-                                $warnings++;
+                                $num_warnings++;
                                 new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
                             }
                         }
@@ -50,7 +52,7 @@ class Notifier
                 }
             }
         }
-        return array($notificationsSent, $warnings);
+        return array($num_notifications_sent, $num_warnings);
     }
 
 
