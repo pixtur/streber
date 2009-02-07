@@ -129,6 +129,8 @@ undefined keys:
 'Reverted all changes (%s) of user %s'=>'',
 'newly created items by this user remain unaffected.'=>'',
 'New project from'            =>'',
+'template'                    =>'',
+'scratch'                     =>'',
 'Topics'                      =>'',
 'No topics yet'               =>'',
 'all|Filter preset'           =>'',

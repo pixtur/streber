@@ -602,7 +602,7 @@ class ListBlockCol_ItemModified extends ListBlockCol
 						$str_url = $person->getLink();
 					}
 				}
-				print '<td><span class=date>'. $str_date .'</span><br><span class="sub who">by '. $str_url .'</span></td>';
+				print '<td><span class=date>'. $str_date .'</span><br><span class="sub who">'.__('by').' '. $str_url .'</span></td>';
 			}
 			else{
 				print "<td class='nowrap'>&nbsp;</td>";

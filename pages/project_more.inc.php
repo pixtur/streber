@@ -59,12 +59,12 @@ function projList()
         
         $page->add_function(new PageFunction(array(
             'target'=> 'projListTemplates',
-            'name'  => 'template',
+            'name'  => __("template"),
             'icon'  => 'new',
         )));
         $page->add_function(new PageFunction(array(
             'target'=> 'projNew',
-            'name'  => 'scratch',
+            'name'  => __("scratch"),
             'icon'  => 'new',
         )));
 

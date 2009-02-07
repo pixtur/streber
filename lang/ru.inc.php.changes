@@ -9,4 +9,6 @@ undefined keys:
 'Skipped recently editted item #%s: <b>%s<b>'=>'',
 'Reverted all changes (%s) of user %s'=>'',
 'newly created items by this user remain unaffected.'=>'',
+'template'                    =>'',
+'scratch'                     =>'',
 'Link to this chapter'        =>'',

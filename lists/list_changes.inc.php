@@ -129,7 +129,7 @@ class ListBlockCol_ChangesDate extends ListBlockCol
         if($change_line instanceof ChangeLine) {
             if($change_line->person_by) {
                 if($person= Person::getVisibleById($change_line->person_by)) {
-                    print '<td><span class=date>'.renderDateHtml($change_line->timestamp) .'</span><br><span class="sub who">by '. $person->getLink() .'</span></td>';
+                    print '<td><span class=date>'.renderDateHtml($change_line->timestamp) .'</span><br><span class="sub who">'.__('by').' '. $person->getLink() .'</span></td>';
                     return;
                 }
 

@@ -234,6 +234,8 @@ undefined keys:
 'Reverted all changes (%s) of user %s'=>'',
 'newly created items by this user remain unaffected.'=>'',
 'New project from'            =>'',
+'template'                    =>'',
+'scratch'                     =>'',
 'modified by me'              =>'',
 'modified by others'          =>'',
 'Topics'                      =>'',

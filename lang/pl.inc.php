@@ -2074,7 +2074,9 @@ $g_lang_table= array(
 'Bookmark: "%s"'              =>'Zakładka: "%s"',  # line 391
 
 ### ../pages/project_more.inc.php   ###
-'New project from'            =>'Nowy projekt z',  # line 57
+'New project from'            =>'Nowy projekt',  # line 57
+'template'                    =>'z szablonu',
+'scratch'                     =>'od zera',
 'New Topic'                   =>'Nowy temat',  # line 1093
 'Topics'                      =>'Tematy',  # line 1115
 'No topics yet'               =>'Nie ma jeszcze żadnych tematów',  # line 1145

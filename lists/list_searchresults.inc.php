@@ -122,7 +122,7 @@ class ListBlockCol_SearchResultModified extends ListBlockCol
 
                     if($person= Person::getVisibleById($r->item->modified_by)) {
 
-                		print '<td><span class=date>'.renderDateHtml($r->item->modified) .'</span><br><span class="sub who">by '. $person->getLink() .'</span></td>';
+                		print '<td><span class=date>'.renderDateHtml($r->item->modified) .'</span><br><span class="sub who">'.__('by').' '. $person->getLink() .'</span></td>';
                 		return;
                     }
 
