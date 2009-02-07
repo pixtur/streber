@@ -142,7 +142,7 @@ class ListBlock_files extends ListBlock
         $this->add_blockFunction(new BlockFunction(array(
             'target'=>'changeBlockStyle',
             'key'=>'list',
-            'name'=>'List',
+            'name'=>__('List','List sort mode'),
             'params'=>array(
                 'style'=>'list',
                 'block_id'=>$this->id,
@@ -154,7 +154,7 @@ class ListBlock_files extends ListBlock
         $this->groupings= new BlockFunction_grouping(array(
             'target'=>'changeBlockStyle',
             'key'=>'grouped',
-            'name'=>'Grouped',
+            'name'=>__('Grouped','List sort mode'),
             'params'=>array(
                 'style'=>'grouped',
                 'block_id'=>$this->id,

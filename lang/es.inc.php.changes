@@ -193,6 +193,8 @@ undefined keys:
 'Latest comment:'             =>'',
 'changed File'                =>'',
 'deleted File'                =>'',
+'Warning'                     =>'',
+'Hint'                        =>'',
 '???'                         =>'',
 'Enable tasks|Project setting'=>'',
 'Enable files|Project setting'=>'',

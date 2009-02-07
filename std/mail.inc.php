@@ -388,7 +388,7 @@ class Notifier
                         $updates_txt.= $file->name;                        
                     }
 
-                    $updates_html.= '<br><span class=details>';		# invisible user
+                    $updates_html.= '<br><span class="details">';		# invisible user
                     $updates_txt.= "\r\n";		# invisible user
                     
                     ### what...
@@ -449,11 +449,11 @@ class Notifier
         ### footer ####
         {
             $message_html.=
-              "<br>\r\n"
+              "<br><span class=\"details\">\r\n"
               .__('Forgot your password or how to log in?','notification'). '<br>'
               . "<a href='$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}'>"
               . __('Request a mail to change your account settings.','notification')
-              . "</a>"
+              . "</a></span>"
               . "."
               . "<br>\r\n"
               . "<br>\r\n"

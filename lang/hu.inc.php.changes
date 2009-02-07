@@ -633,6 +633,8 @@ undefined keys:
 'approved'                    =>'',
 'changed File'                =>'',
 'deleted File'                =>'',
+'Warning'                     =>'',
+'Hint'                        =>'',
 'Operation aborted (%s)'      =>'',
 'Operation aborted with an fatal error (%s).'=>'',
 'Operation aborted with an fatal error which was cause by an programming error (%s).'=>'',

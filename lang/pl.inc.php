@@ -2128,7 +2128,7 @@ $g_lang_table= array(
 'Updates at %s|notication mail subject'=>'Powiadomienie z %s',  # line 105
 'no mail for person|notification'=>'brak maila do osoby', #line 112
 'Hello %s,|notification'      =>'Witaj %s,',  # line 117
-'with this automatically created e-mail we want to inform you that|notification'=>'w tym automatycznie generowanym mailu pragniemy poinformować Ciebie, że',  # line 119
+'with this automatically created e-mail we want to inform you that|notification'=>'pragniemy poinformować Ciebie w tym automatycznie wygenerowanym mailu, że',  # line 119
 'since %s'                    =>'od %s',  # line 123
 'following happened at %s |notification'=>'wystąpiły następujące zmiany w serwisie %s ',  # line 126
 'Your account has been created.|notification'=>'Twoje konto zostało utworzone.',  # line 133
@@ -2147,7 +2147,7 @@ $g_lang_table= array(
 'If you do not want to get further notifications or you forgot your password feel free to|notification'=>'Jeśli nie chcesz otrzymywać następnych powiadomień o zmianach lub zapomniałeś swojego hasła dostępu, możesz',  # line 312
 '%s (not touched since %s day(s))'=>'%s (nie modyfikowane od %s dni)',  # line 322
 'Request a mail to change your account settings.|notification'=>'Zażądaj e-maila w celu zmiany ustawień Twojego konta.|notification',  # line 455
-'Forgot your password or how to log in?|notification'=>'Zapomniałeś swojego hasła lub jak zalogować się?|notification',  # line 464
+'Forgot your password or how to log in?|notification'=>'Zapomniałeś swojego hasła lub nie wiesz, jak zalogować się?|notification',  # line 464
 'Click here:'                 =>'Kliknij tutaj:',  # line 465
 'Your account at %s is still active.|notification'=>'Twoje konto pod adresem %s jest nadal aktywne.', #line 470
 'Your login name is|notification'=>'Twój login to', #line 471
@@ -2176,6 +2176,11 @@ $g_lang_table= array(
 'Skipped recently editted item #%s: <b>%s<b>'=>'Pominięto poprzednio wyedytowaną pozycję #%s: <b>%s<b>',
 'Reverted all changes (%s) of user %s'=>'Przywrócenie wszystkich zmian (%s) użytkownika %s',
 'newly created items by this user remain unaffected.'=>'pozycje nowo stworzone przez tego użytkownika pozostaną nie zmienione.',
+
+'Note' =>'Uwaga',
+'Warning'=>'Ostrzeżenie',
+'Error'=>'Błąd',
+'Hint' =>'Podpowiedź',
 
 );
 

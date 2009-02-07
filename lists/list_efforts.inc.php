@@ -91,7 +91,7 @@ class ListBlock_efforts extends ListBlock
 			'target'=>'changeBlockStyle',
 			'key'=>'list',
 			'default'=>true,
-			'name'=>'List',
+			'name'=>__('List','List sort mode'),
 			'params'=>array(
 				'style'=>'list',
 				'block_id'=>$this->id,
@@ -102,7 +102,7 @@ class ListBlock_efforts extends ListBlock
 		$this->groupings= new BlockFunction_grouping(array(
 			'target'=>'changeBlockStyle',
 			'key'=>'grouped',
-		     'name'=>'Grouped',
+		     'name'=>__('Grouped','List sort mode'),
 		     'params'=>array(
 			   'style'=>'grouped',
 			   'block_id'=>$this->id,

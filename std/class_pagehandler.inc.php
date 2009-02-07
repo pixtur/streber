@@ -100,10 +100,10 @@ class PageHandleFunc extends PageHandle
 * - FeedbackMessages have different types and can be overwritten by styles
 */
 
-define('MESSAGE_NOTE',  'Note');
-define('MESSAGE_WARNING', 'Warning');
-define('MESSAGE_ERROR', 'Error');
-define('MESSAGE_HINT',  'Hint');
+define('MESSAGE_NOTE',  __('Note'));
+define('MESSAGE_WARNING', __('Warning'));
+define('MESSAGE_ERROR', __('Error'));
+define('MESSAGE_HINT',  __('Hint'));
 
 class FeedbackMessage extends BaseObject
 {
