@@ -1,5 +1,5 @@
 <?php if(!function_exists('startedIndexPhp')) { header("location:../index.php"); exit();}
-require_once ("./db/db.inc.php");
+require_once(confGet('DIR_STREBER') . "db/db.inc.php");
 # streber - a php based project management system
 # Copyright (c) 2005 Thomas Mann - thomas@pixtur.de
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
