@@ -73,7 +73,7 @@ class Notifier
         $information_count = 0;
         $from_domain = confGet('SELF_DOMAIN');
         $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-
+		
         /**
         * remove script name if clean urls.
         */
@@ -113,7 +113,7 @@ class Notifier
         }
 
 		### subject ###
-		$subject = sprintf(__('Updates at %s','notication mail subject'), confGet('SELF_DOMAIN'));
+		$subject = sprintf(__('Updates at %s','notification mail subject'), confGet('SELF_DOMAIN'));
 		
 		### message ###
         $message_txt= '';
@@ -369,6 +369,7 @@ class Notifier
                     ### task
                     if($c->item && $c->item->type == ITEM_TASK) {
                         $task= $c->item;
+                        //@TODO is to expensive to call this function in a for each loop. I suggest a local variable at mail.inc.php#line76
                         if(confGet('USE_MOD_REWRITE')) {
                 		  $updates_html.= "<a href='$url{$task->id}'>". asHtml($task->name). "</a>";
                 		}
@@ -457,16 +458,16 @@ class Notifier
               . "."
               . "<br>\r\n"
               . "<br>\r\n"
-              .__('Thanks for your time','notication') . "<br>\r\n"
-              .__('the management', 'notication') . "\r\n";
+              .__('Thanks for your time','notification') . "<br>\r\n"
+              .__('the management', 'notification') . "\r\n";
 
             $message_txt.= ''
               .__('Forgot your password or how to log in?','notification'). ' '
               .__("Click here:") . ' ' . "$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}"
               . "\n"
               . "\n"
-              .'  ' . __('Thanks for your time','notication') . "\n"
-              .'  ' . __('the management', 'notication');
+              .'  ' . __('Thanks for your time','notification') . "\n"
+              .'  ' . __('the management', 'notification');
 
         }
 
@@ -579,6 +580,7 @@ class Notifier
         setLang($person->language);
 
         ### from-address  ###
+        //@TODO this must display APP_NAME title.
         $from = __('Streber Email Notification','notifcation mail from') . " <do-not-reply@".$from_domain.">";
 
         ### reply-addres? ###
@@ -628,8 +630,8 @@ class Notifier
             {
                 $message.= "<br>\r\n"
                 ."<br>\r\n"
-                .__('Thanks for your time','notication') . "<br>\r\n"
-                .__('the management', 'notication') . "\r\n";
+                .__('Thanks for your time','notification') . "<br>\r\n"
+                .__('the management', 'notification') . "\r\n";
             }
 
             $message.="\r\n"
