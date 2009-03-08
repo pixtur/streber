@@ -12,7 +12,7 @@
 
 require_once("db/class_task.inc.php");
 require_once("db/class_project.inc.php");
-require_once("db/class_version.inc.php");
+#require_once("db/class_version.inc.php");
 require_once("render/render_list.inc.php");
 
 /**
