@@ -1517,6 +1517,7 @@ class DbProjectItem extends DbItem {
     
     /**
     * internal function to add update markers to wiki texts
+    * these markers will later be replaced by render_wiki
     */
     public function getTextfieldWithUpdateNotes($fieldname)
     {
@@ -1569,13 +1570,53 @@ class DbProjectItem extends DbItem {
                     $buffer.= join("\n", $do->orig);
                 }
                 else if($do->type == 'add') {
-                    $buffer.= "[added]" . join("\n", $do->closing) . "[/added]\n";
+                    $buffer.= "\n[added]" . join("\n", $do->closing) . "[/added]\n";
                 }
                 else if($do->type =='delete') {
-                    $buffer.= "[deleted something]\n";
+                    $buffer.= "\n[deleted something]\n";
                 }
                 else if($do->type =='change') {
-                    $buffer.= "[changed]" . join("\n", $do->closing) . "[/changed]\n";
+
+                    ### render word level differences
+    		        $wld= new WordLevelDiff($do->orig, $do->closing);
+    		        $buffer_org ='';
+    		        $buffer_new ='';
+    		        foreach($wld->edits as $e) {
+    		            switch($e->type) {
+    		                case 'copy':
+    		                    $orig= implode('',$e->orig);
+    		                    #$buffer_org.= asHtml($orig);
+    		                    $buffer_new.= asHtml($orig);
+    		                    break;
+
+    		                case 'add':
+    		                    #$buffer_org.= '<span class=add_place> </span>';
+    		                    $closing=implode('',$e->closing);
+    		                    $buffer_new.= '[added word]'.asHtml($closing).'[/added word]';
+    		                    break;
+
+    		                case 'change':
+    		                    $orig= implode('',$e->orig);
+    		                    $closing= implode('',$e->closing);
+    		                    #$buffer_org.= '<span class=changed>'.asHtml($orig).'</span>';
+    		                    $buffer_new.= '[deleted word]'.asHtml($orig).'[/deleted word]';
+    		                    $buffer_new.= '[added word]'.asHtml($closing).'[/added word]';
+    		                    break;
+
+    		                case 'delete':
+    		                    $orig= implode('',$e->orig);
+
+    		                    $buffer_new.= '[deleted word]' . asHtml($orig) . '[/deleted word]';
+    		                    break;
+
+    		                default:
+    		                    trigger_error("undefined edit work edit", E_USER_WARNING);
+    		                    break;
+
+    		            }
+    		        }
+                    #$buffer.= "\n[changed]" . join("\n", $do->closing) . "[/changed]\n";
+                    $buffer.= "\n[changed]" . $buffer_new . "[/changed]\n";
                 }
             }
         }

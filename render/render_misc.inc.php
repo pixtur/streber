@@ -1186,6 +1186,7 @@ function renderFilesize($bytes)
 
 /**
 * @@@ move this somewhere else...
+* use difference_engine to render differences between two versions of a texts
 */
 function render_changes($text_org,$text_new)
 {

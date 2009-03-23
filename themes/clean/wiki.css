@@ -281,6 +281,7 @@ div.wiki .edit_chapter:hover {
     background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
 }
 
+/* UPDATE MARKERS */
 div.wiki span.updatemarker {
   background-color: #ff9000; /*#E57700;*/
   color: white;
@@ -290,4 +291,24 @@ div.wiki span.updatemarker {
   font-weight: bold;
   font-size: 70%;
   -moz-border-radius: 4px;
+}
+
+
+/* UPDATE MARKERS */
+div.wiki span.wiki_word_change.added {
+  border: 1px solid #ff9000;
+  -moz-border-radius: 3px 3px 3px 3px;
+}
+div.wiki span.wiki_word_change.added span.marker {
+  border-bottom: 1px solid #ff9000;
+  color: white;
+  background-color: #ff9000; /*#E57700;*/  
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  -padding-left:  0.02em;
+}
+
+div.wiki span.wiki_word_change.deleted {
+  color: #ff9000;
+  text-decoration: line-through;
 }

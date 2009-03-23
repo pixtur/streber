@@ -215,6 +215,10 @@ class FormatBlockLeadingSpaces extends FormatBlock
 * highlight changes
 * [added]...[/added]
 * [changed]...[/changed]
+* [deleted something]
+* [deleted word] .. [/deleted word]
+* [changed word] .. [/changed word]
+* [added word] .. [/added word]
 */
 class FormatBlockChangemarks extends FormatBlock
 {
@@ -235,6 +239,20 @@ class FormatBlockChangemarks extends FormatBlock
         elseif ($this->str == "deleted something") {
             return "<span class='updatemarker deleted'>" . __('Deleted','wiki change marker') . "</span>";
         }
+        elseif ($this->str == "added word") {
+            return "<span class='wiki_word_change added'>";
+        }
+        elseif ($this->str == "/added word") {
+            return "</span>";
+        }
+        elseif ($this->str == "deleted word") {
+            return "<span class='wiki_word_change deleted'>";
+        }
+        elseif ($this->str == "/deleted word") {
+            return "</span>";
+        }
+
+
     }
 
     static function parseBlocks(&$blocks)
@@ -249,8 +267,8 @@ class FormatBlockChangemarks extends FormatBlock
                 $found= false;
                 while($text) {
 
-                    if(preg_match("/^(.*?)\[(\/?changed|\/?added|deleted something)\](.*)/s", $text, $matches)) {
-                        $blocks_new[]= new FormatBlock($matches[1]."\n");
+                    if(preg_match("/^(.*?)\[(\/?changed|\/?added|deleted something|\/?added word|\/?changed word|\/?deleted word)\](.*)/s", $text, $matches)) {
+                        $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockChangemarks($matches[2]);
                         $text= $matches[3];
                         $found= true;
