@@ -654,8 +654,6 @@ class File extends DbProjectItem
                 readfile_chunked($filepath);
             }
             else {
-                #ob_clean();
-                #flush();
                 readfile($filepath);                
             }
             return;
@@ -668,14 +666,34 @@ class File extends DbProjectItem
             log_message("file::viewAsImage($this->id) gd not installed",LOG_MESSAGE_MISSING_FILES);
             return; 
         }
+        
+        ### check if cached file exists
+        $md5= md5( http_build_query(array('filepath'=> $filepath,
+                        'new_width' => $new_width,
+                        'new_height' => $new_height,
+                    )));
+        $cached_filepath= confGet('DIR_IMAGE_CACHE') . "/" . $md5;
 
+        if( file_exists($cached_filepath )) {
+            header('Content-Length: '   . filesize($cached_filepath));
+            header('Content-Type: '     . $this->mimetype);
+            header("Content-Disposition: inline; filename= $this->org_filename");
+            header("Cache-Control: public");
+            header('Last-Modified: '    . gmdate("D, j M Y G:i:s T", strToClientTime($this->modified)));
+            readfile($cached_filepath);           
+            return;
+        }
+        
+        $image_new = NULL;
+
+        ### downscale
         if($this->mimetype == 'image/jpeg'
            ||
            $this->mimetype == 'image/jpg'
            ||
            $this->mimetype == 'image/pjpeg'
         ) {
-            header('Content-Type: '     . 'image/jpeg');
+            header('Content-Type: ' . 'image/jpeg');
             header("Cache-Control: public");
             header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
 
@@ -698,14 +716,11 @@ class File extends DbProjectItem
             else {
                 imagejpeg($image);
             }
-            return;
         }
         else if($this->mimetype == 'image/png' || $this->mimetype == 'image/x-png') {
             header('Content-Type: '     . $this->mimetype);
             header("Cache-Control: public");
             header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-
-            #header("Expires: Thu, 01 Dec 2010 16:00:00 GMT");
 
             $image=     imagecreatefrompng($filepath);
             $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
@@ -726,7 +741,6 @@ class File extends DbProjectItem
             else {
                 imagejpeg($image);
             }
-            return;
         }
         else if($this->mimetype == 'image/gif') {
             header('Content-Type: '     . 'image/gif');
@@ -751,10 +765,16 @@ class File extends DbProjectItem
             else {
                 imagejpeg($image);
             }
-            return;
         }
         else {
              return NULL;
+        }
+
+        ### write cached file
+        if($image_new) {
+            log_message("writing file $cached_filepath", LOG_MESSAGE_DEBUG);
+            imagejpeg( $image_new, $cached_filepath );
+            imagedestroy($image_new);
         }
     }
     

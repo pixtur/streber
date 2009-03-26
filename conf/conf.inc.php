@@ -25,6 +25,7 @@ $g_config= array(
     'INCLUDE_PATH'          => ".",
     'DIR_STREBER'           => "./",
     'DIR_TEMP'              => "./_tmp/",
+    'DIR_IMAGE_CACHE'       => "./_tmp/image_cache",
     'DIR_RSS'               => "./_rss/",
     'DIR_FILES'             => "./_files/",
     'DIR_SETTINGS'          => "./_settings/",
