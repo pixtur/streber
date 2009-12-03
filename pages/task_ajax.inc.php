@@ -28,7 +28,6 @@ function taskAjax()
 
         ### headline ###
 
-        echo "<h3>". asHtml($task->name)."</h3>";
 
         $editable= false;                           # flag, if this task can be edited
 
@@ -37,19 +36,13 @@ function taskAjax()
         }
         else if(!$task=Task::getVisibleById($task_id)) {
             echo "Failure";
+            return;
         }
+        echo "<h3>". asHtml($task->name)."</h3>";
 
-
-        if($editable) {
-            echo  wiki2html($task->description, $project, $task->id, 'description');
-        }
-        else {
-            echo  wiki2html($task->description, $project);
-        }
+        echo  wikifieldAsHtml($task, 'description');
     }
 }
-
-
 
 
 ?>

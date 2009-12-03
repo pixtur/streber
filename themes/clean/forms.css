@@ -1,0 +1,341 @@
+/*---- form --------------------------------------------------------*/
+div.form {
+    padding:10px 0px 0px 0px;
+    text-align:left;
+    margin:3px;
+    /*font-size:80%;*/
+    max-width:700px;
+}
+
+    .form input:focus, textarea:focus {
+        border-color:#000;
+    }
+
+    .form p {
+        padding:0px;
+        margin:0px;
+        color:#555;
+        clear:left;
+    }
+    .form  label {
+        /*font-size:100%;*/
+        width:19%;
+        display:block;
+        float:left;
+        text-align:right;
+        padding-top:4px;
+    }
+
+    .form p.invalid {
+        border:1px solid #d00;
+    }
+    .form p.invalid  label {
+        /*font-size:100%;*/
+        color: #d00;
+    }
+    .form p.text {
+        margin:1em 1em 1em 19% ;
+        color:#555;
+        clear:left;
+    }
+
+    .form .inp {
+        width:78%;
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        /*font-family:verdana;*/
+        -moz-border-radius:4px;
+    }
+
+    .form .inp.captcha{
+        clear:left;
+        width: 20%;
+    }
+
+    .form p.required input {
+        background-color:#ff8;
+    }
+    .form .invalid {
+        border-width:2px;
+        border-color:#f00;
+    }
+
+    .form .datetime .inp_date{
+        width:30%;
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        /*font-family:verdana;*/
+        -moz-border-radius:4px 1px 1px 4px;
+    }
+    .form .datetime .inp_time{
+        width:10%;
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        /*font-family:verdana;*/
+        -moz-border-radius:4px 1px 1px 4px;
+    }
+
+    .form .datetime .button_calendar {
+        font-size:0.06em;
+        padding:13px 9px 2px 9px;
+        -moz-border-radius:0px 0px 0px 0px;
+        background:#BBBBBB url(img/bg_button_calendar.gif);
+        background-repeat:no-repeat;
+        color:#bbb;
+        cursor:pointer;
+    }
+    .form .datetime .slider_time {
+        padding:13px 12px 2px 12px;
+        font-size:0.06em;
+        -moz-border-radius:3px 4px 4px 3px;
+        background:#BBB url(img/bg_slider_time.gif);
+        color:#bbb;
+        background-repeat:no-repeat;
+        cursor:move;
+        border-left:1px solid #EEEEFF;
+    }
+
+
+    .form .inp_dtime {
+        width:7%;
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        /*font-family:verdana;*/
+        -moz-border-radius:4px;
+    }
+
+    .form .date input {
+        width:20%;
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        /*font-family:verdana;*/
+        -moz-border-radius:4px;
+    }
+
+    .form .date .button {
+        border:1px solid #bbb;
+        /*vertical-align:center;*/
+        padding:1px 1px 1px 1px;
+        font-family:verdana;
+        -moz-border-radius:4px;
+        /*font-size:80%;*/
+        background-color:#ddd;
+        cursor:pointer;
+    }
+
+    .form .checker {
+        padding:2px 2px 1px 3px;
+        margin:5px 0px 2px 4px;
+        display:block;
+        vertical-align:bottom;
+
+    }
+
+
+
+
+    .form textarea {
+        width:78%;
+        border:1px solid #bbb;
+        padding:1px 2px 1px 3px;
+        margin:2px 0px 2px 4px;
+        /*font-size:100%;*/
+        /*font-family:verdana;*/
+        -moz-border-radius:4px;
+    }
+
+    .form select {
+        margin:2px 0px 2px 4px;
+        border:1px solid #bbb;
+        padding:0;;
+        border-width:1px;
+    }
+
+    .form span.checker {
+        clear:both;
+        width:auto;
+        margin:6px 0px 5px 4px;
+    }
+
+    .form span.checker label {
+        float:left;
+        display:inline;
+        padding:0px;
+        margin-left:6px;
+        text-align:left;
+        cursor:pointer;
+        width:auto;
+    }
+
+
+    .form span.checker input {
+
+        float:left;
+        padding:1px 2px 0px 3px;
+        margin:4px 0px 3px 115px;
+        display:inline;
+    }
+
+
+    /*--- button area -------------------*/
+    div.formbuttons  {
+
+        background-image:url(layout/bg_form_button_area.png);
+        background-repeat:repeat-x;
+        padding:3px 10px 3px 3px;
+
+        margin:10px 0px 0px 0px;
+        text-align:right;
+        /*border-top:1px solid #aaa;*/
+        clear:both;
+    }
+
+
+    .button  {
+        margin:0px 0px 0px 3px;
+        padding:2px 20px 1px 20px;
+        border:1px solid #8F8F8F;
+        background:#E9E9E9 url(layout/bg_button.png);
+        background-position: top left;
+        cursor:pointer;
+    }
+
+    .button:hover{
+        background-color:#fff;
+        background-image:none;
+    }
+    div.formbuttons .button:focus{
+        background-color:#fff;
+        background-image:none;
+    }
+
+    div.formbuttons .submit {
+        border:2px solid #8F8F8F;
+    }
+
+    div.formbuttons .apply,
+    div.formbuttons .cancel{
+        border:1px solid #8F8F8F;
+    }
+
+    /*div.formbuttons span.option {
+        clear:both;
+        margin:10px 10px 0px 0px;
+        border:0px solid #bbb;
+        line-height:30px;
+        float:left;
+    }
+
+    div.formbuttons > span.option {
+        line-height:0px;
+        padding:0px;
+    }
+
+
+    .form .formbuttons .option .checker {
+        margin-top:-5px;
+        float:left;
+        vertical-align:middle;
+    }
+    div.formbuttons > span.option > .checker {
+        margin:10px 5px 0px 0px;
+    }
+
+    div.formbuttons  span.option label {
+        width:auto;
+        cursor:pointer;
+    }
+    */
+
+    div.formbuttons div.formoptions {
+        text-align:left;
+        float:left;
+    }
+
+    div.formbuttons div.formoptions a {
+        margin-right:1em;
+
+    }
+
+    div.formbuttons div.formoptions label {
+        text-align:left;
+        display:inline;
+        float:left;
+        width:auto;
+        margin:0px;
+        padding:0px;
+    }
+
+    div.formbuttons div.formoptions input {
+        display:inline;
+        text-align:left;
+        margin:3px 3px 0px 0px;
+        float:left;
+
+    }
+
+
+    /* --- tabgroup ---- */
+    div.tabgroup {
+     clear:both;
+     margin:0.5em 1em;
+    }
+    div.tabgroup ul {
+     margin:0;
+     padding:0px 0px 0px 1em;
+     list-style:none;
+     background-image: url(layout/bg_tabgroup_tabrow.png);
+     background-repeat:repeat-x;
+     background-position:bottom;
+     height:1.8em;
+
+    }
+
+    div.tabgroup li.tab_header a {
+     color:#777;
+     border:0;
+     display:block;
+     padding:0em .6em;
+    }
+    div.tabgroup li.tab_header {
+      background-color:#eee;
+      float:left;
+      margin-right:.3em;
+      border:1px solid #D5D5D5;
+      border-width: 1px 1px 0px 1px;
+      height:1.65em;
+    }
+    div.tabgroup li.tab_header.Active {
+      background-color:#fff;
+      height:1.8em;
+
+    }
+
+
+    div.tabgroup li.Active a {
+     color:#000;
+    }
+    div.tabgroup li a:hover {
+     background-color:#fff;
+    }
+    div.tabgroup div.tab_body {
+     background-image: url(layout/bg_tabgroup_tabbody.png);
+     background-repeat:repeat-x;
+     background-position:top;
+     padding:0.8em .7em 1em 1em;
+     border:1px solid #d5d5d5;
+     border-width:  0px 1px 1px 1px;
+     clear:both;
+    }
+
+    div.tabgroup div.Hidden {
+        display:none;
+    }
+    div.tabgroup div.tab_body label {
+        position:relative;
+    }

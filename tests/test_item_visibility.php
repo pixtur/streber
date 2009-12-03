@@ -132,7 +132,7 @@ class TestItemVisibility extends WebTestCase {
         $this->assertTrue( $this->setField('comment_description','description <x>') );
         $this->assertTrue( $this->clickSubmit('Submit'));
 
-        $this->assertText( "Changed Topic");        
+        $this->assertText( "changed Topic");
         $this->assertText( "comment by bob");        
         $this->assertText( "description");        
 

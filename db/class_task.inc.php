@@ -645,6 +645,80 @@ foreach($filters_str as $fs=>$value) {
 
 
     /**
+    * returns assoc. array
+    */
+    function getMilestoneTasksSummary()
+
+    #function getMilestoneTasks()
+    {
+        ### get subtasks if expanded
+        $tasks_open= Task::getAll(array(
+            'for_milestone' => $this->id,
+            'status_min'    => STATUS_NEW,
+            'status_max'    => STATUS_COMPLETED,
+            'project'       => $this->project,
+            'show_folders'  => false,
+        ));
+        $tasks_closed= Task::getAll(array(
+            'for_milestone' => $this->id,
+            'status_min'    => STATUS_APPROVED,
+            'status_max'    => STATUS_CLOSED,
+            'project'       => $this->project,
+            'show_folders'  => false,
+        ));
+
+        $num_closed= count($tasks_closed);
+        $num_open  = count($tasks_open);
+
+        $num_completed= 0;
+        $sum_estimated_min= 0;
+        $sum_estimated_max= 0;
+        $sum_completion_min= 0;
+        $sum_completion_max= 0;
+
+        foreach($tasks_open  as $tt) {
+            $sum_estimated_min+= $tt->estimated;
+            $sum_estimated_max+= $tt->estimated_max
+                               ? $tt->estimated_max
+                               : $tt->estimated;
+
+            if($tt->status > STATUS_BLOCKED) {
+                $num_completed++;
+                $sum_completion_min+= $tt->estimated;
+                $sum_completion_max+= $tt->estimated_max;
+            }
+            else {
+                $sum_completion_min+= $tt->estimated * $tt->completion / 100;
+            }
+        }
+
+        foreach($tasks_closed  as $tt) {
+
+            $sum_estimated_min+= $tt->estimated;
+            $sum_estimated_max+= $tt->estimated_max
+                               ? $tt->estimated_max
+                               : $tt->estimated;
+
+            $sum_completion_min+= $tt->estimated;
+            $sum_completion_max+= $tt->estimated_max;
+        }
+
+        return array(
+            'tasks_closed'      => $tasks_closed,
+            'tasks_open'        => $tasks_open,
+            'num_closed'      => $num_closed,
+            'num_open'        => $num_open,
+            'num_completed'     => $num_completed,
+            'sum_estimated_min' => $sum_estimated_min,
+            'sum_estimated_max' => $sum_estimated_max,
+            'sum_completion_min' => $sum_completion_min,
+            'sum_completion_max' => $sum_completion_max,
+        );
+    }
+
+
+
+    /**
     * getHomeTasks($project=false)
     */
     public static function &getHomeTasks($order_by=" is_folder DESC,  parent_task, prio ASC, project, name")

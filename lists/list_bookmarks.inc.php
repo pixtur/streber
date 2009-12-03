@@ -43,8 +43,6 @@ class ListGroupingType extends ListGrouping {
 
 class ListBlock_bookmarks extends ListBlock
 {
-    public $bg_style = "bg_misc";
-
 	public function __construct($args=NULL)
     {
 		parent::__construct($args);

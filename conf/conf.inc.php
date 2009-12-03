@@ -16,8 +16,8 @@ require_once("defines.inc.php");
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.0902',
-    'STREBER_VERSION_DATE'  => '2009-12-21',
+    'STREBER_VERSION'       => '0.091',
+    'STREBER_VERSION_DATE'  => '2009-06-22',
 
     'APP_NAME'              => 'streber',
     'APP_PAGE_URL'          => 'http://www.streber-pm.org',
@@ -25,7 +25,7 @@ $g_config= array(
     'INCLUDE_PATH'          => ".",
     'DIR_STREBER'           => "./",
     'DIR_TEMP'              => "./_tmp/",
-    'DIR_IMAGE_CACHE'       => "./_tmp/image_cache",
+    'DIR_IMAGE_CACHE'       => "./_image_cache",
     'DIR_RSS'               => "./_rss/",
     'DIR_FILES'             => "./_files/",
     'DIR_SETTINGS'          => "./_settings/",
@@ -317,6 +317,7 @@ $g_config= array(
     * If you allow this, you should also give the id of a project to which they are assigned
     */
     'REGISTER_NEW_USERS'=> false,
+    'ENABLE_GUEST_ACCOUNT'=> false,
     'REGISTER_NEW_USERS_TO_PROJECT'=> 0,
 
     'SMTP'              =>'',
@@ -532,7 +533,7 @@ $g_user_profiles=array(
         'level_create'          => PUB_LEVEL_SUGGESTED,
         'level_edit'            => PUB_LEVEL_CLIENTEDIT,
         'level_view'            => PUB_LEVEL_CLIENT,
-        'level_delete'          => PUB_LEVEL_NOTHING,
+        'level_delete'          => PUB_LEVEL_OWNED,
         'level_reduce'          => PUB_LEVEL_NOTHING,
     ),
     PROFILE_CLIENT_TRUSTED=>array(
@@ -552,7 +553,6 @@ $g_user_profiles=array(
         'level_reduce'          => PUB_LEVEL_NOTHING,
     ),
 );
-
 
 $g_languages=array(
     'en'=>'English',
@@ -628,7 +628,6 @@ function confAppendToValue($var,$value) {
     }
     return true;
 }
-
 
 
 /**

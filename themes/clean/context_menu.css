@@ -1,0 +1,32 @@
+
+.contextMenus {
+    position:absolute;
+    background-color:#cfcfcf;
+    border-style:solid;
+    border-width:1px;
+    border-color:#EFEFEF #505050 #505050 #EFEFEF;
+    visibility:hidden;
+    padding:0px;
+    -moz-border-radius:0px 6px 6px 6px;
+    z-index:9000;
+}
+.menuItem {
+    cursor:pointer;
+    font-size:9pt;
+    font-family:Tahoma, Arial, Helvetica, sans-serif;
+    padding:2px 5px 2px 9px;
+    text-decoration:none
+}
+.menuItemOn {
+    cursor:pointer;
+    font-size:9pt;
+    padding:2px 5px 2px 9px;
+    font-family:Tahoma,Arial, Helvetica, sans-serif;
+    background-color:#008;
+    color:#fff;
+}
+    .contextEntry {
+        font-weight:bold;
+        color:darkred;
+        cursor:pointer
+    }

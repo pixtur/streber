@@ -241,6 +241,9 @@ function TaskNew()
         }
     }
 
+    $folder_as_docu= get('task_show_folder_as_documentation',
+        ($category == TCATEGORY_DOCU) ? 1 : 0);
+
     ### build dummy form ###
     $newtask= new Task(array(
         'id'        =>0,
@@ -251,7 +254,7 @@ function TaskNew()
         'category'  =>$category,
         'parent_task'=>$parent_task_id,
         'for_milestone'=>$for_milestone_id,
-        'show_folder_as_documentation' =>intval(get('task_show_folder_as_documentation'))
+        'show_folder_as_documentation' =>intval($folder_as_docu)
     ));
 
     ### set a valid create-level ###
@@ -359,7 +362,6 @@ function taskEdit($task=NULL)
         $block=new PageBlock(array(
             #'title' =>__('Edit Task'),
             'id'    =>'functions',
-            'reduced_header' => true,
         ));
         $block->render_blockStart();
 
@@ -718,7 +720,7 @@ function taskEdit($task=NULL)
             $tab->add($task->fields['show_folder_as_documentation']->getFormElement(&$task));
 
             ### public-level ###
-            if(($pub_levels=$task->getValidUserSetPublevel())
+            if(($pub_levels=$task->getValidUserSetPublicLevels())
                 && count($pub_levels)>1) {
                 $tab->add(new Form_Dropdown('task_pub_level',  __("Publish to"),$pub_levels,$task->pub_level));
             }
@@ -1166,7 +1168,7 @@ function taskEditSubmit()
     ### pub level ###
     if($pub_level=get('task_pub_level')) {
         if($task->id) {
-             if($pub_level > $task->getValidUserSetPublevel() ) {
+             if($pub_level > $task->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }
@@ -1478,12 +1480,17 @@ function taskEditSubmit()
         $PH->show('taskEdit',array('tsk'=>$newtask->id),$newtask);
     }
     else {
+
+        ### go to task, if new
+        if($tsk_id == 0) {
+            $PH->show('taskView',array('tsk' => $task->id));
+            exit();
+        }
         ### display taskView ####
-        if(!$PH->showFromPage()) {
+        else if(!$PH->showFromPage()) {
             $PH->show('home',array());
         }
     }
-
 }
 
 
@@ -1633,7 +1640,6 @@ function TasksMoveToFolder()
         ### write list of folders ###
         {
             $list= new ListBlock_tasks();
-            $list->reduced_header= true;
             $list->query_options['show_folders']= true;
             $list->query_options['folders_only']= true;
             $list->query_options['project']= $project->id;
@@ -2166,7 +2172,6 @@ function taskEditDescription($task=NULL)
 
         $block=new PageBlock(array(
             'id'    =>'edit',
-            'reduced_header' => true,
         ));
         $block->render_blockStart();
 
@@ -2306,8 +2311,6 @@ function TaskViewEfforts()
 
         ));
         $list= new ListBlock_efforts();
-        $list->reduced_header= true;
-
         $list->render_list(&$efforts);
     }
 
@@ -2500,7 +2503,7 @@ function TaskEditMultiple()
 
 
         ### public-level ###
-        if(($pub_levels=$task->getValidUserSetPublevel())
+        if(($pub_levels=$task->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             if(isset($different_fields['pub_level'])) {
                 $pub_levels[('-- ' . __('keep different'). ' --')]= '__dont_change__';
@@ -2820,7 +2823,7 @@ function taskEditMultipleSubmit()
             if($pub_level && $pub_level != '__dont_change__' && $pub_level != $task->pub_level) {
 
 
-               if($pub_level > $task->getValidUserSetPublevel() ) {
+               if($pub_level > $task->getValidUserSetPublicLevel() ) {
                    $PH->abortWarning('invalid data',ERROR_RIGHTS);
                }
                $task->pub_level= $pub_level;
@@ -3370,7 +3373,7 @@ function taskNoteOnPersonEditSubmit()
     ### pub level ###
     if($pub_level = get('task_pub_level')) {
         if($task->id) {
-             if($pub_level > $task->getValidUserSetPublevel() ) {
+             if($pub_level > $task->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }

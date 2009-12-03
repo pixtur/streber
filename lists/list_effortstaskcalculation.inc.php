@@ -15,7 +15,6 @@
  */
 class ListBlock_effortsTaskCalculation extends ListBlock
 {
-	public $bg_style = "bg_time";
 	
     public function __construct($args=NULL)
     {
@@ -23,7 +22,6 @@ class ListBlock_effortsTaskCalculation extends ListBlock
 
         global $PH;
         $this->id = 'effortstaskcalc';
-        $this->bg_style = 'bg_time';
         $this->no_items_html = __('no efforts booked yet');
 		$this->title =  __("Calculation on task");
 		$this->show_icons = true;
@@ -104,6 +102,7 @@ class ListBlock_effortsTaskCalculation extends ListBlock
 			
 			
     		$this->render_tfoot();
+            parent::render_blockEnd();            
         }
 	}
 }

@@ -42,7 +42,6 @@ class ListBlock_milestones extends ListBlock
         global $PH;
         $this->id='tasks';
         $this->class='milestones';
-        $this->bg_style='bg_projects';
         $this->no_items_html=NULL;
 		$this->title				= __("Milestones");
 
@@ -91,6 +90,7 @@ class ListBlock_milestones extends ListBlock
     */
     public function render_list(&$tasks=NULL)
     {
+
         global $PH;
         require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
@@ -187,6 +187,7 @@ class ListBlock_milestones extends ListBlock
 
             }
     		$this->render_tfoot();
+            parent::render_blockEnd();            
         }
     }
 
@@ -296,7 +297,6 @@ class ListBlockCol_MilestoneName extends ListBlockCol
     		$buffer.= $PH->getLink('taskToggleViewCollapsed',"<img src=\"" . getThemeFile("img/toggle_folder_open.gif") . "\">",array('tsk'=>$task->id),NULL, true)
     		. $html_link
     		. '<br>';
-            #. wiki2html($task->description, $task->project);
             
             $editable= false;
             if(Task::getEditableById($task->id)) {
@@ -304,14 +304,8 @@ class ListBlockCol_MilestoneName extends ListBlockCol
             }
                         
             $buffer.= "<div class=description>";
-            if($editable) {
-                $buffer.=  wiki2html($task->description, $task->project, $task->id, 'description');
-            }
-            else {
-                $buffer.=  wiki2html($task->description, $task->project);
-            }
+            $buffer.=  wikifieldAsHtml($task, 'description');
             $buffer.= "</div>";
-
 		}
         echo '<td>'. $buffer .'</td>';
    	}

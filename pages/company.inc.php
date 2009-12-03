@@ -724,7 +724,7 @@ function companyView()
         echo "<div class=text>";
 
         if($company->comments) {
-            echo wiki2html($company->comments);
+            echo wikifieldAsHtml($company, 'comments');
         }
         if($company->street) {
             echo '<div class=labeled><label>'. __('Adress') . ':</label>' . asHtml($company->street) .'</div>';
@@ -949,7 +949,6 @@ function companyEdit($company=NULL)
 
     $block=new PageBlock(array(
         'id'    =>'edit',
-        'reduced_header' => true,
     ));
     $block->render_blockStart();
 

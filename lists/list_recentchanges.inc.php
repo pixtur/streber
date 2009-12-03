@@ -49,23 +49,29 @@ function printRecentChanges($projects, $print_project_headlines= true)
         }
     }
 
-    if(0 == count($projects_with_changes)) {
-        $block=new PageBlock(array(
-            'title' =>__('Recent changes'),
-            'id'    =>'recentchanges'
-        ));
-        $block->render_blockStart();
-
-
-
+    ### Setup block ###
+    {
         if($auth->cur_user->settings & USER_SETTING_FILTER_OWN_CHANGES) {
-            echo "<div class=text>" . __("No changes by others") . "</div>";
-            $link_name = __("Also show your changes");
+            $link_name = __("Also show yours", "E.i. also show your changes");
         }
         else {
-            echo "<div class=text>" . __("No changes yet") . "</div>";
-            $link_name = __("Hide your changes");
+            $link_name = __("Hide yours", "E.i. Filter out your changes");
         }
+
+        $block=new PageBlock(array(
+            'title' =>__('Recent changes'),
+            'id'    =>'recentchanges',
+            'headline_links' => array($PH->getLink('personToggleFilterOwnChanges', $link_name , array('person'=> $auth->cur_user->id))),
+        ));
+        $block->render_blockStart();
+    }
+
+
+    ### no changes
+    if(0 == count($projects_with_changes)) {
+
+        echo "<div class=text>" . __("No changes yet") . "</div>";
+
 
         ### more options ###
         echo "<p class=more>";
@@ -73,13 +79,8 @@ function printRecentChanges($projects, $print_project_headlines= true)
         echo "</p>";
         $block->render_blockEnd();
     } 
+    ### some changes
     else {
-
-        $block=new PageBlock(array(
-            'title' =>__('Recent changes'),
-            'id'    =>'recentchanges'
-        ));
-        $block->render_blockStart();
         
         $changelines_per_project= confGet('MAX_CHANGELINES_PER_PROJECT');
         if(count($projects_with_changes) < confGet('MAX_CHANGELINES') / confGet('MAX_CHANGELINES_PER_PROJECT')) {
@@ -92,11 +93,12 @@ function printRecentChanges($projects, $print_project_headlines= true)
         */
         $printed_changelines = 0;
         foreach($projects_with_changes as $project) {
+            echo "<div class=post_list_entry>";
             
             $changes= $project_changes[$project->id];
 
             if($print_project_headlines) {
-                echo '<h4>'.  $PH->getLink('projView', $project->name, array('prj'=>$project->id)) . "</h4>";
+                echo '<h3>'. sprintf( __("%s project", "links to project in recent changes list"), $PH->getLink('projView', $project->name, array('prj'=>$project->id))) . "</h3>";
             }
 
             echo "<ul id='changesOnProject_$project->id'>";
@@ -121,7 +123,7 @@ function printRecentChanges($projects, $print_project_headlines= true)
             else {
                 $link_name = __("Hide your changes");
             }
-            echo $PH->getLink('personToggleFilterOwnChanges', $link_name , array('person'=> $auth->cur_user->id));
+            
 
             if($lines < count($changes)) {
                 echo " | ";
@@ -139,6 +141,7 @@ function printRecentChanges($projects, $print_project_headlines= true)
             if($printed_changelines >= confGet('MAX_CHANGELINES')) {
                 break;
             }
+            echo "</div>";
         }            
         $block->render_blockEnd();
     }

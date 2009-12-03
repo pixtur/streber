@@ -220,7 +220,6 @@ function TaskView()
         $block=new PageBlock(array(
             'title'=>__("Summary","Block title"),
             'id'=>'summary',
-            'reduced_header'=>true,
         ));
         $block->render_blockStart();
 
@@ -362,7 +361,6 @@ function TaskView()
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_files.inc.php');
         $list= new ListBlock_files();
-        $list->reduced_header= true;
         #$list->query_options['visible_only']= false;
         $list->query_options['parent_item']= $task->id;
         $list->show_functions=false;
@@ -383,11 +381,10 @@ function TaskView()
         unset($list->functions['fileEdit']);
         unset($list->functions['filesDelete']);
 
-        $list->reduced_header= false;
         $list->title=__('Attached files');
 
         if($editable) {
-            $list->no_items_html= $list->summary= buildFileUploadForm( $task );
+            $list->summary= buildFileUploadForm( $task );
         }
 
         $list->print_automatic($project);
@@ -410,18 +407,9 @@ function TaskView()
 
     #--- description ----------------------------------------------------------------
     {
-        $descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
+        #$descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
-        if($editable) {
-            $description= $descriptionWithUpdates;
-            if( $description == "" ) {
-                $description = "[quote]" . __("This task has no description. Doubleclick to edit.") . "[/quote]";
-            } 
-            echo  wiki2html($description, $project, $task->id, 'description');
-        }
-        else {
-            echo  wiki2html($descriptionWithUpdates, $project);
-        }
+        echo  wikifieldAsHtml($task, 'description');
         echo "</div>";
 
         ### Apply automatic link conversions
@@ -456,7 +444,7 @@ function TaskView()
 
 
         if($issue->plattform) {
-            $buffer.= '<div class=labeled><label>' . __('Platform') . '</label>'.asHtml($issue->plattform).'</div>';
+            $buffer.= '<div class="labeled"><label>' . __('Platform') . '</label>'.asHtml($issue->plattform).'</div>';
         }
         if($issue->os) {
             $buffer.= '<div class=labeled><label>' . __('OS') . '</label>'. asHtml($issue->os).'</div>';
@@ -469,18 +457,17 @@ function TaskView()
         }
 
         if($issue->steps_to_reproduce) {
-            $text= wiki2html($issue->steps_to_reproduce, $project);
-            $buffer.= "<div class=labeled><label>" . __("Steps to reproduce","label in issue-reports") . "</label>$text</div>";
+            $text= wikifieldAsHtml($issue, 'steps_to_reproduce');
+            $buffer.= '<div class="labeled separated"><label>' . __("Steps to reproduce","label in issue-reports") . "</label>$text</div>";
         }
         if($issue->expected_result) {
-            $text= wiki2html($issue->expected_result, $project);
-            $buffer.= "<div class=labeled><label>" . __("Expected result","label in issue-reports") . "</label>$text</div>";
+            $text= wikifieldAsHtml($issue, 'expected_result');
+            $buffer.= '<div class="labeled separated"><label>' . __("Expected result","label in issue-reports") . "</label>$text</div>";
         }
         if($issue->suggested_solution) {
-            $text= wiki2html($issue->suggested_solution, $project);
-            $buffer.= "<div class=labeled><label>" . __("Suggested Solution","label in issue-reports") . "</label>$text</div>";
+            $text= wikifieldAsHtml($issue, 'suggested_solution');
+            $buffer.= '<div class="labeled separated"><label>' . __("Suggested Solution","label in issue-reports") . "</label>$text</div>";
         }
-
 
 
         if($buffer) {
@@ -494,6 +481,7 @@ function TaskView()
 
             echo "<div class=text>";
             echo $buffer;
+            echo "<b class=doclear></b>";
             echo "</div>";
 
             $block->render_blockEnd();
@@ -589,50 +577,23 @@ function TaskView()
     }
 
 
-    #--- list comments -------------------------------------------------------------
+
+
+    #--- list comments --------
     {
-
-        $order_str=get("sort_".$PH->cur_page->id ."_comments");
-        if(!$order_str) {
-            $order_str= 'created ASC';
-        }
-
-
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-            $comments= $task->getComments(array(
-                'order_by'=>$order_str,
-                'visible_only'=>false,
-            ));
-        }
-        else{
-            $comments= $task->getComments(array(
-                'order_by'=>$order_str,
-            ));
-        }
-        if(count($comments) != 0) {
-
-            $list_comments= new ListBlock_comments();
-            if(count($comments) == 1){
-                 $list_comments->title= __("1 Comment") ;
-            }
-            else {
-                 $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
-            }
-
-
-            #$list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
-            $list_comments->render_list(&$comments);
-        }
+        require_once(confGet('DIR_STREBER') . 'blocks/comments_on_item_block.inc.php');
+        print new CommentsOnItemBlock($task);
     }
+
 
 
     #--- task quickedit form -------------------------------------------------------------
-    if($project->isPersonVisibleTeamMember($auth->cur_user)) {
-        if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
-            $block_task_quickedit= new Block_task_quickedit();
-            $block_task_quickedit->render_quickedit(&$task);
-        }
-    }
+    #if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+    #    if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
+    #        $block_task_quickedit= new Block_task_quickedit();
+    #        $block_task_quickedit->render_quickedit(&$task);
+    #    }
+    #}
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
@@ -656,12 +617,8 @@ class Block_task_quickedit extends PageBlock
     {
         global $PH;
         $this->id='quick_edit';
-        $this->bg_style='bg_projects';
         $this->title= __("Comment / Update");
-        $this->reduced_header = true;
     }
-
-
 
     public function render_quickedit($task)
     {
@@ -695,7 +652,7 @@ class Block_task_quickedit extends PageBlock
 
 
             $form=new PageForm();
-            $form->button_cancel=false;
+            $form->button_cancel = false;
 
             $form->add($tab_group = new Page_TabGroup());
 
@@ -742,7 +699,7 @@ class Block_task_quickedit extends PageBlock
 
                 ### public-level ###
                 #{
-                #   if(($pub_levels=$task->getValidUserSetPublevel()) && count($pub_levels)>1) {
+                #   if(($pub_levels=$task->getValidUserSetPublicLevels()) && count($pub_levels)>1) {
                 #       $form->add(new Form_Dropdown('task_pub_level',  __("Public to"),$pub_levels,$task->pub_level));
                 #   }
                 #}
@@ -1175,18 +1132,13 @@ function taskViewAsDocu()
 
     #--- description ----------------------------------------------------------------
     {
-        $descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
+        #$descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
-        if($editable) {
-            $description= $descriptionWithUpdates;
-            if( $description == "" ) {
-                $description = "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]";
-            } 
-            echo  wiki2html($description, $project, $task->id, 'description');
-        }
-        else {
-            echo  wiki2html($descriptionWithUpdates, $project);
-        }
+        echo wikifieldAsHtml($task, 'description', 
+                            array(
+                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                            ));
+
         echo "</div>";
 
         ### Apply automatic link conversions
@@ -1198,47 +1150,53 @@ function taskViewAsDocu()
 
 
     #--- list comments -------------------------------------------------------------
+    #{
+    #
+    #    $order_str=get("sort_".$PH->cur_page->id ."_comments");
+    #    if(!$order_str) {
+    #        $order_str= 'created ASC';
+    #    }
+    #
+    #
+    #    if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+    #        $comments= $task->getComments(array(
+    #            'order_by'=>$order_str,
+    #            'visible_only'=>false,
+    #        ));
+    #    }
+    #    else{
+    #        $comments= $task->getComments(array(
+    #            'order_by'=>$order_str,
+    #        ));
+    #    }
+    #    if(count($comments) != 0) {
+    #
+    #        $list_comments= new ListBlock_comments();
+    #        if(count($comments) == 1){
+    #             $list_comments->title= __("1 Comment") ;
+    #        }
+    #        else {
+    #             $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
+    #        }
+    #
+    #
+    #        $list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
+    #        $list_comments->render_list(&$comments);
+    #    }
+    #}
+
+    #--- list comments --------
     {
-
-        $order_str=get("sort_".$PH->cur_page->id ."_comments");
-        if(!$order_str) {
-            $order_str= 'created ASC';
-        }
-
-
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-            $comments= $task->getComments(array(
-                'order_by'=>$order_str,
-                'visible_only'=>false,
-            ));
-        }
-        else{
-            $comments= $task->getComments(array(
-                'order_by'=>$order_str,
-            ));
-        }
-        if(count($comments) != 0) {
-
-            $list_comments= new ListBlock_comments();
-            if(count($comments) == 1){
-                 $list_comments->title= __("1 Comment") ;
-            }
-            else {
-                 $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
-            }
-
-
-            $list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
-            $list_comments->render_list(&$comments);
-        }
+        require_once(confGet('DIR_STREBER') . 'blocks/comments_on_item_block.inc.php');
+        print new CommentsOnItemBlock($task);
     }
 
 
     #--- task quickedit form -------------------------------------------------------------
-    if($project->isPersonVisibleTeamMember($auth->cur_user)) {
-        $block_task_quickedit= new Block_task_quickedit();
-        $block_task_quickedit->render_quickedit(&$task);
-    }
+    #if($project->isPersonVisibleTeamMember($auth->cur_user)) {
+    #    $block_task_quickedit= new Block_task_quickedit();
+    #    $block_task_quickedit->render_quickedit(&$task);
+    #}
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
@@ -1280,11 +1238,11 @@ function buildRequestFeedbackInput( $project )
 function buildFileUploadForm( $task )
 {
     return
-        '<div style="text-align:left;margin-left:3px">'.__('attach new').':<br />'
+        '<div class=footer_form><h3>'. __('Attach new file').'</h3>'
         .'<input type="hidden" name="parent_task" value="' .$task->id. '">'
         .'<input type="hidden" name="MAX_FILE_SIZE" value="'.confGet('FILE_UPLOAD_SIZE_MAX').'" />'
-        .'<input id="userfiletask" name="userfile" type="file" size="10" accept="*" /><br />'
-        .'<input style="margin-top:5px;margin-bottom:5px;margin-left:0px" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
+        .'<input id="userfiletask" name="userfile" type="file" size="3" accept="*" /> '
+        .'<input style="margin-top:5px;margin-bottom:5px;margin-left:20px;" class="button" type="button" value="' .__('Upload'). '" onclick=\'document.my_form.go.value="filesUpload";document.my_form.submit();\'/>'
         .'</div>';
 
 }

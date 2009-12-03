@@ -392,6 +392,42 @@ class File extends DbProjectItem
         return $files[0];
     }
 
+    /*
+    * if available, returns a cached image src for html img-tags, 
+    */
+    public function getCachedUrl($max_size= 0) {
+        
+        $max_size = intval($max_size);
+        if($max_size) {
+        
+            if (!$dimensions= $this->getImageDimensions($max_size)) {
+                return "";
+            }
+            $filepath   = $dimensions['filepath'];
+            $new_width  = $dimensions['new_width'];
+            $new_height = $dimensions['new_height'];
+            $width  = $dimensions['width'];
+            $height = $dimensions['height'];
+            $filesize= filesize($filepath);
+
+            if ($dimensions['downscale'] ) {
+
+                ### check if cached file exists
+                $md5= md5( http_build_query(array('filepath'=> $filepath,
+                                'new_width' => $new_width,
+                                'new_height' => $new_height,
+                            )));
+                $cached_filepath= confGet('DIR_IMAGE_CACHE') . "/" . $md5 . ".jpg";
+
+                if( file_exists($cached_filepath )) {
+                    return $cached_filepath;
+                }
+            }
+        }
+        global $PH;
+        return $PH->getUrl('fileDownloadAsImage', array('file'=>$this->id,'max_size'=>$max_size));
+        #return "index.php&go=fileDownloadAsImage&file=" . $this->id;
+    }
 
     /**
     * scan post-vars for uploaded files
@@ -574,8 +610,6 @@ class File extends DbProjectItem
                 readfile_chunked($filepath);
             }
             else {
-                #ob_clean();
-                #flush();
                 readfile($filepath);
             }
         }
@@ -672,7 +706,7 @@ class File extends DbProjectItem
                         'new_width' => $new_width,
                         'new_height' => $new_height,
                     )));
-        $cached_filepath= confGet('DIR_IMAGE_CACHE') . "/" . $md5;
+        $cached_filepath= confGet('DIR_IMAGE_CACHE') . "/" . $md5 . ".jpg";
 
         if( file_exists($cached_filepath )) {
             header('Content-Length: '   . filesize($cached_filepath));
@@ -680,10 +714,10 @@ class File extends DbProjectItem
             header("Content-Disposition: inline; filename= $this->org_filename");
             header("Cache-Control: public");
             header('Last-Modified: '    . gmdate("D, j M Y G:i:s T", strToClientTime($this->modified)));
+            header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60 * 60 * 24 * 365) . " GMT");
             readfile($cached_filepath);           
             return;
-        }
-        
+        }        
         $image_new = NULL;
 
         ### downscale
@@ -693,86 +727,48 @@ class File extends DbProjectItem
            ||
            $this->mimetype == 'image/pjpeg'
         ) {
-            header('Content-Type: ' . 'image/jpeg');
-            header("Cache-Control: public");
-            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-
             $image=     imagecreatefromjpeg($filepath);
-            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-            if(imagecopyresampled(
-                 $image_new,                    #resource dst_im,
-                 $image,                        #resource src_im,
-                 0,                             #int dstX,
-                 0,                             #int dstY,
-                 0,                             #int srcX,
-                 0,                             #int srcY,
-                 $new_width,      #int dstW,
-                 $new_height,     #int dstH,
-                 $width,          #int srcW,
-                 $height          #int srcH
-            )) {
-                imagejpeg($image_new);
-            }
-            else {
-                imagejpeg($image);
-            }
         }
         else if($this->mimetype == 'image/png' || $this->mimetype == 'image/x-png') {
-            header('Content-Type: '     . $this->mimetype);
-            header("Cache-Control: public");
-            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
-
             $image=     imagecreatefrompng($filepath);
-            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-            if(imagecopyresampled(
-                 $image_new,       #resource dst_im,
-                 $image,       #resource src_im,
-                 0,       #int dstX,
-                 0,       #int dstY,
-                 0,       #int srcX,
-                 0,       #int srcY,
-                 $new_width,      #int dstW,
-                 $new_height,     #int dstH,
-                 $width,          #int srcW,
-                 $height          #int srcH
-            )) {
-                imagejpeg($image_new);
-            }
-            else {
-                imagejpeg($image);
-            }
         }
+        
         else if($this->mimetype == 'image/gif') {
-            header('Content-Type: '     . 'image/gif');
-            header("Cache-Control: public");
-            header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
             $image=     imagecreatefromgif($filepath);
-            $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
-            if(imagecopyresampled(
-                 $image_new,                    #resource dst_im,
-                 $image,                        #resource src_im,
-                 0,                             #int dstX,
-                 0,                             #int dstY,
-                 0,                             #int srcX,
-                 0,                             #int srcY,
-                 $new_width,      #int dstW,
-                 $new_height,     #int dstH,
-                 $width,          #int srcW,
-                 $height          #int srcH
-            )) {
-                imagejpeg($image_new);
-            }
-            else {
-                imagejpeg($image);
-            }
         }
         else {
              return NULL;
         }
 
+        ### Downscale image and stream content
+        header('Content-Type: ' . 'image/jpeg');
+        header("Cache-Control: public");
+        
+        ### Tell browser to cache forever, because the file will never change
+        header("Last-Modified: ". gmdate('r',strToClientTime($this->modified)));
+        header("Expires: " . gmdate("D, d M Y H:i:s", time() + 60 * 60 * 24 * 365) . " GMT");
+
+        $image_new= imagecreatetruecolor($new_width,$new_height)  or die("Cannot Initialize new GD image stream");
+        if(imagecopyresampled(
+             $image_new,                    #resource dst_im,
+             $image,                        #resource src_im,
+             0,                             #int dstX,
+             0,                             #int dstY,
+             0,                             #int srcX,
+             0,                             #int srcY,
+             $new_width,      #int dstW,
+             $new_height,     #int dstH,
+             $width,          #int srcW,
+             $height          #int srcH
+        )) {
+            imagejpeg($image_new);
+        }
+        else {
+            imagejpeg($image);
+        }
+
         ### write cached file
         if($image_new) {
-            log_message("writing file $cached_filepath", LOG_MESSAGE_DEBUG);
             imagejpeg( $image_new, $cached_filepath );
             imagedestroy($image_new);
         }

@@ -24,7 +24,6 @@ class ListBlock_companies extends ListBlock
 		parent::__construct($args);
 
         $this->id       ='companies';
-        $this->bg_style ='bg_people';
 		$this->title    =__("related companies");
 
         $this->add_col( new ListBlockColSelect());

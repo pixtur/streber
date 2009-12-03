@@ -19,8 +19,8 @@ require_once(confGet('DIR_STREBER') . 'render/render_misc.inc.php');
 */
 function commentView(){
     global $PH;
-	global $auth;
-	
+    global $auth;
+    
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
     ### get task ####
@@ -39,8 +39,8 @@ function commentView(){
     ### create from handle ###
     $from_handle= $PH->defineFromHandle(array('comment'=>$comment->id));
 
-	## is viewed by user ##
-	$comment->nowViewedByUser();
+    ## is viewed by user ##
+    $comment->nowViewedByUser();
 
     ### set up page and write header ####
     {
@@ -59,25 +59,25 @@ function commentView(){
             'tooltip'   =>__('Edit this comment'),
             'name'      =>__('Edit')
         )));
-		
-		$item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$comment->id));
-		if((!$item) || ($item[0]->is_bookmark == 0)){
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsAsBookmark',
-				'params'    =>array('comment'=>$comment->id),
-				'tooltip'   =>__('Mark this comment as bookmark'),
-				'name'      =>__('Bookmark'),
-			)));
-		}
-		else{
-			$page->add_function(new PageFunction(array(
-				'target'    =>'itemsRemoveBookmark',
-				'params'    =>array('comment'=>$comment->id),
-				'tooltip'   =>__('Remove this bookmark'),
-				'name'      =>__('Remove Bookmark'),
-			)));
-		} 
-		
+        
+        $item = ItemPerson::getAll(array('person'=>$auth->cur_user->id,'item'=>$comment->id));
+        if((!$item) || ($item[0]->is_bookmark == 0)){
+            $page->add_function(new PageFunction(array(
+                'target'    =>'itemsAsBookmark',
+                'params'    =>array('comment'=>$comment->id),
+                'tooltip'   =>__('Mark this comment as bookmark'),
+                'name'      =>__('Bookmark'),
+            )));
+        }
+        else{
+            $page->add_function(new PageFunction(array(
+                'target'    =>'itemsRemoveBookmark',
+                'params'    =>array('comment'=>$comment->id),
+                'tooltip'   =>__('Remove this bookmark'),
+                'name'      =>__('Remove Bookmark'),
+            )));
+        } 
+        
         if($comment->state == ITEMSTATE_DELETED) {
 
             $page->add_function(new PageFunction(array(
@@ -100,7 +100,7 @@ function commentView(){
         }
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -114,7 +114,7 @@ function commentView(){
             'noshade'   =>true,
         ));
         $block->render_blockStart();
-        $str= wiki2html($comment->description, $project);
+        $str= wikifieldAsHtml($comment, 'description');
 
         echo "<div class=text>";
         echo "$str";
@@ -123,25 +123,9 @@ function commentView(){
         $block->render_blockEnd();
     }
 
-    #--- list comments -------------------------------------------------------------
-    /*
-    {
-        $comments= $task->getComments();
-        $list=new ListBlock_comments();
-        $list->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
-        $list->render_list($comments);
-    }
-    */
-
     echo '<input type="hidden" name="prj" value="'.$comment->project.'">';
-
-    /**
-    * give parameter for create of new items (subtasks, efforts, etc)
-    */
-    #echo '<input type="hidden" name="parent_task" value="'.$task->id.'">';
-
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -187,7 +171,7 @@ function commentNew() {
     $task=NULL;
     $comment = NULL;
     if($id=getOnePassedId('tsk','tasks_*',false)) { #no not abort if not found
-		if($task= Task::getVisibleById($id)) {
+        if($task= Task::getVisibleById($id)) {
             $newComment->task= $task->id;
 
             ### try to figure project-id from task ###
@@ -228,22 +212,22 @@ function commentNew() {
 
     ### try comment on comment ###
     if($id=getOnePassedId('comment','comments_*',false)) { #no not abort if not found
-		if($comment= Comment::getById($id)) {
+        if($comment= Comment::getById($id)) {
             $newComment->comment= $comment->id;
             switch (confGet('REPLY_ON_COMMENT_PREFIX')) {
-			    case 0: 
-			        $newComment->name='';
-			        break;
-				case 1: 
-				    $newComment->name=__('Re: ').$comment->name;
-					break;
-				case 2: 
-				    $newComment->name=__('Reply to ','prefix for name of new comment on another comment').$comment->name;
-				    break;
-				default: 
-				    $newComment->name=__('Re: ').$comment->name;
-				    break;
-			}
+                case 0: 
+                    $newComment->name='';
+                    break;
+                case 1: 
+                    $newComment->name=__('Re: ').$comment->name;
+                    break;
+                case 2: 
+                    $newComment->name=__('Reply to ','prefix for name of new comment on another comment').$comment->name;
+                    break;
+                default: 
+                    $newComment->name=__('Re: ').$comment->name;
+                    break;
+            }
             $newComment->occasion=$COMMENTTYPE_VALUES['Reply'];
 
         }
@@ -251,7 +235,7 @@ function commentNew() {
 
     ### get current project ###
     if(!$project) {
-		if($task) {
+        if($task) {
             if(!$project= Project::getVisibleById($task->project)) {
                 $PH->abortWarning('invalid project id',ERROR_FATAL);
             }
@@ -275,7 +259,7 @@ function commentNew() {
     }
 
     ### render form ###
-	$PH->show('commentEdit',array('comment'=>$newComment->id), $newComment);
+    $PH->show('commentEdit',array('comment'=>$newComment->id), $newComment);
 }
 
 
@@ -333,17 +317,12 @@ function commentEdit($comment=NULL)
 
         $block=new PageBlock(array(
             'id'    =>'edit',
-            'reduced_header' => true,
         ));
         $block->render_blockStart();
 
 
         $form=new PageForm();
         $form->button_cancel=true;
-
-        #foreach($comment->fields as $field) {
-        #    $form->add($field->getFormElement(&$comment));
-        #}
 
 
         $form->add($comment->fields['name']->getFormElement(&$comment));
@@ -356,10 +335,8 @@ function commentEdit($comment=NULL)
         $form->add(new Form_HiddenField('comment_task', '', $comment->task));
         $form->add(new Form_HiddenField('comment_comment', '', $comment->comment));
 
-        #$form->add(new Form_Dropdown('comment_occasion',  __('Occasion','form label'),$COMMENTTYPE_VALUES,$comment->occasion));
-
         ### public-level ###
-        if(($pub_levels=$comment->getValidUserSetPublevel())
+        if(($pub_levels=$comment->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             $form->add(new Form_Dropdown('comment_pub_level',  __('Publish to','form label'),$pub_levels,$comment->pub_level));
         }
@@ -372,13 +349,11 @@ function commentEdit($comment=NULL)
 
         $block->render_blockEnd();
 
-        #echo($form);
-
         $PH->go_submit= 'commentEditSubmit';
         echo "<input type=hidden name='comment' value='$comment->id'>";
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd);
+    echo (new PageHtmlEnd);
 }
 
 
@@ -421,7 +396,6 @@ function commentEditSubmit(){
 
     validateFormCaptcha(true);
 
-
     # retrieve all possible values from post-data
     # NOTE:
     # - this could be an security-issue.
@@ -433,10 +407,12 @@ function commentEditSubmit(){
     if($tmp= get('comment_project')) {
         $comment->project= $tmp;
     }
+    
+    $task= NULL;
     if($tmp= get('comment_task')) {
         if($task = Task::getVisibleById($tmp)) {
-
             $comment->task= $task->id;
+            $comment->project = $task->project;
         }
     }
     if($tmp= get('comment_occasion')) {
@@ -444,15 +420,37 @@ function commentEditSubmit(){
     }
 
 
-    if($tmp= get('comment_pub_level')) {
-        $comment->pub_level= $tmp;
-    }
-
-
     ### be sure the comment is connected somewhere ###
-    if(!$comment->project && !$comment->task && !$comment->comment && !$comment->company && !$comment->person) {
+    #
+    # Comments to comments are deprecated
+    if(!$comment->project || !$comment->task) {
         $PH->abortWarning("ERROR:Comment not connected anywhere. This is an internal error and should be reported");
     }
+
+    ### change task update modification date ###
+    if($task) {
+        ### Check if now longer new ###
+        if($task->status == STATUS_NEW) {
+            global $auth;
+            if($task->created < $auth->cur_user->last_login) {
+                $task->status = STATUS_OPEN;
+                $task->update(array('modified','status'));
+            }
+        }
+        $task->nowChangedByUser();
+    }
+
+    ### get pub-level
+    $pub_level= intval(get('comment_pub_level'));
+    if(!$pub_level) {
+        $pub_level = PUB_LEVEL_OPEN;
+    }
+    
+    $pp= $task->getProjectPerson();
+    if($pub_level > $pp->level_create) {
+        $pub_level= $pp->level_create;
+    }
+    $comment->pub_level= $pub_level;
 
     ### write to db ###
     if($comment->id == 0) {
@@ -462,42 +460,12 @@ function commentEditSubmit(){
         $comment->update();
     }
 
-    ### change task update modification date ###
-    if(isset($task)) {
-        $parent_task = $task;
-    }
-    ### find parent task of comment
-    elseif(isset($comment->comment)) {
-        $parent_comment_id = $comment->comment;
-        while($parent_comment_id) {
-            if ($next_parent = Comment::getById( $parent_comment_id)) {
-                $parent_comment_id = $next_parent->comment;
-                if($parent_comment_id == 0) {
-                    $parent_task= Task::getById($next_parent->task);
-                }
-            }
-            else {
-                break;
-            }
-        }        
-    }
-
-    if($parent_task) {
-        ### Check if now longer new ###
-        if($parent_task->status == STATUS_NEW) {
-            global $auth;
-            if($parent_task->created < $auth->cur_user->last_login) {
-                $parent_task->status = STATUS_OPEN;
-            }
-        }
-        $parent_task->update(array('modified','status'));
-        $parent_task->nowChangedByUser();
-    }
-
     ### display taskView ####
     if(!$PH->showFromPage()) {
         $PH->show('home');
     }
+
+
 }
 
 
@@ -648,32 +616,32 @@ function commentsCollapseView()
     ### get comment ####
     #$ids= getPassedIds('comment','comments_*');
 
-	/**
-	* because there are no checkboxes left anymore, we have to get the comment-ids
-	* directly from the task with the getComments-function
-	**/
+    /**
+    * because there are no checkboxes left anymore, we have to get the comment-ids
+    * directly from the task with the getComments-function
+    **/
     $tsk=get('tsk');
-	if($task=Task::getEditableById($tsk)) {
-		$ids= $task->getComments();
+    if($task=Task::getEditableById($tsk)) {
+        $ids= $task->getComments();
 
-    	foreach($ids as $obj) {
-			if(!$comment=Comment::getEditableById($obj->id)) {
-            	$PH->abortWarning('undefined comment','warning');
-        	}
-        	if(! $comment->view_collapsed) {
-            	$comment->view_collapsed=1;
-            	$comment->update();
-        	}
-    	}
-	}
-	else {
-		/**
-		* a better way should be not to display this function
-		* if user has not enough rights
-		**/
-		### abort, if not enough rights ###
+        foreach($ids as $obj) {
+            if(!$comment=Comment::getEditableById($obj->id)) {
+                $PH->abortWarning('undefined comment','warning');
+            }
+            if(! $comment->view_collapsed) {
+                $comment->view_collapsed=1;
+                $comment->update();
+            }
+        }
+    }
+    else {
+        /**
+        * a better way should be not to display this function
+        * if user has not enough rights
+        **/
+        ### abort, if not enough rights ###
         $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
-	}
+    }
 
     ### display taskView ####
     if(!$PH->showFromPage()) {
@@ -685,40 +653,37 @@ function commentsExpandView()
 {
     global $PH;
 
-    ### get comment ####
-    #$ids= getPassedIds('comment','comments_*');
-
-	/**
-	* because there are no checkboxes left anymore, we have to get the comment-ids
-	* directly from the task with the getComments-function
-	**/
+    /**
+    * because there are no checkboxes left anymore, we have to get the comment-ids
+    * directly from the task with the getComments-function
+    **/
     $tsk= get('tsk');
-	if($task=Task::getEditableById($tsk)) {
-		$ids= $task->getComments();
+    if($task=Task::getEditableById($tsk)) {
+        $ids= $task->getComments();
 
-    	foreach($ids as $obj) {
-			if(!$comment=Comment::getEditableById($obj->id)) {
-	            $PH->abortWarning('undefined comment','warning');
-	        }
-	        $list= $comment->getSubComments();
-	        $list[]= $comment;
+        foreach($ids as $obj) {
+            if(!$comment=Comment::getEditableById($obj->id)) {
+                $PH->abortWarning('undefined comment','warning');
+            }
+            $list= $comment->getSubComments();
+            $list[]= $comment;
 
-	        foreach($list as $c) {
-	            if( $c->view_collapsed) {
-	                $c->view_collapsed= 0;
-	                $c->update();
-	            }
-	        }
-	    }
-	}
-	else {
-		/**
-		* a better way should be not to display this function
-		* if user has not enough rights
-		**/
-		### abort, if not enough rights ###
+            foreach($list as $c) {
+                if( $c->view_collapsed) {
+                    $c->view_collapsed= 0;
+                    $c->update();
+                }
+            }
+        }
+    }
+    else {
+        /**
+        * a better way should be not to display this function
+        * if user has not enough rights
+        **/
+        ### abort, if not enough rights ###
         $PH->abortWarning(__('insufficient rights'),ERROR_RIGHTS);
-	}
+    }
 
     ### display taskView ####
     if(!$PH->showFromPage()) {
@@ -729,15 +694,8 @@ function commentsExpandView()
 
 
 
-
-
-
-
-
 /**
 * move comments to folder...
-*
-*
 */
 function commentsMoveToFolder()
 {
@@ -817,7 +775,7 @@ function commentsMoveToFolder()
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>false, 'autofocus_field'=>'company_name'));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type= __("Edit tasks");
         $page->title= $project->name;
         $page->title_minor=__("Select one folder to move comments into");
@@ -854,7 +812,7 @@ function commentsMoveToFolder()
             $list->groupings= NULL;
             $list->block_functions= NULL;
             $list->id= 'folders';
-	        unset($list->columns['project']);
+              unset($list->columns['project']);
             unset($list->columns['status']);
             unset($list->columns['date_start']);
             unset($list->columns['days_left']);
@@ -880,7 +838,7 @@ function commentsMoveToFolder()
 
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 
 }
 

@@ -111,7 +111,7 @@ function versionEdit($version=NULL) {
 
 
         ### public-level ###
-        if(($pub_levels= $version->getValidUserSetPublevel())
+        if(($pub_levels= $version->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             $form->add(new Form_Dropdown('version_pub_level',  __("Publish to"),$pub_levels,$version->pub_level));
         }
@@ -186,7 +186,7 @@ function versionEditSubmit()
 
         ### not a new version ###
         if($version->id) {
-             if($pub_level > $version->getValidUserSetPublevel() ) {
+             if($pub_level > $version->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }
@@ -355,7 +355,7 @@ function versionView(){
             'noshade'   =>true,
         ));
         $block->render_blockStart();
-        $str= wiki2html($version->description, $project);
+        $str= wikifieldAsHtml($version, 'description');
 
         echo "<div class=text>";
         echo "$str";

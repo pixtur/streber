@@ -154,18 +154,11 @@ function ProjView()
         $block=new PageBlock(array(
             'title'=>__('Description'),
             'id'=>'description',
-            #'reduced_header'=>true,
-
         ));
         $block->render_blockStart();
 
         echo "<div class=description>";
-        if($editable) {
-            echo  wiki2html($project->description, $project, $project->id, 'description');
-        }
-        else {
-            echo  wiki2html($project->description, $project);
-        }
+        echo  wikifieldAsHtml($project, 'description');
         echo "</div>";
 
         $block->render_blockEnd();
@@ -209,7 +202,7 @@ function ProjView()
                     $link_creator= ' by '. $creator->getLink();
                 }
                 echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
-                echo wiki2html($n->description, $project);
+                echo wikifieldAsHtml($n, 'description');
                 
                 echo "<span class=comments>";
                 if($comments= $n->getComments()) {

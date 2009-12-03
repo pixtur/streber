@@ -30,8 +30,6 @@ class ListBlock_changes extends ListBlock
     {
         parent::__construct($args);
 
-        $this->bg_style= 'bg_time';
-
         global $PH;
         global $auth;
 
@@ -105,6 +103,7 @@ class ListBlock_changes extends ListBlock
             }
 
             $this->render_tfoot();
+            $this->render_blockEnd();            
         }
     }
 }
@@ -310,7 +309,6 @@ class ListBlockCol_ChangesDatePerson extends ListBlockCol
 */
 class ListBlock_AllChanges extends ListBlock
 {
-    public $bg_style = "bg_time";
     public $filters = array();
 
     public function __construct($args=NULL)

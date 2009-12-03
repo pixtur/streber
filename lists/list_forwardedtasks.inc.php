@@ -20,7 +20,6 @@ require_once('lists/list_tasks.inc.php');
 
 class ListBlock_forwarded_tasks extends ListBlock
 {
-    public $bg_style = "bg_misc";
 
 	public function __construct($args=NULL)
     {

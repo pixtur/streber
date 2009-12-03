@@ -80,7 +80,6 @@ class ListBlock_files extends ListBlock
 
         global $PH;
         $this->id='files';
-        $this->bg_style='bg_time';
 		$this->title="Files";
         $this->query_options['order_by']= "created";
 
@@ -359,7 +358,7 @@ class ListBlockCol_FileName extends ListBlockCol
 
 
         ### description ###
-        $diz_buffer.= wiki2html($file->description, $file->project);
+        $diz_buffer.= wikifieldAsHtml($file, 'description');
 
         if($diz_buffer) {
             $buffer.='<span class=sub>'. $diz_buffer. "</span>";
@@ -450,7 +449,14 @@ class ListBlockCol_FileSummary extends ListBlockCol
                 $author_name = "???";
             }
             
-            $buffer.= "<span class=sub><a title='" .  sprintf(__("creatd on %s", "date a file was created"), renderDate($file->created)) .  "'  target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'><br>"
+            $buffer.= "<span class=sub><a "
+                   . "title='" .  sprintf(__("creatd on %s", "date a file was created"), renderDate($file->created)) .  "' "
+                   . "target='blank' "
+                   . "href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."' "
+                   . "><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' "
+                   #. "src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'"
+                   . "src='". $file->getCachedUrl(100) ."'"
+                   . "><br>"
                    .      ""
                    .        asHtml($file->name)
                    .      "</a>"
@@ -519,7 +525,16 @@ class ListBlockCol_FileThumbnail extends ListBlockCol
 		  $file->mimetype == 'image/gif'
 		)
 		{
-            $buffer.= "<a target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'><img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'></a>";
+            $buffer.= "<a target='blank' href='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id))."'>";
+            
+            #$buffer.= "<img class='left' title='".asHtml($file->name)."' alt='".asHtml($file->name)."' src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100))."'>"
+            $buffer.= "<img class='left' title='"
+                    . asHtml($file->name). "' "
+                    . " alt='" . asHtml($file->name) . "'"
+                    #. " src='".$PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>100)) . "'"
+                    . " src='" . $file->getCachedUrl( 100 ) . "'"
+                    .  ">";
+            $buffer.= "</a>";
 
 		}
 

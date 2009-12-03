@@ -1315,7 +1315,6 @@ class Project extends DbProjectItem
     }
 
 
-
     public function getNextMilestone()
     {
         global $auth;

@@ -30,7 +30,6 @@ class ListBlock_versions extends ListBlock
         parent::__construct($args);
 
         $this->id='tasks';
-        $this->bg_style='bg_projects';
         $this->title="Versions";
         $this->active_block_function = 'list';
 
@@ -179,12 +178,7 @@ class ListBlockCol_VersionName extends ListBlockCol
                 
 
             $buffer.= "<div class=description>";
-            if($editable) {
-                $buffer.=  wiki2html($task->description, $task->project, $task->id, 'description');
-            }
-            else {
-                $buffer.=  wiki2html($task->description, $task->project);
-            }
+            $buffer.=  wikifieldAsHtml($task, 'description');
             $buffer.= "</div>";
 
 

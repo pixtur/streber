@@ -81,16 +81,17 @@ class BlockFunction
 */
 class PageBlock extends PageElement
 {
-	public $bg_style                ='bg_misc';
     public $id                      = NULL;         # required for cookies, block-toggle, javascript, etc.
     public $css_classes             = array('block');      # additional classes of block. Id is automatically added
-
+    public $style                   = NULL;
     public $title                   ='';
     public $title_append_hidden;
     public $block_functions         = array();		# should be assoc array to allow user-settings
 	public $active_block_function   = NULL;	        # name of active block_function / style
-    public $reduced_header          = false;        # reduced header display if list is a page's primary block
     public $noshade                 = false;        # noframe for primary text blocks (like wiki)
+    public $headline_links          = array();      # List of links rendered behind block headline e.g. "(Show your)"
+    public $reduced_header= false; # 
+
 
 	//== constructor ========================================================================
     public function __construct($args=NULL)
@@ -120,102 +121,58 @@ class PageBlock extends PageElement
 	public function render_blockStart($hidden=false)
 	{
 	    global $auth;
+		echo "<!-- start of list-block -->\n";
+  		echo "<div id=b_{$this->id}_long class=\"" . implode(" ", $this->css_classes) . " opened\">";
+		echo "<div class=block_header>";
+		    echo "<h2 class=table_name >\n";
+			echo asHtml($this->title);
+			
+			if($this->headline_links) {
+			    echo ' <span class=links>(';
+			    echo  join($this->headline_links, '<span class=separator>|</span');
+			    echo ')</span>';
+			}
+			echo "</h2>";
 
-		#$title=
-		#$bg_style="bg_time";      # bg_proj|bg_time etc.
+			$this->renderBlockFunctions();
+			
 
-
-        ### hidden-cookie set? ###
-        if(get('b_'.$this->id)=='hidden') {
-            $hidden=true;
-        }
-
-
-		if(! $this->reduced_header && !$this->noshade) {
-    		#--- collapsed version ----
-    		{
-                if($hidden) {
-                    $style= "";
-                }
-                else {
-                    $style= "style='display:none'" ;
-                }
-    			echo "<!-- start of list-block {$this->id} -->\n";
-    	  		echo "<div id=b_{$this->id}_short class=\"" . implode(" ", $this->css_classes) . " closed\" $style>\n";
-    			echo "<div class=\"header\">\n";
-    			    echo "<b class=extra></b>";
-				    echo "<h2 class=table_name >\n";
-
-    				echo asHtml($this->title);
-                    if($this->title_append_hidden) {
-                        echo " <span class=append>" . asHtml($this->title_append_hidden) . "</span>";
-                    }
-                    echo "</h2>\n";
-    			echo "</div>";
-    			echo "</div>";
-    		}
-    		#--- expanded -------------
-    		{
-                if($hidden) {
-                    $style= "style='display:none'" ;
-                }
-                else {
-                    $style= "";
-                }
-    			echo "<!-- start of list-block -->\n";
-    	  		echo "<div id=b_{$this->id}_long class=\"" . implode(" ", $this->css_classes) . " opened\" $style>";
-    			echo "<div class=\"header\">";
-    			    echo "<b class=extra></b>";
-				    echo "<h2 class=table_name >\n";
-
-    				#echo "<img src=\"themes/".getCurTheme()."/img/toggle_block_closed.gif\">";
-    				echo asHtml($this->title);
-    				echo "</h2>";
-
-    				$this->renderBlockFunctions();
-
-    			echo "</div>";
-
-    		}
-    	}
-    	### reduced header ###
-    	else if($this->reduced_header){
-
-			echo "<div class=header>";
-			echo  $this->renderBlockFunctions();
-			echo "</div>";
-			echo "<!-- start of list-block -->\n";
-	  		echo "<div style='clear:both;' id=b_{$this->id}_long class=\"block {$this->bg_style}_shade opened reduced_header\" >";
-	  		echo "<div class='extra_top'></div>";           # extra div for css-formating with div.block.reduced_header div.extra_top
-	  		if($this->title) {
-	  		    echo '<h2>'. asHtml($this->title) . '</h2>';
-	  		}
-    	}
-    	### noframe ###
-    	else {
-			echo "<!-- start of list-block -->\n";
-			echo "<div class=header>";
-			echo  $this->renderBlockFunctions();
-			echo "</div>";
-	  		echo "<div style='clear:both;' id=b_{$this->id}_long class=\"block noshade opened reduced_header\" >";
-
-	  		echo "<div class='extra_top'></div>";           # extra div for css-formating with div.block.reduced_header div.extra_top
-    	}
+		echo "</div>";
+	    echo "<div class='block_body'>";
+	        echo "<div class='block_content'>";
 
 	}
+	
+	/**
+	* overwrite this function to insert content to block footer
+    */
+    public function render_blockFooter() {
 
+    }
+    
+	/**
+	* overwrite this function to insert content to block footer
+    */
+    public function render_blockContent() {
+        
+    }
 
 
     public function render_blockEnd()
     {
-        echo "\n<b class=doclear>&nbsp;</b></div><!-- end {$this->id} -->\n";
+        echo "\n</div>";  # /block_content
+        $this->render_blockFooter();
+        echo  '</div>'    # /block_body
+             . '<b class=doclear>&nbsp;</b>'
+             . '</div>'   # /block
+             . "<!-- end {$this->id} -->\n";
     }
 
 
 	/**
 	* get the current block-style from cookie
 	*/
-	function getBlockStyleFromCookie()
+	public function getBlockStyleFromCookie()
 	{
 		global $PH;
 
@@ -257,7 +214,7 @@ class PageBlock extends PageElement
     *
     * @@@ most of this stuff should be done in constructor of BlockFunction
     */
-    function add_blockFunction(BlockFunction &$fn)
+    public function add_blockFunction(BlockFunction &$fn)
     {
         global $PH;
 
@@ -319,6 +276,7 @@ class PageBlock extends PageElement
             echo "</span>";
     	}
     }
+    
 
 
 }

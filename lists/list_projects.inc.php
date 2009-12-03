@@ -55,7 +55,6 @@ class ListBlock_projects extends ListBlock
         parent::__construct($args);
 
         $this->id       = 'projects';
-        $this->bg_style = 'bg_projects';
         $this->title    = "related Projects";
 
         $this->add_col( new ListBlockColSelect());

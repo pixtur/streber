@@ -17,15 +17,12 @@ require_once(confGet('DIR_STREBER') . "db/class_effort.inc.php");
  */
 class ListBlock_effortsPerson extends ListBlock
 {
-	public $bg_style = "bg_time";
-		
     public function __construct($args=NULL)
     {
 		parent::__construct($args);
 
         global $PH;
         $this->id = 'effortsperson';
-        $this->bg_style = 'bg_time';
         $this->no_items_html = __('no efforts booked yet');
 		$this->title =  __("Efforts on team member");
 		$this->show_icons = true;
@@ -106,6 +103,7 @@ class ListBlock_effortsPerson extends ListBlock
             $sum=round($sum,1);
             $this->summary= sprintf(__("Total effort sum: %s hours"), $sum);
     		$this->render_tfoot();
+            parent::render_blockEnd();            
         }
 	}
 }

@@ -16,7 +16,6 @@
  */
 class ListBlock_efforts extends ListBlock
 {
-	public $bg_style = "bg_time";
 	public $filters = array();
 	
     public function __construct($args=NULL)
@@ -25,7 +24,6 @@ class ListBlock_efforts extends ListBlock
 
         global $PH;
         $this->id='efforts';
-        $this->bg_style='bg_time';
         $this->no_items_html= __('no efforts booked yet');
 		$this->title= __("Efforts");
 
@@ -257,6 +255,7 @@ class ListBlock_efforts extends ListBlock
             $sum=round($sum,1);
             $this->summary= sprintf(__("%s effort(s) with %s hours"), count($efforts), $sum);
     		$this->render_tfoot();
+            parent::render_blockEnd();            
         }
 	}
 }

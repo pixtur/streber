@@ -132,7 +132,7 @@ function projectPersonEdit($pp= NULL)
 		$tab->add($pp->fields['name']->getFormElement(&$pp));
 
         ### public-level ###
-        if(($pub_levels=$pp->getValidUserSetPublevel())
+        if(($pub_levels=$pp->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             //$form->add(new Form_Dropdown('projectperson_pub_level',  __("Publish to"),$pub_levels,$pp->pub_level));
 			$tab->add(new Form_Dropdown('projectperson_pub_level',  __("Publish to"),$pub_levels,$pp->pub_level));
@@ -251,7 +251,7 @@ function projectPersonEditSubmit()
     ### pub level ###
     if($pub_level=get('projectperson_pub_level')) {
         if($pp->id) {
-             if($pub_level > $pp->getValidUserSetPublevel() ) {
+             if($pub_level > $pp->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }

@@ -81,7 +81,6 @@ function projList()
 
     	#$projects=Project::getActive($order_str);
         $list= new ListBlock_projects();
-        $list->reduced_header= true;
 
 		$format = get('format');
 		if($format == FORMAT_HTML|| $format == ''){
@@ -154,7 +153,6 @@ function ProjListClosed()
 	#--- list projects --------------------------------------------------------
 	{
         $list= new ListBlock_projects();
-        $list->reduced_header=true;
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -219,7 +217,6 @@ function ProjListTemplates()
 	#--- list projects --------------------------------------------------------
 	{
         $list= new ListBlock_projects();
-        $list->reduced_header=true;
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -1012,7 +1009,6 @@ function projViewTasks()
 
     #--- list tasks --------------------------------------------------------------------------
     {
-        $list->reduced_header= true;
         #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
 
         #if($for_milestone=get('for_milestone')) {
@@ -1118,7 +1114,6 @@ function ProjViewDocu()
         ));
         $list->title= __('Topics');
 
-        $list->reduced_header= true;
         $list->query_options['category']= TCATEGORY_DOCU;
         $list->query_options['status_min']= 0;
         $list->query_options['status_max']= 10;
@@ -1221,7 +1216,6 @@ function ProjViewFiles()
     {
         require_once(confGet('DIR_STREBER') . "lists/list_files.inc.php");
         $list= new ListBlock_files();
-        $list->reduced_header= true;
         #$list->query_options['visible_only']= false;
         unset($list->columns['summary']);
 
@@ -1326,7 +1320,6 @@ function ProjViewMilestones()
         }
         echo "</div>";
 
-        $list->reduced_header= true;
 
         $list->print_automatic($project);
 	}
@@ -1686,7 +1679,6 @@ function ProjViewEfforts()
 
         ));
         $list= new ListBlock_efforts();
-        //$list->reduced_header= true;
 		
 		$list->filters[] = new ListFilter_efforts();
 		{
@@ -1980,7 +1972,6 @@ function ProjViewVersions()
     {
 
         $list= new ListBlock_versions();
-        $list->reduced_header= true;
 
         $list->query_options['project']= $project->id;
 
@@ -2098,7 +2089,6 @@ function projEdit($project=NULL)
         ### form background ###
         $block=new PageBlock(array(
             'id'    =>'project_edit',
-            'reduced_header' => true,
         ));
         $block->render_blockStart();
 

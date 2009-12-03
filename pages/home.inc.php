@@ -210,7 +210,6 @@ function homeBookmarks()
     {
         require_once(confGet('DIR_STREBER') . 'lists/list_bookmarks.inc.php');
         $list_bookmarks = new ListBlock_bookmarks();
-        $list_bookmarks->reduced_header = true;
         $list_bookmarks->print_automatic();
     }
 	

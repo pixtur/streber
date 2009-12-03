@@ -112,8 +112,10 @@ function addRequestVars(&$referred_vars)
 
 /**
 * access request vars
+*
+* returns optional 2nd parameter, if variable isn't set
 */
-function get($key) {
+function get($key, $default_value= NULL) {
  	global $g_request_vars;
 
     if(isset($g_request_vars[$key])) {
@@ -141,7 +143,7 @@ function get($key) {
         }
         return($hash);
     }
-    return NULL;
+    return $default_value;
 }
 
 function getServerVar($name, $as_html= false)

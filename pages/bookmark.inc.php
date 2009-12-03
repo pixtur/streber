@@ -305,7 +305,7 @@ function itemBookmarkEdit($bookmark=NULL)
         {
             require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
     
-            $block = new PageBlock(array('id'=>'functions','reduced_header' => true,));
+            $block = new PageBlock(array('id'=>'functions'));
             $block->render_blockStart();
     
             $form = new PageForm();
@@ -608,7 +608,7 @@ function itemBookmarkEditMultiple($thebookmarks=NULL)
             }
         }
         
-        $block = new PageBlock(array('id'=>'functions','reduced_header' => true,));
+        $block = new PageBlock(array('id'=>'functions'));
         $block->render_blockStart();
         
         $form = new PageForm();

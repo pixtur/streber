@@ -21,12 +21,15 @@ function itemLoadField()
     header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
     if(!$item_id=get('item')) {
+        echo "Failure: could not get item_id";
         return NULL;
     }
     if(!$item= DbProjectItem::getVisibleById($item_id)) {
+        echo "Failure: could not get item #" . intval($item_id);
         return NULL;
     }
     if(!$object= DbProjectItem::getObjectById($item_id)) {
+        echo "Failure: could not get object #" . intval($item_id);
         return NULL;
     }
 
@@ -145,6 +148,14 @@ function itemSaveField()
 
     ### update 
     $object->update(array($field_name));
+    
+    ### mark parent of comment as changes 
+    if($item->type == ITEM_COMMENT) {
+        if($parent_task= Task::getById($object->task)) {
+            print "calling now changed by user";
+            $parent_task->nowChangedByUser();
+        }
+    }
     print wiki2purehtml($object->$field_name); 
     $item->nowChangedByUser();
 }

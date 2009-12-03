@@ -12,6 +12,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('DISPLAY_ERROR_LIST', 'DETAILS');
 #confChange('CHECK_IP_ADDRESS', true);
 confChange('USE_MOD_REWRITE', true);
+confChange('USE_PROFILER', true);
 confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
@@ -20,5 +21,8 @@ confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 
 #confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
 #confChange('SMTP','mail.yourdomain.de');
+#confChange('ANONYMOUS_USER', 38);
+#confChange('REGISTER_NEW_USERS', true);
+#confChange('REGISTER_NEW_USERS_TO_PROJECT', 10);
 
 ?>

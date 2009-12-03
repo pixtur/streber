@@ -22,7 +22,6 @@
 class ListBlock_taskfolders extends ListBlock {
 
     ### overwrite ###
-    public $bg_style='bg_misc';
     public $id=    'folders';
 
     private $cur_task_id=-1;

@@ -702,6 +702,7 @@ class FormatBlockHeadline extends FormatBlock
 
     public function __construct($str, $level)
     {
+        measure_start("blockHeadlineConstruction");
 
         $blocks= array(new FormatBlock($str));
         $blocks= FormatBlockChangemarks::parseBlocks($blocks);
@@ -720,7 +721,8 @@ class FormatBlockHeadline extends FormatBlock
 
         $this->str= '';
         $this->level=$level+1;
-
+        
+        measure_stop("blockHeadlineConstruction");
     }
 
     public function renderAsHtml()
@@ -739,7 +741,7 @@ class FormatBlockHeadline extends FormatBlock
     */
     static function parseBlocks(&$blocks)
     {
-
+        measure_start("blockHeadline1");
         $blocks_new= array();
         foreach($blocks as $b) {
             if($b->str && !($b instanceof FormatBlockCode)) {
@@ -770,6 +772,8 @@ class FormatBlockHeadline extends FormatBlock
         }
         $blocks= $blocks_new;
         $blocks_new= array();
+        measure_stop("blockHeadline1");
+        measure_start("blockHeadline2");
 
         foreach($blocks as $b) {
 
@@ -800,6 +804,9 @@ class FormatBlockHeadline extends FormatBlock
         }
         $blocks= $blocks_new;
         $blocks_new= array();
+
+        measure_stop("blockHeadline2");
+        measure_start("blockHeadline3");
 
         foreach($blocks as $b) {
             if($b->str && !($b instanceof FormatBlockCode)) {
@@ -832,6 +839,9 @@ class FormatBlockHeadline extends FormatBlock
         $blocks= $blocks_new;
         $blocks_new= array();
 
+        measure_stop("blockHeadline3");
+        measure_start("blockHeadline4");
+
         foreach($blocks as $b) {
             if($b->str && !($b instanceof FormatBlockCode)) {
 
@@ -858,6 +868,8 @@ class FormatBlockHeadline extends FormatBlock
                 $blocks_new[]=$b;
             }
         }
+        measure_stop("blockHeadline4");
+
         return $blocks_new;
     }
 }
@@ -1163,7 +1175,8 @@ class FormatBlockLink extends FormatBlock
                                        . "<img class='$align uploaded'"
                                        .     " title='" . asHtml($file->name) ."'"
                                        .     " alt='" . asHtml($file->name) ."'"
-                                       .     " src='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
+                                       #.     " src='" . $PH->getUrl('fileDownloadAsImage',array('file'=>$file->id,'max_size'=>$max_size))."'"
+                                       .    " src='" . $file->getCachedUrl($max_size)."'"
                                        .     " height=" .intval( $dimensions['new_height'])    
                                        .     " width=" .intval( $dimensions['new_width'])    
                                        . "></a>";
@@ -1194,7 +1207,7 @@ class FormatBlockLink extends FormatBlock
         }
         /**
         * try to guess node from name
-        * - we prefer the current project (has to be passed by wiki2html()-callers
+        * - we prefer the current project (has to be passed by wikifieldAsHtml()-callers
         */
         else {
             $this->html= FormatBlockLink::renderLinkFromTargetName($this->target, $this->name);
@@ -1932,11 +1945,32 @@ class FormatBlockTable extends FormatBlock
     }
 }
 
+function wikiAsHtml($wikitext) {
+    
+}
 
-
-function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
+function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
 {
+    $editable= $item->isEditable();
+    $empty_text= '';
+
+    ### filter params ###
+    if($args) {
+        foreach($args as $key=>$value) {
+            if(!isset($$key) && !is_null($$key) && !$$key==="") {
+                trigger_error("unknown parameter",E_USER_NOTICE);
+            }
+            else {
+                $$key= $value;
+            }
+        }
+    }
+
     measure_start("render_wiki");
+    $text= $item->getTextfieldWithUpdateNotes($field_name);
+    if(trim($text) == "") {
+        $text= $empty_text;
+    }
     $text_org = $text;
     $text.="\n";
 
@@ -1944,28 +1978,25 @@ function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
     $text= asHtml($text);
 
     ### convert, if id is given ###
-    if(!is_object($project)) {
-        $project= Project::getVisibleById($project);
-    }
+    $project= Project::getVisibleById($item->project);
 
     global $g_wiki_project;
     $g_wiki_project= $project;
 
     $blocks= wiki2blocks($text);
 
-    $str_item_id= is_null($item_id)
+    $str_item_id= is_null($item->id)
                 ? ''
-                : 'item_id=' . $item_id;
+                : 'item_id=' . $item->id;
 
 
     $str_field  = is_null($field_name)
                 ? ''
                 : 'field_name=' . $field_name;
 
-    $str_editable = $item_id
-                ? 'editable'
-                : '';
-
+    $str_editable = $editable
+                  ? 'editable'
+                  : '';
 
     $tmp= array();
     $tmp[]= "<div class='wiki $str_editable' $str_item_id $str_field><div class=chapter>";
@@ -1994,7 +2025,7 @@ function wiki2html($text, $project=NULL, $item_id=NULL, $field_name=NULL)
 * - NULL if nothing was changed
 *
 * Notes:
-* This works only for the wiki-text directly rendered before with wiki2html()
+* This works only for the wiki-text directly rendered before with wikifieldAsHtml()
 */
 function applyAutoWikiAdjustments($text_org)
 {

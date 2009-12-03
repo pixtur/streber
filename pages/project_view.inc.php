@@ -191,7 +191,18 @@ function ProjView()
     }
     echo (new PageContentOpen_Columns);
 
-    measure_stop('init2');
+    measure_stop('current milestone');
+
+    #--- write info-block ------------
+    {
+        require_once(confGet('DIR_STREBER') . 'blocks/current_milestone_block.inc.php');        
+        $block= new CurrentMilestoneBlock($project);
+        $block->render();
+    }
+
+    measure_stop('current milestone');
+
+
     measure_start('info');
 
     #--- write info-block ------------
@@ -199,13 +210,6 @@ function ProjView()
         $block=new PageBlock(array('title'=>__('Details','block title'),'id'=>'summary'));
         $block->render_blockStart();
         echo "<div class=text>";
-        /*
-        if($project->description) {
-        	$diz= wiki2html($project->description, $project);
-            #$diz=preg_replace("/\n\r/","<br>#",$project->description);
-            echo "$diz";
-        }
-        */
 
         if($project->company) {
             require_once(confGet('DIR_STREBER') . "db/class_company.inc.php");
@@ -337,86 +341,25 @@ function ProjView()
 
 
     #--- description ----------------------------------------------------------------
-    if($project->description != "") {
-        $block=new PageBlock(array(
-            'title'=>__('Description'),
-            'id'=>'description',
-            #'reduced_header'=>true,
-
-        ));
-        $block->render_blockStart();
+    {
 
         echo "<div class=description>";
-        if($editable) {
-            echo  wiki2html($project->description, $project, $project->id, 'description');
-        }
-        else {
-            echo  wiki2html($project->description, $project);
-        }
+
+        echo wikifieldAsHtml($project, 'description', 
+                            array(
+                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                                'editable' => 'false',
+                            ));
+
         echo "</div>";
-
-        $block->render_blockEnd();
-
-        ### update task if relative links have been converted to ids ###
-        if( checkAutoWikiAdjustments() ) {
-            $project->description= applyAutoWikiAdjustments( $project->description );
-            $project->update(array('description'),false);
-        }
     }
 
 
 	#--- news -----------------------------------------------------------
-    if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) {
-        
-		if($news= $project->getTasks(array(  # NOTE: get all items with show news option (not just DOCU)
-            'is_news'  => 1,
-            'order_by'  => 'created DESC',
-        )))  {
-            
-            $block=new PageBlock(array(
-                'title'=>__('News'),
-                'id'=>'news',
-            ));
-            $block->render_blockStart();
-    
-            echo "<div class='text'>";
-            
-            $count = 0;
-            foreach($news as $n) {
-                if($count++ >= 3) {
-                    break;
-                };
-                echo "<div class='newsBlock'>";
-                if($creator= Person::getVisibleById($n->created_by)) {
-                    $link_creator= ' by '. $creator->getLink();
-                }
-                else {
-                    $link_creator= '';
-                }
-                echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
-                
-                if($project->validateEditItem($n, false)) {
-                    echo  wiki2html($n->description, $project, $n->id, 'description');   
-                }
-                else {
-                    echo  wiki2html($n->description, $n);
-                }
-
-                echo "<span class=comments>";
-                if($comments= $n->getComments()) {
-                     echo  $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id));
-                }
-                echo " | ";
-                echo $PH->getLink("commentNew", __("Add comment"), array('parent_task' => $n->id) );
-                echo "</span>";
-                
-                echo "</div>";                
-            }   
-            echo "</div>";
-    
-            $block->render_blockEnd();
-        }
-
+    if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) 
+    {
+        require_once(confGet('DIR_STREBER') . './blocks/project_news_block.inc.php');
+        print new ProjectNewsBlock($project);
     }
 
 

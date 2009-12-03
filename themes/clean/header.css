@@ -1,0 +1,371 @@
+
+/* === header =========================================== */
+#header {
+ background:    #5E6867 url(layout/bg_header.png) bottom left repeat-x;
+}
+
+#header #logo {
+ float:         left;
+ width:         7em;
+}
+#header #logo .text {
+ padding-left:  0.6em;
+}
+#header #logo .text a {
+ text-decoration:none;
+ color:          #fff;
+}
+
+#header #logo .text a .extend {
+ font-size:9pt;
+ vertical-align:top;
+}
+
+
+/*==== tabs ============================================= */
+div#sections {
+ padding-top:   5px;
+ padding-left:  5px;
+ width:         60em;
+}            
+
+div#sections span.section {
+ display:       block;
+ float:         left;
+
+ font-size:     10pt;
+ font-weight:   bold;
+ background:    #B1B1B1 url(layout/bg_section_tabs.png) bottom left repeat-x;
+ padding:       0.0em 0.5em;
+ line-height:   170%;
+ margin:        3px 0px 0px 2px;
+ padding-bottom: 1px;
+}
+
+div#sections span.section a {                
+ color:         #000;   
+}
+
+div#sections span.section:hover,
+div#sections span.section.current {
+ background:    #D7DADB none;
+ margin-top:    0px;
+ padding-top:   3px;
+}
+
+div#sections span.section input.searchfield {       /* seach field */
+ width:         80px;
+ border:        0px;
+ background:    #DDDDDD url(layout/bg_header_search_field.png)  no-repeat top left;
+ font-size:     9pt;
+ padding:       2px 1px 0px 2px;
+}
+div#sections span.section  input:focus {
+ width:         140px;
+}
+
+
+#header #user_functions {
+    position:       absolute;
+    right:          0px;
+    z-index:        1;
+}
+
+
+
+
+
+/*--- login -------------------------------------------------*/
+#header #user_functions {
+    float:          right;
+    padding:        2px 0.61em 0px 0px;
+    
+    color:          #fff;
+    text-align:     right;
+    white-space:    nowrap;
+    font-size:      8pt;
+    line-height:    95%;
+    display:        inline;
+}
+
+#header #user_functions a {
+    color:          #fff;
+    text-decoration:none;
+}
+#header #user_functions a.name {
+    font-weight:    bold;
+}
+
+#header #user_functions a:hover {
+    color:          #ff8;
+    text-decoration:underline;
+}
+
+
+/*--- sub-navigation (breadcrumbs and options) --------------------------*/
+div#nav_sub {
+ clear:         both;
+ margin:        0px;
+ padding:       2px 1.22em 0px 0px;
+ background:    #D7DADB url(layout/bg_header_pages.png) repeat-x bottom left;
+ font-size:     13px;
+ line-height:   26px;
+ /*height:        25px;*/
+ /*overflow:      hidden;*/
+}
+div#nav_sub a {
+ color:         #000;
+ text-decoration:none;
+ padding:       5px 3px 5px 6px;
+ font-weight:   bold;
+ white-space: nowrap;
+}
+
+/*
+div#nav_sub a.project {
+ background-image:  url(items/item_project.png) no-repeat center left;
+ padding-left:      18px;
+}
+div#nav_sub a.person {
+ background-image:url(items/item_person.png) no-repeat center left;
+ padding-left:18px;
+}
+*/
+
+
+
+div#nav_sub span.breadcrumbs a{
+ background:        url(layout/bg_header_breadcrumb.png) no-repeat bottom right;
+ padding-right:     20px;
+}
+
+div#nav_sub span.breadcrumbs a.current {
+ background:        url(layout/bg_header_breadcrumb_current.png) no-repeat bottom right;
+ color:             #000;
+}
+
+div#nav_sub span.breadcrumbs a.parent_of_current {
+ background:        url(layout/bg_header_breadcrumb_precurrent.png) no-repeat bottom right;
+ color:             #000;
+}
+
+
+div#nav_sub span.options {
+ padding-left:      1em;
+}
+
+div#nav_sub span.options a {
+ color:             #000;
+ font-weight:       bold;
+ padding-left:      0.7em;
+ padding-right:     0.7em;
+ padding-top:       2px;
+ background:        url(layout/bg_header_pages_option.png) no-repeat bottom right;
+
+}
+
+div#nav_sub em {
+ display:           none;
+}
+
+
+div#nav_sub span.options a.current {
+ color:             #000;
+ background-color:  #fff;
+ background-image:  none;
+ border:            1px solid #ABAEAE;
+ border-bottom-width:     0px;
+
+}
+
+div#nav_sub span.breadcrumbs a:hover {
+ text-decoration:   underline;
+}
+
+div#nav_sub span.options a:hover {
+ background-color:#e8e8e8;
+}
+
+div#nav_sub span.help {
+    text-align:right;
+    margin-right:0px;
+    position:absolute;
+    right:10px;
+}
+
+/* ==== feedback-line ==========================================*/
+
+div.messages {
+    background: #F6F9E0 url(layout/bg_header_messages.png) bottom left repeat-x;
+    border-bottom:1px dashed #888;
+    padding:0.8em;
+    color:#000;
+    /*font-size:80%;*/
+    
+}
+
+div.messages p span.type{
+    margin:0px;
+    padding:0px;
+    padding-left:18px;
+    color:#200;
+    font-weight:bold;
+    background-position:center left;
+    background-repeat:no-repeat;
+}
+
+div.messages p.note span.type {
+    display:none;
+}
+
+div.messages p.warning span.type{
+    background-image:url(img/icon_feedback_warning.png);
+}
+
+div.messages p.error span.type{
+    background-image:url(img/icon_feedback_error.png);
+}
+
+div.messages p.hint span.type{
+    background-image:url(img/icon_feedback_hint.png);
+}
+
+div.messages a {
+    border-bottom:1px dotted #888;
+}
+
+div.messages a:hover {
+    border-bottom:1px dotted #f00;
+}
+
+
+#message b{
+    font-weight:normal;
+    font-style:italic;
+}
+
+/**
+* quick project selector in tabs
+*/
+span.selector {
+ background-image:  url(layout/marker_context_menu.png);
+ background-repeat: no-repeat;
+ cursor:            pointer;
+ padding:     		0px 4px 0px 4px;
+ margin-left: 		4px;
+ background-position: right center;
+ border-left: 		1px dotted #777;
+}
+
+span.selector:hover {
+ background-image: url(layout/marker_context_menu_hover.png);
+}
+
+
+span.selectorlist {
+ display:           inline;
+ z-index:           5000;
+ position:          absolute;
+}
+
+
+span.selectorlist span.selectorlist_content {
+ position:          relative;
+ top:               -2px;
+ left:              5px;
+ display:           block;
+ border:            1px solid #888;
+ background:        #eee;
+ padding:           2px;
+ margin:            20px 0px 0px 0px;
+ /*font-size:         90%;*/
+ text-align: 		left;
+ width: 			180px;
+}
+
+span.selectorlist span.selectorlist_content a {
+ display:           block;
+ text-align:        left;
+ font-weight:       normal;
+}
+
+span.selectorlist span.selectorlist_content div.companies:hover {
+ background-color:  #fff;
+ /*color:             #fff;*/  /* this has no effect with Ghecko ???*/
+}
+
+span.selectorlist span.selectorlist_content div.companies {
+	padding: 2px;
+ 	margin:  0px 0px 0px 0px;	
+	border-top: 1px dotted #000; 	
+}
+
+span.selectorlist span.selectorlist_content div.projects {
+	padding:       2px;
+	margin:	       0px;
+}
+
+span.selectorlist span.selectorlist_content div.projects ul {
+	margin: 0px 0px 5px 30px;
+	padding: 0px 2px 2px 2px;
+}
+
+span.selectorlist span.selectorlist_content div.projects ul li:hover {
+ background-color:  #fff;
+}
+
+
+
+    /*----- page functions ------------------*/
+    div.page_functions {
+        display:inline;
+        position:absolute;
+        right:0;
+        vertical-align:top;
+        padding:1px 3px 3px 55px;
+        margin-top:1px;
+        z-index:500;
+        background-image:url(img/bg_pagefunctions.png);
+        background-position:bottom left;
+        background-repeat:no-repeat;
+        /*font-family:"Tahoma";*/
+        /*font-size:80%;*/
+    }
+
+    div.page_functions img {
+        display:none;
+    }
+    div.page_functions a {
+        color:#000;
+        margin-right:9px;
+        padding-right:10px;
+        margin-left:2px;
+        text-decoration:none;
+        border-right:1px solid #aaa;
+    }
+    div.page_functions a:hover{
+        text-decoration:underline;
+    }
+
+    div.page_functions a.last {
+        border-right-width:0px;
+        margin-right:0px;
+    }
+
+    /*
+    div.page_functions2 span {
+        display:inline;
+        vertical-align:super;
+        font-size:70%;
+        padding-right:10px;
+        padding-left:2px;
+
+    }
+    */
+
+    div.page_functions span.group {
+        color:#888;
+        padding-left:15px;
+        padding-right:3px;
+    }
+

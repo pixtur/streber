@@ -158,7 +158,7 @@ function effortView()
 
         if($effort->description != "") {
             echo '<div class="text">';
-            echo wiki2html($effort->description, $project->id);
+            echo wikifieldAsHtml($effort, 'description');
 
             ### update task if relative links have been converted to ids ###
             if( checkAutoWikiAdjustments() ) {
@@ -390,7 +390,7 @@ function effortViewMultiple()
 
             if($effort->description != "") {
                 echo '<div class="text">';
-                echo wiki2html($effort->description, $effort);
+                echo wikifieldAsHtml($effort, 'description');
 
 
                 ### update task if relative links have been converted to ids ###
@@ -608,7 +608,6 @@ function effortEdit($effort=NULL)
     {
         $block=new PageBlock(array(
             'id' =>'edit',
-            'reduced_header' => true,
         ));
         $block->render_blockStart();
 
@@ -685,7 +684,7 @@ function effortEdit($effort=NULL)
         }
 
         ### public-level ###
-        if(($pub_levels= $effort->getValidUserSetPublevel())
+        if(($pub_levels= $effort->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             $form->add(new Form_Dropdown('effort_pub_level',  __("Publish to"),$pub_levels,$effort->pub_level));
         }
@@ -798,7 +797,7 @@ function effortEditSubmit()
 
         ### not a new effort ###
         if($effort->id) {
-             if($pub_level > $effort->getValidUserSetPublevel() ) {
+             if($pub_level > $effort->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }
@@ -999,7 +998,7 @@ function effortEditMultiple()
         
         ### public level ###
         {
-            if(($pub_levels = $effort->getValidUserSetPublevel()) && count($pub_levels)>1) {
+            if(($pub_levels = $effort->getValidUserSetPublicLevels()) && count($pub_levels)>1) {
                 if(isset($different_fields['pub_level'])) {
                     $pub_levels[('-- ' . __('keep different'). ' --')] = -1;
                     $form->add(new Form_Dropdown('effort_pub_level',__("Publish to"),$pub_levels,  -1));
@@ -1087,7 +1086,7 @@ function effortEditMultipleSubmit()
             
             $pub_level = get('effort_pub_level');
             if(!is_null($pub_level) && $pub_level != -1 && $pub_level != $effort->pub_level){
-                if($pub_level > $effort->getValidUserSetPublevel() ) {
+                if($pub_level > $effort->getValidUserSetPublicLevels() ) {
                      $PH->abortWarning('invalid data',ERROR_RIGHTS);
                 }
                 $effort->pub_level = $pub_level;

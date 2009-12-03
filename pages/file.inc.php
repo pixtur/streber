@@ -163,7 +163,7 @@ function fileView()
         }
         echo "<div class=labeled><label>". __('Download'). "</label><span>". $PH->getLink('fileDownload', $file_latest->org_filename ,array('file'=>$file_latest->id))."</span></div>";
 
-        $str= wiki2html($file_latest->description, $project);
+        $str= wikifieldAsHtml($file_latest, 'description');
         echo "<br>";
         echo "$str";
 
@@ -208,7 +208,7 @@ function fileView()
                     echo "</a></div>";
                 }
 
-                $str= wiki2html($of->description, $project);
+                $str= wikifieldAsHtml($of, 'description');
                 echo "$str";
 
                 echo "<div class=labeled><label>" . __('Filesize') .  "</label><span>$of->filesize bytes</span></div>";
@@ -422,7 +422,6 @@ function fileEdit($file=NULL)
 
     $block=new PageBlock(array(
         'id'    =>'edit',
-        'reduced_header' => true,
     ));
     $block->render_blockStart();
 
@@ -469,7 +468,7 @@ function fileEdit($file=NULL)
         }
 
         ### public-level ###
-        if(($pub_levels= $file->getValidUserSetPublevel())
+        if(($pub_levels= $file->getValidUserSetPublicLevels())
             && count($pub_levels)>1) {
             $form->add(new Form_Dropdown('file_pub_level',  __("Publish to"),$pub_levels,$file->pub_level));
         }
@@ -577,7 +576,7 @@ function fileEditSubmit()
 
         ### not a new file ###
         if($file->id) {
-             if($pub_level > $file->getValidUserSetPublevel() ) {
+             if($pub_level > $file->getValidUserSetPublicLevels() ) {
                  $PH->abortWarning('invalid data',ERROR_RIGHTS);
              }
         }
@@ -879,7 +878,6 @@ function FilesMoveToFolder()
         {
             require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
             $list= new ListBlock_tasks();
-            $list->reduced_header= true;
             $list->query_options['show_folders']= true;
             #$list->query_options['folders_only']= true;
             $list->query_options['project']= $project->id;

@@ -17,7 +17,6 @@ require_once(confGet('DIR_STREBER') . './render/render_list.inc.php');
 */
 class ListBlock_searchresults extends ListBlock
 {
-    public  $bg_style="bg_misc";
     private  $list_changes_newer_than= '';                      # timestamp
 
     public function __construct() {
@@ -26,7 +25,6 @@ class ListBlock_searchresults extends ListBlock
         global $auth;
 
         $this->id='changes';
-        $this->reduced_header=true;
 
 		$this->title=__("Changes");
 		$this->id="changes";

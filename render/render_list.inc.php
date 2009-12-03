@@ -1311,14 +1311,27 @@ class ListBlock extends PageBlock
     function render_tfoot()
     {
         global $PH;
-        echo "</table></div>";
+        echo '</table>';
+        echo '</div>';  #close table container
+    }
+    
+    /**
+    * overwrites block function
+    * called by render_blockEnd()
+    */
+    function render_blockFooter() 
+    {
+        global $PH;
+        #echo "x6</div>x7";  #close block_content
+        #echo "</div>";  #close block_content
+
         #--- footer extras ----
 
         $context_menu_def="";
         $context_menu_rows="";
 
         if($this->show_footer && ($this->show_pages || $this->show_functions || $this->show_icons)) {
-            echo "<div class=footer>";
+            echo "<div class=block_footer>";
 
             #--- icons --------
             if($this->show_icons && $this->functions) {
@@ -1393,7 +1406,7 @@ class ListBlock extends PageBlock
             #    echo "<span class=items>20 of 234&nbsp;&nbsp;&nbsp;</span>";
             #    echo "<span class=pages>  Page 1 2 3 4</span>";
             #}
-            echo "</div> <!-- end list footer-->";
+            echo "</div><!-- end list footer-->";
         }
 
         #--- context menu ------------
@@ -1406,8 +1419,7 @@ class ListBlock extends PageBlock
                 }
             }
         }
-
-        parent::render_blockEnd();
+        #parent::render_blockEnd();
 
         #--- write context-menu-definition -------------
         if($context_menu_def) {
@@ -1434,11 +1446,11 @@ class ListBlock extends PageBlock
     * if no items to show, display alternative content
     */
     public function render_tfoot_empty() {
-        echo "</table></div><div class=empty>{$this->no_items_html}"
+        echo "</table></div></div><div class=empty>{$this->no_items_html}"
+            ."</div>"
             ."</div>"
             ."</div>";
     }
-
 
     /**
     * render complete list-block automatically
@@ -1592,9 +1604,12 @@ class ListBlock extends PageBlock
     */
     function renderListHtml(&$list=NULL)
     {
-        $this->render_header();
         if($list || !$this->no_items_html) {
-            $this->render_thead();
+            $this->render_header();
+
+            if(!$this->reduced_header) {
+                $this->render_thead();                
+            }
             
             if($list) {
                 ### grouping ###
@@ -1617,9 +1632,16 @@ class ListBlock extends PageBlock
                 }
             }
             $this->render_tfoot();
+            parent::render_blockEnd();            
         }
         else {
-            $this->render_tfoot_empty();
+            parent::render_blockStart();
+            echo '<div class="no_content">';
+            echo $this->no_items_html;
+            echo '</div>';
+            parent::render_blockEnd();
+            
+            #$this->render_tfoot_empty();
         }
     }
 

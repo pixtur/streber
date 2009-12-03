@@ -57,7 +57,6 @@ class ListBlock_tasks extends ListBlock
 		parent::__construct(array());
 
         $this->id           =  'tasks';
-        $this->bg_style     ='bg_projects';
         $this->no_items_html=NULL;
 		$this->title        = __("Tasks");
 
@@ -466,20 +465,18 @@ class ListBlock_tasks extends ListBlock
 		            {
     		            echo '<div class=description>&nbsp;';
     		            if($t->description)  {
-    		                echo "<p>".wiki2html($t->description, $project)."</p>";
+    		                echo "<p>".wikifieldAsHtml($t, 'description')."</p>";
     		            }
-
-
 
 		                ### steps ###
     		            if($ir && isset($ir->steps_to_reproduce) && $ir->steps_to_reproduce)  {
-    		                echo "<p>".wiki2html($ir->steps_to_reproduce, $project)."</p>";
+    		                echo "<p>".wikifieldAsHtml($ir, 'steps_to_reproduce')."</p>";
     		            }
     		            if($ir && isset($ir->expected_result) && $ir->expected_result)  {
-    		                echo "<p>".wiki2html($ir->expected_result, $project)."</p>";
+    		                echo "<p>".wikifieldAsHtml($ir, 'expected_result')."</p>";
     		            }
     		            if($ir && isset($ir->suggested_solution) && $ir->suggested_solution)  {
-    		                echo "<p>".wiki2html($ir->suggested_solution, $project)."</p>";
+    		                echo "<p>".wikifieldAsHtml($ir, 'suggested_solution')."</p>";
     		            }
 
 
@@ -504,7 +501,7 @@ class ListBlock_tasks extends ListBlock
     		                    echo '<p>'. asHtml($c->name) . '</p>';
     		                }
     		                if($c->description) {
-    		                    echo "<p>". wiki2html($c->description, $project). "</p>";
+    		                    echo "<p>". wikifieldAsHtml($c->description, $project). "</p>";
     		                }
     		            }
     		            echo '&nbsp;</div>';
@@ -542,6 +539,7 @@ class ListBlock_tasks extends ListBlock
                 $this->summary= '';
             }
     		$this->render_tfoot();
+            $this->render_blockEnd();            
         }
     }
 
@@ -999,6 +997,7 @@ class ListBlockCol_TaskName extends ListBlockCol
 		}
 
         ### descriptions ###
+        /*
         if($task->description && !$this->use_short_names) {
             $html_diz= asHtml($task->description);
             if(strlen($html_diz) > TEXT_LEN_PREVIEW) {
@@ -1030,7 +1029,7 @@ class ListBlockCol_TaskName extends ListBlockCol
                 $attachments='<img title="' . sprintf(__('Task has %s attachments'), count($files))  . '" src="' . getThemeFile("items/item_attachment.png"). '">';
             }
          }
-		
+		*/
 		
 		 
         ### task with zero-id is project-root ###
@@ -1076,11 +1075,11 @@ class ListBlockCol_TaskName extends ListBlockCol
                     $html_indention= "style='padding-left:".(1.2 * ($no_folder+intval($task->level)))."em;'";
                 }
 
-                echo "<td $html_indention>{$toggle}$link{$description}{$discussion}{$attachments}</td>";
+                echo "<td $html_indention>{$toggle}$link</td>";
 
             }
             else {
-                echo "<td>{$link}{$description}{$discussion}{$attachments}</td>";
+                echo "<td>{$link}</td>";
             }
         }
         measure_stop('col_taskname');

@@ -456,7 +456,7 @@ class PageElement extends BaseObject
 
     #--- render -------------------------------------
     # note: derived classes should not implement render() but __toString()
-    public function render(&$arg=false)
+    public function render($arg=false)
     {
         if($arg) {
             return $this->__toString($arg);
@@ -514,8 +514,6 @@ class PageHtmlStart extends PageElement {
         if(isset($auth->cur_user->language)) {
             $buffer.='<meta http-equiv="Content-Language" content="'.$auth->cur_user->language.'">';
         }
-        
-
         
         $buffer.='<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">'
         .'<META HTTP-EQUIV="EXPIRES" CONTENT="-1">'
@@ -1177,7 +1175,6 @@ class PageContentOpen_Columns extends PageElement
         $this->page->content_open=true;
         $this->page->content_columns=true;
         $buffer="";
-        #$buffer.= '<form name="my_form" action="index.php" method="post">';
 
         ### pass from-handle? ###
         if(!$PH->cur_page_md5) {
@@ -1240,7 +1237,6 @@ class PageContentClose extends PageElement
         $buffer.= '<input type="hidden" name="go" value="'.$go.'">';
         $buffer.= "</form>";
 
-
         return $buffer;
     }
 }
@@ -1256,7 +1252,6 @@ class PageContentNextCol extends PageElement {
             trigger_error("No content-table to close. Wrong HTML-structure?", E_USER_NOTICE);
         }
         $this->page->content_col++;
-        #$buffer="</td><td id=\"c{$this->page->content_col}\">";
         $buffer='</div><div id="c2">';
         return $buffer;
     }
@@ -1269,8 +1264,6 @@ class PageContentNextCol extends PageElement {
 */
 class PageFooter extends PageElement
 {
-
-
     public function __toString()
     {
         global $TIME_START;

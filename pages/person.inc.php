@@ -376,7 +376,6 @@ function personList()
         ));
 
         $list= new ListBlock_persons();
-        $list->reduced_header= true;
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
@@ -461,7 +460,6 @@ function personList()
         ));
 
         $list= new ListBlock_persons();
-        $list->reduced_header= true;
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
@@ -536,7 +534,6 @@ function personList()
         ));
 
         $list= new ListBlock_persons();
-        $list->reduced_header= true;
         $list->add_col( new listBlockColDate(array(
             'key'=>'modified',
             'name'=>__('deleted')
@@ -692,9 +689,6 @@ function personView()
         $block=new PageBlock(array('title'=>__('Summary','Block title'),'id'=>'summary'));
         $block->render_blockStart();
         echo "<div class=text>";
-        #if($person->description) {
-        #    echo wiki2html($person->description);
-        #}
 
         if($person->mobile_phone) {
             echo "<div class=labeled><label>" . __('Mobile','Label mobilephone of person'). '</label>'. asHtml($person->mobile_phone). '</div>';
@@ -806,7 +800,6 @@ function personView()
         $block=new PageBlock(array(
             'title'=>__('Person details'),
             'id'=>'persondetails',
-            #'reduced_header'=>true,
 
         ));
         $block->render_blockStart();
@@ -814,7 +807,7 @@ function personView()
 
         echo "<div class=text>";
 
-        echo wiki2html($person->description);
+        echo wikifieldAsHtml($person, 'description');
 
         echo "</div>";
 
@@ -2013,7 +2006,6 @@ function personEdit($person=NULL)
     ### form background ###
     $block=new PageBlock(array(
         'id'    =>'person_edit',
-        'reduced_header' => true,
     ));
     $block->render_blockStart();
 

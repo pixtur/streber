@@ -22,7 +22,6 @@ class ListBlock_comments extends ListBlock
 		parent::__construct();
 
         $this->id       ='comments';
-        $this->bg_style ='bg_misc';
 
         $this->no_items_html=$PH->getLink('commentNew');;
 
@@ -249,13 +248,8 @@ class ListBlockCol_CommentText extends ListBlockCol
     			#	}
     			#}
     		}
-            if($editable) {
-    		    $diz= wiki2html($obj->description, $project, $obj->id, 'description');
-    		}
-    		else {
-    		    $diz= wiki2html($obj->description, $project);
-    		}
-
+    		
+    		$diz= wikifieldAsHtml($obj, 'description');
 
             if($diz) {
 	    	    $column_text.= "<div class=comment_text>$diz</div>";

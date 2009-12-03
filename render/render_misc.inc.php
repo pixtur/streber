@@ -1041,6 +1041,16 @@ function renderTimeAgo($t)
     }
 }
 
+function renderPubLevelName($pub_level)
+{
+    global $g_pub_level_names;
+    if(isset($g_pub_level_names[$pub_level])) {
+        return $g_pub_level_names[$pub_level];
+    }
+    else {
+        return '';
+    }
+}
 
 
 /**

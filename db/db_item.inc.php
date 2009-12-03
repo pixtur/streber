@@ -434,6 +434,7 @@ abstract class DbItem {
             $ip->feedback_requested_by = 0;
             $ip->update();
         }
+        $this->update();
     }
 
 
@@ -1027,6 +1028,8 @@ class DbProjectItem extends DbItem {
 
     /**
     * mark_delete (sets object-state to -1)
+    *
+    * returns true on success
     */
     public function delete()
     {
@@ -1083,7 +1086,7 @@ class DbProjectItem extends DbItem {
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -1116,6 +1119,8 @@ class DbProjectItem extends DbItem {
 
     /**
     * return the project object the current user has to this item
+    *
+    * this can be used to find the max pub_level a user can set
     */
     public function getProjectPerson() {
         global $auth;
@@ -1153,7 +1158,7 @@ class DbProjectItem extends DbItem {
     * - reducing the pub_level is like deleting an item for others
     * - raising the pub_level might reveal information to outsiders
     */
-    public function getValidUserSetPublevel()
+    public function getValidUserSetPublicLevels()
     {
         global $g_pub_level_names;
 
@@ -1570,10 +1575,11 @@ class DbProjectItem extends DbItem {
                     $buffer.= join("\n", $do->orig);
                 }
                 else if($do->type == 'add') {
-                    $buffer.= "\n[added]" . join("\n", $do->closing) . "[/added]\n";
+                    $buffer.= "\n[added word]" . join("\n", $do->closing) . "[/added word]\n";
                 }
                 else if($do->type =='delete') {
-                    $buffer.= "\n[deleted something]\n";
+                    #$buffer.= "\n[deleted something]\n";
+    		        $buffer.= '[deleted word]' . asHtml($do->closing) . '[/deleted word]';
                 }
                 else if($do->type =='change') {
 
@@ -1616,7 +1622,8 @@ class DbProjectItem extends DbItem {
     		            }
     		        }
                     #$buffer.= "\n[changed]" . join("\n", $do->closing) . "[/changed]\n";
-                    $buffer.= "\n[changed]" . $buffer_new . "[/changed]\n";
+                    #$buffer.= "\n[changed]" . $buffer_new . "[/changed]\n";
+                    $buffer.=  $buffer_new;
                 }
             }
         }

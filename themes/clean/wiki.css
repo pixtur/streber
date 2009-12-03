@@ -291,6 +291,8 @@ div.wiki span.updatemarker {
   font-weight: bold;
   font-size: 70%;
   -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 
 
@@ -298,6 +300,10 @@ div.wiki span.updatemarker {
 div.wiki span.wiki_word_change.added {
   border: 1px solid #ff9000;
   -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  border-width: 0px 3px 1px 3px;
+  background-color: #ffe0cc; /*#E57700;*/  
 }
 div.wiki span.wiki_word_change.added span.marker {
   border-bottom: 1px solid #ff9000;
@@ -305,7 +311,7 @@ div.wiki span.wiki_word_change.added span.marker {
   background-color: #ff9000; /*#E57700;*/  
   font-family: Tahoma, sans-serif;
   font-weight: bold;
-  -padding-left:  0.02em;
+  padding-left:  0.02em;
 }
 
 div.wiki span.wiki_word_change.deleted {

@@ -22,7 +22,6 @@ class ListBlock_persons extends ListBlock
 		parent::__construct($args);
 
         $this->id='persons';
-        $this->bg_style='bg_people';
 		$this->title=__("Your related persons");
 
 

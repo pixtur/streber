@@ -32,12 +32,11 @@ class Block_DocuNavigation extends PageBlock
 {
     public  $current_task   = NULL;
     public  $project_id     = NULL;     # object
-    public  $reduced_header = true;
     private $tasks          = array();
     public  $root           = NULL;
 
     public function __construct($args=NULL) {
-        $this->title= __("Documentation");
+        $this->title= __("Topics");
         $this->id = 'parent_task';
         parent::__construct($args);
     }

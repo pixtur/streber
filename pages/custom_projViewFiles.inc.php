@@ -78,7 +78,7 @@ function projViewFiles()
         echo "<div class=text>";
 
         if($task= Task::getVisibleById(3645)) {
-            echo wiki2html($task->description, $project);
+            echo wikifieldAsHtml($task, 'description');
         }
 
         echo "</div>";
