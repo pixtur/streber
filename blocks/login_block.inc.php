@@ -33,6 +33,7 @@ class LoginBlock extends PageBlock
     function render_blockFooter() 
     {
         global $PH;
+        global $g_valid_login_params;
         
         $form=new PageForm();
         $form->add(new Form_Input('login_name',         __('Nickname',    'label in login form'),'') );
