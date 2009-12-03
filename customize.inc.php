@@ -12,7 +12,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 #confChange('DISPLAY_ERROR_LIST', 'DETAILS');
 #confChange('CHECK_IP_ADDRESS', true);
 confChange('USE_MOD_REWRITE', true);
-confChange('USE_PROFILER', true);
+#confChange('USE_PROFILER', true);
 confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 #confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 

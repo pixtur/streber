@@ -76,8 +76,8 @@ class TestPagesAll extends WebTestCase {
 
                 TestEnvironment::prepare('fixtures/project_setup.sql');
 
+                $params=array();
                 if(isset($handle->test_params)) {
-                    $params=array();
                     foreach($handle->test_params as $param=>$value) {
                         if(isset($test_params[$value])){
                             #echo "using param $param=$test_params[$value]<br>";
@@ -89,7 +89,9 @@ class TestPagesAll extends WebTestCase {
                 else {
                     $url= $url_streber . $PH->getUrl($key);
                 }
-                echo "<b>$url</b><br>";
+                echo "<b>$url</b>";
+                print_r($params);
+                echo "<br>";
                 $this->assertTrue($this->get($url)         , "getting $url (%s)");
                 $this->assertNoUnwantedPattern('/PHP Error |<b>Fatal error<\/b>|<b>Warning<\/b>|<b>Error<\/b>|<b>Notice<\/b>|<b>Parse error<\/b>/i',    'php-error found (%s)' );
                 $this->assertNoUnwantedPattern('/' . '%' . '%' . '/i',     'debug output found (%s)' );

@@ -23,7 +23,7 @@ require_once(dirname(__FILE__) . '/class.test_environment.php');
 
 #confChange('DB_TABLE_PREFIX_UNITTEST', '');   # overwrite development database!!!
 
-#TestEnvironment::prepare('fixtures/project_setup.sql');
+TestEnvironment::prepare('fixtures/project_setup.sql');
 
 $grouptest = new GroupTest('Efforts');          $grouptest->addTestFile('test_efforts.php');    $grouptest->run(new HtmlReporter());
 $grouptest = new GroupTest('Item visibility');  $grouptest->addTestFile('test_item_visibility.php');    $grouptest->run(new HtmlReporter());
@@ -31,5 +31,5 @@ $grouptest = new GroupTest('Login logic');      $grouptest->addTestFile('test_pa
 $grouptest = new GroupTest('Render all pages'); $grouptest->addTestFile('test_pages_all.php');          $result= $grouptest->run(new HtmlReporter()); 
 
 #TestEnvironment::prepare('fixtures/remove_tables.sql');
-#
+
 ?>
