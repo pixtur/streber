@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 #
 # scan list-strings...
 #

@@ -590,6 +590,9 @@ class Auth
                 #"", #(psbot/0.1 (+http://www.picsearch.com/bot.html)) 
                 '/ Charlotte\/?.?/',  #Mozilla/5.0 (compatible; Charlotte/1.1; http://www.searchme.com/support/)
                 "/http:\/\/discoveryengine.com\/discobot.html/", #Mozilla/5.0 (compatible; discobot/1.0; +http://discoveryengine.com/discobot.html)
+                "/Twiceler/",
+                "/DotBot/",
+                
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {

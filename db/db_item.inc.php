@@ -762,13 +762,16 @@ class DbProjectItem extends DbItem {
                 return true;
             }
         }
+        else if($this->type == ITEM_PERSON) {
+            return $this->isEditable();
+        }
         else if($p= Project::getById($this->project)) {
             if($p->validateEditItem($this, false)) { # do not abort on error
                 return true;
             }
         }
         else {
-            trigger_error("issue without project?",E_USER_WARNING);
+            trigger_error("item without project? ($this->id, $this->project)",E_USER_WARNING);
         }
         return false;
     }

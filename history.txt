@@ -1,5 +1,25 @@
 streber-version-history
 
+version v0.91 (revision 485)
+=============
+major:
+- implemented new style and removed block collapsing
+- fixed new folder as documentation setting
+- highlight wiki-differences inside wiki
+- added word level diff
+- add also show your changes to project change block
+- implemented image-caching for scaled images
+
+minor:
+- fixed unit tests
+- fixed g_login_params bug
+- removed deprecated background styles
+- started to split reusable blocks into /blocks/*
+- refactored wikiFieldAsHtml to automatically check if editable
+- standard way to include files added
+- updated language change files and polish language
+
+
 version v0.0902
 ===============
 - fix deletion of error.log.php at upgrades

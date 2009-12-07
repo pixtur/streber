@@ -40,20 +40,6 @@ function ProjView()
 		return;
 	}
 
-/*
-	### get current project ###
-    $id=getOnePassedId('prj','projects_*');
-    if($project= Project::getEditableById($id)) {
-        $editable= true;        
-    }
-    else if ($project= Project::getVisibleById($id)) {
-        $editable= false;        
-    }
-    else {
-        $PH->abortWarning(__("invalid project-id"));
-		return;
-	}
-	*/
 
     ### define from-handle ###
     $PH->defineFromHandle(array('prj'=>$project->id));
@@ -177,50 +163,13 @@ function ProjView()
 
 
 	#--- news -----------------------------------------------------------
+    if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) 
     {
-		if($news= $project->getTasks(array(
-            'order_by'  => 'created DESC',
-            'is_news'  => 1,
-        )))  {
-            
-            $block=new PageBlock(array(
-                'title'=>__('News'),
-                'id'=>'news',
-    
-            ));
-            $block->render_blockStart();
-    
-            echo "<div class='text'>";
-            
-            $count = 0;
-            foreach($news as $n) {
-                if($count++ >= 3) {
-                    break;
-                };
-                echo "<div class='newsBlock'>";
-                if($creator= Person::getVisibleById($n->created_by)) {
-                    $link_creator= ' by '. $creator->getLink();
-                }
-                echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
-                echo wikifieldAsHtml($n, 'description');
-                
-                echo "<span class=comments>";
-                if($comments= $n->getComments()) {
-                     echo  $PH->getLink('taskViewAsDocu', sprintf(__("%s comments"),count($comments)), array('tsk'=> $n->id));
-                }
-                echo " | ";
-                echo $PH->getLink("commentNew", __("Add comment"), array('parent_task' => $n->id) );
-                echo "</span>";
-                
-                echo "</div>";                
-            }   
-            echo "</div>";
-    
-            $block->render_blockEnd();
-        }
-
+        require_once(confGet('DIR_STREBER') . './blocks/project_news_block.inc.php');
+        print new ProjectNewsBlock($project);
     }
 	
+    #--- list changes (new) -----------------------------------------------------------
     {
         require_once(confGet('DIR_STREBER') . './lists/list_recentchanges.inc.php');
         printRecentChanges(array($project), false);

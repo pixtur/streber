@@ -2317,6 +2317,15 @@ $g_lang_table= array(
 'update your account settings'=>'um Ihre Einstellungen zu bearbeiten.',  
 'late|time status of a task'  =>'verspätet',  
 'remain|time status of a task'=>'bleibt',  
+'invalid Person #%s'          =>'Ungültige Person mit Id %s',
+'Reverting user changes'      =>'Änderungen der Person werden rückgängig gemacht.',
+'Skipped recently editted item #%s: <b>%s<b>'=>'überspringe bearbeitete Item #%s: %s',
+'Reverted all changes (%s) of user %s'=>'Widerrufe alle Änderungen (%s) von Person %s',
+'newly created items by this user remain unaffected.'=>'Von der Person neu erstellte Objekte bleiben unberührt.',
+'template'                    =>'Vorgabe',
+'scratch'                     =>'völlig neu',
+'Hint'                        =>'Hinweis',
+
 );
 
 ?>

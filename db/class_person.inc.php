@@ -467,6 +467,11 @@ class Person extends DbProjectItem {
         return NULL;
     }
 
+    public function isEditable() {
+        if(Person::getEditableById($this->id)) {
+            return true;
+        }
+    }
 
     public function getLink()
     {

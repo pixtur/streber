@@ -568,6 +568,7 @@ $g_languages=array(
     'fi'=>'Finish',
     'ru'=> 'Russian',
     'hu'=> 'Hungarian',
+    'zh_CN'=> 'Chinese'
 );
 $g_language_names= array_keys($g_languages);
 

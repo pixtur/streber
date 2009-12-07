@@ -186,7 +186,7 @@ CREATE TABLE `item` (
 ) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (1, 4, 3, '0000-00-00 00:00:00', '2009-01-13 08:51:31', '0000-00-00 00:00:00', 1, 1, 0, 0, 1);
 INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (2, 4, 3, '2008-12-12 14:44:56', '2009-01-13 08:52:23', '0000-00-00 00:00:00', 1, 2, 0, 0, 1);
-INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (3, 4, 3, '2008-12-12 14:47:40', '2008-12-12 14:47:40', '0000-00-00 00:00:00', 1, 1, 0, 0, 1);
+#INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (3, 4, 3, '2008-12-12 14:47:40', '2008-12-12 14:47:40', '0000-00-00 00:00:00', 1, 1, 0, 0, 1);
 INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (4, 4, 3, '2008-12-12 14:51:03', '2008-12-12 15:05:19', '0000-00-00 00:00:00', 1, 1, 0, 0, 1);
 INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (5, 4, 3, '2008-12-12 14:54:44', '2008-12-12 15:29:34', '0000-00-00 00:00:00', 1, 5, 0, 0, 1);
 INSERT INTO item (id, pub_level, type, created, modified, deleted, created_by, modified_by, deleted_by, project, state) VALUES (6, 4, 3, '2008-12-12 14:57:30', '2008-12-12 14:57:30', '0000-00-00 00:00:00', 1, 1, 0, 0, 1);

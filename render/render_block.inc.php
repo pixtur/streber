@@ -66,7 +66,6 @@ class BlockFunction
             $buffer= "<span><a href='$this->url'>$this->name</a></span>";
         }
         return $buffer;
-
     }
 
 }
