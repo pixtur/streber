@@ -15,8 +15,6 @@
  */
 
 
-
-
 /**
 * About using referred variables:
 *
@@ -54,28 +52,28 @@ function addRequestVars(&$referred_vars)
         $g_request_vars= array();
     }
 
-	if(!isset($referred_vars) ) {
-		trigger_error('filter_vars() called without proper parameters', E_USER_NOTICE);
-		return;
-	}
+    if(!isset($referred_vars) ) {
+        trigger_error('filter_vars() called without proper parameters', E_USER_NOTICE);
+        return;
+    }
 
-	foreach(array_keys($referred_vars) as $key) {
+    foreach(array_keys($referred_vars) as $key) {
 
-		### skip too long variable key (probably an hacking-attempt) ###
-		if(strlen($key) > 256) {
-			trigger_error('Skipping too long key: "'.$key.'"', E_USER_NOTICE);
-			continue;
-		}
+        ### skip too long variable key (probably an hacking-attempt) ###
+        if(strlen($key) > 256) {
+            trigger_error('Skipping too long key: "'.$key.'"', E_USER_NOTICE);
+            continue;
+        }
 
-		### skip variables with invalid name ###
-		if(preg_match("/[\\'<>\/\"]/",$key)) {
-			trigger_error('Skipping maleformed key: "'.$key.'"', E_USER_NOTICE);
-			continue;
-		}
+        ### skip variables with invalid name ###
+        if(preg_match("/[\\'<>\/\"]/",$key)) {
+            trigger_error('Skipping maleformed key: "'.$key.'"', E_USER_NOTICE);
+            continue;
+        }
 
-		$value= $referred_vars[$key];
+        $value= $referred_vars[$key];
 
-		if(is_string($value)) {
+        if(is_string($value)) {
 
             switch(confGet('CLEAN_REFERRED_VARS')) {
 
@@ -83,7 +81,7 @@ function addRequestVars(&$referred_vars)
                     while ($value != strip_tags($value)) {
                        $g_tags_removed++;
                        $value = strip_tags($value);
-                	}
+                    }
 
                 case 'HTML_ENTITIES':
                     break;
@@ -98,14 +96,14 @@ function addRequestVars(&$referred_vars)
             }
 
             ### strip length ###
-    		$value= substr( $value,0,confGet('STRING_SIZE_MAX'));
+            $value= substr( $value,0,confGet('STRING_SIZE_MAX'));
         }
         else if(! is_numeric($value) ) {
             trigger_error("Skipping referred value for '$key' of unknown type: '". gettype($value)."' ", E_USER_NOTICE);
             continue;
         }
-    	$g_request_vars[$key] = $value;
-	}
+        $g_request_vars[$key] = $value;
+    }
 }
 
 
@@ -116,7 +114,7 @@ function addRequestVars(&$referred_vars)
 * returns optional 2nd parameter, if variable isn't set
 */
 function get($key, $default_value= NULL) {
- 	global $g_request_vars;
+    global $g_request_vars;
 
     if(isset($g_request_vars[$key])) {
         $value=$g_request_vars[$key];
@@ -131,13 +129,13 @@ function get($key, $default_value= NULL) {
     }
 
     ### use wildcards ###
-	else if(isset($g_request_vars) && ereg("\*",$key)) {
-	    $key= str_replace("*",".*",$key);
+    else if(isset($g_request_vars) && preg_match("/\*/",$key)) {
+        $key= str_replace("*",".*",$key);
 
 
         $hash= array();
         foreach($g_request_vars as $ikey=>$ivalue) {
-            if(ereg($key,$ikey)) {
+            if(preg_match("/" . $key . "/", $ikey)) {
                 $hash[$ikey]=$ivalue;
             }
         }
@@ -266,8 +264,8 @@ function validateFormCaptcha($abort_on_failure = false)
 * parse a mysql-dump with multiple queries and sent it to mysql
 *
 * - adds table-prefix to all select and create-statements
-* - This function is a hack to quicky set up the db-structure. Sooner
-*   or later it will be replaces with a reall table-creation-function.
+* - This function is a hack to quickly set up the db-structure. Sooner
+*   or later it will be replaces with a real table-creation-function.
 */
 function parse_mysql_dump($url, $table_prefix, $sql_obj)
 {
@@ -810,7 +808,7 @@ function GMTToClientTime($time)
 * - $list - reference to resulting, flat list of objects
 * - $level recursion depth
 */
-function &sortObjectsRecursively(&$obj_with_children, &$list, $level=0)
+function sortObjectsRecursively(&$obj_with_children, &$list, $level=0)
 {
 
     $obj_with_children->level= $level;

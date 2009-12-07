@@ -154,7 +154,7 @@ function customHandler($number, $error_string, $file, $line, $context)
 
     ### prepend date and add line add beginning
     $prepend = "\nError " . @gmdate("YmdHis") . " ";
-    $error_buffer   = "\n" . ereg_replace("\n", $prepend, $error_buffer);
+    $error_buffer   = "\n" . preg_replace("/\n/", $prepend, $error_buffer);
 
     ### render complete output?
     if(function_exists('confGet') && confGet('DISPLAY_ERROR_FULL')) {
@@ -262,7 +262,7 @@ function log_message($message, $level= false, $traceback= false)
         $message ="\n".$message;
 
         $prepend = "\nLog " . @gmdate("YmdHis") . " ";
-        $message = ereg_replace("\n", $prepend, $message);
+        $message = preg_replace("/\n/", $prepend, $message);
 
 
         if(!error_log($message, 3, dirname(__FILE__)."/../_tmp/errors.log.php")) {

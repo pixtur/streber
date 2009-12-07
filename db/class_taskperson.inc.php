@@ -119,7 +119,7 @@ class TaskPerson extends DbProjectItem {
 
 
 
-    static function &getTaskPersons( $args=NULL)
+    static function getTaskPersons( $args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');

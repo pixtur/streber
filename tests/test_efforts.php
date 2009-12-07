@@ -10,16 +10,18 @@
 class TestEfforts extends WebTestCase {
     
     function testEffort() {
-
+        global $g_streber_url;
+        TestEnvironment::initStreberUrl();
         TestEnvironment::prepare('fixtures/project_setup.sql');
         $this->addHeader('USER_AGENT: streber_unit_tester');
 
-        $g_streber_url= "http://localhost/streber_head";
-
         ### logout first ###
         $this->assertTrue($this->get($g_streber_url), 'getting login page (%s)' );
-        $this->assertWantedPattern('/please login/i',                                            'check content (%s)');
+        $this->assertWantedPattern('/please login/i','check content (%s)');
+        #echo "<pre>" . $this->_browser->getContent() . "</pre>";
+
         $this->assertValidHtmlStucture('login');
+
 
         ### Test login working ###
         $this->assertTrue( $this->setField('login_name', 'bob'));

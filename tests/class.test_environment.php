@@ -6,6 +6,9 @@
 
 class TestEnvironment extends BaseObject {
     
+    /**
+    * execute sql file with unit_test_table_prefix
+    */
     static public function prepare($sql_setup_file)
     {
         ### prepare test database
@@ -29,12 +32,22 @@ class TestEnvironment extends BaseObject {
         $dbh = new DB_Mysql;
         $sql_obj= $dbh->connect();
 
-        if(!parse_mysql_dump($sql_setup_file, confGet('DB_TABLE_PREFIX_UNITTEST'), $sql_obj) ) {
+        if(!parse_mysql_dump($sql_setup_file, confGet('DB_TABLE_PREFIX_UNITTEST') . confGet('DB_TABLE_PREFIX'), $sql_obj) ) {
             #trace("error");
             print "error setting up database structure";
             print "mySQL-Error[" . __LINE__ . "]:<pre>".$sql_obj->error."</pre>";
         }
     }
+
+
+    static public function initStreberUrl()
+    {
+        global $g_streber_url;
+        $directory = explode("/tests/", $_SERVER['SCRIPT_NAME']);
+        $g_streber_url= confGet('SELF_PROTOCOL') . "://" . asCleanString($_SERVER['HTTP_HOST'])  . $directory[0] ;
+    }
+
+
 }
 
 function validatePage($handle) {

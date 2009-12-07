@@ -30,7 +30,7 @@ class CurrentMilestoneBlock extends PageBlock
 
     }
     
-    public function render($arg=false)
+    public function render($args=NULL)
     {
         if(!$this->current_milestone) {
             return '';

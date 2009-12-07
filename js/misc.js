@@ -22,56 +22,6 @@ var ajax_edits= new Array();
 function misc()
 {
 
-    /**
-    * visual effects
-    *
-    *  - hideBlock
-    *  - showBlock
-    */
-
-    // show Block
-    $("div.block.closed h2.table_name").click
-    (
-
-        function()
-        {
-            myHeadName= this.parentNode.parentNode.id;
-            myHead= document.getElementById(this.parentNode.parentNode.id);
-            myBodyName= myHeadName.replace(/_short/, "_long");
-            myBlockName= myHeadName.replace(/_short/, "");
-            myBody= document.getElementById(myBodyName);
-            myHead.style.display = 'none';
-            myBody.style.display = 'block';
-
-
-    		var date = new Date();
-		    date.setTime(date.getTime()+(-1  *24*60*60*1000));
-            document.cookie=  myBlockName  +"=1;expires="+  date.toGMTString() + ";";
-
-            return false;
-        }
-    );
-
-    // hide Block
-    $("div.block.opened h2.table_name").click
-    (
-        function()
-        {
-            myHeadName= this.parentNode.parentNode.id;
-            myHead= document.getElementById(this.parentNode.parentNode.id);
-            myBodyName= myHeadName.replace(/_long/, "_short");
-            myBlockName= myHeadName.replace(/_long/, "");
-            myBody= document.getElementById(myBodyName);
-            myHead.style.display = 'none';
-            myBody.style.display = 'block';
-
-    		var date = new Date();
-		    date.setTime(date.getTime()+(30  *24*60*60*1000));
-            document.cookie=  myBlockName  +"=hidden;expires="+  date.toGMTString()+  ";";
-            return false;
-        }
-    );
-
 
 
 	/*******************************************************

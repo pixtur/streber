@@ -24,7 +24,9 @@ class TestPagesAll extends WebTestCase {
         */
         $login_name     = "admin";
         $login_password = "";
-        $url_streber    = "http://localhost/streber_head/";
+
+        # FIXME: Setting an absolute path is bad!
+        $url_streber    = "http://localhost/streber/";
         $url_start      = $url_streber . 'index.php?go=logout';
         $test_params    = array(
                              "_projectView_"=>12,

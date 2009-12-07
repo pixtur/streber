@@ -498,7 +498,7 @@ function step_02_proceed()
                 rsort($filenames);
                 print_testResult(RESULT_PROBLEM,"Required file $filename is missing, trying to use $filenames[0] instead and then upgrade.");
                 $filename = $filenames[0];
-                ereg("create_structure_v(.*)\.sql", $filename, $matches);
+                preg_match("/create_structure_v(.*)\.sql/", $filename, $matches);
                 $upgradeFromVersion = $matches[1];
             }
             else {

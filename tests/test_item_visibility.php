@@ -10,11 +10,9 @@
 class TestItemVisibility extends WebTestCase {
     
     function testStalin() {
-
+        global $g_streber_url;
         TestEnvironment::prepare('fixtures/project_setup.sql');
         $this->addHeader('USER_AGENT: streber_unit_tester');
-
-        $g_streber_url= "http://localhost/streber_head";
 
         ### logout first ###
         $this->assertTrue($this->get("$g_streber_url"), 'getting login page (%s)' );
@@ -52,12 +50,11 @@ class TestItemVisibility extends WebTestCase {
     }
 
 
-    function testRoosevelt() {
-
+    function testRoosevelt() 
+    {
+        global $g_streber_url;
         TestEnvironment::prepare('fixtures/project_setup.sql');
         $this->addHeader('USER_AGENT: streber_unit_tester');
-
-        $g_streber_url= "http://localhost/streber_head";
 
         ### logout first ###
         $this->assertTrue($this->get("$g_streber_url"), 'getting login page (%s)' );
@@ -81,10 +78,10 @@ class TestItemVisibility extends WebTestCase {
         $this->assertWantedPattern('/manhatten/i');
 
         #$this->showSource();
-        foreach( split(",", "admin,pm,alan,bob,we will win,big news") as $p) {
+        foreach( explode(",", "admin,pm,alan,bob,we will win,big news") as $p) {
             $this->assertWantedPattern('/' . $p . '/i');
         }
-        #foreach( split(",", "error_list") as $p) {
+        #foreach( explode(",", "error_list") as $p) {
         #    $this->assertWantedPattern('/' . $p . '/i');
         #}
     
@@ -111,7 +108,6 @@ class TestItemVisibility extends WebTestCase {
         $this->addHeader('USER_AGENT: streber_unit_tester');
 
         global $g_streber_url;
-        $g_streber_url= "http://localhost/streber_head";
 
         ### login as bob ###
         $this->assertTrue($this->get($g_streber_url),       'getting login page (%s)' );
@@ -132,7 +128,6 @@ class TestItemVisibility extends WebTestCase {
         $this->assertTrue( $this->setField('comment_description','description <x>') );
         $this->assertTrue( $this->clickSubmit('Submit'));
 
-        $this->assertText( "changed Topic");
         $this->assertText( "comment by bob");        
         $this->assertText( "description");        
 
@@ -142,6 +137,7 @@ class TestItemVisibility extends WebTestCase {
         $this->assertText('News',                       'make sure news still there(%s)');
         $this->assertText('1 comments',                 'make sure news still there(%s)');
         $this->assertText('Add comment',                'make sure news still there(%s)');
+
 
         ### logout  ###
         $this->assertTrue( $this->clickLink('Logout'));
@@ -158,12 +154,12 @@ class TestItemVisibility extends WebTestCase {
     */
     function testRevertChanges()
     {
+        TestEnvironment::initStreberUrl();
+        global $g_streber_url;
 
         TestEnvironment::prepare('fixtures/project_setup.sql');
         $this->addHeader('USER_AGENT: streber_unit_tester');
 
-        global $g_streber_url;
-        $g_streber_url= "http://localhost/streber_head";
         
         $deleted_items = array(25, 23, 19, 18);
 
@@ -206,7 +202,10 @@ class TestItemVisibility extends WebTestCase {
         $this->assertWantedPattern("/body class=\"home\"/");
         #$this->showSource();
         foreach( $deleted_items as $id) {
-            $this->assertWantedPattern("/href=\"$id\">.*deleted by <span class=person>Bob/");
+            $this->assertWantedPattern("/$id\">.*deleted by <span class=person>Bob/");
+
+#            echo "<pre>" . $this->_browser->getContent() . "</pre>";
+            
         }
 
         $this->assertTrue($this->get($g_streber_url . '/?go=personRevertChanges&person=5'),       'getting revert page (%s)' );
@@ -218,13 +217,7 @@ class TestItemVisibility extends WebTestCase {
             $this->assertNoUnwantedPattern("/href=\"$id\">.*deleted by <span class=person>Bob/");
         }        
     }
-
-
-
 }
-
-
-
 
 
 ?>

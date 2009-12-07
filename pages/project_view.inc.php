@@ -275,7 +275,7 @@ function ProjView()
         $sum_progress= $project->getProgressSum();
         if($sum_progress) {
             echo "<div class=labeled><label>" . __("Completed") . "</label><b>"
-                .$PH->getLink('projViewTasks',number_format($sum_progress, 1, ',', ''),array('prj'=>$project->id))
+                .$PH->getLink('projViewTasks', sprintf("%0.1f",  $sum_progress),array('prj'=>$project->id))
                 ."%</b></div>" ;
         }
         $num_tasks= $project->getNumTasks();

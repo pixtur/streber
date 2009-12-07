@@ -31,17 +31,17 @@ $g_cache_projects=array();
 class Project extends DbProjectItem
 {
     public $_visible_team=NULL;    # assoc array for optimized visibility-check
-	public $project_status;
-	
-	//=== constructor ================================================
-	function __construct ($id_or_array=NULL)
+    public $project_status;
+    
+    //=== constructor ================================================
+    function __construct ($id_or_array=NULL)
     {
         global $g_project_fields;
         $this->fields= &$g_project_fields;
 
         parent::__construct($id_or_array);
         $this->type= ITEM_PROJECT;
-   	}
+    }
 
 
     static function initFields() 
@@ -113,7 +113,7 @@ class Project extends DbProjectItem
             */
             new FieldInternal(array(    'name'=>'settings',
                 'default'=>    confGet('PROJECT_DEFAULT_SETTINGS'),
-        		'log_changes'=>true,
+                'log_changes'=>true,
             )),
         
         
@@ -197,9 +197,9 @@ class Project extends DbProjectItem
     {
         $id = intval($id);
         global $auth;
-    	if(
-    		$auth->cur_user->user_rights & RIGHT_PROJECT_EDIT
-    	) {
+        if(
+            $auth->cur_user->user_rights & RIGHT_PROJECT_EDIT
+        ) {
             return Project::getVisibleById($id, NULL, false);
         }
         return NULL;
@@ -235,7 +235,7 @@ class Project extends DbProjectItem
     function getTaskPersons($order_by=NULL, $visible_only=true, $alive_only=true)
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         if(!$order_by) {
             $order_by="comment";
         }
@@ -281,8 +281,8 @@ class Project extends DbProjectItem
         }
 
         $sth= $dbh->prepare($str_query);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $taskpersons=array();
         foreach($tmp as $t) {
             $taskpersons[]=new TaskPerson($t);
@@ -315,9 +315,9 @@ class Project extends DbProjectItem
 
         $sum=0;
         if($tasknum = $this->getNumTasks()) {
-			if($tasksum = $this->getSumTasksProgress()) {
+            if($tasksum = $this->getSumTasksProgress()) {
                     $sum=($tasksum/$tasknum*100)/100;
-			}
+            }
         }
         return $sum;
     }
@@ -338,7 +338,7 @@ class Project extends DbProjectItem
     *   alive_only=true,
     *   parent_task=NULL)  # if NULL parent-task is ignored
     */
-    function &getTasks( $args=array())
+    function getTasks( $args=array())
     {
         $args['project']= $this->id;
         $result= Task::getAll($args);
@@ -347,12 +347,12 @@ class Project extends DbProjectItem
 
     /**
     * get num of open tasks
-	*
-	* @@@ check for user-rights
+    *
+    * @@@ check for user-rights
     */
     function getNumTasks()
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT  COUNT(*) FROM {$prefix}item i, {$prefix}task t
             WHERE
@@ -362,19 +362,19 @@ class Project extends DbProjectItem
             AND t.is_folder = 0
             AND t.id= i.id
             AND t.status < ". STATUS_CLOSED );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['COUNT(*)'];
     }
 
     /**
     * get num of open tasks
-	*
-	* @@@ check for user-rights
+    *
+    * @@@ check for user-rights
     */
     function getSumTasksProgress()
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare("SELECT  SUM(t.completion) CSUM FROM {$prefix}item i, {$prefix}task t
             WHERE
@@ -384,8 +384,8 @@ class Project extends DbProjectItem
             AND t.is_folder = 0
             AND t.id= i.id
             AND t.status < ". STATUS_CLOSED );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['CSUM'];
     }
 
@@ -395,16 +395,16 @@ class Project extends DbProjectItem
     * @@@ ToDo:
     * the following function should be moved to Comment-class
     */
-    function &getComments($args=Array())
+    function getComments($args=Array())
     {
         global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+        $prefix = confGet('DB_TABLE_PREFIX');
 
         ### default params ###
         $order_by=      'name';
         $visible_only=  true;   # use project rights settings
         $alive_only=    true;   # ignore deleted
-        $on_task=		0;		# only project-tasks by default
+        $on_task=       0;      # only project-tasks by default
         $limit=         NULL;   # limit number of results
 
 
@@ -420,17 +420,17 @@ class Project extends DbProjectItem
             }
         }
 
-		$str_parent_task="";
-		if($on_task) {
-			$str_parent_task='AND c.task='. intVal($on_task);
-		}
-		else {
-			$str_parent_task="AND c.task=0";
-		}
+        $str_parent_task="";
+        if($on_task) {
+            $str_parent_task='AND c.task='. intVal($on_task);
+        }
+        else {
+            $str_parent_task="AND c.task=0";
+        }
 
-		$str_limit= $limit
-		    ? "LIMIT " . intval($limit) .",0"
-		    : '';
+        $str_limit= $limit
+            ? "LIMIT " . intval($limit) .",0"
+            : '';
 
 
         require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
@@ -480,9 +480,9 @@ class Project extends DbProjectItem
         }
 
         $sth= $dbh->prepare($str_query);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$comments=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $comments=array();
         foreach($tmp as $n) {
             $comment=new Comment($n);
             $comments[]= $comment;
@@ -541,10 +541,10 @@ class Project extends DbProjectItem
     /**
     * getIssues($project=false)
     */
-    function &getIssues($order_by=NULL, $visible_only=true, $alive_only=true){
+    function getIssues($order_by=NULL, $visible_only=true, $alive_only=true){
 
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
 
         require_once(confGet('DIR_STREBER') . 'db/class_issue.inc.php');
@@ -593,9 +593,9 @@ class Project extends DbProjectItem
 
 
         $sth= $dbh->prepare($str_query);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$issues=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $issues=array();
         foreach($tmp as $n) {
             $i=new Issue($n);
             $issues[]= $i;
@@ -606,7 +606,7 @@ class Project extends DbProjectItem
     /**
     * create assoc. array of team for optimized visibilty-checks
     */
-    private function &getVisibleTeam() {
+    private function getVisibleTeam() {
         $a= array();
         $persons= $this->getPersons();
         foreach($persons as $p) {
@@ -657,26 +657,26 @@ class Project extends DbProjectItem
     }
 
 
-	/**
+    /**
     * get projectAssigments (not persons but their assigments to the current project)
     *
     * @see: getPersons()
-	**/
-	function getProjectPersons($args=NULL)
-	{
-		global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+    **/
+    function getProjectPersons($args=NULL)
+    {
+        global $auth;
+        $prefix = confGet('DB_TABLE_PREFIX');
 
-		### default parameter ###
-		$order_by=NULL;
-		$alive_only=true;
-		//$visible_only=true;
-		$visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+        ### default parameter ###
+        $order_by=NULL;
+        $alive_only=true;
+        //$visible_only=true;
+        $visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
                         ? false
                         : true;
-		$person_id = NULL;
+        $person_id = NULL;
 
-		### filter parameters ###
+        ### filter parameters ###
         if($args) {
             foreach($args as $key=>$value) {
                 if(!isset($$key) && !is_null($$key) && !$$key==="") {
@@ -688,13 +688,13 @@ class Project extends DbProjectItem
             }
         }
 
-		$s_alive_only= $alive_only
+        $s_alive_only= $alive_only
             ? "AND i.state=1"
             : "";
-		
-		$s_person = $person_id
-		          ? "AND person.id = " . intval($person_id)
-				  : "";
+        
+        $s_person = $person_id
+                  ? "AND person.id = " . intval($person_id)
+                  : "";
 
         ### all users ###
         if($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
@@ -706,7 +706,7 @@ class Project extends DbProjectItem
                 $s_alive_only
                 AND pp.id = i.id
                 AND person.id = pp.person
-				$s_person
+                $s_person
                 ". getOrderByString($order_by, 'person.name')
                 ;
         }
@@ -724,14 +724,14 @@ class Project extends DbProjectItem
                 $s_alive_only
                 AND pp.id = i.id
                 AND (
-                	  i.pub_level >= upp.level_view
+                      i.pub_level >= upp.level_view
                       OR
                       i.created_by = {$auth->cur_user->id}
                       OR
                       pp.person =  {$auth->cur_user->id}
                 )
                 AND person.id = pp.person
-				$s_person
+                $s_person
                 ". getOrderByString($order_by, 'person.name')
                 ;
         }
@@ -746,8 +746,8 @@ class Project extends DbProjectItem
                 $s_alive_only
                 AND i.id = pp.id
                 AND person.id = pp.person
-				$s_person
-				". getOrderByString($order_by, 'person.name')
+                $s_person
+                ". getOrderByString($order_by, 'person.name')
                 ;
         }
         require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
@@ -755,18 +755,18 @@ class Project extends DbProjectItem
         $dbh = new DB_Mysql;
 
         $sth= $dbh->prepare($s_query);
-    	$sth->execute("",1);
-		
-    	$tmp=$sth->fetchall_assoc();
-    	$ppersons=array();
+        $sth->execute("",1);
+        
+        $tmp=$sth->fetchall_assoc();
+        $ppersons=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
             $ppersons[]= $pperson;
         }
 
         return $ppersons;
-	}
-	
+    }
+    
     /**
     * optimized query function which only returns the names of visible project members
     * 
@@ -775,7 +775,7 @@ class Project extends DbProjectItem
     function getTeamMemberNames()
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
         $dbh = new DB_Mysql;
 
@@ -793,8 +793,8 @@ class Project extends DbProjectItem
                 AND i.state=1
                 AND pp.id = i.id
                 AND person.id = pp.person
-				ORDER BY person.name
-			"
+                ORDER BY person.name
+            "
                 ;
         }
         ### only visibile for current user ###
@@ -811,21 +811,21 @@ class Project extends DbProjectItem
                 AND i.state=1
                 AND pp.id = i.id
                 AND (
-                	  i.pub_level >= upp.level_view
+                      i.pub_level >= upp.level_view
                       OR
                       i.created_by = {$auth->cur_user->id}
                       OR
                       pp.person =  {$auth->cur_user->id}
                 )
                 AND person.id = pp.person
-				ORDER BY person.name
-			"
+                ORDER BY person.name
+            "
                 ;
         }
 
         $sth= $dbh->prepare($str_query);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         
         $names= array();
         foreach($tmp as $t) {
@@ -834,12 +834,12 @@ class Project extends DbProjectItem
         return $names;
     }
 
-	
+    
     /**
     * get persons (team)
     */
-    function &getPersons($visible_only=true)
-	{
+    function getPersons($visible_only=true)
+    {
         $ppersons= $this->getProjectPersons(NULL, true, $visible_only);
         $persons= array();
         foreach($ppersons as $pp) {
@@ -888,15 +888,15 @@ class Project extends DbProjectItem
     /**
     * query project-objects from database
     */
-    static function &queryFromDb($query_string)
+    static function queryFromDb($query_string)
     {
         $dbh = new DB_Mysql;
 
         $sth= $dbh->prepare($query_string);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$projects=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $projects=array();
         foreach($tmp as $t) {
             $project=new Project($t);
             $projects[]=$project;
@@ -913,13 +913,13 @@ class Project extends DbProjectItem
     public static function getAll($args=NULL)
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
 
-		if($args && !is_array($args)) {
-		    trigger_error("requires array as parameter", E_USER_WARNING);
-		    return;
-		}
+        if($args && !is_array($args)) {
+            trigger_error("requires array as parameter", E_USER_WARNING);
+            return;
+        }
 
         ### default params ###
         $order_by=      "prio, name";
@@ -930,9 +930,9 @@ class Project extends DbProjectItem
                         ? false
                         : true;
         $search=        NULL;
-		$id=			NULL;
-		$person=        NULL;
-		$limit=         NULL;
+        $id=            NULL;
+        $person=        NULL;
+        $limit=         NULL;
 
         ### filter params ###
         if($args) {
@@ -960,28 +960,28 @@ class Project extends DbProjectItem
         else {
             $AND_company= "";
         }
-		
-		if(!is_null($person)){
-			$AND_person_all_part1 = " {$prefix}projectperson upp, ";
-			$AND_person_all_part2 = "AND upp.person = '" . intval($person) . "' 
-			                         AND upp.state = 1
+        
+        if(!is_null($person)){
+            $AND_person_all_part1 = " {$prefix}projectperson upp, ";
+            $AND_person_all_part2 = "AND upp.person = '" . intval($person) . "' 
+                                     AND upp.state = 1
                                      AND upp.project = p.id";
-			$AND_person_visible_part1 = " {$prefix}projectperson upp2, ";
-			$AND_person_visible_part2 = "AND upp.project = upp2.project
-					                     AND upp2.person = '" . intval($person) . "'" ;
-		}
-		else{
-			$AND_person_all_part1 = "";
-			$AND_person_all_part2 = "";
-			$AND_person_visible_part1 = "";
-			$AND_person_visible_part2 = "";
-		}
+            $AND_person_visible_part1 = " {$prefix}projectperson upp2, ";
+            $AND_person_visible_part2 = "AND upp.project = upp2.project
+                                         AND upp2.person = '" . intval($person) . "'" ;
+        }
+        else{
+            $AND_person_all_part1 = "";
+            $AND_person_all_part2 = "";
+            $AND_person_visible_part1 = "";
+            $AND_person_visible_part2 = "";
+        }
 
         $str_limit= $limit
                 ? " LIMIT ". intval($limit). " "
                 : "";
 
-		
+        
         /**
         * @@@ NOTE: using a distinct select here is not nice...
         */
@@ -990,51 +990,51 @@ class Project extends DbProjectItem
             $str=
                 "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, $AND_person_visible_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
                 WHERE
-					upp.person = '{$auth->cur_user->id}'
-					AND upp.state = 1
+                    upp.person = '{$auth->cur_user->id}'
+                    AND upp.state = 1
                     AND upp.project = p.id
-					$AND_person_visible_part2
+                    $AND_person_visible_part2
                     AND   p.status <= ". intval($status_max) ."
                     AND   p.status >= ". intval($status_min) ."
                     AND   p.state = 1
                     AND   i.id = p.id
-					AND (p.company = c.id OR p.company = 0)
+                    AND (p.company = c.id OR p.company = 0)
                     $AND_company
                     $AND_match
-					$AND_id
+                    $AND_id
                 ". getOrderByString($order_by) 
                 . $str_limit;
         }
         ### all projects ###
         else {
-			$str=
-			    "SELECT DISTINCT i.*, p.* from {$prefix}item i, $AND_person_all_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
+            $str=
+                "SELECT DISTINCT i.*, p.* from {$prefix}item i, $AND_person_all_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
 
                 WHERE
                        p.status <= ".intval($status_max)."
                    AND p.status >= ".intval($status_min)."
                    AND p.state = 1
                    AND i.id = p.id
-				   AND (p.company = 0 OR p.company = c.id)
+                   AND (p.company = 0 OR p.company = c.id)
                   $AND_company
                   $AND_match
-				  $AND_id
-				  $AND_person_all_part2
+                  $AND_id
+                  $AND_person_all_part2
                 ". getOrderByString($order_by)
                 . $str_limit;
                 
         }
 
         $projects = self::queryFromDb($str);
-		
+        
         return $projects;
     }
-	
+    
     /**
     * get projects from db
     */
     public static function getActive($order_by=NULL)
-	{
+    {
         if($order_by && !is_string($order_by)) {
             trigger_error("requires string", E_USER_WARNING);
             return;
@@ -1072,10 +1072,10 @@ class Project extends DbProjectItem
     *
     * primarily used for validating project-rights
     */
-    function &getCurrentProjectPerson()
+    function getCurrentProjectPerson()
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         require_once(confGet('DIR_STREBER') . 'db/class_projectperson.inc.php');
         $dbh = new DB_Mysql;
@@ -1091,9 +1091,9 @@ class Project extends DbProjectItem
                 AND i.type = '".ITEM_PROJECTPERSON."'"
 
         );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$ppersons=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $ppersons=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
             $ppersons[]= $pperson;
@@ -1234,7 +1234,7 @@ class Project extends DbProjectItem
                 $PH->abortWarning(__("insufficient rights"),ERROR_RIGHTS);
                 exit();
             }
-		    return false;
+            return false;
         }
         return true;
 
@@ -1251,7 +1251,7 @@ class Project extends DbProjectItem
             $for_person= $auth->cur_user;
         }
         global $PH;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         ### all projects ###
         if($for_person->user_rights & RIGHT_VIEWALL) {
@@ -1271,7 +1271,7 @@ class Project extends DbProjectItem
                 AND   p.state = 1
         ";
 
-  	    $projects= self::queryFromDb($str);
+        $projects= self::queryFromDb($str);
 
         if(count($projects) == 1) {
             return true;
@@ -1318,7 +1318,7 @@ class Project extends DbProjectItem
     public function getNextMilestone()
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare(
@@ -1333,7 +1333,7 @@ class Project extends DbProjectItem
                     ORDER BY t.name, t.id
                 "
         )->execute();
-    	$tmp=$sth->fetchall_assoc();
+        $tmp=$sth->fetchall_assoc();
         if($tmp) {
             $tmp_values=array_values($tmp[0]);
             $next_milestone= Task::getVisibleById($tmp_values[0]);
@@ -1343,16 +1343,16 @@ class Project extends DbProjectItem
             return false;
         }
     }
-	
-	function setStatus($status=NULL)
-	{
-		$this->project_status = $status;
-	}
-	
-	function getStatus()
-	{
-		return $this->project_status;
-	}
+    
+    function setStatus($status=NULL)
+    {
+        $this->project_status = $status;
+    }
+    
+    function getStatus()
+    {
+        return $this->project_status;
+    }
 
 
 

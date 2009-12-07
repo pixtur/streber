@@ -730,7 +730,7 @@ function taskEdit($task=NULL)
             if(!$task->isOfCategory(TCATEGORY_VERSION, TCATEGORY_MILESTONE, TCATEGORY_FOLDER)) {
                 $labels=array(__('undefined') => 0);
                 $counter= 1;
-                foreach(split(",",$project->labels) as $l) {
+                foreach(explode(",",$project->labels) as $l) {
                     $labels[$l]=$counter++;
                 }
                 $tab->add(new Form_Dropdown('task_label',  __("Label"),$labels,$task->label));
@@ -871,7 +871,7 @@ function taskEditSubmit()
             }
             $requested_people= array();
 
-            foreach( split('\s*,\s*', $request_feedback) as $nickname) {
+            foreach( explode('\s*,\s*', $request_feedback) as $nickname) {
                 
                 ### now check if this nickname is a team member
                 if ($nickname = trim($nickname)) {
@@ -2518,7 +2518,7 @@ function TaskEditMultiple()
         ### labels ###
         $labels=array(__('undefined') => 0);
         $counter= 1;
-        foreach(split(",",$project->labels) as $l) {
+        foreach(explode(",",$project->labels) as $l) {
             $labels[$l]=$counter++;
         }
         if(isset($different_fields['label'])) {

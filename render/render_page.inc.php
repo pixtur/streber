@@ -1298,7 +1298,7 @@ class PageFooter extends PageElement
             $buffer.= " / ".__('rendered in')." $time_str ms / ";
 
             if(function_exists('memory_get_usage')) {
-                $buffer.= __('memory used').": ".number_format(memory_get_usage(),",",".",".")." B / ";
+                $buffer.= __('memory used').": ". intval(memory_get_usage() / 1024)." kb / ";
             }
 
             $buffer .= ' ('. sprintf(__('%s queries / %s fields '), $g_count_db_statements, $DB_ITEMS_LOADED ) . ') ';

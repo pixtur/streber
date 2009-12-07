@@ -1057,7 +1057,7 @@ class FormatBlockLink extends FormatBlock
         ### id|options|title ###
         if(preg_match("/\A([^\|]+)\|([^|]+)\|([^|]*)$/", $str, $matches)) {
             $this->target= asCleanString($matches[1]);
-            $this->options= split(",", preg_replace("/[^a-z,=0-9]/", "", strtolower($matches[2])));
+            $this->options= explode(",", preg_replace("/[^a-z,=0-9]/", "", strtolower($matches[2])));
             $this->name=$matches[3];
 
         }
@@ -1126,7 +1126,7 @@ class FormatBlockLink extends FormatBlock
 
                         ### if there are not options ##
                         if(!$this->options && $this->name) {
-                            $this->options=split(",", preg_replace("/[^a-z,=0-9]/","",strtolower($this->name)));
+                            $this->options=explode(",", preg_replace("/[^a-z,=0-9]/","",strtolower($this->name)));
                             $this->name = asHtml($file->name);
                         }
 
@@ -2055,7 +2055,7 @@ function checkAutoWikiAdjustments() {
 * NOTE:
 * - g_wiki_project has to be initialized for this function
 */
-function &wiki2blocks(&$text)
+function wiki2blocks(&$text)
 {
     #if($convert_special_chars) {
     #    $text= htmlSpecialChars($text);
@@ -2195,7 +2195,7 @@ class ChapterBlockCode extends ChapterBlock{
 * - returns array with chapters.
 * - First chapter might be empty, if there is no text before the first headline.
 */
-function &getWikiChapters($text)
+function getWikiChapters($text)
 {
     if(!preg_match("/\n$/s", $text)) {
         $text.= "\n";

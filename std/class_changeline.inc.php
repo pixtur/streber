@@ -59,7 +59,7 @@ class ChangeLine extends BaseObject
 
 
 
-    static function &getChangeLinesForPerson(&$person, $project=NULL, $date_compare=NULL)
+    static function getChangeLinesForPerson(&$person, $project=NULL, $date_compare=NULL)
     {
         global $PH;
         $query_options= array();

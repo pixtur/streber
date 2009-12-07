@@ -61,7 +61,7 @@ class sql_class implements sql_interface{
     /**
     * Constructor: Check database and PHP versions
     */
-    function __construct($tmpserver='', $tmpuser='', $tmppwd='', $tmpdb=''){
+    function __construct($tmpserver='', $tmpuser='', $tmppwd='', $tmpdb='') {
 
         $this->lastId = 0;
         $this->error = false;
@@ -99,7 +99,7 @@ class sql_class implements sql_interface{
             $this->server,
             $this->user,
             $this->pwd
-            )){
+        )){
             $this->error('Connection using mysql_connect SUCCESSFUL');
             return true;
         }
@@ -153,7 +153,8 @@ class sql_class implements sql_interface{
 
         if(isset($this->result)){
             $tmp = @mysql_fetch_array($this->result);
-        }else{
+        } 
+        else{
             return false;
         }
         if(DEBUG_SQL_DISPLAY == 1){echo '<pre>'.print_r($tmp, 1).'</pre><br /><hr />';}

@@ -455,20 +455,26 @@ table.list td {
       font-weight:bold;
   }
 
-div.block table tr.even td {
-  background-color:     #f8f8f8;
+div.block_content table tr.even td {
+  background-color:     #f8f800;
 }
 
-div.block table.list tr.selected td{
+td {
+	font-size:200%;
+	color:red;
+}
+
+
+div.block_content table.list tr.selected td{
     background-color:#5761E2;
     color:#fff;
 }
 
-div.block table.list tr.selected td a{
+div.block_content table.list tr.selected td a{
     color:#fff;
 }
 
-div.block table.list tr.selected td span{
+div.block_content table.list tr.selected td span{
     color:#fff;
 }
 

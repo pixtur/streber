@@ -498,7 +498,7 @@ foreach($filters_str as $fs=>$value) {
     }
 
 
-    function &getComments($args=array())
+    function getComments($args=array())
     {
         if($project= Project::getVisibleById($this->project)) {
             $args['on_task']= $this->id;
@@ -509,7 +509,7 @@ foreach($filters_str as $fs=>$value) {
     }
 
 
-    function &getLatestComment($args=array())
+    function getLatestComment($args=array())
     {
         if($project= Project::getVisibleById($this->project)) {
             $args['on_task']= $this->id;
@@ -524,7 +524,7 @@ foreach($filters_str as $fs=>$value) {
     /**
     * @@@ todo: this should by mapped to Project::getNumComments()
     */
-    function &getNumComments()
+    function getNumComments()
     {
         global $auth;
         $prefix= confGet('DB_TABLE_PREFIX');
@@ -562,7 +562,7 @@ foreach($filters_str as $fs=>$value) {
     *
     * it also checks efforts of deleted subtasks!
     */
-    function &getSumEfforts()
+    function getSumEfforts()
     {
         global $auth;
         $sum=0;
@@ -606,7 +606,7 @@ foreach($filters_str as $fs=>$value) {
         return $sum;
     }
     
-    function &getSumTaskEfforts()
+    function getSumTaskEfforts()
     {
         global $auth;
         $sum=0;
@@ -721,7 +721,7 @@ foreach($filters_str as $fs=>$value) {
     /**
     * getHomeTasks($project=false)
     */
-    public static function &getHomeTasks($order_by=" is_folder DESC,  parent_task, prio ASC, project, name")
+    public static function getHomeTasks($order_by=" is_folder DESC,  parent_task, prio ASC, project, name")
     {
         global $auth;
         $prefix= confGet('DB_TABLE_PREFIX');
@@ -1391,7 +1391,7 @@ foreach($filters_str as $fs=>$value) {
             if(!$project= Project::getById($this->project)) {
                 trigger_error("task without project?", E_USER_WARNING);
             }
-            $labels=split(",",$project->labels);
+            $labels=preg_split("/,/",$project->labels);
             $value= $labels[$this->label-1];
             return $value;
         }

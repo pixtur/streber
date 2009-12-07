@@ -498,11 +498,11 @@ class PageHandler extends BaseObject
 	        $data = fread ($FH, 64000);
     	    fclose ($FH);
 
-            $arr= split("\n",$data);
+            $arr= preg_split("/\n/",$data);
 
             ### convert to assoc. array and look for md5 ###
             foreach($arr as $line) {
-                $tmp_arr=split("\|",$line);
+                $tmp_arr=preg_split("/\|/",$line);
                 if(count($tmp_arr)==2) {
                     ### store as assoc. array. ###
                     $stored_handles[$tmp_arr[0]]=$line;
@@ -574,12 +574,12 @@ class PageHandler extends BaseObject
 	        $data = fread ($FH, 64000);
     	    fclose ($FH);
 
-            $arr= split("\n",$data);
+            $arr= preg_split("/\n/",$data);
 
             ### convert to assoc. array and look for md5 ###
             $stored_handles=array();
             foreach($arr as $line) {
-                $tmp_arr=split("\|",$line);
+                $tmp_arr= preg_split("/\|/",$line);
                 if(count($tmp_arr)==2) {
                     $stored_handles[$tmp_arr[0]]=$tmp_arr[1];
                 }

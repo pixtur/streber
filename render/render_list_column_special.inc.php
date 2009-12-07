@@ -85,11 +85,11 @@ class ListBlockColFormat extends ListBlockCol
 		      ? "class='$this->style'"
 		      : '';
 
-		while(	ereg("\{\?([a-z_]*)\}(.*)",$rest, $matches) ) {
+		while(	preg_match("/\{\?([a-z_]*)\}(.*)/",$rest, $matches) ) {
 			$key=$matches[1];
 	  		$rest=$matches[2];
 			$value= isset($obj->$key) ? $obj->$key : "??$key";
-			$format=ereg_replace("\{\?$key\}",asHtml($value),$format);
+			$format=preg_replace("/\{\?$key\}/",asHtml($value),$format);
 		}
 
 		print "<td $style>". $format . '</td>';
@@ -150,7 +150,7 @@ class ListBlockColTime extends ListBlockCol{
         $format='';
         if($value && $value!="00:00:00") {
             $format=$value;
-            ereg("(..):(..):(..)",$value,$matches);
+            preg_match("/(..):(..):(..)/",$value,$matches);
             list($all,$hh,$mm,$ss)=$matches;
             #$format="$hh:$mm";
             $hours=$hh*1+ ($mm/60);

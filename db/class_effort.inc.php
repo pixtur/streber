@@ -330,7 +330,7 @@ class Effort extends DbProjectItem
         return $efforts;
     }
 	
-	static function &getSumEfforts($args=NULL)
+	static function getSumEfforts($args=NULL)
 	{
 		global $auth;
 		$sum = 0.0;
@@ -394,7 +394,7 @@ class Effort extends DbProjectItem
 		return sum;
 	}
 	
-	static function &getEffortPersons($args=NULL)
+	static function getEffortPersons($args=NULL)
 	{
 		$prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
@@ -462,7 +462,7 @@ class Effort extends DbProjectItem
 		return NULL;
 	}
 	
-	static function &getEffortTasks($args=NULL)
+	static function getEffortTasks($args=NULL)
 	{
 		$prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');

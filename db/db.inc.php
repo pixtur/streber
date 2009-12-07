@@ -182,22 +182,26 @@ class DB_Mysql implements DB_Connection
 
         if(!$sql_obj->connect()) {
             ### can't connect db... ###
+            log_message("Can't connect database");
             return NULL;
         }
         if(!$sql_obj->selectdb()) {
 
             ### can't select... ###
+            log_message("Can't select database");
             return NULL;
         }
 
         ### get version ###
 		$prefix= confGet('DB_TABLE_PREFIX');
 
-        if($sql_obj->execute("select * from {$prefix}db where updated is NULL")) {
+        $sql_command = "select * from {$prefix}db where updated is NULL";
+        if($sql_obj->execute($sql_command)) {
             $row = $sql_obj->fetchArray();
             return $row;
         }
         else {
+            trigger_error("Can't selection version row from db: $sql_command");
             return NULL;
         }
 	}

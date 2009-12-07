@@ -83,7 +83,7 @@ function changeSort()
 
         ### get sorting from cookie ###
         if($tmp=get($id)) {
-            $list_old=split(",",$tmp);
+            $list_old=explode(",",$tmp);
 
 
             ### just reverse sort order? ###

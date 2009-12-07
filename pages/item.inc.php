@@ -550,7 +550,7 @@ function itemViewDiff()
                     }
                     else if($field_name == 'label') {
                         if($project = Project::getVisibleById($item->project)) {
-                            $labels=split(",",$project->labels);
+                            $labels=explode(",",$project->labels);
 
                             $old_value= isset($labels[$old_value-1])
                                       ? $labels[$old_value-1]

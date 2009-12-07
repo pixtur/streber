@@ -77,7 +77,7 @@ class SearchResult extends BaseObject
     }
 
 
-    static function &RateItem($item)
+    static function RateItem($item)
     {
         $rate=1;
         $age= time() - strToGMTime($item->modified);
@@ -104,7 +104,7 @@ class SearchResult extends BaseObject
         return $rate;
     }
 
-    static function &GetExtract($item,$search)
+    static function GetExtract($item,$search)
     {
         $strings=array();
         foreach(explode(" ",$search) as $s) {
@@ -131,7 +131,7 @@ class SearchResult extends BaseObject
         return $foo;
     }
 
-    static function &RateTitle($item, $search)
+    static function RateTitle($item, $search)
     {
         $rate=1;
 
@@ -177,7 +177,7 @@ class SearchResult extends BaseObject
 
 
 
-    static function &getForQuery($search_query, $project=NULL)
+    static function getForQuery($search_query, $project=NULL)
     {
         $count_overall=0;
         $resuts=array();

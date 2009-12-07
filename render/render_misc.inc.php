@@ -15,7 +15,18 @@
  */
 
 
-
+/**
+* Handy function to set a message that welcomes a user after login.
+* This message can be adjusted conf
+*/
+function setWelcomeToProjectMessage($project) 
+{
+    global $auth;
+    $PH->messages[]= sprintf( __("Hello %s. Welcome to project %s"), 
+                            "<b>". asHtml($auth->cur_user->name) . "</b>",
+                            "<b>". asHtml($project->name) . "</b>"
+                    );
+}
 
 
 /**
@@ -1302,7 +1313,7 @@ function render_changes($text_org,$text_new)
 *
 * - used for rendering differences
 */
-function &arrayAsHtml($strings)
+function arrayAsHtml($strings)
 {
     $buffer = '';
     $sep    = '';

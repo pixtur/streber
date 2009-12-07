@@ -120,7 +120,7 @@ function loginFormSubmit()
     ### get formdata ####
     $name = get('login_name');
     $password = get('login_password');
-	
+    
     if(!is_null(get('login_password'))) {
         $password_md5= md5(get('login_password'));
     }
@@ -128,96 +128,96 @@ function loginFormSubmit()
     else if(!is_null(get('login_password_md5'))) {                  # required for auto login
         $password_md5= get('login_password_md5');
     }
-	
-	/**
-	* try to login using ldap
-	*/
-	if($auth->checkLdapOption($name)){
-		if($auth->tryLoginUserByLdap($name,$password)){
-			$PH->messages= array();
-	
-			$auth->storeUserCookie();
-	
-			if(isset($g_languages[$auth->cur_user->language])) {
-				setLang($auth->cur_user->language);
-			}
-	
-			### display taskView ####
-			$projects=$auth->cur_user->getProjects();
-					
-			### if go-parameter was present before logging in
-			if($go_after= get('go_after')) {
-				$params=array();
-				foreach($g_valid_login_params as $var) {
-					if(get($var)) {
-						$params[$var]= get($var);
-					}
-				}
-				log_message("show(go_after=".get('go_after').")", LOG_MESSAGE_DEBUG);
-				$PH->show(get('go_after'),$params);
-			}
-			### if user has only one project go there ###
-			else if(count($projects) == 1) {
-				$PH->messages[]= sprintf(confGet('MESSAGE_WELCOME_ONEPROJECT'), asHtml($auth->cur_user->name),asHtml($projects[0]->name));
-				$PH->show('projView',array('prj'=>$projects[0]->id));
-			}
-			else {
-				$PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
-				$PH->show('home',array());
-			}
-		}
-		else{
-			log_message("invalid login. Show loginForm again", LOG_MESSAGE_DEBUG);
-			$PH->messages[]=__('invalid login','message when login failed');
-			$PH->show('loginForm');
-		}
-	}
-	else{
-		/**
-		* try to login with nickname / password
-		*/
-		if(
-			$auth->tryLoginUser($name,$password_md5)
-	
-		) {
-			$PH->messages= array();
-	
-			$auth->storeUserCookie();
-	
-			if(isset($g_languages[$auth->cur_user->language])) {
-				setLang($auth->cur_user->language);
-			}
-	
-			### display taskView ####
-			$projects=$auth->cur_user->getProjects();
-					
-			### if go-parameter was present before logging in
-			if($go_after= get('go_after')) {
-				$params=array();
-				foreach($g_valid_login_params as $var) {
-					if(get($var)) {
-						$params[$var]= get($var);
-					}
-				}
-				log_message("show(go_after=".get('go_after').")", LOG_MESSAGE_DEBUG);
-				$PH->show(get('go_after'),$params);
-			}
-			### if user has only one project go there ###
-			else if(count($projects) == 1) {
-				$PH->messages[]= sprintf(confGet('MESSAGE_WELCOME_ONEPROJECT'), asHtml($auth->cur_user->name),asHtml($projects[0]->name));
-				$PH->show('projView',array('prj'=>$projects[0]->id));
-			}
-			else {
-				$PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
-				$PH->show('home',array());
-			}
-		}
-		else {
-			log_message("invalid login. Show loginForm again", LOG_MESSAGE_DEBUG);
-			$PH->messages[]=__('invalid login','message when login failed');
-			$PH->show('loginForm');
-		}
-	}
+    
+    /**
+    * try to login using ldap
+    */
+    if($auth->checkLdapOption($name)){
+        if($auth->tryLoginUserByLdap($name,$password)){
+            $PH->messages= array();
+    
+            $auth->storeUserCookie();
+    
+            if(isset($g_languages[$auth->cur_user->language])) {
+                setLang($auth->cur_user->language);
+            }
+    
+            ### display taskView ####
+            $projects=$auth->cur_user->getProjects();
+                    
+            ### if go-parameter was present before logging in
+            if($go_after= get('go_after')) {
+                $params=array();
+                foreach($g_valid_login_params as $var) {
+                    if(get($var)) {
+                        $params[$var]= get($var);
+                    }
+                }
+                log_message("show(go_after=".get('go_after').")", LOG_MESSAGE_DEBUG);
+                $PH->show(get('go_after'),$params);
+            }
+            ### if user has only one project directly go there ###
+            else if(count($projects) == 1) {
+                setWelcomeToProjectMessage($projects[0]);
+                $PH->show('projView',array('prj'=>$projects[0]->id));
+            }
+            else {
+                $PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
+                $PH->show('home',array());
+            }
+        }
+        else{
+            log_message("invalid login. Show loginForm again", LOG_MESSAGE_DEBUG);
+            $PH->messages[]=__('invalid login','message when login failed');
+            $PH->show('loginForm');
+        }
+    }
+    else{
+        /**
+        * try to login with nickname / password
+        */
+        if(
+            $auth->tryLoginUser($name,$password_md5)
+    
+        ) {
+            $PH->messages= array();
+    
+            $auth->storeUserCookie();
+    
+            if(isset($g_languages[$auth->cur_user->language])) {
+                setLang($auth->cur_user->language);
+            }
+    
+            ### display taskView ####
+            $projects=$auth->cur_user->getProjects();
+                    
+            ### if go-parameter was present before logging in
+            if($go_after= get('go_after')) {
+                $params=array();
+                foreach($g_valid_login_params as $var) {
+                    if(get($var)) {
+                        $params[$var]= get($var);
+                    }
+                }
+                log_message("show(go_after=".get('go_after').")", LOG_MESSAGE_DEBUG);
+                $PH->show(get('go_after'),$params);
+            }
+            ### if user has only one project go there ###
+            else if(count($projects) == 1) {
+                setWelcomeToProjectMessage($projects[0]);
+                $PH->show('projView',array('prj'=>$projects[0]->id));
+            }
+            else {
+                $PH->messages[] = sprintf( __("Welcome to %s", "Notice after login"), confGet('APP_NAME'));
+                $PH->show('home',array());
+            }
+        }
+        else {
+            log_message("invalid login. Show loginForm again", LOG_MESSAGE_DEBUG);
+            $PH->messages[]=__('invalid login','message when login failed');
+            $PH->show('loginForm');
+        }
+    }
 }
 
 

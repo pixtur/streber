@@ -191,7 +191,7 @@ class Company extends DbProjectItem
     }
 
 
-    static function &queryFromDb($query_string)
+    static function queryFromDb($query_string)
 	{
         $dbh = new DB_Mysql;
 
@@ -211,7 +211,7 @@ class Company extends DbProjectItem
     #------------------------------------------------------------
     # get companies from db --> old function
     #------------------------------------------------------------
-    /*public static function &getAll($order_str=NULL, $has_id=NULL, $search=NULL)
+    /*public static function getAll($order_str=NULL, $has_id=NULL, $search=NULL)
     {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');
@@ -360,7 +360,7 @@ class Company extends DbProjectItem
 
 	}
 
-	/*public static function &getCompanies($order_str=NULL, $has_id=NULL, $search=NULL, $comcat=NULL)
+	/*public static function getCompanies($order_str=NULL, $has_id=NULL, $search=NULL, $comcat=NULL)
     {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');

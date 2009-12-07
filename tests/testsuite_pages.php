@@ -18,11 +18,13 @@ function startedIndexPhp() {return true; }
 
 ### include some core libraries ###
 require_once('../std/common.inc.php');
+
 require_once(dirname(__FILE__) . '/../conf/conf.inc.php');
 require_once(dirname(__FILE__) . '/class.test_environment.php');
 
 #confChange('DB_TABLE_PREFIX_UNITTEST', '');   # overwrite development database!!!
 
+TestEnvironment::initStreberUrl();
 TestEnvironment::prepare('fixtures/project_setup.sql');
 
 $grouptest = new GroupTest('Efforts');          $grouptest->addTestFile('test_efforts.php');    $grouptest->run(new HtmlReporter());

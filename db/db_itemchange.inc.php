@@ -219,7 +219,7 @@ class ItemChange extends DbItem
     }
 
 
-    static function &getItemChanges( $args=NULL)
+    static function getItemChanges( $args=NULL)
     {
         global $auth;
 		$prefix = confGet('DB_TABLE_PREFIX');

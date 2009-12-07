@@ -221,8 +221,6 @@ $g_config= array(
                     Problem: <b>",
 
 
-    'MESSAGE_WELCOME_ONEPROJECT'=>
-                        "Hello <b>%s</b>. Welcome to project <b>%s</b> ",
 
     'EMAIL_ADMINISTRATOR'=>'',
 
@@ -397,10 +395,9 @@ $g_config= array(
 /**
 * try to figure out url installation for links from notification mails
 */
-if(isset($_SERVER['SCRIPT_NAME']) && $_SERVER['HTTP_HOST'] && preg_match("/\/index\.php/",$_SERVER['SCRIPT_NAME'])) {
-
+if(isset($_SERVER['SCRIPT_NAME']) && $_SERVER['HTTP_HOST'] && preg_match("/\/index\.php/",$_SERVER['SCRIPT_NAME'])
+) {
     $url= asCleanString($_SERVER['HTTP_HOST'] .$_SERVER['SCRIPT_NAME']);
-
     confChange('SELF_URL', $url);
 }
 

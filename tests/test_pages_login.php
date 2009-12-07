@@ -11,11 +11,10 @@
 class TestPagesLogin extends WebTestCase {
     
     function testHomepage() {
-
+        global $g_streber_url;
+        
         TestEnvironment::prepare('fixtures/project_setup.sql');
         $this->addHeader('USER_AGENT: streber_unit_tester');
-
-        $g_streber_url= "http://localhost/streber_head";
 
         ### logout first ###
         $this->assertTrue($this->get("$g_streber_url/index.php?go=logout"), 'getting logout-page (%s)' );

@@ -30,7 +30,8 @@ function testPhpVersion() {
 
 
 /**
-* is db online?
+* Test if db is online?
+* - returns string, if error or true on success
 */
 function testDb() {
     require_once(dirname(__FILE__)."/../db/db.inc.php");
@@ -76,6 +77,7 @@ function testInstallDirectoryExists() {
 */
 function validateEnvironment()
 {
+    # NOTE: it's weird that we have to use strings for referring to functions...
     foreach( array('testPhpVersion', 'testDb', 'testInstallDirectoryExists' ) as $test_function) {
         $result = $test_function();
     

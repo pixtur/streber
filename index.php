@@ -14,21 +14,27 @@
 * 2. include config and customize
 * 3. include core-components
 * 4. authenticate the user
-* 5. render a page (which means calling a function defined in a file at pages/*.inc)
+* 5. render a page (which means calling a function defined in a file at pages/XXX.inc)
 *
 */
 
+/*.
+    require_module 'standard';
+    require_module 'pcre';
+    require_module 'mysql';
+.*/
 
 error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT |E_PARSE|E_CORE_ERROR|E_CORE_WARNING|E_COMPILE_ERROR);
 
 
-/********************************************************************************
+/*****************************************************************************
 * setup framework
-********************************************************************************/
+*****************************************************************************/
 
 ### create a function to make sure we started at index.php ###
-function startedIndexPhp() {return true; }
+function startedIndexPhp() {  }
 
+require_once('std/initial_setup.inc.php');
 initialBasicFixes();
 initProfiler();
 
@@ -207,7 +213,7 @@ if($user) {
         ### if user has only one project go there ###
         $projects = $auth->cur_user->getProjects();
         if(count($projects) == 1) {
-            new FeedbackMessage(sprintf(confGet('MESSAGE_WELCOME_ONEPROJECT'), $auth->cur_user->name,$projects[0]->name));
+            setWelcomeToProjectMessage($projects[0]);
             $PH->show('projView',array('prj'=>$projects[0]->id));
         }
         else {
@@ -259,86 +265,5 @@ exit();
 
 
 
-/********************************************************************
-* basic setup functions follow
-********************************************************************/
-
-/**
-* start timing for profiler
-*/
-function initProfiler()
-{
-    global $TIME_START;
-    $TIME_START=microtime(1);
-    global $DB_ITEMS_LOADED;
-    $DB_ITEMS_LOADED=0;
-
-    global $g_count_db_statements;
-    $g_count_db_statements = 0;
-}
-
-
-/**
-* Fix basic php issues and check version
-*/
-function initialBasicFixes()
-{
-    /**
-    * bypass date & timezone-related warnings with php 5.1
-    */
-    if (function_exists('date_default_timezone_set')) {
-        $tz= @date_default_timezone_get();
-        date_default_timezone_set($tz);
-    }
-
-    ini_set('zend.ze1_compatibility_mode', 0);
-    ini_set("pcre.backtrack_limit", -1);                        # fix 5.2.0 prce bug with render_wiki
-    if(function_exists('mb_internal_encoding')) {
-        mb_internal_encoding("UTF-8");
-    }
-    #ini_set("mbstring.func_overload", 2);
-
-    /**
-    * add rough php-version check to at least avoid parsing errors.
-    * fine version-check follows further down
-    */
-    if(phpversion() < "5.0.0") {
-        echo "Sorry, but Streber requires php5 or higher.";
-        exit();
-    }
-}
-
-
-/**
-* Filter get and post-vars
-*
-* - We don't not distinguish security between post-,get- and cookie-vars
-*   because any of them can be easily forged. We create a joined assoc array
-*   and filter for too long variables and html-tags. Additional security-checks
-*   should be done later in db- and field-classes.
-*
-* - passed parames should always be accessed like;
-*
-*    $f_person_name= get('person_name');
-*
-* - You CAN NOT access $_GET, $_POST and $_COOKIE-vars directly (because they are cleared)!
-* - for additional information see std/common.inc
-*/
-function filterGlobalArrays()
-{
-    ### clean global namespace from register globals ###
-    if (@ini_get('register_globals')) {
-       foreach ($_REQUEST as $key => $value) {
-           unset($GLOBALS[$key]);
-        }
-    }
-
-    clearRequestVars();
-    addRequestVars($_GET);
-    addRequestVars($_POST);
-    addRequestVars($_COOKIE);
-
-    $_COOKIE= $_GET= $_POST=array();
-}
 
 ?>

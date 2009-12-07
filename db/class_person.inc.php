@@ -488,7 +488,7 @@ class Person extends DbProjectItem {
     /**
     * get Objects from db-query
     */
-    static function &queryFromDb($query_string)
+    static function queryFromDb($query_string)
     {
 
         $dbh = new DB_Mysql;
@@ -511,7 +511,7 @@ class Person extends DbProjectItem {
     * - use "has_id" to query one person if visible
     */
     #$order_by=NULL, $accounts_only=false, $has_id=NULL, $search=NULL)
-    public static function &getPersons($args=NULL)
+    public static function getPersons($args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');

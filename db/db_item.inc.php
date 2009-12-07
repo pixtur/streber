@@ -266,7 +266,7 @@ abstract class DbItem {
         }
         $length= confGet('STRING_LENGTH_SHORT');
         if(isset($this->name) && $this->name !="") {
-            ereg("(.{0,$length})(.*)",asHtml($this->name),$matches);
+            preg_match("/(.{0,$length})(.*)/",asHtml($this->name),$matches);
             if(!$matches[2]) {
                 return $matches[1];
             }
