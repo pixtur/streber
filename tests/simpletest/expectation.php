@@ -73,9 +73,9 @@ class SimpleExpectation {
      *    @return SimpleDumper    Current value dumper.
      *    @access protected
      */
-    function &_getDumper() {
+    function _getDumper() {
         if (! $this->_dumper) {
-            $dumper = &new SimpleDumper();
+            $dumper = new SimpleDumper();
             return $dumper;
         }
         return $this->_dumper;
@@ -893,7 +893,6 @@ class MethodExistsExpectation extends SimpleExpectation {
     }
 }
 
-
 /**
  *    Test for a pattern using Perl regex rules.
  *	  @package SimpleTest
@@ -979,7 +978,7 @@ class ValidStructureExpectation extends SimpleExpectation {
         $tag_stack=array();
         $buffer="";
         
-        $lines=split("\n",$html);
+        $lines= preg_split("/\n/",$html);
         $indent="|&nbsp;&nbsp;&nbsp;";
         
         $line_num=0;

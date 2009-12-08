@@ -102,7 +102,7 @@ class SimpleTest {
      *   @return array|object|null
      *   @see prefer()
      */
-    function &preferred($classes) {
+    function preferred($classes) {
         if (! is_array($classes)) {
             $classes = array($classes);
         }
@@ -202,7 +202,7 @@ class SimpleTest {
      *    @access private
      *    @static
      */
-    function &_getRegistry() {
+    function _getRegistry() {
         static $registry = false;
         if (! $registry) {
             $registry = SimpleTest::_getDefaults();
@@ -217,7 +217,7 @@ class SimpleTest {
      *    @access public
      *    @static
      */
-    function &getContext() {
+    function getContext() {
         static $context = false;
         if (! $context) {
             $context = new SimpleTestContext();
@@ -281,7 +281,7 @@ class SimpleTestContext {
      *    @return SimpleTestCase    Current test.
      *    @access public
      */
-    function &getTest() {
+    function getTest() {
         return $this->_test;
     }
 
@@ -302,7 +302,7 @@ class SimpleTestContext {
      *    @return SimpleReporter    Current reporter.
      *    @access public
      */
-    function &getReporter() {
+    function getReporter() {
         return $this->_reporter;
     }
 
@@ -312,9 +312,9 @@ class SimpleTestContext {
      *    @access public
      *    @static
      */
-    function &get($resource) {
+    function get($resource) {
         if (! isset($this->_resources[$resource])) {
-            $this->_resources[$resource] = &new $resource();
+            $this->_resources[$resource] = new $resource();
         }
         return $this->_resources[$resource];
     }

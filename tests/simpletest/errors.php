@@ -56,7 +56,7 @@ class SimpleErrorTrappingInvoker extends SimpleInvokerDecorator {
      *    @return SimpleErrorQueue    Queue connected to the test.
      *    @access private
      */
-    function &_createErrorQueue() {
+    function _createErrorQueue() {
         $context = &SimpleTest::getContext();
         $test = &$this->getTestCase();
         $queue = &$context->get('SimpleErrorQueue');

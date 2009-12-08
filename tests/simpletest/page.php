@@ -148,7 +148,7 @@ class SimplePageBuilder extends SimpleSaxListener {
      *    @return SimplePage                   Newly parsed page.
      *    @access public
      */
-    function &parse($response) {
+    function parse($response) {
         $this->_tags = array();
         $this->_page = &$this->_createPage($response);
         $parser = &$this->_createParser($this);
@@ -162,8 +162,8 @@ class SimplePageBuilder extends SimpleSaxListener {
      *    @return SimplePage        New unparsed page.
      *    @access protected
      */
-    function &_createPage($response) {
-        $page = &new SimplePage($response);
+    function _createPage($response) {
+        $page = new SimplePage($response);
         return $page;
     }
 
@@ -174,8 +174,8 @@ class SimplePageBuilder extends SimpleSaxListener {
      *                                         events for the builder.
      *    @access protected
      */
-    function &_createParser(&$listener) {
-        $parser = &new SimpleHtmlSaxParser($listener);
+    function _createParser(&$listener) {
+        $parser = new SimpleHtmlSaxParser($listener);
         return $parser;
     }
     
@@ -188,7 +188,7 @@ class SimplePageBuilder extends SimpleSaxListener {
      *    @access public
      */
     function startElement($name, $attributes) {
-        $factory = &new SimpleTagBuilder();
+        $factory = new SimpleTagBuilder();
         $tag = $factory->createTag($name, $attributes);
         if (! $tag) {
             return true;
@@ -641,7 +641,7 @@ class SimplePage {
      *    @access public
      */
     function acceptFormStart(&$tag) {
-        $this->_open_forms[] = &new SimpleForm($tag, $this);
+        $this->_open_forms[] = new SimpleForm($tag, $this);
     }
 
     /**
@@ -898,7 +898,7 @@ class SimplePage {
      *                                          the button.
      *    @access public
      */
-    function &getFormBySubmit($selector) {
+    function getFormBySubmit($selector) {
         for ($i = 0; $i < count($this->_complete_forms); $i++) {
             if ($this->_complete_forms[$i]->hasSubmit($selector)) {
                 return $this->_complete_forms[$i];
@@ -916,7 +916,7 @@ class SimplePage {
      *                                     the image.
      *    @access public
      */
-    function &getFormByImage($selector) {
+    function getFormByImage($selector) {
         for ($i = 0; $i < count($this->_complete_forms); $i++) {
             if ($this->_complete_forms[$i]->hasImage($selector)) {
                 return $this->_complete_forms[$i];
@@ -934,7 +934,7 @@ class SimplePage {
      *    @return SimpleForm    Form object containing the matching ID.
      *    @access public
      */
-    function &getFormById($id) {
+    function getFormById($id) {
         for ($i = 0; $i < count($this->_complete_forms); $i++) {
             if ($this->_complete_forms[$i]->getId() == $id) {
                 return $this->_complete_forms[$i];

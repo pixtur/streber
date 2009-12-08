@@ -151,7 +151,7 @@ class ParametersExpectation extends SimpleExpectation {
         $descriptions = array();
         if (is_array($args)) {
             foreach ($args as $arg) {
-                $dumper = &new SimpleDumper();
+                $dumper = new SimpleDumper();
                 $descriptions[] = $dumper->describeValue($arg);
             }
         }
@@ -333,7 +333,7 @@ class SimpleSignatureMap {
      *                                slot, otherwise null.
      *    @access public
      */
-    function &findFirstAction($parameters) {
+    function findFirstAction($parameters) {
         $slot = $this->_findFirstSlot($parameters);
         if (isset($slot) && isset($slot['content'])) {
             return $slot['content'];
@@ -373,7 +373,7 @@ class SimpleSignatureMap {
      *    @return array               Reference to slot or null.
      *    @access private
      */
-    function &_findFirstSlot($parameters) {
+    function _findFirstSlot($parameters) {
         $count = count($this->_map);
         for ($i = 0; $i < $count; $i++) {
             if ($this->_map[$i]["params"]->test($parameters)) {
@@ -465,7 +465,7 @@ class SimpleCallSchedule {
      *    @return mixed             The result of the action.
      *    @access public.
      */
-    function &respond($step, $method, $args) {
+    function respond($step, $method, $args) {
         $method = strtolower($method);
         if (isset($this->_at[$method][$step])) {
             if ($this->_at[$method][$step]->isMatch($args)) {
@@ -529,7 +529,7 @@ class SimpleByReference {
      *    @return mixed    Whatever was stashed.
      *    @access public
      */
-    function &act() {
+    function act() {
         return $this->_reference;
     }
 }
@@ -559,7 +559,7 @@ class SimpleByValue {
      *    @return mixed    Whatever was stashed.
      *    @access public
      */
-    function &act() {
+    function act() {
         $dummy = $this->_value;
         return $dummy;
     }
@@ -618,7 +618,7 @@ class SimpleErrorThrower {
      *    @return null        The usual PHP4.4 shenanigans are needed here.
      *    @access public
      */
-    function &act() {
+    function act() {
         trigger_error($this->_error, $this->_severity);
         $null = null;
         return $null;
@@ -652,8 +652,8 @@ class SimpleMock {
      *    @access public
      */
     function SimpleMock() {
-        $this->_actions = &new SimpleCallSchedule();
-        $this->_expectations = &new SimpleCallSchedule();
+        $this->_actions = new SimpleCallSchedule();
+        $this->_expectations = new SimpleCallSchedule();
         $this->_call_counts = array();
         $this->_expected_counts = array();
         $this->_max_counts = array();
@@ -677,7 +677,7 @@ class SimpleMock {
      *    @return SimpeTestCase    Current test case.
      *    @access protected
      */
-    function &_getCurrentTestCase() {
+    function _getCurrentTestCase() {
         $context = &SimpleTest::getContext();
         return $context->getTest();
     }
@@ -1054,7 +1054,7 @@ class SimpleMock {
      *    @return mixed               Stored return.
      *    @access private
      */
-    function &_invoke($method, $args) {
+    function _invoke($method, $args) {
         $method = strtolower($method);
         $step = $this->getCallCount($method);
         $this->_addCall($method, $args);
@@ -1074,7 +1074,7 @@ class SimpleMock {
      *    @return mixed              Stored return or other action.
      *    @access protected
      */
-    function &_emulateCall($method, $args, $step) {
+    function _emulateCall($method, $args, $step) {
         return $this->_actions->respond($step, $method, $args);
     }
 
@@ -1320,7 +1320,7 @@ class MockGenerator {
         $code .= $this->_addMethodList(array_merge($methods, $this->_reflection->getMethods()));
         $code .= "\n";
         $code .= "    function " . $this->_mock_class . "() {\n";
-        $code .= "        \$this->_mock = &new " . $this->_mock_base . "();\n";
+        $code .= "        \$this->_mock = new " . $this->_mock_base . "();\n";
         $code .= "        \$this->_mock->disableExpectationNameChecks();\n";
         $code .= "    }\n";
         $code .= $this->_chainMockReturns();
@@ -1346,7 +1346,7 @@ class MockGenerator {
         $code .= $this->_addMethodList($methods);
         $code .= "\n";
         $code .= "    function " . $this->_mock_class . "() {\n";
-        $code .= "        \$this->_mock = &new " . $this->_mock_base . "();\n";
+        $code .= "        \$this->_mock = new " . $this->_mock_base . "();\n";
         $code .= "        \$this->_mock->disableExpectationNameChecks();\n";
         $code .= "    }\n";
         $code .= $this->_chainMockReturns();

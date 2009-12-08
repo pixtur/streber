@@ -74,8 +74,8 @@ class RemoteTestCase {
      *    @return SimpleBrowser           New browser.
      *    @access protected
      */
-    function &_createBrowser() {
-        $browser = &new SimpleBrowser();
+    function _createBrowser() {
+        $browser = new SimpleBrowser();
         return $browser;
     }
     
@@ -85,8 +85,8 @@ class RemoteTestCase {
      *    @return SimpleTestXmlListener      XML reader.
      *    @access protected
      */
-    function &_createParser(&$reporter) {
-        $parser = &new SimpleTestXmlParser($reporter);
+    function _createParser(&$reporter) {
+        $parser = new SimpleTestXmlParser($reporter);
         return $parser;
     }
     
@@ -103,7 +103,7 @@ class RemoteTestCase {
                 trigger_error('Cannot read remote test URL [' . $this->_dry_url . ']');
                 return false;
             }
-            $reporter = &new SimpleReporter();
+            $reporter = new SimpleReporter();
             $parser = &$this->_createParser($reporter);
             if (! $parser->parse($xml)) {
                 trigger_error('Cannot parse incoming XML from [' . $this->_dry_url . ']');

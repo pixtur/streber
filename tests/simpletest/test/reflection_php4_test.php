@@ -51,7 +51,7 @@ class TestOfReflection extends UnitTestCase {
         $reflection = new SimpleReflection('AnyOldThing');
         $this->assertEqualIgnoringCase(
                 $reflection->getSignature('aMethod'),
-                'function &aMethod()');
+                'function aMethod()');
     }
 
     function assertEqualIgnoringCase($a, $b) {

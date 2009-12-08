@@ -8,7 +8,7 @@ if (function_exists('spl_classes')) {
 interface DummyInterface {
     function aMethod();
     function anotherMethod($a);
-    function &referenceMethod(&$a);
+    function referenceMethod(&$a);
 }
 
 Mock::generate('DummyInterface');
@@ -75,7 +75,7 @@ class WithHint {
 class ImplementsDummy implements DummyInterface {
     function aMethod() { }
     function anotherMethod($a) { }
-    function &referenceMethod(&$a) { }
+    function referenceMethod(&$a) { }
     function extraMethod($a = false) { }
 }
 Mock::generate('ImplementsDummy');

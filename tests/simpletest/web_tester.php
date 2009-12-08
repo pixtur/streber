@@ -190,7 +190,7 @@ class HttpHeaderExpectation extends SimpleExpectation {
      *    @access protected
      */
     function _findHeader($compare) {
-        $lines = split("\r\n", $compare);
+        $lines = explode("\r\n", $compare);
         foreach ($lines as $line) {
             if ($this->_testHeaderLine($line)) {
                 return $line;
@@ -206,7 +206,7 @@ class HttpHeaderExpectation extends SimpleExpectation {
      *    @access private
      */
     function _testHeaderLine($line) {
-        if (count($parsed = split(':', $line, 2)) < 2) {
+        if (count($parsed = explode(':', $line, 2)) < 2) {
             return false;
         }
         list($header, $value) = $parsed;
@@ -276,8 +276,8 @@ class NoHttpHeaderExpectation extends HttpHeaderExpectation {
     }
     
     /**
-     *    @param mixed $compare   Raw header block to search.
      *    Tests that the unwanted header is not found.
+     *    @param mixed $compare   Raw header block to search.
      *    @return boolean         True if header present.
      *    @access public
      */
@@ -472,7 +472,7 @@ class WebTestCase extends SimpleTestCase {
      *    @return SimpleBrowser     Current test browser object.
      *    @access public
      */
-    function &getBrowser() {
+    function getBrowser() {
         return $this->_browser;
     }
     
@@ -502,8 +502,8 @@ class WebTestCase extends SimpleTestCase {
      *    @return TestBrowser           New browser.
      *    @access public
      */
-    function &createBrowser() {
-        $browser = &new SimpleBrowser();
+    function createBrowser() {
+        $browser = new SimpleBrowser();
         return $browser;
     }
     
@@ -1537,7 +1537,6 @@ class WebTestCase extends SimpleTestCase {
         $trace = new SimpleStackTrace(array('assert', 'click', 'pass', 'fail'));
         return $trace->traceMethod();
     }
-
 
     /**
      *    patch by pixtur

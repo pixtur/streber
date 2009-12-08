@@ -43,7 +43,7 @@ class SimpleInvoker {
      *    @return SimpleTestCase    Test case.
      *    @access public
      */
-    function &getTestCase() {
+    function getTestCase() {
         return $this->_test_case;
     }
 
@@ -102,7 +102,7 @@ class SimpleInvokerDecorator {
      *    @return SimpleTestCase    Test case.
      *    @access public
      */
-    function &getTestCase() {
+    function getTestCase() {
         return $this->_invoker->getTestCase();
     }
 

@@ -515,7 +515,7 @@ class SimpleTestXmlParser {
      *    @return resource        Expat handle.
      *    @access protected
      */
-    function &_createParser() {
+    function _createParser() {
         $expat = xml_parser_create();
         xml_set_object($expat, $this);
         xml_set_element_handler($expat, '_startElement', '_endElement');
@@ -540,7 +540,7 @@ class SimpleTestXmlParser {
      *                             being parsed.
      *    @access private
      */
-    function &_getCurrentNestingTag() {
+    function _getCurrentNestingTag() {
         return $this->_tag_stack[0];
     }
 

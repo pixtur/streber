@@ -63,7 +63,7 @@ class SimpleScorer {
      *    @return SimpleInvoker           Wrapped test runner.
      *    @access public
      */
-    function &createInvoker(&$invoker) {
+    function createInvoker(&$invoker) {
         return $invoker;
     }
 
@@ -466,7 +466,7 @@ class SimpleReporterDecorator {
      *    @return SimpleInvoker           Wrapped test runner.
      *    @access public
      */
-    function &createInvoker(&$invoker) {
+    function createInvoker(&$invoker) {
         return $this->_reporter->createInvoker($invoker);
     }
     
@@ -683,7 +683,7 @@ class MultipleReporter {
      *    @return SimpleInvoker           Wrapped test runner.
      *    @access public
      */
-    function &createInvoker(&$invoker) {
+    function createInvoker(&$invoker) {
         for ($i = 0; $i < count($this->_reporters); $i++) {
             $invoker = &$this->_reporters[$i]->createInvoker($invoker);
         }

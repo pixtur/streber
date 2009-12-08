@@ -130,7 +130,7 @@ class SimpleReflection {
      *    @access public
      */
     function getSignature($method) {
-        return "function &$method()";
+        return "function $method()";
     }
 }
 ?>

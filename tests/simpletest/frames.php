@@ -473,7 +473,7 @@ class SimpleFrameset {
      *                                          the button.
      *    @access public
      */
-    function &getFormBySubmit($selector) {
+    function getFormBySubmit($selector) {
         $form = &$this->_findForm('getFormBySubmit', $selector);
         return $form;
     }
@@ -488,7 +488,7 @@ class SimpleFrameset {
      *                                     the image.
      *    @access public
      */
-    function &getFormByImage($selector) {
+    function getFormByImage($selector) {
         $form = &$this->_findForm('getFormByImage', $selector);
         return $form;
     }
@@ -503,7 +503,7 @@ class SimpleFrameset {
      *    @return SimpleForm    Form object containing the matching ID.
      *    @access public
      */
-    function &getFormById($id) {
+    function getFormById($id) {
         $form = &$this->_findForm('getFormById', $id);
         return $form;
     }
@@ -516,7 +516,7 @@ class SimpleFrameset {
         *    @return SimpleForm    Form object containing the matching ID.
         *    @access private
         */
-    function &_findForm($method, $attribute) {
+    function _findForm($method, $attribute) {
         if (is_integer($this->_focus)) {
             $form = &$this->_findFormInFrame(
                     $this->_frames[$this->_focus],
@@ -549,7 +549,7 @@ class SimpleFrameset {
      *    @return SimpleForm       Form object containing the matching ID.
      *    @access private
      */
-    function &_findFormInFrame(&$page, $index, $method, $attribute) {
+    function _findFormInFrame(&$page, $index, $method, $attribute) {
         $form = &$this->_frames[$index]->$method($attribute);
         if (isset($form)) {
             $form->setDefaultTarget($this->_getPublicNameFromIndex($index));

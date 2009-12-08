@@ -43,6 +43,7 @@ class SimpleCookie {
         $this->_path = ($path ? $this->_fixPath($path) : "/");
         $this->_expiry = false;
         if (is_string($expiry)) {
+            date_default_timezone_set("Europe/Berlin");
             $this->_expiry = strtotime($expiry);
         } elseif (is_integer($expiry)) {
             $this->_expiry = $expiry;
@@ -176,6 +177,7 @@ class SimpleCookie {
             return true;
         }
         if (is_string($now)) {
+            date_default_timezone_set("Europe/Berlin");
             $now = strtotime($now);
         }
         return ($this->_expiry < $now);

@@ -1077,7 +1077,7 @@ class SimpleTagGroup {
      *    @return array        All widgets.
      *    @access protected
      */
-    function &_getWidgets() {
+    function _getWidgets() {
         return $this->_widgets;
     }
 

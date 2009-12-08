@@ -177,7 +177,7 @@ class SimpleBrowser {
                 SimpleTest::getDefaultProxy(),
                 SimpleTest::getDefaultProxyUsername(),
                 SimpleTest::getDefaultProxyPassword());
-        $this->_page = &new SimplePage();
+        $this->_page = new SimplePage();
         $this->_history = &$this->_createHistory();
         $this->_ignore_frames = false;
         $this->_maximum_nested_frames = DEFAULT_MAX_NESTED_FRAMES;
@@ -188,8 +188,8 @@ class SimpleBrowser {
      *    @return SimpleFetcher    Content fetcher.
      *    @access protected
      */
-    function &_createUserAgent() {
-        $user_agent = &new SimpleUserAgent();
+    function _createUserAgent() {
+        $user_agent = new SimpleUserAgent();
         return $user_agent;
     }
 
@@ -198,8 +198,8 @@ class SimpleBrowser {
      *    @return SimpleBrowserHistory    New list.
      *    @access protected
      */
-    function &_createHistory() {
-        $history = &new SimpleBrowserHistory();
+    function _createHistory() {
+        $history = new SimpleBrowserHistory();
         return $history;
     }
 
@@ -245,12 +245,12 @@ class SimpleBrowser {
      *    @return SimplePage                     Parsed HTML.
      *    @access private
      */
-    function &_parse($response, $depth = 0) {
+    function _parse($response, $depth = 0) {
         $page = &$this->_buildPage($response);
         if ($this->_ignore_frames || ! $page->hasFrames() || ($depth > $this->_maximum_nested_frames)) {
             return $page;
         }
-        $frameset = &new SimpleFrameset($page);
+        $frameset = new SimpleFrameset($page);
         foreach ($page->getFrameset() as $key => $url) {
             $frame = &$this->_fetch($url, new SimpleGetEncoding(), $depth + 1);
             $frameset->addFrame($frame, $key);
@@ -266,8 +266,8 @@ class SimpleBrowser {
      *    @return SimplePage                     Parsed top level page.
      *    @access protected
      */
-    function &_buildPage($response) {
-        $builder = &new SimplePageBuilder();
+    function _buildPage($response) {
+        $builder = new SimplePageBuilder();
         $page = &$builder->parse($response);
         $builder->free();
         unset($builder);
@@ -283,10 +283,10 @@ class SimpleBrowser {
      *    @return SimplePage                    Parsed page.
      *    @access private
      */
-    function &_fetch($url, $encoding, $depth = 0) {
+    function _fetch($url, $encoding, $depth = 0) {
         $response = &$this->_user_agent->fetchResponse($url, $encoding);
         if ($response->isError()) {
-            $page = &new SimplePage($response);
+            $page = new SimplePage($response);
         } else {
             $page = &$this->_parse($response, $depth);
         }
