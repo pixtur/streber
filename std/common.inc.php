@@ -99,7 +99,8 @@ function addRequestVars(&$referred_vars)
             $value= substr( $value,0,confGet('STRING_SIZE_MAX'));
         }
         else if(! is_numeric($value) ) {
-            trigger_error("Skipping referred value for '$key' of unknown type: '". gettype($value)."' ", E_USER_NOTICE);
+            $content = print_r($value, true);
+            trigger_error("Skipping referred value for '$key' of unknown type: '". gettype($value)."' $content", E_USER_NOTICE);
             continue;
         }
         $g_request_vars[$key] = $value;

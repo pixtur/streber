@@ -113,10 +113,28 @@ class RSS
                 $feeditem = new FeedItem();
                 $feeditem->title = $item->name  . " (" . $ch->txt_what .' ' . __("by") . ' ' . $name_author . ")";
                 $feeditem->link = $url . "?go=itemView&item=$item->id";
-                #$feeditem->description =  ;
                 $feeditem->date = gmdate("r", strToGMTime($item->modified));
                 $feeditem->source = $url;
                 $feeditem->author = $name_author;
+
+                
+                switch($ch->type) {
+                    case ChangeLine::COMMENTED:
+                        $feeditem->description = $ch->html_comment;
+                        
+                        break;
+                        
+                    case ChangeLine::NEW_TASK:
+                        $feeditem->description = str_replace("\n", "<br>", $item->description );
+                        break;
+                        
+                    default:
+                        $feeditem->description = $ch-type . " " . str_replace("\n", "<br>", $item->description );
+                        break;
+                }
+
+
+
 
                 $rss->addItem($feeditem);
             }

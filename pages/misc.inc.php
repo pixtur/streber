@@ -432,7 +432,8 @@ function showLog()
 {
     global $PH;
     echo "<pre>";
-    // get contents of a file into a string
+    
+    ### get contents of a file into a string
     $filename = "_tmp/errors.log.php";
     $handle = fopen($filename, "r");
     $last_error_time= NULL;
@@ -459,18 +460,21 @@ function showLog()
     }
 
 
-        echo $PH->getLink('systemInfo','back to sysInfo') . " | ";
-        echo $PH->getLink('showLog','log', array('showlog'=>1)) . " | ";
-        echo $PH->getLink('showLog','errors', array()) . " | ";
-        echo $PH->getLink('showLog','newbots', array('newbots'=>1)) . " | ";
-        echo "<hr>";
+    echo $PH->getLink('systemInfo','back to sysInfo') . " | ";
+    echo $PH->getLink('showLog','log', array('showlog'=>1)) . " | ";
+    echo $PH->getLink('showLog','errors', array()) . " | ";
+    echo $PH->getLink('showLog','newbots', array('newbots'=>1)) . " | ";
+    echo "<hr>";
 
+    
+    $count_requests= 0;
+    $count_requests_by_crawlers= 0;
+    $new_bots= array();
 
 
     while (!feof($handle)) {
         $line = fgets($handle);
-        #echo $line."<br><br>";
-
+        #echo asHtml($line) . "<br>";
 
         if(preg_match("/(\w+) (\d+)\s*(.*)/", $line, $matches)) {
             $cat= $matches[1];
@@ -478,9 +482,26 @@ function showLog()
             $rest= $matches[3];
 
             if(get('newbots')) {
-                if(preg_match("/\Sbot/", $rest, $matches)) {
-                    if(!preg_match("/ crawler/", $rest)) {
-                        echo $line ."<br>";
+                if($cat == 'Log') {
+                    $count_requests++;
+                    if(preg_match("/\((.*)\)/", $rest, $matches_bot)) {    
+                        $agent_string= $matches_bot[1];
+                        
+                        ### skip known crawlers.
+                        if(!Auth::agentStringMatchesCrawler($agent_string)) {
+                            if(preg_match("/bot|crawler|spider/i", $agent_string )) {
+                                if( !isset($new_bots[$agent_string])) {
+                                    $new_bots[$agent_string] = 1;
+                                    #echo asHtml($agent_string) . "<br>";                            
+                                }
+                                else {
+                                    $new_bots[$agent_string]++;
+                                }
+                            }
+                        }
+                        else {
+                            $count_requests_by_crawlers++;
+                        }
                     }
                 }
             }
@@ -515,6 +536,11 @@ function showLog()
         }
     }
     fclose($handle);
+    if(get('newbots')) {
+        foreach($new_bots as $bot=>$count) {
+            printf("%6d  %s<br>", $count, $bot);
+        }
+    }
 }
 
 /**

@@ -1441,8 +1441,6 @@ foreach($filters_str as $fs=>$value) {
         return $tasks;
     }
     
-    
-    
     public function isMilestoneOrVersion()
     {
         return $this->isOfCategory(array(TCATEGORY_MILESTONE, TCATEGORY_VERSION));
@@ -1464,6 +1462,15 @@ foreach($filters_str as $fs=>$value) {
         }
         return false;        
     }
+    
+    public function isDocumentation() {
+        return isOfCategory(TCATEGORY_DOCU);
+    }
+
+    public function isBug() {
+        return isOfCategory(TCATEGORY_BUG);
+    }
+
 }
 
 Task::init();

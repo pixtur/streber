@@ -7,6 +7,8 @@ todo:
 
 
 
+- added generation of crawler list
+- added some details to RSS-Feed
 - fixed closed tasks for milestone are not displayed correctly
 - added current milestone block to project overview
 - added graph to milestone view

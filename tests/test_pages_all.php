@@ -15,8 +15,10 @@ class TestPagesAll extends WebTestCase {
     *
     */
     function testAllPages() {
+        global $g_streber_url;
 
         TestEnvironment::prepare('fixtures/project_setup.sql');
+        TestEnvironment::initStreberUrl();
         $this->addHeader('USER_AGENT: streber_unit_tester');
         
         /**
@@ -26,8 +28,7 @@ class TestPagesAll extends WebTestCase {
         $login_password = "";
 
         # FIXME: Setting an absolute path is bad!
-        $url_streber    = "http://localhost/streber/";
-        $url_start      = $url_streber . 'index.php?go=logout';
+        $url_start      = $g_streber_url . '/index.php?go=logout';
         $test_params    = array(
                              "_projectView_"=>12,
                              "_projectEdit_"=>12,
@@ -86,12 +87,12 @@ class TestPagesAll extends WebTestCase {
                             $params[$param]= $test_params[$value];
                         }
                     }
-                    $url= $url_streber . $PH->getUrl($key,$params);
+                    $url= $g_streber_url . $PH->getUrl($key,$params);
                 }
                 else {
-                    $url= $url_streber . $PH->getUrl($key);
+                    $url= $g_streber_url . $PH->getUrl($key);
                 }
-                echo "<b>$url</b>";
+                echo "<b>$handle->id</b> ";
                 print_r($params);
                 echo "<br>";
                 $this->assertTrue($this->get($url)         , "getting $url (%s)");

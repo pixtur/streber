@@ -35,21 +35,39 @@ define('ITEM_NEW', 3);
 * - this function has not been optimized for performance
 *
 */
+
+
+
 class ChangeLine extends BaseObject 
 {
+    
+    const UNDEFINED = 0;
+    const NEW_TOPIC = 1;
+    const NEW_TASK  = 2;
+    const NEW_FILE  = 3;
+    const UPDATED   = 4;
+    const COMMENTED = 5;
+    const MOVED     = 6;
+    const RENAMED   = 7;
+    const EDITED_WIKI= 8;
+    const ATTACHED_FILE =9;
+    const ASSIGNED  =10;
+
     public $project_id;
     public $timestamp;
     public $person_by;
     public $relavant_to_cur_user= true;
     public $html_what;
     public $txt_what;
-    public $what;
+    public $type= ChangeLine::UNDEFINED;   #type
     public $item;
     public $task;
     public $item_id;
     public $task_html;
     public $html_details;
     public $html_assignment;
+
+
 
 
     public function __construct($args)
@@ -179,6 +197,7 @@ class ChangeLine extends BaseObject
                         #'task'      =>      $task,
                         'html_what' =>      '<span class=new>'. __('new') .' '. $task->getLabel() .'</span>',
                         'txt_what'  =>      __('new') .' '. $task->getLabel(),
+                        'type'      =>      ChangeLine::NEW_TASK,
                         'html_assignment'=> $html_assignment,
                         'html_details'=>    $html_details,
                     ));
@@ -195,6 +214,7 @@ class ChangeLine extends BaseObject
                             'item_id'   =>      $i->id,
                             'html_what' =>      __('New file'),
                             'txt_what'  =>      __('New file'),
+                            'type'      =>      ChangeLine::NEW_FILE,
                             'html_details'=>    $file->name,
                         ));
                         $changes[]= $change;
@@ -209,6 +229,7 @@ class ChangeLine extends BaseObject
                 /**
                 * modified tasks
                 */
+                $type = ChangeLine::UPDATED;
                 if($i->type == ITEM_TASK) {
 
 
@@ -235,6 +256,7 @@ class ChangeLine extends BaseObject
                     }
 
                     $txt_what= $html_what= __('modified');
+                    $type= ChangeLine::UPDATED;
 
                     ### try to get comments
                     {
@@ -254,15 +276,6 @@ class ChangeLine extends BaseObject
                                 $html_comment= strip_tags($last_comment->name). ': ';
                             }
                             $html_comment.= strip_tags($last_comment->description);
-                            if(strlen($html_comment) > COMMENT_LEN_PREVIEW) {
-                                $html_comment= substr($html_comment, 0, COMMENT_LEN_PREVIEW). "...";
-                            }
-                            if(count($comments) > 1) {
-                                $html_comment= __('Latest comment:') . ' '. $html_comment;
-                            }
-                            else {
-                                $html_comment= __('comment:'). ' '. $html_comment;
-                            }
                             $html_comment = asHtml($html_comment);
                         }
                     }
@@ -308,24 +321,23 @@ class ChangeLine extends BaseObject
                                 }
                             }
                         }
+                        
                         if(isset($changed_fields_hash['parent_task'])) {
                             $txt_what= $html_what= __('moved');
+                            $type= ChangeLine::MOVED;
                             unset($changed_fields_hash['parent_task']);
                         }
-
                         else if(count($changed_fields_hash) == 1 && isset($changed_fields_hash['name'])) {
                             $txt_what= $html_what= __('renamed');
+                            $type= ChangeLine::RENAMED;
                         }
                         else if(count($changed_fields_hash) == 1 && isset($changed_fields_hash['description'])) {
                             $txt_what= $html_what= __('edit wiki');
-                            
+                            $type= ChangeLine::EDITED_WIKI;
                         }
 
                         else if(count($changed_fields_hash)) {                        # status does not count
                             $html_details .= ' / ' . __('changed:'). ' '. implode(', ', array_keys($changed_fields_hash));
-                            #if($html_comment) {
-                            #    $html_details.= '<br> / '. $html_comment;
-                            #}
                         }
 
                         /**
@@ -333,12 +345,12 @@ class ChangeLine extends BaseObject
                         */
                         else if($html_comment) {
                             $txt_what= $html_what= __('commented');
+                            $type= ChangeLine::COMMENTED;
                         }
 
                         if($html_comment) {
                             $html_details .= ' / ' . $html_comment;
                         }
-
                     }
 
                     /**
@@ -371,6 +383,7 @@ class ChangeLine extends BaseObject
                            &&
                            $timestamp_last_change < $t_timestamp
                         ) {
+                            $type= ChangeLine::ASSIGNED;
                             $txt_what= $html_what= __('assigned');
                             $timestamp_last_change = $t_timestamp;
                         }
@@ -403,6 +416,7 @@ class ChangeLine extends BaseObject
                             }
                         }
                         if($count_attached_files) {
+                            $type= ChangeLine::ATTACHED_FILE;
                             $txt_what= $html_what= __('attached file to');
                             if($timestamp_last_change < $t_timestamp) {
                                 $html_details.= ' / '. $html_attached;
@@ -425,6 +439,7 @@ class ChangeLine extends BaseObject
                         'item_id'   =>      $i->id,
                         #'task'      =>      $task,
                         'item'      =>      $task,
+                        'type'      =>      $type,
                         'txt_what'  =>      $txt_what,
                         'html_what' =>      $html_what,
                         'html_assignment'=> $html_assignment,
@@ -445,6 +460,7 @@ class ChangeLine extends BaseObject
                             'item_id'   =>      $i->id,
                             'html_what' =>      __('changed File'),
                             'txt_what'  =>      __('changed File'),
+                            'type'      =>      ChangeLine::NEW_FILE,
                             'html_details'=>    $file->name,
                         ));
                         $changes[]= $change;
@@ -487,13 +503,13 @@ class ChangeLine extends BaseObject
 
                     $txt_what= $html_what= __('deleted');
 
-
                     $change= new ChangeLine(array(
                         'item'      =>      $task,
                         'person_by' =>      $i->deleted_by,
                         'timestamp' =>      $i->deleted,
                         'item_id'   =>      $i->id,
                         #'task'      =>      $task,
+                        'type'      =>      ChangeLine::DELETED,
                         'txt_what' =>      $txt_what,
                         'html_what' =>      $html_what,
                         'html_assignment'=> $html_assignment,
@@ -515,7 +531,7 @@ class ChangeLine extends BaseObject
                             'timestamp' =>      $i->created,
                             'item_id'   =>      $i->id,
                             'html_what' =>      __('deleted File'),
-                            'txt_what'  =>      __('deleted File'),
+                            'txt_what'  =>      ChangeLine::DELETED,
                             'html_details'=>    $file->name,
                         ));
                         $changes[]= $change;

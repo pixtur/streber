@@ -543,71 +543,70 @@ class Auth
         if(!Auth::isAnonymousUser()) {
             return false;
         }
-        #if(ini_get('browscap') &&  isset($_SERVER['HTTP_USER_AGENT'])) {
-        #    $browser= get_browser(NULL, true);
-        #    if($browser['crawler']) {
-        #        return true;
-        #    }
-        #}
-        if($agent= getServerVar('HTTP_USER_AGENT')){
-            $crawlers= array(
-                "/Googlebot/",
-                "/Yahoo! Slurp;/",
-                "/msnbot/",                 # msnbot/1.1 (+http://search.msn.com/msnbot.htm)) 
-                "/Mediapartners-Google/",
-                "/Scooter/",
-                "/Yahoo-MMCrawler/",
-                "/FAST-WebCrawler/",
-                "/Yahoo-MMCrawler/",
-                "/Yahoo! Slurp/",
-                "/FAST-WebCrawler/",
-                "/FAST Enterprise Crawler/",
-                "/grub-client-/",
-                "/MSIECrawler/",
-                "/NPBot/",
-                "/NameProtect/",
-                "/ZyBorg/",
-                "/worio bot heritrix/",
-                "/Ask Jeeves/",
-                "/libwww-perl/",
-                "/Gigabot/",
-                "/bot@bot.bot/",
-                "/SeznamBot/",
-                "/MetaWeb Crawler/", #(FAST MetaWeb Crawler (helpdesk at fastsearch dot com)) 
-                "/ia_archiver/", #(ia_archiver)
-                "/SeznamBot/", #(SeznamBot/1.0 (+http://fulltext2.seznam.cz/))
-                #"", #(Feedfetcher-Google; (+http://www.google.com/feedfetcher.html; 7 subscribers; feed-id=14943301623292076042))
-                "/Speedy Spider/", #(Speedy Spider (Entireweb; Beta/1.1; http://www.entireweb.com/about/search_tech/speedyspider/)) 
-                "/MJ12bot/", #(MJ12bot/v1.2.0 (http://majestic12.co.uk/bot.php?+))
-                "/Gigabot/", #(Gigabot/2.0)
-                #"", #(Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07))
-                #"", #(nestReader/0.2 (discovery; http://echonest.com/reader.shtml; reader at echonest.com))
-                #"", #(bot/1.0 (bot; http://; bot@bot.bot))
-                #"", #(JobSpider_BA/1.1)
-                #"", #(StackRambler/2.0 (MSIE incompatible))
-                #"", #(www.clamav.net)
-                #"", #(Page2RSS/0.2)
-                #"", #(psbot/0.1 (+http://www.picsearch.com/bot.html)) 
-                '/ Charlotte\/?.?/',  #Mozilla/5.0 (compatible; Charlotte/1.1; http://www.searchme.com/support/)
-                "/http:\/\/discoveryengine.com\/discobot.html/", #Mozilla/5.0 (compatible; discobot/1.0; +http://discoveryengine.com/discobot.html)
-                "/Twiceler/",
-                "/DotBot/",
-                "/crawler/",
-                "/Crawler/",
-                "/Bot/",
-                "/Spider/",
-                "/spider/",
-                "/Yandex/",
-            );
-            foreach($crawlers as $c) {
-                if(preg_match($c, $agent)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return Auth::agentStringMatchesCrawler( getServerVar('HTTP_USER_AGENT') );
     }
 
+    /**
+    * checks if a string matches a known crawler agent-string.
+    */
+    public static function agentStringMatchesCrawler($agent) {
+        $crawlers= array(
+            "/Googlebot/",
+            "/Yahoo! Slurp;/",
+            "/msnbot/",                 # msnbot/1.1 (+http://search.msn.com/msnbot.htm)) 
+            "/Mediapartners-Google/",
+            "/Scooter/",
+            "/Yahoo-MMCrawler/",
+            "/FAST-WebCrawler/",
+            "/Yahoo-MMCrawler/",
+            "/Yahoo! Slurp/",
+            "/FAST-WebCrawler/",
+            "/FAST Enterprise Crawler/",
+            "/grub-client-/",
+            "/MSIECrawler/",
+            "/NPBot/",
+            "/NameProtect/",
+            "/ZyBorg/",
+            "/worio bot heritrix/",
+            "/Ask Jeeves/",
+            "/libwww-perl/",
+            "/Gigabot/",
+            "/bot@bot.bot/",
+            "/SeznamBot/",
+            "/MetaWeb Crawler/", #(FAST MetaWeb Crawler (helpdesk at fastsearch dot com)) 
+            "/ia_archiver/", #(ia_archiver)
+            "/SeznamBot/", #(SeznamBot/1.0 (+http://fulltext2.seznam.cz/))
+            #"", #(Feedfetcher-Google; (+http://www.google.com/feedfetcher.html; 7 subscribers; feed-id=14943301623292076042))
+            "/Speedy Spider/", #(Speedy Spider (Entireweb; Beta/1.1; http://www.entireweb.com/about/search_tech/speedyspider/)) 
+            "/MJ12bot/", #(MJ12bot/v1.2.0 (http://majestic12.co.uk/bot.php?+))
+            "/Gigabot/", #(Gigabot/2.0)
+            #"", #(Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07))
+            #"", #(nestReader/0.2 (discovery; http://echonest.com/reader.shtml; reader at echonest.com))
+            #"", #(bot/1.0 (bot; http://; bot@bot.bot))
+            #"", #(JobSpider_BA/1.1)
+            #"", #(StackRambler/2.0 (MSIE incompatible))
+            #"", #(www.clamav.net)
+            #"", #(Page2RSS/0.2)
+            #"", #(psbot/0.1 (+http://www.picsearch.com/bot.html)) 
+            '/ Charlotte\/?.?/',  #Mozilla/5.0 (compatible; Charlotte/1.1; http://www.searchme.com/support/)
+            "/http:\/\/discoveryengine.com\/discobot.html/", #Mozilla/5.0 (compatible; discobot/1.0; +http://discoveryengine.com/discobot.html)
+            "/Twiceler/",
+            "/DotBot/",
+            "/crawler/",
+            "/Crawler/",
+            "/robot/",
+            "/Spider/",
+            "/spider/",
+            "/Yandex/",
+            "/\.NET CL/",#(Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729;  SLCC1;  .NET CLR 1.1.4325;  .NET CLR 2.0.40607;  .NET CLR 3.0.30729;  .NET CLR 3.5.30707;  MS-RTC LM 8)) 
+            "/Yeti/",
+        );
+        foreach($crawlers as $c) {
+            if(preg_match($c, $agent)) {
+                return true;
+            }
+        }
+    }
     /**
     * there are some web crawlers which only cause traffic
     *

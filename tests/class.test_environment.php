@@ -47,7 +47,6 @@ class TestEnvironment extends BaseObject {
         $g_streber_url= confGet('SELF_PROTOCOL') . "://" . asCleanString($_SERVER['HTTP_HOST'])  . $directory[0] ;
     }
 
-
 }
 
 function validatePage($handle) {

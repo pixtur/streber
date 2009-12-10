@@ -770,7 +770,7 @@ class DbProjectItem extends DbItem {
                 return true;
             }
         }
-        else {
+        else if($this->type != ITEM_ISSUE){
             trigger_error("item without project? ($this->id, $this->project)",E_USER_WARNING);
         }
         return false;
