@@ -1522,10 +1522,10 @@ class DbProjectItem extends DbItem {
             return $item_full;
         }
     }
-    
+
     /**
     * internal function to add update markers to wiki texts
-    * these markers will later be replaced by render_wiki
+    * these markers will later be replaced by render_wiki (see render_wiki.inc.php FormatBlockChangemarks)
     */
     public function getTextfieldWithUpdateNotes($fieldname)
     {
@@ -1571,65 +1571,55 @@ class DbProjectItem extends DbItem {
         $nta = explode( "\n", str_replace( "\r\n", "\n", $new_version ) );
         $diffs = new Diff( $ota, $nta );
         
-        $buffer= "";
+        $new_lines= array();
         foreach($diffs as $d) {
             foreach($d as $do) {
                 if($do->type == 'copy') {
-                    $buffer.= join("\n", $do->orig);
+                    $new_lines[].= join("\n", $do->orig);
                 }
                 else if($do->type == 'add') {
-                    $buffer.= "\n[added word]" . join("\n", $do->closing) . "[/added word]\n";
+                    $new_lines[]= "[added line]" . join("\n", $do->closing) . "[/added word]";
                 }
                 else if($do->type =='delete') {
-                    #$buffer.= "\n[deleted something]\n";
-    		        $buffer.= '[deleted word]' . asHtml($do->closing) . '[/deleted word]';
+                    $new_lines[] = '[deleted word]' . asHtml($do->closing) . '[/deleted word]';
                 }
                 else if($do->type =='change') {
 
                     ### render word level differences
-    		        $wld= new WordLevelDiff($do->orig, $do->closing);
-    		        $buffer_org ='';
-    		        $buffer_new ='';
-    		        foreach($wld->edits as $e) {
-    		            switch($e->type) {
-    		                case 'copy':
-    		                    $orig= implode('',$e->orig);
-    		                    #$buffer_org.= asHtml($orig);
-    		                    $buffer_new.= asHtml($orig);
-    		                    break;
+                    $wld= new WordLevelDiff($do->orig, $do->closing);
+                    $buffer_new ='';
+                    foreach($wld->edits as $e) {
+                        switch($e->type) {
+                            case 'copy':
+                                $buffer_new.= asHtml( implode('',$e->orig) );
+                                break;
 
-    		                case 'add':
-    		                    #$buffer_org.= '<span class=add_place> </span>';
-    		                    $closing=implode('',$e->closing);
-    		                    $buffer_new.= '[added word]'.asHtml($closing).'[/added word]';
-    		                    break;
+                            case 'add':
+                                $buffer_new.= '[added word]'.asHtml( implode('',$e->closing) ).'[/added word]';
+                                break;
 
-    		                case 'change':
-    		                    $orig= implode('',$e->orig);
-    		                    $closing= implode('',$e->closing);
-    		                    #$buffer_org.= '<span class=changed>'.asHtml($orig).'</span>';
-    		                    $buffer_new.= '[deleted word]'.asHtml($orig).'[/deleted word]';
-    		                    $buffer_new.= '[added word]'.asHtml($closing).'[/added word]';
-    		                    break;
+                            case 'change':
+                                $buffer_new.= '[deleted word]'.asHtml( implode('',$e->orig)    ).'[/deleted word]'
+                                            . '[added word]'.  asHtml( implode('',$e->closing) ).'[/added word]';
+                                break;
 
-    		                case 'delete':
-    		                    $orig= implode('',$e->orig);
+                            case 'delete':
+                                $buffer_new.= '[deleted word]' . asHtml( implode('',$e->orig) ) . '[/deleted word]';
+                                break;
 
-    		                    $buffer_new.= '[deleted word]' . asHtml($orig) . '[/deleted word]';
-    		                    break;
+                            default:
+                                trigger_error("undefined edit work edit", E_USER_WARNING);
+                                break;
 
-    		                default:
-    		                    trigger_error("undefined edit work edit", E_USER_WARNING);
-    		                    break;
-
-    		            }
-    		        }
-                    #$buffer.= "\n[changed]" . join("\n", $do->closing) . "[/changed]\n";
-                    #$buffer.= "\n[changed]" . $buffer_new . "[/changed]\n";
-                    $buffer.=  $buffer_new;
+                        }
+                    }
+                    $new_lines[] = $buffer_new;
                 }
             }
         }
+        $buffer= join($new_lines, "\n");
+        #debugMessage($old_version);
+        #debugMessage( htmlspecialchars($buffer));
         return $buffer;
     }
 }

@@ -592,7 +592,12 @@ class Auth
                 "/http:\/\/discoveryengine.com\/discobot.html/", #Mozilla/5.0 (compatible; discobot/1.0; +http://discoveryengine.com/discobot.html)
                 "/Twiceler/",
                 "/DotBot/",
-                
+                "/crawler/",
+                "/Crawler/",
+                "/Bot/",
+                "/Spider/",
+                "/spider/",
+                "/Yandex/",
             );
             foreach($crawlers as $c) {
                 if(preg_match($c, $agent)) {

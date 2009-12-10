@@ -1,5 +1,10 @@
 streber-version-history
 
+todo:
+- validate uniqueness of project title and short title
+- hide "new project from, if not enough user-rights"
+
+
 version v0.91 (revision 485)
 =============
 major:

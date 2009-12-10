@@ -213,12 +213,15 @@ class FormatBlockLeadingSpaces extends FormatBlock
 
 /**
 * highlight changes
+*
 * [added]...[/added]
 * [changed]...[/changed]
 * [deleted something]
 * [deleted word] .. [/deleted word]
 * [changed word] .. [/changed word]
 * [added word] .. [/added word]
+* 
+* The original changes are added by DbItem->getTextfieldWithUpdateNotes()
 */
 class FormatBlockChangemarks extends FormatBlock
 {
@@ -251,8 +254,6 @@ class FormatBlockChangemarks extends FormatBlock
         elseif ($this->str == "/deleted word") {
             return "</span>";
         }
-
-
     }
 
     static function parseBlocks(&$blocks)
@@ -291,7 +292,6 @@ class FormatBlockChangemarks extends FormatBlock
         return $blocks_new;
     }    
 }
-
 
 
 
@@ -2057,9 +2057,6 @@ function checkAutoWikiAdjustments() {
 */
 function wiki2blocks(&$text)
 {
-    #if($convert_special_chars) {
-    #    $text= htmlSpecialChars($text);
-    #}
     measure_start("wiki2blocks");
 
     $blocks= array(new FormatBlock(&$text));
@@ -2205,7 +2202,6 @@ function getWikiChapters($text)
         "/(.*?)(\r?===[ \t]*([^\n=]+)===\s*\n[ \t]*)(.*)/s",
         "/(.*?)([^\r\n]+[\r\n]+===+[ \t]*[\r\n]+)(.*)/s",
         "/(.*?)([^\n\r]+\r?\n---+[\t]*[\r\n]+)(.*)/s",
-        #"/(.*?)(\[code(\s*[^\]]*)\](.*?)\[\/code\]\r?\n?)(.*)$/s",
     );
 
     $blocks= array();

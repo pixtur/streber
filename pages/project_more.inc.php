@@ -40,7 +40,7 @@ function projList()
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->title=__("Your Active Projects");
         if(!($auth->cur_user->user_rights & RIGHT_PROJECT_EDIT)) {
             $page->title_minor=sprintf(__("relating to %s"), $page->title_minor=$auth->cur_user->name);
@@ -52,23 +52,26 @@ function projList()
 
         $page->options=build_projList_options();
 
-        ### page functions ###
-        $page->add_function(new PageFunctionGroup(array(
-				'name'      => __('New project from')
-			)));
-        
-        $page->add_function(new PageFunction(array(
-            'target'=> 'projListTemplates',
-            'name'  => __("template"),
-            'icon'  => 'new',
-        )));
-        $page->add_function(new PageFunction(array(
-            'target'=> 'projNew',
-            'name'  => __("scratch"),
-            'icon'  => 'new',
-        )));
+        if($auth->cur_user->user_rights & RIGHT_PROJECT_CREATE) {
 
-    	### render title ###
+            ### page functions ###
+            $page->add_function(new PageFunctionGroup(array(
+                    'name'      => __('New project from')
+                )));
+        
+            $page->add_function(new PageFunction(array(
+                'target'=> 'projListTemplates',
+                'name'  => __("template"),
+                'icon'  => 'new',
+            )));
+            $page->add_function(new PageFunction(array(
+                'target'=> 'projNew',
+                'name'  => __("scratch"),
+                'icon'  => 'new',
+            )));
+        }
+    
+        ### render title ###
         echo(new PageHeader);
 
 
@@ -76,16 +79,16 @@ function projList()
     }
     echo (new PageContentOpen);
 
-	#--- list projects --------------------------------------------------------
+    #--- list projects --------------------------------------------------------
     {
 
-    	#$projects=Project::getActive($order_str);
+        #$projects=Project::getActive($order_str);
         $list= new ListBlock_projects();
 
-		$format = get('format');
-		if($format == FORMAT_HTML|| $format == ''){
-		    $list->footer_links[]= $PH->getCSVLink();
-		}
+        $format = get('format');
+        if($format == FORMAT_HTML|| $format == ''){
+            $list->footer_links[]= $PH->getCSVLink();
+        }
 
 
         unset($list->functions['projNewFromTemplate']);
@@ -109,10 +112,10 @@ function projList()
 
         $list->print_automatic();
 
-	}
+    }
 
     echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageHtmlEnd);
 }
 
 
@@ -133,7 +136,7 @@ function ProjListClosed()
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->title=__("Your Closed Projects");
         if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
             $page->title_minor=sprintf(__("relating to %s"), $page->title_minor=$auth->cur_user->name);
@@ -145,20 +148,20 @@ function ProjListClosed()
 
         $page->options = build_projList_options();
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
-	#--- list projects --------------------------------------------------------
-	{
+    #--- list projects --------------------------------------------------------
+    {
         $list= new ListBlock_projects();
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML || $format == ''){
-		    $list->footer_links[]= $PH->getCSVLink();
-		}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            $list->footer_links[]= $PH->getCSVLink();
+        }
 
 
         unset($list->functions['effortNew']);
@@ -173,10 +176,10 @@ function ProjListClosed()
 
         $list->print_automatic();
 
-	}
+    }
 
     echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageHtmlEnd);
 
 }
 
@@ -197,7 +200,7 @@ function ProjListTemplates()
     ### set up page and write header ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->title=__("Project Templates");
         if(!($auth->cur_user->user_rights & RIGHT_PROJECT_EDIT)) {
             $page->title_minor= sprintf(__("relating to %s"), $page->title_minor=$auth->cur_user->name);
@@ -209,20 +212,20 @@ function ProjListTemplates()
 
         $page->options= build_projList_options();
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
-	#--- list projects --------------------------------------------------------
-	{
+    #--- list projects --------------------------------------------------------
+    {
         $list= new ListBlock_projects();
 
-		## Link to start cvs export ##
-		$format = get('format');
-		if($format == FORMAT_HTML|| $format == ''){
-		    $list->footer_links[]= $PH->getCSVLink();
-		}
+        ## Link to start cvs export ##
+        $format = get('format');
+        if($format == FORMAT_HTML|| $format == ''){
+            $list->footer_links[]= $PH->getCSVLink();
+        }
 
         unset($list->functions['effortNew']);
         unset($list->functions['projNew']);
@@ -237,11 +240,11 @@ function ProjListTemplates()
 
         $list->print_automatic();
 
-	}
+    }
 
 
     echo(new PageContentClose);
-	echo(new PageHtmlEnd);
+    echo(new PageHtmlEnd);
 }
 
 
@@ -253,29 +256,29 @@ function ProjListTemplates()
 function ProjViewChanges()
 {
     global $PH;
-	global $auth;
+    global $auth;
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project= Project::getVisibleById($id)) {
         $PH->abortWarning(__("invalid project-id"));
-		return;
-	}
+        return;
+    }
 
-	### sets the presets ###
-	$presets= array(
+    ### sets the presets ###
+    $presets= array(
         ### all ###
         'all_changes' => array(
             'name'=> __('all'),
             'filters'=> array(
-			    'task_status'   =>  array(
+                'task_status'   =>  array(
                     'id'        => 'task_status',
                     'visible'   => true,
                     'active'    => true,
                     'min'    =>  STATUS_UNDEFINED,
-					'max'    =>  STATUS_CLOSED,
+                    'max'    =>  STATUS_CLOSED,
                 ),
-			),
+            ),
             'list_settings' => array(
                 'changes' =>array(
                     'hide_columns'  => array(''),
@@ -283,16 +286,16 @@ function ProjViewChanges()
                 )
             )
         ),
-		## modified by me ##
+        ## modified by me ##
         'modified_by_me' => array(
             'name'=> __('modified by me'),
             'filters'=> array(
-				'task_status'   =>  array(
+                'task_status'   =>  array(
                     'id'        => 'task_status',
                     'visible'   => true,
                     'active'    => true,
                     'min'    =>  STATUS_UNDEFINED,
-					'max'    =>  STATUS_CLOSED,
+                    'max'    =>  STATUS_CLOSED,
                 ),
                 'modified_by'   =>  array(
                     'id'        => 'modified_by',
@@ -308,16 +311,16 @@ function ProjViewChanges()
                 )
             ),
         ),
-		## modified by others ##
-		'modified_by_others' => array(
+        ## modified by others ##
+        'modified_by_others' => array(
             'name'=> __('modified by others'),
             'filters'=> array(
-				'task_status'   =>  array(
+                'task_status'   =>  array(
                     'id'        => 'task_status',
                     'visible'   => true,
                     'active'    => true,
                     'min'    =>  STATUS_UNDEFINED,
-					'max'    =>  STATUS_CLOSED,
+                    'max'    =>  STATUS_CLOSED,
                 ),
                 'not_modified_by'   => array(
                     'id'        => 'not_modified_by',
@@ -333,15 +336,15 @@ function ProjViewChanges()
                 )
             ),
         ),
-		## last logout ##
-		'last_logout' => array(
+        ## last logout ##
+        'last_logout' => array(
             'name'=> __('last logout'),
             'filters'=> array(
                 'last_logout'   => array(
                     'id'        => 'last_logout',
                     'visible'   => true,
                     'active'    => true,
-					'value'     => $auth->cur_user->id,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -351,16 +354,16 @@ function ProjViewChanges()
                 )
             ),
         ),
-		## 1 week ##
-		'last_week' => array(
+        ## 1 week ##
+        'last_week' => array(
             'name'=> __('1 week'),
             'filters'=> array(
                 'last_week'   => array(
                     'id'        => 'last_week',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 7,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 7,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -370,16 +373,16 @@ function ProjViewChanges()
                 )
             ),
         ),
-		## 2 week ##
-		'last_two_weeks' => array(
+        ## 2 week ##
+        'last_two_weeks' => array(
             'name'=> __('2 weeks'),
             'filters'=> array(
                 'last_two_weeks'   => array(
                     'id'        => 'last_two_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 14,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 14,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -391,8 +394,8 @@ function ProjViewChanges()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'projViewChanges';
+    ## set preset location ##
+    $preset_location = 'projViewChanges';
 
     ### get preset-id ###
     {
@@ -418,21 +421,21 @@ function ProjViewChanges()
         }
     }
 
-	### create from handle ###
+    ### create from handle ###
     $PH->defineFromHandle(array('prj'=>$project->id, 'preset_id'=>$preset_id));
 
-	## init known filters for preset ##
-	require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
-	$page= new Page();
-	$list = new ListBlock_changes();
-	$list->query_options['project']= $project->id;
+    ## init known filters for preset ##
+    require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
+    $page= new Page();
+    $list = new ListBlock_changes();
+    $list->query_options['project']= $project->id;
 
-	$list->filters[] = new ListFilter_changes();
-	{
-		$preset = $presets[$preset_id];
-		foreach($preset['filters'] as $f_name=>$f_settings) {
-			switch($f_name) {
-				case 'task_status':
+    $list->filters[] = new ListFilter_changes();
+    {
+        $preset = $presets[$preset_id];
+        foreach($preset['filters'] as $f_name=>$f_settings) {
+            switch($f_name) {
+                case 'task_status':
                     $list->filters[]= new ListFilter_status_min(array(
                         'value'=>$f_settings['min'],
                     ));
@@ -440,51 +443,51 @@ function ProjViewChanges()
                     #    'value'=>$f_settings['max'],
                     #));
                     break;
-				case 'modified_by':
-					$list->filters[]= new ListFilter_modified_by(array(
-						'value'=>$f_settings['value'],
-					));
-					break;
-				case 'not_modified_by':
-					$list->filters[]= new ListFilter_not_modified_by(array(
-						'value'=>$f_settings['value'],
-					));
-					break;
-				case 'last_logout':
-					$list->filters[]= new ListFilter_last_logout(array(
-						'value'=>$f_settings['value'],
-					));
-					break;
-				case 'last_week':
-					$list->filters[]= new ListFilter_min_week(array(
-						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-					));
-					#$list->filters[]= new ListFilter_max_week(array(
-					#	'value'=>$f_settings['value'],
-					#));
-					break;
-				case 'last_two_weeks':
-					$list->filters[]= new ListFilter_min_week(array(
-						'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-					));
-					#$list->filters[]= new ListFilter_max_week(array(
-					#	'value'=>$f_settings['value'],
-					#));
-					break;
-				default:
-					trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-					break;
-			}
-		}
+                case 'modified_by':
+                    $list->filters[]= new ListFilter_modified_by(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+                case 'not_modified_by':
+                    $list->filters[]= new ListFilter_not_modified_by(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+                case 'last_logout':
+                    $list->filters[]= new ListFilter_last_logout(array(
+                        'value'=>$f_settings['value'],
+                    ));
+                    break;
+                case 'last_week':
+                    $list->filters[]= new ListFilter_min_week(array(
+                        'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #   'value'=>$f_settings['value'],
+                    #));
+                    break;
+                case 'last_two_weeks':
+                    $list->filters[]= new ListFilter_min_week(array(
+                        'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                    ));
+                    #$list->filters[]= new ListFilter_max_week(array(
+                    #   'value'=>$f_settings['value'],
+                    #));
+                    break;
+                default:
+                    trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                    break;
+            }
+        }
 
-		$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-							  ? true
-							  : NULL;
-	}
+        $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                              ? true
+                              : NULL;
+    }
 
     ### set up page ####
     {
-    	$page->cur_tab  = 'projects';
+        $page->cur_tab  = 'projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -502,17 +505,17 @@ function ProjViewChanges()
             $page->type=__("Project","Page Type");
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
-	$page->print_presets(array(
-	    'target' => $preset_location,
-		'project_id' => $project->id,
-		'preset_id' => $preset_id,
-		'presets' => $presets,
-		'person_id' => ''));
+    $page->print_presets(array(
+        'target' => $preset_location,
+        'project_id' => $project->id,
+        'preset_id' => $preset_id,
+        'presets' => $presets,
+        'person_id' => ''));
 
     #echo(new PageContentNextCol);
 
@@ -529,7 +532,7 @@ function ProjViewChanges()
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -541,12 +544,12 @@ function projViewTasks()
     global $PH;
     global $auth;
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
     ### get upcoming or selected milestone ###
     /*
@@ -556,8 +559,11 @@ function projViewTasks()
     the following task list. I have no idea, why this code is in here,
     or weather it is required at all.
     */
-    $for_milestone= 0;
+    $for_milestone= intval(get("for_milestone"));
     $milestone= NULL;
+    if($for_milestone) {
+        $milestone= Task::getVisibleById($for_milestone);
+    }
     if($milestone= $project->getNextMilestone()) {
         $for_milestone= $milestone->id;
     }
@@ -782,8 +788,8 @@ function projViewTasks()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'projViewTasks';
+    ## set preset location ##
+    $preset_location = 'projViewTasks';
 
     ### get preset-id ###
     {
@@ -883,9 +889,10 @@ function projViewTasks()
     }
 
 
+
     ### set up page ####
     {
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -953,20 +960,20 @@ function projViewTasks()
             }
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
     ### list available presets ###
-	if($page->format != FORMAT_CSV){
-		$page->print_presets(array(
-			'target'=> $preset_location,
-			'project_id'=> $project->id,
-			'preset_id'=> $preset_id,
-			'presets'=> $presets,
-			'person_id' => ''));
-	 }
+    if($page->format != FORMAT_CSV){
+        $page->print_presets(array(
+            'target'=> $preset_location,
+            'project_id'=> $project->id,
+            'preset_id'=> $preset_id,
+            'presets'=> $presets,
+            'person_id' => ''));
+     }
     /*if($page->format != FORMAT_CSV) {
         echo "<div class=presets>";
         #echo __("Filter-Preset:");
@@ -998,11 +1005,11 @@ function projViewTasks()
             echo "<input type=hidden name='$name' value='$value'>";
         }
 
-    	### Link to start cvs export ###
-    	$format = get('format');
-    	if($format == FORMAT_HTML || $format == ''){
-    		$list->footer_links[]= $PH->getCSVLink();
-    	}
+        ### Link to start cvs export ###
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            $list->footer_links[]= $PH->getCSVLink();
+        }
     }
 
 
@@ -1038,11 +1045,11 @@ function projViewTasks()
 
         $list->no_items_html=__('No tasks');
         $list->print_automatic($project, NULL, $filter_empty_folders);
-	}
+    }
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -1054,12 +1061,12 @@ function ProjViewDocu()
     global $PH;
     global $auth;
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array(
@@ -1069,7 +1076,7 @@ function ProjViewDocu()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1098,7 +1105,7 @@ function ProjViewDocu()
             )));
         }
     
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -1143,7 +1150,7 @@ function ProjViewDocu()
 
         $list->no_items_html= __('No topics yet');
         $list->print_automatic($project, NULL, false);
-	}
+    }
 
     $PH->go_submit='taskNew';
     echo '<input type="hidden" name="prj" value="'.$id.'">';
@@ -1151,7 +1158,7 @@ function ProjViewDocu()
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -1165,12 +1172,12 @@ function ProjViewFiles()
     global $PH;
     global $auth;
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array('prj'=>$project->id));
@@ -1178,7 +1185,7 @@ function ProjViewFiles()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1192,27 +1199,27 @@ function ProjViewFiles()
         ### page functions ###
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
-	### upload files ###
+    ### upload files ###
     if($project->isPersonVisibleTeamMember($auth->cur_user))  {
         $block=new PageBlock(array('title'=>__('Upload file','block title'),'id'=>'summary'));
         $block->render_blockStart();
 
         echo "<div class=text>";
-		echo '<input type="hidden" name="MAX_FILE_SIZE" value="'. confGet('FILE_UPLOAD_SIZE_MAX'). '" />';
-		echo '<input id="userfile" name="userfile" type="file" size="40" accept="*" />';
+        echo '<input type="hidden" name="MAX_FILE_SIZE" value="'. confGet('FILE_UPLOAD_SIZE_MAX'). '" />';
+        echo '<input id="userfile" name="userfile" type="file" size="40" accept="*" />';
         echo '<input type="submit" value="'.__('Upload').'" />';
         echo '</div>';
 
         $block->render_blockEnd();
-		echo '<br />';
+        echo '<br />';
     }
 
-	### list files ###
+    ### list files ###
     {
         require_once(confGet('DIR_STREBER') . "lists/list_files.inc.php");
         $list= new ListBlock_files();
@@ -1221,7 +1228,7 @@ function ProjViewFiles()
 
 
         $list->print_automatic($project);
-	}
+    }
 
 
 
@@ -1237,7 +1244,7 @@ function ProjViewFiles()
     echo '<input type="hidden" name="prj" value="'.$id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -1252,12 +1259,12 @@ function ProjViewMilestones()
     global $PH;
     global $auth;
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array(
@@ -1268,7 +1275,7 @@ function ProjViewMilestones()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1289,7 +1296,7 @@ function ProjViewMilestones()
             }
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -1322,11 +1329,11 @@ function ProjViewMilestones()
 
 
         $list->print_automatic($project);
-	}
+    }
     echo '<input type="hidden" name="prj" value="'.$id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -1337,21 +1344,21 @@ function ProjViewMilestones()
 function ProjViewEfforts()
 {
     global $PH;
-	global $auth;
-	
+    global $auth;
+    
     require_once(confGet('DIR_STREBER') . "lists/list_efforts.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
 
-	
-	### get current project ###
+    
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
-	
-	$presets= array(
+        return;
+    }
+    
+    $presets= array(
         ### all ###
         'all_efforts' => array(
             'name'=> __('all','Filter preset'),
@@ -1391,8 +1398,8 @@ function ProjViewEfforts()
                 )
             )
         ),
-		
-		### open efforts ###
+        
+        ### open efforts ###
         'open_efforts' => array(
             'name'=> __('open','Filter preset'),
             'filters'=> array(
@@ -1411,8 +1418,8 @@ function ProjViewEfforts()
                 )
             )
         ),
-		
-		### discounted efforts ###
+        
+        ### discounted efforts ###
         'discounted_efforts' => array(
             'name'=> __('discounted','Filter preset'),
             'filters'=> array(
@@ -1431,8 +1438,8 @@ function ProjViewEfforts()
                 )
             )
         ),
-		
-		### not chargeable efforts ###
+        
+        ### not chargeable efforts ###
         'notchargeable_efforts' => array(
             'name'=> __('not chargeable','Filter preset'),
             'filters'=> array(
@@ -1451,8 +1458,8 @@ function ProjViewEfforts()
                 )
             )
         ),
-		
-		### balanced efforts ###
+        
+        ### balanced efforts ###
         'balanced_efforts' => array(
             'name'=> __('balanced','Filter preset'),
             'filters'=> array(
@@ -1471,16 +1478,16 @@ function ProjViewEfforts()
                 )
             )
         ),
-		
-		## last logout ##
-		'last_logout' => array(
+        
+        ## last logout ##
+        'last_logout' => array(
             'name'=> __('last logout','Filter preset'),
             'filters'=> array(
                 'last_logout'   => array(
                     'id'        => 'last_logout',
                     'visible'   => true,
                     'active'    => true,
-					'value'     => $auth->cur_user->id,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1490,17 +1497,17 @@ function ProjViewEfforts()
                 )
             ),
         ),
-		
-		## 1 week ##
-		'last_week' => array(
+        
+        ## 1 week ##
+        'last_week' => array(
             'name'=> __('1 week','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 7,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 7,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1510,17 +1517,17 @@ function ProjViewEfforts()
                 )
             ),
         ),
-		
-		## 2 weeks ##
-		'last_two_weeks' => array(
+        
+        ## 2 weeks ##
+        'last_two_weeks' => array(
             'name'=> __('2 weeks','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 14,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 14,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1530,17 +1537,17 @@ function ProjViewEfforts()
                 )
             ),
         ),
-		
-		## 3 weeks ##
-		'last_three_weeks' => array(
+        
+        ## 3 weeks ##
+        'last_three_weeks' => array(
             'name'=> __('3 weeks','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 21,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 21,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1550,17 +1557,17 @@ function ProjViewEfforts()
                 )
             ),
         ),
-		
-		## 1 month ##
-		'last_month' => array(
+        
+        ## 1 month ##
+        'last_month' => array(
             'name'=> __('1 month','Filter preset'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 28,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 28,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1570,17 +1577,17 @@ function ProjViewEfforts()
                 )
             ),
         ),
-		
-		## prior ##
-		'prior' => array(
+        
+        ## prior ##
+        'prior' => array(
             'name'=> __('prior','Filter preset'),
             'filters'=> array(
                 'prior'    => array(
                     'id'        => 'prior',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 29,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 29,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1592,10 +1599,10 @@ function ProjViewEfforts()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'projViewEfforts';
-	
-	### get preset-id ###
+    ## set preset location ##
+    $preset_location = 'projViewEfforts';
+    
+    ### get preset-id ###
     {
         $preset_id= 'all_efforts';                           # default value
         if($tmp_preset_id= get('preset')) {
@@ -1619,16 +1626,16 @@ function ProjViewEfforts()
         }
     }
 
-	### create from handle ###
-	$PH->defineFromHandle(array(
-		'prj'      =>$project->id,
-		'preset_id' =>$preset_id
-	));
+    ### create from handle ###
+    $PH->defineFromHandle(array(
+        'prj'      =>$project->id,
+        'preset_id' =>$preset_id
+    ));
     
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1663,7 +1670,7 @@ function ProjViewEfforts()
         )));
 
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -1679,131 +1686,131 @@ function ProjViewEfforts()
 
         ));
         $list= new ListBlock_efforts();
-		
-		$list->filters[] = new ListFilter_efforts();
-		{
-			$preset = $presets[$preset_id];
-			foreach($preset['filters'] as $f_name=>$f_settings) {
-				switch($f_name) {
-					case 'effort_status':
-						$list->filters[]= new ListFilter_effort_status_min(array(
-							'value'=>$f_settings['min'],
-						));
-						$val1 = $f_settings['min'];
-						$list->filters[]= new ListFilter_effort_status_max(array(
-							'value'=>$f_settings['max'],
-						));
-						$val2 = $f_settings['max'];
-						break;
-					case 'last_logout':
-						$list->filters[]= new ListFilter_last_logout(array(
-							'value'=>$f_settings['value'],
-						));
-					    break;
-					case 'last_weeks':
-						$list->filters[]= new ListFilter_min_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-						break;
-					case 'prior':
-						$list->filters[]= new ListFilter_max_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-					    break;
-					default:
-						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-						break;
-				}
-			}
-	
-			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-								  ? true
-								  : NULL;
-		}
-		
-		### Link to start cvs export ###
-    	$format = get('format');
-    	if($format == FORMAT_HTML || $format == ''){
-    		$list->footer_links[]=  $PH->getCSVLink();
-    	}
+        
+        $list->filters[] = new ListFilter_efforts();
+        {
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'effort_status':
+                        $list->filters[]= new ListFilter_effort_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $val1 = $f_settings['min'];
+                        $list->filters[]= new ListFilter_effort_status_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        $val2 = $f_settings['max'];
+                        break;
+                    case 'last_logout':
+                        $list->filters[]= new ListFilter_last_logout(array(
+                            'value'=>$f_settings['value'],
+                        ));
+                        break;
+                    case 'last_weeks':
+                        $list->filters[]= new ListFilter_min_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        break;
+                    case 'prior':
+                        $list->filters[]= new ListFilter_max_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
+        }
+        
+        ### Link to start cvs export ###
+        $format = get('format');
+        if($format == FORMAT_HTML || $format == ''){
+            $list->footer_links[]=  $PH->getCSVLink();
+        }
 
 
         unset($list->columns['p.name']);
-		
-		$page->print_presets(array(
-		    'target' => $preset_location,
-		    'project_id' => $project->id,
-		    'preset_id' => $preset_id,
-		    'presets' => $presets,
-		    'person_id' => ''));
-		    
-		    
-		$list->query_options['order_by'] = $order_by;
-		$list->query_options['project'] = $project->id;
-		$list->print_automatic();
+        
+        $page->print_presets(array(
+            'target' => $preset_location,
+            'project_id' => $project->id,
+            'preset_id' => $preset_id,
+            'presets' => $presets,
+            'person_id' => ''));
+            
+            
+        $list->query_options['order_by'] = $order_by;
+        $list->query_options['project'] = $project->id;
+        $list->print_automatic();
         //$list->render_list(&$efforts);
 
-	}
-	
-	/*if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-		#--- list effort summary on team members --------------------------------------------------------------------
-		{
-			$list_effort_person = new ListBlock_effortsPerson();
-			$list_effort_person->query_options['project'] = &$project->id;
-			if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
-			if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
-			$list_effort_person->print_automatic();
-		}
-		
-		#--- list effort summary on tasks --------------------------------------------------------------------
-		{
-			$list_effort_tasks = new ListBlock_effortsTask();
-			$list_effort_tasks->query_options['project'] = &$project->id;
-			if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
-			if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
-			$list_effort_tasks->print_automatic();
-		}
-		
-		#--- list cost overview on person --------------------------------------------------------------------
-		{
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_person_calc = new ListBlock_effortsPersonCalculation();
-				$list_effort_person_calc->query_options['project'] = &$project->id;
-				if($val1) $list_effort_person_calc->query_options['effort_status_min'] = $val1;
-				if($val2) $list_effort_person_calc->query_options['effort_status_max'] = $val2;
-				$list_effort_person_calc->print_automatic();
-			}
-		}
-		
-		#--- list cost overview on task --------------------------------------------------------------------
-		{		
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
-				$list_effort_tasks_calc->query_options['project'] = &$project->id;
-				if($val1) $list_effort_tasks_calc->query_options['effort_status_min'] = $val1;
-				if($val2) $list_effort_tasks_calc->query_options['effort_status_max'] = $val2;
-				$list_effort_tasks_calc->print_automatic();
-			}
-		}
-		
-		#--- list cost overview for project --------------------------------------------------------------------
-		{		
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
-				#$list_effort_proj_calc->query_options['project'] = &$project->id;
-				if($val1) $list_effort_proj_calc->query_options['effort_status_min'] = $val1;
-				if($val2) $list_effort_proj_calc->query_options['effort_status_max'] = $val2;
-				$list_effort_proj_calc->print_automatic(&$project);
-			}
-		}
-	}*/
-	
-	### 'add new task'-field ###
-	$PH->go_submit='taskNew';
-	echo '<input type="hidden" name="prj" value="'.$id.'">';
+    }
+    
+    /*if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+        #--- list effort summary on team members --------------------------------------------------------------------
+        {
+            $list_effort_person = new ListBlock_effortsPerson();
+            $list_effort_person->query_options['project'] = &$project->id;
+            if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
+            if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
+            $list_effort_person->print_automatic();
+        }
+        
+        #--- list effort summary on tasks --------------------------------------------------------------------
+        {
+            $list_effort_tasks = new ListBlock_effortsTask();
+            $list_effort_tasks->query_options['project'] = &$project->id;
+            if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
+            if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
+            $list_effort_tasks->print_automatic();
+        }
+        
+        #--- list cost overview on person --------------------------------------------------------------------
+        {
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_person_calc = new ListBlock_effortsPersonCalculation();
+                $list_effort_person_calc->query_options['project'] = &$project->id;
+                if($val1) $list_effort_person_calc->query_options['effort_status_min'] = $val1;
+                if($val2) $list_effort_person_calc->query_options['effort_status_max'] = $val2;
+                $list_effort_person_calc->print_automatic();
+            }
+        }
+        
+        #--- list cost overview on task --------------------------------------------------------------------
+        {       
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
+                $list_effort_tasks_calc->query_options['project'] = &$project->id;
+                if($val1) $list_effort_tasks_calc->query_options['effort_status_min'] = $val1;
+                if($val2) $list_effort_tasks_calc->query_options['effort_status_max'] = $val2;
+                $list_effort_tasks_calc->print_automatic();
+            }
+        }
+        
+        #--- list cost overview for project --------------------------------------------------------------------
+        {       
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
+                #$list_effort_proj_calc->query_options['project'] = &$project->id;
+                if($val1) $list_effort_proj_calc->query_options['effort_status_min'] = $val1;
+                if($val2) $list_effort_proj_calc->query_options['effort_status_max'] = $val2;
+                $list_effort_proj_calc->print_automatic(&$project);
+            }
+        }
+    }*/
+    
+    ### 'add new task'-field ###
+    $PH->go_submit='taskNew';
+    echo '<input type="hidden" name="prj" value="'.$id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 /**
@@ -1812,31 +1819,31 @@ function ProjViewEfforts()
 function projViewEffortCalculations()
 {
     global $PH;
-	global $auth;
-	
+    global $auth;
+    
     require_once(confGet('DIR_STREBER') . "lists/list_efforts.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortstaskcalculation.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortspersoncalculation.inc.php");
-	require_once(confGet('DIR_STREBER') . "lists/list_effortsprojectcalculation.inc.php");
-	
-	### get current project ###
+    require_once(confGet('DIR_STREBER') . "lists/list_effortsperson.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortstask.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortstaskcalculation.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortspersoncalculation.inc.php");
+    require_once(confGet('DIR_STREBER') . "lists/list_effortsprojectcalculation.inc.php");
+    
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
-	### create from handle ###
-	$PH->defineFromHandle(array(
-		'prj'      =>$project->id,
-	));
+    ### create from handle ###
+    $PH->defineFromHandle(array(
+        'prj'      =>$project->id,
+    ));
     
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1854,59 +1861,59 @@ function projViewEffortCalculations()
             $page->type=__("Project","Page Type");
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
 
-	if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-		#--- list effort summary on team members --------------------------------------------------------------------
-		{
-			$list_effort_person = new ListBlock_effortsPerson();
-			$list_effort_person->query_options['project'] = &$project->id;
-			$list_effort_person->print_automatic();
-		}
-		
-		#--- list effort summary on tasks --------------------------------------------------------------------
-		{
-			$list_effort_tasks = new ListBlock_effortsTask();
-			$list_effort_tasks->query_options['project'] = &$project->id;
-			$list_effort_tasks->print_automatic();
-		}
-		
-		#--- list cost overview on person --------------------------------------------------------------------
-		{
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_person_calc = new ListBlock_effortsPersonCalculation();
-				$list_effort_person_calc->query_options['project'] = &$project->id;
-				$list_effort_person_calc->print_automatic();
-			}
-		}
-		
-		#--- list cost overview on task --------------------------------------------------------------------
-		{		
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
-				$list_effort_tasks_calc->query_options['project'] = &$project->id;
-				$list_effort_tasks_calc->print_automatic();
-			}
-		}
-		
-		#--- list cost overview for project --------------------------------------------------------------------
-		{		
-			if((confGet('INTERNAL_COST_FEATURE'))){
-				$list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
-				$list_effort_proj_calc->print_automatic(&$project);
-			}
-		}
-	}
-	
-	### 'add new task'-field ###
-	$PH->go_submit='taskNew';
-	echo '<input type="hidden" name="prj" value="'.$id.'">';
+    if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+        #--- list effort summary on team members --------------------------------------------------------------------
+        {
+            $list_effort_person = new ListBlock_effortsPerson();
+            $list_effort_person->query_options['project'] = &$project->id;
+            $list_effort_person->print_automatic();
+        }
+        
+        #--- list effort summary on tasks --------------------------------------------------------------------
+        {
+            $list_effort_tasks = new ListBlock_effortsTask();
+            $list_effort_tasks->query_options['project'] = &$project->id;
+            $list_effort_tasks->print_automatic();
+        }
+        
+        #--- list cost overview on person --------------------------------------------------------------------
+        {
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_person_calc = new ListBlock_effortsPersonCalculation();
+                $list_effort_person_calc->query_options['project'] = &$project->id;
+                $list_effort_person_calc->print_automatic();
+            }
+        }
+        
+        #--- list cost overview on task --------------------------------------------------------------------
+        {       
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
+                $list_effort_tasks_calc->query_options['project'] = &$project->id;
+                $list_effort_tasks_calc->print_automatic();
+            }
+        }
+        
+        #--- list cost overview for project --------------------------------------------------------------------
+        {       
+            if((confGet('INTERNAL_COST_FEATURE'))){
+                $list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
+                $list_effort_proj_calc->print_automatic(&$project);
+            }
+        }
+    }
+    
+    ### 'add new task'-field ###
+    $PH->go_submit='taskNew';
+    echo '<input type="hidden" name="prj" value="'.$id.'">';
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 /**
@@ -1919,12 +1926,12 @@ function ProjViewVersions()
 
     require_once(confGet('DIR_STREBER') . "lists/list_versions.inc.php");
 
-	### get current project ###
+    ### get current project ###
     $id =getOnePassedId('prj','projects_*');
     if(!$project=Project::getVisibleById($id)) {
         $PH->abortWarning("invalid project-id");
-		return;
-	}
+        return;
+    }
 
     ### create from handle ###
     $PH->defineFromHandle(array('prj'=>$project->id));
@@ -1932,7 +1939,7 @@ function ProjViewVersions()
     ### set up page ####
     {
         $page= new Page();
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
 
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
@@ -1962,7 +1969,7 @@ function ProjViewVersions()
             }
         }
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
@@ -1977,19 +1984,19 @@ function ProjViewVersions()
 
 
         $list->print_automatic($project);
-	}
+    }
 
 
-	### list changes for upcoming version ###
-	{
+    ### list changes for upcoming version ###
+    {
 
-	    if($tasks= Task::getAll(array(
-	        'project'           => $project->id,
-	        'status_min'        => STATUS_COMPLETED,
-	        'status_max'        => STATUS_CLOSED,
-	        'resolved_version'  => RESOLVED_IN_NEXT_VERSION,
-	        'resolve_reason_min'=> RESOLVED_DONE,                          # @@@ this is not the best solution (should be IS NOT)
-	    ))) {
+        if($tasks= Task::getAll(array(
+            'project'           => $project->id,
+            'status_min'        => STATUS_COMPLETED,
+            'status_max'        => STATUS_CLOSED,
+            'resolved_version'  => RESOLVED_IN_NEXT_VERSION,
+            'resolve_reason_min'=> RESOLVED_DONE,                          # @@@ this is not the best solution (should be IS NOT)
+        ))) {
 
             $block=new PageBlock(array(
                 'title'=>__("Tasks resolved in upcoming version"),
@@ -1997,9 +2004,9 @@ function ProjViewVersions()
             ));
             $block->render_blockStart();
             echo "<div class=text>";
-	        echo '<ul>';
-	        foreach($tasks as $t) {
-	            global $g_resolve_reason_names;
+            echo '<ul>';
+            foreach($tasks as $t) {
+                global $g_resolve_reason_names;
                 if($t->resolve_reason && isset($g_resolve_reason_names[$t->resolve_reason])) {
                     $reason= $g_resolve_reason_names[$t->resolve_reason] .": ";
                 }
@@ -2007,16 +2014,16 @@ function ProjViewVersions()
                     $reason= "";
                 }
 
-	            echo '<li>' . $reason . $t->getLink(false) . '</li>';
-	        }
-	        echo '</ul>';
+                echo '<li>' . $reason . $t->getLink(false) . '</li>';
+            }
+            echo '</ul>';
 
             $block->render_blockEnd();
-	    }
-	}
+        }
+    }
 
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -2066,7 +2073,7 @@ function projEdit($project=NULL)
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>true,'autofocus_field'=>'project_name'));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type= __("Edit Project");
         $page->title=$project->name;
         $page->title_minor=$project->short;
@@ -2196,7 +2203,7 @@ function projEdit($project=NULL)
         }
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 
 }
 
@@ -2329,8 +2336,8 @@ function projEditSubmit()
         log_message(" :updated", LOG_MESSAGE_DEBUG);
     }
 
-	### notify on change ###
-	$project->nowChangedByUser();
+    ### notify on change ###
+    $project->nowChangedByUser();
 
     ### automatically view new project ###
     if($project_id == 0) {
@@ -2375,12 +2382,12 @@ function projDelete()
             $errors++;
         }
         else {
-			if($p->delete()) {
-				$counter++;
-			}
-			else {
-				$errors++;
-			}
+            if($p->delete()) {
+                $counter++;
+            }
+            else {
+                $errors++;
+            }
         }
     }
     if($errors) {
@@ -2470,7 +2477,7 @@ function projAddPerson()
     ### set up page and write header ####
     {
         $page= new Page(array('use_jscalendar'=>false));
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->type= __("Edit Project");
         $page->title="$project->name";
         $page->title_minor=__("Select new team members");
@@ -2505,7 +2512,7 @@ function projAddPerson()
 
             ### filter already added persons ###
             $persons = array();
-		if($pers = Person::getPersons())
+        if($pers = Person::getPersons())
             {
                 foreach($pers as $p) {
                     if(!isset($pp_hash[$p->id])) {
@@ -2540,7 +2547,7 @@ function projAddPerson()
         echo "</div>";
     }
     echo (new PageContentClose);
-	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 
@@ -2566,9 +2573,9 @@ function projAddPersonSubmit()
 
     ### get team (including inactive members)  ###
     $ppersons= $project->getProjectPersons(array(
-		'alive_only' => false,
-		'visible_only' => false,
-		'person_id' => NULL,
+        'alive_only' => false,
+        'visible_only' => false,
+        'person_id' => NULL,
     ));
     
 
@@ -2601,7 +2608,7 @@ function projAddPersonSubmit()
                 'person'                => $person->id,
                 'project'               => $project->id,
                 'adjust_effort_style'   => $adjust_effort_style,
-				'salary_per_hour'       => $person->salary_per_hour,
+                'salary_per_hour'       => $person->salary_per_hour,
             ));
 
             ### add project-right ###
@@ -2890,7 +2897,7 @@ function projDuplicate($org_project_id=NULL)
         foreach($new_tasks as $nt) {
             if(isset($dict_tasks[$nt->parent_task])) {
                 $nt->parent_task= $dict_tasks[$nt->parent_task];
-				$nt->for_milestone= $dict_tasks[$nt->for_milestone];
+                $nt->for_milestone= $dict_tasks[$nt->for_milestone];
             }
             else {
                 trigger_error("undefined task-id $nt->parent_task",E_USER_WARNING);
