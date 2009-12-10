@@ -5,6 +5,16 @@ todo:
 - hide "new project from, if not enough user-rights"
 
 
+
+
+- fixed closed tasks for milestone are not displayed correctly
+- added current milestone block to project overview
+- added graph to milestone view
+- fixed CSS definition for lots of list elements
+
+
+
+
 version v0.91 (revision 485)
 =============
 major:
