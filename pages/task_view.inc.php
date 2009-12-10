@@ -214,6 +214,17 @@ function TaskView()
     echo (new PageContentOpen_Columns);
 
 
+    #--- write info-block ------------
+    if($task->isMilestoneOrVersion()){
+        measure_stop('current milestone');
+        require_once(confGet('DIR_STREBER') . 'blocks/current_milestone_block.inc.php');        
+        $block= new CurrentMilestoneBlock($project);
+        $block->current_milestone= $task;
+        $block->title= __("Open milestone");
+        $block->render();
+        measure_stop('current milestone');
+    }
+
 
     #--- info block ------------
     {
@@ -409,7 +420,11 @@ function TaskView()
     {
         #$descriptionWithUpdates= $task->getTextfieldWithUpdateNotes('description');
         echo "<div class=description>";
-        echo  wikifieldAsHtml($task, 'description');
+        echo  wikifieldAsHtml($task, 'description',
+                            array(
+                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                            ));
+
         echo "</div>";
 
         ### Apply automatic link conversions
@@ -1088,7 +1103,6 @@ function taskViewAsDocu()
         unset($list->columns['mimetype']);
         unset($list->columns['filesize']);
         unset($list->columns['created_by']);
-        #unset($list->columns['download']);
         unset($list->columns['version']);
         unset($list->columns['_select_col_']);
         unset($list->columns['modified']);
@@ -1149,54 +1163,12 @@ function taskViewAsDocu()
     }
 
 
-    #--- list comments -------------------------------------------------------------
-    #{
-    #
-    #    $order_str=get("sort_".$PH->cur_page->id ."_comments");
-    #    if(!$order_str) {
-    #        $order_str= 'created ASC';
-    #    }
-    #
-    #
-    #    if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-    #        $comments= $task->getComments(array(
-    #            'order_by'=>$order_str,
-    #            'visible_only'=>false,
-    #        ));
-    #    }
-    #    else{
-    #        $comments= $task->getComments(array(
-    #            'order_by'=>$order_str,
-    #        ));
-    #    }
-    #    if(count($comments) != 0) {
-    #
-    #        $list_comments= new ListBlock_comments();
-    #        if(count($comments) == 1){
-    #             $list_comments->title= __("1 Comment") ;
-    #        }
-    #        else {
-    #             $list_comments->title= sprintf(__("%s Comments"), count($comments)) ;
-    #        }
-    #
-    #
-    #        $list_comments->no_items_html=$PH->getLink('commentNew','',array('parent_task'=>$task->id));
-    #        $list_comments->render_list(&$comments);
-    #    }
-    #}
-
     #--- list comments --------
     {
         require_once(confGet('DIR_STREBER') . 'blocks/comments_on_item_block.inc.php');
         print new CommentsOnItemBlock($task);
     }
 
-
-    #--- task quickedit form -------------------------------------------------------------
-    #if($project->isPersonVisibleTeamMember($auth->cur_user)) {
-    #    $block_task_quickedit= new Block_task_quickedit();
-    #    $block_task_quickedit->render_quickedit(&$task);
-    #}
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);

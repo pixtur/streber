@@ -15,13 +15,14 @@ class CurrentMilestoneBlock extends PageBlock
 {
     public $project;
     public $current_milestone;
+    public $title= ""; 
 
     public function __construct($project)
     {
         parent::__construct(NULL);
         $this->project = $project;
         $this->current_milestone = $project->getNextMilestone();
-        $this->title = __('Current Milestone');        
+        $this->title= __('Current Milestone');
     }
 
     public function __toString()
@@ -29,7 +30,8 @@ class CurrentMilestoneBlock extends PageBlock
         return "";
 
     }
-    
+
+
     public function render($args=NULL)
     {
         if(!$this->current_milestone) {
@@ -41,7 +43,6 @@ class CurrentMilestoneBlock extends PageBlock
         echo "<div class='post_list_entry'>";
             echo "<h3>";
             echo $this->current_milestone->getLink();
-            #echo $PH->getLink('taskView', array('tsk'=>$this->current_milestone->id)  );
             echo "</h3>";
 
             $milestone_task_summary= $this->current_milestone->getMilestoneTasksSummary();
@@ -52,13 +53,18 @@ class CurrentMilestoneBlock extends PageBlock
         return '';
     }
     
+    /**
+    * prints a milestone summary of an assoc. array
+    *
+    * For more details about the available information, see Task->getMilestoneTasksSummary()
+    */
     private function render_milestoneGraph( $milestone_task_summary )
     {
         global $PH;
         $width= 220;
         if($milestone_task_summary['num_open'] + $milestone_task_summary['num_closed']) {
             $width_closed   = floor($width * ($milestone_task_summary['num_closed'])    / ($milestone_task_summary['num_open'] + $milestone_task_summary['num_closed']));
-            $width_completed= floor($width * ($milestone_task_summary['num_completed']) / ($milestone_task_summary['num_open'] + $milestone_task_summary['num_closed']));
+            $width_completed= floor($width * ($milestone_task_summary['num_need_approval']) / ($milestone_task_summary['num_open'] + $milestone_task_summary['num_closed']));
             if($width_completed + $width_closed > $width) {
                 $width_completed = $width - $width_closed;
             }
@@ -91,8 +97,21 @@ class CurrentMilestoneBlock extends PageBlock
                         'prj'          => $this->project->id,
                         'for_milestone'=> $this->current_milestone->id,
                         'preset'       =>'next_milestone',
-                    ))
+                    ), "open_task_count")
              . '<br>';
+
+        if($milestone_task_summary['num_need_approval']) {
+            echo $PH->getLink('projViewTasks',  $milestone_task_summary['num_need_approval'] < 2
+                                                ? sprintf(__("%s needs approval"), $milestone_task_summary['num_need_approval']) 
+                                                : sprintf(__("%s need approval"), $milestone_task_summary['num_need_approval']) ,
+                    array(
+                        'prj'          => $this->project->id,
+                        'for_milestone'=> $this->current_milestone->id,
+                        'preset'       =>'closed_tasks',
+                    ));
+            
+        }
+
 
         if( $milestone_task_summary['sum_estimated_min']) {
             echo renderEstimationGraph($milestone_task_summary['sum_estimated_min'], $milestone_task_summary['sum_estimated_max'], ($milestone_task_summary['sum_completion_min']/ $milestone_task_summary['sum_estimated_min']) * 100);

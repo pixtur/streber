@@ -370,7 +370,7 @@ class PageHandler extends BaseObject
     * getLink (return nothing, if not enough user-rights)
     * - link name will be converted to html
     */
-    public function getLink($id=NULL, $name=NULL, $params=NULL,$style=NULL, $allow_html=false)
+    public function getLink($id=NULL, $name=NULL, $params=NULL, $style=NULL, $allow_html=false)
     {
         ### try to get url ###
         if($url=$this->getUrl($id,$params)) {
@@ -380,9 +380,9 @@ class PageHandler extends BaseObject
             else if(!$allow_html) {
                 $name= asHtml($name);
             }
-            $class=$style
-                ? "class='$style'"
-                : '';
+            $class  = $style
+                    ? "class='$style'"
+                    : '';
 
             $buffer= '<a '.$class.' href="'. $url. '">'. $name .'</a>';
             return $buffer;

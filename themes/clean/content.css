@@ -200,12 +200,12 @@ div.block div.post_list_entry {
 
 div.block div.post_list_entry > h3 {
   font-size:              17px;
-  margin:               7px 0px 0px 4px ;
+  /*margin:               7px 0px 0px 4px ;*/
   color:                #373737;
 }
 
 div.block div.post_list_entry p.details {
-  margin:               0px 4px 6px 5px;
+  margin:               0px 4px 6px 0px;
 }
 
 div.block h3 span.headline_add_on {
@@ -257,11 +257,13 @@ div.block h3 span.headline_add_on {
   float:          left;
 }
 
-
+/* ===== Milestone summary =====*/
+div.post_list_entry .open_task_count {
+	float: right;
+	
+}
 
 /* ===== RECENT CHANGES ================= */
-
-
 div.recentchanges ul {
  margin:            5px 1em 0em 0.5em;
  padding:           0px;
@@ -419,7 +421,7 @@ div.weeks_risk {
   border-right:1px solid #800;
   float:right;
   opacity:0.6;
-
+}
 
 
 
@@ -456,12 +458,7 @@ table.list td {
   }
 
 div.block_content table tr.even td {
-  background-color:     #f8f800;
-}
-
-td {
-	font-size:200%;
-	color:red;
+  background-color:     #f4f4f4;
 }
 
 

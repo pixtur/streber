@@ -669,8 +669,7 @@ foreach($filters_str as $fs=>$value) {
 
         $num_closed= count($tasks_closed);
         $num_open  = count($tasks_open);
-
-        $num_completed= 0;
+        $num_need_approval= 0;
         $sum_estimated_min= 0;
         $sum_estimated_max= 0;
         $sum_completion_min= 0;
@@ -683,7 +682,7 @@ foreach($filters_str as $fs=>$value) {
                                : $tt->estimated;
 
             if($tt->status > STATUS_BLOCKED) {
-                $num_completed++;
+                $num_need_approval++;
                 $sum_completion_min+= $tt->estimated;
                 $sum_completion_max+= $tt->estimated_max;
             }
@@ -704,15 +703,16 @@ foreach($filters_str as $fs=>$value) {
         }
 
         return array(
-            'tasks_closed'      => $tasks_closed,
-            'tasks_open'        => $tasks_open,
-            'num_closed'      => $num_closed,
-            'num_open'        => $num_open,
-            'num_completed'     => $num_completed,
-            'sum_estimated_min' => $sum_estimated_min,
-            'sum_estimated_max' => $sum_estimated_max,
-            'sum_completion_min' => $sum_completion_min,
-            'sum_completion_max' => $sum_completion_max,
+            'tasks_closed'          => $tasks_closed,
+            'tasks_open'            => $tasks_open,
+            'num_open'              => $num_open,
+            'num_need_approval'     => $num_need_approval,
+            'num_closed'            => $num_closed,
+            'num_need_approval'     => $num_need_approval,
+            'sum_estimated_min'     => $sum_estimated_min,
+            'sum_estimated_max'     => $sum_estimated_max,
+            'sum_completion_min'    => $sum_completion_min,
+            'sum_completion_max'    => $sum_completion_max,
         );
     }
 

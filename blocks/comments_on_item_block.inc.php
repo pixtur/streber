@@ -42,12 +42,14 @@ class CommentsOnItemBlock extends PageBlock
         global $PH;
         global $auth;
         
-    	#--- news -----------------------------------------------------------
+        #--- news -----------------------------------------------------------
             
         $comments= $this->item_with_comments->getComments(array('order_by'=>'created'  ));
 
         $block=new PageBlock(array(
-            'title'=> sprintf( __("%s Comments"), count($comments)),
+            'title'=> sprintf( __("%s Comments"),    count($comments) 
+                                                   ? count($comments)
+                                                   : __("No", "As in... >No< Comments")  ),
             'id'=>'news',
         ));
         $block->render_blockStart();
@@ -113,22 +115,22 @@ class CommentsOnItemBlock extends PageBlock
             {
                 echo ' - '. sprintf(__("visible as %s"), renderPubLevelName($c->pub_level));
 
-    			### publish ###
-    			if( 
-    			    ($parent_task= Task::getEditableById($c->task))
-    			    && ($c->pub_level < PUB_LEVEL_OPEN) 
-    			) {
-    				echo " - " .  $PH->getLink('itemsSetPubLevel', __('Publish'), array( 'item'=>$c->id, 'item_pub_level'=>PUB_LEVEL_OPEN));
-    			}
+                ### publish ###
+                if( 
+                    ($parent_task= Task::getEditableById($c->task))
+                    && ($c->pub_level < PUB_LEVEL_OPEN) 
+                ) {
+                    echo " - " .  $PH->getLink('itemsSetPubLevel', __('Publish'), array( 'item'=>$c->id, 'item_pub_level'=>PUB_LEVEL_OPEN));
+                }
 
             }
 
 
 
             ### delete
-			if( $is_own_comment) {
-				echo " - " .  $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$c->id));
-			}
+            if( $is_own_comment) {
+                echo " - " .  $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$c->id));
+            }
 
 
             echo "</p>";

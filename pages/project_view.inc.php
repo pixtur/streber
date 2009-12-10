@@ -191,21 +191,22 @@ function ProjView()
     }
     echo (new PageContentOpen_Columns);
 
-    measure_stop('current milestone');
 
     #--- write info-block ------------
     {
+        measure_stop('current milestone');
         require_once(confGet('DIR_STREBER') . 'blocks/current_milestone_block.inc.php');        
         $block= new CurrentMilestoneBlock($project);
         $block->render();
+        measure_stop('current milestone');
     }
-
-    measure_stop('current milestone');
-
 
     measure_start('info');
 
+
+
     #--- write info-block ------------
+    /*
     {
         $block=new PageBlock(array('title'=>__('Details','block title'),'id'=>'summary'));
         $block->render_blockStart();
@@ -294,7 +295,8 @@ function ProjView()
     }
 
     measure_stop('info');
-
+    */
+    
     /**
     * list folders has become obsolete, since
     * moving tasks is done by separate dialog
@@ -310,15 +312,6 @@ function ProjView()
     */
     measure_start('team');
 
-    #--- list team -----------------------------------------------------------
-    {
-
-        $list= new ListBlock_projectTeam();
-        $list->title= __('Team members');
-        $list->show_icons=true;
-		$list->active_block_function = 'list';
-		$list->print_automatic($project);
-    }
 
 
 
@@ -335,9 +328,19 @@ function ProjView()
     }
 
 
+    #--- list team -----------------------------------------------------------
+    {
+
+        $list= new ListBlock_projectTeam();
+        $list->title= __('Team members');
+        $list->show_icons=true;
+		$list->active_block_function = 'list';
+		$list->print_automatic($project);
+    }
+    measure_stop('team');
+
 
     echo(new PageContentNextCol);
-    measure_stop('team');
 
 
     #--- description ----------------------------------------------------------------

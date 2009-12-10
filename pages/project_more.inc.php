@@ -974,21 +974,6 @@ function projViewTasks()
             'presets'=> $presets,
             'person_id' => ''));
      }
-    /*if($page->format != FORMAT_CSV) {
-        echo "<div class=presets>";
-        #echo __("Filter-Preset:");
-        foreach($presets as $p_id=>$p_settings) {
-            if($p_id == $preset_id) {
-                echo $PH->getLink('projViewTasks',$p_settings['name'], array('prj'=>$project->id,'preset'=>$p_id),'current');;
-            }
-            else {
-                echo $PH->getLink('projViewTasks',$p_settings['name'], array('prj'=>$project->id,'preset'=>$p_id));
-            }
-        }
-        echo "</div>";
-    }*/
-
-    #echo(new PageContentNextCol);
 
 
 
@@ -1016,11 +1001,11 @@ function projViewTasks()
 
     #--- list tasks --------------------------------------------------------------------------
     {
-        #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
-
-        #if($for_milestone=get('for_milestone')) {
-        #    $list->filters['for_milestone']= intval($for_milestone);
-        #}
+        if($for_milestone) {
+            $list->filters[]= new ListFilter_for_milestone(array(
+                            'value'=>$for_milestone,
+                    ));
+        }
         $list->show_project_folder= false;
 
         unset($list->columns['project']);
