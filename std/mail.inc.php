@@ -119,21 +119,21 @@ class Notifier
         $message_txt= '';
         $message_html= '';
 
-		$message_html.= "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n<html>\r\n"
-                . "<head>\r\n"
-                . "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\r\n"
-                . "<title>$subject</title>\r\n"
-                . "<style>\r\n \r\n\r\n h4 {font-size:11pt;}\r\n li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;}li span.details { font-size: 10pt; color: #888}\r\n</style>\r\n"
-                . "</head>\r\n"
-                . "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
+		$message_html.= "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n\r<html>\r\n"
+                . "<head>\n\r"
+                . "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">\n\r"
+                . "<title>$subject</title>\n\r"
+                . "<style>\n\r\n\r\n\r h4 {font-size:11pt;}\n\r li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;}li span.details { font-size: 10pt; color: #888}\n\r</style>\n\r"
+                . "</head>\n\r"
+                . "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\n\r"
                 . sprintf(__('Hello %s,','notification'), asHtml($person->name))
-                . "<br><br>\r\n"
+                . "<br><br>\n\r"
                 . __('with this automatically created e-mail we want to inform you that', 'notification')
-                . "<br>\r\n";
+                . "<br>\n\r";
         $message_txt.= sprintf(__('Hello %s,','notification'), $person->name)
-                    . "\n\n"
+                    . "\n\r"
                     . __('with this automatically created e-mail we want to inform you that', 'notification')
-                    . "\n";
+                    . "\n\r";
 
         if($person->notification_last) {
             $message_html.= sprintf(__('since %s'), renderDate($person->notification_last, false) ). ' ';
@@ -143,23 +143,23 @@ class Notifier
         $message_html.= sprintf(__('following happened at %s ','notification'),
                          "<a href='" . $url ."'>" . confGet('SELF_DOMAIN')."</a>"
                    )
-                . "<br>\r\n";
+                . "<br>\n\r";
         $message_txt.= sprintf(__('following happened at %s ','notification'),confGet('SELF_DOMAIN'))
-                    ."\n";
+                    ."\n\r";
 
         ### new account ###
         if($person->settings & USER_SETTING_SEND_ACTIVATION) {
             $message_html.= __('Your account has been created.','notification')
                     . "<a href='$url?go=activateAccount&tuid={$person->identifier}'>"
                     . __('Please set a password to activate it.','notification')
-                    . "</a><br>\r\n";
+                    . "</a><br>\n\r";
 
             $message_txt.= __('Your account has been created.','notification')
                     . " "
                     . __('Please set a password to activate it.','notification')
-                    . "\n "
+                    . "\n\r "
                     . $url."?go=activateAccount&tuid={$person->identifier}"
-                    . "\n\n";
+                    . "\n\r\n\r";
 
             $information_count++;
         }
@@ -167,11 +167,11 @@ class Notifier
         ### recently assigned to projects ###
         $projects= array();
         {
-            $headline_html= "<h3>\r\n"
+            $headline_html= "<h3>\n\r"
                      . __('You have been assigned to projects:','notification')
-                     . "</h3>\r\n"
-                     . "<ul>\r\n";
-            $headline_txt= "\n". __('You have been assigned to projects:','notification')."\n";
+                     . "</h3>\n\r"
+                     . "<ul>\n\r";
+            $headline_txt= "\n\r". __('You have been assigned to projects:','notification')."\n\r";
 
             $close_list_html= '';
             $close_list_txt= '';
@@ -192,13 +192,13 @@ class Notifier
                             else {
                                 $message_html.= "<a href='$url?go=projView&prj={$pp->project}'>". asHtml($project->name) ."</a>";
                             }
-                            $message_html. "</li>\r\n";
-                            $message_txt.= "- ". $project->name. "\n";
+                            $message_html. "</li>\n\r";
+                            $message_txt.= "- ". $project->name. "\n\r";
 
                             $headline_html='';
                             $headline_txt='';
-                            $close_list_html= "</ul>\r\n";
-                            $close_list_txt= "\n";
+                            $close_list_html= "</ul>\n\r";
+                            $close_list_txt= "\n\r";
                             $information_count++;
                         }
                     }
@@ -226,7 +226,7 @@ class Notifier
                      . __('Changed monitored items:','notification')
                      . "</h3>"
                      . "<ul>";
-            	$changes_headline_txt = "\n". __('Changed monitored items:','notification')."\n";
+            	$changes_headline_txt = "\n\r". __('Changed monitored items:','notification')."\n\r";
 								
 				foreach($monitored_items as $mi){
 					if($pi = DbProjectItem::getById($mi->item)){
@@ -236,14 +236,14 @@ class Notifier
 								$p = Person::GetVisibleById($pi->modified_by);
 								$object = DbProjectItem::getObjectById($pi->id);
 								$changes_message_html .= '<li>' . sprintf(__("%s edited > %s"), $p->nickname, $object->name) . '</li>';
-								$changes_message_txt .= '- ' . sprintf(__("%s edited > %s"), $p->nickname, $object->name) . '\n';
+								$changes_message_txt .= '- ' . sprintf(__("%s edited > %s"), $p->nickname, $object->name) . '\n\r';
 							}
 						}
 					}
 				}
 				if($changes_message_html != ''){
 					$changes_message_html .= "</ul>";
-					$changes_message_txt .= "\n";
+					$changes_message_txt .= "\n\r";
 				}
 			}
 			
@@ -264,7 +264,7 @@ class Notifier
                      . __('Unchanged monitored items:','notification')
                      . "</h3>" 
                      . "<ul>";
-            	$unchanged_headline_txt = "\n". __('Unchanged monitored items:','notification')."\n";
+            	$unchanged_headline_txt = "\n\r". __('Unchanged monitored items:','notification')."\n\r";
 												
 				foreach($monitored_items_unchanged as $miu){
 					## reminder period ##
@@ -319,7 +319,7 @@ class Notifier
 										$object = DbProjectItem::getObjectById($pi->id);
 										
 										$unchanged_message_html .= '<li>' . sprintf(__("%s (not touched since %s day(s))"), asHtml($object->name), $days) . '</li>';
-										$unchanged_message_txt .= '- ' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '\n';
+										$unchanged_message_txt .= '- ' . sprintf(__("%s (not touched since %s day(s))"), $object->name, $days) . '\n\r';
 									}
 								}
 							}
@@ -328,7 +328,7 @@ class Notifier
 				}
 				if($unchanged_message_html != ''){
 					$unchanged_message_html .= "</ul>";
-					$unchanged_message_txt .= "\n";
+					$unchanged_message_txt .= "\n\r";
 				}
 			}
 		}
@@ -350,7 +350,7 @@ class Notifier
         foreach($projects as $p) {
             if($changes= ChangeLine::getChangeLinesForPerson($person,$p, $person->notification_last)) {
                 $information_count++;
-                $updates_html.= "<h4>\r\n";
+                $updates_html.= "<h4>\n\r";
                 if(confGet('USE_MOD_REWRITE')) {
                     $updates_html.="<a href='$url{$p->id}'>". asHtml($p->name) ."</a>";
                 }
@@ -359,12 +359,12 @@ class Notifier
                 }
 
 
-                $updates_html.= "</h4>\r\n<ul>\r\n";
-                $updates_txt.= "\n". $p->name."\n";
+                $updates_html.= "</h4>\n\r<ul>\n\r";
+                $updates_txt.= "\n\r". $p->name."\n\r";
 
                 foreach($changes as $c) {
                     $updates_html.="<li>";
-                    $updates_txt.="\n- ";
+                    $updates_txt.="\n\r- ";
 
                     ### task
                     if($c->item && $c->item->type == ITEM_TASK) {
@@ -390,7 +390,7 @@ class Notifier
                     }
 
                     $updates_html.= '<br><span class="details">';		# invisible user
-                    $updates_txt.= "\r\n";		# invisible user
+                    $updates_txt.= "\n\r";		# invisible user
                     
                     ### what...
                     if($c->html_what) {
@@ -432,17 +432,17 @@ class Notifier
                         $updates_html.= ' ('.$c->html_assignment. ') ';
                         #$updates_txt.= ' '.$c->html_assignment. ' ';
                     }
-                    $updates_html.="</span></li>\r\n";
-                    $updates_txt.="\n";
+                    $updates_html.="</span></li>\n\r";
+                    $updates_txt.="\n\r";
                 }
-                $updates_html.="</ul>\r\n";
-                $updates_txt.="\n";
+                $updates_html.="</ul>\n\r";
+                $updates_txt.="\n\r";
             }
         }
         if($updates_html) {
-            $message_html.="<h3>". __('Project Updates'). "</h3>\r\n"
+            $message_html.="<h3>". __('Project Updates'). "</h3>\n\r"
                     . $updates_html;
-            $message_txt.= "\n== ". __('Project Updates'). " ==\n"
+            $message_txt.= "\n\r== ". __('Project Updates'). " ==\n\r"
                     . $updates_txt;
 
         }
@@ -450,28 +450,28 @@ class Notifier
         ### footer ####
         {
             $message_html.=
-              "<br><span class=\"details\">\r\n"
+              "<br><span class=\"details\">\n\r"
               .__('Forgot your password or how to log in?','notification'). '<br>'
               . "<a href='$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}'>"
               . __('Request a mail to change your account settings.','notification')
               . "</a></span>"
               . "."
-              . "<br>\r\n"
-              . "<br>\r\n"
-              .__('Thanks for your time','notification') . "<br>\r\n"
-              .__('the management', 'notification') . "\r\n";
+              . "<br>\n\r"
+              . "<br>\n\r"
+              .__('Thanks for your time','notification') . "<br>\n\r"
+              .__('the management', 'notification') . "\n\r";
 
             $message_txt.= ''
               .__('Forgot your password or how to log in?','notification'). ' '
               .__("Click here:") . ' ' . "$url?go=loginForgotPasswordSubmit&amp;login_name={$person->nickname}"
-              . "\n"
-              . "\n"
-              .'  ' . __('Thanks for your time','notification') . "\n"
+              . "\n\r"
+              . "\n\r"
+              .'  ' . __('Thanks for your time','notification') . "\n\r"
               .'  ' . __('the management', 'notification');
 
         }
 
-        $message_html.="</body>\r\n"
+        $message_html.="</body>\n\r"
                 . "</html>";
 
 
@@ -486,13 +486,13 @@ class Notifier
             * using some t
             */
             if (strtoupper(substr(PHP_OS,0,3)=='WIN')) {
-              $eol="\r\n";
+              $eol="\n\r";
             }
             elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) {
-              $eol="\r";
+              $eol="\n\r";
             }
             else {
-              $eol="\n";
+              $eol="\n\r";
             }
 
 
@@ -609,41 +609,41 @@ class Notifier
 
         $html_format = true;
         if($html_format) {
-            $message = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\r\n"
-            ."<html>\r\n"
-            ."<head>\r\n"
-            ."<title>$subject</title>\r\n"
-            . "</head>\r\n"
-            ."<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\r\n"
-            . sprintf(__('Hello %s,','notification'), asHtml($person->name)) . "<br><br>\r\n";
+            $message = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n\r"
+            ."<html>\n\r"
+            ."<head>\n\r"
+            ."<title>$subject</title>\n\r"
+            . "</head>\n\r"
+            ."<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">\n\r"
+            . sprintf(__('Hello %s,','notification'), asHtml($person->name)) . "<br><br>\n\r";
 
             ### new account ###
-            $message.= sprintf(__('Your account at %s is still active.','notification'), "<a href='" . $url ."'>" . confGet('SELF_DOMAIN')."</a>") . "<br>\r\n"
-            .__('Your login name is','notification') . " '" . $person->nickname . "'<br>\r\n"
+            $message.= sprintf(__('Your account at %s is still active.','notification'), "<a href='" . $url ."'>" . confGet('SELF_DOMAIN')."</a>") . "<br>\n\r"
+            .__('Your login name is','notification') . " '" . $person->nickname . "'<br>\n\r"
             . __('Please use this link to') 
             .' ' 
             . "<a href=\"" . $url . "?go=activateAccount&tuid=" . $person->identifier . "\">"
             . __('update your account settings')
-            . "</a>...<br>\r\n";
+            . "</a>...<br>\n\r";
 
             ### footer ####
             {
-                $message.= "<br>\r\n"
-                ."<br>\r\n"
-                .__('Thanks for your time','notification') . "<br>\r\n"
-                .__('the management', 'notification') . "\r\n";
+                $message.= "<br>\n\r"
+                ."<br>\n\r"
+                .__('Thanks for your time','notification') . "<br>\n\r"
+                .__('the management', 'notification') . "\n\r";
             }
 
-            $message.="\r\n"
-            ."</body>\r\n"
+            $message.="\n\r"
+            ."</body>\n\r"
             ."</html>";
         }
 
         ### headers  ###
         $headers="";
         if($html_format) {
-            $headers .= "From: $from\r\n";
-            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+            $headers .= "From: $from\n\r";
+            $headers .= "Content-type: text/html; charset=UTF-8\n\r";
         }
 
 

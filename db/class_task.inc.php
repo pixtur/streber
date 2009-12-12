@@ -646,6 +646,9 @@ foreach($filters_str as $fs=>$value) {
 
     /**
     * returns assoc. array
+    * 
+    * Note: - "num_open" counts all tasks with status between New and Completed
+    *       - to differentiate between open and needs approval subtract num_need_approval
     */
     function getMilestoneTasksSummary()
 

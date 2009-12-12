@@ -564,9 +564,9 @@ function projViewTasks()
     if($for_milestone) {
         $milestone= Task::getVisibleById($for_milestone);
     }
-    if($milestone= $project->getNextMilestone()) {
-        $for_milestone= $milestone->id;
-    }
+    #if($milestone= $project->getNextMilestone()) {
+    #    $for_milestone= $milestone->id;
+    #}
     
 
     $presets= array(
@@ -1000,7 +1000,7 @@ function projViewTasks()
 
 
     #--- list tasks --------------------------------------------------------------------------
-    {
+    {   
         if($for_milestone) {
             $list->filters[]= new ListFilter_for_milestone(array(
                             'value'=>$for_milestone,

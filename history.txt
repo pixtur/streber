@@ -5,6 +5,10 @@ todo:
 - hide "new project from, if not enough user-rights"
 
 
+- fixed milestone task count 
+- fixed link to milestone tasks
+- fixed line-breaks for notification mails
+
 rev 492
 - version v0.0911
 - fixed layout of attached files
