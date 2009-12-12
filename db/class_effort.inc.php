@@ -88,6 +88,14 @@ class Effort extends DbProjectItem
                         'view_in_forms'=>true,
                         'default'=>1,
                     )),
+                    
+                    /**
+                    * DEPRECATED! this internal field is for backwards compatibility to old db-structures
+                    */
+                    new FieldInternal(array('name'=>'category',
+                        'default'=>TCATEGORY_TASK,
+                        'log_changes' => true,
+                    )),
     
                 ) as $f) {
                     $effort_fields[$f->name]=$f;

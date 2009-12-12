@@ -1107,7 +1107,6 @@ class FormatBlockLink extends FormatBlock
         else if(preg_match("/\A([\w]+)\:(\d+)/",$this->target, $matches)) {
 
             $type       = asKey($matches[1]);
-            $target     = $matches[2];
             $target     = asCleanString($matches[2]);
 
             switch($type) {
@@ -1884,8 +1883,12 @@ class FormatBlockTable extends FormatBlock
                                     $syntax_failure= true;
                                     break;
                                 }
-
-                                $line_cells[]= $cells;
+                                
+                                $cells_clean = array();
+                                foreach($cells as $cell_with_pipeplaceholder) {
+                                    $cells_clean[] = str_replace($placeholder_for_pipes, '|', $cell_with_pipeplaceholder);
+                                }
+                                $line_cells[]= $cells_clean;
                             }
                             else{
                                 $last_num_cells = -1;
@@ -2009,7 +2012,7 @@ function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
         $tmp[]= $b->renderAsHtml();
     }
     $tmp[]= '</div>';
-    $tmp[]= '<span class=end> </span></div>';                # end-span to create image-floats
+    $tmp[]= '<span class="end doClear"> </span></div>';                # end-span to create image-floats
 
     $out= implode('', $tmp);
     measure_stop("render_wiki");

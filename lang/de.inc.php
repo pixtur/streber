@@ -11,7 +11,7 @@ $g_lang_table= array(
 'en_US.utf8,en_US,enu|list of locales'=>'de_DE.UTF8,de_DE@euro,de_DE,de,gede.utf8,deu,german',
 
 ### Oct 13, 2008  ->  13.Okt 2008
-'%b %e, %Y|strftime format string'=>'%e.%b 2008', 
+'%b %e, %Y|strftime format string'=>'%e.%b %Y', 
 
 ### 1:34pm  ->  13:34
 '%I:%M%P|strftime format string'=>'%H:%M',
@@ -553,7 +553,7 @@ $g_lang_table= array(
 'Select some persons to delete'=>'Bitte wählen Sie die zu löschenden Personen',
 'Adjust user-rights of %s'    =>'Nutzerrechte von %s bearbeiten',
 'Please consider that activating login-accounts might trigger security-issues.'
-                              =>'Bitte berücksichtigen Sie, dass Benutzerkonten ein potentielles Risiko darstellen.',
+                              =>'Bitte berücksichtigen Sie, Benutzerkonten ein potentielles Risiko darstellen.',
 'User rights changed'         =>'Benutzerrechte wurden geändert.',
 'Select one or more persons' =>'Wählen Sie ein oder mehrere Personen aus',
 'Export persons'			  =>'Personenliste exportieren',
@@ -2256,8 +2256,8 @@ $g_lang_table= array(
 'can not render form without valid user'=>'Formular kann nicht ohne gültigen Anwender bearbeitet werden.',  
 
 ### ../std/mail.inc.php   ###
-'Forgot your password or how to log in?|notification'=>'Passwort vergessen? Keine Ahnung, wie man sich anmeldet? Keine Lust auf diese Mails',  
-'Request a mail to change your account settings.|notification'=>'Erhalte eine E-Mail, um Password und News-Einstellungen zu ändern.',  
+'Forgot your password or how to log in?|notification'=>'Passwort vergessen? Keine Ahnung, wie man sich anmeldet? Keine Lust auf diese Mails?',  
+'Request a mail to change your account settings.|notification'=>'Hier klicken, um eine E-Mail für Passwort- und News-Einstellungen anzufordern...',  
 'Click here:'                 =>'Hier klicken',  
 
 ### ../db/class_task.inc.php   ###

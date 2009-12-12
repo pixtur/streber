@@ -1421,7 +1421,11 @@ function taskEditSubmit()
             $i->task= $task->id;
             $i->update();
         }        
-        new FeedbackMessage(sprintf(__("Created task %s with ID %s"),  $task->getLink(false),$task-> id));
+        new FeedbackMessage(sprintf(__("Created %s %s with ID %s","Created <type> <name> with ID <id>..."),  
+                $task->getLabel(),
+                $task->getLink(false),
+                $task-> id)
+            );
     }
     else {
 

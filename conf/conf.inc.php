@@ -400,6 +400,11 @@ if(isset($_SERVER['SCRIPT_NAME']) && $_SERVER['HTTP_HOST'] && preg_match("/\/ind
     $url= asCleanString($_SERVER['HTTP_HOST'] .$_SERVER['SCRIPT_NAME']);
     confChange('SELF_URL', $url);
 }
+elseif( $_SERVER['HTTP_HOST'] )
+{
+	$url = asCleanString($_SERVER['HTTP_HOST']);
+	confChange('SELF_URL', $url);
+}
 
 /**
 * adjust url-prefix if https

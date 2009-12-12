@@ -28,12 +28,12 @@ require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 function build_person_options(&$person) {
 
     return array(
-		new NaviOption(array(
+        new NaviOption(array(
             'target_id'=>'personViewProjects',
             'name'=>__('Projects'),
             'target_params'=>array('person'=>$person->id )
         )),
-		new NaviOption(array(
+        new NaviOption(array(
             'target_id'=>'personViewTasks',
             'name'=>__('Tasks'),
             'target_params'=>array('person'=>$person->id )
@@ -43,7 +43,7 @@ function build_person_options(&$person) {
             'name'=>__('Efforts'),
             'target_params'=>array('person'=>$person->id )
         )),
-		new NaviOption(array(
+        new NaviOption(array(
             'target_id'=>'personViewChanges',
             'name'=>__('Changes'),
             'target_params'=>array('person'=>$person->id )
@@ -60,8 +60,8 @@ function personList()
 {
     global $PH;
     global $auth;
-	
-	$presets= array(
+    
+    $presets= array(
         ### all ###
         'all_persons' => array(
             'name'=> __('all'),
@@ -87,7 +87,7 @@ function personList()
             'filters'=> array(
                 'can_login'=> array(
                     'id'        => 'can_login',
-					'value'     => '0',
+                    'value'     => '0',
                     'visible'   => true,
                     'active'    => true,
                 ),
@@ -105,7 +105,7 @@ function personList()
             'filters'=> array(
                 'can_login'=> array(
                     'id'        => 'can_login',
-					'value'     => '1', 
+                    'value'     => '1', 
                     'visible'   => true,
                     'active'    => true,
                 ),
@@ -161,7 +161,7 @@ function personList()
             'filters'=> array(
                 'person_is_alive'=> array(
                     'id'        => 'person_is_alive',
-					'value'     => false,
+                    'value'     => false,
                     'visible'   => true,
                     'active'    => true,
                 ),
@@ -175,8 +175,8 @@ function personList()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'personList';
+    ## set preset location ##
+    $preset_location = 'personList';
 
     ### get preset-id ###
     {
@@ -201,14 +201,14 @@ function personList()
             }
         }
     }
-	
+    
     ### create from handle ###
-	$PH->defineFromHandle(array('preset_id'=>$preset_id));
+    $PH->defineFromHandle(array('preset_id'=>$preset_id));
 
     ### set up page and write header ####
     {
         $page= new Page();
-		$page->cur_tab='people';
+        $page->cur_tab='people';
         $page->title=__('Persons','Pagetitle for person list');
         if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
             $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), $auth->cur_user->name);
@@ -234,9 +234,9 @@ function personList()
         ### render title ###
         echo(new PageHeader);
     }
-	
+    
     echo (new PageContentOpen);
-	
+    
     #--- list persons --------------------------------------------------------
     {
         if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
@@ -251,64 +251,64 @@ function personList()
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
-		#if(!confGet('PERSON_LAST_LOGIN')){
-        #	unset($list->columns['last_login']);
-		#}
+        #if(!confGet('PERSON_LAST_LOGIN')){
+        #   unset($list->columns['last_login']);
+        #}
         unset($list->columns['changes']);
-		
-		$list->filters[] = new ListFilter_persons();
-		{
-		    
-			$preset = $presets[$preset_id];
-			foreach($preset['filters'] as $f_name=>$f_settings) {
-				switch($f_name) {
-					case 'person_category':
-						$list->filters[]= new ListFilter_person_category_min(array(
-							'value'=>$f_settings['min'],
-						));
-						$list->filters[]= new ListFilter_person_category_max(array(
-							'value'=>$f_settings['max'],
-						));
-						break;
-					case 'can_login':
-						$list->filters[]= new ListFilter_can_login(array(
-							'value'=>$f_settings['value'],
-						));
-						break;
-					case 'person_is_alive':
-						$list->filters[]= new ListFilter_is_alive(array(
-							'value'=>$f_settings['value'],
-						));
-						break;
-					default:
-						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-						break;
-				}
-			}
-	
-			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-								  ? true
-								  : NULL;
-		}
-		
+        
+        $list->filters[] = new ListFilter_persons();
+        {
+            
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'person_category':
+                        $list->filters[]= new ListFilter_person_category_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $list->filters[]= new ListFilter_person_category_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        break;
+                    case 'can_login':
+                        $list->filters[]= new ListFilter_can_login(array(
+                            'value'=>$f_settings['value'],
+                        ));
+                        break;
+                    case 'person_is_alive':
+                        $list->filters[]= new ListFilter_is_alive(array(
+                            'value'=>$f_settings['value'],
+                        ));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
+        }
+        
         if($auth->cur_user->user_rights & RIGHT_PERSON_CREATE) {
             $list->no_items_html=$PH->getLink('personNew','');
         }
         else {
             $list->no_items_html=__("no related persons");
         }
-		
-		$page->print_presets(array(
-		    'target' => $preset_location,
-		    'project_id' => '',
-		    'preset_id' => $preset_id,
-		    'presets' => $presets,
-		    'person_id' => ''));
-			
         
-		$list->query_options['order_by'] = $order_by;
-		$list->print_automatic();
-		
+        $page->print_presets(array(
+            'target' => $preset_location,
+            'project_id' => '',
+            'preset_id' => $preset_id,
+            'presets' => $presets,
+            'person_id' => ''));
+            
+        
+        $list->query_options['order_by'] = $order_by;
+        $list->print_automatic();
+        
         ## Link to start cvs export ##
         $format = get('format');
         if($format == FORMAT_HTML || $format == ''){
@@ -736,11 +736,11 @@ function personView()
         if($person->birthdate && $person->birthdate != "0000-00-00") {
             echo "<div class=labeled><label>" . __('Birthdate','Label'). "</label>".renderDateHtml($person->birthdate)."</div>";
         }
-		
-		if($person->last_login) {
-			echo "<div class=labeled><label>" . __('Last login','Label'). '</label>'. renderDateHtml($person->last_login) .'</div>';
-		}
-		
+        
+        if($person->last_login) {
+            echo "<div class=labeled><label>" . __('Last login','Label'). '</label>'. renderDateHtml($person->last_login) .'</div>';
+        }
+        
 
         ### functions ####
         echo "</div>";
@@ -890,7 +890,7 @@ function personView()
 */
 function personViewProjects()
 {
-	global $PH;
+    global $PH;
     
     ### get current project ###
     $id = getOnePassedId('person','persons_*');
@@ -899,8 +899,8 @@ function personViewProjects()
         $PH->abortWarning("invalid person-id");
         return;
     }
-	
-	$presets= array(
+    
+    $presets= array(
         ### all ###
         'all_related_projects' => array(
             'name'=> __('all'),
@@ -960,9 +960,9 @@ function personViewProjects()
                 )
             )
         ),
-	);
-	
-	## set preset location ##
+    );
+    
+    ## set preset location ##
     $preset_location = 'personViewProjects';
     
     ### get preset-id ###
@@ -991,8 +991,8 @@ function personViewProjects()
     }
     ### create from handle ###
     $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
-	
-	### set up page ####
+    
+    ### set up page ####
     {
         $page = new Page();
         $page->cur_tab = 'people';
@@ -1006,15 +1006,15 @@ function personViewProjects()
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
-	
-	#--- list projects --------------------------------------------------------------------------
+    
+    #--- list projects --------------------------------------------------------------------------
     {
         $order_by = get('sort_'.$PH->cur_page->id."_projects");
 
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
         
         $list= new ListBlock_projects();
-		unset($list->functions['effortNew']);
+        unset($list->functions['effortNew']);
         unset($list->functions['projNew']);
         unset($list->functions['projNewFromTemplate']);
         $list->no_items_html= __('no projects yet');
@@ -1058,15 +1058,15 @@ function personViewProjects()
     }
     
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
-	
-	echo (new PageContentClose);
+    
+    echo (new PageContentClose);
     echo (new PageHtmlEnd());
 }
 
 function personViewTasks()
 {
-	global $PH;
-	global $auth;
+    global $PH;
+    global $auth;
     
     ### get current project ###
     $id = getOnePassedId('person','persons_*');
@@ -1075,8 +1075,8 @@ function personViewTasks()
         $PH->abortWarning("invalid person-id");
         return;
     }
-	
-	$presets= array(
+    
+    $presets= array(
         ### all ###
         'all_tasks' => array(
             'name'=> __('all'),
@@ -1098,8 +1098,8 @@ function personViewTasks()
                 )
             )
         ),
-		
-		### open tasks ###
+        
+        ### open tasks ###
         'new_tasks' => array(
             'name'=> __('new'),
             'filters'=> array(
@@ -1120,7 +1120,7 @@ function personViewTasks()
                 )
             )
         ),
-		
+        
         ### open tasks ###
         'open_tasks' => array(
             'name'=> __('open'),
@@ -1142,7 +1142,7 @@ function personViewTasks()
                 )
             )
         ),
-		
+        
         ### blocked tasks ###
         'blocked_tasks' => array(
             'name'=> __('blocked'),
@@ -1215,8 +1215,8 @@ function personViewTasks()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'personViewTasks';
+    ## set preset location ##
+    $preset_location = 'personViewTasks';
 
     ### get preset-id ###
     {
@@ -1244,8 +1244,8 @@ function personViewTasks()
 
     ### create from handle ###
     $PH->defineFromHandle(array('person'=>$person->id, 'preset_id' =>$preset_id));
-	
-	### set up page ####
+    
+    ### set up page ####
     {
         $page = new Page();
         $page->cur_tab = 'people';
@@ -1259,49 +1259,49 @@ function personViewTasks()
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
-	
-	#--- list projects --------------------------------------------------------------------------
+    
+    #--- list projects --------------------------------------------------------------------------
     {
         $order_by = get('sort_'.$PH->cur_page->id."_tasks");
 
         require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
         
-		$list= new ListBlock_tasks(array(
+        $list= new ListBlock_tasks(array(
             'active_block_function'=>'list'
         ));
 
         unset($list->columns['created_by']);
         unset($list->columns['planned_start']);
         unset($list->columns['assigned_to']);
-		//unset($list->columns['efforts_estimated']);
+        //unset($list->columns['efforts_estimated']);
         $list->no_items_html= __('no tasks yet');
         
         $list->filters[] = new ListFilter_tasks();
         {
 
-        	$preset= $presets[$preset_id];
-			foreach($preset['filters'] as $f_name=>$f_settings) {
-				switch($f_name) {
-	
-					case 'task_status':
-						$list->filters[]= new ListFilter_status_min(array(
-							'value'=>$f_settings['min'],
-						));
-						$list->filters[]= new ListFilter_status_max(array(
-							'value'=>$f_settings['max'],
-						));
-						break;
-	
-					default:
-						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-						break;
-				}
-			}
-	
-			$filter_empty_folders=  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-								 ? true
-								 : NULL;
-		}
+            $preset= $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+    
+                    case 'task_status':
+                        $list->filters[]= new ListFilter_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        $list->filters[]= new ListFilter_status_max(array(
+                            'value'=>$f_settings['max'],
+                        ));
+                        break;
+    
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders=  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                 ? true
+                                 : NULL;
+        }
 
     
         
@@ -1312,15 +1312,15 @@ function personViewTasks()
         'presets' => $presets,
         'person_id' => $person->id));
         
-		$list->query_options['assigned_to_person']= $person->id;
-		$list->query_options['person'] = $person->id;
+        $list->query_options['assigned_to_person']= $person->id;
+        $list->query_options['person'] = $person->id;
         $list->print_automatic(NULL, NULL, true);
         
     }
     
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
-	
-	echo (new PageContentClose);
+    
+    echo (new PageContentClose);
     echo (new PageHtmlEnd());
 }
 
@@ -1331,7 +1331,7 @@ function personViewTasks()
 function personViewEfforts()
 {
     global $PH;
-	global $auth;
+    global $auth;
     
     ### get current project ###
     $id=getOnePassedId('person','persons_*');
@@ -1461,16 +1461,16 @@ function personViewEfforts()
                 )
             )
         ),
-		
-		## last logout ##
-		'last_logout' => array(
+        
+        ## last logout ##
+        'last_logout' => array(
             'name'=> __('last logout'),
             'filters'=> array(
                 'last_logout'   => array(
                     'id'        => 'last_logout',
                     'visible'   => true,
                     'active'    => true,
-					'value'     => $auth->cur_user->id,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1480,17 +1480,17 @@ function personViewEfforts()
                 )
             ),
         ),
-		
-		## 1 week ##
-		'last_week' => array(
+        
+        ## 1 week ##
+        'last_week' => array(
             'name'=> __('1 week'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 7,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 7,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1500,17 +1500,17 @@ function personViewEfforts()
                 )
             ),
         ),
-		
-		## 2 weeks ##
-		'last_two_weeks' => array(
+        
+        ## 2 weeks ##
+        'last_two_weeks' => array(
             'name'=> __('2 weeks'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 14,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 14,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1520,17 +1520,17 @@ function personViewEfforts()
                 )
             ),
         ),
-		
-		## 3 weeks ##
-		'last_three_weeks' => array(
+        
+        ## 3 weeks ##
+        'last_three_weeks' => array(
             'name'=> __('3 weeks'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 21,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 21,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1540,17 +1540,17 @@ function personViewEfforts()
                 )
             ),
         ),
-		
-		## 1 month ##
-		'last_month' => array(
+        
+        ## 1 month ##
+        'last_month' => array(
             'name'=> __('1 month'),
             'filters'=> array(
                 'last_weeks'    => array(
                     'id'        => 'last_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 28,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 28,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1560,17 +1560,17 @@ function personViewEfforts()
                 )
             ),
         ),
-		
-		## prior ##
-		'prior' => array(
+        
+        ## prior ##
+        'prior' => array(
             'name'=> __('prior'),
             'filters'=> array(
                 'prior'    => array(
                     'id'        => 'prior',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 29,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 29,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1653,21 +1653,21 @@ function personViewEfforts()
                             'value'=>$f_settings['max'],
                         ));
                         break;
-					case 'last_logout':
-						$list->filters[]= new ListFilter_last_logout(array(
-							'value'=>$f_settings['value'],
-						));
-					    break;
-					case 'last_weeks':
-						$list->filters[]= new ListFilter_min_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-						break;
-					case 'prior':
-						$list->filters[]= new ListFilter_max_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-					    break;
+                    case 'last_logout':
+                        $list->filters[]= new ListFilter_last_logout(array(
+                            'value'=>$f_settings['value'],
+                        ));
+                        break;
+                    case 'last_weeks':
+                        $list->filters[]= new ListFilter_min_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        break;
+                    case 'prior':
+                        $list->filters[]= new ListFilter_max_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        break;
                     default:
                         trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
                         break;
@@ -1699,9 +1699,9 @@ function personViewEfforts()
 
 function personViewChanges()
 {
-	global $PH;
+    global $PH;
     global $auth;
-	
+    
     ### get current project ###
     $id = getOnePassedId('person','persons_*');
     
@@ -1709,21 +1709,21 @@ function personViewChanges()
         $PH->abortWarning("invalid person-id");
         return;
     }
-	
-	### sets the presets ###
-	$presets = array(
+    
+    ### sets the presets ###
+    $presets = array(
         ### all ###
         'all_changes' => array(
             'name'=> __('all'),
             'filters'=> array(
-			    'task_status'   =>  array(
+                'task_status'   =>  array(
                     'id'        => 'task_status',
                     'visible'   => true,
                     'active'    => true,
                     'min'    =>  STATUS_UNDEFINED,
-					'max'    =>  STATUS_CLOSED,
+                    'max'    =>  STATUS_CLOSED,
                 ),
-			),
+            ),
             'list_settings' => array(
                 'changes' =>array(
                     'hide_columns'  => array(''),
@@ -1731,15 +1731,15 @@ function personViewChanges()
                 )
             )
         ),
-		## last logout ##
-		'last_logout' => array(
+        ## last logout ##
+        'last_logout' => array(
             'name'=> __('last logout'),
             'filters'=> array(
                 'last_logout'   => array(
                     'id'        => 'last_logout',
                     'visible'   => true,
                     'active'    => true,
-					'value'     => $auth->cur_user->id,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1749,16 +1749,16 @@ function personViewChanges()
                 )
             ),
         ),
-		## 1 week ##
-		'last_week' => array(
+        ## 1 week ##
+        'last_week' => array(
             'name'=> __('1 week'),
             'filters'=> array(
                 'last_week'   => array(
                     'id'        => 'last_week',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 7,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 7,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1768,16 +1768,16 @@ function personViewChanges()
                 )
             ),
         ),
-		## 2 week ##
-		'last_two_weeks' => array(
+        ## 2 week ##
+        'last_two_weeks' => array(
             'name'=> __('2 weeks'),
             'filters'=> array(
                 'last_two_weeks'   => array(
                     'id'        => 'last_two_weeks',
                     'visible'   => true,
                     'active'    => true,
-					'factor'    => 14,
-					'value'     => $auth->cur_user->id,
+                    'factor'    => 14,
+                    'value'     => $auth->cur_user->id,
                 ),
             ),
             'list_settings' => array(
@@ -1789,8 +1789,8 @@ function personViewChanges()
         ),
     );
 
-	## set preset location ##
-	$preset_location = 'personViewChanges';
+    ## set preset location ##
+    $preset_location = 'personViewChanges';
 
     ### get preset-id ###
     {
@@ -1816,10 +1816,10 @@ function personViewChanges()
         }
     }
 
-	### create from handle ###
+    ### create from handle ###
     $PH->defineFromHandle(array('person'=>$person->id, 'preset_id'=>$preset_id));
-	
-	### set up page ####
+    
+    ### set up page ####
     {
         $page= new Page();
         $page->cur_tab='people';
@@ -1833,8 +1833,8 @@ function personViewChanges()
         echo(new PageHeader);
     }
     echo (new PageContentOpen);
-	
-	#--- list efforts --------------------------------------------------------------------------
+    
+    #--- list efforts --------------------------------------------------------------------------
     {
         require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
         
@@ -1843,48 +1843,48 @@ function personViewChanges()
         $list->no_items_html= __('no changes yet');
         
         $list->filters[] = new ListFilter_changes();
-		{
-			$preset = $presets[$preset_id];
-			foreach($preset['filters'] as $f_name=>$f_settings) {
-				switch($f_name) {
-					case 'task_status':
-						$list->filters[]= new ListFilter_status_min(array(
-							'value'=>$f_settings['min'],
-						));
-						#$list->filters[]= new ListFilter_status_max(array(
-						#    'value'=>$f_settings['max'],
-						#));
-						break;
-					case 'last_logout':
-						$list->filters[]= new ListFilter_last_logout(array(
-							'value'=>$f_settings['value'],
-						));
-						break;
-					case 'last_week':
-						$list->filters[]= new ListFilter_min_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-						#$list->filters[]= new ListFilter_max_week(array(
-						#	'value'=>$f_settings['value'],
-						#));
-						break;
-					case 'last_two_weeks':
-						$list->filters[]= new ListFilter_min_week(array(
-							'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
-						));
-						#$list->filters[]= new ListFilter_max_week(array(
-						#	'value'=>$f_settings['value'],
-						#));
-						break;
-					default:
-						trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
-						break;
-				}
-			}
-	
-			$filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
-								  ? true
-								  : NULL;
+        {
+            $preset = $presets[$preset_id];
+            foreach($preset['filters'] as $f_name=>$f_settings) {
+                switch($f_name) {
+                    case 'task_status':
+                        $list->filters[]= new ListFilter_status_min(array(
+                            'value'=>$f_settings['min'],
+                        ));
+                        #$list->filters[]= new ListFilter_status_max(array(
+                        #    'value'=>$f_settings['max'],
+                        #));
+                        break;
+                    case 'last_logout':
+                        $list->filters[]= new ListFilter_last_logout(array(
+                            'value'=>$f_settings['value'],
+                        ));
+                        break;
+                    case 'last_week':
+                        $list->filters[]= new ListFilter_min_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        #$list->filters[]= new ListFilter_max_week(array(
+                        #   'value'=>$f_settings['value'],
+                        #));
+                        break;
+                    case 'last_two_weeks':
+                        $list->filters[]= new ListFilter_min_week(array(
+                            'value'=>$f_settings['value'], 'factor'=>$f_settings['factor']
+                        ));
+                        #$list->filters[]= new ListFilter_max_week(array(
+                        #   'value'=>$f_settings['value'],
+                        #));
+                        break;
+                    default:
+                        trigger_error("Unknown filter setting $f_name", E_USER_WARNING);
+                        break;
+                }
+            }
+    
+            $filter_empty_folders =  (isset($preset['filter_empty_folders']) && $preset['filter_empty_folders'])
+                                  ? true
+                                  : NULL;
         }
         
         $page->print_presets(array(
@@ -1902,7 +1902,7 @@ function personViewChanges()
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd());
-	
+    
 }
 
 
@@ -1982,7 +1982,6 @@ function personEdit($person=NULL)
     }
     else {
         $PH->abortWarning(__("not allowed to edit"),ERROR_RIGHTS);
-
     }
 
     ### set up page and write header ####
@@ -2018,10 +2017,19 @@ function personEdit($person=NULL)
         $form->button_cancel=true;
 
         $form->add($person->fields['name']->getFormElement(&$person));
-		
-		        
+        
+                
         ### profile and login ###
-        if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
+        if( ($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS)
+            ||
+            (
+                ($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
+                &&
+                ($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN)
+                &&
+                $person->id == 0
+            )
+        ) {
             /**
             * if checkbox not rendered, submit might reset $person->can_login.
             * ...be sure the user_rights match
@@ -2057,12 +2065,12 @@ function personEdit($person=NULL)
                 $fpw2->required= true;
             }
             $tab->add($fpw2);
-			
-			### authentication ###
-			if(confGet('LDAP')){
-				$authentication = array('streber'=>0, 'ldap'=>1);
-				$tab->add(new Form_Dropdown('person_auth', __("Authentication with","form label"), $authentication, $person->ldap));
-			}
+            
+            ### authentication ###
+            if(confGet('LDAP')){
+                $authentication = array('streber'=>0, 'ldap'=>1);
+                $tab->add(new Form_Dropdown('person_auth', __("Authentication with","form label"), $authentication, $person->ldap));
+            }
 
             ### profile and login ###
             if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
@@ -2098,7 +2106,7 @@ function personEdit($person=NULL)
             ### notification ###
             {
                 $a=array(
-                	sprintf(__('ASAP'),  -1)        => -1,
+                    sprintf(__('ASAP'),  -1)        => -1,
                     sprintf(__('daily'),  1)        =>  1,
                     sprintf(__('each 3 days'), 3)   =>  3,
                     sprintf(__('each 7 days'), 7)   =>  7,
@@ -2222,14 +2230,14 @@ function personEdit($person=NULL)
 
             $tab->add(new Form_checkbox("person_filter_own_changes",__('Filter own changes from recent changes list'), $person->settings & USER_SETTING_FILTER_OWN_CHANGES));
         }
-		
-		## internal area ##
-		{
-			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
-				$tab->add($person->fields['salary_per_hour']->getFormElement(&$person));
-			}
-		}
+        
+        ## internal area ##
+        {
+            if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
+                $tab_group->add($tab=new Page_Tab("internal",__("Internal")));
+                $tab->add($person->fields['salary_per_hour']->getFormElement(&$person));
+            }
+        }
 
         ### temp uid for account activation ###
         if($tuid = get('tuid')) {
@@ -2378,7 +2386,7 @@ function personEditSubmit()
                 $person->profile= $profile_num;
                 if(isset($g_user_profiles[$profile_num]['default_user_rights'])) {
                     $rights=$g_user_profiles[$profile_num]['default_user_rights'];
-                    $person->user_rights= $rights;
+                    
 
                     /**
                     * add warning on changed profile
@@ -2386,14 +2394,27 @@ function personEditSubmit()
                     if($person->user_rights != $rights && $person->id) {
                         new FeedbackHint(__('The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'));
                     }
+                    $person->user_rights= $rights;
                 }
                 else {
                     trigger_error("Undefined profile requested ($profile_num)", E_USER_ERROR);
                 }
             }
         }
-
-
+    }
+    
+    ### can login ###
+    if( ($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS)
+        ||
+        (
+            ($auth->cur_user->user_rights & RIGHT_PERSON_CREATE)
+            &&
+            ($auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN)
+            &&
+            $person->id == 0
+        )
+    ) {
+    
         /**
         * NOTE, if checkbox is not rendered in editForm, user-account will be disabled!
         * there seems no way the be sure the checkbox has been rendered, if it is not checked in form
@@ -2531,16 +2552,16 @@ function personEditSubmit()
             new FeedbackMessage(__("Nickname has been converted to lowercase"));
             $person->nickname = strtolower($person->nickname);
         }
-		
-		### authentication ###
-		$p_auth = get('person_auth');
-		if($p_auth){
-			$person->ldap = 1;
-		}
-		else{
-			$person->ldap = 0;
-		}
-		
+        
+        ### authentication ###
+        $p_auth = get('person_auth');
+        if($p_auth){
+            $person->ldap = 1;
+        }
+        else{
+            $person->ldap = 0;
+        }
+        
         if($p2= Person::getByNickname($t_nickname)) { # another person with this nick?
             if($p2->id != $person->id) {
                 new FeedbackWarning(__("Nickname has to be unique"));

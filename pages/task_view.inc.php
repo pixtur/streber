@@ -422,7 +422,7 @@ function TaskView()
         echo "<div class=description>";
         echo  wikifieldAsHtml($task, 'description',
                             array(
-                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                                'empty_text'=> "[quote]" . __("This task does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
                             ));
 
         echo "</div>";
@@ -1109,7 +1109,7 @@ function taskViewAsDocu()
         echo "<div class=description>";
         echo wikifieldAsHtml($task, 'description', 
                             array(
-                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                                'empty_text'=> "[quote]" . __("This topic does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
                             ));
 
         echo "</div>";

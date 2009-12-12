@@ -813,17 +813,17 @@ function effortEditSubmit()
     }
 
     ### link to task ###
-	$task_id = get('effort_task');
-	if(!is_null($task_id)){
-		if($task_id == 0) {
-			$effort->task = 0;
-		}
-		else{
-			if($task= Task::getVisibleById($task_id)) {
-				$effort->task = $task->id;
-			}
-		}
-	}
+    $task_id = get('effort_task');
+    if(!is_null($task_id)){
+        if($task_id == 0) {
+            $effort->task = 0;
+        }
+        else{
+            if($task= Task::getVisibleById($task_id)) {
+                $effort->task = $task->id;
+            }
+        }
+    }
 
 
     ### go back to from if validation fails ###
@@ -836,6 +836,38 @@ function effortEditSubmit()
         $failure= true;
         new FeedbackWarning(__("Cannot start before end."));
     }
+
+    ### validation of the Datetime fields###
+    if(!$as_duration){
+        if(strToGMTime($effort->time_start) == 0){
+            $failure= true;
+            $name= $effort->fields['time_start']->name;
+            $field_id= $effort->_type.'_'.$name;
+            $value_time=get($field_id.'_time');
+            new FeedbackWarning(sprintf(__("<b>%s</b> is not a valid value for start time."),$value_time));
+            $effort->time_start = getGMTString();
+        }
+        if(strToGMTime($effort->time_end) == 0){
+            $failure= true;
+            $name= $effort->fields['time_end']->name;
+            $field_id= $effort->_type.'_'.$name;
+            $value_time=get($field_id.'_time');
+            new FeedbackWarning(sprintf(__("<b>%s</b> is not a valid value for end time."),$value_time));
+            $effort->time_end= getGMTString();
+        }
+    }   
+    else{ ##As duration
+        if(strToGMTime($effort->time_end) == 0){
+            $failure= true;
+            $name= $effort->fields['time_end']->name;
+            $field_id= $effort->_type.'_'.$name;
+            $value_time=get($field_id.'_time');
+            new FeedbackWarning(sprintf(__("<b>%s</b> is not a valid value for hours."),$value_time));
+            $effort->time_end = gmdate("Y-m-d", time()) ." 00:00:00";
+        }
+    }
+    
+
     if($failure) {
         $PH->show('effortEdit',NULL,$effort);
         exit();

@@ -1,9 +1,11 @@
 streber-version-history
 
-todo:
-- validate uniqueness of project title and short title
-- hide "new project from, if not enough user-rights"
-
+rev 494
+- fixed 2008 bug
+- fixed minor text issues
+- fixed image-attributes inside tables
+- fixed url for mod_rewrite
+- fixed effort-date-time problems
 
 - fixed milestone task count 
 - fixed link to milestone tasks

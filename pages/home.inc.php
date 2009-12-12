@@ -214,11 +214,11 @@ function homeBookmarks()
     }
 	
 	### list forwarded tasks ###
-	{
-		require_once(confGet('DIR_STREBER') . 'lists/list_forwardedtasks.inc.php');
-        $list_forwarded_tasks = new ListBlock_forwarded_tasks();
-        $list_forwarded_tasks->print_automatic();
-	}
+	#{
+	#	require_once(confGet('DIR_STREBER') . 'lists/list_forwardedtasks.inc.php');
+    #    $list_forwarded_tasks = new ListBlock_forwarded_tasks();
+    #    $list_forwarded_tasks->print_automatic();
+	#}
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
