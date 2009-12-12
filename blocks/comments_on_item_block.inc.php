@@ -80,7 +80,7 @@ class CommentsOnItemBlock extends PageBlock
                 echo $creator->getLink();
             }
             
-            echo "<span class=seperator>:</span>";
+            echo "<span class=separator>:</span>";
             echo $c->name;
 
             if($new= $c->isChangedForUser()) {

@@ -10,6 +10,7 @@
 
 #headline .type {
 	font-size:    8pt;
+	padding-top:	4px;
 	padding-left: 1px;
 	padding-bottom:10px;
 	color:        #888;
@@ -21,11 +22,11 @@
 }
 
 #headline .title {
-	font-size:    15pt;
+	font-size:    16pt;
 	padding-left: 5px;
 }
 #headline .title .minor {
-	font-size:    13pt;
+	font-size:    17px;
 	font-style:   normal;
 }
 #headline a {

@@ -37,7 +37,7 @@ function ProjView()
     require_once(confGet('DIR_STREBER') . "render/render_wiki.inc.php");
 
 
-	### get current project ###
+    ### get current project ###
     $id=getOnePassedId('prj','projects_*');
     if($project= Project::getEditableById($id)) {
         $editable= true;        
@@ -47,16 +47,16 @@ function ProjView()
     }
     else {
         $PH->abortWarning(__("invalid project-id"));
-		return;
-	}
+        return;
+    }
 
     ### define from-handle ###
     $PH->defineFromHandle(array('prj'=>$project->id));
 
-	## is viewed by user ##
-	$project->nowViewedByUser();
+    ## is viewed by user ##
+    $project->nowViewedByUser();
 
-	## next milestone ##
+    ## next milestone ##
     $next=$project->getNextMilestone();
 
     ### set up page ####
@@ -66,9 +66,9 @@ function ProjView()
         $page->crumbs= build_project_crumbs($project);
         $page->options= build_projView_options($project);
 
-    	$page->cur_tab='projects';
+        $page->cur_tab='projects';
         $page->title=$project->name;
-        $page->title_minor=__("Overview");
+        $page->title_minor=__("Project overview");
 
         if($project->status == STATUS_TEMPLATE) {
             $page->type=__("Project Template");
@@ -93,40 +93,40 @@ function ProjView()
                 )));
             }
 
-    		/*
-    		$item = ItemPerson::getAll(array(
-    		    'person'=>$auth->cur_user->id,
-    		    'item'=>$project->id
-    		));
-    		if((!$item) || ($item[0]->is_bookmark == 0)){
-    			$page->add_function(new PageFunction(array(
-    				'target'    =>'itemsAsBookmark',
-    				'params'    =>array('proj'=>$project->id),
-    				'tooltip'   =>__('Mark this project as bookmark'),
-    				'name'      =>__('Bookmark'),
-    			)));
-    		}
-    		else{
-    			$page->add_function(new PageFunction(array(
-    				'target'    =>'itemsRemoveBookmark',
-    				'params'    =>array('proj'=>$project->id),
-    				'tooltip'   =>__('Remove this bookmark'),
-    				'name'      =>__('Remove Bookmark'),
-    			)));
-    		}
-    		*/
+            /*
+            $item = ItemPerson::getAll(array(
+                'person'=>$auth->cur_user->id,
+                'item'=>$project->id
+            ));
+            if((!$item) || ($item[0]->is_bookmark == 0)){
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsAsBookmark',
+                    'params'    =>array('proj'=>$project->id),
+                    'tooltip'   =>__('Mark this project as bookmark'),
+                    'name'      =>__('Bookmark'),
+                )));
+            }
+            else{
+                $page->add_function(new PageFunction(array(
+                    'target'    =>'itemsRemoveBookmark',
+                    'params'    =>array('proj'=>$project->id),
+                    'tooltip'   =>__('Remove this bookmark'),
+                    'name'      =>__('Remove Bookmark'),
+                )));
+            }
+            */
 
-    		/*
-    		if($project->state == 1) {
-    				$page->add_function(new PageFunction(array(
-    					'target'=>'projDelete',
-    					'params'=>array('prj'=>$project->id),
-    					'icon'=>'delete',
-    					'tooltip'=>__('Delete this project'),
-    					'name'=>__('Delete')
-    				)));
-    		}
-    		*/
+            /*
+            if($project->state == 1) {
+                    $page->add_function(new PageFunction(array(
+                        'target'=>'projDelete',
+                        'params'=>array('prj'=>$project->id),
+                        'icon'=>'delete',
+                        'tooltip'=>__('Delete this project'),
+                        'name'=>__('Delete')
+                    )));
+            }
+            */
 
 
             #$page->add_function(new PageFunctionGroup(array(
@@ -186,7 +186,7 @@ function ProjView()
                 '<link rel="alternate" type="application/rss+xml" title="' .asHtml($project->name) .' '. __("News")  . '"'
                 .' href="' . $url . '" />';
 
-    	### render title ###
+        ### render title ###
         echo(new PageHeader);
     }
     echo (new PageContentOpen_Columns);
@@ -201,115 +201,7 @@ function ProjView()
         measure_stop('current milestone');
     }
 
-    measure_start('info');
 
-
-
-    #--- write info-block ------------
-    /*
-    {
-        $block=new PageBlock(array('title'=>__('Details','block title'),'id'=>'summary'));
-        $block->render_blockStart();
-        echo "<div class=text>";
-
-        if($project->company) {
-            require_once(confGet('DIR_STREBER') . "db/class_company.inc.php");
-            if( $company= Company::getVisibleById($project->company)) {
-                echo "<div class=labeled><label>".__('Client','label')."</label>". $project->getCompanyLink(true) ."</div>";
-                if($company->phone) {
-                    echo "<div class=labeled><label>" . __('Phone','label') . "</label>". asHtml($company->phone)."</div>";
-                }
-                if($company->email) {
-                    echo "<div class=labeled><label>" . __('E-Mail','label') . "</label>". url2LinkMail($company->email)."</div>";
-                }
-            }
-            echo "<br>";
-        }
-
-
-        global $g_status_names;
-        if($status=$g_status_names[$project->status]) {
-            $ssummary= $project->status_summary
-                     ? ' ('. asHtml($project->status_summary).')'
-                     : '';
-
-            echo "<div class=labeled><label>".__("Status","Label in summary").'</label>'. asHtml($status) . $ssummary. '</div>';
-        }
-
-
-        if($project->wikipage) {
-	        echo "<div class=labeled><label>".__("Wikipage","Label in summary")."</label>".url2linkExtern($project->wikipage)."</div>";
-	    }
-
-        if($project->projectpage) {
-	        echo "<div class=labeled><label>".__("Projectpage","Label in summary")."</label>".url2linkExtern($project->projectpage)."</div>";
-	    }
-
-
-        if($project->date_start !="0000-00-00") {
-	        echo "<div class=labeled><label>".__("Opened","Label in summary")."</label>".renderDateHtml($project->date_start)."</div>";
-	    }
-
-
-        if($project->date_closed !="0000-00-00") {
-            echo "<div class=labeled><label>".__("Closed","Label in summary")."</label>".renderDateHtml($project->date_closed)."</div>";
-        }
-
-        if($person_creator= Person::getVisibleById($project->created_by)) {
-            echo "<div class=labeled><label>".__("Created by","Label in summary")."</label>".$person_creator->getLink()."</div>" ;
-        }
-
-        if($project->modified_by != $project->created_by) {
-            if($person_modify= Person::getVisibleById($project->modified_by)) {
-                echo "<div class=labeled><label>".__("Last modified by","Label in summary")."</label>".$person_modify->getLink()."</div>" ;
-            }
-        }
-
-
-        $sum_efforts= $project->getEffortsSum();
-        if($sum_efforts) {
-            echo "<div class=labeled><label>" . __("Logged effort") . "</label>"
-                .$PH->getLink('projViewEfforts',round($sum_efforts/60/60,1),array('prj'=>$project->id))
-                ." ".__("hours")."</div>" ;
-        }
-
-        $sum_progress= $project->getProgressSum();
-        if($sum_progress) {
-            echo "<div class=labeled><label>" . __("Completed") . "</label><b>"
-                .$PH->getLink('projViewTasks', sprintf("%0.1f",  $sum_progress),array('prj'=>$project->id))
-                ."%</b></div>" ;
-        }
-        $num_tasks= $project->getNumTasks();
-        if($num_tasks) {
-            echo "<div class=labeled><label>" . __("Tasks") . "</label>"
-                .$PH->getLink('projViewTasks',$num_tasks,array('prj'=>$project->id))
-                ."</div>" ;
-        }
-
-
-
-
-        echo "</div>";
-
-        $block->render_blockEnd();
-    }
-
-    measure_stop('info');
-    */
-    
-    /**
-    * list folders has become obsolete, since
-    * moving tasks is done by separate dialog
-    */
-    /*
-    measure_start('folders');
-
-    #--- list folders -----------------------------------------------------------
-    $list= new ListBlock_taskFolders($project);
-    $list->render();
-
-    measure_stop('folders');
-    */
     measure_start('team');
 
 
@@ -334,8 +226,8 @@ function ProjView()
         $list= new ListBlock_projectTeam();
         $list->title= __('Team members');
         $list->show_icons=true;
-		$list->active_block_function = 'list';
-		$list->print_automatic($project);
+        $list->active_block_function = 'list';
+        $list->print_automatic($project);
     }
     measure_stop('team');
 
@@ -358,7 +250,7 @@ function ProjView()
     }
 
 
-	#--- news -----------------------------------------------------------
+    #--- news -----------------------------------------------------------
     if ($project->settings & PROJECT_SETTING_ENABLE_NEWS) 
     {
         require_once(confGet('DIR_STREBER') . './blocks/project_news_block.inc.php');
@@ -382,7 +274,7 @@ function ProjView()
         $list->query_options['not_modified_by']= $auth->cur_user->id;
         $list->query_options['project']= $project->id;
         //$list->print_automatic($project);
-		$list->print_automatic();
+        $list->print_automatic();
     }
     measure_stop('changes');
     */
@@ -398,16 +290,16 @@ function ProjView()
 
     ### rss link ###
     {
-		#$rss_url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-		#$rss_url = str_replace("index.php", "rss/", $rss_url);
-		#$prj_id  = $this->page->options[0]->target_params['prj'];
-		$url= $PH->getUrl('projViewAsRSS',array('prj'=> $project->id));
-		echo  "<a style='margin:0px; border-width:0px;' href='{$url}' target='_blank'>"
-		        ."<img style='margin:0px; border-width:0px;' src='" . getThemeFile("icons/rss_icon.gif") ."'>"
-		        ."</a>";
-	}
+        #$rss_url = confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
+        #$rss_url = str_replace("index.php", "rss/", $rss_url);
+        #$prj_id  = $this->page->options[0]->target_params['prj'];
+        $url= $PH->getUrl('projViewAsRSS',array('prj'=> $project->id));
+        echo  "<a style='margin:0px; border-width:0px;' href='{$url}' target='_blank'>"
+                ."<img style='margin:0px; border-width:0px;' src='" . getThemeFile("icons/rss_icon.gif") ."'>"
+                ."</a>";
+    }
     echo (new PageContentClose);
-   	echo (new PageHtmlEnd());
+    echo (new PageHtmlEnd());
 }
 
 

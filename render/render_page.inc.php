@@ -1045,10 +1045,10 @@ class PageTitle extends PageElement {
         }
         $buffer.= '<h1 class="title">'. asHtml($this->page->title);
         if($this->page->title_minor_html) {
-            $buffer.= '<span class="minor"> / '. $this->page->title_minor_html. '</span>';
+            $buffer.= '<span class="minor"><span class="separator">/</span>'. $this->page->title_minor_html. '</span>';
         }
         else if($this->page->title_minor) {
-            $buffer.= '<span class="minor"> / '. asHtml($this->page->title_minor). '</span>';
+            $buffer.= '<span class="minor"><span class="separator">/</span>'. asHtml($this->page->title_minor). '</span>';
         }
         $buffer.= "</h1>";
         $buffer.= "</div>";

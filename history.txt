@@ -1,5 +1,7 @@
 streber-version-history
 
+- updated custom project view
+
 rev 494
 - fixed 2008 bug
 - fixed minor text issues

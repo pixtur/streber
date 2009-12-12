@@ -112,6 +112,8 @@ h3 {
   color:                #48a7f0;
 }
 
-.seperator {
+.separator {
   color:                #b3b3b3;
+  padding-left:			0.3em;
+  padding-right:		0.3em;
 }
