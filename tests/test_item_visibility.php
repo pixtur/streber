@@ -79,7 +79,7 @@ class TestItemVisibility extends WebTestCase {
 
         #$this->showSource();
         foreach( explode(",", "admin,pm,alan,bob,we will win,big news") as $p) {
-            $this->assertWantedPattern('/' . $p . '/i');
+            $this->assertWantedPattern('/' . $p . '/i', "check existence of '$p'");
         }
         #foreach( explode(",", "error_list") as $p) {
         #    $this->assertWantedPattern('/' . $p . '/i');

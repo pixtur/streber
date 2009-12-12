@@ -813,7 +813,7 @@ new PageHandleFunc(array('id'=>'commentNew',
            'prj'=>'\d*'),
 
     'test'=>'yes',
-    'test_params'=>array('prj'=>'_projectEdit_', 'tsk'=>'_taskEdit_'),
+    'test_params'=>array('prj'=>'_projectEdit_', 'parent_task'=>'_taskEdit_'),
 ));
 new PageHandleForm(array('id'=>'commentEdit',
     'req'=>'pages/comment.inc.php',

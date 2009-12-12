@@ -369,7 +369,6 @@ INSERT INTO person (id, state, name, nickname, tagline, mobile_phone, personal_p
 #
 #project
 #
-
 DROP TABLE IF EXISTS project;
 CREATE TABLE `project` (
   `id` int(11) NOT NULL default '0',
@@ -403,7 +402,6 @@ INSERT INTO project (id, state, name, short, wikipage, projectpage, date_start, 
 #
 #projectperson
 #
-
 DROP TABLE IF EXISTS projectperson;
 CREATE TABLE `projectperson` (
   `id` int(11) NOT NULL default '0',
