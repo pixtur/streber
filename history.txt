@@ -5,7 +5,11 @@ todo:
 - hide "new project from, if not enough user-rights"
 
 
-
+rev 492
+- version v0.0911
+- fixed layout of attached files
+- fixed double upload form in topics #8305
+- added missing _image_cache directory to repository
 
 - added generation of crawler list
 - added some details to RSS-Feed

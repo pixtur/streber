@@ -260,9 +260,21 @@ div.block h3 span.headline_add_on {
 /* ===== Milestone summary =====*/
 div.post_list_entry .open_task_count {
 	float: right;
-	
 }
 
+table#files.list {
+	width: 100%;
+}
+
+table#files.list td.attachment_summary {
+	text-align:		center;
+	border-top:		1px solid #d3d3d3;
+	background: none;
+}
+
+table#files.list tr:first-child td.attachment_summary {
+	border-width:	0px;
+}
 /* ===== RECENT CHANGES ================= */
 div.recentchanges ul {
  margin:            5px 1em 0em 0.5em;

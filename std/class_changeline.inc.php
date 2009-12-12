@@ -52,6 +52,7 @@ class ChangeLine extends BaseObject
     const EDITED_WIKI= 8;
     const ATTACHED_FILE =9;
     const ASSIGNED  =10;
+    const DELETED  =11;
 
     public $project_id;
     public $timestamp;

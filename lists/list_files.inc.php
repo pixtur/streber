@@ -172,8 +172,6 @@ class ListBlock_files extends ListBlock
             new ListGroupingParentItem(),
 
         );
-
-
     }
 
 
@@ -194,7 +192,6 @@ class ListBlock_files extends ListBlock
         if(!$this->active_block_function=$this->getBlockStyleFromCookie()) {
             $this->active_block_function = 'list';
         }
-        
 
         if($project) {
             $this->query_options['project']= $project->id;
@@ -202,19 +199,12 @@ class ListBlock_files extends ListBlock
 
         $this->group_by= get("blockstyle_{$PH->cur_page->id}_{$this->id}_grouping");
 
-
         $s_cookie= "sort_{$PH->cur_page->id}_{$this->id}_{$this->active_block_function}";
         if($sort= get($s_cookie)) {
             $this->query_options['order_by']= $sort;
         }
 
         ### add filter options ###
-        #foreach($this->filters as $f) {
-        #    foreach($f->getQuerryAttributes() as $k=>$v) {
-        #        $this->query_options[$k]= $v;
-        #    }
-        #}
-
         if(!$this->no_items_html) {
             $this->no_items_html= __("No files uploaded");
         }
@@ -226,7 +216,6 @@ class ListBlock_files extends ListBlock
 	        ### prepend key to sorting ###
 	        if(isset($this->query_options['order_by'])) {
 	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
-
 	        }
 	        else {
 	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
@@ -244,7 +233,6 @@ class ListBlock_files extends ListBlock
         ### list view ###
         else {
             $foo= true;
-
         }
         $files= File::getAll($this->query_options);
         $this->render_list(&$files);
@@ -483,7 +471,7 @@ class ListBlockCol_FileSummary extends ListBlockCol
 
 		}
 
-		print "<td class='summary'>$buffer</td>";
+		print "<td class='attachment_summary'>$buffer</td>";
 	}
 }
 

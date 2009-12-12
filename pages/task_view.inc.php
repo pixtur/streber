@@ -542,12 +542,8 @@ function TaskView()
         unset($list->columns['modified']);
         unset($list->columns['for_milestone']);
         unset($list->columns['pub_level']);
-        #$list->filters[]= new ListFilter_status_max(array('value'=>STATUS_COMPLETED));
-        #$list->filters[]= new ListFilter_for_milestone(array('value'=>$task->id));
         $list->query_options['status_max'] = STATUS_COMPLETED;
         $list->query_options['for_milestone'] = $task->id;
-        
-        
         
         $list->print_automatic($project, NULL, true);
     }
@@ -603,13 +599,6 @@ function TaskView()
 
 
     #--- task quickedit form -------------------------------------------------------------
-    #if($project->isPersonVisibleTeamMember($auth->cur_user)) {
-    #    if(! $task->isOfCategory(array(TCATEGORY_DOCU))) {
-    #        $block_task_quickedit= new Block_task_quickedit();
-    #        $block_task_quickedit->render_quickedit(&$task);
-    #    }
-    #}
-
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
 
@@ -1089,43 +1078,13 @@ function taskViewAsDocu()
         $block->render_blockEnd();
     }
 
-    #--- list files --------------------------------------------------------------------------
+
+    #--- list files --------
     {
-        require_once(confGet('DIR_STREBER') . 'lists/list_files.inc.php');
-        $files= File::getall(array('parent_item'=>$task->id));
-
-        $list= new ListBlock_files();
-        $list->reduced_header= true;
-        $list->query_options['parent_item']= $task->id;
-        $list->show_functions=false;
-
-        unset($list->columns['status']);
-        unset($list->columns['mimetype']);
-        unset($list->columns['filesize']);
-        unset($list->columns['created_by']);
-        unset($list->columns['version']);
-        unset($list->columns['_select_col_']);
-        unset($list->columns['modified']);
-        unset($list->columns['name']);
-        unset($list->columns['thumbnail']);
-
-        unset($list->block_functions['list']);
-        unset($list->block_functions['grouped']);
-        unset($list->functions['fileEdit']);
-        unset($list->functions['filesDelete']);
-
-        $list->reduced_header= false;
-        $list->title=__('Attached files');
-
-        if($editable) {
-            $list->no_items_html= $list->summary= buildFileUploadForm( $task );
-        }
-        
-
-        $list->print_automatic($project);
-        $PH->go_submit= $PH->getValidPage('filesUpload')->id;
+        require_once(confGet('DIR_STREBER') . 'blocks/files_attached_to_item.inc.php');
+        print new FilesAttachedToItemBlock($task);
     }
-
+    
 
     echo(new PageContentNextCol);
 

@@ -25,4 +25,5 @@ confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 #confChange('REGISTER_NEW_USERS', true);
 #confChange('REGISTER_NEW_USERS_TO_PROJECT', 10);
 
+confChange('TASKDETAILS_IN_SIDEBOARD', true)
 ?>
