@@ -26,6 +26,7 @@ class LoginBlock extends PageBlock
 
         $this->render_blockStart();
         $this->render_blockEnd();
+
         return '';
     }
 
