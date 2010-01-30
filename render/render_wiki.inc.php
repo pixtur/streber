@@ -1955,7 +1955,7 @@ function wikiAsHtml($wikitext) {
 function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
 {
     $editable= $item->isEditable();
-    $empty_text= '';
+    $empty_text = '';
 
     ### filter params ###
     if($args) {
@@ -1997,10 +1997,12 @@ function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
                 ? ''
                 : 'field_name=' . $field_name;
 
+    
     $str_editable = $editable
                   ? 'editable'
                   : '';
 
+    
     $tmp= array();
     $tmp[]= "<div class='wiki $str_editable' $str_item_id $str_field><div class=chapter>";
 

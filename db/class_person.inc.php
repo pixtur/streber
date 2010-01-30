@@ -1051,7 +1051,18 @@ class Person extends DbProjectItem {
         return $buffer;
     }
 
-
+    /**
+    * returns NULL if not set
+    */
+    function getValidEmailAddress() 
+    {
+        if($this->office_email) {
+            return $this->office_email;
+        }
+        else if($this->personal_email) {
+            return $this->personal_email;
+        }
+    }
 
 
     /**

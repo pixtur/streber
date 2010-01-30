@@ -2806,16 +2806,12 @@ function personSendActivation()
     $person->settings |= USER_SETTING_SEND_ACTIVATION;
 
     {
-        require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
-        $n= new Notifier();
-        if($n->sendPasswordReminder($person)) {
+        require_once(confGet('DIR_STREBER') . 'std/class_email_password_reminder.inc.php');
+        $email= new EmailPasswordReminder($person);
+        if($email->send()) {
             new FeedbackMessage(__("Activation mail has been sent."));
         }
-        #else {
-        #    new FeedbackMessage(__("Sending notification e-mail failed."));
-        #}
     }
-
 
     ### display taskView ####
     if(!$PH->showFromPage()) {
@@ -2844,19 +2840,19 @@ function personsFlushNotifications()
     $errors=0;
 
     foreach($ids as $id) {
-        if(!$p= Person::getEditableById($id)) {
+        if(!$person= Person::getEditableById($id)) {
             $PH->abortWarning("Invalid person-id!");
         }
 
-        require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
-        $n= new Notifier();
+        require_once(confGet('DIR_STREBER') . 'std/class_email_notification.inc.php');
 
-        ### persons in project can't be deleted ###
-        if($n->sendNotifcationForPerson($p)) {
-            $counter++;
+        $email= new EmailNotification($person);
+        $send_result= $email->send();
+        if($send_result === true) {
+            $counter++;            
         }
         else {
-            $errors++;
+            $errors++;            
         }
     }
 

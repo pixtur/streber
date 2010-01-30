@@ -273,7 +273,7 @@ class ChangeLine extends BaseObject
                             $timestamp_last_change= $last_comment->created;
 
 
-                            if($last_comment->name != __('New Comment')) {      # ignore default title
+                            if($last_comment->name && $last_comment->name != __('New Comment')) {      # ignore default title
                                 $html_comment= strip_tags($last_comment->name). ': ';
                             }
                             $html_comment.= strip_tags($last_comment->description);

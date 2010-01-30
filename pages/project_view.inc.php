@@ -242,8 +242,7 @@ function ProjView()
 
         echo wikifieldAsHtml($project, 'description', 
                             array(
-                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
-                                'editable' => 'false',
+                                'empty_text'=> "[quote]" . __("This project does not have any text yet.\nDoubleclick here to add some.") . "[/quote]"
                             ));
 
         echo "</div>";

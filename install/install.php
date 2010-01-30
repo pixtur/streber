@@ -109,15 +109,21 @@ function step_01_checkEvironment() {
         #unset($sql_obj);
     }
 
-    ### check _settings-directory writeable ###
-    {
-        print_testStart("check write-permissions for settings directory '<b>". confGet('DIR_SETTINGS') ."</b>'?");
-        if(!is_writeable('../'. confGet('DIR_SETTINGS'))) {
-            if(!is_dir('../'. confGet('DIR_SETTINGS'))){
-                @mkdir('../'. confGet('DIR_SETTINGS'));
+    ### check temporary directories writeable ###
+    foreach( array(
+        confGet('DIR_SETTINGS'),
+        confGet('DIR_TEMP'),
+        confGet('DIR_FILES'),
+        confGet('DIR_IMAGE_CACHE'),
+        confGet('DIR_RSS'),    
+    ) as $dir) {
+        print_testStart("check write-permissions for settings directory '<b>$dir</b>'?");
+        if(!is_writeable('../'. $dir)) {
+            if(!is_dir('../'. $dir)){
+                @mkdir('../'. $dir);
             }
-            @chmod('../'. confGet('DIR_SETTINGS'), 0777);
-            if(!is_writeable('../'. confGet('DIR_SETTINGS'))){
+            @chmod('../'. $dir, 0777);
+            if(!is_writeable('../'. $dir)){
                 print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory.");
               $flag_errors= true;
             }else{
@@ -129,73 +135,7 @@ function step_01_checkEvironment() {
         }
     }
 
-    ### check _tmp-directory writeable ###
-    {
-        print_testStart("check write-permissions for temporary files directory '<b>". confGet('DIR_TEMP') ."</b>'?");
-        if(is_writeable('../'. confGet('DIR_TEMP'))) {
-            print_testResult(RESULT_GOOD, 'Fine.');                            
-        }
-        else {
-            if(!is_dir('../'. confGet('DIR_TEMP'))){
-                @mkdir('../'. confGet('DIR_TEMP'));
-            }
-            @chmod('../'. confGet('DIR_TEMP'), 0777);
-            if(!is_writeable('../'. confGet('DIR_TEMP'))){
-                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory.");
-                $flag_errors= true;
-            }
-            else {
-                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');                
-            }            
-        }
-    }
 
-    if( checkLogfileIsSecure()) {
-        $flag_errors= true;
-    }
-    
-
-    ### check _files-directory writeable ###
-    {
-        print_testStart("check write-permissions for files directory '<b>". confGet('DIR_FILES') ."</b>'?");
-        if(!is_writeable('../'. confGet('DIR_FILES'))) {
-            if(!is_dir('../'. confGet('DIR_FILES'))){
-                @mkdir('../'. confGet('DIR_FILES'));
-            }
-            @chmod('../'. confGet('DIR_FILES'), 0777);
-            if(!is_writeable('../'. confGet('DIR_FILES'))){
-                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-                $flag_errors= true;
-            }
-            else{
-                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
-            }
-        }
-        else {
-            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
-        }
-    }
-
-    ### check _rss-directory writeable ###
-    {
-        print_testStart("check write-permissions for RSS directory '<b>". confGet('DIR_RSS') ."</b>'?");
-        if(!is_writeable('../'. confGet('DIR_RSS'))) {
-            if(!is_dir('../'. confGet('DIR_RSS'))){
-                @mkdir('../'. confGet('DIR_RSS'));
-            }
-            @chmod('../'. confGet('DIR_RSS'), 0777);
-            if(!is_writeable('../'. confGet('DIR_RSS'))){
-                print_testResult(RESULT_FAILED,"Please grant write-permissions for this directory. Although you can proceed with installation, you will get warnings later.");
-                $flag_errors= true;
-            }
-            else{
-                print_testResult(RESULT_GOOD, 'Folder written by Streber, please check permissions rights with your root account.');
-            }
-        }
-        else {
-            print_testResult(RESULT_GOOD, "Directory has required permissions set.");
-        }
-    }
     ### check db-setting exists ###
     {
         print_testStart("check previous db-settings in'<b>". confGet('DIR_SETTINGS') ."</b>'...");

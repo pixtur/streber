@@ -264,8 +264,7 @@ function logout(){
     */
     {
         require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
-        $n= new Notifier();
-        $n->sendNotifications();
+        Notifier::sendNotifications();
     }
 }
 
@@ -364,17 +363,13 @@ function loginForgotPasswordSubmit()
     else {
         if($person=Person::getByNickname(get('login_name'))) {
             if($person->can_login) {
-
                 if($person->office_email || $person->personal_email) {
-
-
-                    require_once(confGet('DIR_STREBER') . 'std/mail.inc.php');
-                    $n= new Notifier();
-                    $n->sendPasswordReminder($person);
+                    require_once(confGet('DIR_STREBER') . 'std/class_email_password_reminder.inc.php');
+                    $email = new EmailPasswordReminder($person);
+                    $email->send();
 
                     $person->settings |= USER_SETTING_NOTIFICATIONS;
                     $person->settings |= USER_SETTING_SEND_ACTIVATION;
-
                 }
             }
         }
