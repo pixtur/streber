@@ -36,17 +36,19 @@ class Notifier
 
                     if(strToGMTime($p->notification_last) + $period  < time() || $period == -1) {
                         $email= new EmailNotification($p);
-                        $result= $email->send();
-                        if($result === true ) {
-                            ### reset activation-flag ###
-                            $p->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
-                            $p->notification_last= gmdate("Y-m-d H:i:s");
-                            $p->update();
-                            $num_notifications_sent++;
-                        }
-                        else if ($result !== false) {
-                            $num_warnings++;
-                            new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
+                        if($email->information_count) {
+                            $result= $email->send();
+                            if($result === true ) {
+                                ### reset activation-flag ###
+                                $p->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
+                                $p->notification_last= gmdate("Y-m-d H:i:s");
+                                $p->update();
+                                $num_notifications_sent++;
+                            }
+                            else if ($result !== false) {
+                                $num_warnings++;
+                                new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
+                            }
                         }
                     }
                 }

@@ -2847,12 +2847,14 @@ function personsFlushNotifications()
         require_once(confGet('DIR_STREBER') . 'std/class_email_notification.inc.php');
 
         $email= new EmailNotification($person);
-        $send_result= $email->send();
-        if($send_result === true) {
-            $counter++;            
-        }
-        else {
-            $errors++;            
+        if($email->information_count) {
+            $send_result= $email->send();
+            if($send_result === true) {
+                $counter++;            
+            }
+            else {
+                $errors++;            
+            }
         }
     }
 

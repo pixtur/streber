@@ -40,9 +40,9 @@ class Email
         $this->from_domain = confGet('SELF_DOMAIN');;
         $this->from = __('Streber Email Notification','notifcation mail from') . " <do-not-reply@".$this->from_domain.">";
         $this->reply =         ### reply-addres? ###
-        $reply="do-not-reply@$this->from_domain";
-        $to = $person->getValidEmailAddress();
-        if(!$to) {
+        $this->reply="do-not-reply@$this->from_domain";
+        $this->to = $person->getValidEmailAddress();
+        if(!$this->to) {
             $this->errors[]= _('no person does not have an Email-address','notification');
         }
         
@@ -75,7 +75,7 @@ class Email
             return false;
         }
 
-        $eol= "\n\r"; #getEndOfLine();
+        $eol= "\n"; #getEndOfLine();
 
         $boundary= "-streber--------------------------------------";
 
@@ -105,8 +105,6 @@ class Email
         * it sets the global variable $g_error_mail
         */
         mail($this->to, $this->subject, $msg, $headers);
-        
-        debugMessage($msg);
         
         global $g_error_mail;
         if(isset($g_error_mail)) {

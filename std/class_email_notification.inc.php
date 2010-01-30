@@ -18,7 +18,7 @@ require_once(confGet('DIR_STREBER') . './std/class_email.inc.php');
 
 class EmailNotification extends Email
 {
-    protected   $information_count;
+    public   $information_count;
     protected   $projects;
     protected   $projects_new;
 
@@ -61,10 +61,10 @@ class EmailNotification extends Email
                      . "<head>"
                      . "<meta content=\"text/html;charset=UTF-8\" http-equiv=\"Content-Type\">"
                      . "<title>$this->subject</title>"
-                     . "<style> div.detail{color:#888888; font-size: 40%;} h4 {font-size:11pt;} li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;} li span.details { font-size: 10pt; color: #888} </style>"
+                     . "<style> div.details{color:#888888; font-size: 80%;} h4 {font-size:110%;} li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;} li span.details { font-size: 80%; color: #888} </style>"
                      . "</head>"
                      . "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">"
-                     . "<h1>". sprintf(__('Hello %s,','notification'), asHtml($this->recipient->name)) . "</h1>"
+                     . "<h2>". sprintf(__('Hello %s,','notification'), asHtml($this->recipient->name)) . "</h2>"
                      . __('with this automatically created e-mail we want to inform you that', 'notification')
                      . "<br>";
 
@@ -139,8 +139,8 @@ class EmailNotification extends Email
                                  ;
 
             foreach($this->projects_new as $p) {
-                $this->body_html     .= $headline_html . "<li>" . $this->getItemLink($p->id, $p->name) . "</li>";
-                $this->body_plaintext.= $headline_txt  . "- ". $p->name. "\n\r";
+                $this->body_html     .= "<li>" . $this->getItemLink($p->id, $p->name) . "</li>";
+                $this->body_plaintext.= "- ". $p->name. "\n\r";
             }
 
             $this->body_html.= "</ul>\n\r";
@@ -360,7 +360,7 @@ class EmailNotification extends Email
                         $updates_html.= ' ('.$c->html_assignment. ') ';
                     }
                     $updates_html.="</span>";
-                    $updates_html.="<div class='comment'>" . $c->html_details . "</div>";
+                    $updates_html.="<div class='details'>" . $c->html_details . "</div>";
                     $updates_html.="</li>";
                     $updates_txt.="\n\r";
                 }
