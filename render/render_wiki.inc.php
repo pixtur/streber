@@ -1981,7 +1981,12 @@ function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
     $text= asHtml($text);
 
     ### convert, if id is given ###
-    $project= Project::getVisibleById($item->project);
+    if($item->type == ITEM_PROJECT) {
+        $project= $item;
+    }
+    else {
+        $project= Project::getVisibleById($item->project);
+    }
 
     global $g_wiki_project;
     $g_wiki_project= $project;

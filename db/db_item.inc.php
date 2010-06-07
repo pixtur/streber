@@ -1578,42 +1578,23 @@ class DbProjectItem extends DbItem {
                     $new_lines[].= join("\n", $do->orig);
                 }
                 else if($do->type == 'add') {
-                    $new_lines[]= "[added line]" . join("\n", $do->closing) . "[/added word]";
+                    $new_lines[]= "[added word]" . join("\n", $do->closing) . "[/added word]";
                 }
                 else if($do->type =='delete') {
-                    $new_lines[] = '[deleted word]' . asHtml($do->closing) . '[/deleted word]';
+                    $new_lines[] = '[deleted word]' . join("\n", $do->orig) . '[/deleted word]';
                 }
                 else if($do->type =='change') {
 
                     ### render word level differences
                     $wld= new WordLevelDiff($do->orig, $do->closing);
-                    $buffer_new ='';
-                    foreach($wld->edits as $e) {
-                        switch($e->type) {
-                            case 'copy':
-                                $buffer_new.= asHtml( implode('',$e->orig) );
-                                break;
-
-                            case 'add':
-                                $buffer_new.= '[added word]'.asHtml( implode('',$e->closing) ).'[/added word]';
-                                break;
-
-                            case 'change':
-                                $buffer_new.= '[deleted word]'.asHtml( implode('',$e->orig)    ).'[/deleted word]'
-                                            . '[added word]'.  asHtml( implode('',$e->closing) ).'[/added word]';
-                                break;
-
-                            case 'delete':
-                                $buffer_new.= '[deleted word]' . asHtml( implode('',$e->orig) ) . '[/deleted word]';
-                                break;
-
-                            default:
-                                trigger_error("undefined edit work edit", E_USER_WARNING);
-                                break;
-
-                        }
+                    $change_ratio = DbProjectItem::getEditRatioOfWordLevelDiff($wld);
+                    if($change_ratio > 0.1) {
+                        $new_lines[]= "[deleted word]" . join("\n", $do->orig) . "[/deleted word]";
+                        $new_lines[]= "[added word]" . join("\n", $do->closing) . "[/added word]";
                     }
-                    $new_lines[] = $buffer_new;
+                    else {
+                        $new_lines[]= formatWordLevelDiff($wld);
+                    }
                 }
             }
         }
@@ -1622,6 +1603,50 @@ class DbProjectItem extends DbItem {
         #debugMessage( htmlspecialchars($buffer));
         return $buffer;
     }
+    
+    public static function getEditRatioOfWordLevelDiff($wld) {
+        $word_count = 0;
+        $change_count = 0;
+        foreach($wld->edits as $e) {
+            $word_count+= count($e->orig);
+            if($e->type != 'copy') {
+                $change_count+= count($e->orig);
+            }
+        }
+
+        return $change_count/$word_count;
+    }
+
+}
+
+function formatWordLevelDiff($wld) {
+    $buffer_new ='';
+    foreach($wld->edits as $e) {
+        switch($e->type) {
+            case 'copy':
+                $buffer_new.= asHtml( implode('',$e->orig) );
+                break;
+
+            case 'add':
+                $buffer_new.= '[added word]'.asHtml( implode('',$e->closing) ).'[/added word]';
+                break;
+
+            case 'change':
+                $buffer_new.= '[deleted word]'.asHtml( implode('',$e->orig)    ).'[/deleted word]'
+                            . '[added word]'.  asHtml( implode('',$e->closing) ).'[/added word]';
+                break;
+
+            case 'delete':
+                $buffer_new.= '[deleted word]' . asHtml( implode('',$e->orig) ) . '[/deleted word]';
+                break;
+
+            default:
+                trigger_error("undefined edit work edit", E_USER_WARNING);
+                break;
+
+        }
+    }
+    return $buffer_new;
 }
 
 ?>

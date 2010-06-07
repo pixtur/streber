@@ -1,5 +1,12 @@
 streber-version-history
 
+
+rev 500
+- fixed minor title for new task edit
+- fixed edit font for inline edit in webkit
+- tuned the word-level diff for heavily edited chapters
+- refactored task-edit page
+
 - updated custom project view
 
 rev 494

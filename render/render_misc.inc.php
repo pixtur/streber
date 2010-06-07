@@ -207,7 +207,9 @@ function initPageForTask($page, $task, $project=NULL)
     $page->options= build_projView_options($project);
 	$page->cur_tab='projects';
 	$page->title = $task->name;
-    $page->title_minor_html= $PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
+	if($task->id) {
+        $page->title_minor_html= $PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
+	}
     
     /**
     * render html buffer with page type of this task, including parent folders

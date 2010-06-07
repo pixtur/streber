@@ -281,6 +281,12 @@ div.wiki .edit_chapter:hover {
     background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
 }
 
+div.wiki .edit_chapter textarea {
+    font-family: monospace;
+    font-size: 12px;
+}
+
+
 /* UPDATE MARKERS */
 div.wiki span.updatemarker {
   background-color: #ff9000; /*#E57700;*/

@@ -1221,8 +1221,7 @@ class Project extends DbProjectItem
             }
             return false;
         }
-
-
+        
         $l= $item->pub_level;
         if($item->created_by == $pp->person) {
             $l= PUB_LEVEL_OWNED;

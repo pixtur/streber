@@ -467,7 +467,7 @@ new PageHandle(array('id'=>'taskViewAsDocu',
 
 
 new PageHandleForm(array('id'=>'taskEdit',
-    'req'=>'pages/task_more.inc.php',
+    'req'=>'pages/task_edit.inc.php',
     'title'=>__('Edit Task'),
 
     'test'=>'yes',
