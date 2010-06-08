@@ -37,7 +37,7 @@ function itemsRemoveMany()
     
     ### set up page and write header ####
     {
-        $PH->go_submit='itemsRemoveManySubmit';
+        $PH->go_submit='itemsRemoveManyPreview';
         $page = new Page();
         $page->cur_tab = 'home';
 
@@ -56,8 +56,6 @@ function itemsRemoveMany()
         $form=new PageForm();
         $form->button_cancel=true;
         
-        $tab_group=new Page_TabGroup();
-        $form->add($tab_group);
         
         ### author
         $people= array(0 => 'anybody');

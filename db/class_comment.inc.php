@@ -299,7 +299,15 @@ class Comment extends DbProjectItem
         return $comments;
 
     }
+
+    public function getLink()
+    {
+        global $PH;
+        return $PH->getLink('commentView', $this->name, array('comment'=>$this->id));
+    }
 }
+
+
 
 
 ?>

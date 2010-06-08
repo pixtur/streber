@@ -1317,6 +1317,12 @@ new PageHandleForm(array('id'=>'itemsRemoveMany',
 
 ));
 
+new PageHandleForm(array('id'=>'itemsRemoveManyPreview',
+    'req'=>'pages/items_remove_many_preview.inc.php',
+    'title'=>__('Preview removed items'),
+    'rights_required'=>RIGHT_EDITALL,
+));
+
 new PageHandleSubm(array('id'=>'itemsRemoveManySubmit',
     'req'=>'pages/items_remove_many_submit.inc.php',
     'rights_required'=>RIGHT_EDITALL,

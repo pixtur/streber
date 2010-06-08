@@ -1,6 +1,11 @@
 streber-version-history
 
 
+rev503
+- refactored DateTime field parsing
+- added itemsRemoveMany-function to delete spam comments (including preview)
+- refactored spam detection
+
 rev 501
 - fixed minor title for new task edit
 - fixed edit font for inline edit in webkit

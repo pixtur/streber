@@ -1355,8 +1355,6 @@ foreach($filters_str as $fs=>$value) {
 
     public function getLink($short_name= true, $strikeDone= true)
     {
-
-        
         $style_isdone=   ($this->isOfCategory(array(TCATEGORY_TASK, TCATEGORY_BUG))) && ($strikeDone && $this->status >= STATUS_COMPLETED)
                     ? 'isDone'
                     : '';
