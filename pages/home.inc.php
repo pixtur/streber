@@ -86,7 +86,6 @@ function home() {
             'name'  =>__('Edit your Profile')
         )));
 
-        ### page functions ###
         $page->add_function(new PageFunction(array(
             'target' =>'personAllItemsViewed',
             'params' =>array('person'=>$auth->cur_user->id),
@@ -218,7 +217,7 @@ function homeBookmarks()
 	#	require_once(confGet('DIR_STREBER') . 'lists/list_forwardedtasks.inc.php');
     #    $list_forwarded_tasks = new ListBlock_forwarded_tasks();
     #    $list_forwarded_tasks->print_automatic();
-	#}
+	#
 
     echo (new PageContentClose);
     echo (new PageHtmlEnd);
@@ -443,6 +442,17 @@ function homeAllChanges()
     $page->title = __("Changes");
     $page->type = __('List','page type');
     $page->title_minor = renderTitleDate(time());
+
+
+
+    ### page functions ###
+    {
+        $page->add_function(new PageFunction(array(
+            'target' =>'itemsRemoveMany',
+            'icon'  =>'remove',
+        )));
+
+    }
 
     echo(new PageHeader);
     echo (new PageContentOpen);

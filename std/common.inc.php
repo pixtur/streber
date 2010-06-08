@@ -829,7 +829,7 @@ function sortObjectsRecursively(&$obj_with_children, &$list, $level=0)
 * - uses confGet('SPAM_WORDS')
 * - see conf.inc.php for settings
 */
-function isSpam($str) {
+function getSpamProbability($str) {
     $cleaned= preg_replace("/[^a-z]/",'', strtolower($str));
     $count= 0;
     $count_matched_words=0;
@@ -849,6 +849,28 @@ function isSpam($str) {
     return $rate;
 }
 
+
+function isSpam($str) 
+{
+    if( getSpamProbability($str) > confGet('REJECT_SPAM_CONTENT') )  {
+        return true;
+    }
+}
+
+
+function validateNotSpam($str) 
+{
+    global $PH;
+    global $auth;
+    
+    if(     confGet('REJECT_SPAM_CONTENT')  
+        && $auth->cur_user->id == confGet('ANONYMOUS_USER') 
+        && isSpam($str)
+    ) {
+        log_message(sprintf("rejected spam comment from %s with %s", getServerVar('REMOTE_ADDR'), $propability),  LOG_MESSAGE_HACKING_ALERT);
+        $PH->abortWarning(__("Comment has been rejected, because it looks like spam.") );
+    }
+}
 
 /**
 * helper function to clear global variables used in render_misc time rendering.

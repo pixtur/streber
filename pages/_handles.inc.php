@@ -1310,6 +1310,20 @@ new PageHandleFunc(array('id'=>'itemsRestore',
 ));
 
 
+new PageHandleForm(array('id'=>'itemsRemoveMany',
+    'req'=>'pages/items_remove_many.inc.php',
+    'title'=>__('Remove many items'),
+    'rights_required'=>RIGHT_EDITALL,
+
+));
+
+new PageHandleSubm(array('id'=>'itemsRemoveManySubmit',
+    'req'=>'pages/items_remove_many_submit.inc.php',
+    'rights_required'=>RIGHT_EDITALL,
+));
+
+
+
 
 new PageHandle(array('id'=>'error',
     'req'=>'pages/error.inc.php',

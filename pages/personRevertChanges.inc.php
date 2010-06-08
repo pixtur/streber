@@ -74,6 +74,7 @@ function personRevertChanges()
 
     echo "<div class=text>";
     echo "<ul>";
+
     ### get changes of person ###
     $count_reverted_fields = 0;
     $changes = ItemChange::getItemChanges(array('person' => $person_id, 'order_by' => 'id DESC'));

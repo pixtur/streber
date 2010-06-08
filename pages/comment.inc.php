@@ -440,6 +440,10 @@ function commentEditSubmit(){
         $task->nowChangedByUser();
     }
 
+
+    ### detect spam
+    validateNotSpam($comment->description ." " . $comment->name);
+
     ### get pub-level
     $pub_level= intval(get('comment_pub_level'));
     if(!$pub_level) {

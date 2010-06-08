@@ -152,12 +152,15 @@ function FieldDatetime_getFormElement(&$field,&$obj) {
 }
 
 function FieldDatetime_parseForm(&$field,&$obj) {
-
     $name= $field->name;
+    $field_id= $obj->_type . '_' . $name;
+    $obj->$name= getDateTimeFieldValue($field_id);
+}
 
-
-    $field_id= $obj->_type.'_'.$name;
-
+/**
+* returns NULL on failure
+*/
+function getDateTimeFieldValue($field_id) {
     $value_date=get($field_id.'_date');
     if($value_date ==="" || $value_date ==="-") {
         $value_date="0000-00-00";
@@ -245,8 +248,7 @@ function FieldDatetime_parseForm(&$field,&$obj) {
         if($value != "0000-00-00 00:00:00") {
             $value= clientTimeStrToGMTString($value);
         }
-
-        $obj->$name= $value;
+        return $value;
     }
 }
 

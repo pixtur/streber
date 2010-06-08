@@ -1,7 +1,7 @@
 streber-version-history
 
 
-rev 500
+rev 501
 - fixed minor title for new task edit
 - fixed edit font for inline edit in webkit
 - tuned the word-level diff for heavily edited chapters

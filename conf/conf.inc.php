@@ -347,7 +347,7 @@ $g_config= array(
     * posts by anonymous users are rejected, if they contain any of these keys.
     * The value is an indicator for spam probability.
     */
-    'SPAM_WORDS'=>array('viagra'=>10, 'cialis'=>10, 'porn'=>10, 'sex'=>2, 'free'=>1, 'href'=>2, 'online'=>1, 'casino'=>3, 'buy'=>1,'order'=>2,'levitra'=>5,'softtabs'=>5, 'spam'=>1, 'site'=>2),
+    'SPAM_WORDS'=>array('viagra'=>10, 'cialis'=>10, 'porn'=>10, 'sex'=>2, 'free'=>1, 'http'=>2, 'href'=>2, 'online'=>1, 'casino'=>3, 'buy'=>1,'order'=>2,'levitra'=>5,'softtabs'=>5, 'spam'=>1, 'site'=>2),
 
     /**
     * if not 0 try to match SPAM_WORDS on comments and descriptions.
@@ -356,7 +356,7 @@ $g_config= array(
     *   0.01   - friendly
     *   0.1    - loose
     */
-    'REJECT_SPAM_CONTENT' => 0.1,
+    'REJECT_SPAM_CONTENT' => 0.005,
     
     /**
     * enables the sideboard, which is been been displayed on the
