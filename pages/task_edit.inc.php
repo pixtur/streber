@@ -17,6 +17,8 @@
 require_once(confGet('DIR_STREBER') . 'db/class_issue.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_task.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
+require_once(confGet('DIR_STREBER') . 'render/render_block.inc.php');
+require_once(confGet('DIR_STREBER') . 'render/render_block.inc.php');
 
 
 /**
@@ -115,7 +117,7 @@ function taskEdit($task=NULL)
         $form=new PageForm();
         $form->button_cancel=true;
 
-        $form->add($task->fields['name']->getFormElement(&$task));
+        $form->add($task->fields['name']->getFormElement($task));
 
         ### task category ###
         {
@@ -280,7 +282,7 @@ function taskEdit($task=NULL)
 
             ### completion ###
             if(!$task->is_released > RELEASED_UPCOMMING) {
-                #$form->add($task->fields['estimated'    ]->getFormElement(&$task));
+                #$form->add($task->fields['estimated'    ]->getFormElement($task));
                 $ar= array(
                     __('undefined')=> -1,
                     '0%'    => 0,
@@ -386,7 +388,7 @@ function taskEdit($task=NULL)
                 $tab->add(new Form_Dropdown('issue_severity',       __("Severity","Form label, attribute of issue-reports"),        array_flip($g_severity_names),        $issue->severity));
                 $tab->add(new Form_Dropdown('issue_reproducibility',__("Reproducibility","Form label, attribute of issue-reports"), array_flip($g_reproducibility_names), $issue->reproducibility));
                 foreach($issue->fields as $field) {
-                    $tab->add($field->getFormElement(&$issue));
+                    $tab->add($field->getFormElement($issue));
                 }
                 $tab->add(new Form_HiddenField('task_issue_report','',$task->issue_report));
             }
@@ -401,7 +403,7 @@ function taskEdit($task=NULL)
 
             ### estimated ###
             if(!$task->isMilestoneOrVersion()){
-                #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
+                #$tab->add($task->fields['estimated'    ]->getFormElement($task));
                 $ar= array(
                     __('undefined')=> 0,
                     __('30 min')    => 30*60,
@@ -425,15 +427,15 @@ function taskEdit($task=NULL)
 
             ### planned time ###
             if(!$task->isMilestoneOrVersion()) {
-                $tab->add($task->fields['planned_start'     ]->getFormElement(&$task));
+                $tab->add($task->fields['planned_start'     ]->getFormElement($task));
             }
-            $tab->add($task->fields['planned_end' ]->getFormElement(&$task));
+            $tab->add($task->fields['planned_end' ]->getFormElement($task));
 
             if($task->isMilestoneOrVersion()) {
                 global $g_released_names;
                 $tab->add(new Form_Dropdown('task_is_released',       __("Release as version","Form label, attribute of issue-reports"),        array_flip($g_released_names),        $task->is_released));
 
-                $tab->add($task->fields['time_released']->getFormElement(&$task));
+                $tab->add($task->fields['time_released']->getFormElement($task));
             }
 
         }
@@ -442,7 +444,7 @@ function taskEdit($task=NULL)
         {
             $tab_group->add($tab= new Page_Tab('description', __("Description")));
 
-            $e= $task->fields['description']->getFormElement(&$task);
+            $e= $task->fields['description']->getFormElement($task);
             $e->rows=20;
             $tab->add($e);
         }
@@ -453,17 +455,17 @@ function taskEdit($task=NULL)
 
 
             ### short ###
-            $tab->add($task->fields['short']->getFormElement(&$task));
+            $tab->add($task->fields['short']->getFormElement($task));
 
 
             ### order id ###
-            $tab->add($task->fields['order_id']->getFormElement(&$task));
+            $tab->add($task->fields['order_id']->getFormElement($task));
 
             ### Shows as news ###
-            $tab->add($task->fields['is_news']->getFormElement(&$task));
+            $tab->add($task->fields['is_news']->getFormElement($task));
 
             ### Shows Folder as documentation ###
-            $tab->add($task->fields['show_folder_as_documentation']->getFormElement(&$task));
+            $tab->add($task->fields['show_folder_as_documentation']->getFormElement($task));
 
             ### public-level ###
             if(($pub_levels=$task->getValidUserSetPublicLevels())
@@ -487,7 +489,7 @@ function taskEdit($task=NULL)
         {
             if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
                 $tab_group->add($tab=new Page_Tab("internal",__("Internal")));
-                $tab->add($task->fields['calculation']->getFormElement(&$task));
+                $tab->add($task->fields['calculation']->getFormElement($task));
             }
         }
 
@@ -501,7 +503,7 @@ function taskEdit($task=NULL)
         }
 
 
-        $form->add($task->fields['parent_task']->getFormElement(&$task));
+        $form->add($task->fields['parent_task']->getFormElement($task));
 
 
         #echo "<input type=hidden name='tsk' value='$task->id'>";
