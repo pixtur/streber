@@ -651,7 +651,7 @@ function asSearchQuery($str) {
 
 function asMatchString($str) {
     #return preg_replace("/[^0-9A-Z_]/i",' ', $str); 
-    return preg_replace("/[\/\<\>\`_%&?\"\'()\[\]]/",' ', $str); 
+    return preg_replace("/[\/\<\>\`\´_%&?\"\'()\[\]]/",' ', $str); 
 }
 
 function asIdentifier($str) {
@@ -660,7 +660,7 @@ function asIdentifier($str) {
 
 function asCleanString($str)
 {
-    return preg_replace("/[\\\<\>\`\´\"]/",'',$str);
+    return preg_replace("/[\\\<\>\`\´\"']/",'',$str);
 }
 
 
@@ -817,7 +817,7 @@ function sortObjectsRecursively(&$obj_with_children, &$list, $level=0)
 
     foreach($obj_with_children->children as $id => $child) {
         if($child->id) {
-            sortObjectsRecursively(&$child, &$list, $level+1);
+            sortObjectsRecursively($child, $list, $level+1);
         }
     }
     return $list;
