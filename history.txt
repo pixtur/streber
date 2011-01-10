@@ -1,5 +1,16 @@
 streber-version-history
 
+rev508
+- fixed Inline editing break #8396
+- updated some language glitches
+- added some functions to delete spam comments
+- implemented deleting of person (e.g. disable login and remove from all projects)
+
+
+
+v0.092 / rev507
+- fixed SQL injection 
+- fixed passing by reference warning with PHP 5.3
 
 rev503
 - refactored DateTime field parsing

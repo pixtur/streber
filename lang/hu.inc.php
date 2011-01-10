@@ -511,7 +511,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Személy szerkesztése',  # line 110
 
 ### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'Felhasználó jogainak szerkesztése',  # line 1016
+'Edit user rights'            =>'Felhasználó jogainak szerkesztése',  # line 1016
 
 ### ../lists/list_persons.inc.php   ###
 'Delete person'               =>'Személy törlése',  # line 123
@@ -1273,7 +1273,7 @@ $g_lang_table= array(
 'Add existing companies to this person'=>'',  # line 517
 'Edit this person|Tooltip for page function'=>'',  # line 528
 'Profile|Page function edit person'=>'',  # line 529
-'Edit User Rights|Tooltip for page function'=>'',  # line 536
+'Edit user rights|Tooltip for page function'=>'',  # line 536
 'User Rights|Page function for edit user rights'=>'',  # line 537
 'Mark this person as bookmark'=>'',  # line 545
 'notification:'               =>'értesítés:',  # line 559
@@ -1869,7 +1869,7 @@ $g_lang_table= array(
 'Create & Edit Persons|a user right'=>'Személyeket hozhat létre és szerkesztheti azokat',  # line 91
 'Delete Persons|a user right' =>'Személyeket törölhet',  # line 92
 'View all Persons|a user right'=>'Láthatja az összes személyt',  # line 93
-'Edit User Rights|a user right'=>'Felhasználói jogokat szerkesztheti',  # line 94
+'Edit user rights|a user right'=>'Felhasználói jogokat szerkesztheti',  # line 94
 'Edit Own Profil|a user right'=>'Saját profilját szerkesztheti',  # line 95
 'Create Companies|a user right'=>'Cégeket hozhat létre',  # line 97
 'Edit Companies|a user right' =>'Szerkeszthet cégeket',  # line 98

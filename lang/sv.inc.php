@@ -384,7 +384,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Ändra användare',  # line 100
 
 ### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'Ändra rättigheter',  # line 653
+'Edit user rights'            =>'Ändra rättigheter',  # line 653
 
 ### ../lists/list_persons.inc.php   ###
 'Delete person'               =>'Radera användare',  # line 113
@@ -891,7 +891,7 @@ $g_lang_table= array(
 'admin view|Page title add on if admin'=>'Admin vy',  # line 140
 'Edit this person|Tooltip for page function'=>'Ändra användare',  # line 234
 'Profile|Page function edit person'=>'Profil',  # line 235
-'Edit User Rights|Tooltip for page function'=>'Ändra Användarrättigheter',  # line 241
+'Edit user rights|Tooltip for page function'=>'Ändra Användarrättigheter',  # line 241
 'User Rights|Page function for edit user rights'=>'Användarrättigheter',  # line 242
 
 ### ../pages/task.inc.php   ###
@@ -1336,7 +1336,7 @@ $g_lang_table= array(
 'Create & Edit Persons|a user right'=>'Skapa & ändra användare',  # line 70
 'Delete Persons|a user right' =>'Radera användare',  # line 71
 'View all Persons|a user right'=>'Visa alla användare',  # line 72
-'Edit User Rights|a user right'=>'Ändra rättigheter',  # line 73
+'Edit user rights|a user right'=>'Ändra rättigheter',  # line 73
 'Edit own profile|a user right'=>'Ändra profil',  # line 74
 'Create Companies|a user right'=>'Skapa företag',  # line 76
 'Edit Companies|a user right' =>'Ändra företag',  # line 77
@@ -2622,7 +2622,7 @@ $g_lang_table= array(
 'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Lägg till uppgift för denna användare (valfritt att skapa projekt och försök direkt)',  # line 706
 'Add note|Page function person'=>'Lägg till anteckning',  # line 707
 'Edit profile|Page function edit person'=>'Ändra profil',  # line 721
-'Edit user Rights|Page function for edit user rights'=>'Ändra användarrättigheter',  # line 729
+'Edit user rights|Page function for edit user rights'=>'Ändra användarrättigheter',  # line 729
 'Authentication with|form label'=>'Autentisera med',  # line 2152
 
 ### ../pages/project_more.inc.php   ###

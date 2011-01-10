@@ -126,7 +126,7 @@ $g_lang_table= array(
 'View Person'                 =>'Visualizar Usuários',
 'New person'                  =>'Novo Usuário',
 'Edit Person'                 =>'Editar Usuário',
-'Edit User Rights'            =>'Editar Direitos de Usuário',
+'Edit user rights'            =>'Editar Direitos de Usuário',
 'Delete Person'               =>'Eliminar Usuário',
 'View Efforts of Person'      =>'Visializar Esforço de Usuário',
 'Login'                       =>'Conectar',
@@ -844,7 +844,7 @@ $g_lang_table= array(
 'admin view|Page title add on if admin'=>'visão de Admin|Título de página adicional se Admin',
 'Edit this person|Tooltip for page function'=>'Editar essa pessoa|Dicas para página de função',
 'Profile|Page function edit person'=>'Perfil|Função de página editar pessoa',
-'Edit User Rights|Tooltip for page function'=>'Editar direitos de Usuário|Dicas para página de função',
+'Edit user rights|Tooltip for page function'=>'Editar direitos de Usuário|Dicas para página de função',
 'User Rights|Page function for edit user rights'=>'Direitos de Usuário|Função de página editar direitos de usuário',
 
 ### ../pages/task.inc   ###
@@ -1021,7 +1021,7 @@ $g_lang_table= array(
 'Edit Presons|a user right'   =>'Editar Usuários|um direito de usuário',
 'Delete Persons|a user right' =>'Deletar Usuários|um direito de usuário',
 'View all Persons|a user right'=>'Ver todos os usuários|um direito de usuário',
-'Edit User Rights|a user right'=>'Editar Direitos de Usuários|um direito de usuário',
+'Edit user rights|a user right'=>'Editar Direitos de Usuários|um direito de usuário',
 'Edit own profile|a user right'=>'Editar Próprio Perfil|Edite Próprio Perfil',
 'Create Companies|a user right'=>'Criar Companhias|Edite Próprio Perfil',
 'Edit Companies|a user right' =>'Editar Companhias|Edite Próprio Perfil',

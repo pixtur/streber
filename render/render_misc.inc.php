@@ -704,10 +704,6 @@ function build_companyList_options()
 }
 
 
-
-
-
-
 function build_projList_options()
 {
     return array(
@@ -728,6 +724,31 @@ function build_projList_options()
 }
 
 
+function build_person_options(&$person) {
+
+    return array(
+        new NaviOption(array(
+            'target_id'=>'personViewProjects',
+            'name'=>__('Projects'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+        new NaviOption(array(
+            'target_id'=>'personViewTasks',
+            'name'=>__('Tasks'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+        new NaviOption(array(
+            'target_id'=>'personViewEfforts',
+            'name'=>__('Efforts'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+        new NaviOption(array(
+            'target_id'=>'personViewChanges',
+            'name'=>__('Changes'),
+            'target_params'=>array('person'=>$person->id )
+        )),
+    );
+}
 
 
 

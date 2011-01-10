@@ -407,7 +407,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Modifica persona',  # line 100
 
 ### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'Modifica permessi utente',  # line 653
+'Edit user rights'            =>'Modifica permessi utente',  # line 653
 
 ### ../lists/list_persons.inc.php   ###
 'Delete person'               =>'Elimina persona',  # line 113
@@ -914,7 +914,7 @@ $g_lang_table= array(
 'admin view|Page title add on if admin'=>'Vista dell`amministratore',  # line 140
 'Edit this person|Tooltip for page function'=>'Modifica questa persona',  # line 234
 'Profile|Page function edit person'=>'Profilo',  # line 235
-'Edit User Rights|Tooltip for page function'=>'Modifica i permessi utenti',  # line 241
+'Edit user rights|Tooltip for page function'=>'Modifica i permessi utenti',  # line 241
 'User Rights|Page function for edit user rights'=>'Permessi utente',  # line 242
 
 ### ../pages/task.inc.php   ###
@@ -1361,7 +1361,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Create & Edit Persons|a user right'=>'Crea & Modifica Persone',  # line 70
 'Delete Persons|a user right' =>'Elimina Persone',  # line 71
 'View all Persons|a user right'=>'Mostra tutte le Persone',  # line 72
-'Edit User Rights|a user right'=>'Modifica Permessi Utente',  # line 73
+'Edit user rights|a user right'=>'Modifica Permessi Utente',  # line 73
 'Edit Own Profil|a user right'=>'Modifica il proprio Profilo',  # line 74
 'Create Companies|a user right'=>'Crea Aziende',  # line 76
 'Edit Companies|a user right' =>'Modifica Aziende',  # line 77

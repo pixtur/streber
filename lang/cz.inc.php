@@ -427,7 +427,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Upravit osobu',
 
 ### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'Upravit používatelské prístupy',
+'Edit user rights'            =>'Upravit používatelské prístupy',
 
 ### ../lists/list_persons.inc.php   ###
 'Delete person'               =>'Smazat osobu',
@@ -945,7 +945,7 @@ $g_lang_table= array(
 'admin view|Page title add on if admin'=>'admin zobrazení',
 'Edit this person|Tooltip for page function'=>'Upravit tuto osobu',
 'Profile|Page function edit person'=>'Profil',
-'Edit User Rights|Tooltip for page function'=>'Upravit uživatelská práva',
+'Edit user rights|Tooltip for page function'=>'Upravit uživatelská práva',
 'User Rights|Page function for edit user rights'=>'Uživatelská práva',
 
 ### ../pages/task.inc.php   ###
@@ -1401,7 +1401,7 @@ $g_lang_table= array(
 'Create & Edit Persons|a user right'=>'Vytvořit a upravit osoby',
 'Delete Persons|a user right' =>'Odstranit osoby',
 'View all Persons|a user right'=>'Zobrazit všechny osoby',
-'Edit User Rights|a user right'=>'Upravit práva prístupu',
+'Edit user rights|a user right'=>'Upravit práva prístupu',
 'Edit Own Profil|a user right'=>'Upravit vlastný profil',
 'Create Companies|a user right'=>'Vytvořit firmy',
 'Edit Companies|a user right' =>'Upravit firmy',

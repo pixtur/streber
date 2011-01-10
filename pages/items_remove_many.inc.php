@@ -97,13 +97,13 @@ function itemsRemoveMany()
         {
             $form->add( new Form_DateTime(
                 'time_start',
-                __('starting_at'),
+                __('starting at','label for time filter'),
                 getGMTString(time() - 7*24*60*60)
             ));
 
             $form->add( new Form_DateTime(
                 'time_end',
-                __('starting_at'),
+                __('ending at','label for time filter'),
                 getGMTString(time() + 60*60)
             ));
         }

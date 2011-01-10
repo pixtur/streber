@@ -433,7 +433,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Muokkaa henkilöä',  # line 103
 
 ### ../pages/_handles.inc.php   ###
-'Edit User Rights'            =>'Muokkaa käyttöoikeuksia',  # line 922
+'Edit user rights'            =>'Muokkaa käyttöoikeuksia',  # line 922
 
 ### ../lists/list_persons.inc.php   ###
 'Delete person'               =>'Poista henkilö',  # line 116
@@ -1048,7 +1048,7 @@ $g_lang_table= array(
 'Note|Page function person'   =>'Muistio',  # line 475
 'Edit this person|Tooltip for page function'=>'Muokkaa tätä henkilöä',  # line 485
 'Profile|Page function edit person'=>'Profiili',  # line 486
-'Edit User Rights|Tooltip for page function'=>'Muokkaa käyttäjäoikeuksia',  # line 492
+'Edit user rights|Tooltip for page function'=>'Muokkaa käyttäjäoikeuksia',  # line 492
 'User Rights|Page function for edit user rights'=>'Käyttäjäoikeudet',  # line 493
 'notification:'               =>'huomautus:',  # line 496
 
@@ -1641,7 +1641,7 @@ $g_lang_table= array(
 'Create & Edit Persons|a user right'=>'Luo ja muokkaa henkilöitä',  # line 85
 'Delete Persons|a user right' =>'Poista henkilöitä',  # line 86
 'View all Persons|a user right'=>'Näytä kaikki henkilöt',  # line 87
-'Edit User Rights|a user right'=>'Muokkaa käyttäjätasoja',  # line 88
+'Edit user rights|a user right'=>'Muokkaa käyttäjätasoja',  # line 88
 'Edit Own Profil|a user right'=>'Muokkaa omaa profiilia',  # line 89
 'Create Companies|a user right'=>'Luo yrityksiä',  # line 91
 'Edit Companies|a user right' =>'Muokkaa yrityksiä',  # line 92

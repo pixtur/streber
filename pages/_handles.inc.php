@@ -1037,7 +1037,7 @@ new PageHandle(array('id'=>'personList',
 
 
 new PageHandle(array('id'=>'personView',
-    'req'=>'pages/person.inc.php',
+    'req'=>'pages/person_view.inc.php',
     'title'=>__('View Person'),
 
     'test'=>'yes',
@@ -1069,7 +1069,7 @@ new PageHandleSubm(array('id'=>'personEditSubmit',
 new PageHandleForm(array('id'=>'personEditRights',
     'rights_required'=>RIGHT_PERSON_EDIT_RIGHTS,
     'req'=>'pages/person.inc.php',
-    'title'=>__('Edit User Rights'),
+    'title'=>__('Edit user rights'),
 
     'test'=>'yes',
     'test_params'=>array('person'=>'_personEdit_',),      # test aborts / not enough params
@@ -1081,7 +1081,7 @@ new PageHandleSubm(array('id'=>'personEditRightsSubmit',
 ));
 
 new PageHandleFunc(array('id'=>'personDelete',
-    'req'=>'pages/person.inc.php',
+    'req'=>'pages/person_delete.inc.php',
     'title'=>__('Delete Person'),
     'rights_required'=>RIGHT_PERSON_DELETE,
 ));
@@ -1139,7 +1139,7 @@ new PageHandle(array('id'=>'personViewChanges',
 ));
 new PageHandleFunc(array('id'=>'personSendActivation',
     'req'       =>'pages/person.inc.php',
-    'title'     =>__('Send Activation E-Mail'),
+    'title'     =>__('Send Activation'),
     'rights_required'=>RIGHT_PERSON_EDIT_SELF,
 
     'test'=>'complex',
@@ -1147,7 +1147,7 @@ new PageHandleFunc(array('id'=>'personSendActivation',
 ));
 new PageHandleFunc(array('id'=>'personsFlushNotifications',
     'req'       =>'pages/person.inc.php',
-    'title'     =>__('Flush Notifications'),
+    'title'     =>__('Send Notifications'),
     'rights_required'=>RIGHT_PERSON_EDIT,
 ));
 

@@ -116,7 +116,12 @@ function renderRemovalPreviewItem($comment)
     echo "<li>";
     echo "<input checked type=checkbox value='{$comment->id}' name='item_{$comment->id}'>";
     echo "<label for='item_{$comment->id}'>";
-    echo $comment->getLink();
+    echo $comment->getLink(); 
+
+    if( $creator= Person::getVisibleById($comment->created_by) ) {
+        echo sprintf( __("by %s", "as in created by"), $creator->getLink());        
+    }
+    echo "<br>";
     echo " <small>" . asHtml($comment->description) . "</small>";
     echo "</label>";
     echo "</li>";

@@ -780,7 +780,7 @@ undefined keys:
 'Create & Edit Persons|a user right'=>'',
 'Delete Persons|a user right' =>'',
 'View all Persons|a user right'=>'',
-'Edit User Rights|a user right'=>'',
+'Edit user rights|a user right'=>'',
 'Edit own profile|a user right'=>'',
 'Create Companies|a user right'=>'',
 'Edit Companies|a user right' =>'',

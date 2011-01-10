@@ -24,7 +24,7 @@ class ProjectNewsBlock extends PageBlock
         parent::__construct(NULL);
         $this->project = $project;
         $this->title = __('Project News');
-        $this->id = __('project_news');
+        $this->id = 'project_news';
     }
 
     public function __toString()

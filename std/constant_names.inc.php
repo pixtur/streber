@@ -95,7 +95,7 @@ $g_user_right_names=array(
     RIGHT_PERSON_EDIT        =>__('Create & Edit Persons', 'a user right'),
     RIGHT_PERSON_DELETE      =>__('Delete Persons', 'a user right'),
     RIGHT_PERSON_VIEWALL     =>__('View all Persons', 'a user right'),
-    RIGHT_PERSON_EDIT_RIGHTS =>__('Edit User Rights', 'a user right'),
+    RIGHT_PERSON_EDIT_RIGHTS =>__('Edit user rights', 'a user right'),
     RIGHT_PERSON_EDIT_SELF   =>__('Edit own profile', 'a user right'),
 
     RIGHT_COMPANY_CREATE     =>__('Create Companies', 'a user right'),

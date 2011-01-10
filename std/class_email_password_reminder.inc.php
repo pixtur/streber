@@ -49,7 +49,7 @@ class EmailPasswordReminder extends Email
                 . sprintf(__('Your account at %s is still active.','notification'), "<a href='" . $this->url ."'>" . confGet('SELF_DOMAIN')."</a>") . "\n"
                 . __('Your login name is','notification') . " '" . asHtml($this->recipient->nickname) . "'.\n"
                 . "\n"
-                . __('Please use this link the following link to update your account settings:')  . "\n"
+                . __('Please use the following link to update your account settings:')  . "\n"
                 . $this->url . "?go=activateAccount&tuid=" . $this->recipient->identifier . "\n"
                 . "\n"
                 . "\n"

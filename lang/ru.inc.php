@@ -119,7 +119,7 @@ global $g_lang_table;$g_lang_table= array(
                               => 'Редактировать профиль пользователя', #528
 'Profile|Page function edit person'
                               => 'Профиль',                        #529
-'Edit User Rights|Tooltip for page function'
+'Edit user rights|Tooltip for page function'
                               => 'Назначение прав пользователя',   #536
 'User Rights|Page function for edit user rights'
                               => 'Права пользователя',             #537
@@ -895,7 +895,7 @@ global $g_lang_table;$g_lang_table= array(
                               => 'Создаваь и Редактировать профили пользователей', #91
 'Delete Persons|a user right' => 'Удалять профили пользователей',  #92
 'View all Persons|a user right'=> 'Просмотр всех профилей',         #93
-'Edit User Rights|a user right'=> 'Назначение прав пользователей',  #94
+'Edit user rights|a user right'=> 'Назначение прав пользователей',  #94
 'Edit Own Profil|a user right'=> 'Редактировать собственный профиль', #95
 'Create Companies|a user right'=> 'Создавать компании',             #97
 'Edit Companies|a user right' => 'Редактировать компании',         #98
@@ -1398,7 +1398,7 @@ global $g_lang_table;$g_lang_table= array(
 'Remove bookmark'             => 'Удалить закладку',               #52
 'Mark as bookmark'            => 'Поменить закладкой',             #45
 'Edit file'                   => 'редактировать файл',             #811
-'Edit User Rights'            => 'Определение прав пользователей', #1016
+'Edit user rights'            => 'Определение прав пользователей', #1016
 'Create Template'             => 'Создать Шаблон',                 #262
 'Project from Template'       => 'Проект из Шаблона',              #270
 'Home'                        => 'Главная',                        #7
@@ -2218,7 +2218,7 @@ global $g_lang_table;$g_lang_table= array(
 'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Добавить задачу для текущего пользователя (опционально на лету создаются проект и задания)',  # line 627
 'Add note|Page function person'=>'Добавить заметку',  # line 628
 'Edit profile|Page function edit person'=>'Изменить профиль',  # line 642
-'Edit user Rights|Page function for edit user rights'=>'Изменить права пользователя',  # line 650
+'Edit user rights|Page function for edit user rights'=>'Изменить права пользователя',  # line 650
 'Authentication with|form label'=>'Авторизация с',  # line 2072
 'Updated settings for %s.'    =>'Настройки для %s обновлены.',  # line 2673
 

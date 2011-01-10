@@ -226,7 +226,7 @@ undefined keys:
 'Add note|Page function person'=>'',
 'Add existing companies to this person'=>'',
 'Edit profile|Page function edit person'=>'',
-'Edit user Rights|Page function for edit user rights'=>'',
+'Edit user rights|Page function for edit user rights'=>'',
 'Mark this person as bookmark'=>'',
 'Last login|Label'            =>'',
 'link existing Company'       =>'',

@@ -113,7 +113,7 @@ class ListBlock_persons extends ListBlock
         )));
         $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('personEditRights')->id,
-            'name'  =>__('Edit User Rights'),
+            'name'  =>__('Edit user rights'),
             'id'    =>'personEditRights',
             'context_menu'=>'submit',
         )));

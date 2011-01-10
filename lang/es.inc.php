@@ -411,7 +411,7 @@ $g_lang_table= array(
 'Edit person'                 =>'Editar persona',
 
 
-'Edit User Rights'            =>'Editar permisos de usuario',
+'Edit user rights'            =>'Editar permisos de usuario',
 
 
 'Delete person'               =>'Eliminar persona',
@@ -920,7 +920,7 @@ $g_lang_table= array(
 'admin view|Page title add on if admin'=>'vista administrador',
 'Edit this person|Tooltip for page function'=>'Editar esta persona',
 'Profile|Page function edit person'=>'Perfil',
-'Edit User Rights|Tooltip for page function'=>'Editar derechos de usuario',
+'Edit user rights|Tooltip for page function'=>'Editar derechos de usuario',
 'User Rights|Page function for edit user rights'=>'Derechos de Usuario',
 
 
@@ -1362,7 +1362,7 @@ $g_lang_table= array(
 'Create & Edit Persons|a user right'=>'Crear y Editar Personas',
 'Delete Persons|a user right' =>'Borrar Personas',
 'View all Persons|a user right'=>'Ver todas las personas',
-'Edit User Rights|a user right'=>'Editar Derechos de Usuarios',
+'Edit user rights|a user right'=>'Editar Derechos de Usuarios',
 'Edit Own Profil|a user right'=>'Editar propio Perfil',
 'Create Companies|a user right'=>'Crear Compañías',
 'Edit Companies|a user right' =>'Editar Compañías',

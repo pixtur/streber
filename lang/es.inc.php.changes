@@ -124,7 +124,7 @@ undefined keys:
 'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'',
 'Add note|Page function person'=>'',
 'Edit profile|Page function edit person'=>'',
-'Edit user Rights|Page function for edit user rights'=>'',
+'Edit user rights|Page function for edit user rights'=>'',
 'Last login|Label'            =>'',
 'Projects|Page title add on'  =>'',
 'Tasks|Page title add on'     =>'',

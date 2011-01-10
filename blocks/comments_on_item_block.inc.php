@@ -15,7 +15,7 @@ require_once(confGet('DIR_STREBER') . "render/render_list_column_special.inc.php
 
 
 /**
-* provide front-end for rendering and manimpulating lists
+* provide front-end for rendering and manipulating lists
 *
 * usage:
 *
@@ -60,20 +60,16 @@ class CommentsOnItemBlock extends PageBlock
 
             
             ### own comment
-            $is_own_comment= ($auth->cur_user->user_rights & RIGHT_EDITALL) || ($c->created_by == $auth->cur_user->id);
+            $is_comment_editable= ($auth->cur_user->user_rights & RIGHT_EDITALL) || ($c->created_by == $auth->cur_user->id);
 
 
             if(! $creator= Person::getVisibleById($c->created_by) ) {
                 continue;
             }
-            
-
-            
+                        
             echo "<div class='post_list_entry'>";
-
-            #echo "<div class=newsTitle><h3>".$PH->getLink('taskView', $n->name , array('tsk' => $n->id)) ."</h3><span class=author>". renderDateHtml($n->created) . $link_creator . "</span></div>";
             echo "<h3>";
-            if($is_own_comment) {
+            if($c->created_by == $auth->cur_user->id) {
                 echo $creator->nickname;
             } 
             else {
@@ -102,7 +98,7 @@ class CommentsOnItemBlock extends PageBlock
                 $versions= ItemVersion::getFromItem($c);
                 if(count($versions) > 1) {
                                     echo " (" . $PH->getLink('itemViewDiff', 
-                                        sprintf(__("%s. update"), count($versions)), 
+                                        sprintf(__("%s. update", "like in... Nth update"), count($versions)), 
                                         array('item' => $c->id)
                                     ); 
                                     echo " " . renderTimeAgo($c->modified);
@@ -128,14 +124,14 @@ class CommentsOnItemBlock extends PageBlock
 
 
             ### delete
-            if( $is_own_comment) {
+            if( $is_comment_editable) {
                 echo " - " .  $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$c->id));
             }
 
 
             echo "</p>";
             
-            if($is_own_comment) {
+            if($is_comment_editable) {
                 echo wikifieldAsHtml($c, 'description');
             }
             else {
