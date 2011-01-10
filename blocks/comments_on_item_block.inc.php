@@ -77,7 +77,7 @@ class CommentsOnItemBlock extends PageBlock
             }
             
             echo "<span class=separator>:</span>";
-            echo $c->name;
+            echo asHtml($c->name);
 
             if($new= $c->isChangedForUser()) {
                 if($new == 1) {

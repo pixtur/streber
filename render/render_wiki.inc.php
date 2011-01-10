@@ -1087,7 +1087,7 @@ class FormatBlockLink extends FormatBlock
             $target_url = str_replace( "&amp;" , "&", asHtml($target));
                     
             if($this->name) {
-                $this->html= "<a class=extern title='" . asHtml($this->target).  "' href='". $type. "://" . $target_url . "'>" . asHtml($this->name) . "</a>";
+                $this->html= "<a rel='nofollow' class=extern title='" . asHtml($this->target).  "' href='". $type. "://" . $target_url . "'>" . asHtml($this->name) . "</a>";
             }
             else {
                 $this->html= "<a  class=extern  title='" . asHtml($this->target).  "' href='". $type. "://" . $target_url . "'>" . asHtml($this->target) . "</a>";

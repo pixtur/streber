@@ -1,10 +1,16 @@
 streber-version-history
 
+rev509
+- added ref="nofollow" attribute to external links
+- fixed html escape for comment headlines
+
 rev508
 - fixed Inline editing break #8396
 - updated some language glitches
 - added some functions to delete spam comments
 - implemented deleting of person (e.g. disable login and remove from all projects)
+- fixed comment author link for admins
+- some refactoring of page functions
 
 
 
