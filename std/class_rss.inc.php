@@ -120,7 +120,7 @@ class RSS
                 
                 switch($ch->type) {
                     case ChangeLine::COMMENTED:
-                        $feeditem->description = $ch->html_comment;
+                        $feeditem->description = $ch->html_details;
                         
                         break;
                         
@@ -129,7 +129,7 @@ class RSS
                         break;
                         
                     default:
-                        $feeditem->description = $ch-type . " " . str_replace("\n", "<br>", $item->description );
+                        $feeditem->description = $ch->type . " " . str_replace("\n", "<br>", $item->description );
                         break;
                 }
 

@@ -852,8 +852,12 @@ function getSpamProbability($str) {
 
 function isSpam($str) 
 {
-    if( getSpamProbability($str) > confGet('REJECT_SPAM_CONTENT') )  {
-        return true;
+    $probability = getSpamProbability($str);
+    if( $probability > confGet('REJECT_SPAM_CONTENT') )  {
+        return $probability;
+    }
+    else {
+        return 0;
     }
 }
 
@@ -867,7 +871,7 @@ function validateNotSpam($str)
         && $auth->cur_user->id == confGet('ANONYMOUS_USER') 
         && isSpam($str)
     ) {
-        log_message(sprintf("rejected spam comment from %s with %s", getServerVar('REMOTE_ADDR'), $propability),  LOG_MESSAGE_HACKING_ALERT);
+        log_message(sprintf("rejected spam comment from %s with %s", getServerVar('REMOTE_ADDR'), getSpamProbability($str)),  LOG_MESSAGE_HACKING_ALERT);
         $PH->abortWarning(__("Comment has been rejected, because it looks like spam.") );
     }
 }

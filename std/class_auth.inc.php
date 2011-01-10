@@ -576,18 +576,9 @@ class Auth
             "/MetaWeb Crawler/", #(FAST MetaWeb Crawler (helpdesk at fastsearch dot com)) 
             "/ia_archiver/", #(ia_archiver)
             "/SeznamBot/", #(SeznamBot/1.0 (+http://fulltext2.seznam.cz/))
-            #"", #(Feedfetcher-Google; (+http://www.google.com/feedfetcher.html; 7 subscribers; feed-id=14943301623292076042))
             "/Speedy Spider/", #(Speedy Spider (Entireweb; Beta/1.1; http://www.entireweb.com/about/search_tech/speedyspider/)) 
             "/MJ12bot/", #(MJ12bot/v1.2.0 (http://majestic12.co.uk/bot.php?+))
             "/Gigabot/", #(Gigabot/2.0)
-            #"", #(Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07))
-            #"", #(nestReader/0.2 (discovery; http://echonest.com/reader.shtml; reader at echonest.com))
-            #"", #(bot/1.0 (bot; http://; bot@bot.bot))
-            #"", #(JobSpider_BA/1.1)
-            #"", #(StackRambler/2.0 (MSIE incompatible))
-            #"", #(www.clamav.net)
-            #"", #(Page2RSS/0.2)
-            #"", #(psbot/0.1 (+http://www.picsearch.com/bot.html)) 
             '/ Charlotte\/?.?/',  #Mozilla/5.0 (compatible; Charlotte/1.1; http://www.searchme.com/support/)
             "/http:\/\/discoveryengine.com\/discobot.html/", #Mozilla/5.0 (compatible; discobot/1.0; +http://discoveryengine.com/discobot.html)
             "/Twiceler/",
@@ -600,6 +591,14 @@ class Auth
             "/Yandex/",
             "/\.NET CL/",#(Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729;  SLCC1;  .NET CLR 1.1.4325;  .NET CLR 2.0.40607;  .NET CLR 3.0.30729;  .NET CLR 3.5.30707;  MS-RTC LM 8)) 
             "/Yeti/",
+            "/VoilaBot BETA/",
+            "/Exabot-Thumbnails/",
+            "/HappyFunBot/",
+            "/MLBot/",
+            "/seoprofiler/",
+            "/Purebot/",
+            "/bingbot/",
+            "/archive.org_bot/"
         );
         foreach($crawlers as $c) {
             if(preg_match($c, $agent)) {

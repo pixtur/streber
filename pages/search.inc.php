@@ -180,7 +180,7 @@ class SearchResult extends BaseObject
     static function getForQuery($search_query, $project=NULL)
     {
         $count_overall=0;
-        $resuts=array();
+        $results=array();
         global $PH;
 
 
@@ -493,7 +493,6 @@ class SearchResult extends BaseObject
 
             $count_overall+= count($efforts);
         }
-
 
         return $results;
     }

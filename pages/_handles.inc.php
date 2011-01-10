@@ -1152,14 +1152,14 @@ new PageHandleFunc(array('id'=>'personsFlushNotifications',
 ));
 
 new PageHandleForm(array('id'=>'personRegister',
-    'req'       =>'pages/person.inc.php',
+    'req'       =>'pages/person_register.inc.php',
     'title'     =>__('Register'),
     'test'=>'yes',
 
     'cleanurl'  => 'register',
 ));
 new PageHandleSubm(array('id'=>'personRegisterSubmit',
-    'req'       =>'pages/person.inc.php',
+    'req'       =>'pages/person_register_submit.inc.php',
     'test'=>'yes',
 ));
 new PageHandle(array('id'=>'personLinkCompanies',

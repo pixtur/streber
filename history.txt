@@ -1,5 +1,14 @@
 streber-version-history
 
+rev510
+- fixed invalid probabality warning
+- fixed unknown variable warning
+- fixed type warning
+- fixed html_commment warning
+- disable csv export for non-priveledged users
+- added some bot definitions
+
+
 rev509
 - added ref="nofollow" attribute to external links
 - fixed html escape for comment headlines
