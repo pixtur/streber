@@ -286,7 +286,7 @@ class ListBlock_projects extends ListBlock
         }
 
         $projects= Project::getAll($this->query_options);
-        $this->render_list(&$projects);
+        $this->render_list($projects);
     }
 }
 

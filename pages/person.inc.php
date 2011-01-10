@@ -388,8 +388,8 @@ function personList()
         else {
             $list->no_items_html=__("no related persons");
         }
-        #$list->render_list(&$persons);
-        $list->print_automatic(&$persons);
+        #$list->render_list($persons);
+        $list->print_automatic($persons);
 
         ## Link to start cvs export ##
         $format = get('format');
@@ -472,8 +472,8 @@ function personList()
         else {
             $list->no_items_html=__("no related persons");
         }
-        #$list->render_list(&$persons);
-        $list->print_automatic(&$persons);
+        #$list->render_list($persons);
+        $list->print_automatic($persons);
 
         ## Link to start cvs export ##
         $format = get('format');
@@ -555,8 +555,8 @@ function personList()
         else {
             $list->no_items_html=__("no related persons");
         }
-        #$list->render_list(&$persons);
-        $list->print_automatic(&$persons);
+        #$list->render_list($persons);
+        $list->print_automatic($persons);
 
         ## Link to start cvs export ##
         $format = get('format');
@@ -789,7 +789,7 @@ function personView()
             $list->no_items_html=__("no companies related");
         }
         #$list->no_items_html=__("no company");
-        $list->render_list(&$companies);
+        $list->render_list($companies);
     }
 
     echo(new PageContentNextCol);
@@ -850,7 +850,7 @@ function personView()
                 $list->no_items_html=__("no active projects");
             }
 
-            $list->render_list(&$projects);
+            $list->render_list($projects);
         }
     }
 
@@ -1054,7 +1054,7 @@ function personViewProjects()
         $list->query_options['person'] = $person->id;
         $list->print_automatic();
         
-        //$list->render_list(&$efforts);
+        //$list->render_list($efforts);
     }
     
     echo '<input type="hidden" name="person" value="'.$person->id.'">';
@@ -2016,7 +2016,7 @@ function personEdit($person=NULL)
         $form=new PageForm();
         $form->button_cancel=true;
 
-        $form->add($person->fields['name']->getFormElement(&$person));
+        $form->add($person->fields['name']->getFormElement($person));
         
                 
         ### profile and login ###
@@ -2043,7 +2043,7 @@ function personEdit($person=NULL)
         ### account ###
         {
             $tab_group->add($tab=new Page_Tab("account",__("Account")));
-            $fnick=$person->fields['nickname']->getFormElement(&$person);
+            $fnick=$person->fields['nickname']->getFormElement($person);
             if($person->can_login) {
                 $fnick->required= true;
             }
@@ -2160,28 +2160,28 @@ function personEdit($person=NULL)
             $tab->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
 
 
-            $tab->add($person->fields['office_email']->getFormElement(&$person));
-            $tab->add($person->fields['mobile_phone']->getFormElement(&$person));
-            $tab->add($person->fields['office_phone']->getFormElement(&$person));
-            $tab->add($person->fields['office_fax']->getFormElement(&$person));
-            $tab->add($person->fields['office_street']->getFormElement(&$person));
-            $tab->add($person->fields['office_zipcode']->getFormElement(&$person));
-            $tab->add($person->fields['office_homepage']->getFormElement(&$person));
+            $tab->add($person->fields['office_email']->getFormElement($person));
+            $tab->add($person->fields['mobile_phone']->getFormElement($person));
+            $tab->add($person->fields['office_phone']->getFormElement($person));
+            $tab->add($person->fields['office_fax']->getFormElement($person));
+            $tab->add($person->fields['office_street']->getFormElement($person));
+            $tab->add($person->fields['office_zipcode']->getFormElement($person));
+            $tab->add($person->fields['office_homepage']->getFormElement($person));
 
-            $tab->add($person->fields['personal_email']->getFormElement(&$person));
-            $tab->add($person->fields['personal_phone']->getFormElement(&$person));
-            $tab->add($person->fields['personal_fax']->getFormElement(&$person));
-            $tab->add($person->fields['personal_street']->getFormElement(&$person));
-            $tab->add($person->fields['personal_zipcode']->getFormElement(&$person));
-            $tab->add($person->fields['personal_homepage']->getFormElement(&$person));
-            $tab->add($person->fields['birthdate']->getFormElement(&$person));
+            $tab->add($person->fields['personal_email']->getFormElement($person));
+            $tab->add($person->fields['personal_phone']->getFormElement($person));
+            $tab->add($person->fields['personal_fax']->getFormElement($person));
+            $tab->add($person->fields['personal_street']->getFormElement($person));
+            $tab->add($person->fields['personal_zipcode']->getFormElement($person));
+            $tab->add($person->fields['personal_homepage']->getFormElement($person));
+            $tab->add($person->fields['birthdate']->getFormElement($person));
         }
 
         ### description ###
         {
             $tab_group->add($tab=new Page_Tab("description",__("Description")));
 
-            $e= $person->fields['description']->getFormElement(&$person);
+            $e= $person->fields['description']->getFormElement($person);
             $e->rows=20;
             $tab->add($e);
         }
@@ -2235,7 +2235,7 @@ function personEdit($person=NULL)
         {
             if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
                 $tab_group->add($tab=new Page_Tab("internal",__("Internal")));
-                $tab->add($person->fields['salary_per_hour']->getFormElement(&$person));
+                $tab->add($person->fields['salary_per_hour']->getFormElement($person));
             }
         }
 
@@ -2365,7 +2365,7 @@ function personEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($person->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$person);
+        $f->parseForm($person);
     }
 
 
@@ -3064,27 +3064,27 @@ function personRegister($person=NULL)
         $form=new PageForm();
         $form->button_cancel=true;
 
-        $form->add($person->fields['name']->getFormElement(&$person));
+        $form->add($person->fields['name']->getFormElement($person));
 
-        $f= $person->fields['office_email']->getFormElement(&$person);
+        $f= $person->fields['office_email']->getFormElement($person);
         $f->required= true;
         $form->add($f);
 
-        #$form->add($person->fields['mobile_phone']->getFormElement(&$person));
-        #$form->add($person->fields['office_phone']->getFormElement(&$person));
-        #$form->add($person->fields['office_fax']->getFormElement(&$person));
-        #$form->add($person->fields['office_street']->getFormElement(&$person));
-        #$form->add($person->fields['office_zipcode']->getFormElement(&$person));
-        #$form->add($person->fields['office_homepage']->getFormElement(&$person));
+        #$form->add($person->fields['mobile_phone']->getFormElement($person));
+        #$form->add($person->fields['office_phone']->getFormElement($person));
+        #$form->add($person->fields['office_fax']->getFormElement($person));
+        #$form->add($person->fields['office_street']->getFormElement($person));
+        #$form->add($person->fields['office_zipcode']->getFormElement($person));
+        #$form->add($person->fields['office_homepage']->getFormElement($person));
 
-        #$form->add($person->fields['personal_email']->getFormElement(&$person));
-        #$form->add($person->fields['personal_phone']->getFormElement(&$person));
-        #$form->add($person->fields['personal_fax']->getFormElement(&$person));
-        #$form->add($person->fields['personal_street']->getFormElement(&$person));
-        #$form->add($person->fields['personal_zipcode']->getFormElement(&$person));
-        #$form->add($person->fields['personal_homepage']->getFormElement(&$person));
+        #$form->add($person->fields['personal_email']->getFormElement($person));
+        #$form->add($person->fields['personal_phone']->getFormElement($person));
+        #$form->add($person->fields['personal_fax']->getFormElement($person));
+        #$form->add($person->fields['personal_street']->getFormElement($person));
+        #$form->add($person->fields['personal_zipcode']->getFormElement($person));
+        #$form->add($person->fields['personal_homepage']->getFormElement($person));
 
-        #$form->add($person->fields['birthdate']->getFormElement(&$person));
+        #$form->add($person->fields['birthdate']->getFormElement($person));
 
 
         ### profile and login ###
@@ -3099,7 +3099,7 @@ function personRegister($person=NULL)
         #}
 
 
-        $fnick=$person->fields['nickname']->getFormElement(&$person);
+        $fnick=$person->fields['nickname']->getFormElement($person);
         $fnick->required= true;
         $form->add($fnick);
 
@@ -3164,7 +3164,7 @@ function personRegister($person=NULL)
             $form->add(new Form_Dropdown('person_time_zone', __("Time zone","form label"), $g_time_zones, $person->time_zone));
 
         }
-        $form->add($person->fields['description']->getFormElement(&$person));
+        $form->add($person->fields['description']->getFormElement($person));
 
         $form->addCaptcha();
 
@@ -3235,7 +3235,7 @@ function personRegisterSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($person->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$person);
+        $f->parseForm($person);
     }
 
     $person->can_login= 1;
@@ -3525,7 +3525,7 @@ function personLinkCompanies() {
         $list->show_functions = false;
         $list->show_icons = false;
 
-        $list->render_list(&$companies);
+        $list->render_list($companies);
 
         $PH->go_submit = 'personLinkCompaniesSubmit';
 

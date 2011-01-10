@@ -178,10 +178,10 @@ class CommentsOnItemBlock extends PageBlock
                 'name'=>$comment_name,
             ));
 
-            $e= $comment->fields['description']->getFormElement(&$comment,__('Comment'));
+            $e= $comment->fields['description']->getFormElement($comment,__('Comment'));
             $e->rows=8;
             $form->add($e);
-            $form->add($comment->fields['name']->getFormElement(&$comment,__('Summary')));
+            $form->add($comment->fields['name']->getFormElement($comment,__('Summary')));
 
 
             

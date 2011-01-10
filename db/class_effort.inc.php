@@ -46,7 +46,7 @@ class Effort extends DbProjectItem
     {
         global $effort_fields;
         $effort_fields=array();
-        addProjectItemFields(&$effort_fields);
+        addProjectItemFields($effort_fields);
     
                 foreach(array(
                     new FieldInternal(array(    'name'=>'id',

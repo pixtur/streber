@@ -671,8 +671,8 @@ class Block_task_quickedit extends PageBlock
                     'name'=>$comment_name,
                 ));
 
-                $tab->add($comment->fields['name']->getFormElement(&$comment,__('Comment')));
-                $e= $comment->fields['description']->getFormElement(&$comment);
+                $tab->add($comment->fields['name']->getFormElement($comment,__('Comment')));
+                $e= $comment->fields['description']->getFormElement($comment);
                 $e->rows=8;
                 $tab->add($e);
 
@@ -765,7 +765,6 @@ class Block_task_quickedit extends PageBlock
 
                 ### estimated ###
                 {
-                    #$tab->add($task->fields['estimated'    ]->getFormElement(&$task));
                     $ar= array(
                         __('undefined')=> 0,
                         __('30 min')    => 30*60,
@@ -777,7 +776,6 @@ class Block_task_quickedit extends PageBlock
                         __('3 Days')    =>   3 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
                         __('4 Days')    =>   4 * confGet('WORKHOURS_PER_DAY') * 60 * 60,
                         __('1 Week')   =>   1 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
-                        #__('1,5 Weeks')=> 1.5 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
                         __('2 Weeks')  =>   2 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
                         __('3 Weeks')  =>   3 * confGet('WORKDAYS_PER_WEEK') * confGet('WORKHOURS_PER_DAY') * 60 * 60,
                     );
@@ -807,7 +805,7 @@ class Block_task_quickedit extends PageBlock
                     $tab->add(new Form_Dropdown('task_completion',__("Completed"),$ar,  $task->completion));
                 }
 
-                $tab->add($task->fields['parent_task']->getFormElement(&$task));
+                $tab->add($task->fields['parent_task']->getFormElement($task));
 
 
                 ### status ###

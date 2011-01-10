@@ -48,7 +48,7 @@ class Employment extends DbProjectItem {
         $g_employment_fields=array();
         
         
-        addProjectItemFields(&$g_employment_fields);
+        addProjectItemFields($g_employment_fields);
         
         foreach(array(
             new FieldInternal(array(    'name'=>'id',

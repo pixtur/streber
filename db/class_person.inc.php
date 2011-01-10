@@ -52,7 +52,7 @@ class Person extends DbProjectItem {
     {
         global $g_person_fields;
         $g_person_fields=array();
-        addProjectItemFields(&$g_person_fields);
+        addProjectItemFields($g_person_fields);
     
         foreach(array(
             new FieldInternal(array(    'name'=>'id',

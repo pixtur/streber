@@ -30,7 +30,7 @@ class Task extends DbProjectItem
     public static function init()
     {
         #self::$type= ITEM_TASK;
-        addProjectItemFields(&self::$fields_static);
+        addProjectItemFields(self::$fields_static);
 
         foreach(array(
             new FieldInternal(array('name'=>'id',

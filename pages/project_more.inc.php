@@ -1733,62 +1733,8 @@ function ProjViewEfforts()
         $list->query_options['order_by'] = $order_by;
         $list->query_options['project'] = $project->id;
         $list->print_automatic();
-        //$list->render_list(&$efforts);
-
     }
     
-    /*if(($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
-        #--- list effort summary on team members --------------------------------------------------------------------
-        {
-            $list_effort_person = new ListBlock_effortsPerson();
-            $list_effort_person->query_options['project'] = &$project->id;
-            if($val1) $list_effort_person->query_options['effort_status_min'] = $val1;
-            if($val2) $list_effort_person->query_options['effort_status_max'] = $val2;
-            $list_effort_person->print_automatic();
-        }
-        
-        #--- list effort summary on tasks --------------------------------------------------------------------
-        {
-            $list_effort_tasks = new ListBlock_effortsTask();
-            $list_effort_tasks->query_options['project'] = &$project->id;
-            if($val1) $list_effort_tasks->query_options['effort_status_min'] = $val1;
-            if($val2) $list_effort_tasks->query_options['effort_status_max'] = $val2;
-            $list_effort_tasks->print_automatic();
-        }
-        
-        #--- list cost overview on person --------------------------------------------------------------------
-        {
-            if((confGet('INTERNAL_COST_FEATURE'))){
-                $list_effort_person_calc = new ListBlock_effortsPersonCalculation();
-                $list_effort_person_calc->query_options['project'] = &$project->id;
-                if($val1) $list_effort_person_calc->query_options['effort_status_min'] = $val1;
-                if($val2) $list_effort_person_calc->query_options['effort_status_max'] = $val2;
-                $list_effort_person_calc->print_automatic();
-            }
-        }
-        
-        #--- list cost overview on task --------------------------------------------------------------------
-        {       
-            if((confGet('INTERNAL_COST_FEATURE'))){
-                $list_effort_tasks_calc = new ListBlock_effortsTaskCalculation();
-                $list_effort_tasks_calc->query_options['project'] = &$project->id;
-                if($val1) $list_effort_tasks_calc->query_options['effort_status_min'] = $val1;
-                if($val2) $list_effort_tasks_calc->query_options['effort_status_max'] = $val2;
-                $list_effort_tasks_calc->print_automatic();
-            }
-        }
-        
-        #--- list cost overview for project --------------------------------------------------------------------
-        {       
-            if((confGet('INTERNAL_COST_FEATURE'))){
-                $list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
-                #$list_effort_proj_calc->query_options['project'] = &$project->id;
-                if($val1) $list_effort_proj_calc->query_options['effort_status_min'] = $val1;
-                if($val2) $list_effort_proj_calc->query_options['effort_status_max'] = $val2;
-                $list_effort_proj_calc->print_automatic(&$project);
-            }
-        }
-    }*/
     
     ### 'add new task'-field ###
     $PH->go_submit='taskNew';
@@ -1888,7 +1834,7 @@ function projViewEffortCalculations()
         {       
             if((confGet('INTERNAL_COST_FEATURE'))){
                 $list_effort_proj_calc = new ListBlock_effortsProjectCalculation();
-                $list_effort_proj_calc->print_automatic(&$project);
+                $list_effort_proj_calc->print_automatic($project);
             }
         }
     }
@@ -2088,7 +2034,7 @@ function projEdit($project=NULL)
         $form->button_cancel=true;
 
 
-        $form->add($project->fields['name']->getFormElement(&$project));
+        $form->add($project->fields['name']->getFormElement($project));
 
 
         $form->add($tab_group=new Page_TabGroup());
@@ -2108,9 +2054,9 @@ function projEdit($project=NULL)
 
             $tab->add(new Form_Dropdown('project_prio',  "Prio",array_flip($g_prio_names),$project->prio));
 
-            $tab->add($project->fields['projectpage']->getFormElement(&$project));
-            $tab->add($project->fields['date_start']->getFormElement(&$project));
-            $tab->add($project->fields['date_closed']->getFormElement(&$project));
+            $tab->add($project->fields['projectpage']->getFormElement($project));
+            $tab->add($project->fields['date_start']->getFormElement($project));
+            $tab->add($project->fields['date_closed']->getFormElement($project));
 
         }
 
@@ -2118,7 +2064,7 @@ function projEdit($project=NULL)
         {
             $tab_group->add($tab=new Page_Tab("description",__("Description")));
 
-            $e= $project->fields['description']->getFormElement(&$project);
+            $e= $project->fields['description']->getFormElement($project);
             $e->rows=20;
             $tab->add($e);
 
@@ -2128,8 +2074,8 @@ function projEdit($project=NULL)
         {
             global $g_project_setting_names;
             $tab_group->add($tab=new Page_Tab("tab3",__("Display")));
-            $tab->add($project->fields['short']->getFormElement(&$project));
-            $tab->add($project->fields['status_summary']->getFormElement(&$project));
+            $tab->add($project->fields['short']->getFormElement($project));
+            $tab->add($project->fields['status_summary']->getFormElement($project));
 
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_TASKS',         $g_project_setting_names[PROJECT_SETTING_ENABLE_TASKS], $project->settings & PROJECT_SETTING_ENABLE_TASKS));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_FILES',         $g_project_setting_names[PROJECT_SETTING_ENABLE_FILES], $project->settings & PROJECT_SETTING_ENABLE_FILES));
@@ -2138,30 +2084,7 @@ function projEdit($project=NULL)
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_MILESTONES',   $g_project_setting_names[PROJECT_SETTING_ENABLE_MILESTONES], $project->settings & PROJECT_SETTING_ENABLE_MILESTONES));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_VERSIONS',     $g_project_setting_names[PROJECT_SETTING_ENABLE_VERSIONS], $project->settings & PROJECT_SETTING_ENABLE_VERSIONS));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_NEWS',     $g_project_setting_names[PROJECT_SETTING_ENABLE_NEWS], $project->settings & PROJECT_SETTING_ENABLE_NEWS));
-
-            #$tab->add(new Form_checkbox('project_setting_only_pm_may_close',     $g_project_setting_names[PROJECT_SETTING_ONLY_PM_MAY_CLOSE], $project->settings & PROJECT_SETTING_ONLY_PM_MAY_CLOSE));
-
         }
-
-
-        #$form->add($project->fields['prio']->getFormElement(&$project));
-
-
-        #$form->add($project->fields['show_in_home']->getFormElement(&$project));
-        #$form->add($project->fields['color']->getFormElement(&$project));
-        #$form->add($project->fields['wikipage']->getFormElement(&$project));
-
-
-
-        #$form->add(new Form_Dropdown('status',  "Status",array(),0));
-
-        #$form->add(new Form_Date('prj_date_start', 'Started',$project->fields['date_start']->db2value($project->date_start)));
-        #$form->add(new Form_Date('prj_date_closed','Closed',$project->fields['date_closed']->db2value($project->date_closed)));
-        #$form->add(new Form_Edit('prj_description', 'Description', $project->description));
-
-
-
-
 
         ### create another one ###
         if($auth->cur_user->user_rights & RIGHT_PROJECT_CREATE && $project->id == 0) {
@@ -2244,7 +2167,7 @@ function projEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($project->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$project);
+        $f->parseForm($project);
     }
 
     ### project company ###
@@ -2517,7 +2440,7 @@ function projAddPerson()
             $list->functions=array();
             $list->no_items_html=__("Found no persons to add. Go to `People` to create some.");
 
-            $list->render_list(&$persons);
+            $list->render_list($persons);
         }
 
 

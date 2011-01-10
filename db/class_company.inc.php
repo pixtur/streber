@@ -15,7 +15,7 @@
 
 global $g_company_fields;
 $g_company_fields=array();
-addProjectItemFields(&$g_company_fields);
+addProjectItemFields($g_company_fields);
 
 foreach(array(
     new FieldInternal(array(    'name'=>'id',

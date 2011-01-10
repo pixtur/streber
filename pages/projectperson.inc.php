@@ -128,8 +128,8 @@ function projectPersonEdit($pp= NULL)
             ));
         }
 
-        //$form->add($pp->fields['name']->getFormElement(&$pp));
-		$tab->add($pp->fields['name']->getFormElement(&$pp));
+        //$form->add($pp->fields['name']->getFormElement($pp));
+		$tab->add($pp->fields['name']->getFormElement($pp));
 
         ### public-level ###
         if(($pub_levels=$pp->getValidUserSetPublicLevels())
@@ -151,7 +151,7 @@ function projectPersonEdit($pp= NULL)
 		{
 			if((confGet('INTERNAL_COST_FEATURE')) && ($auth->cur_user->user_rights & RIGHT_VIEWALL) && ($auth->cur_user->user_rights & RIGHT_EDITALL)){
 				$tab_group->add($tab=new Page_Tab("internal",__("Internal")));
-				$tab->add($pp->fields['salary_per_hour']->getFormElement(&$pp));
+				$tab->add($pp->fields['salary_per_hour']->getFormElement($pp));
 			}
 		}
 
@@ -215,7 +215,7 @@ function projectPersonEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($pp->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$pp);
+        $f->parseForm($pp);
     }
 
 

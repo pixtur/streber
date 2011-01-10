@@ -199,7 +199,7 @@ class ListBlock_persons extends ListBlock
         }
 		
 		$persons = Person::getPersons($this->query_options);
-        $this->render_list(&$persons);
+        $this->render_list($persons);
     }
 }
 

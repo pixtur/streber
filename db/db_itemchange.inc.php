@@ -132,8 +132,6 @@ class ItemChange extends DbItem
         * add default fields if not overwritten by derived class
         */
         if(!$this->fields) {
-            #global $g_itemchange_fields;
-            #$this->fields= &$g_itemchange_fields;
             $this->fields= &self::$itemchange_fields_static;
         }
 

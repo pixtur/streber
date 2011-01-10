@@ -102,10 +102,10 @@ function versionEdit($version=NULL) {
         $form=new PageForm();
         $form->button_cancel=true;
 
-        $form->add($version->fields['name']->getFormElement(&$version));
+        $form->add($version->fields['name']->getFormElement($version));
 
-        $form->add($version->fields['time_released']->getFormElement(&$version));
-        $form->add($version->fields['description']->getFormElement(&$version));
+        $form->add($version->fields['time_released']->getFormElement($version));
+        $form->add($version->fields['description']->getFormElement($version));
 
         ### released ###
 
@@ -177,7 +177,7 @@ function versionEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($version->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$version);
+        $f->parseForm($version);
     }
 
 

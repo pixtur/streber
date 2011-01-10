@@ -178,7 +178,7 @@ class ListBlock_efforts extends ListBlock
 		
 		$efforts = Effort::getAll($this->query_options);
 
-        $this->render_list(&$efforts);
+        $this->render_list($efforts);
     }
 	
     /**
@@ -227,10 +227,10 @@ class ListBlock_efforts extends ListBlock
 					$day= gmdate('z',strToClientTime( $e->time_end ) )*1;
 					if($day != $day_last) {
 						$day_last= $day;
-						$this->render_trow(&$e,'isNewDay');
+						$this->render_trow($e,'isNewDay');
 					}
 					else {
-						$this->render_trow(&$e);
+						$this->render_trow($e);
 					}
 				}
 			}
@@ -244,10 +244,10 @@ class ListBlock_efforts extends ListBlock
 					$day= gmdate('z',strToClientTime( $e->time_end ) )*1;
 					if($day != $day_last) {
 						$day_last= $day;
-						$this->render_trow(&$e,'isNewDay');
+						$this->render_trow($e,'isNewDay');
 					}
 					else {
-						$this->render_trow(&$e);
+						$this->render_trow($e);
 					}
 				}
 			}

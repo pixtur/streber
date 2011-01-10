@@ -45,7 +45,7 @@ class ListBlock_effortsTask extends ListBlock
 			$e->setStatus($effort_status);
 		}*/
 		
-        $this->render_list(&$efforts);
+        $this->render_list($efforts);
     }
 	
     /**
@@ -77,7 +77,7 @@ class ListBlock_effortsTask extends ListBlock
 			$sum=0.0;
 			
 			foreach($efforts as $e) {
-				$this->render_trow(&$e);
+				$this->render_trow($e);
 			}
 			
 			/*if($efforts[0]->getStatus()){

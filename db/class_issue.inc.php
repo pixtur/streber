@@ -40,7 +40,7 @@ class Issue extends DbProjectItem {
         global $SEVERITY_VALUES;
         
         
-        addProjectItemFields(&$g_issue_fields);
+        addProjectItemFields($g_issue_fields);
         
         foreach(array(
             new FieldInternal(array(    'name'=>'id',

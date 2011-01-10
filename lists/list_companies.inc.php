@@ -130,7 +130,7 @@ class ListBlock_companies extends ListBlock
         }
 		
 		$companies=Company::getAll($this->query_options);
-        $this->render_list(&$companies);
+        $this->render_list($companies);
     }
 }
 

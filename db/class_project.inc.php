@@ -49,7 +49,7 @@ class Project extends DbProjectItem
             
         global $g_project_fields;
         $g_project_fields=array();
-        addProjectItemFields(&$g_project_fields);
+        addProjectItemFields($g_project_fields);
         
         foreach(array(
             new FieldInternal(array(    'name'=>'id',
@@ -529,7 +529,7 @@ class Project extends DbProjectItem
         $list=array();
         if(isset($dict_id_dict[0]->children)) {
             foreach($dict_id_dict[0]->children as $c) {
-                sortObjectsRecursively(&$c, &$list);
+                sortObjectsRecursively($c, $list);
             }
         }
         return $list;

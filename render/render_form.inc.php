@@ -13,7 +13,7 @@
 *
 *    ### add all fields of dbItem with view_in_forms==TRUE to form ###
 *    foreach($effort->fields as $field) {
-*        $form->add($field->getFormElement(&$effort));
+*        $form->add($field->getFormElement($effort));
 *    }
 *    echo ($form);
 *

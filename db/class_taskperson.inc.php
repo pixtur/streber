@@ -40,7 +40,7 @@ class TaskPerson extends DbProjectItem {
     {
         global $g_task_person_fields;
         $g_task_person_fields=array();
-        addProjectItemFields(&$g_task_person_fields);
+        addProjectItemFields($g_task_person_fields);
         
         foreach(array(
             new FieldInternal(array(    'name'=>'id',               # add id to both tables for caching

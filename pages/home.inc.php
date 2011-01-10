@@ -1229,7 +1229,7 @@ function homeEfforts()
         $list->query_options['person'] = $person->id;
         $list->print_automatic();
         
-        //$list->render_list(&$efforts);
+        //$list->render_list($efforts);
     }
     
     echo '<input type="hidden" name="person" value="'.$person->id.'">';

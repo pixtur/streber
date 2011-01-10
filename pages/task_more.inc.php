@@ -455,10 +455,10 @@ function taskEditSubmit()
     # @@@ TODO: as some kind of form-edit-behaviour to field-definition
     foreach($task->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$task);
+        $f->parseForm($task);
     }
 
-    $task->fields['parent_task']->parseForm(&$task);
+    $task->fields['parent_task']->parseForm($task);
 
     ### category ###
     $was_of_category = $task->category;
@@ -812,7 +812,7 @@ function taskEditSubmit()
             ### querry form-information ###
             foreach($issue->fields as $f) {
                 $name=$f->name;
-                $f->parseForm(&$issue);
+                $f->parseForm($issue);
             }
 
             global $g_reproducibility_names;
@@ -850,7 +850,7 @@ function taskEditSubmit()
             ### querry form-information ###
             foreach($issue->fields as $f) {
                 $name=$f->name;
-                $f->parseForm(&$issue);
+                $f->parseForm($issue);
             }
 
             global $g_reproducibility_names;
@@ -1665,8 +1665,8 @@ function taskEditDescription($task=NULL)
 
 
         $form->add(new Form_HiddenField('task_id','',$task->id));
-        $form->add($task->fields['name']->getFormElement(&$task));
-        $e= $task->fields['description']->getFormElement(&$task);
+        $form->add($task->fields['name']->getFormElement($task));
+        $e= $task->fields['description']->getFormElement($task);
         $e->rows=22;
         $form->add($e);
 
@@ -1796,7 +1796,7 @@ function TaskViewEfforts()
 
         ));
         $list= new ListBlock_efforts();
-        $list->render_list(&$efforts);
+        $list->render_list($efforts);
     }
 
     ### 'add new task'-field ###
@@ -1944,11 +1944,6 @@ function TaskEditMultiple()
 
         $form=new PageForm();
         $form->button_cancel=true;
-
-        #$form->add($tasks[0]->fields['name']->getFormElement(&$tasks[0]));
-        #$form->add($tasks[0]->fields['short']->getFormElement(&$tasks[0]));
-
-
 
 
         ### category ###
@@ -2648,10 +2643,10 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
         $form->button_cancel=true;
 
         ## name field ##
-        $form->add($task->fields['name']->getFormElement(&$task));
+        $form->add($task->fields['name']->getFormElement($task));
 
         ## description field ##
-        $e = $task->fields['description']->getFormElement(&$task);
+        $e = $task->fields['description']->getFormElement($task);
         $e->rows = 22;
         $form->add($e);
 
@@ -2666,28 +2661,14 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
             if($task->id == 0){
                 $proj_select = 0;
             }
-            ## eventually needed later when note is a subcategory of task
-            /*else {
-                if(!$project = $task->getProject()){
-                    $PH->abortWarning(__("ERROR: could not get project"), ERROR_NOTE);
-                    $proj_select = 0;
-                }
-                else{
-                    $proj_select = $project->id;
-                }
-            }*/
-
+            
             $p_list = array();
-            #$p_list[0] = __('Assigned Projects');
 
             $count = 1;
 
             $p_projects = $person->getProjects();
             $num = count($p_projects);
-            /*if($num == 0){
-                $p_list['-1'] = __('- no assigend projects');
-            }
-            else{*/
+
             if($num > 0){
                 $p_list[0] = __('Assigned Projects');
                 foreach($p_projects as $pp){
@@ -2696,21 +2677,11 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
                 }
             }
 
-            #$p_list['-3'] = __('Company Projects');
 
             $p_companies = $person->getCompanies();
             $num = count($p_companies);
-            /*if($num == 0){
-                $p_list['-4'] = __('- no company projects');
-            }
-            elseif($num == 1){
-                $c_id = $p_companies[0]->id;
-                $c_projects = Project::getAll(array('company'=>$c_id));
-                foreach($c_projects as $cp){
-                    $p_list[$cp->id] = "- " . $cp->name;
-                }
-            }
-            else*/if($num > 0){
+
+            if($num > 0){
                 $p_list['-1'] = __('Company Projects');
                 foreach($p_companies as $pcs){
                     $c_id = $pcs->id;
@@ -2723,10 +2694,7 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
                 }
             }
 
-            #$p_list['-5'] = __('All other Projects');
-
             if(!$projects = Project::getAll(array('order_by'=>'name ASC'))){
-                #$p_list['-6'] = __('- no other projects');
             }
             else{
                 $p_list['-2'] = __('All other Projects');
@@ -2884,7 +2852,7 @@ function taskNoteOnPersonEditSubmit()
     # @@@ TODO: as some kind of form-edit-behaviour to field-definition
     foreach($task->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$task);
+        $f->parseForm($task);
     }
 
     ### validate ###

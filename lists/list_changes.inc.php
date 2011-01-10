@@ -68,7 +68,7 @@ class ListBlock_changes extends ListBlock
         }
         $changes= ChangeLine::getChangeLines($this->query_options);
 
-        $this->render_list(&$changes);
+        $this->render_list($changes);
 
     }
 
@@ -99,7 +99,7 @@ class ListBlock_changes extends ListBlock
             
             foreach($changes as $c) {
 
-                $this->render_trow(&$c,$style);
+                $this->render_trow($c,$style);
             }
 
             $this->render_tfoot();
@@ -420,7 +420,7 @@ class ListBlock_AllChanges extends ListBlock
 
         $changes = DbProjectItem::getChanges($this->query_options);
 
-        $this->render_list(&$changes);
+        $this->render_list($changes);
     }
 }
 

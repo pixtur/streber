@@ -87,7 +87,7 @@ abstract class NaviLink
             if(!isset($this->target_id)) {
                 trigger_error("NaviOption::__construct() needs either target_id or target_url", E_USER_ERROR);
             }
-            $this->target_url= $PH->getUrl($this->target_id, &$this->target_params);
+            $this->target_url= $PH->getUrl($this->target_id, $this->target_params);
         }
 
         #--- get name, if not already defined ----

@@ -61,7 +61,7 @@ class ListBlock_searchresults extends ListBlock
 
         #$changes= ChangeLine::getChangeLinesForPerson($auth->cur_user, $project);
 
-        $this->render_list(&$results);
+        $this->render_list($results);
 
     }
 
@@ -91,7 +91,7 @@ class ListBlock_searchresults extends ListBlock
 
             $last_group= NULL;
     		foreach($changes as $c) {
-      			$this->render_trow(&$c,$style);
+      			$this->render_trow($c,$style);
             }
 
     		$this->render_tfoot();

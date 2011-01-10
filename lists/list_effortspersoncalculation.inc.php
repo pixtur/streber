@@ -54,7 +54,7 @@ class ListBlock_effortsPersonCalculation extends ListBlock
 			$e->setStatus($effort_status);
 		}*/
 		
-        $this->render_list(&$efforts);
+        $this->render_list($efforts);
     }
 	
     /**
@@ -84,7 +84,7 @@ class ListBlock_effortsPersonCalculation extends ListBlock
     		$this->render_thead();
 			
 			foreach($efforts as $e) {
-				$this->render_trow(&$e);
+				$this->render_trow($e);
 			}
 			
     		$this->render_tfoot();

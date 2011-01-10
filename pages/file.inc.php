@@ -432,9 +432,9 @@ function fileEdit($file=NULL)
         $form=new PageForm();
         $form->button_cancel=true;
 
-        $form->add($file->fields['name']->getFormElement(&$file));
+        $form->add($file->fields['name']->getFormElement($file));
 
-        $form->add($file->fields['description']->getFormElement(&$file));
+        $form->add($file->fields['description']->getFormElement($file));
 
         /**
         * until new file is added to database keep details in hiddenfields

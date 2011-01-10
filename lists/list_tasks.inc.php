@@ -402,7 +402,7 @@ class ListBlock_tasks extends ListBlock
                     $count_estimated+=$t->estimated;
                 }
 
-      			$this->render_trow(&$t,$style);
+      			$this->render_trow($t,$style);
 
 
       			### render additional information ###
@@ -530,7 +530,7 @@ class ListBlock_tasks extends ListBlock
 		            echo '</td></tr>';
 		        }
             }
-               		#$this->render_trow(&$t);
+               		#$this->render_trow($t);
 
             if($this->show_summary) {
                  $this->summary=sprintf(__("%s open tasks / %s h"), count($tasks), $count_estimated);
@@ -841,7 +841,7 @@ class ListBlock_tasks extends ListBlock
                 $tasks= array_reverse($new_list);
             }
         }
-        $this->render_list(&$tasks);
+        $this->render_list($tasks);
     }
 }
 

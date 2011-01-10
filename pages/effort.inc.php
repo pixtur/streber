@@ -619,10 +619,10 @@ function effortEdit($effort=NULL)
 
         ### automatically write fields ###
 #   foreach($effort->fields as $field) {
-#    $form->add($field->getFormElement(&$effort));
+#    $form->add($field->getFormElement($effort));
 #   }
 
-        $form->add($effort->fields['name']->getFormElement(&$effort));
+        $form->add($effort->fields['name']->getFormElement($effort));
 
         if($effort->as_duration) {
             /**
@@ -634,15 +634,15 @@ function effortEdit($effort=NULL)
             */
             $effort->time_end=clientTimeStrToGMTString($effort->time_end);
 
-            $tmp_edit= $effort->fields['time_end']->getFormElement(&$effort);
+            $tmp_edit= $effort->fields['time_end']->getFormElement($effort);
             $tmp_edit->title=__("Date / Duration","Field label when booking time-effort as duration");
             $form->add($tmp_edit);
         }
         else {
-            $form->add($effort->fields['time_start']->getFormElement(&$effort));
-            $form->add($effort->fields['time_end']->getFormElement(&$effort));
+            $form->add($effort->fields['time_start']->getFormElement($effort));
+            $form->add($effort->fields['time_end']->getFormElement($effort));
         }
-        $form->add($effort->fields['description']->getFormElement(&$effort));
+        $form->add($effort->fields['description']->getFormElement($effort));
         $form->add(new Form_Dropdown("effort_status", __('Status'), array_flip($g_effort_status_names), $effort->status));
 
         ### get meta-tasks / folders ###
@@ -765,7 +765,7 @@ function effortEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($effort->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$effort);
+        $f->parseForm($effort);
     }
 
     ### times as duration ###

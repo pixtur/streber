@@ -49,7 +49,7 @@ class ListBlock_effortsTaskCalculation extends ListBlock
 			$e->setStatus($effort_status);
 		}*/
 		
-        $this->render_list(&$efforts);
+        $this->render_list($efforts);
     }
 	
     /**
@@ -81,7 +81,7 @@ class ListBlock_effortsTaskCalculation extends ListBlock
 			$sum_hours = 0.0;
 			
 			foreach($efforts as $e) {
-				$this->render_trow(&$e);
+				$this->render_trow($e);
 			}
 			
 			## sum effort hours ##

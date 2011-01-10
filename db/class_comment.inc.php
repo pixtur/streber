@@ -20,7 +20,7 @@
     global $comment_fields;
     global $COMMENTTYPE_VALUES;
     $comment_fields= array();
-    addProjectItemFields(&$comment_fields);
+    addProjectItemFields($comment_fields);
 
     foreach(array(
         new FieldInternal(array(    'name'=>'id',

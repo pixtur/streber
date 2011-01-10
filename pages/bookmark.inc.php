@@ -311,7 +311,7 @@ function itemBookmarkEdit($bookmark=NULL)
             $form = new PageForm();
             $form->button_cancel = true;
     
-            $form->add($editbookmark->fields['comment']->getFormElement(&$editbookmark));
+            $form->add($editbookmark->fields['comment']->getFormElement($editbookmark));
             $form->add(new Form_checkbox("notify_on_change", __('Notify on change'), $editbookmark->notify_on_change));
             
             $form->add(new Form_Dropdown("notify_period", __('Notify if unchanged in'), array_flip($g_notitychange_period), $editbookmark->notify_if_unchanged));
@@ -391,7 +391,7 @@ function itemBookmarkEditSubmit()
     # - this could be an security-issue.
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($bookmark->fields as $f) {
-        $f->parseForm(&$bookmark);
+        $f->parseForm($bookmark);
     }
     
     $notify_on_change = get('notify_on_change');

@@ -140,7 +140,7 @@ class Field
     {
         if(isset($this->func_renderToForm)) {
             $fn= $this->func_renderToForm;
-            return $fn(&$this,&$obj);
+            return $fn($this,$obj);
         }
         return false;                   # TODO: add warning
     }
@@ -149,7 +149,7 @@ class Field
     {
         if(isset($this->func_parseForm)) {
             $fn= $this->func_parseForm;
-            return $fn(&$this, &$obj);
+            return $fn($this, $obj);
         }
         return false;                   # TODO: add warning
     }
@@ -161,7 +161,7 @@ class Field
     {
         if(isset($this->func_getFormElement)) {
             $fn= $this->func_getFormElement;
-            return $fn(&$this, &$obj, $title);
+            return $fn($this, $obj, $title);
         }
         else {
             return new Form_CustomHTML('');

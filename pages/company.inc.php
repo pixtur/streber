@@ -325,7 +325,7 @@ function companyList() {
 							));
 
 		$list->title= $page->title;
-		$list->render_list(&$companies);
+		$list->render_list($companies);
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -413,7 +413,7 @@ function companyList() {
 							));
 
 		$list->title= $page->title;
-		$list->render_list(&$companies);
+		$list->render_list($companies);
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -499,7 +499,7 @@ function companyList() {
 							));
 
 		$list->title= $page->title;
-		$list->render_list(&$companies);
+		$list->render_list($companies);
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -587,7 +587,7 @@ function companyList() {
 							));
 
 		$list->title= $page->title;
-		$list->render_list(&$companies);
+		$list->render_list($companies);
 
 		## Link to start cvs export ##
 		$format = get('format');
@@ -808,8 +808,8 @@ function companyView()
             $list->no_items_html=__("no persons related");
         }
 
-        $list->render_list(&$persons);
-		//$list->print_automatic(&$persons);
+        $list->render_list($persons);
+		//$list->print_automatic($persons);
     }
 
 
@@ -961,7 +961,7 @@ function companyEdit($company=NULL)
         $form->button_cancel=true;
 
         foreach($company->fields as $field) {
-            $form->add($field->getFormElement(&$company));
+            $form->add($field->getFormElement($company));
         }
 
 		### dropdown menu for company category ###
@@ -1061,7 +1061,7 @@ function companyEditSubmit()
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($company->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$company);
+        $f->parseForm($company);
     }
 
     ### write to db ###
@@ -1146,7 +1146,7 @@ function companyLinkPersons() {
         $list->show_icons=false;
 
 
-        $list->render_list(&$persons);
+        $list->render_list($persons);
 
         $PH->go_submit='companyLinkPersonsSubmit';
         echo "<input type=hidden name='company' value='$company->id'>";

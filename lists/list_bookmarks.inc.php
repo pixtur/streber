@@ -160,16 +160,16 @@ class ListBlock_bookmarks extends ListBlock
         }
 
 		$bookmark_items = ItemPerson::getAll($this->query_options);
-		
-		$items= array();
+        
+        $items= array();
 
-		foreach($bookmark_items as $bi) {
-		    if($item= DbProjectItem::getVisibleById($bi->item)) {
-		       $items[]= $item;
-		    }
-		}
+        foreach($bookmark_items as $bi) {
+            if($item= DbProjectItem::getVisibleById($bi->item)) {
+               $items[]= $item;
+            }
+        }
 
-        $this->render_list(&$items);
+        $this->render_list($items);
     }
 }
 

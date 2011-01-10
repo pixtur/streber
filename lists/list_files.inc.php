@@ -235,7 +235,7 @@ class ListBlock_files extends ListBlock
             $foo= true;
         }
         $files= File::getAll($this->query_options);
-        $this->render_list(&$files);
+        $this->render_list($files);
     }
 }
 

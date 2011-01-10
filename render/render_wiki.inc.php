@@ -2069,7 +2069,7 @@ function wiki2blocks(&$text)
 {
     measure_start("wiki2blocks");
 
-    $blocks= array(new FormatBlock(&$text));
+    $blocks= array(new FormatBlock($text));
 
     ### code-blocks ###
     measure_start("blockCode");

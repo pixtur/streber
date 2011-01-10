@@ -325,8 +325,8 @@ function commentEdit($comment=NULL)
         $form->button_cancel=true;
 
 
-        $form->add($comment->fields['name']->getFormElement(&$comment));
-        $e= $comment->fields['description']->getFormElement(&$comment);
+        $form->add($comment->fields['name']->getFormElement($comment));
+        $e= $comment->fields['description']->getFormElement($comment);
         $e->rows=22;
         $form->add($e);
 
@@ -402,7 +402,7 @@ function commentEditSubmit(){
     # - TODO: as some kind of form-edit-behaviour to field-definition
     foreach($comment->fields as $f) {
         $name=$f->name;
-        $f->parseForm(&$comment);
+        $f->parseForm($comment);
     }
     if($tmp= get('comment_project')) {
         $comment->project= $tmp;

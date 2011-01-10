@@ -43,7 +43,7 @@ class ListBlock_effortsProjectCalculation extends ListBlock
 		
 		#$project->setStatus($project_status);
 		
-        $this->render_list(&$project);
+        $this->render_list($project);
     }
 	
     /**
@@ -73,7 +73,7 @@ class ListBlock_effortsProjectCalculation extends ListBlock
 
     		$this->render_thead();
 			
-			$this->render_trow(&$project);
+			$this->render_trow($project);
 						
     		$this->render_tfoot();
             parent::render_blockEnd();            

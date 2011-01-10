@@ -37,7 +37,7 @@ class File extends DbProjectItem
     {
         global $g_file_fields;
         $g_file_fields= array();
-        addProjectItemFields(&$g_file_fields);
+        addProjectItemFields($g_file_fields);
     
         foreach(array(
             new FieldInternal(array(    'name'=>'id',

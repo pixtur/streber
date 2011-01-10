@@ -1209,7 +1209,7 @@ class ListFunction {
     $count_estimated=0;
     foreach($tasks as $t) {
         $count_estimated+=$t->estimated;
-        $list_tasks->render_trow(&$t,$style);
+        $list_tasks->render_trow($t,$style);
     }
     $list->summary= count($tasks)." tasks with estimated $count_estimated hours of work";
     $list->render_tfoot();

@@ -33,7 +33,7 @@ class ProjectPerson extends DbProjectItem {
     {
         global $projectperson_fields;
         $projectperson_fields=array();
-        addProjectItemFields(&$projectperson_fields);
+        addProjectItemFields($projectperson_fields);
     
         foreach(array(
             new FieldInternal(array(    'name'=>'id',

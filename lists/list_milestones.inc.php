@@ -183,7 +183,7 @@ class ListBlock_milestones extends ListBlock
                     $style_row= $style;
                     $count_estimated+=$t->estimated;
                 }
-      			$this->render_trow(&$t,$style_row);
+      			$this->render_trow($t,$style_row);
 
             }
     		$this->render_tfoot();
@@ -253,7 +253,7 @@ class ListBlock_milestones extends ListBlock
 
         $tasks= Task::getAll($this->query_options);
 
-        $this->render_list(&$tasks);
+        $this->render_list($tasks);
     }
 }
 

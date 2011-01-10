@@ -131,7 +131,7 @@ class ListBlock_versions extends ListBlock
 
         $versions= Task::getAll($this->query_options);
 
-        $this->render_list(&$versions);
+        $this->render_list($versions);
     }
 }
 
