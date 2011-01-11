@@ -31,6 +31,30 @@ function personList()
 {
     global $PH;
     global $auth;
+
+    if(!($auth->cur_user->user_rights & RIGHT_PERSON_EDIT) && confGet('ANONYMOUS_USER') != false) {
+        ### set up page and write header ####
+
+        $page= new Page();
+	    $page->type=__("List");
+        $page->cur_tab='people';
+        $page->title=__('List of people');
+
+        echo(new PageHeader);
+
+        echo (new PageContentOpen);
+
+        echo "<div class=license>";
+        echo wiki2purehtml("
+You have insufficent user rights to see complete list.
+");
+        echo "</div>";
+
+        echo (new PageContentClose);
+        echo (new PageHtmlEnd);        
+        exit();        
+    }
+
     
     $presets= array(
         ### all ###
@@ -180,7 +204,7 @@ function personList()
     {
         $page= new Page();
         $page->cur_tab='people';
-        $page->title=__('Persons','Pagetitle for person list');
+        $page->title=__('People','Pagetitle for person list');
         if(!($auth->cur_user->user_rights & RIGHT_VIEWALL)) {
             $page->title_minor= sprintf(__("relating to %s","Page title Person list title add on"), $auth->cur_user->name);
         }
