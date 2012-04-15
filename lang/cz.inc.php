@@ -754,7 +754,7 @@ $g_lang_table= array(
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Vytvořit nový projekt pro tuto firmu',
 'Add existing persons to this company'=>'Přidat existující osobu do této firmy',
-'Persons'                     =>'Lidé',
+'People'                     =>'Lidé',
 'Adress'                      =>'Adresa',
 'Fax'                         =>'Fax',
 'Web'                         =>'Web',

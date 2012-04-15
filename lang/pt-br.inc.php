@@ -399,7 +399,7 @@ $g_lang_table= array(
 ### ../pages/company.inc   ###
 'Create new project for this company'=>'Criar um novo projeto para esta Organização',
 'Add existing persons to this company'=>'Adicionar usuários existentes para essa Organização',
-'Persons'                     =>'Usuários',
+'People'                     =>'Usuários',
 
 ### ../pages/person.inc   ###
 'Summary'                     =>'Sumário',

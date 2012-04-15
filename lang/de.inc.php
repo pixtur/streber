@@ -459,7 +459,7 @@ $g_lang_table= array(
 
 'Create new project for this company'=>'Neues Projekt für Firma',
 'Add existing persons to this company'=>'Existierende Person mit Firma verbinden',
-'Persons'                     =>'Personen',
+'People'                     =>'Personen',
 'clients'                     =>'Kunden',
 'prospective clients'         =>'Interessenten',
 'supplier'                    =>'Lieferanten',

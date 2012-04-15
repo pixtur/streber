@@ -54,10 +54,12 @@ class RSS
         $changes= ChangeLine::getChangeLines(array(
             'project'           => $project->id,
             'unviewed_only'     => false,
-            'limit_rowcount'    => 30,
-            'not_modified_by'   => $not_modified_by,
-            'type'              => array(ITEM_TASK),
+            'limit_rowcount'    => 20,
+            'type'              => array(ITEM_TASK, ITEM_FILE),
+            'limit_offset'      => 0,
         ));
+        
+                
         
         /*
         $changes= DbProjectItem::getAll(array(

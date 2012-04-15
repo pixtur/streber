@@ -688,7 +688,7 @@ function build_personList_options()
     return array(
         new NaviOption(array(
             'target_id'=>'personList',
-            'name'=>__('Persons', 'page option')
+            'name'=>__('People', 'page option')
         ))
     );
 }

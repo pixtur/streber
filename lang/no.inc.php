@@ -396,7 +396,7 @@ $g_lang_table= array(
 ### ../pages/company.inc   ###
 'Create new project for this company'=>'Nytt Prosjekt for organisasjonen',
 'Add existing persons to this company'=>'Legg til eksisterende Personer til organisasjonen',
-'Persons'                     =>'Personer',
+'People'                     =>'Personer',
 
 ### ../pages/person.inc   ###
 'Summary'                     =>'Sammendrag',

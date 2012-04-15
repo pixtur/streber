@@ -724,7 +724,7 @@ $g_lang_table= array(
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Crea nuovo progetto per questa azienda',  # line 139
 'Add existing persons to this company'=>'Aggiungi persona esistente a questa azienda',  # line 146
-'Persons'                     =>'Persone',  # line 147
+'People'                     =>'Persone',  # line 147
 'Adress'                      =>'Indirizzo',  # line 169
 'Fax'                         =>'Fax',  # line 178
 'Web'                         =>'Sito web',  # line 183

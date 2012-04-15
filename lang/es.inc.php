@@ -732,7 +732,7 @@ $g_lang_table= array(
 
 'Create new project for this company'=>'Crear nuevo proyecto para esta empresa',
 'Add existing persons to this company'=>'Agregar personas existentes para esta empresa',
-'Persons'                     =>'Personas',
+'People'                     =>'Personas',
 'Adress'                      =>'Dirección',
 'Fax'                         =>'Fax',
 'Web'                         =>'Web',

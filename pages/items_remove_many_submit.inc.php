@@ -45,6 +45,13 @@ function itemsRemoveManySubmit()
                     $count_removed_items++;
                 }
             }
+            else if($item->type == ITEM_TASK) {
+                if($task= Task::getById($id)) {
+                    #revertDateOfCommentParent($comment);
+                    $task->deleteFromDb();
+                    $count_removed_items++;
+                }
+            }
         }
     }
 

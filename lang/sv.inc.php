@@ -701,7 +701,7 @@ $g_lang_table= array(
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Skapa nytt projekt till detta företag',  # line 139
 'Add existing persons to this company'=>'Lägg till befintlig användare till detta företag',  # line 146
-'Persons'                     =>'Användare (koppla)',  # line 147
+'People'                     =>'Användare (koppla)',  # line 147
 'Adress'                      =>'Adress',  # line 169
 'Fax'                         =>'Fax',  # line 178
 'Web'                         =>'Webbsida',  # line 183

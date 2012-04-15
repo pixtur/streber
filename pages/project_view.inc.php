@@ -263,23 +263,6 @@ function ProjView()
         printRecentChanges(array($project), false);
     }
 
-/*
-    measure_start('changes');
-    {
-        require_once(confGet('DIR_STREBER') . './lists/list_changes.inc.php');
-
-        $list= new ListBlock_changes();
-        $list->query_options['date_min']= $auth->cur_user->last_logout;
-        $list->query_options['not_modified_by']= $auth->cur_user->id;
-        $list->query_options['project']= $project->id;
-        //$list->print_automatic($project);
-        $list->print_automatic();
-    }
-    measure_stop('changes');
-    */
-
-
-
 
     echo "<br><br>";                                        # @@@ hack for firefox overflow problems
     ### HACKING: 'add new task'-field ###

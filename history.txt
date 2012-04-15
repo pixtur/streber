@@ -1,5 +1,9 @@
 streber-version-history
 
+v0.092 / rev511
+- reduce people list visibility if anonymous login
+- increase spam filter rate
+
 rev510
 - fixed invalid probabality warning
 - fixed unknown variable warning
@@ -21,9 +25,6 @@ rev508
 - fixed comment author link for admins
 - some refactoring of page functions
 
-
-
-v0.092 / rev507
 - fixed SQL injection 
 - fixed passing by reference warning with PHP 5.3
 

@@ -60,8 +60,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_CREATE_DUMP_VERSION'     => '0.0803',     # sql-dump loaded from /_install/-directory at installation
-
+    'DB_CREATE_DUMP_VERSION'     => '0.093',     # sql-dump loaded from /_install/-directory at installation
 
     /**
     * url to online-help
@@ -79,7 +78,6 @@ $g_config= array(
     'DB_TYPE'               => 'mysql',     # mysql is default
     'DB_TYPES'              => array(),     # init defined database-types in db_types.inc
     'HOSTNAME'              => 'localhost',
-
 
     'DB_USERNAME'           =>'',
     'DB_PASSWORD'           =>'',

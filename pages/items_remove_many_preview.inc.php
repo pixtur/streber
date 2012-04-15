@@ -101,15 +101,20 @@ function renderPreviewList()
             if(get('only_spam_comments') && !isSpam($comment->name . " " . $comment->description) ) {
                 continue;
             }
+        	renderRemovalPreviewComment($comment);        
         }
-        renderRemovalPreviewItem($comment);        
+        if($item->type == ITEM_TASK) {
+            $task= Task::getById($item->id);
+            
+        	renderRemovalPreviewTask($task);        
+        }
     }
     echo "</ol>";
     
 }
 
 
-function renderRemovalPreviewItem($comment)
+function renderRemovalPreviewComment($comment)
 {
     $name = asHtml($comment->name);
     if(!$name) { $name = __("Untitled"); }
@@ -126,5 +131,25 @@ function renderRemovalPreviewItem($comment)
     echo "</label>";
     echo "</li>";
 }
+
+function renderRemovalPreviewTask($task)
+{
+    $name = asHtml($task->name);
+    if(!$name) { $name = __("Untitled"); }
+    echo "<li>";
+    echo "<input checked type=checkbox value='{$task->id}' name='item_{$task->id}'>";
+    echo "<label for='item_{$task->id}'>";
+    echo $task->getLink(); 
+
+    if( $creator= Person::getVisibleById($task->created_by) ) {
+        echo sprintf( __("by %s", "as in created by"), $creator->getLink());        
+    }
+    echo "<br>";
+    echo " <small>" . asHtml($task->description) . "</small>";
+    echo "</label>";
+    echo "</li>";
+}
+
+
 
 ?>

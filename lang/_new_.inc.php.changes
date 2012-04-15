@@ -549,7 +549,7 @@ undefined keys:
 'Create new person for this company'=>'',
 'Create new project for this company'=>'',
 'Add existing persons to this company'=>'',
-'Persons'                     =>'',
+'People'                     =>'',
 'Adress'                      =>'',
 'Fax'                         =>'',
 'Web'                         =>'',
