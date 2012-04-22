@@ -371,11 +371,11 @@ abstract class DbItem {
         }
 
         require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
-        if($item_persons = ItemPerson::getAll(array(
+        if($item_people = ItemPerson::getAll(array(
             'person'=>$auth->cur_user->id,
             'item' => $this->id
         ))) {
-            $ip= $item_persons[0];
+            $ip= $item_people[0];
             if($ip->viewed_last < $this->modified) {
                 return 2;
             }
@@ -397,12 +397,12 @@ abstract class DbItem {
         global $auth;
 
         require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
-        if($item_persons = ItemPerson::getAll(array(
+        if($item_people = ItemPerson::getAll(array(
             'person'=>$auth->cur_user->id,
             'item' => $this->id,
             'feedback_requested_by' => true,
         ))) {
-            $ip= $item_persons[0];
+            $ip= $item_people[0];
             return $ip->feedback_requested_by;
         }
         return 0;
@@ -1073,7 +1073,7 @@ class DbProjectItem extends DbItem {
         }
         ### not a project-item? ###
         #
-        #@@@  be sure that rights deleting project, companies and persons is validated somewhere else
+        #@@@  be sure that rights deleting project, companies and people is validated somewhere else
         #
         else if($this->project == 0) {
 
@@ -1540,11 +1540,11 @@ class DbProjectItem extends DbItem {
         }
 
         ### has user seen item? ###        
-        else if($item_persons = ItemPerson::getAll(array(
+        else if($item_people = ItemPerson::getAll(array(
             'person'=>$auth->cur_user->id,
             'item' => $this->id
         ))) {
-            $ip= $item_persons[0];
+            $ip= $item_people[0];
             if($ip->viewed_last > $this->modified) {
                 return $this->$fieldname;
             }

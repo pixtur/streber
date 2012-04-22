@@ -7,7 +7,7 @@
 /**\file
 * employments / jointable between company and person
 *
-* linking persons to companies is not required with work with projects. It's only
+* linking people to companies is not required with work with projects. It's only
 * purpose now, is to display additional information in personView and projView.
 *
 *

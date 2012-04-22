@@ -110,7 +110,7 @@ class EmailNotification extends Email
         $this->projects     = array(); # keep for later reference
         $this->projects_new = array();
         
-        foreach($this->recipient->getProjectPersons() as $pp) {
+        foreach($this->recipient->getProjectPeople() as $pp) {
             if($project= Project::getVisibleById($pp->project)) {
                 if($project->state) {
                     $this->projects[]= $project;

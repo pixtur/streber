@@ -23,7 +23,7 @@ function projectPersonEdit($pp= NULL)
 	global $auth;
 	
     if(!$pp) {
-        $id= getOnePassedId('projectperson','projectpersons_*', true, 'No team member selected?');   # WARNS if multiple; ABORTS if no id found
+        $id= getOnePassedId('projectperson','projectpeople_*', true, 'No team member selected?');   # WARNS if multiple; ABORTS if no id found
         if(!$pp= ProjectPerson::getEditableById($id)) {
             $PH->abortWarning("ERROR: could not get Project Person");
             return;
@@ -290,7 +290,7 @@ function projectPersonDelete()
     global $PH;
 
     ### get project person ####
-    $ids= getPassedIds('projectperson','projectpersons_*');
+    $ids= getPassedIds('projectperson','projectpeople_*');
 
     if(!$ids) {
         $PH->abortWarning("No team-member(s) selected?",ERROR_NOTE);

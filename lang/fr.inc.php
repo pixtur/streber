@@ -121,8 +121,8 @@ $g_lang_table= array(
 'New company'                 =>'Nouvelle companie',
 'Edit Company'                =>'Modifier companie',
 'Delete Company'              =>'Effacer companie',
-'Link Persons'                =>'Personnes liées' ,
-'List Persons'                =>'Listes des contacts',
+'Link People'                =>'Personnes liées' ,
+'List People'                =>'Listes des contacts',
 'View Person'                 =>'Voir un contact',
 'New person'                  =>'Nouveau contact',
 'Edit Person'                 =>'Modifier contact',
@@ -149,7 +149,7 @@ $g_lang_table= array(
 'Full name'                   =>'Nom et prénom',
 'Nickname'                    =>'Pseudonyme',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Tagline'                     =>'Etiquette',
 
 ### ../db/class_person.inc   ###
@@ -233,7 +233,7 @@ $g_lang_table= array(
 ### ../lists/list_efforts.inc   ###
 'S'                           =>'S',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Name Short'                  =>'Nom court',
 'Shortnames used in other lists'=>'Nom court utilisé dans d´autres listes',
 
@@ -261,22 +261,22 @@ $g_lang_table= array(
 'New effort'                  =>'nouveau effort',
 'D, d.m.Y'                    =>'D, d.m.Y',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Mobil'                       =>'Mobile',
 
 ### ../pages/person.inc   ###
 'Office'                      =>'Bureau',
 'Private'                     =>'Privé',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Edit person'                 =>'Modifier contact',
 'Delete person'               =>'Supprimer contact',
 'Create new person'           =>'Créer nouveau contact',
 
 ### ../lists/list_project_team.inc   ###
-'Your related persons'        =>'Vos contacts',
+'Your related people'        =>'Vos contacts',
 'Rights'                      =>'Droits',
-'Persons rights in this project'=>'Droits des contacts pour ce projet',
+'People rights in this project'=>'Droits des contacts pour ce projet',
 'Add team member'             =>'Ajouter un participant',
 'Remove person from team'     =>'Enlever un participant',
 'Member'                      =>'Contact',
@@ -397,7 +397,7 @@ $g_lang_table= array(
 
 ### ../pages/company.inc   ###
 'Create new project for this company'=>'Créer nouveau projet pour cette companie',
-'Add existing persons to this company'=>'Ajouter des contacts existants dans cette companie',
+'Add existing people to this company'=>'Ajouter des contacts existants dans cette companie',
 'People'                     =>'Contacts',
 
 ### ../pages/person.inc   ###
@@ -414,11 +414,11 @@ $g_lang_table= array(
 'no projects yet'             =>'Pas encore de projet',
 'link existing Person'        =>'Lien sur contacts existant',
 'create new'                  =>'Créer nouveau',
-'no persons related'          =>'Pas de contacts en relation',
+'no people related'          =>'Pas de contacts en relation',
 'Create another company after submit'=>'Créer une autre companie après validation',
 'Edit %s'                     =>'Modifier %s',
-'Add persons employed or related'=>'Ajoutez les personnes employées ou en relation',
-'No persons selected...'=>'Pas de contacts sélectionné',
+'Add people employed or related'=>'Ajoutez les personnes employées ou en relation',
+'No people selected...'=>'Pas de contacts sélectionné',
 'Person already related to company'=>'Contact déj en relation avec cette companie',
 'Select some companies to delete'=>'Sélectionner les companies  supprimer',
 
@@ -449,8 +449,8 @@ $g_lang_table= array(
 
 ### ../pages/person.inc   ###
 'With Account'                =>'Avec compte',
-'All Persons'                 =>'Tous les contacts',
-'no related persons'          =>'Aucun',
+'All People'                 =>'Tous les contacts',
+'no related people'          =>'Aucun',
 'Edit this person'            =>'Modifier ce contact',
 'Profile'                     =>'Profil',
 'User Rights'                 =>'Droits du contact',
@@ -475,7 +475,7 @@ $g_lang_table= array(
 'passwords don´t match'       =>'Mot de passe différent',
 'Login-accounts require a unique nickname'=>'Le compte de login requiert un pseudo unique',
 'Could not insert object'=>'Insertion d´object pas possible',
-'Select some persons to delete'=>'Sélectionner les contacts  supprimer',
+'Select some people to delete'=>'Sélectionner les contacts  supprimer',
 'Adjust user-rights of %s'    =>'Ajuster les droits d´accès de %s',
 'Please consider that activating login-accounts might trigger security-issues.'
                               =>'Please consider that activating login-accounts might trigger security-issues.',
@@ -516,8 +516,8 @@ $g_lang_table= array(
 'Failed to change %s projects'=>'Changement du projet %s échoué',
 'Closed %s projects'          =>'Projets %s terminés',
 'Select new team members'     =>'Sélectionner nouveau participant',
-'found no persons to add'     =>'Pas de contacts trouvé  ajouter',
-'No persons selected...'      =>'Pas de contacts sélectionné',
+'found no people to add'     =>'Pas de contacts trouvé  ajouter',
+'No people selected...'      =>'Pas de contacts sélectionné',
 'Could not access person by id'=>'Contact pas accessible par l´ID',
 'Reanimated person as team-member'=>'Réactivez le contact comme participant',
 'Person already in project'=>'Contact déj dans le projet',
@@ -607,8 +607,8 @@ $g_lang_table= array(
 
 ### ../pages/person.inc   ###
 'passwords don´t match'       =>'Le mot de pass n´est pas identique',
-'Failed to delete %s persons'=>'la supression du contact %s a échouée',
-'Moved %s persons to trash'=>'Le contact %s est déplacé dans la corbeille',
+'Failed to delete %s people'=>'la supression du contact %s a échouée',
+'Moved %s people to trash'=>'Le contact %s est déplacé dans la corbeille',
 
 ### ../pages/proj.inc   ###
 'Issues'                      =>'Problèmes',
@@ -638,7 +638,7 @@ $g_lang_table= array(
 ### ../pages/person.inc   ###
 'Language'                    =>'Langue',
 'passwords don´t match'       =>'Mot de passe pas identique',
-'Select some persons to edit' =>'Sélectionnez un contact  modifier',
+'Select some people to edit' =>'Sélectionnez un contact  modifier',
 'Could not get Person'        =>'La personne n´a pu être prise',
 
 ### ../pages/proj.inc   ###
@@ -673,7 +673,7 @@ $g_lang_table= array(
 ### ../db/class_project.inc   ###
 'insufficient rights (not in project)'=>'Droits insuffisant (pas dans le projet)',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 '(adjusted)'                  =>'(ajusté)',
 
 ### ../lists/list_projectchanges.inc   ###
@@ -759,7 +759,7 @@ $g_lang_table= array(
 'Searching'                   =>'Cherche',
 'Found %s companies'          =>'%s companies trouvées',
 'Found %s projects'           =>'%s projets trouvées',
-'Found %s persons'            =>'%s contacts trouvées',
+'Found %s people'            =>'%s contacts trouvées',
 'Found %s tasks'              =>'%s tâches trouvées',
 'Found %s comments'           =>'%s commentaires trouvées',
 
@@ -877,9 +877,9 @@ $g_lang_table= array(
 ### ../pages/person.inc   ###
 'relating to %s|page title add on listing pages relating to current user'=>'en relation a %s',
 'With Account|page option'    =>'Avec compte',
-'All Persons|page option'     =>'Tous les contacts',
+'All People|page option'     =>'Tous les contacts',
 'People/Project Overview'     =>'Contact/apercu projet',
-'Persons|Pagetitle for person list'=>'Contacts',
+'People|Pagetitle for person list'=>'Contacts',
 'relating to %s|Page title Person list title add on'=>'en relation a %s',
 'admin view|Page title add on if admin'=>'Vue admin',
 'Edit this person|Tooltip for page function'=>'Modifier ce contact',
@@ -1055,10 +1055,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Modifier membre du projet',
 'View anything|a user right'  =>'Tout voir',
 'Edit anything|a user right'  =>'Tout modifier',
-'Create Persons|a user right' =>'Créer contact',
+'Create People|a user right' =>'Créer contact',
 'Edit Presons|a user right'   =>'Modifier contact',
-'Delete Persons|a user right' =>'Effacer contact',
-'View all Persons|a user right'=>'Voir tous les contacts',
+'Delete People|a user right' =>'Effacer contact',
+'View all People|a user right'=>'Voir tous les contacts',
 'Edit user rights|a user right'=>'Modifier les droits des contacts',
 'Edit own profile|a user right'=>'Modifier son profil',
 'Create Companies|a user right'=>'Créer companie',
@@ -1197,7 +1197,7 @@ $g_lang_table= array(
 'Yesterday'                   =>'Hier',
 
 ### ../std/constant_names.inc   ###
-'Edit Persons|a user right'   =>'Modifier contact',
+'Edit People|a user right'   =>'Modifier contact',
 ### ../db/class_comment.inc   ###
 'Details'                     =>'Détails',
 
@@ -1218,7 +1218,7 @@ $g_lang_table= array(
 'Flush Notifications'         =>'Envoi email de notifications',
 
 ### ../pages/company.inc   ###
-'related Persons'             =>'Contacts en relation',
+'related People'             =>'Contacts en relation',
 
 ### ../pages/file.inc   ###
 'Could not access parent task.'=>'La tâche parente n´est pas accessible',
@@ -1237,8 +1237,8 @@ $g_lang_table= array(
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'Tant que le contact n´a pas le droit de modifier son profil, il n y a pas de sens de lui envoy une activation',
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'Envoyer une activation n´a pas de sens tant que le contact ne peut pas se connecter',
 'Activation mail has been sent.'=>'Le email d´activation  été envoyé',
-'Select some persons to notify'=>'Sélectionner les contacts  notifiés',
-'Failed to mail %s persons'=>'Echec de l´envoi de mail aux contacts %s',
+'Select some people to notify'=>'Sélectionner les contacts  notifiés',
+'Failed to mail %s people'=>'Echec de l´envoi de mail aux contacts %s',
 'Sent notification to %s person(s)'=>'Envoi de la notification  % contacts',
 
 ### ../pages/proj.inc   ###
@@ -1306,7 +1306,7 @@ $g_lang_table= array(
 ### ../render/render_list.inc   ###
 'modified by unknown'         =>'Modifié par inconnu',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'last login'                  =>'dernière session',
 'Profile|column header'       =>'Profile',
 'Account settings for user (do not confuse with project rights)'=>'Configuration de comptes utilisateur',
@@ -1488,9 +1488,9 @@ $g_lang_table= array(
 'List Prospective Clients'    =>'Liste des clients potentiel',
 'List Suppliers'              =>'Liste des fournisseurs',
 'List Partners'               =>'Liste des partenaires',
-'Remove persons from company' =>'Enlever des personnes des companies',
+'Remove people from company' =>'Enlever des personnes des companies',
 'List Employees'              =>'Liste des employés',
-'List Deleted Persons'        =>'Liste des personnes supprimées',
+'List Deleted People'        =>'Liste des personnes supprimées',
 'Filter errors.log'           =>'Filtrer errors.log',
 'Delete errors.log'           =>'Supprimer errors.log',
 
@@ -1574,7 +1574,7 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'Employees|Pagetitle for person list'=>'Employés',
-'Contact Persons|Pagetitle for person list'=>'Personnes de contact',
+'Contact People|Pagetitle for person list'=>'Personnes de contact',
 'Deleted People'              =>'Personne effacé',
 'notification:'               =>'notification:',
 'no company'                  =>'pas de companie',
@@ -1621,7 +1621,7 @@ $g_lang_table= array(
 'Released Versions'           =>'Versions révisées',
 'New released Version'      =>'Nouvelle objectif révisé',
 'Tasks resolved in upcoming version'=>'Tâches résolue dans la prochaine version',
-'Found no persons to add. Go to `People` to create some.'=>'Pas de personne trouvée',
+'Found no people to add. Go to `People` to create some.'=>'Pas de personne trouvée',
 'Select a project to edit description'=>'Séléectionner un projet pour modifier la description',
 
 ### ../pages/task_more.inc.php   ###
@@ -1771,7 +1771,7 @@ $g_lang_table= array(
 'Select / Deselect'           =>'Select / Deselect',
 
 ### ../render/render_misc.inc.php   ###
-'Other Persons|page option'   =>'Autre contacts',
+'Other People|page option'   =>'Autre contacts',
 'Clients|page option'         =>'Clients',
 'Prospective Clients|page option'=>'Clients potentiel',
 'Suppliers|page option'       =>'Fournisseurs',
@@ -1784,7 +1784,7 @@ $g_lang_table= array(
 'Efforts|Project option'      =>'Efforts',
 'History|Project option'      =>'Historique',
 'Employees|page option'       =>'Employés',
-'Contact Persons|page option' =>'Contacts',
+'Contact People|page option' =>'Contacts',
 'Deleted|page option'         =>'Supprimé',
 'All Companies|page option'   =>'Toutes les companies',
 '%s hours'                    =>'%s heures',
@@ -1841,7 +1841,7 @@ $g_lang_table= array(
 'Client|profile name'         =>'Client',
 'Client trusted|profile name' =>'Partenaire',
 'Guest|profile name'          =>'Invité',
-'Create & Edit Persons|a user right'=>'Créer et modifier les personnes',
+'Create & Edit People|a user right'=>'Créer et modifier les personnes',
 'done|resolve reason'         =>'achevé',
 'fixed|resolve reason'        =>'fixé',
 'works_for_me|resolve reason' =>'travail pour moi',

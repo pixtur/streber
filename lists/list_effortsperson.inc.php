@@ -47,7 +47,7 @@ class ListBlock_effortsPerson extends ListBlock
 			$effort_status = true;
 		}*/
 		
-		$efforts = Effort::getEffortPersons($this->query_options);
+		$efforts = Effort::getEffortPeople($this->query_options);
 		
 		/*foreach($efforts as $e){
 			$e->setStatus($effort_status);
@@ -125,7 +125,7 @@ class ListBlockCol_EffortPersonRole extends ListBlockCol
 		}
 		
 		if($project = Project::getVisibleById($obj->project)){
-			if($pp = $project->getProjectPersons(array('person_id'=>$obj->person))){
+			if($pp = $project->getProjectPeople(array('person_id'=>$obj->person))){
 				$role = $g_user_profile_names[intval($pp[0]->role)];
 			}
 			else{

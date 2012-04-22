@@ -37,7 +37,7 @@ CREATE TABLE `comment` (
   KEY `task` (`task`),
   FULLTEXT KEY `name` (`name`,`description`),
   FULLTEXT KEY `name_2` (`name`,`description`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE `company` (
   FULLTEXT KEY `comments_2` (`comments`),
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `comments_3` (`comments`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE `db` (
   `created` datetime NOT NULL default '0000-00-00 00:00:00',
   `updated` datetime default NULL,
   `version_streber_required` varchar(12) NOT NULL default ''
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,7 @@ CREATE TABLE `effort` (
   PRIMARY KEY  (`id`),
   KEY `project` (`project`),
   KEY `task` (`task`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -123,7 +123,7 @@ CREATE TABLE `employment` (
   KEY `person` (`person`),
   KEY `client` (`company`),
   KEY `pub_level` (`pub_level`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE `file` (
   PRIMARY KEY  (`id`),
   KEY `parent_item` (`parent_item`),
   KEY `is_latest` (`is_latest`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -175,7 +175,7 @@ CREATE TABLE `issue` (
   KEY `task_2` (`task`),
   KEY `task_3` (`task`),
   FULLTEXT KEY `plattform` (`plattform`,`os`,`version`,`production_build`,`steps_to_reproduce`,`expected_result`,`suggested_solution`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -217,7 +217,7 @@ CREATE TABLE `itemchange` (
   PRIMARY KEY  (`id`),
   KEY `item` (`item`,`modified_by`),
   KEY `modified` (`modified`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -240,7 +240,7 @@ CREATE TABLE `itemperson` (
   `created` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
   KEY `item` (`item`,`person`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -308,7 +308,7 @@ CREATE TABLE `person` (
   FULLTEXT KEY `name` (`name`,`nickname`,`tagline`,`description`),
   FULLTEXT KEY `name_2` (`name`,`nickname`,`tagline`,`description`),
   FULLTEXT KEY `name_3` (`name`,`nickname`,`tagline`,`description`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -341,7 +341,7 @@ CREATE TABLE `project` (
   FULLTEXT KEY `name` (`name`,`status_summary`,`description`),
   FULLTEXT KEY `name_2` (`name`,`status_summary`,`description`),
   FULLTEXT KEY `name_3` (`name`,`status_summary`,`description`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -370,7 +370,7 @@ CREATE TABLE `projectperson` (
   KEY `person` (`person`),
   KEY `proj_rights` (`proj_rights`),
   KEY `person_2` (`person`,`project`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -422,7 +422,7 @@ CREATE TABLE `task` (
   FULLTEXT KEY `name` (`name`,`short`,`description`),
   FULLTEXT KEY `name_2` (`name`,`short`,`description`),
   FULLTEXT KEY `name_3` (`name`,`short`,`description`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 
 -- --------------------------------------------------------
 
@@ -440,5 +440,5 @@ CREATE TABLE `taskperson` (
   `forward_comment` text,
   PRIMARY KEY  (`id`),
   KEY `person` (`person`,`task`)
-) TYPE=MyISAM; 
+) ENGINE=MyISAM; 
 

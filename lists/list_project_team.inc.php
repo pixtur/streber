@@ -4,7 +4,7 @@
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
 /**
- * derived ListBlock-class for listing project persons
+ * derived ListBlock-class for listing project people
  *
  * @includedby:     pages/company.inc, pages/person.inc, pages/proj.inc
  *
@@ -21,8 +21,8 @@ class ListBlock_projectTeam extends ListBlock
     {
 		parent::__construct($args);
 
-        $this->id='projectpersons';
-		$this->title=__("Your related persons");
+        $this->id='projectpeople';
+		$this->title=__("Your related people");
 
         $this->add_col( new ListBlockColSelect());
    		/*$this->add_col( new ListBlockColFormat(array(
@@ -39,7 +39,7 @@ class ListBlock_projectTeam extends ListBlock
    		#$this->add_col( new ListBlockColFormat(array(
 		#	'key'=>'role',
 		#	'name'=>__("Rights"),
-		#	'tooltip'=>__("Persons rights in this project"),
+		#	'tooltip'=>__("People rights in this project"),
 		#	'format'=>'{?role}'
 		#)));
    		/*
@@ -156,8 +156,8 @@ class ListBlock_projectTeam extends ListBlock
 			$this->query_options['visible_only'] = true;
         }
 
-        #$team_members = &$project->getProjectPersons($this->query_options['order_by'], $this->query_options['alive_only'], $this->query_options['visible_only']);
-		$team_members = $project->getProjectPersons($this->query_options);
+        #$team_members = &$project->getProjectPeople($this->query_options['order_by'], $this->query_options['alive_only'], $this->query_options['visible_only']);
+		$team_members = $project->getProjectPeople($this->query_options);
         $this->render_list($team_members);
     }
 }

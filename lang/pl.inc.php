@@ -118,7 +118,7 @@ $g_lang_table= array(
 'Nickname'                    =>'Nick',  # line 47
 'only required if user can login (e.g. pixtur)'=>'wymagane jedynie, gdy użytkownik może się zalogować (np. pixtur)',  # line 48
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'Adres/Informacje dodatkowe',  # line 59
 
 ### ../db/class_person.inc.php   ###
@@ -278,9 +278,9 @@ $g_lang_table= array(
 'Reactivated %s projects'     =>'Reaktywacja %s projektów',  # line 1769
 'Edit Project'                =>'Edytuj projekt',  # line 1801
 'Select new team members'     =>'Zaznacz nowych członków zespołu',  # line 1803
-'Found no persons to add. Go to `People` to create some.'=>'Nie znaleziono osób do dodania. Przejdź do `Osoby` w celu dodania kilku.',  # line 1847
+'Found no people to add. Go to `People` to create some.'=>'Nie znaleziono osób do dodania. Przejdź do `Osoby` w celu dodania kilku.',  # line 1847
 'Add'                         =>'Dodanie',  # line 1859
-'No persons selected...'      =>'Brak zaznaczonych osób...',  # line 1885
+'No people selected...'      =>'Brak zaznaczonych osób...',  # line 1885
 'Could not access person by id'=>'Brak dostępu do osoby poprzez ID',  # line 1894
 'NOTE: reanimated person as team-member'=>'UWAGA: Ponowne przypisanie osoby jako członka zespołu',  # line 1932
 'NOTE: person already in project'=>'UWAGA: Osoba już jest przypisana do projektu',  # line 1936
@@ -390,7 +390,7 @@ $g_lang_table= array(
 ### ../lists/list_companies.inc.php   ###
 'related companies'           =>'powiązane firmy',  # line 22
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Nazwa skrócona',  # line 27
 'Shortnames used in other lists'=>'Skrócone nazwy używane w innych listach',  # line 28
 
@@ -449,16 +449,16 @@ $g_lang_table= array(
 'Completed tasks: %s'         =>'Zadania zakończone: %s',  # line 459
 'date not set'                =>'brak terminu',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Prywatne',  # line 44
 'Mobil'                       =>'Telefon komórkowy',  # line 49
 'Office'                      =>'Biuro',  # line 54
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'ostatni login',  # line 69
 'Edit person'                 =>'Edycja osoby',  # line 100
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Usunięcie osoby',  # line 113
 'Create new person'           =>'Utworzenie nowej osoby',  # line 119
 'Profile|column header'       =>'Profil',  # line 141
@@ -469,14 +469,14 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Priorytet jest %s',  # line 255
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'ostatnie zmiany',  # line 225
 'changes since YOUR last logout'=>'zmiany od TWOJEGO ostatniego wylogowania się',  # line 227
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'Osoby powiązane z tobą',  # line 25
+'Your related people'        =>'Osoby powiązane z tobą',  # line 25
 'Rights'                      =>'Uprawnienia',  # line 40
-'Persons rights in this project'=>'Uprawnienia osób w tym projekcie',  # line 41
+'People rights in this project'=>'Uprawnienia osób w tym projekcie',  # line 41
 'Edit team member'            =>'Edycja członka zespołu',  # line 98
 'Add team member'             =>'Dodanie członka zespołu',  # line 105
 'Remove person from team'     =>'Usunięcie osoby z zespołu',  # line 112
@@ -674,7 +674,7 @@ $g_lang_table= array(
 'View Company'                =>'Wyświetlenie firmy',  # line 562
 'View multiple efforts'       =>'Wyświetlenie wielu wysiłków',  # line 569
 'Delete Company'              =>'Usunięcie firmy',  # line 589
-'List Persons'                =>'Lista osób',  # line 618
+'List People'                =>'Lista osób',  # line 618
 'View Person'                 =>'Wyświetlenie osoby',  # line 624
 'Edit Person'                 =>'Edycja osoby',  # line 638
 'Edit user rights'            =>'Edycja uprawnień osoby',  # line 653
@@ -695,9 +695,9 @@ $g_lang_table= array(
 'System Information'          =>'Informacje o systemie',  # line 799
 'PhpInfo'                     =>'PhpInfo',  # line 809
 'Search'                      =>'Wyszukiwanie',  # line 820
-'Remove persons from company' =>'Usunięcie osób z firmy',  # line 845
+'Remove people from company' =>'Usunięcie osób z firmy',  # line 845
 'List Employees'              =>'Lista pracowników',  # line 872
-'List Deleted Persons'        =>'Lista osób usuniętych',  # line 885
+'List Deleted People'        =>'Lista osób usuniętych',  # line 885
 'Mark all items as viewed'    =>'Oznacz wszystko jako przeczytane',  # line 1048
 'View Projects of Person'     =>'Wyświetl projekty osoby',  # line 1067
 'View Task of Person'         =>'Wyświetl zadania osoby',  # line 1078
@@ -714,7 +714,7 @@ $g_lang_table= array(
 'Edit Company'                =>'Edycja firmy',  # line 523
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Asygnowanie osób',  # line 228
+'Link People'                =>'Asygnowanie osób',  # line 228
 
 ### ../pages/error.inc.php   ###
 'Error'                       =>'Błąd',  # line 34
@@ -771,25 +771,25 @@ $g_lang_table= array(
 
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Utworzenie nowego projektu dla tej firmy',  # line 139
-'Add existing persons to this company'=>'Dodanie istniejącej osoby do tej firmy',  # line 146
+'Add existing people to this company'=>'Dodanie istniejącej osoby do tej firmy',  # line 146
 'People'                     =>'Osoby',  # line 147
 'Adress'                      =>'Adres',  # line 169
 'Fax'                         =>'Faks',  # line 178
 'Web'                         =>'Web',  # line 183
 'Intra'                       =>'Intranet',  # line 186
 'Mail'                        =>'Mail',  # line 189
-'related Persons'             =>'Osoby powiązane',  # line 204
+'related People'             =>'Osoby powiązane',  # line 204
 'link existing Person'        =>'powiązanie do istniejącej osoby',  # line 235
 'create new'                  =>'utworzenie nowej',  # line 237
-'no persons related'          =>'brak powiązanych osób',  # line 240
+'no people related'          =>'brak powiązanych osób',  # line 240
 'Active projects'             =>'Aktywne projekty',  # line 297
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>'Podpowiedź: wyedytuj istniejące projekty i zmień ustawienia firmy',  # line 307
 'no projects yet'             =>'nie ma jeszcze żadnych projektów',  # line 310
 'Closed projects'             =>'Projekty zamknięte',  # line 335
 'Create another company after submit'=>'Utworzenie następnej firmy po zatwierdzeniu obecnej',  # line 430
 'Edit %s'                     =>'Edycja %s',  # line 524
-'Add persons employed or related'=>'Dodanie osób zatrudnionych lub powiązanych',  # line 525
-'NOTE: No persons selected...'=>'UWAGA: Brak zaznaczonych osób...',  # line 578
+'Add people employed or related'=>'Dodanie osób zatrudnionych lub powiązanych',  # line 525
+'NOTE: No people selected...'=>'UWAGA: Brak zaznaczonych osób...',  # line 578
 'NOTE person already related to company'=>'UWAGA: Osoba jest już powiązana z firmą',  # line 605
 'Select some companies to delete'=>'Zaznacz firmy do skasowania',  # line 627
 'WARNING: Failed to delete %s companies'=>'OSTRZEŻENIE: Usunięcie %s firmy/firm nie powiodło się',  # line 647
@@ -976,20 +976,20 @@ $g_lang_table= array(
 'Active People'               =>'Osoby aktywne',  # line 60
 'relating to %s|page title add on listing pages relating to current user'=>'przypisanych do %s',  # line 62
 'People/Project Overview'     =>'Osoby/Streszczenie projektu',  # line 100
-'no related persons'          =>'brak powiązanych osób',  # line 189
-'Persons|Pagetitle for person list'=>'Osoby',  # line 135
+'no related people'          =>'brak powiązanych osób',  # line 189
+'People|Pagetitle for person list'=>'Osoby',  # line 135
 'relating to %s|Page title Person list title add on'=>'powiązane z %s',  # line 137
 'admin view|Page title add on if admin'=>'widok administratora',  # line 140
 'without account'             =>'bez konta',  # line 165
 'with account'                =>'z kontem',  # line 183
 'employees'                   =>'zatrudniony',  # line 201
 'Employees|Pagetitle for person list'=>'Pracownicy',  # line 210
-'contact persons'             =>'osoba kontaktowa',  # line 220
+'contact people'             =>'osoba kontaktowa',  # line 220
 'Edit this person|Tooltip for page function'=>'Edycja tej osoby',  # line 234
 'Profile|Page function edit person'=>'Profil',  # line 235
 'Edit user rights|Tooltip for page function'=>'Edycja uprawnień użytkownika',  # line 241
 'User Rights|Page function for edit user rights'=>'Uprawnienia użytkownika',  # line 242
-'Contact Persons|Pagetitle for person list'=>'Osoby kontaktowe',  # line 286
+'Contact People|Pagetitle for person list'=>'Osoby kontaktowe',  # line 286
 'Mobile|Label mobilephone of person'=>'Telefon komórkowy',  # line 290
 'Office|label for person'     =>'Biurowe',  # line 293
 'Private|label for person'    =>'Prywatne',  # line 296
@@ -1020,7 +1020,7 @@ $g_lang_table= array(
 'no company'                  =>'brak firmy',  # line 608
 'Person details'              =>'Szczegóły osoby',  # line 618
 'Person with account (can login)|form label'=>'Osoba z kontem (może zalogować się)',  # line 618
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Dodaj zadanie dla tych osób (opcjonalnie tworząc w locie projekt i wysiłek)|Tooltip for page function',  # line 627
+'Add task for this people (optionally creating project and effort on the fly)|Tooltip for page function'=>'Dodaj zadanie dla tych osób (opcjonalnie tworząc w locie projekt i wysiłek)|Tooltip for page function',  # line 627
 'Add note|Page function person'=>'Dodaj notatkę|Page function person',  # line 628
 'Edit profile|Page function edit person'=>'Edytuj profil|Page function edit person',  # line 642
 'Edit user rights|Page function for edit user rights'=>'Edytuj uprawnienia użytkownika|Page function for edit user rights',  # line 650
@@ -1056,11 +1056,11 @@ $g_lang_table= array(
 'Assigne to project|form label'=>'Przypisz do projektu',  # line 980
 'A notification / activation  will be mailed to <b>%s</b> when you log out.'=>'Potwierdzenie / aktywacja zostanie wysłana do <b>%s</b>, gdy wylogujesz się.',  # line 983
 'WARNING: could not insert object'=>'OSTRZEŻENIE: nie można wstawić obiektu',  # line 1004
-'Select some persons to delete'=>'Zaznacz osoby do usunięcia',  # line 1048
+'Select some people to delete'=>'Zaznacz osoby do usunięcia',  # line 1048
 'Options'                     =>'Opcje',  # line 1056
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'<b>%s</b> został przypisany do projektów. Można jednak wyłączyć jego prawa do logowania się.',  # line 1065
-'WARNING: Failed to delete %s persons'=>'OSTRZEŻENIE: Usunięcie %s osoby/osób nie powiodło się',  # line 1077
-'Moved %s persons to trash'=>'Przeniesionoo %s osób do kosza',  # line 1080
+'WARNING: Failed to delete %s people'=>'OSTRZEŻENIE: Usunięcie %s osoby/osób nie powiodło się',  # line 1077
+'Moved %s people to trash'=>'Przeniesionoo %s osób do kosza',  # line 1080
 'Projects|Page title add on'  =>'Projekty',  # line 1095
 'Insufficient rights'         =>'Niewystarczające uprawnienia',  # line 1099
 'Sending notifactions requires an email-address.'=>'Wysłanie potwierdzeń wymaga adresu e-mail',  # line 1105
@@ -1068,11 +1068,11 @@ $g_lang_table= array(
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'Wysłanie maila aktywującego nie ma sensu dopóki użytkownik nie mam możliwości do zalogowania się.',  # line 1116
 'Activation mail has been sent.'=>'Mail aktywujący',  # line 1127
 'Sending notification e-mail failed.'=>'Wysłanie maila z potwierdzeniem nie powiodło się.',  # line 1130
-'Select some persons to notify'=>'Zaznacz kilka osób do powiadomienia',  # line 1151
-'WARNING: Failed to mail %s persons'=>'OSTRZEŻENIE: Wysłanie maila do %s osoby/osób nie powiodło się',  # line 1176
+'Select some people to notify'=>'Zaznacz kilka osób do powiadomienia',  # line 1151
+'WARNING: Failed to mail %s people'=>'OSTRZEŻENIE: Wysłanie maila do %s osoby/osób nie powiodło się',  # line 1176
 'Sent notification to %s person(s)'=>'Wysłanie potwierdzeń do %s osoby/osób',  # line 1179
 'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'=>'Zmieniony profil <b>nie wpływa na role osoby w już istniejących projektach</b>! Takie zmiany należy dokonać również w istniejących prjektach przypisanych do osoby.',  # line 1181
-'Select some persons to edit' =>'Zaznacz osoby do edycji',  # line 1205
+'Select some people to edit' =>'Zaznacz osoby do edycji',  # line 1205
 'Could not get Person'        =>'Nie można znaleźć osoby',  # line 1209
 'Edit Person|page type'       =>'Edycja osoby',  # line 1225
 'Malformed activation url'    =>'Nieprawidłowy url aktywacyjny',  # line 1225
@@ -1091,11 +1091,11 @@ $g_lang_table= array(
 'no tasks yet'                =>'nie wprowadzono jeszcze zadań',  # line 1372
 'Person %s created'           =>'Osoba %s została utworzona',  # line 1416
 'Could not insert object'     =>'Nie można zapisać obiektu',  # line 1419
-'Failed to delete %s persons' =>'Usunięcie %s osoby/osób nie powiodło się',  # line 1492
+'Failed to delete %s people' =>'Usunięcie %s osoby/osób nie powiodło się',  # line 1492
 '3 weeks'                     =>'3 tygodnie',  # line 1534
 '1 month'                     =>'1 miesiąc',  # line 1554
 'prior'                       =>'wcześniej',  # line 1574
-'Failed to mail %s persons'   =>'Wysłanie maila do %s osoby/osób nie powiodło się',  # line 1591
+'Failed to mail %s people'   =>'Wysłanie maila do %s osoby/osób nie powiodło się',  # line 1591
 'Registering is not enabled'  =>'Rejestracja nie jest włączona',  # line 1755
 'Please provide information, why you want to register.'=>'Proszę poinformować o powodzie rejestracji',  # line 1760
 'Register as a new user'      =>'Zarejestruj się jako nowy użytkownik',  # line 1768
@@ -1146,7 +1146,7 @@ $g_lang_table= array(
 'Searching'                   =>'Trwa szukanie',  # line 168
 'Found %s companies'          =>'Znaleziono %s firm',  # line 179
 'Found %s projects'           =>'Znaleziono %s projektów',  # line 188
-'Found %s persons'            =>'Znaleziono %s osób',  # line 198
+'Found %s people'            =>'Znaleziono %s osób',  # line 198
 'Found %s tasks'              =>'Znaleziono %s zadań',  # line 213
 'Found %s comments'           =>'Znaleziono %s komentarzy',  # line 224
 'Sorry. Could not find anything.'=>'Niestety. Nie znaleziono podanej frazy.',  # line 230
@@ -1399,10 +1399,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Edycja zespołu projektu',  # line 65
 'View anything|a user right'  =>'Wyświetlanie wszystkiego',  # line 66
 'Edit anything|a user right'  =>'Edytowanie wszystkiego',  # line 67
-'Create Persons|a user right' =>'Dodawanie osób',  # line 69
-'Create & Edit Persons|a user right'=>'Tworzenie i edycja osób',  # line 70
-'Delete Persons|a user right' =>'Usuwanie osób',  # line 71
-'View all Persons|a user right'=>'Wyświetlanie wszystkich osób',  # line 72
+'Create People|a user right' =>'Dodawanie osób',  # line 69
+'Create & Edit People|a user right'=>'Tworzenie i edycja osób',  # line 70
+'Delete People|a user right' =>'Usuwanie osób',  # line 71
+'View all People|a user right'=>'Wyświetlanie wszystkich osób',  # line 72
 'Edit user rights|a user right'=>'Edycja uprawnienia użytkownika',  # line 73
 'Edit own profile|a user right'=>'Edycja własnego profilu',  # line 74
 'Enable Efforts|Project setting'=>'Włącz wysiłki',  # line 74
@@ -1538,7 +1538,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'Z kontem',  # line 180
-'All Persons|page option'     =>'Wszystkie osoby',  # line 186
+'All People|page option'     =>'Wszystkie osoby',  # line 186
 'Companies|page option'       =>'Firmy',  # line 239
 'Issues'                      =>'Zdarzenia',  # line 260
 'Tasks|Project option'        =>'Zadania',  # line 265
@@ -1550,9 +1550,9 @@ $g_lang_table= array(
 'Versions|Project option'     =>'Wydania',  # line 328
 'Versions|Project option'     =>'Wersje',  # line 330
 'Docu|Project option'         =>'Dokumentacja',  # line 336
-'Other Persons|page option'   =>'Inne osoby',  # line 365
+'Other People|page option'   =>'Inne osoby',  # line 365
 'Employees|page option'       =>'Pracownicy',  # line 369
-'Contact Persons|page option' =>'Osoby kontaktowe',  # line 373
+'Contact People|page option' =>'Osoby kontaktowe',  # line 373
 'Deleted|page option'         =>'Usunięte',  # line 377
 'All Companies|page option'   =>'Wszystkie firmy',  # line 388
 'Clients|page option'         =>'Klienci',  # line 392
@@ -1567,7 +1567,7 @@ $g_lang_table= array(
 '%I:%M%P|strftime format string'=>'%H:%M',  # line 592
 '%a %b %e, %Y %I:%M%P|strftime format string'=>'%Y-%m-%d %H:%M',  # line 601
 'Topics|Project option'       =>'Tematy|Project option',  # line 616
-'Persons|page option'         =>'Osoby',  # line 619
+'People|page option'         =>'Osoby',  # line 619
 'Calculation|Project option'  =>'Kalkulacja|Project option',  # line 657
 'Changes|Project option'      =>'Zmiany|Project option',  # line 665
 '%s min'                      =>'%s min',  # line 696
@@ -1613,7 +1613,7 @@ $g_lang_table= array(
 ### ../lists/list_versions.inc.php   ###
 '%s required'                 =>'%s wymagane',  # line 265
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Nickname|column header'      =>'Nick',  # line 202
 'Name|column header'          =>'Nazwisko',  # line 223
 
@@ -1715,7 +1715,7 @@ $g_lang_table= array(
 'For Project|form label'      =>'Do projektu',  # line 3260
 'New project|form label'      =>'Nowy projekt',  # line 3265
 'Project name|form label'     =>'Nazwa projektu',  # line 3266
-'ERROR: could not get assigned persons'=>'BŁĄD: nie znaleziono przypisanych osób',  # line 3282
+'ERROR: could not get assigned people'=>'BŁĄD: nie znaleziono przypisanych osób',  # line 3282
 'Also assign to'              =>'Przypisz również do',  # line 3318
 'Book effort after submit'    =>'Rejestracja wysiłków po wprowadzeniu',  # line 3322
 'ERROR: could not get task'   =>'BŁĄD: nie znaleziono zadania',  # line 3362

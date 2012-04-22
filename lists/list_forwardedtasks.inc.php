@@ -49,9 +49,9 @@ class ListBlock_forwarded_tasks extends ListBlock
 		$this->query_options['forward'] = 1;
 		$this->query_options['state'] = 1;
 				
-		$task_persons = TaskPerson::getTaskPersons($this->query_options);
+		$task_people = TaskPerson::getTaskPeople($this->query_options);
 		
-        $this->render_list($task_persons);
+        $this->render_list($task_people);
     }
 }
 

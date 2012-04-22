@@ -472,7 +472,7 @@ $g_theme_names= array_keys($g_themes);
 *
 * $profile=$g_user_profiles[ $g_user_profile_names[$person->profile] ];
 *
-* when initializing projectPersons, all defined (and useful) settings of
+* when initializing projectPeople, all defined (and useful) settings of
 * the profile are copied. To avoid reinitiating, comment the lines.
 */
 

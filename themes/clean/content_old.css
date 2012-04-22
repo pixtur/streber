@@ -1026,7 +1026,7 @@ div.block {
     }
 
     /* ---- team list ----------------*/
-    table#projectpersons span.person{
+    table#projectpeople span.person{
      display:block;
      float:left;
      overflow:hidden;
@@ -1035,7 +1035,7 @@ div.block {
 
 
     }
-    table#projectpersons td{
+    table#projectpeople td{
       padding-right:5px;
       vertical-align:bottom;
     }

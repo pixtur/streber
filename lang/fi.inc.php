@@ -98,7 +98,7 @@ $g_lang_table= array(
 'Nickname'                    =>'Kirjautumisnimi',  # line 44
 'only required if user can login (e.g. pixtur)'=>'vaaditaan vain kirjautumista varten',  # line 45
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'Nimilappu',  # line 62
 
 ### ../db/class_person.inc.php   ###
@@ -316,7 +316,7 @@ $g_lang_table= array(
 ### ../lists/list_companies.inc.php   ###
 'related companies'           =>'Liitetyt asiakkaat',  # line 22
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Nimilyhennys',  # line 29
 'Shortnames used in other lists'=>'Nimilyhennystä käytetään muissa listoissa',  # line 30
 
@@ -420,7 +420,7 @@ $g_lang_table= array(
 ### ../lists/list_versions.inc.php   ###
 'Task name. More Details as tooltips'=>'Tehtävän nimi.',  # line 53
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Yksityinen',  # line 47
 'Mobil'                       =>'Mobiili',  # line 52
 'Office'                      =>'Toimisto',  # line 57
@@ -428,14 +428,14 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Companies'                   =>'Asiakkaat',  # line 240
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'viimeksi kirjautunut',  # line 72
 'Edit person'                 =>'Muokkaa henkilöä',  # line 103
 
 ### ../pages/_handles.inc.php   ###
 'Edit user rights'            =>'Muokkaa käyttöoikeuksia',  # line 922
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Poista henkilö',  # line 116
 'Create new person'           =>'Luo uusi henkilö',  # line 122
 'Nickname|column header'      =>'Käyttäjätunnus',  # line 202
@@ -448,14 +448,14 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Prioritetti on %s',  # line 255
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'Viimeiset muutokset',  # line 332
 'changes since YOUR last logout'=>'Viimeisimmät muutokset käyntisi jälkeen',  # line 334
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'Projektin henkilöt',  # line 25
+'Your related people'        =>'Projektin henkilöt',  # line 25
 'Rights'                      =>'Oikeudet',  # line 40
-'Persons rights in this project'=>'Henkilön oikeudet tässä projektissa',  # line 41
+'People rights in this project'=>'Henkilön oikeudet tässä projektissa',  # line 41
 'Edit team member'            =>'Muokkaa tiimin jäsentä',  # line 98
 'Add team member'             =>'Lisää tiimin jäsen',  # line 105
 'Remove person from team'     =>'Poista henkilö tiimistä',  # line 112
@@ -674,13 +674,13 @@ $g_lang_table= array(
 'Delete Company'              =>'Poista yritys',  # line 826
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Linkitä henkilöitä',  # line 566
+'Link People'                =>'Linkitä henkilöitä',  # line 566
 
 ### ../pages/_handles.inc.php   ###
-'Remove persons from company' =>'Poista henkilö yrityksestä',  # line 845
-'List Persons'                =>'Listaa henkilöt',  # line 879
+'Remove people from company' =>'Poista henkilö yrityksestä',  # line 845
+'List People'                =>'Listaa henkilöt',  # line 879
 'List Employees'              =>'Listaa työntekijät',  # line 872
-'List Deleted Persons'        =>'Listaa poistetut henkilöt',  # line 885
+'List Deleted People'        =>'Listaa poistetut henkilöt',  # line 885
 'View Person'                 =>'Näytä henkilöt',  # line 891
 
 ### ../pages/person.inc.php   ###
@@ -800,18 +800,18 @@ $g_lang_table= array(
 'Edit this company'           =>'Muokkaa tätä yritystä',  # line 458
 'Create new person for this company'=>'Luo uusi henkilö tähän yritykseen',  # line 470
 'Create new project for this company'=>'Luo uusi projekti tälle yritykselle',  # line 477
-'Add existing persons to this company'=>'Lisää jo olemassa oleva henkilö tähän yritykseen',  # line 484
+'Add existing people to this company'=>'Lisää jo olemassa oleva henkilö tähän yritykseen',  # line 484
 'People'                     =>'Henkilöt',  # line 485
 'Adress'                      =>'Osoite',  # line 507
 'Fax'                         =>'Faksi',  # line 516
 'Web'                         =>'WWW',  # line 521
 'Intra'                       =>'Intra',  # line 524
 'Mail'                        =>'Sähköposti',  # line 527
-'related Persons'             =>'liittyvät henkilöt',  # line 542
+'related People'             =>'liittyvät henkilöt',  # line 542
 'Remove person from company'  =>'Poista henkilö yrityksestä',  # line 572
 'link existing Person'        =>'linkitä henkilö',  # line 580
 'create new'                  =>'luo uusi',  # line 582
-'no persons related'          =>'ei liittyviä henkilöitä',  # line 585
+'no people related'          =>'ei liittyviä henkilöitä',  # line 585
 'Active projects'             =>'Aktiiviset projektit',  # line 643
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>'Vihje: muokkaa yritys-asetuksien kautta olemassa olevia projekteja',  # line 653
 'no projects yet'             =>'ei projekteja',  # line 656
@@ -823,10 +823,10 @@ $g_lang_table= array(
 ### ../pages/company.inc.php   ###
 'Create another company after submit'=>'Luo lisää uusia',  # line 788
 'Edit %s'                     =>'Muokkaa %s',  # line 891
-'Add persons employed or related'=>'Lisää henkilöitä tai liitä toisia',  # line 892
+'Add people employed or related'=>'Lisää henkilöitä tai liitä toisia',  # line 892
 
 ### ../pages/proj.inc.php   ###
-'No persons selected...'      =>'Henkilöitä ei valittuna',  # line 2083
+'No people selected...'      =>'Henkilöitä ei valittuna',  # line 2083
 
 ### ../pages/company.inc.php   ###
 'Person already related to company'=>'Henkilö on jo liitetty yritykseen',  # line 972
@@ -1037,12 +1037,12 @@ $g_lang_table= array(
 'Active People'               =>'Aktiiviset henkilöt',  # line 61
 'relating to %s|page title add on listing pages relating to current user'=>'liittyen %s',  # line 364
 'People/Project Overview'     =>'Henkilö-/Projektiyhteenveto',  # line 410
-'no related persons'          =>'ei liittyviä henkilöitä',  # line 421
-'Persons|Pagetitle for person list'=>'Henkilöt',  # line 134
+'no related people'          =>'ei liittyviä henkilöitä',  # line 421
+'People|Pagetitle for person list'=>'Henkilöt',  # line 134
 'relating to %s|Page title Person list title add on'=>'liittyen %s',  # line 288
 'admin view|Page title add on if admin'=>'ylläpidon näkymä',  # line 291
 'Employees|Pagetitle for person list'=>'Työntekijät',  # line 210
-'Contact Persons|Pagetitle for person list'=>'Yhteyshenkilöt',  # line 286
+'Contact People|Pagetitle for person list'=>'Yhteyshenkilöt',  # line 286
 'Deleted People'              =>'Poistetut henkilöt',  # line 362
 'Create Note|Tooltip for page function'=>'Tee muistio',  # line 474
 'Note|Page function person'   =>'Muistio',  # line 475
@@ -1126,19 +1126,19 @@ $g_lang_table= array(
 ### ../pages/person.inc.php   ###
 'Person %s created'           =>'%s luotu onnistuneesti',  # line 1416
 'Could not insert object'     =>'Objektia ei voitu kiinnittää',  # line 1419
-'Select some persons to delete'=>'Valitse poistettavia henkilöitä.',  # line 1463
+'Select some people to delete'=>'Valitse poistettavia henkilöitä.',  # line 1463
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'%s on mukana projektissa eikä siksi voida poistaa. Sen sijaan hänen kirjautumisensa voidaan estää.',  # line 1480
-'Failed to delete %s persons' =>'Virhe poistettaessa %s henkilöä',  # line 1492
-'Moved %s persons to trash'   =>'%s henkilöä siirrettiin roskakoriin',  # line 1495
+'Failed to delete %s people' =>'Virhe poistettaessa %s henkilöä',  # line 1492
+'Moved %s people to trash'   =>'%s henkilöä siirrettiin roskakoriin',  # line 1495
 'Insufficient rights'         =>'Oikeudet eivät riitä',  # line 1514
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 1526
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 1531
 'Activation mail has been sent.'=>'Aktivointisähköposti on lähetetty.',  # line 1542
 'Sending notification e-mail failed.'=>'Aktivointisähköpostin lähettäminen epäonnistui.',  # line 1545
-'Select some persons to notify'=>'Valitse henkilöt joita muistutetaan.',  # line 1566
-'Failed to mail %s persons'   =>'%s henkilön muistuttaminen epäonnistui',  # line 1591
+'Select some people to notify'=>'Valitse henkilöt joita muistutetaan.',  # line 1566
+'Failed to mail %s people'   =>'%s henkilön muistuttaminen epäonnistui',  # line 1591
 'Sent notification to %s person(s)'=>'Lähetettiin muistutus %s henkilölle',  # line 1594
-'Select some persons to edit' =>'Valitse henkilöitä muokkaaksesi',  # line 1620
+'Select some people to edit' =>'Valitse henkilöitä muokkaaksesi',  # line 1620
 'Could not get Person'        =>'Henkilöä ei voitu hakea.',  # line 1624
 'Edit Person|page type'       =>'Muokkaa henkilöä',  # line 1640
 'Adjust user-rights'          =>'Muokkaa käyttäjätasoja',  # line 1642
@@ -1236,7 +1236,7 @@ $g_lang_table= array(
 'Closed %s projects'          =>'%s projektia suljettu',  # line 1967
 'Reactivated %s projects'     =>'%s projektia uudelleen aktivoitu',  # line 1970
 'Select new team members'     =>'Valiste uudet tiimin jäsenet',  # line 2004
-'Found no persons to add. Go to `Persons` to create some.'=>'Ei henkilöitä. Lisää Henkilöt valikossa uusia.',  # line 2048
+'Found no people to add. Go to `People` to create some.'=>'Ei henkilöitä. Lisää Henkilöt valikossa uusia.',  # line 2048
 'Add'                         =>'Lisää',  # line 2060
 'Could not access person by id'=>'Ei pääsyä henkilön tietoihin ID:n perusteella',  # line 2092
 'Reanimated person as team-member'=>'Uudelleenaktivoitu tiimin jäsenenä',  # line 2138
@@ -1418,7 +1418,7 @@ $g_lang_table= array(
 'For Project|form label'      =>'Projektille',  # line 3238
 'New project|form label'      =>'Uusi projekti',  # line 3243
 'Project name|form label'     =>'Projektin nimi',  # line 3244
-'ERROR: could not get assigned persons'=>'VIRHE: ei voitu vastuuttaa henkilöitä',  # line 3260
+'ERROR: could not get assigned people'=>'VIRHE: ei voitu vastuuttaa henkilöitä',  # line 3260
 'Also assign to'              =>'Vastuuta myös',  # line 3296
 'Book effort after submit'    =>'Kirjaa työpanokset seuraavaksi',  # line 3300
 'ERROR: could not get task'   =>'VIRHE: tehtävää ei voitu hakea',  # line 3340
@@ -1517,7 +1517,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'Käyttäjätilillä',  # line 361
-'Other Persons|page option'   =>'Muut henkilöt',  # line 365
+'Other People|page option'   =>'Muut henkilöt',  # line 365
 'Clients|page option'         =>'Asiakkaat',  # line 392
 'Prospective Clients|page option'=>'Mahdolliset asiakkaat',  # line 396
 'Suppliers|page option'       =>'Toimittajat',  # line 400
@@ -1530,7 +1530,7 @@ $g_lang_table= array(
 'Efforts|Project option'      =>'Työpanokset',  # line 342
 'History|Project option'      =>'Historia',  # line 347
 'Employees|page option'       =>'Työntekijät',  # line 369
-'Contact Persons|page option' =>'Kontaktihenkilöt',  # line 373
+'Contact People|page option' =>'Kontaktihenkilöt',  # line 373
 'Deleted|page option'         =>'Poistettu',  # line 377
 'All Companies|page option'   =>'Kaikki yritykset',  # line 388
 'new since last logout'       =>'uudet viimekirjautumisesta',  # line 682
@@ -1637,10 +1637,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Muokkaa projektitiimiä',  # line 80
 'View anything|a user right'  =>'Näytä kaikki',  # line 81
 'Edit anything|a user right'  =>'Muokkaa kaikkea',  # line 82
-'Create Persons|a user right' =>'Luo henkilöitä',  # line 84
-'Create & Edit Persons|a user right'=>'Luo ja muokkaa henkilöitä',  # line 85
-'Delete Persons|a user right' =>'Poista henkilöitä',  # line 86
-'View all Persons|a user right'=>'Näytä kaikki henkilöt',  # line 87
+'Create People|a user right' =>'Luo henkilöitä',  # line 84
+'Create & Edit People|a user right'=>'Luo ja muokkaa henkilöitä',  # line 85
+'Delete People|a user right' =>'Poista henkilöitä',  # line 86
+'View all People|a user right'=>'Näytä kaikki henkilöt',  # line 87
 'Edit user rights|a user right'=>'Muokkaa käyttäjätasoja',  # line 88
 'Edit Own Profil|a user right'=>'Muokkaa omaa profiilia',  # line 89
 'Create Companies|a user right'=>'Luo yrityksiä',  # line 91

@@ -8,7 +8,7 @@
 
 
 /**
-* Project Person - jointable between projects and persons
+* Project Person - jointable between projects and people
 */
 class ProjectPerson extends DbProjectItem {
     public $name;

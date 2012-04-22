@@ -178,8 +178,8 @@ class ListBlockCol_EffortTaskAmountSalary extends ListBlockCol
 		$sum_sal = 0.0;
 		$sum_all = 0.0;
 		
-		if($effort_persons = Effort::getEffortPersons(array('project'=>$obj->project, 'task'=>$obj->task))){
-			foreach($effort_persons as $ep){
+		if($effort_people = Effort::getEffortPeople(array('project'=>$obj->project, 'task'=>$obj->task))){
+			foreach($effort_people as $ep){
 				if($person = Person::getVisibleById($ep->person)){
 					/*if($obj->getStatus()){
 						$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id, 'status'=>$obj->status));
@@ -191,7 +191,7 @@ class ListBlockCol_EffortTaskAmountSalary extends ListBlockCol
 					{
 						$sum = (round($sum_sal/60/60, 1) * 1.0);
 						if($project = Project::getVisibleById($obj->project)){
-							if($pp = $project->getProjectPersons(array('person_id'=>$person->id))){
+							if($pp = $project->getProjectPeople(array('person_id'=>$person->id))){
 								if($pp[0]->salary_per_hour){
 									$sum_all = ($sum * $pp[0]->salary_per_hour);
 								}
@@ -267,8 +267,8 @@ class ListBlockCol_EffortTaskCalcGraph extends ListBlockCol
 		    echo "<td>-</td>";
 		}
 		else {
-			if($effort_persons = Effort::getEffortPersons(array('project'=>$obj->project, 'task'=>$obj->task))){
-				foreach($effort_persons as $ep){
+			if($effort_people = Effort::getEffortPeople(array('project'=>$obj->project, 'task'=>$obj->task))){
+				foreach($effort_people as $ep){
 					if($person = Person::getVisibleById($ep->person)){
 						/*if($obj->getStatus()){
 							$sum_sal = Effort::getSumEfforts(array('project'=>$obj->project, 'task'=>$obj->task, 'person'=>$person->id, 'status'=>$obj->status));
@@ -280,7 +280,7 @@ class ListBlockCol_EffortTaskCalcGraph extends ListBlockCol
 						{
 							$sum = (round($sum_sal/60/60, 1) * 1.0);
 							if($project = Project::getVisibleById($obj->project)){
-								if($pp = $project->getProjectPersons(array('person_id'=>$person->id))){
+								if($pp = $project->getProjectPeople(array('person_id'=>$person->id))){
 									if($pp[0]->salary_per_hour){
 										$sum_all = ($sum * $pp[0]->salary_per_hour);
 									}

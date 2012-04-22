@@ -439,7 +439,7 @@ function build_person_crumbs(&$person) {
 
 	$crumbs[]= new NaviCrumb(array(
 		'target_id'     =>'personList',
-		'name'          =>__('Other Persons','page option'),
+		'name'          =>__('Other People','page option'),
 	));
     
     $crumbs[]= new NaviCrumb(array(

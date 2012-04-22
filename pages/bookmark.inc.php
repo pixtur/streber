@@ -29,7 +29,7 @@ function itemsAsBookmark()
     if($ids = getPassedIds('task', 'tasks_*')){
         $valid = true;
     }
-    elseif($ids = getPassedIds('person', 'persons_*')){
+    elseif($ids = getPassedIds('person', 'people_*')){
         $valid = true;
     }
     elseif($ids = getPassedIds('company', 'companies_*')){
@@ -78,7 +78,7 @@ function itemsRemoveBookmark()
         if($ids = getPassedIds('task', 'tasks_*')){
             $valid = true;
         }
-        elseif($ids = getPassedIds('person', 'persons_*')){
+        elseif($ids = getPassedIds('person', 'people_*')){
             $valid = true;
         }
         elseif($ids = getPassedIds('company', 'companies_*')){

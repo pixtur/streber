@@ -97,7 +97,7 @@ $g_lang_table= array(
 'Nickname'                    =>'Användarnamn',  # line 47
 'only required if user can login (e.g. pixtur)'=>'obligatorisk om användaren kan logga in',  # line 48
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'Etikett',  # line 59
 
 ### ../db/class_person.inc.php   ###
@@ -280,7 +280,7 @@ $g_lang_table= array(
 ### ../lists/list_companies.inc.php   ###
 'related companies'           =>'kopplade företag',  # line 22
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Förkortning',  # line 27
 'Shortnames used in other lists'=>'Förkortningar i andra listor',  # line 28
 
@@ -371,7 +371,7 @@ $g_lang_table= array(
 'Completed|columnheader'      =>'Slutförd',  # line 441
 'Completed tasks: %s'         =>'Slutförda uppgifter',  # line 459
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Privat',  # line 44
 'Mobil'                       =>'Mobil',  # line 49
 'Office'                      =>'Kontor',  # line 54
@@ -379,14 +379,14 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Companies'                   =>'Företag',  # line 240
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'senast inloggad',  # line 69
 'Edit person'                 =>'Ändra användare',  # line 100
 
 ### ../pages/_handles.inc.php   ###
 'Edit user rights'            =>'Ändra rättigheter',  # line 653
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Radera användare',  # line 113
 'Create new person'           =>'Skapa ny användare',  # line 119
 'Profile|column header'       =>'Profil',  # line 141
@@ -397,14 +397,14 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Prioriteten är %s',  # line 255
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'nya ändringar',  # line 225
 'changes since YOUR last logout'=>'ändringar sedan din senaste inloggning',  # line 227
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'Dina kopplade användare',  # line 25
+'Your related people'        =>'Dina kopplade användare',  # line 25
 'Rights'                      =>'Rättigheter',  # line 40
-'Persons rights in this project'=>'Rättigheter i detta projekt',  # line 41
+'People rights in this project'=>'Rättigheter i detta projekt',  # line 41
 'Edit team member'            =>'Ändra gruppmedlem',  # line 98
 'Add team member'             =>'Lägg till gruppmedlem',  # line 105
 'Remove person from team'     =>'Ta bort gruppmedlem',  # line 112
@@ -597,10 +597,10 @@ $g_lang_table= array(
 'Delete Company'              =>'Radera företag',  # line 589
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Koppla användare',  # line 228
+'Link People'                =>'Koppla användare',  # line 228
 
 ### ../pages/_handles.inc.php   ###
-'List Persons'                =>'Lista användare',  # line 618
+'List People'                =>'Lista användare',  # line 618
 'View Person'                 =>'Visa användare',  # line 624
 
 ### ../pages/person.inc.php   ###
@@ -700,25 +700,25 @@ $g_lang_table= array(
 
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Skapa nytt projekt till detta företag',  # line 139
-'Add existing persons to this company'=>'Lägg till befintlig användare till detta företag',  # line 146
+'Add existing people to this company'=>'Lägg till befintlig användare till detta företag',  # line 146
 'People'                     =>'Användare (koppla)',  # line 147
 'Adress'                      =>'Adress',  # line 169
 'Fax'                         =>'Fax',  # line 178
 'Web'                         =>'Webbsida',  # line 183
 'Intra'                       =>'Intranät',  # line 186
 'Mail'                        =>'E-post',  # line 189
-'related Persons'             =>'Kopplade användare',  # line 204
+'related People'             =>'Kopplade användare',  # line 204
 'link existing Person'        =>'koppla befintlig användare',  # line 235
 'create new'                  =>'skapa ny',  # line 237
-'no persons related'          =>'inga användare kopplade',  # line 240
+'no people related'          =>'inga användare kopplade',  # line 240
 'Active projects'             =>'Aktiva projekt',  # line 297
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>' TIPS: ändra befintliga projekt och anpassa företagsuppgifter.',  # line 307
 'no projects yet'             =>'inga projekt',  # line 310
 'Closed projects'             =>'Stängda projekt',  # line 335
 'Create another company after submit'=>'Skapa ytterligare ett företag',  # line 430
 'Edit %s'                     =>'Ändra %s',  # line 524
-'Add persons employed or related'=>'Lägg till anställd eller kopplad användare',  # line 525
-'NOTE: No persons selected...'=>'Ingen användare vald...',  # line 578
+'Add people employed or related'=>'Lägg till anställd eller kopplad användare',  # line 525
+'NOTE: No people selected...'=>'Ingen användare vald...',  # line 578
 'NOTE person already related to company'=>'Användaren är redan kopplad till företaget',  # line 605
 'Select some companies to delete'=>'Välj företag att radera',  # line 627
 'WARNING: Failed to delete %s companies'=>'VARNING: Det gick inte att radera %s företag',  # line 647
@@ -881,12 +881,12 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'Med konto',  # line 180
-'All Persons|page option'     =>'Alla användare',  # line 186
+'All People|page option'     =>'Alla användare',  # line 186
 
 ### ../pages/person.inc.php   ###
 'People/Project Overview'     =>'Användare/projekt översikt',  # line 100
-'no related persons'          =>'inga kopplade användare',  # line 189
-'Persons|Pagetitle for person list'=>'Användare',  # line 135
+'no related people'          =>'inga kopplade användare',  # line 189
+'People|Pagetitle for person list'=>'Användare',  # line 135
 'relating to %s|Page title Person list title add on'=>'länkad till %s',  # line 137
 'admin view|Page title add on if admin'=>'Admin vy',  # line 140
 'Edit this person|Tooltip for page function'=>'Ändra användare',  # line 234
@@ -949,19 +949,19 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'WARNING: could not insert object'=>'VARNING: det gick inte att infoga objekt',  # line 1004
-'Select some persons to delete'=>'Välj användare att radera',  # line 1048
+'Select some people to delete'=>'Välj användare att radera',  # line 1048
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'<b>%s</b> har blivit tilldelad projekt och kan inte raderas. Möjligheten att logga in går dock att inaktivera.',  # line 1065
-'WARNING: Failed to delete %s persons'=>'Det gick inte att radera %s användare',  # line 1077
-'Moved %s persons to trash'=>'Flyttade %s användare till papperskorgen',  # line 1080
+'WARNING: Failed to delete %s people'=>'Det gick inte att radera %s användare',  # line 1077
+'Moved %s people to trash'=>'Flyttade %s användare till papperskorgen',  # line 1080
 'Insufficient rights'         =>'Otillräckliga rättighter',  # line 1099
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'Skicka aktiveringskod har ingen effekt eftersom användaren inte har rättighet att ändra sin profil och sitt lösenord.',  # line 1111
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'Skicka aktiveringskod har ingen effekt så länge användaren inte har rättighet att logga in. Anpassa användarens profil.',  # line 1116
 'Activation mail has been sent.'=>'Aktiveringskod har skickats via e-post.',  # line 1127
 'Sending notification e-mail failed.'=>'Det gick inte att skicka aktiveringskod.',  # line 1130
-'Select some persons to notify'=>'Välj användare som ska meddelas',  # line 1151
-'WARNING: Failed to mail %s persons'=>'Det gick inte att skicka e-post till %s användare',  # line 1176
+'Select some people to notify'=>'Välj användare som ska meddelas',  # line 1151
+'WARNING: Failed to mail %s people'=>'Det gick inte att skicka e-post till %s användare',  # line 1176
 'Sent notification to %s person(s)'=>'Skicka meddelande till %s användare',  # line 1179
-'Select some persons to edit' =>'Välj användare att ändra',  # line 1205
+'Select some people to edit' =>'Välj användare att ändra',  # line 1205
 'Could not get Person'        =>'Det gick inte att hämta användaren',  # line 1209
 'Edit Person|page type'       =>'Ändra användare',  # line 1225
 'Adjust user-rights'          =>'Anpassa rättigheter',  # line 1227
@@ -1067,7 +1067,7 @@ $g_lang_table= array(
 'Reactivated %s projects'     =>'Återaktiverade %s projekt',  # line 1769
 'Select new team members'     =>'Välj ny gruppmedlem',  # line 1803
 'Add'                         =>'Lägg till',  # line 1859
-'No persons selected...'      =>'Inga användare valda...',  # line 1885
+'No people selected...'      =>'Inga användare valda...',  # line 1885
 'Could not access person by id'=>'Det gick inte att hämta användaren med ID',  # line 1894
 'NOTE: reanimated person as team-member'=>'Återuppliva användare som gruppmedlem',  # line 1932
 'NOTE: person already in project'=>'Användaren är redan medlem i projektet',  # line 1936
@@ -1097,7 +1097,7 @@ $g_lang_table= array(
 'Searching'                   =>'Söker',  # line 168
 'Found %s companies'          =>'Hittade %s företag',  # line 179
 'Found %s projects'           =>'Hittade %s projekt',  # line 188
-'Found %s persons'            =>'Hittade %s användare',  # line 198
+'Found %s people'            =>'Hittade %s användare',  # line 198
 'Found %s tasks'              =>'Hittade %s uppgifter',  # line 213
 'Found %s comments'           =>'Hittade %s kommentarer',  # line 224
 'sorry. Could not find anything.'=>'Sökningen gav inga träffar.',  # line 230
@@ -1332,10 +1332,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Ändra projektgrupper',  # line 65
 'View anything|a user right'  =>'Visa allt',  # line 66
 'Edit anything|a user right'  =>'Ändra allt',  # line 67
-'Create Persons|a user right' =>'Skapa användare',  # line 69
-'Create & Edit Persons|a user right'=>'Skapa & ändra användare',  # line 70
-'Delete Persons|a user right' =>'Radera användare',  # line 71
-'View all Persons|a user right'=>'Visa alla användare',  # line 72
+'Create People|a user right' =>'Skapa användare',  # line 69
+'Create & Edit People|a user right'=>'Skapa & ändra användare',  # line 70
+'Delete People|a user right' =>'Radera användare',  # line 71
+'View all People|a user right'=>'Visa alla användare',  # line 72
 'Edit user rights|a user right'=>'Ändra rättigheter',  # line 73
 'Edit own profile|a user right'=>'Ändra profil',  # line 74
 'Create Companies|a user right'=>'Skapa företag',  # line 76
@@ -1429,7 +1429,7 @@ $g_lang_table= array(
 'view changes'                =>'visa ändringar',  # line 271
 'Mark tasks as Open'          =>'Markera uppgifter som pågående',  # line 325
 'Move files to folder'        =>'Flytta filer till mapp',  # line 582
-'List Deleted Persons'        =>'Lista raderade användare',  # line 669
+'List Deleted People'        =>'Lista raderade användare',  # line 669
 'Filter errors.log'           =>'Filtrera errors.log',  # line 870
 'Delete errors.log'           =>'Radera errors.log',  # line 877
 
@@ -1477,8 +1477,8 @@ $g_lang_table= array(
 'Nickname has to be unique'   =>'Användarnamn måste vara unikt',  # line 1036
 'Passwords do not match'      =>'Lösenord är inte lika ',  # line 1052
 'Could not insert object'     =>'Det gick inte att lägga till objektet',  # line 1131
-'Failed to delete %s persons' =>'Det gick inte radera %s användare',  # line 1204
-'Failed to mail %s persons'   =>'Det gick inte att skicka e-post till %s användare',  # line 1303
+'Failed to delete %s people' =>'Det gick inte radera %s användare',  # line 1204
+'Failed to mail %s people'   =>'Det gick inte att skicka e-post till %s användare',  # line 1303
 
 ### ../pages/proj.inc.php   ###
 'not assigned to a closed project'=>'ej tilldelad till ett stängt projekt',  # line 171
@@ -1568,7 +1568,7 @@ $g_lang_table= array(
 'Status|Short status column header'=>'Status',  # line 273
 
 ### ../render/render_misc.inc.php   ###
-'Other Persons|page option'   =>'Övriga användare',  # line 305
+'Other People|page option'   =>'Övriga användare',  # line 305
 'Deleted|page option'         =>'Raderade',  # line 309
 '%s hours'                    =>'%s timmar',  # line 559
 '%s days'                     =>'%s dagar',  # line 563
@@ -1697,9 +1697,9 @@ $g_lang_table= array(
 'List Prospective Clients' =>'Lista eventuellt blivande kunder', # line 692
 'List Suppliers' =>'Lista leverantörer', # line 698
 'List Partners' =>'Lista partners', # line 704
-'Remove persons from company' =>'Ta bort användare från företag', # line 755
+'Remove people from company' =>'Ta bort användare från företag', # line 755
 'List Employees' =>'Lista anställda', # line 779
-'List Deleted Persons' =>'Lista raderade användare', # line 792
+'List Deleted People' =>'Lista raderade användare', # line 792
 'Filter errors.log' =>'Filtrera fel-logg', # line 993
 'Delete errors.log' =>'Raderad fel-logg', # line 1000
 
@@ -1781,7 +1781,7 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php ###
 'Employees|Pagetitle for person list'=>'Anställda', # line 204
-'Contact Persons|Pagetitle for person list'=>'Kontaktperson', # line 278
+'Contact People|Pagetitle for person list'=>'Kontaktperson', # line 278
 'Deleted People' =>'Raderade användare', # line 352
 'notification:' =>'MEDDELANDE ', # line 463
 'no company' =>'inga företag', # line 577
@@ -1797,8 +1797,8 @@ $g_lang_table= array(
 'Passwords do not match' =>'Lösenord är inte lika', # line 1231
 'Person %s created' =>'Skapat %s användare', # line 1309
 'Could not insert object' =>'Det gick inte att lägga till objektet', # line 1312
-'Failed to delete %s persons' =>'Det gick inte radera %s användare', # line 1386
-'Failed to mail %s persons' =>'Det gick inte att skicka e-post till %s användare', # line 1485
+'Failed to delete %s people' =>'Det gick inte radera %s användare', # line 1386
+'Failed to mail %s people' =>'Det gick inte att skicka e-post till %s användare', # line 1485
 
 ### ../pages/proj.inc.php ###
 'not assigned to a closed project'=>'ej tilldelad till ett stängt projekt', # line 173
@@ -1818,7 +1818,7 @@ $g_lang_table= array(
 'Tasks resolved in upcoming version'=>'Uppgift löst i kommande version', # line 1594
 'Failed to delete %s projects'=>'Det gick inte att radera %s projekt', # line 1902
 'Failed to change %s projects'=>'Det gick inte att ändra %s projekt', # line 1952
-'Found no persons to add. Go to `People` to create some.'=>'Hittade inga användare att lägga till. Gå till *Användare* för att skapa.', # line 2037
+'Found no people to add. Go to `People` to create some.'=>'Hittade inga användare att lägga till. Gå till *Användare* för att skapa.', # line 2037
 'Reanimated person as team-member'=>'Återkalla användare som gruppmedlem', # line 2127
 'Person already in project' =>'Användaren finns redan i projektet', # line 2131
 
@@ -1932,7 +1932,7 @@ $g_lang_table= array(
 'Select / Deselect' =>'Välj', # line 364
 
 ### ../render/render_misc.inc.php ###
-'Other Persons|page option' =>'Andra användare', # line 365
+'Other People|page option' =>'Andra användare', # line 365
 'Clients|page option' =>'Kunder', # line 392
 'Prospective Clients|page option'=>'Blivande kunder', # line 396
 'Suppliers|page option' =>'Leverantörer', # line 400
@@ -1940,7 +1940,7 @@ $g_lang_table= array(
 'Companies|page option' =>'Företag', # line 239
 'Versions|Project option' =>'Versioner', # line 330
 'Employees|page option' =>'Anställda', # line 369
-'Contact Persons|page option' =>'Kontaktpersoner', # line 373
+'Contact People|page option' =>'Kontaktpersoner', # line 373
 'Deleted|page option' =>'Raderade', # line 377
 'All Companies|page option' =>'Alla företag', # line 388
 '%s hours' =>'%s timmar', # line 711
@@ -2045,7 +2045,7 @@ $g_lang_table= array(
 'Using auto detection of time zone requires this user to relogin.'=>'Aktivering av automatisk tidszon sker vid nästa inloggning.',  # line 1285
 
 ### ../pages/proj.inc.php   ###
-'Found no persons to add. Go to `Persons` to create some.'=>'Hittade inga användare att lägga till. Gå till `Användare` för att skapa ny.',  # line 2048
+'Found no people to add. Go to `People` to create some.'=>'Hittade inga användare att lägga till. Gå till `Användare` för att skapa ny.',  # line 2048
 
 ### ../pages/task_more.inc.php   ###
 'ERROR: could not get Person' =>'Det gick inte att hämta användaren',  # line 3073
@@ -2064,7 +2064,7 @@ $g_lang_table= array(
 'For Project|form label'      =>'Till projekt',  # line 3208
 'New project|form label'      =>'Nytt projekt',  # line 3213
 'Project name|form label'     =>'Projekt',  # line 3214
-'ERROR: could not get assigned persons'=>'Det gick inte att hämta tilldelade användare',  # line 3230
+'ERROR: could not get assigned people'=>'Det gick inte att hämta tilldelade användare',  # line 3230
 'Assigne to'                  =>'Tilldelad till',  # line 3247
 'Also assigne to'             =>'Tilldelad till',  # line 3264
 'Book effort after submit'    =>'Boka försök',  # line 3268
@@ -2087,7 +2087,7 @@ $g_lang_table= array(
 ### ../lists/list_comments.inc.php   ###
 'Publish'                     =>'Publicera',  # line 147
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Nickname|column header'      =>'Smeknamn',  # line 202
 'Name|column header'          =>'Namn',  # line 223
 
@@ -2491,7 +2491,7 @@ $g_lang_table= array(
 'without account'             =>'saknar konto',  # line 165
 'with account'                =>'med konto',  # line 183
 'employees'                   =>'anställda',  # line 201
-'contact persons'             =>'kontaktperson',  # line 220
+'contact people'             =>'kontaktperson',  # line 220
 'Mark this person as bookmark'=>'Markera användaren som bokmärke',  # line 743
 'notification'                =>'meddelande',  # line 757
 'Last login|Label'            =>'Senast inloggad',  # line 835
@@ -2541,7 +2541,7 @@ $g_lang_table= array(
 'Mark this version as bookmark'=>'Markera version som bokmärke',  # line 324
 
 ### ../render/render_misc.inc.php   ###
-'Persons|page option'         =>'Användare',  # line 619
+'People|page option'         =>'Användare',  # line 619
 '%b %e, %Y|strftime format string'=>'%b %e, %Y',  # line 735
 '%I:%M%P|strftime format string'=>'%H:%M',  # line 749
 '%a %b %e, %Y %I:%M%P|strftime format string'=>'%a %e %b, %H:%M, %Y',  # line 759
@@ -2619,7 +2619,7 @@ $g_lang_table= array(
 'prior'                       =>'föregående',  # line 1586
 
 ### ../pages/person.inc.php   ###
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Lägg till uppgift för denna användare (valfritt att skapa projekt och försök direkt)',  # line 706
+'Add task for this people (optionally creating project and effort on the fly)|Tooltip for page function'=>'Lägg till uppgift för denna användare (valfritt att skapa projekt och försök direkt)',  # line 706
 'Add note|Page function person'=>'Lägg till anteckning',  # line 707
 'Edit profile|Page function edit person'=>'Ändra profil',  # line 721
 'Edit user rights|Page function for edit user rights'=>'Ändra användarrättigheter',  # line 729

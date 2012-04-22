@@ -322,7 +322,7 @@ function TaskView()
             ."</div>" ;
         }
 
-        if($tps= $task->getAssignedPersons()) {
+        if($tps= $task->getAssignedPeople()) {
             $value="";
             $sep="";
             foreach($tps as $tp) {
@@ -407,7 +407,7 @@ function TaskView()
     #--- feedback notice ------------------------------------------------------------
     {
         if($view = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$task->id, 'feedback_requested_by'=>true))){
-            if ($requested_by= Person::getPersons( array( 'id' => $view[0]->feedback_requested_by ) )) {
+            if ($requested_by= Person::getPeople( array( 'id' => $view[0]->feedback_requested_by ) )) {
                 echo "<div class=item_notice>";
                 echo "<h3>" . sprintf(__("Your feedback is requested by %s."), asHtml($requested_by[0]->nickname) ) . "</h3>";
                 echo __("Please edit or comment this item.");
@@ -712,7 +712,7 @@ class Block_task_quickedit extends PageBlock
                 {
                     ### for existing tasks, get already assigned
                     if($task->id) {
-                        $assigned_persons = $task->getAssignedPersons();
+                        $assigned_people = $task->getAssignedPeople();
                     }
 
                     ### for new tasks get the assignments from parent task ###
@@ -723,15 +723,15 @@ class Block_task_quickedit extends PageBlock
                     $team=array(__('- select person -')=>0);
 
                     ### create team-list ###
-                    foreach($project->getPersons() as $p) {
+                    foreach($project->getPeople() as $p) {
                         $team[$p->name]= $p->id;
                     }
 
                     ### create drop-down-lists ###
                     $count_new=0;
                     $count_all=0;
-                    if(isset($assigned_persons)) {
-                        foreach($assigned_persons as $ap) {
+                    if(isset($assigned_people)) {
+                        foreach($assigned_people as $ap) {
                             if(!$p= Person::getVisibleById($ap->id)) {
                                 continue;                               # skip if invalid person
                             }
@@ -1091,7 +1091,7 @@ function taskViewAsDocu()
     {
         require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');        
         if($view = ItemPerson::getAll(array('person'=>$auth->cur_user->id, 'item'=>$task->id, 'feedback_requested_by'=>true))){
-            if ($requested_by= Person::getPersons( array( 'id' => $view[0]->feedback_requested_by ) )) {
+            if ($requested_by= Person::getPeople( array( 'id' => $view[0]->feedback_requested_by ) )) {
                 echo "<div class=item_notice>";
                 echo "<h3>" . sprintf(__("Your feedback is requested by %s."), asHtml($requested_by[0]->nickname) ) . "</h3>";
                 echo __("Please edit or comment this item.");

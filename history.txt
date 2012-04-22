@@ -1,6 +1,11 @@
 streber-version-history
 
-v0.093 / rev513
+v0.093 / rev512
+- renamed persons->people
+- fixed installation sql setup (file had invalid version)
+- fixed rendering on people list header
+
+rev513
 - fixed unit-tests
 - Disable modifications by anonymous users (I.e. guests)
 - Fixed error in grouped list style
@@ -360,7 +365,7 @@ major:
 - list changes now explicitly lists files 
 - fixed some problems with IE7 display
 - fixed composition of notification mails 
-- fixed reassigning persons to teams (assigned twice?) #4849
+- fixed reassigning people to teams (assigned twice?) #4849
 - fixed Strange behaviour when re-assigning a user to a project #4083
 - fixed issue values are not stored correctly #4865
 - refactored project RSS-Feed:
@@ -417,7 +422,7 @@ minor:
 - added "add comment" to news in custom_projView.inc.php 
 - fixed id parameter in itemView #4132
 - added "book effort" function for docu pages #3772
-- improved csv-exporting of lists (added names of persons, tasks and projects)
+- improved csv-exporting of lists (added names of people, tasks and projects)
 - fixed wiki text with less than 3 characters doesn't appear bold #4107
 
 v0.0795 [2007-02-19]
@@ -545,7 +550,7 @@ major
 
 minor
 ------
-- fixed default user rights of new persons #1785
+- fixed default user rights of new people #1785
 - changed wrapping of long indented task names in tree view
 - added server_time_offset option 
 - added ROUND_AUTO_DETECTED_TIME_OFFSET option
@@ -572,7 +577,7 @@ minor:
 - version v0.07rc1
 - fixed deletion of task description
 - fixed wiki line syntax (_____)
-- fixed wiki links to persons like [[item:##]]
+- fixed wiki links to people like [[item:##]]
 - fixed wiki rendering of empty code blocks
 - fixed style sheets for printing
 - fixed layout problems with too long nick names in projView team list
@@ -584,7 +589,7 @@ minor:
 
 internal:
 -----------
-- fixed ITEM_TYPES of new created persons
+- fixed ITEM_TYPES of new created people
 - fixed DbProjectItem::getVisibleById() for non project items 
 - DEV_AJAX is been made the default (removed)
 
@@ -598,10 +603,10 @@ major:
 - taskViewEffort 
 - quick edit in task view
 - added comment field in quick edit form of normal task view
-- fixed login of new persons when not checking IP-ADRESS
+- fixed login of new people when not checking IP-ADRESS
 - fixed tasks visibility related to status of folders in tree lists 
 - add new definitions for company and person categories
-- fixed strange modification date for project and persons 
+- fixed strange modification date for project and people 
 - new Translation into: Polish, Swedish, Norwegian,
 
 minor
@@ -640,7 +645,7 @@ v0.067 (2006-07-29)
 major
 --------
 - add a quick edit form in the normal task view (http://streber.pixtur.de/index.php?go=taskView&tsk=1351)
-- fixed "searching for Item-IDs does not work" (http://streber.pixtur.de/index.php?go=taskView&tsk=1405) - Search works with Item-ID for persons, companies, projects and tasks
+- fixed "searching for Item-IDs does not work" (http://streber.pixtur.de/index.php?go=taskView&tsk=1405) - Search works with Item-ID for people, companies, projects and tasks
 
 minor
 -----
@@ -751,7 +756,7 @@ internal
 % fix Project::getChanges-bug should be static function bug
 % adjusted display of project changes
 % slightly adjusted display of attached files for tasks
-+ made "can login"  default option for new persons
++ made "can login"  default option for new people
 
 
 
@@ -845,7 +850,7 @@ internal
 - moved db-upgrades to separate file
 - fixed files querry
 - prepared "milestone", "versions" and "roadmap"
-- fixed visibility-check for persons
+- fixed visibility-check for people
 - refactured listFilters
 - refactured display of tasks in tree-view (this is much slower now, but should work)
 
@@ -871,7 +876,7 @@ major
 minor
 -----
 - finished changes list
-- refactured Persons::getPersons()
+- refactured People::getPeople()
 - capture mail() error with error-handler
 - added "www.somehost.de/index.php?go=triggerSendNotifications" to externally trigger notification by cron-jobs
 - added 'STMP'-config-var
@@ -1018,7 +1023,7 @@ major
 minor
 -----
 + changed default labels for new projects to "Bug,Feature,Tweak,Idea,Refacture,Research,Organize,Docu"
-+ persons assigned to projects can no longer be deleted
++ people assigned to projects can no longer be deleted
 + translated priority-values
 + deleted items can be restored from project's history-list
 + fixed some minor issues in installation
@@ -1178,10 +1183,10 @@ interface / major
 
 minor
 -----
-% fixed 'undefined index 15'- bug (when getting taskpersons)
+% fixed 'undefined index 15'- bug (when getting taskpeople)
 + installation >> password fields no longer clear-text
 + effortEdit >> validates for name and time_end > time_start
-+ companyView >> added option to link new persons
++ companyView >> added option to link new people
 + projView >> fixed breadcrumbs for template-projects
 + projViewIssues >> added pageFunction to "report Bugs"
 % fixed language used after login
@@ -1225,7 +1230,7 @@ internal
 + DbItem->getShortWithTitle()
 % can pass multiple messages to next page
 % fixed: upcomming projects not listed in active projects
-% fixed: visibility-check for displayed persons at many places
+% fixed: visibility-check for displayed people at many places
 % fixed creating for Issues and Comments (where sometimes not correctly linked to project and therefore not duplicated)
 
 
@@ -1245,7 +1250,7 @@ interface
 + visibility (pub_level) of project team members can be edited
 % fixed dropDown-list functions companyView / personView
 % fixed display of projects(team) in companyView
-+ reduced list of persons companyView
++ reduced list of people companyView
 + companyView -> add list for closedProjects
 % taskView fixed display of description
 
@@ -1369,7 +1374,7 @@ interface
 + add status-summary-text field to projects
 + added cancel-buttons to edit-forms
 + added styles to buttons
-+ added page-functions at the upper right (for tasks, projects, persons, companies)
++ added page-functions at the upper right (for tasks, projects, people, companies)
 + project->closed tasks
 + project->History
 + added functions to taskFolder-List

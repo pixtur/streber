@@ -1000,9 +1000,9 @@ new PageHandleFunc(array('id'=>'companyDelete',
     'rights_required'=>RIGHT_COMPANY_DELETE,
 
 ));
-new PageHandle(array('id'=>'companyLinkPersons',
+new PageHandle(array('id'=>'companyLinkPeople',
     'req'=>'pages/company.inc.php',
-    'title'=>__('Link Persons'),
+    'title'=>__('Link People'),
     'rights_required'=>RIGHT_COMPANY_EDIT,
 
     'test'=>'yes',
@@ -1010,14 +1010,14 @@ new PageHandle(array('id'=>'companyLinkPersons',
     'valid_for_crawlers'=>false,
     'valid_for_crawlers'=>false,
 ));
-new PageHandleSubm(array('id'=>'companyLinkPersonsSubmit',
+new PageHandleSubm(array('id'=>'companyLinkPeopleSubmit',
     'req'=>'pages/company.inc.php',
     'rights_required'=>RIGHT_COMPANY_EDIT,
 
 ));
-new PageHandleFunc(array('id'=>'companyPersonsDelete',
+new PageHandleFunc(array('id'=>'companyPeopleDelete',
     'req'       =>'pages/company.inc.php',
-    'title'     =>__('Remove persons from company'),
+    'title'     =>__('Remove people from company'),
     'rights_required'=>RIGHT_COMPANY_EDIT,
 
     'test'=>'yes',
@@ -1029,7 +1029,7 @@ new PageHandleFunc(array('id'=>'companyPersonsDelete',
 */
 new PageHandle(array('id'=>'personList',
     'req'=>'pages/person.inc.php',
-    'title'=>__('List Persons'),
+    'title'=>__('List People'),
     'test'=>'yes',
     'valid_for_crawlers'=>false,
 
@@ -1145,7 +1145,7 @@ new PageHandleFunc(array('id'=>'personSendActivation',
     'test'=>'complex',
     'test_params'=>array('projectperson'=>'_projectPersonEdit_',),
 ));
-new PageHandleFunc(array('id'=>'personsFlushNotifications',
+new PageHandleFunc(array('id'=>'peopleFlushNotifications',
     'req'       =>'pages/person.inc.php',
     'title'     =>__('Send Notifications'),
     'rights_required'=>RIGHT_PERSON_EDIT,

@@ -16,13 +16,13 @@
 *  like       $id => object
 *
 */
-global $g_cache_persons;
-$g_cache_persons=array();
+global $g_cache_people;
+$g_cache_people=array();
 
 
 
 /**
-* Persons
+* People
 */
 class Person extends DbProjectItem {
     public $name;
@@ -384,13 +384,13 @@ class Person extends DbProjectItem {
     static function getById($id, $use_cache= true)
     {
         $id= intval($id);
-        global $g_cache_persons;
-        if($use_cache && isset($g_cache_persons[$id])) {
-            $p= $g_cache_persons[$id];
+        global $g_cache_people;
+        if($use_cache && isset($g_cache_people[$id])) {
+            $p= $g_cache_people[$id];
         }
         else {
             $p= new Person($id);
-            $g_cache_persons[$p->id]= $p;
+            $g_cache_people[$p->id]= $p;
         }
         if(!$p->id) {
             return NULL;
@@ -411,22 +411,22 @@ class Person extends DbProjectItem {
         }
 
         $id = intval($id);
-        global $g_cache_persons;
-        if($use_cache && isset($g_cache_persons[$id])) {
-            $p= $g_cache_persons[$id];
+        global $g_cache_people;
+        if($use_cache && isset($g_cache_people[$id])) {
+            $p= $g_cache_people[$id];
             return $p;
         }
         else {
             $p=NULL;
-            $persons= Person::getPersons(array(
+            $people= Person::getPeople(array(
                 'id'=>$id
             ));
-            if(count($persons) == 1) {
+            if(count($people) == 1) {
 
 
-                if($persons[0]->id) {
-                    $p=$persons[0];
-                    $g_cache_persons[$p->id]= $p;
+                if($people[0]->id) {
+                    $p=$people[0];
+                    $g_cache_people[$p->id]= $p;
                     return $p;
                 }
             }
@@ -455,12 +455,12 @@ class Person extends DbProjectItem {
             ||
             $auth->cur_user->user_rights & RIGHT_PERSON_EDIT
         ) {
-            $persons= Person::getPersons(array(
+            $people= Person::getPeople(array(
                 'id'=>$id
             ));
-            if(count($persons) == 1) {
-                if($persons[0]->id) {
-                    return $persons[0];
+            if(count($people) == 1) {
+                if($people[0]->id) {
+                    return $people[0];
                 }
             }
         }
@@ -497,12 +497,12 @@ class Person extends DbProjectItem {
 
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
-        $persons=array();
+        $people=array();
         foreach($tmp as $t) {
             $person=new Person($t);
-            $persons[]=$person;
+            $people[]=$person;
         }
-        return $persons;
+        return $people;
     }
 
     /**
@@ -511,7 +511,7 @@ class Person extends DbProjectItem {
     * - use "has_id" to query one person if visible
     */
     #$order_by=NULL, $accounts_only=false, $has_id=NULL, $search=NULL)
-    public static function getPersons($args=NULL)
+    public static function getPeople($args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');
@@ -603,7 +603,7 @@ class Person extends DbProjectItem {
 			$str_pcategory = '';
 		}
 		
-        ### all persons ###
+        ### all people ###
         if(!$visible_only) {
             $str=
                 "SELECT i.*, pers.* from {$prefix}person pers, {$prefix}item i
@@ -619,18 +619,18 @@ class Person extends DbProjectItem {
                ". getOrderByString($order_by);
         }
 
-        ### only related persons ###
+        ### only related people ###
         else {
             $str=
                 "SELECT DISTINCT pers.*, ipers.* from {$prefix}person pers, {$prefix}project p, {$prefix}projectperson upp, {$prefix}projectperson pp, {$prefix}item ipp, {$prefix}item ipers
                 WHERE
                         upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1           /* upp all user projectpersons */
+                    AND upp.state = 1           /* upp all user projectpeople */
                     AND upp.project = $str_project        /* all user projects */
 
                     AND p.state = 1
                     AND p.status > 0              /* ignore templates */
-                    AND p.id = pp.project         /* all projectpersons in user's project*/
+                    AND p.id = pp.project         /* all projectpeople in user's project*/
 
                     AND pp.state = 1
                     AND pp.id = ipp.id
@@ -650,7 +650,7 @@ class Person extends DbProjectItem {
                ". getOrderByString($order_by);
         }
 
-        $persons = self::queryFromDb($str);                 # store in variable to pass by reference
+        $people = self::queryFromDb($str);                 # store in variable to pass by reference
 		
         /**
         * be sure that the current user is listed
@@ -668,18 +668,18 @@ class Person extends DbProjectItem {
             ) {
 
             $flag_user_found = false;
-            foreach($persons as $p) {
+            foreach($people as $p) {
                 if($p->id == $auth->cur_user->id) {
                     $flag_user_found= true;
                     break;
                 }
             }
             if(!$flag_user_found) {
-                $persons[]= $auth->cur_user;
+                $people[]= $auth->cur_user;
             }
         }
 
-        return $persons;
+        return $people;
     }
 
     #------------------------------------------------------------
@@ -748,9 +748,9 @@ class Person extends DbProjectItem {
     }
 
     /**
-    * get project-persons
+    * get project-people
     */
-    function getProjectPersons($args=NULL)
+    function getProjectPeople($args=NULL)
     {
         $prefix= confGet('DB_TABLE_PREFIX');
         global $auth;
@@ -824,12 +824,12 @@ class Person extends DbProjectItem {
         }
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
-        $ppersons=array();
+        $ppeople=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
-            $ppersons[]= $pperson;
+            $ppeople[]= $pperson;
         }
-        return $ppersons;
+        return $ppeople;
     }
 
     /**
@@ -968,13 +968,13 @@ class Person extends DbProjectItem {
 
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
-        $taskpersons=array();
+        $taskpeople=array();
         require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
 
         foreach($tmp as $tp) {
-            $taskpersons[]=new TaskPerson($tp);
+            $taskpeople[]=new TaskPerson($tp);
         }
-        return $taskpersons;
+        return $taskpeople;
 
     }
 	

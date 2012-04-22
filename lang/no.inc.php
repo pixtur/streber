@@ -120,14 +120,14 @@ $g_lang_table= array(
 'New company'                 =>'Ny Organisasjon',
 'Edit Company'                =>'Redigere Organisasjon',
 'Delete Company'              =>'Slette Organisasjon',
-'Link Persons'                =>'Linke Personer',
-'List Persons'                =>'Liste Personer',
+'Link People'                =>'Linke Personer',
+'List People'                =>'Liste Personer',
 'View Person'                 =>'Person Oversikt',
 'New person'                  =>'Ny Person',
 'Edit Person'                 =>'Redigere Person',
 'Edit user rights'            =>'Redigere Bruker-rettigheter',
 'Delete Person'               =>'Slette Person',
-'View Efforts of Person'      =>'Vise en persons Innsats',
+'View Efforts of Person'      =>'Vise en people Innsats',
 'Login'                       =>'Logg inn',
 'License'                     =>'Lisens',
 'Error'                       =>'Feil',
@@ -148,7 +148,7 @@ $g_lang_table= array(
 'Full name'                   =>'Fullt navn',
 'Nickname'                    =>'Brukernavn',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Tagline'                     =>'Tag linje',
 
 ### ../db/class_person.inc   ###
@@ -232,7 +232,7 @@ $g_lang_table= array(
 ### ../lists/list_efforts.inc   ###
 'S'                           =>'S',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Name Short'                  =>'Kortnavn',
 'Shortnames used in other lists'=>'Abkürzungen werden in Listen verwendet',
 
@@ -260,22 +260,22 @@ $g_lang_table= array(
 'New effort'                  =>'Ny Innsats',
 'D, d.m.Y'                    =>'D, d.m.Y',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Mobil'                       =>'Mobil',
 
 ### ../pages/person.inc   ###
 'Office'                      =>'Kontor',
 'Private'                     =>'Privat',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'Edit person'                 =>'Redigere Person',
 'Delete person'               =>'Slette Person',
 'Create new person'           =>'Ny Person',
 
 ### ../lists/list_project_team.inc   ###
-'Your related persons'        =>'Dine relevante Personer',
+'Your related people'        =>'Dine relevante Personer',
 'Rights'                      =>'Rettigheter',
-'Persons rights in this project'=>'Personers Prosjektrettigheter',
+'People rights in this project'=>'Personers Prosjektrettigheter',
 'Add team member'             =>'Ny Prosjektperson',
 'Remove person from team'     =>'Fjerne Prosjektperson fra team',
 'Member'                      =>'Prosjektperson',
@@ -395,7 +395,7 @@ $g_lang_table= array(
 
 ### ../pages/company.inc   ###
 'Create new project for this company'=>'Nytt Prosjekt for organisasjonen',
-'Add existing persons to this company'=>'Legg til eksisterende Personer til organisasjonen',
+'Add existing people to this company'=>'Legg til eksisterende Personer til organisasjonen',
 'People'                     =>'Personer',
 
 ### ../pages/person.inc   ###
@@ -412,11 +412,11 @@ $g_lang_table= array(
 'no projects yet'             =>'ennå ingen Projekter',
 'link existing Person'        =>'linke eksisterende Personer',
 'create new'                  =>'opprette ny',
-'no persons related'          =>'ingen relevante Personer',
+'no people related'          =>'ingen relevante Personer',
 'Create another company after submit'=>'opprette ennå en organisasjon etter lagring',
 'Edit %s'                     =>'Redigere %s',
-'Add persons employed or related'=>'Legg til ansatte eller relaterte Personer',
-'No persons selected...'=>'Ingen Personer valgt...',
+'Add people employed or related'=>'Legg til ansatte eller relaterte Personer',
+'No people selected...'=>'Ingen Personer valgt...',
 'Person already related to company'=>'Personen arbeiteder allerede for denne organisasjonen',
 'Select some companies to delete'=>'Velg organisasjoner som skal slettes',
 
@@ -447,8 +447,8 @@ $g_lang_table= array(
 
 ### ../pages/person.inc   ###
 'With Account'                =>'med Konto',
-'All Persons'                 =>'Alle Personer',
-'no related persons'          =>'ingen relevante Personer',
+'All People'                 =>'Alle Personer',
+'no related people'          =>'ingen relevante Personer',
 'Edit this person'            =>'Redigere denne Personen',
 'Profile'                     =>'Profil',
 'User Rights'                 =>'Bruker-rettigheter',
@@ -473,7 +473,7 @@ $g_lang_table= array(
 'passwords don´t match'       =>'Passordene stemmer ikke overens',
 'Login-accounts require a unique nickname'=>'Personer med bruker konti må ha entydige brukernavn',
 'could not insert object'=>'kunne ikke legge til objekt',
-'Select some persons to delete'=>'Velg personer som skal slettes',
+'Select some people to delete'=>'Velg personer som skal slettes',
 'Adjust user-rights of %s'    =>'Redigere bruker rettigheter for %s',
 'Please consider that activating login-accounts might trigger security-issues.'
                               =>'Vær oppmerksom på at bruker konti representerer potensiell sikkerhets risiko.',
@@ -514,8 +514,8 @@ $g_lang_table= array(
 'Failed to change %s projects'=>'ADVARSEL: Endringen av %s slo feil',
 'Closed %s projects'          =>'%s Projekter lukket',
 'Select new team members'     =>'Velg nye team medlemmer',
-'found no persons to add'     =>'fant ingen personer å legge til',
-'No persons selected...'      =>'Ingen personer ble valgt ut.',
+'found no people to add'     =>'fant ingen personer å legge til',
+'No people selected...'      =>'Ingen personer ble valgt ut.',
 'Could not access person by id'=>'Kunne ikke aksessere Person med ID',
 'reanimated person as team-member'=>'Person ble gjenopptatt som team medlem.',
 'Person already in project'=>'Person er allerede Team-Medlem',
@@ -605,8 +605,8 @@ $g_lang_table= array(
 
 ### ../pages/person.inc   ###
 'passwords don´t match'       =>'Passordene stemmer ikke overens.',
-'Failed to delete %s persons'=>'%s Personer kunne ikke slettes.',
-'Moved %s persons to trash'=>'%s Personen ble flyttet til papirkurven.',
+'Failed to delete %s people'=>'%s Personer kunne ikke slettes.',
+'Moved %s people to trash'=>'%s Personen ble flyttet til papirkurven.',
 
 ### ../pages/proj.inc   ###
 'Issues'                      =>'Feilrapporter',
@@ -636,7 +636,7 @@ $g_lang_table= array(
 ### ../pages/person.inc   ###
 'Language'                    =>'Språk',
 'passwords don´t match'       =>'Passordene stemmer ikke overens',
-'Select some persons to edit' =>'Vennligst velg noen personer å redigere',
+'Select some people to edit' =>'Vennligst velg noen personer å redigere',
 'Could not get Person'        =>'Kan ikke finne Person',
 
 ### ../pages/proj.inc   ###
@@ -670,7 +670,7 @@ $g_lang_table= array(
 ### ../db/class_project.inc   ###
 'insufficient rights (not in project)'=>'Manglende tilgangsretter (ikke i prosjekt).',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 '(adjusted)'                  =>'(tilpasset)',
 
 ### ../lists/list_projectchanges.inc   ###
@@ -756,7 +756,7 @@ $g_lang_table= array(
 'Searching'                   =>'Søk',
 'Found %s companies'          =>'%s Firmaer funnet',
 'Found %s projects'           =>'%s Projekter funnet',
-'Found %s persons'            =>'%s Personer funnet',
+'Found %s people'            =>'%s Personer funnet',
 'Found %s tasks'              =>'%s Oppgaver funnet',
 'Found %s comments'           =>'%s Notater funnet',
 
@@ -878,9 +878,9 @@ $g_lang_table= array(
 ### ../pages/person.inc   ###
 'relating to %s|page title add on listing pages relating to current user'=>'relatert til %s',
 'With Account|page option'    =>'Med Konto',
-'All Persons|page option'     =>'Alle Personer',
+'All People|page option'     =>'Alle Personer',
 'People/Project Overview'     =>'Personer / Prosject Overblikk',
-'Persons|Pagetitle for person list'=>'Personer',
+'People|Pagetitle for person list'=>'Personer',
 'relating to %s|Page title Person list title add on'=>'relatert til %s',
 'admin view|Page title add on if admin'=>'Admin visning',
 'Edit this person|Tooltip for page function'=>'Redigere denne Personen',
@@ -1069,10 +1069,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Redigere Prosjekt Team',
 'View anything|a user right'  =>'Se alt',
 'Edit anything|a user right'  =>'Redigere alt',
-'Create Persons|a user right' =>'Opprette Personer',
+'Create People|a user right' =>'Opprette Personer',
 'Edit Presons|a user right'   =>'Redigere Personer',
-'Delete Persons|a user right' =>'Slette Personer',
-'View all Persons|a user right'=>'Se Alle Personer',
+'Delete People|a user right' =>'Slette Personer',
+'View all People|a user right'=>'Se Alle Personer',
 'Edit user rights|a user right'=>'Endre bruker rettigheter',
 'Edit own profile|a user right'=>'Redigere egen profil',
 'Create Companies|a user right'=>'Opprette Firmaer',
@@ -1212,7 +1212,7 @@ $g_lang_table= array(
 'Yesterday'                   =>'Igår',
 
 ### ../std/constant_names.inc   ###
-'Edit Persons|a user right'   =>'Redigere Personer',
+'Edit People|a user right'   =>'Redigere Personer',
 
 
 
@@ -1239,7 +1239,7 @@ $g_lang_table= array(
 'Flush Notifications'         =>'Sende e-post nå',
 
 ### ../pages/company.inc   ###
-'related Persons'             =>'relevante Personer',
+'related People'             =>'relevante Personer',
 
 ### ../pages/file.inc   ###
 'Could not access parent task.'=>'Kommer ikke til mappen',
@@ -1260,8 +1260,8 @@ $g_lang_table= array(
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'
 	=>'Aktiveringsmail har ingen hensikt sålenge Personen ikke får logge inn. Vennligst se over Profil.',
 'Activation mail has been sent.'=>'Aktiveringsmail ble sendt',
-'Select some persons to notify'=>'Velg person(er) å informere',
-'Failed to mail %s persons'=>'Kunne ikke sende Mail til %s.',
+'Select some people to notify'=>'Velg person(er) å informere',
+'Failed to mail %s people'=>'Kunne ikke sende Mail til %s.',
 'Sent notification to %s person(s)'=>'Melding ble sendt til %s Person(er.',
 
 ### ../pages/proj.inc   ###
@@ -1329,7 +1329,7 @@ $g_lang_table= array(
 ### ../render/render_list.inc   ###
 'modified by unknown'         =>'Endret av ukjent',
 
-### ../lists/list_persons.inc   ###
+### ../lists/list_people.inc   ###
 'last login'                  =>'siste innlogging',
 'Profile|column header'       =>'Profil',
 'Account settings for user (do not confuse with project rights)'
@@ -1410,7 +1410,7 @@ $g_lang_table= array(
 'Could not set cookie.'       =>'Kunne ikke sette Cookie.',
 
 ### ../std/constant_names.inc   ###
-'Create & Edit Persons|a user right'=>'Opprette og Redigere Personer',
+'Create & Edit People|a user right'=>'Opprette og Redigere Personer',
 
 
 
@@ -1676,7 +1676,7 @@ $g_lang_table= array(
 
 ### ../pages/proj.inc.php   ###
 'Create a new folder for tasks and files'=>'Opprette ny mappe for oppgaver og filer',
-'Found no persons to add. Go to `People` to create some.'=>'Fant ingen personer å legge til.',
+'Found no people to add. Go to `People` to create some.'=>'Fant ingen personer å legge til.',
 
 ### ../pages/task.inc.php   ###
 'Add Details|page function'   =>'Legg til detaljer',
@@ -1717,7 +1717,7 @@ $g_lang_table= array(
 'Click on the file ids for details.'=>'Klikk på fil id for detaljer',
 
 ### ../pages/_handles.inc.php   ###
-'List Deleted Persons'        =>'Vis slettete Personer',
+'List Deleted People'        =>'Vis slettete Personer',
 
 
 ### ../pages/person.inc.php   ###
@@ -1729,7 +1729,7 @@ $g_lang_table= array(
 'You do not have enough rights to edit this task'=>'Du har ikke nok rettigheter for å endre denne oppgaven.',
 
 ### ../render/render_misc.inc.php   ###
-'Other Persons|page option'   =>'Andre Personer',
+'Other People|page option'   =>'Andre Personer',
 'Deleted|page option'         =>'Slettet',
 
 ### ../render/render_wiki.inc.php   ###
@@ -1854,7 +1854,7 @@ $g_lang_table= array(
 'List Prospective Clients'    =>'Liste prospektive klienter',
 'List Suppliers'              =>'Liste leverandører',
 'List Partners'               =>'Liste partnere',
-'Remove persons from company' =>'Slette personer fra organisasjonen',
+'Remove people from company' =>'Slette personer fra organisasjonen',
 'List Employees'              =>'Liste ansatte',
 
 ### ../pages/comment.inc.php   ###
@@ -1907,7 +1907,7 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'Employees|Pagetitle for person list'=>'Ansatte',
-'Contact Persons|Pagetitle for person list'=>'Kontaktpersoner',
+'Contact People|Pagetitle for person list'=>'Kontaktpersoner',
 'Person details'              =>'Personopplysninger',
 'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'
 	=>'Den endrete profilen <b> påvirker ikke eksisterende prosjekt roller</b>! Disse må justeres innenfor prosjektene.',
@@ -2005,7 +2005,7 @@ $g_lang_table= array(
 'Companies|page option'       =>'Organisasjoner',
 'Versions|Project option'     =>'Versjoner',
 'Employees|page option'       =>'Ansatte',
-'Contact Persons|page option' =>'Kontaktpersoner',
+'Contact People|page option' =>'Kontaktpersoner',
 'All Companies|page option'   =>'Alle organisasjoner',
 '%s hours'                    =>'%s timer',
 '%s days'                     =>'%s dager',

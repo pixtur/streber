@@ -60,7 +60,7 @@ class ProjectNewsBlock extends PageBlock
             }
             echo "<h3>" . asHtml( $n->name ) . "</h3>";
             echo "<p class= details>";
-            echo sprintf (__('%s by %s', "time ago by nickname"), renderTimeAgo($n->created), asHtml($creator->nickname));
+            echo sprintf (__("%s by %s","time ago by nickname"), renderTimeAgo($n->created), asHtml($creator->nickname));
 
             if($comments= $n->getComments()) {
                 echo " / ";

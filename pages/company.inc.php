@@ -704,11 +704,11 @@ function companyView()
             'name'      =>__('Project'),
         )));
         $page->add_function(new PageFunction(array(
-            'target'    =>'companyLinkPersons',
+            'target'    =>'companyLinkPeople',
             'params'    =>array('company'=>$company->id),
             'icon'      =>'add',
-            'tooltip'   =>__('Add existing persons to this company'),
-            'name'      =>__('Persons'),
+            'tooltip'   =>__('Add existing people to this company'),
+            'name'      =>__('People'),
         )));
 
     	### render title ###
@@ -755,15 +755,15 @@ function companyView()
         $block->render_blockEnd();
     }
 
-    #--- list persons -------------------------------
+    #--- list people -------------------------------
     {
         require_once(confGet('DIR_STREBER') . 'pages/person.inc.php');
-        $list= new ListBlock_persons();
+        $list= new ListBlock_people();
 
-        $persons= $company->getPersons();
+        $people= $company->getPeople();
 
-        $list->title= __('related Persons');
-        $list->id="related_persons";
+        $list->title= __('related People');
+        $list->id="related_people";
         unset($list->columns['tagline']);
         unset($list->columns['nickname']);
         unset($list->columns['profile']);
@@ -784,32 +784,32 @@ function companyView()
         * pass the company's id, which is not possible right now...
         */
         $list->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('companyLinkPersons')->id,
+            'target'=>$PH->getPage('companyLinkPeople')->id,
             #'params'    =>array('company'=>$company->id),
-            'name'  =>__('Link Persons'),
-            'id'    =>'companyLinkPersons',
+            'name'  =>__('Link People'),
+            'id'    =>'companyLinkPeople',
             'icon'  =>'add',
         )));
 		$list->add_function(new ListFunction(array(
-            'target'=>$PH->getPage('companyPersonsDelete')->id,
+            'target'=>$PH->getPage('companyPeopleDelete')->id,
             'name'  =>__('Remove person from company'),
-            'id'    =>'companyPersonsDelete',
+            'id'    =>'companyPeopleDelete',
             'icon'  =>'sub',
             'context_menu'=>'submit',
         )));
 
         if($auth->cur_user->user_rights & RIGHT_COMPANY_EDIT) {
             $list->no_items_html=
-                $PH->getLink('companyLinkPersons',__('link existing Person'),array('company'=>$company->id))
+                $PH->getLink('companyLinkPeople',__('link existing Person'),array('company'=>$company->id))
                 ." ". __("or")." "
                 .$PH->getLink('personNew',__('create new'),array('company'=>$company->id));
         }
         else {
-            $list->no_items_html=__("no persons related");
+            $list->no_items_html=__("no people related");
         }
 
-        $list->render_list($persons);
-		//$list->print_automatic($persons);
+        $list->render_list($people);
+		//$list->print_automatic($people);
     }
 
 
@@ -1104,11 +1104,11 @@ function companyEditSubmit()
 }
 
 /**
-* Link Persons to company
+* Link People to company
 *
 * @ingroup pages
 */
-function companyLinkPersons() {
+function companyLinkPeople() {
     global $PH;
 
     $id= getOnePassedId('company','companies_*');   # WARNS if multiple; ABORTS if no id found
@@ -1124,12 +1124,12 @@ function companyLinkPersons() {
     	$page->cur_tab='companies';
         $page->type=__("Edit Company");
         $page->title=sprintf(__("Edit %s"),$company->name);
-        $page->title_minor=__("Add persons employed or related");
+        $page->title_minor=__("Add people employed or related");
 
 
     	$page->crumbs= build_company_crumbs($company);
     	$page->options[]= new NaviOption(array(
-    	    'target_id'     => 'companyLinkPersons',
+    	    'target_id'     => 'companyLinkPeople',
     	));
 
         echo(new PageHeader);
@@ -1140,15 +1140,15 @@ function companyLinkPersons() {
     {
         require_once(confGet('DIR_STREBER') . 'pages/person.inc.php');
         require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');
-        $persons= Person::getPersons();
-        $list= new ListBlock_persons();
+        $people= Person::getPeople();
+        $list= new ListBlock_people();
         $list->show_functions=false;
         $list->show_icons=false;
 
 
-        $list->render_list($persons);
+        $list->render_list($people);
 
-        $PH->go_submit='companyLinkPersonsSubmit';
+        $PH->go_submit='companyLinkPeopleSubmit';
         echo "<input type=hidden name='company' value='$company->id'>";
         echo "<input class=button2 type=submit>";
 
@@ -1162,11 +1162,11 @@ function companyLinkPersons() {
 
 
 /**
-* Submit linked persons to a company
+* Submit linked people to a company
 *
 * @ingroup pages 
 */
-function companyLinkPersonsSubmit()
+function companyLinkPeopleSubmit()
 {
     global $PH;
     require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
@@ -1177,9 +1177,9 @@ function companyLinkPersonsSubmit()
         $PH->abortWarning("Could not get object...");
     }
 
-    $person_ids= getPassedIds('person','persons*');
+    $person_ids= getPassedIds('person','people*');
     if(!$person_ids) {
-        $PH->abortWarning(__("No persons selected..."));
+        $PH->abortWarning(__("No people selected..."));
     }
 
     $employments= $company->getEmployments();
@@ -1216,11 +1216,11 @@ function companyLinkPersonsSubmit()
 }
 
 /**
-* Remove persons from a company 
+* Remove people from a company 
 *
 * @ingroup pages
 */
-function companyPersonsDelete()
+function companyPeopleDelete()
 {
 	global $PH;
 
@@ -1230,9 +1230,9 @@ function companyPersonsDelete()
         $PH->abortWarning("Could not get object...");
     }
 
-    $person_ids= getPassedIds('person','persons*');
+    $person_ids= getPassedIds('person','people*');
     if(!$person_ids) {
-        $PH->abortWarning(__("No persons selected..."));
+        $PH->abortWarning(__("No people selected..."));
     }
 
 	$employments= $company->getEmployments();

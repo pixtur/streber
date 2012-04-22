@@ -164,10 +164,10 @@ class ChangeLine extends BaseObject
                         continue;
                     }
 
-                    if($assigned_persons= $task->getAssignedPersons()) {
+                    if($assigned_people= $task->getAssignedPeople()) {
                         $tmp=array();
 
-                        foreach($assigned_persons as $ap) {
+                        foreach($assigned_people as $ap) {
                             $tmp[]= $ap->getLink();
                         }
 
@@ -238,10 +238,10 @@ class ChangeLine extends BaseObject
                         continue;
                     }
 
-                    if($assigned_persons= $task->getAssignedPersons()) {
+                    if($assigned_people= $task->getAssignedPeople()) {
                         $tmp=array();
 
-                        foreach($assigned_persons as $ap) {
+                        foreach($assigned_people as $ap) {
                             $tmp[]= $ap->getLink();
                         }
 
@@ -362,7 +362,7 @@ class ChangeLine extends BaseObject
 
                     require_once "db/class_taskperson.inc.php";
                     $count_assignments=0;
-                    if($assignments= TaskPerson::getTaskPersons(array(
+                    if($assignments= TaskPerson::getTaskPeople(array(
                         'task'      => $task->id,
                         'project'   => $task->project,
                         'date_min'  => $task->modified,
@@ -481,10 +481,10 @@ class ChangeLine extends BaseObject
                         continue;
                     }
 
-                    if($assigned_persons= $task->getAssignedPersons()) {
+                    if($assigned_people= $task->getAssignedPeople()) {
                         $tmp=array();
 
-                        foreach($assigned_persons as $ap) {
+                        foreach($assigned_people as $ap) {
                             $tmp[]= $ap->getLink();
                         }
 

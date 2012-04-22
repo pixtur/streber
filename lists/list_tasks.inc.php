@@ -514,11 +514,11 @@ class ListBlock_tasks extends ListBlock
                     {
                         echo '<div class=assigned_to>';
 
-                        $persons= $t->getAssignedPersons();
-                        if($persons) {
+                        $people= $t->getAssignedPeople();
+                        if($people) {
                             $sep='';
                             echo "<p>".__('for')." ";
-                            foreach($persons as $p) {
+                            foreach($people as $p) {
                                 echo $sep . $p->getLink();
                                 $sep= ', ';
                             }
@@ -958,7 +958,7 @@ class ListBlockCol_TaskAssignedTo extends ListBlockCol
             return;
         }
         $value="";
-        if($tps= $obj->getAssignedPersons()) {
+        if($tps= $obj->getAssignedPeople()) {
             $sep="";
             foreach($tps as $tp) {
                 $value.= $sep.$tp->getLink();

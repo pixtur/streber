@@ -354,7 +354,7 @@ function taskEditSubmit()
         if($request_feedback= get('request_feedback')) {
             $team_members_by_nickname = array();
 
-            foreach($project->getProjectPersons() as $pp) {
+            foreach($project->getProjectPeople() as $pp) {
                 $team_members_by_nickname[ $pp->getPerson()->nickname ] = $pp->getPerson();
             }
             $requested_people= array();
@@ -494,7 +494,7 @@ function taskEditSubmit()
     *   ... where ?? being the id of the last assigned person(s)
     *
     * - builds up multiple arrays of person-objects (reusing the same objects due to caching)
-    *   - get already assigned persons into  dict. of person_id => Person
+    *   - get already assigned people into  dict. of person_id => Person
     *   - get assignments into dict. of person_id => Person
     *   - get current project-team as dict of person_id => Person
     * - checks for double-assigments
@@ -502,12 +502,12 @@ function taskEditSubmit()
     */
     {
 
-        $assigned_persons = array();
+        $assigned_people = array();
         $task_assignments = array();
 
         if($task->id) {
-            foreach($task->getAssignedPersons() as $p) {
-                $assigned_persons[$p->id] = $p;
+            foreach($task->getAssignedPeople() as $p) {
+                $assigned_people[$p->id] = $p;
             }
 
             foreach($task->getAssignments() as $ta) {
@@ -516,7 +516,7 @@ function taskEditSubmit()
         }
 
         $team= array();
-        foreach($project->getPersons() as $p) {
+        foreach($project->getPeople() as $p) {
             $team[$p->id]= $p;
         }
 
@@ -544,7 +544,7 @@ function taskEditSubmit()
                 }
                 
                 if($id == $id_new) {
-                    if($tp = TaskPerson::getTaskPersons(array('person'=>$id, 'task'=>$task->id))){
+                    if($tp = TaskPerson::getTaskPeople(array('person'=>$id, 'task'=>$task->id))){
                         $tp[0]->forward = $forwarded;
                         $tp[0]->forward_comment = $forward_comment;
                         $old_task_assignments[] = $tp[0];
@@ -603,7 +603,7 @@ function taskEditSubmit()
             
             ### check if already assigned ###
             if(isset($task_assignments[$id_new])) {
-                if($tp = TaskPerson::getTaskPersons(array('person'=>$id_new,'task'=>$task->id))){
+                if($tp = TaskPerson::getTaskPeople(array('person'=>$id_new,'task'=>$task->id))){
                     $tp[0]->forward = $forwarded;
                     $tp[0]->forward_comment = $forward_comment;
                     $old_task_assignments[] = $tp[0];
@@ -1861,14 +1861,14 @@ function TaskEditMultiple()
 
             $tasks[]= $task;
 
-            ## get assigned persons ##
-            if($task_persons = $task->getAssignedPersons(false))
+            ## get assigned people ##
+            if($task_people = $task->getAssignedPeople(false))
             {
                 $counter = 0;
-                foreach($task_persons as $tp){
+                foreach($task_people as $tp){
                     $task_assignments[$task->id][$counter++] = $tp->id;
                 }
-                $task_assignments_count[$task->id] = count($task_persons);
+                $task_assignments_count[$task->id] = count($task_people);
             }
             ## if nobody is assigned
             else{
@@ -1895,7 +1895,7 @@ function TaskEditMultiple()
                     }
                 }
 
-                ## check if tasks have different persons assigned ##
+                ## check if tasks have different people assigned ##
                 if($task_assignments_count[$tasks[0]->id] != $task_assignments_count[$task->id]){
                     $different_assignments = true;
                 }
@@ -2096,14 +2096,14 @@ function TaskEditMultiple()
             $ass_also = array();
 
             ## get project team ##
-            if($proj_persons = $project->getPersons()){
-                foreach($proj_persons as $pp){
+            if($proj_people = $project->getPeople()){
+                foreach($proj_people as $pp){
                     $ass[$pp->id] = $pp->name;
                     $ass_also[$pp->id] = $pp->name;
                 }
             }
 
-            ## different persons assigend? ##
+            ## different people assigend? ##
             if($different_assignments){
                 $ass['__dont_change__'] = ('-- ' . __('keep different') . ' --');
                 $form->add(new Form_Dropdown('task_assignement_diff', __('Assigned to'), array_flip($ass), '__dont_change__'));
@@ -2188,24 +2188,24 @@ function taskEditMultipleSubmit()
                 }
 
                 $team= array();
-                foreach($project->getPersons() as $p) {
+                foreach($project->getPeople() as $p) {
                     $team[$p->id]= $p;
                 }
             }
 
             ### assignment ###
             {
-                $task_assigned_persons = array();
+                $task_assigned_people = array();
                 $task_assignments = array();
-                $task_persons_overwrite = array();
-                $task_persons_new = array();
-                $task_persons_delete = array();
+                $task_people_overwrite = array();
+                $task_people_new = array();
+                $task_people_delete = array();
 
-                ## previous assigend persons ##
-                if($task_persons = $task->getAssignedPersons(false))
+                ## previous assigend people ##
+                if($task_people = $task->getAssignedPeople(false))
                 {
-                    foreach($task_persons as $tp){
-                        $task_assigned_persons[$tp->id] = $tp;
+                    foreach($task_people as $tp){
+                        $task_assigned_people[$tp->id] = $tp;
                     }
                 }
 
@@ -2217,13 +2217,13 @@ function taskEditMultipleSubmit()
                     }
                 }
 
-                ## different assigned persons ##
+                ## different assigned people ##
                 ## overwrite ?? ##
                 $ass1 = get('task_assignement_diff');
                 if($ass1 && $ass1 != '__dont_change__'){
-                    $task_persons_overwrite[] = $ass1;
+                    $task_people_overwrite[] = $ass1;
                     foreach($task_assignments as $key=>$value){
-                        $task_persons_delete[] = $value;
+                        $task_people_delete[] = $value;
                     }
                     $change = true;
                 }
@@ -2231,7 +2231,7 @@ function taskEditMultipleSubmit()
                 ## new ?? ##
                 $ass2 = get('task_assignement_also_diff');
                 if($ass2 && $ass2 != '__select_person__'){
-                    $task_persons_new[] = $ass2;
+                    $task_people_new[] = $ass2;
                     $change = true;
                 }
 
@@ -2249,25 +2249,25 @@ function taskEditMultipleSubmit()
                                 if(!$t_old){
                                     continue;
                                 }
-                                $task_persons_delete[] = $t_old;
+                                $task_people_delete[] = $t_old;
                                 continue;
                             }
 
-                            $task_persons_delete[] = $t_old;
-                            $task_persons_overwrite[] = $id_new;
+                            $task_people_delete[] = $t_old;
+                            $task_people_overwrite[] = $id_new;
                         }
                     }
                     else{
                         $id_new = get('task_assign_to___none__');
                         if($id_new && $id_new != '__none__'){
-                            $task_persons_new[] = $id_new;
+                            $task_people_new[] = $id_new;
                         }
                     }
 
                     $id_new = get('task_assign_to_0');
                     if($id_new != '__select_person__'){
                         if(!isset($task_assignments[$id_new])){
-                            $task_persons_new[] = $id_new;
+                            $task_people_new[] = $id_new;
                         }
                     }
 
@@ -2379,15 +2379,15 @@ function taskEditMultipleSubmit()
                         $task->status = STATUS_OPEN;
                     }
                 }
-                ## overwrite assigend persons ##
-                if(isset($task_persons_overwrite)){
-                    if(isset($task_persons_delete)){
-                        foreach($task_persons_delete as $tpd){
+                ## overwrite assigend people ##
+                if(isset($task_people_overwrite)){
+                    if(isset($task_people_delete)){
+                        foreach($task_people_delete as $tpd){
                             $tpd->delete();
                             
                         }
                     }
-                    foreach($task_persons_overwrite as $tpo)
+                    foreach($task_people_overwrite as $tpo)
                     {
                         $task_pers_over = new TaskPerson(array(
                                         'person'=> $team[$tpo]->id,
@@ -2400,9 +2400,9 @@ function taskEditMultipleSubmit()
                 }
 
                 ## add new person ##
-                if(isset($task_persons_new)){
-                    foreach($task_persons_new as $tpn){
-                        if(!isset($task_assigned_persons[$tpn]))
+                if(isset($task_people_new)){
+                    foreach($task_people_new as $tpn){
+                        if(!isset($task_assigned_people[$tpn]))
                         {
                             $task_pers_new = new TaskPerson(array(
                                          'person'=> $team[$tpn]->id,
@@ -2724,8 +2724,8 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
             }
             ## eventually needed later when note is a subcategory of task
             /*else {
-                if(!$pperson = $task->getAssignedPersons()){
-                    $PH->abortWarning(__("ERROR: could not get assigned persons"), ERROR_NOTE);
+                if(!$pperson = $task->getAssignedPeople()){
+                    $PH->abortWarning(__("ERROR: could not get assigned people"), ERROR_NOTE);
                 }
                 else{
                     foreach($pperson as $pp){
@@ -2753,8 +2753,8 @@ function taskNoteOnPersonEdit($task=NULL, $person=NULL)
 
             $pers_list = array();
             $pers_list[-1] = __('undefined');
-            if($persons = Person::getPersons(array('can_login'=>1))){
-                foreach($persons as $pers){
+            if($people = Person::getPeople(array('can_login'=>1))){
+                foreach($people as $pers){
                     if($auth->cur_user->name <> $pers->name) {
                         $pers_list[$pers->id] = $pers->name;
                     }
@@ -2917,7 +2917,7 @@ function taskNoteOnPersonEditSubmit()
         $task->project = $project->id;
     }
 
-    ## assigne persons to task##
+    ## assigne people to task##
     $new_task_assignments = array();
     $count = 0;
     if(!$task->id){
@@ -2959,7 +2959,7 @@ function taskNoteOnPersonEditSubmit()
     }
     ## eventually needed later when note is a subcategory of task
     /*else {
-        # ToDo: check if persons are assigned
+        # ToDo: check if people are assigned
     }*/
 
     ## assigne person to project ##
@@ -2967,7 +2967,7 @@ function taskNoteOnPersonEditSubmit()
     $new_project_assignments = array();
     $count = 0;
     if(!$task->id){
-        $projperson = $project->getPersons(false);
+        $projperson = $project->getPeople(false);
         foreach($projperson as $projp){
             $team[$projp->id] = $projp->name;
         }
@@ -3025,7 +3025,7 @@ function taskNoteOnPersonEditSubmit()
     }
     ## eventually needed later when note is a subcategory of task
     /*else{
-        # ToDo: check if persons are assigned
+        # ToDo: check if people are assigned
     }*/
 
 
@@ -3057,7 +3057,7 @@ function taskNoteOnPersonEditSubmit()
     $book_effort = get('book_effort');
     if($book_effort) {
         $as_duration = 0;
-        if($pperson = $project->getProjectPersons()){
+        if($pperson = $project->getProjectPeople()){
             foreach($pperson as $pp){
                 if(($pp->project == $project->id) && ($pp->person == $auth->cur_user->id)){
                     if($pp->adjust_effort_style == 1){

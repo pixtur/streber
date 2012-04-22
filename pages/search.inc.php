@@ -212,11 +212,11 @@ class SearchResult extends BaseObject
         }
 
         /**
-        * search persons
+        * search people
         */
         {
             require_once(confGet('DIR_STREBER') . "db/class_person.inc.php");
-            foreach($persons= Person::getPersons(array(
+            foreach($people= Person::getPeople(array(
                             'search'=>$search_query   #$search=NULL
                             ))
             as $person) {

@@ -121,7 +121,7 @@ $g_lang_table= array(
 'only required if user can login (e.g. pixtur)'=>'vyžadované, jen při prihlášení uživ. (např. pixtur)',
 'Optional: Color for graphical overviews (e.g. #FFFF00)'=>'Volitelné: Farba pro grafický prehlad (např.  #FFFF00)',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'Slogan',
 
 ### ../db/class_person.inc.php   ###
@@ -310,7 +310,7 @@ $g_lang_table= array(
 'related companies'           =>'propojené firmy',
 'Company|Column header'       =>'Firma',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Krátke jméno',
 'Shortnames used in other lists'=>'Krátke jména použíté v jiných seznamech',
 
@@ -414,7 +414,7 @@ $g_lang_table= array(
 'closed'                      =>'uzavřený',
 '%s required'                 =>'%s je vyžadované',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Soukromé',
 'Mobil'                       =>'Mobil',
 'Office'                      =>'Kancelář',
@@ -422,14 +422,14 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Companies'                   =>'Společnosti',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'poslední přihlášení',
 'Edit person'                 =>'Upravit osobu',
 
 ### ../pages/_handles.inc.php   ###
 'Edit user rights'            =>'Upravit používatelské prístupy',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Smazat osobu',
 'Active Projects|column header'=>'Aktivní projekty',
 'Create new person'           =>'Vytvořit novou osobu',
@@ -440,14 +440,14 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Priorita je %s',
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'poslední změny',
 'changes since YOUR last logout'=>'změny od posledního odhlášení',
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'Prepojené osoby na tebe',
+'Your related people'        =>'Prepojené osoby na tebe',
 'Rights'                      =>'Práva',
-'Persons rights in this project'=>'Práva osob v tomto projektu',
+'People rights in this project'=>'Práva osob v tomto projektu',
 'Edit team member'            =>'Upravit člena týmu',
 'Add team member'             =>'Přidat člena týmu',
 'Remove person from team'     =>'Odstranit osobu z týmu',
@@ -647,10 +647,10 @@ $g_lang_table= array(
 'Delete Company'              =>'Odstranit firmu',
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Propojit osoby',
+'Link People'                =>'Propojit osoby',
 
 ### ../pages/_handles.inc.php   ###
-'List Persons'                =>'Seznam osob',
+'List People'                =>'Seznam osob',
 'View Person'                 =>'Zobrazit osoby',
 
 ### ../pages/person.inc.php   ###
@@ -753,25 +753,25 @@ $g_lang_table= array(
 
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Vytvořit nový projekt pro tuto firmu',
-'Add existing persons to this company'=>'Přidat existující osobu do této firmy',
+'Add existing people to this company'=>'Přidat existující osobu do této firmy',
 'People'                     =>'Lidé',
 'Adress'                      =>'Adresa',
 'Fax'                         =>'Fax',
 'Web'                         =>'Web',
 'Intra'                       =>'Intra',
 'Mail'                        =>'E-mail',
-'related Persons'             =>'propojené osoby',
+'related People'             =>'propojené osoby',
 'link existing Person'        =>'propojit existující osobu',
 'create new'                  =>'vytvořit novou',
-'no persons related'          =>'bez propojenej osoby',
+'no people related'          =>'bez propojenej osoby',
 'Active projects'             =>'Aktivní projekty',
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>'Tip: existující projekty prosím upravte a nastavte v nich firmu',
 'no projects yet'             =>'zatí bez projektů',
 'Closed projects'             =>'Ukončené projekty',
 'Create another company after submit'=>'Vytvořit další firmu po odeslaní',
 'Edit %s'                     =>'Upravit %s',
-'Add persons employed or related'=>'Přidat osoby zaměstnané nebo napojené',
-'NOTE: No persons selected...'=>'UPOZORNĚNÍ: Bez označených osob...',
+'Add people employed or related'=>'Přidat osoby zaměstnané nebo napojené',
+'NOTE: No people selected...'=>'UPOZORNĚNÍ: Bez označených osob...',
 'NOTE person already related to company'=>'UPOZORNĚNÍ: Osoba je už provázaná na firmu',
 'Select some companies to delete'=>'Označit některé firmy na smazání',
 'WARNING: Failed to delete %s companies'=>'VAROVÁNÍ: Nepodařilo se smazat %s spoločností',
@@ -935,12 +935,12 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'S účtem',
-'All Persons|page option'     =>'Všechny osoby',
+'All People|page option'     =>'Všechny osoby',
 
 ### ../pages/person.inc.php   ###
 'People/Project Overview'     =>'Přehled osob/projektů',
-'no related persons'          =>'bez provázaných osob',
-'Persons|Pagetitle for person list'=>'Osoby',
+'no related people'          =>'bez provázaných osob',
+'People|Pagetitle for person list'=>'Osoby',
 'relating to %s|Page title Person list title add on'=>'provázaný na %s',
 'admin view|Page title add on if admin'=>'admin zobrazení',
 'Edit this person|Tooltip for page function'=>'Upravit tuto osobu',
@@ -1008,19 +1008,19 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'WARNING: could not insert object'=>'VAROVANIE: Není možné vložit objekt',
-'Select some persons to delete'=>'Vyberte nejaké osoby pro smazání',
+'Select some people to delete'=>'Vyberte nejaké osoby pro smazání',
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'<b>%s</b> je přiřazený k projektům a proto nemůže být smazan. Ale můžete deaktivovat jeho práva na přihlášení se.',
-'WARNING: Failed to delete %s persons'=>'VAROBANIE: Nepodařilo se smazat %s osob.',
-'Moved %s persons to trash'=>'%s osob presunutých do odpadků',
+'WARNING: Failed to delete %s people'=>'VAROBANIE: Nepodařilo se smazat %s osob.',
+'Moved %s people to trash'=>'%s osob presunutých do odpadků',
 'Insufficient rights'         =>'Nedostatočné práva',
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'Když uživatel nemá právo upravit svůj vlastní profil a tedy ani heslo, odeslání aktiváce nemá smysl.',
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'Odeslání aktivačního e-mailu nemá smysl, pokud se uživatel nemůže přihlásit. Uprav prosím jeho profil.',
 'Activation mail has been sent.'=>'Aktivační e-mail byl odeslaný',
 'Sending notification e-mail failed.'=>'Odeslání upozornujícího e-mailu se nepodařilo.',
-'Select some persons to notify'=>'Vyberte ludí pro notifikáciu',
-'WARNING: Failed to mail %s persons'=>'VAROVANIE: nepodarilo se e-mailovat pro %s osob',
+'Select some people to notify'=>'Vyberte ludí pro notifikáciu',
+'WARNING: Failed to mail %s people'=>'VAROVANIE: nepodarilo se e-mailovat pro %s osob',
 'Sent notification to %s person(s)'=>'Odeslané upozornění pro %s osob',
-'Select some persons to edit' =>'Vyberte nejaké osoby pro úpravy',
+'Select some people to edit' =>'Vyberte nejaké osoby pro úpravy',
 'Could not get Person'        =>'Nelze načíst osobu',
 'Edit Person|page type'       =>'Upravit osobu',
 'Adjust user-rights'          =>'Přizpůsobit oprávnení',
@@ -1127,9 +1127,9 @@ $g_lang_table= array(
 'Closed %s projects'          =>'Uzatvorených %s projektů',
 'Reactivated %s projects'     =>'Reaktivovaných %s projektů',
 'Select new team members'     =>'Vyber nového člena týmu',
-'Found no persons to add. Go to `People` to create some.'=>'Nejsou dostupné žádné osoby. Jdi do časti `Lidé` a vytvoř nekoho.',
+'Found no people to add. Go to `People` to create some.'=>'Nejsou dostupné žádné osoby. Jdi do časti `Lidé` a vytvoř nekoho.',
 'Add'                         =>'Přidat',
-'No persons selected...'      =>'Žádná osoba není označená',
+'No people selected...'      =>'Žádná osoba není označená',
 'Could not access person by id'=>'Není možné přistoupit o osobě přez id',
 'NOTE: reanimated person as team-member'=>'UPOZORNĚNÍ: osoba znovu zařazená do týmu.',
 'NOTE: person already in project'=>'UPOZORNĚNÍ: osoba je už v projekte ',
@@ -1159,7 +1159,7 @@ $g_lang_table= array(
 'Searching'                   =>'Hledání',
 'Found %s companies'          =>'Nalezených %s firiem',
 'Found %s projects'           =>'Nalezených %s projektů',
-'Found %s persons'            =>'Nalezených %s osob',
+'Found %s people'            =>'Nalezených %s osob',
 'Found %s tasks'              =>'Nalezených %s úkol',
 'Found %s comments'           =>'Nalezených %s komentářů',
 'Sorry. Could not find anything.'=>'lituji. Nic jsem nenašel',
@@ -1397,10 +1397,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'Upravit projektové týmy',
 'View anything|a user right'  =>'Zobrazit vše',
 'Edit anything|a user right'  =>'Upravit vše',
-'Create Persons|a user right' =>'Vytvořit osoby',
-'Create & Edit Persons|a user right'=>'Vytvořit a upravit osoby',
-'Delete Persons|a user right' =>'Odstranit osoby',
-'View all Persons|a user right'=>'Zobrazit všechny osoby',
+'Create People|a user right' =>'Vytvořit osoby',
+'Create & Edit People|a user right'=>'Vytvořit a upravit osoby',
+'Delete People|a user right' =>'Odstranit osoby',
+'View all People|a user right'=>'Zobrazit všechny osoby',
 'Edit user rights|a user right'=>'Upravit práva prístupu',
 'Edit Own Profil|a user right'=>'Upravit vlastný profil',
 'Create Companies|a user right'=>'Vytvořit firmy',
@@ -1469,14 +1469,14 @@ $g_lang_table= array(
 'view changes|' =>'zobrazit změny',
 'Mark tasks as Open|' =>'Označit úkoly jako otevřené',
 'Move files to folder|' =>'Presunout soubory do složky',
-'List Deleted Persons|' =>'Seznam zmazaných osob',
+'List Deleted People|' =>'Seznam zmazaných osob',
 #
 ### ../pages/_handles.inc.php   ###
 'Edit multiple Tasks'         =>'Upravit více úkol',
 'view changes'                =>'zobrazit změny',
 'Mark tasks as Open'          =>'Označit úkol jako otevřenú',
 'Move files to folder'        =>'Přesunout soubory do složky',
-'List Deleted Persons'        =>'Seznam zmazaných lidí',
+'List Deleted People'        =>'Seznam zmazaných lidí',
 'Filter errors.log'           =>'Filtrovat errors.log',
 'Delete errors.log'           =>'Smazat errors.log',
 
@@ -1524,8 +1524,8 @@ $g_lang_table= array(
 'Nickname has to be unique'   =>'Prezývka musí byt jedinečná',
 'Passwords do not match'      =>'Heslá nesouhlasia',
 'Could not insert object'     =>'Není možné vložit objekt',
-'Failed to delete %s persons' =>'Nepodařilo se smazat %s osob',
-'Failed to mail %s persons'   =>'Nepodařilo se poslat e-mail %s osobám',
+'Failed to delete %s people' =>'Nepodařilo se smazat %s osob',
+'Failed to mail %s people'   =>'Nepodařilo se poslat e-mail %s osobám',
 
 ### ../pages/proj.inc.php   ###
 'not assigned to a closed project'=>'nepřidělený k uzavřenému projektu',
@@ -1620,7 +1620,7 @@ $g_lang_table= array(
 'Status|Short status column header'=>'Stav',
 
 ### ../render/render_misc.inc.php   ###
-'Other Persons|page option'   =>'Ostatní osoby',
+'Other People|page option'   =>'Ostatní osoby',
 'Deleted|page option'         =>'Smazané',
 '%s hours'                    =>'%s hodin',
 '%s days'                     =>'%s dní',
@@ -1701,7 +1701,7 @@ $g_lang_table= array(
 'List Prospective Clients'    =>'Seznam perspektívnych klientů',
 'List Suppliers'              =>'Seznam dodávatelů',
 'List Partners'               =>'Seznam partnerů',
-'Remove persons from company' =>'Odstranit osoby zo spoločnosti',
+'Remove people from company' =>'Odstranit osoby zo spoločnosti',
 'List Employees'              =>'Seznam zamestnanců',
 
 ### ../pages/comment.inc.php   ###
@@ -1751,7 +1751,7 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'Employees|Pagetitle for person list'=>'Zamestnanci',
-'Contact Persons|Pagetitle for person list'=>'Kontaktní osoby',
+'Contact People|Pagetitle for person list'=>'Kontaktní osoby',
 'Person %s created'           =>'Osoba %s vytvořená',
 
 ### ../pages/proj.inc.php   ###
@@ -1836,7 +1836,7 @@ $g_lang_table= array(
 'Companies|page option'       =>'Spoločnosti',
 'Versions|Project option'     =>'Verze',
 'Employees|page option'       =>'Zamestnanci',
-'Contact Persons|page option' =>'Kontaktné osoby',
+'Contact People|page option' =>'Kontaktné osoby',
 'All Companies|page option'   =>'Všechny společnosti',
 
 ### ../render/render_wiki.inc.php   ###

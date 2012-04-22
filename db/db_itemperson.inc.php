@@ -256,13 +256,13 @@ class ItemPerson extends DbItem
             $sth = $dbh->prepare($str_query);
             $sth->execute("",1);
             $tmp = $sth->fetchall_assoc();
-            $itempersons = array();
+            $itempeople = array();
             foreach($tmp as $t){
                 $itemperson = new ItemPerson($t);
-                $itempersons[] = $itemperson;
+                $itempeople[] = $itemperson;
             }
 
-            return $itempersons;
+            return $itempeople;
         }
         else{
             return NULL;
@@ -310,7 +310,7 @@ class ItemPerson extends DbItem
         return NULL;
     }
     
-    static function getPersons($item=NULL,$notify_on_change=NULL)
+    static function getPeople($item=NULL,$notify_on_change=NULL)
     {
         global $auth;
 

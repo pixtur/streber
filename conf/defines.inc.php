@@ -57,7 +57,7 @@ define('RIGHT_PROJECT_DELETE',      1<<4);
 define('RIGHT_VIEWALL',             1<<5);      # implies view all other projects
 define('RIGHT_EDITALL',             1<<6);      # implies editing anything!
 
-define('RIGHT_PERSON_CREATE',       1<<9);      # creating persons includes right-editing
+define('RIGHT_PERSON_CREATE',       1<<9);      # creating people includes right-editing
 define('RIGHT_PERSON_EDIT',         1<<9);
 define('RIGHT_PERSON_DELETE',       1<<10);
 define('RIGHT_PERSON_VIEWALL',      1<<11);

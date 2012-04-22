@@ -742,7 +742,7 @@ foreach($filters_str as $fs=>$value) {
             WHERE
                     upp.person = {$auth->cur_user->id}
                 AND upp.state = 1
-                AND upp.project = p.id   /* all user projectpersons */
+                AND upp.project = p.id   /* all user projectpeople */
 
                 AND p.state = 1
                 AND p.status >=1
@@ -784,7 +784,7 @@ foreach($filters_str as $fs=>$value) {
             WHERE
                     upp.person = {$auth->cur_user->id}
                 AND upp.state = 1
-                AND upp.project = p.id   /* all user projectpersons */
+                AND upp.project = p.id   /* all user projectpeople */
 
                 AND p.state = 1
                 AND p.status >=1
@@ -1243,7 +1243,7 @@ foreach($filters_str as $fs=>$value) {
 
         ### all projects ###
         #
-        # TODO @@@ CHECK projeckt-assigment / visible persons...
+        # TODO @@@ CHECK projeckt-assigment / visible people...
         # if( $auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
         $query_str=
             "SELECT itp.*, tp.* from {$prefix}item itp, {$prefix}person pers, {$prefix}taskperson tp
@@ -1304,9 +1304,9 @@ foreach($filters_str as $fs=>$value) {
 
 
     /**
-    * getAssignedPersons
+    * getAssignedPeople
     */
-    function getAssignedPersons($visible_only=true) {
+    function getAssignedPeople($visible_only=true) {
         global $auth;
 
         $prefix = confGet('DB_TABLE_PREFIX');
@@ -1331,16 +1331,16 @@ foreach($filters_str as $fs=>$value) {
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
 
-        $persons=array();
+        $people=array();
 
 
         #--- return all ---
         if(!$visible_only || $auth->cur_user->user_rights & RIGHT_PROJECT_ASSIGN) {
             foreach($tmp as $t) {
-                $persons[]=new Person($t);
+                $people[]=new Person($t);
             }
 
-            return $persons;
+            return $people;
         }
         else {
             $project= Project::getById($this->project);
@@ -1348,10 +1348,10 @@ foreach($filters_str as $fs=>$value) {
 
                 $p=new Person($t);
                 if($project->isPersonVisibleTeamMember($p)) {
-                    $persons[]= $p;
+                    $people[]= $p;
                 }
             }
-            return $persons;
+            return $people;
         }
     }
 	

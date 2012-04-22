@@ -187,25 +187,25 @@ function taskEdit($task=NULL)
             {
                 ### for existing tasks, get already assigned
                 if($task->id) {
-                    $assigned_persons = $task->getAssignedPersons();
+                    $assigned_people = $task->getAssignedPeople();
                     #$task_assignments = $task->getAssignments();
                 }
 
                 ### for new tasks get the assignments from parent task ###
 
                 /**
-                * Some notes on assigning persons
+                * Some notes on assigning people
                 *
                 * Passing this information is tricky because:
-                * - multiple persons could be assigned to a task
+                * - multiple people could be assigned to a task
                 * - task-assignments for new tasks can't be stored to database until the task
                 *   has finally been validated and stored itself. Therefore this information has
                 *   to be passed in hiddenfields named "task_assign_to_#" whereas # is an integer counting
                 *   up from 0.
-                * - additionally all persons have to be checked for visibility and if they are already
+                * - additionally all people have to be checked for visibility and if they are already
                 *   assigned to this task.
                 *
-                *   To automatically assign new tasks to persons there are two possibilites:
+                *   To automatically assign new tasks to people there are two possibilites:
                 *   1. pass 'task_assign_to_#" - parameters
                 *   2. pass 'parent_task' - parameter which is been assigned to a person
                 *
@@ -220,7 +220,7 @@ function taskEdit($task=NULL)
 
                         ### check if already assigned ###
                         if($p= Person::getVisibleById($id_new)) {
-                            $assigned_persons[]= $p;
+                            $assigned_people[]= $p;
                         }
                     }
 
@@ -231,8 +231,8 @@ function taskEdit($task=NULL)
                             $parents= array_reverse($parents);
 
                             foreach($parents as $p) {
-                                if($ap= $p->getAssignedPersons()) {
-                                    $assigned_persons= $ap;
+                                if($ap= $p->getAssignedPeople()) {
+                                    $assigned_people= $ap;
                                     break;
 
                                 }
@@ -244,7 +244,7 @@ function taskEdit($task=NULL)
                 $team=array(__('- select person -')=>0);
 
                 ### create team-list ###
-                foreach($project->getPersons() as $p) {
+                foreach($project->getPeople() as $p) {
                     $team[$p->name]= $p->id;
                 }
 
@@ -252,8 +252,8 @@ function taskEdit($task=NULL)
                 ### create drop-down-lists ###
                 $count_new=0;
                 $count_all=0;
-                if(isset($assigned_persons)) {
-                    foreach($assigned_persons as $ap) {
+                if(isset($assigned_people)) {
+                    foreach($assigned_people as $ap) {
                         if(!$p= Person::getVisibleById($ap->id)) {
                             continue;                               # skip if invalid person
                         }

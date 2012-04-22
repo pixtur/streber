@@ -104,7 +104,7 @@ class ListBlock_projects extends ListBlock
             'format'=>'{?status_summary}'
         )));
 
-        $this->add_col( new ListBlockCol_ProjectPersons);
+        $this->add_col( new ListBlockCol_ProjectPeople);
 
         $this->add_col( new ListBlockCol_ProjectEffortSum);
 
@@ -295,11 +295,11 @@ class ListBlock_projects extends ListBlock
 * column active projects
 *
 */
-class ListBlockCol_ProjectPersons extends ListBlockCol
+class ListBlockCol_ProjectPeople extends ListBlockCol
 {
     public $name;
     public $tooltip;
-    public $id='persons';
+    public $id='people';
     public $width="70%";
 
     public function __construct($args=NULL) {
@@ -314,7 +314,7 @@ class ListBlockCol_ProjectPersons extends ListBlockCol
         global $PH;
 
         print "<td>";
-        if($pps= $project->getProjectPersons()) {
+        if($pps= $project->getProjectPeople()) {
 
             $str_delimiter="";
             foreach($pps as $pp){

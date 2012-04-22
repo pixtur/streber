@@ -28,10 +28,10 @@ function personDelete()
     global $PH;
 
     ### get person ####
-    $ids= getPassedIds('person','persons_*');
+    $ids= getPassedIds('person','people_*');
 
     if(!$ids) {
-        $PH->abortWarning(__("Select some persons to delete"));
+        $PH->abortWarning(__("Select some people to delete"));
         return;
     }
 
@@ -42,8 +42,8 @@ function personDelete()
             $PH->abortWarning("Invalid person-id!");
         }
 
-        ### persons in project can't be deleted ###
-        if($pps = $person->getProjectPersons(array(
+        ### people in project can't be deleted ###
+        if($pps = $person->getProjectPeople(array(
             'alive_only' => false,
             'visible_only' => false 
         ))) {
@@ -70,10 +70,10 @@ function personDelete()
         }
     }
     if($errors) {
-        new FeedbackWarning(sprintf(__("Failed to delete %s persons"), $errors));
+        new FeedbackWarning(sprintf(__("Failed to delete %s people"), $errors));
     }
     else {
-        new FeedbackMessage(sprintf(__("Moved %s persons to trash"),$counter));
+        new FeedbackMessage(sprintf(__("Moved %s people to trash"),$counter));
     }
 
     ### display personList ####

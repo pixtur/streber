@@ -59,7 +59,7 @@ function itemsRemoveMany()
         
         ### author
         $people= array(0 => 'anybody');
-        foreach(Person::getPersons() as $p) {
+        foreach(Person::getPeople() as $p) {
             $people[$p->id] = $p->nickname;
         }
 

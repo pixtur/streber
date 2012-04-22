@@ -214,9 +214,9 @@ class ListFilter_tasks extends ListFilter
     }
 }
 
-class ListFilter_persons extends ListFilter
+class ListFilter_people extends ListFilter
 {
-    public $id = 'persons';
+    public $id = 'people';
     public $sql_querry_attribute = 'visible_only';
     public $default = true;
 

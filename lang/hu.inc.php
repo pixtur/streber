@@ -114,7 +114,7 @@ $g_lang_table= array(
 'Nickname'                    =>'Becenév',  # line 59
 'csak akkor kötelező, ha a felhasználó felhasználói fiókot igényel'=>'',  # line 60
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'',  # line 68
 
 ### ../db/class_person.inc.php   ###
@@ -393,7 +393,7 @@ $g_lang_table= array(
 ### ../lists/list_companies.inc.php   ###
 'related companies'           =>'kapcsolódó cégek',  # line 28
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Rövid név',  # line 34
 'Shortnames used in other lists'=>'Más listában használt rövid név',  # line 35
 
@@ -490,7 +490,7 @@ $g_lang_table= array(
 'open'                        =>'nyitva',  # line 599
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'',  # line 26
+'Your related people'        =>'',  # line 26
 
 ### ../std/constant_names.inc.php   ###
 'Person'                      =>'Személy',  # line 121
@@ -498,7 +498,7 @@ $g_lang_table= array(
 ### ../lists/list_versions.inc.php   ###
 'Task name. More Details as tooltips'=>'Feladat neve. További részletek a tooltipben.',  # line 54
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Privát',  # line 53
 'Mobil'                       =>'Mobil',  # line 58
 'Office'                      =>'HIvatal',  # line 63
@@ -506,14 +506,14 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Companies'                   =>'Cégek',  # line 243
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'utolsó belépés',  # line 78
 'Edit person'                 =>'Személy szerkesztése',  # line 110
 
 ### ../pages/_handles.inc.php   ###
 'Edit user rights'            =>'Felhasználó jogainak szerkesztése',  # line 1016
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Személy törlése',  # line 123
 'Create new person'           =>'Új személy felvitele',  # line 129
 'Nickname|column header'      =>'Becenév',  # line 217
@@ -526,13 +526,13 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Prioritás: %s',  # line 255
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'Legutóbbi változások',  # line 349
 'changes since YOUR last logout'=>'Legutóbbi kijelentkezés óta történt változások',  # line 351
 
 ### ../lists/list_project_team.inc.php   ###
 'Rights'                      =>'Jogok',  # line 42
-'Persons rights in this project'=>'Személy jogai ebben a projektben',  # line 43
+'People rights in this project'=>'Személy jogai ebben a projektben',  # line 43
 'Edit team member'            =>'Csapattag szerkesztése',  # line 100
 'Add team member'             =>'Csapattag hozzáadása',  # line 107
 'Remove person from team'     =>'Személy eltávolítása a csapatból',  # line 114
@@ -771,13 +771,13 @@ $g_lang_table= array(
 'Delete Company'              =>'Cég törlése',  # line 920
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Személy kapcsolása',  # line 637
+'Link People'                =>'Személy kapcsolása',  # line 637
 
 ### ../pages/_handles.inc.php   ###
-'Remove persons from company' =>'Személy eltávolítása cégből',  # line 940
-'List Persons'                =>'Személyek listája',  # line 973
+'Remove people from company' =>'Személy eltávolítása cégből',  # line 940
+'List People'                =>'Személyek listája',  # line 973
 'List Employees'              =>'Alkalmazottak listája',  # line 966
-'List Deleted Persons'        =>'Törölt személyek listája',  # line 979
+'List Deleted People'        =>'Törölt személyek listája',  # line 979
 'View Person'                 =>'Személy megtekintése',  # line 985
 
 ### ../pages/person.inc.php   ###
@@ -927,14 +927,14 @@ $g_lang_table= array(
 'Delete this company'         =>'Cég törlése',  # line 528
 'Create new person for this company'=>'Új személy felvitele a jelenlegi céghez',  # line 541
 'Create new project for this company'=>'Új projekt felvitele a jelenlegi céghez',  # line 548
-'Add existing persons to this company'=>'Meglévő személy felvitele ehez a céghez',  # line 555
+'Add existing people to this company'=>'Meglévő személy felvitele ehez a céghez',  # line 555
 'People'                     =>'Személyek',  # line 556
 'Adress'                      =>'Cím',  # line 578
 'Fax'                         =>'Fax',  # line 587
 'Web'                         =>'Weboldal',  # line 592
 'Intra'                       =>'Intranet',  # line 595
 'Mail'                        =>'E-mail',  # line 598
-'related Persons'             =>'',  # line 613
+'related People'             =>'',  # line 613
 'Remove person from company'  =>'Személy eltávolítása a cégből',  # line 643
 'link existing Person'        =>'Meglévő személy kapcsolása',  # line 651
 
@@ -942,7 +942,7 @@ $g_lang_table= array(
 'create new'                  =>'új létrehozása',  # line 679
 
 ### ../pages/company.inc.php   ###
-'no persons related'          =>'',  # line 656
+'no people related'          =>'',  # line 656
 'Active projects'             =>'Aktív projectek',  # line 675
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>'',  # line 691
 'no projects yet'             =>'Még nincsenek projektek',  # line 694
@@ -958,10 +958,10 @@ $g_lang_table= array(
 'Edit %s'                     =>'%s szerkesztése',  # line 2056
 
 ### ../pages/company.inc.php   ###
-'Add persons employed or related'=>'',  # line 950
+'Add people employed or related'=>'',  # line 950
 
 ### ../pages/project_more.inc.php   ###
-'No persons selected...'      =>'Nincs személy kiválasztva',  # line 2095
+'No people selected...'      =>'Nincs személy kiválasztva',  # line 2095
 
 ### ../pages/company.inc.php   ###
 'Person already related to company'=>'',  # line 1030
@@ -1261,12 +1261,12 @@ $g_lang_table= array(
 'Active People'               =>'Aktív személy',  # line 55
 'relating to %s|page title add on listing pages relating to current user'=>'',  # line 390
 'People/Project Overview'     =>'',  # line 431
-'no related persons'          =>'',  # line 442
-'Persons|Pagetitle for person list'=>'',  # line 135
+'no related people'          =>'',  # line 442
+'People|Pagetitle for person list'=>'',  # line 135
 'relating to %s|Page title Person list title add on'=>'',  # line 306
 'admin view|Page title add on if admin'=>'',  # line 309
 'Employees|Pagetitle for person list'=>'alkalmazottak',  # line 221
-'Contact Persons|Pagetitle for person list'=>'Kapcsolattartó',  # line 304
+'Contact People|Pagetitle for person list'=>'Kapcsolattartó',  # line 304
 'Deleted People'              =>'Törölt személy',  # line 388
 'Create Note|Tooltip for page function'=>'',  # line 511
 'Note|Page function person'   =>'',  # line 512
@@ -1359,19 +1359,19 @@ $g_lang_table= array(
 ### ../pages/person.inc.php   ###
 'Person %s created'           =>'A következő személy elkészült: %s',  # line 1549
 'Could not insert object'     =>'Az objektum beszúrása nem sikerült',  # line 1552
-'Select some persons to delete'=>'',  # line 1599
+'Select some people to delete'=>'',  # line 1599
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'',  # line 1616
-'Failed to delete %s persons' =>'A következő személy törlése nem sikerült: %s',  # line 1628
-'Moved %s persons to trash'   =>'',  # line 1631
+'Failed to delete %s people' =>'A következő személy törlése nem sikerült: %s',  # line 1628
+'Moved %s people to trash'   =>'',  # line 1631
 'Insufficient rights'         =>'',  # line 1649
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'',  # line 1661
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'',  # line 1666
 'Activation mail has been sent.'=>'',  # line 1677
 'Sending notification e-mail failed.'=>'',  # line 1680
-'Select some persons to notify'=>'',  # line 1701
-'Failed to mail %s persons'   =>'',  # line 1726
+'Select some people to notify'=>'',  # line 1701
+'Failed to mail %s people'   =>'',  # line 1726
 'Sent notification to %s person(s)'=>'',  # line 1729
-'Select some persons to edit' =>'',  # line 1755
+'Select some people to edit' =>'',  # line 1755
 'Could not get Person'        =>'',  # line 1759
 'Edit Person|page type'       =>'Személy módosítása',  # line 1775
 'Adjust user-rights'          =>'Felhasználó jogainak beállítása',  # line 1777
@@ -1450,7 +1450,7 @@ $g_lang_table= array(
 'Closed %s projects'          =>'',  # line 1979
 'Reactivated %s projects'     =>'',  # line 1982
 'Select new team members'     =>'',  # line 2016
-'Found no persons to add. Go to `People` to create some.'=>'',  # line 2060
+'Found no people to add. Go to `People` to create some.'=>'',  # line 2060
 'Add'                         =>'',  # line 2072
 'Could not access person by id'=>'',  # line 2104
 'Reanimated person as team-member'=>'',  # line 2150
@@ -1622,7 +1622,7 @@ $g_lang_table= array(
 'For Project|form label'      =>'',  # line 3065
 'New Project|form label'      =>'',  # line 3070
 'Project name|form label'     =>'',  # line 3071
-'ERROR: could not get assigned persons'=>'',  # line 3087
+'ERROR: could not get assigned people'=>'',  # line 3087
 'Also assign to'              =>'',  # line 3123
 'Book effort after submit'    =>'',  # line 3127
 'ERROR: could not get task'   =>'',  # line 3165
@@ -1726,7 +1726,7 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'Belépésre jogosultak',  # line 430
-'Other Persons|page option'   =>'Egyéb személyek',  # line 434
+'Other People|page option'   =>'Egyéb személyek',  # line 434
 'Clients|page option'         =>'Ügyfelek',  # line 461
 'Prospective Clients|page option'=>'Lehetséges partnerek',  # line 465
 'Suppliers|page option'       =>'Beszállítók',  # line 469
@@ -1740,7 +1740,7 @@ $g_lang_table= array(
 'Efforts|Project option'      =>'Munkaidő',  # line 411
 'History|Project option'      =>'Előzmények',  # line 417
 'Employees|page option'       =>'Alkalmazottak',  # line 438
-'Contact Persons|page option' =>'Kapcsolattartók',  # line 442
+'Contact People|page option' =>'Kapcsolattartók',  # line 442
 'Deleted|page option'         =>'Törölt',  # line 446
 'All Companies|page option'   =>'Összes cég',  # line 457
 'Active'                      =>'Aktív',  # line 488
@@ -1865,10 +1865,10 @@ $g_lang_table= array(
 'Edit project teams|a user right'=>'',  # line 86
 'View anything|a user right'  =>'Mindent láthat',  # line 87
 'Edit anything|a user right'  =>'Mindent szerkeszthet',  # line 88
-'Create Persons|a user right' =>'Személyeket hozhat létre',  # line 90
-'Create & Edit Persons|a user right'=>'Személyeket hozhat létre és szerkesztheti azokat',  # line 91
-'Delete Persons|a user right' =>'Személyeket törölhet',  # line 92
-'View all Persons|a user right'=>'Láthatja az összes személyt',  # line 93
+'Create People|a user right' =>'Személyeket hozhat létre',  # line 90
+'Create & Edit People|a user right'=>'Személyeket hozhat létre és szerkesztheti azokat',  # line 91
+'Delete People|a user right' =>'Személyeket törölhet',  # line 92
+'View all People|a user right'=>'Láthatja az összes személyt',  # line 93
 'Edit user rights|a user right'=>'Felhasználói jogokat szerkesztheti',  # line 94
 'Edit Own Profil|a user right'=>'Saját profilját szerkesztheti',  # line 95
 'Create Companies|a user right'=>'Cégeket hozhat létre',  # line 97
@@ -1983,7 +1983,7 @@ $g_lang_table= array(
 'Total effort sum: %s hours'  =>'Teljes munkaidő: %s óra',  # line 98
 
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'Legutóbbi változások',  # line 350
 'changes since YOUR last logout'=>'Változások a legutóbbi kijelentkezés óta',  # line 352
 

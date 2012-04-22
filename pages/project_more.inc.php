@@ -1905,10 +1905,10 @@ function projAddPerson()
         require_once(confGet('DIR_STREBER') . "pages/person.inc.php");
         require_once(confGet('DIR_STREBER') . "render/render_form.inc.php");
 
-        ### write list of persons ###
+        ### write list of people ###
         {
             ### build hash of already added person ###
-            $pps= $project->getProjectPersons(array(
+            $pps= $project->getProjectPeople(array(
                 'alive_only' => true,
                 'visible_only' => false
             ));
@@ -1917,18 +1917,18 @@ function projAddPerson()
                 $pp_hash[$pp->person]= true;
             }
 
-            ### filter already added persons ###
-            $persons = array();
-        if($pers = Person::getPersons())
+            ### filter already added people ###
+            $people = array();
+        if($pers = Person::getPeople())
             {
                 foreach($pers as $p) {
                     if(!isset($pp_hash[$p->id])) {
-                         $persons[]=$p;
+                         $people[]=$p;
                     }
                 }
             }
 
-            $list= new ListBlock_persons();
+            $list= new ListBlock_people();
 
             unset($list->columns['personal_phone']);
             unset($list->columns['office_phone']);
@@ -1937,9 +1937,9 @@ function projAddPerson()
             unset($list->columns['changes']);
             unset($list->columns['last_login']);
             $list->functions=array();
-            $list->no_items_html=__("Found no persons to add. Go to `People` to create some.");
+            $list->no_items_html=__("Found no people to add. Go to `People` to create some.");
 
-            $list->render_list($persons);
+            $list->render_list($people);
         }
 
 
@@ -1972,14 +1972,14 @@ function projAddPersonSubmit()
         $PH->abortWarning("Could not get object...",ERROR_FATAL);
     }
 
-    ### get persons ###
-    $person_ids= getPassedIds('person','persons*');
+    ### get people ###
+    $person_ids= getPassedIds('person','people*');
     if(!$person_ids) {
-        $PH->abortWarning(__("No persons selected..."),ERROR_NOTE);
+        $PH->abortWarning(__("No people selected..."),ERROR_NOTE);
     }
 
     ### get team (including inactive members)  ###
-    $ppersons= $project->getProjectPersons(array(
+    $ppeople= $project->getProjectPeople(array(
         'alive_only' => false,
         'visible_only' => false,
         'person_id' => NULL,
@@ -1996,7 +1996,7 @@ function projAddPersonSubmit()
         #### person already employed? ###
         $already_in=false;
         $pp=NULL;
-        foreach($ppersons as $pp) {
+        foreach($ppeople as $pp) {
             if($pp->person == $person->id) {
                 $already_in= true;
                 break;
@@ -2201,12 +2201,12 @@ function projDuplicate($org_project_id=NULL)
 
     $flag_cur_user_in_project=false;
 
-    ### copy projectpersons ###
-    if($org_ppersons= $org_project->getProjectPersons(array(
+    ### copy projectpeople ###
+    if($org_ppeople= $org_project->getProjectPeople(array(
          'alive_only' => false, 
          'visible_only' => false
     ))){
-        foreach($org_ppersons as $pp){
+        foreach($org_ppeople as $pp){
             $pp->id=0;
             $pp->project= $new_project->id;
 
@@ -2348,14 +2348,14 @@ function projDuplicate($org_project_id=NULL)
     }
 
     ### copy task_assigments ###
-    $dict_taskpersons=array(0 => 0);                        # this hash is not required
+    $dict_taskpeople=array(0 => 0);                        # this hash is not required
 
-    if($org_taskpersons= $org_project->getTaskPersons(
+    if($org_taskpeople= $org_project->getTaskPeople(
                                       "",  # $order_by=NULL,
                                       false,  # $visible_only=true,
                                       false  # $alive_only=true
     )) {
-        foreach($org_taskpersons as $tp) {
+        foreach($org_taskpeople as $tp) {
 
             $org_taskperson_id= $tp->id;
 
@@ -2374,7 +2374,7 @@ function projDuplicate($org_project_id=NULL)
             }
 
             $count_items++;
-            $dict_taskpersons[$org_taskperson_id]= $tp->id;
+            $dict_taskpeople[$org_taskperson_id]= $tp->id;
         }
     }
 

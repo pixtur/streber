@@ -29,7 +29,7 @@ function personView()
     global $auth;
 
     ### get current person ###
-    $id=getOnePassedId('person','persons_*');
+    $id=getOnePassedId('person','people_*');
     if(!$person= Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
         return;
@@ -70,7 +70,7 @@ function personView()
             $page->add_function(new PageFunction(array(
                 'target'=>'taskNoteOnPersonNew',
                 'params'=>array('person'=>$person->id),
-                'tooltip'=>__('Add task for this persons (optionally creating project and effort on the fly)','Tooltip for page function'),
+                'tooltip'=>__('Add task for this people (optionally creating project and effort on the fly)','Tooltip for page function'),
                 'name'=>__('Add note','Page function person'),
             )));
             #$page->add_function(new PageFunction(array(
@@ -130,7 +130,7 @@ function personView()
                     'params'=>array('person'=>$person->id),
                 )));
                 $page->add_function(new PageFunction(array(
-                    'target'=>'personsFlushNotifications',
+                    'target'=>'peopleFlushNotifications',
                     'params'=>array('person'=>$person->id),
                 )));
             }
@@ -278,7 +278,7 @@ function personView()
     {
         /**
         *  \Note: passing colum to person->getProject is not simple...
-        *  the sql-querry currently just querry project-persons, which do not contain anything usefull
+        *  the sql-querry currently just querry project-people, which do not contain anything usefull
         *  Possible solutions:
         *   - rewrite the querry-string
         *   - rewrite all order-keys to something like company.name

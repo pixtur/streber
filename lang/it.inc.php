@@ -120,7 +120,7 @@ $g_lang_table= array(
 'Nickname'                    =>'Nickname',  # line 47
 'only required if user can login (e.g. pixtur)'=>'richiesto solo se l`utente può fare login',  # line 48
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Tagline'                     =>'Tag',  # line 59
 
 ### ../db/class_person.inc.php   ###
@@ -303,7 +303,7 @@ $g_lang_table= array(
 ### ../lists/list_companies.inc.php   ###
 'related companies'           =>'aziende correlate',  # line 22
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Name Short'                  =>'Nome Breve',  # line 27
 'Shortnames used in other lists'=>'Nomi brevi usati in altri elenchi',  # line 28
 
@@ -394,7 +394,7 @@ $g_lang_table= array(
 'Completed|columnheader'      =>'Completate',  # line 441
 'Completed tasks: %s'         =>'Attività completate',  # line 459
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Private'                     =>'Personale',  # line 44
 'Mobil'                       =>'Cellulare',  # line 49
 'Office'                      =>'Ufficio',  # line 54
@@ -402,14 +402,14 @@ $g_lang_table= array(
 ### ../render/render_page.inc.php   ###
 'Companies'                   =>'Aziende',  # line 240
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'last login'                  =>'ultimo login',  # line 69
 'Edit person'                 =>'Modifica persona',  # line 100
 
 ### ../pages/_handles.inc.php   ###
 'Edit user rights'            =>'Modifica permessi utente',  # line 653
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Delete person'               =>'Elimina persona',  # line 113
 'Create new person'           =>'Crea nuova persona',  # line 119
 'Profile|column header'       =>'Profilo',  # line 141
@@ -420,14 +420,14 @@ $g_lang_table= array(
 ### ../render/render_list_column_special.inc.php   ###
 'Priority is %s'              =>'Priorità è %s',  # line 255
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'recent changes|column header'=>'cambiamenti recenti',  # line 225
 'changes since YOUR last logout'=>'cambiamenti dal TUO ultimo logout',  # line 227
 
 ### ../lists/list_project_team.inc.php   ###
-'Your related persons'        =>'Persone correlate a te',  # line 25
+'Your related people'        =>'Persone correlate a te',  # line 25
 'Rights'                      =>'Permessi',  # line 40
-'Persons rights in this project'=>'Permessi utente delle persone in questo progetto',  # line 41
+'People rights in this project'=>'Permessi utente delle persone in questo progetto',  # line 41
 'Edit team member'            =>'Modifica membro del team',  # line 98
 'Add team member'             =>'Aggiungi membro del team',  # line 105
 'Remove person from team'     =>'Rimuovi persona dal team',  # line 112
@@ -620,10 +620,10 @@ $g_lang_table= array(
 'Delete Company'              =>'Elimina Azienda',  # line 589
 
 ### ../pages/company.inc.php   ###
-'Link Persons'                =>'Collega Persone',  # line 228
+'Link People'                =>'Collega Persone',  # line 228
 
 ### ../pages/_handles.inc.php   ###
-'List Persons'                =>'Elenco Persone',  # line 618
+'List People'                =>'Elenco Persone',  # line 618
 'View Person'                 =>'Visualizza Persona',  # line 624
 
 ### ../pages/person.inc.php   ###
@@ -723,25 +723,25 @@ $g_lang_table= array(
 
 ### ../pages/company.inc.php   ###
 'Create new project for this company'=>'Crea nuovo progetto per questa azienda',  # line 139
-'Add existing persons to this company'=>'Aggiungi persona esistente a questa azienda',  # line 146
+'Add existing people to this company'=>'Aggiungi persona esistente a questa azienda',  # line 146
 'People'                     =>'Persone',  # line 147
 'Adress'                      =>'Indirizzo',  # line 169
 'Fax'                         =>'Fax',  # line 178
 'Web'                         =>'Sito web',  # line 183
 'Intra'                       =>'Intranet',  # line 186
 'Mail'                        =>'E-Mail',  # line 189
-'related Persons'             =>'persone correlate',  # line 204
+'related People'             =>'persone correlate',  # line 204
 'link existing Person'        =>'collega persone esistenti',  # line 235
 'create new'                  =>'crea nuova',  # line 237
-'no persons related'          =>'nessuna persona correlata',  # line 240
+'no people related'          =>'nessuna persona correlata',  # line 240
 'Active projects'             =>'Progetti attivi',  # line 297
 ' Hint: for already existing projects please edit those and adjust company-setting.'=>' Suggerimento: per i progetti già esistenti si prega di modificarli e aggiornare le impostazioni dell`azienda ',  # line 307
 'no projects yet'             =>'ancora nessun progetto',  # line 310
 'Closed projects'             =>'Progetti chiusi',  # line 335
 'Create another company after submit'=>'Dopo il salvataggio crea nuova azienda',  # line 430
 'Edit %s'                     =>'Modifica %s',  # line 524
-'Add persons employed or related'=>'Aggiungi persone impiegate o correlate',  # line 525
-'NOTE: No persons selected...'=>'NOTA: Nessuna persona selezionata',  # line 578
+'Add people employed or related'=>'Aggiungi persone impiegate o correlate',  # line 525
+'NOTE: No people selected...'=>'NOTA: Nessuna persona selezionata',  # line 578
 'NOTE person already related to company'=>'NOTA persona già correlata all`azienda',  # line 605
 'Select some companies to delete'=>'Seleziona le aziende da eliminare',  # line 627
 'WARNING: Failed to delete %s companies'=>'ATTENZIONE: Errore durante l`eliminazione di %s aziende',  # line 647
@@ -904,12 +904,12 @@ $g_lang_table= array(
 
 ### ../render/render_misc.inc.php   ###
 'With Account|page option'    =>'Con l`account',  # line 180
-'All Persons|page option'     =>'Tutte le persone',  # line 186
+'All People|page option'     =>'Tutte le persone',  # line 186
 
 ### ../pages/person.inc.php   ###
 'People/Project Overview'     =>'Panoramica Persone/Progetto',  # line 100
-'no related persons'          =>'nessuna persona correlata',  # line 189
-'Persons|Pagetitle for person list'=>'Persone',  # line 135
+'no related people'          =>'nessuna persona correlata',  # line 189
+'People|Pagetitle for person list'=>'Persone',  # line 135
 'relating to %s|Page title Person list title add on'=>'relative a %s',  # line 137
 'admin view|Page title add on if admin'=>'Vista dell`amministratore',  # line 140
 'Edit this person|Tooltip for page function'=>'Modifica questa persona',  # line 234
@@ -972,19 +972,19 @@ $g_lang_table= array(
 
 ### ../pages/person.inc.php   ###
 'WARNING: could not insert object'=>'ATTENZIONE: non è stato possibile inserire l`oggetto',  # line 1004
-'Select some persons to delete'=>'Seleziona le persone da eliminare',  # line 1048
+'Select some people to delete'=>'Seleziona le persone da eliminare',  # line 1048
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'',  # line 1065
-'WARNING: Failed to delete %s persons'=>'ATTENZIONE: Errore durante l`eliminazione di %s persone',  # line 1077
-'Moved %s persons to dumpster'=>'Spostato %s persone nel cestino',  # line 1080
+'WARNING: Failed to delete %s people'=>'ATTENZIONE: Errore durante l`eliminazione di %s persone',  # line 1077
+'Moved %s people to dumpster'=>'Spostato %s persone nel cestino',  # line 1080
 'Insufficient rights'         =>'Permessi utente non sufficienti',  # line 1099
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'=>'Poichè l`utente non ha i permessi utente per modificare il proprio profilo e quindi di cambiare la password, inviare l`attivazione non ha senso',  # line 1111
 'Sending an activation mail does not make sense, until the user is allowed to login. Please adjust his profile.'=>'Inviare la mail di attivazione non ha senso poichè a questo utente non è concesso di fare login. Si prega di modificare il suo profilo.',  # line 1116
 'Activation mail has been sent.'=>'Mail di attivazione inviata.',  # line 1127
 'Sending notification e-mail failed.'=>'Invio della e-mail di notifica fallita',  # line 1130
-'Select some persons to notify'=>'Seleziona le persone da notificare',  # line 1151
-'WARNING: Failed to mail %s persons'=>'ATTENZIONE: Invio fallito a %s persone',  # line 1176
+'Select some people to notify'=>'Seleziona le persone da notificare',  # line 1151
+'WARNING: Failed to mail %s people'=>'ATTENZIONE: Invio fallito a %s persone',  # line 1176
 'Sent notification to %s person(s)'=>'Inviata notifica a %s persone',  # line 1179
-'Select some persons to edit' =>'Seleziona le persone da modificare',  # line 1205
+'Select some people to edit' =>'Seleziona le persone da modificare',  # line 1205
 'Could not get Person'        =>'Non è stato possibile prendere la Persona',  # line 1209
 'Edit Person|page type'       =>'Modifica Persona',  # line 1225
 'Adjust user-rights'          =>'Aggiorna permessi-utente',  # line 1227
@@ -1089,9 +1089,9 @@ $g_lang_table= array(
 'Closed %s projects'          =>'Chiuso %s progetti',  # line 1766
 'Reactivated %s projects'     =>'Riattivato %s progetti',  # line 1769
 'Select new team members'     =>'Seleziona nuovi membri del team',  # line 1803
-'Found no persons to add. Go to `Persons` to create some.'=>'Non sono stati trovate persone da aggiugere. Vai in `Persone` per crearne di nuove.',  # line 1847
+'Found no people to add. Go to `People` to create some.'=>'Non sono stati trovate persone da aggiugere. Vai in `Persone` per crearne di nuove.',  # line 1847
 'Add'                         =>'Aggiungi',  # line 1859
-'No persons selected...'      =>'Nessuna persona selezionata',  # line 1885
+'No people selected...'      =>'Nessuna persona selezionata',  # line 1885
 'Could not access person by id'=>'Non è stato possibile accedere alla persona tramite id',  # line 1894
 'NOTE: reanimated person as team-member'=>'NOTA: persona riammessa come membro del team',  # line 1932
 'NOTE: person already in project'=>'NOTA: persona già nel progetto',  # line 1936
@@ -1122,7 +1122,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Searching'                   =>'Ricerca in corso',  # line 168
 'Found %s companies'          =>'Trovato %s aziende',  # line 179
 'Found %s projects'           =>'Trovato %s progetti',  # line 188
-'Found %s persons'            =>'Trovato %s persone',  # line 198
+'Found %s people'            =>'Trovato %s persone',  # line 198
 'Found %s tasks'              =>'Trovato %s attività',  # line 213
 'Found %s comments'           =>'Trovato %s commenti',  # line 224
 'sorry. Could not find anything.'=>'spiacente. Non è stato trovato alcun risultato.',  # line 230
@@ -1357,10 +1357,10 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Edit project teams|a user right'=>'Modifica team di progetti',  # line 65
 'View anything|a user right'  =>'Visualizza tutto',  # line 66
 'Edit anything|a user right'  =>'Modifica tutto',  # line 67
-'Create Persons|a user right' =>'Crea Persona',  # line 69
-'Create & Edit Persons|a user right'=>'Crea & Modifica Persone',  # line 70
-'Delete Persons|a user right' =>'Elimina Persone',  # line 71
-'View all Persons|a user right'=>'Mostra tutte le Persone',  # line 72
+'Create People|a user right' =>'Crea Persona',  # line 69
+'Create & Edit People|a user right'=>'Crea & Modifica Persone',  # line 70
+'Delete People|a user right' =>'Elimina Persone',  # line 71
+'View all People|a user right'=>'Mostra tutte le Persone',  # line 72
 'Edit user rights|a user right'=>'Modifica Permessi Utente',  # line 73
 'Edit Own Profil|a user right'=>'Modifica il proprio Profilo',  # line 74
 'Create Companies|a user right'=>'Crea Aziende',  # line 76
@@ -1443,7 +1443,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'view changes'                =>'visualizza cambiamenti',  # line 254
 'Mark tasks as Open'          =>'Segna attività come Aperta',  # line 308
 'Move files to folder'        =>'Sposta file nella cartella',  # line 565
-'List Deleted Persons'        =>'Elenco Persone Eliminate',  # line 652
+'List Deleted People'        =>'Elenco Persone Eliminate',  # line 652
 'Filter errors.log'           =>'Filtra errors.log',  # line 853
 'Delete errors.log'           =>'Elimina errors.log',  # line 860
 
@@ -1482,8 +1482,8 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Passwords do not match'      =>'Le password non coincidono',  # line 1000
 'Could not insert object'     =>'Non è possibile inserire oggetti',  # line 1079
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'=>'<b>%s</b> è stato assegnato ai progetti e non può essere eliminato. Ma è possibile disattivare i suoi permessi utente al login.',  # line 1140
-'Failed to delete %s persons' =>'Errore durante l`eliminazione di %s persone',  # line 1152
-'Failed to mail %s persons'   =>'Errore durante l`invio di e-mail a %s persone',  # line 1251
+'Failed to delete %s people' =>'Errore durante l`eliminazione di %s persone',  # line 1152
+'Failed to mail %s people'   =>'Errore durante l`invio di e-mail a %s persone',  # line 1251
 
 ### ../pages/proj.inc.php   ###
 'not assigned to a closed project'=>'not assegnato ad un progetto chiuso',  # line 171
@@ -1548,7 +1548,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Wiki format'                 =>'formato Wiki',  # line 310
 
 ### ../render/render_misc.inc.php   ###
-'Other Persons|page option'   =>'Altre persone',  # line 305
+'Other People|page option'   =>'Altre persone',  # line 305
 'Deleted|page option'         =>'Eliminato',  # line 309
 
 ### ../render/render_wiki.inc.php   ###
@@ -1646,7 +1646,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'List Prospective Clients'    =>'Elenco Prospect',  # line 711
 'List Suppliers'              =>'Elenco Fornitori',  # line 717
 'List Partners'               =>'Elenco Partner',  # line 723
-'Remove persons from company' =>'Rimuovi persone dall`azienda',  # line 774
+'Remove people from company' =>'Rimuovi persone dall`azienda',  # line 774
 'List Employees'              =>'Elenco Impiegati',  # line 798
 
 ### ../pages/comment.inc.php   ###
@@ -1708,7 +1708,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 
 ### ../pages/person.inc.php   ###
 'Employees|Pagetitle for person list'=>'Impiegati',  # line 210
-'Contact Persons|Pagetitle for person list'=>'Contatti',  # line 286
+'Contact People|Pagetitle for person list'=>'Contatti',  # line 286
 'Create Note|Tooltip for page function'=>'Crea Nota',  # line 472
 'Note|Page function person'   =>'Note',  # line 473
 'Person details'              =>'Dettagli della persona',  # line 616
@@ -1724,7 +1724,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'The changed profile <b>does not affect existing project roles</b>! Those has to be adjusted inside the projects.'=>'I cambiamenti al profilo <b>non hanno effetto sulle regole dei progetti esistenti</b>! Queste devono essere aggiornate singolarmente nei progetti.',  # line 1213
 'Using auto detection of time zone requires this user to relogin.'=>'La selezione automatica del fuso orario richiede un nuovo login da parte di questo utente',  # line 1287
 'Person %s created'           =>'Persona %s creata',  # line 1448
-'Moved %s persons to trash'   =>'Spostate %s persone nel cestino',  # line 1527
+'Moved %s people to trash'   =>'Spostate %s persone nel cestino',  # line 1527
 
 ### ../pages/proj.inc.php   ###
 'all'                         =>'tutti',  # line 724
@@ -1793,7 +1793,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'For Project|form label'      =>'Per il Progetto',  # line 3208
 'New project|form label'      =>'Nuovo Progetto',  # line 3213
 'Project name|form label'     =>'Nome del progetto',  # line 3214
-'ERROR: could not get assigned persons'=>'ERRORE: non è stato possibile prendere le persone assegnate',  # line 3230
+'ERROR: could not get assigned people'=>'ERRORE: non è stato possibile prendere le persone assegnate',  # line 3230
 'Assigne to'                  =>'Assegna a',  # line 3247
 'Also assigne to'             =>'Assegna anche a',  # line 3264
 'Book effort after submit'    =>'Dopo il salvataggio pianifica impegno',  # line 3268
@@ -1841,7 +1841,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Companies|page option'       =>'Aziende',  # line 239
 'Versions|Project option'     =>'Versioni',  # line 330
 'Employees|page option'       =>'Impiegati',  # line 369
-'Contact Persons|page option' =>'Contatti',  # line 373
+'Contact People|page option' =>'Contatti',  # line 373
 'All Companies|page option'   =>'Tutte le Aziende',  # line 388
 '%s hours'                    =>'%s ore',  # line 711
 '%s days'                     =>'%s giorni',  # line 715
@@ -1901,7 +1901,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 ### ../lists/list_comments.inc.php   ###
 'Publish'                     =>'Pubblica',  # line 147
 
-### ../lists/list_persons.inc.php   ###
+### ../lists/list_people.inc.php   ###
 'Nickname|column header'      =>'Nickname',  # line 202
 'Name|column header'          =>'Nome',  # line 223
 
@@ -1933,7 +1933,7 @@ commento. La struttura del database potrebbe essere corrotta',  # line 2297
 'Register as a new user'      =>'Registra come nuovo utente',  # line 1768
 
 ### ../pages/proj.inc.php   ###
-'Found no persons to add. Go to `People` to create some.'=>'Non è stato trovato nessuno da aggiungere. Vai in `Persone` per crearne di nuove',  # line 2048
+'Found no people to add. Go to `People` to create some.'=>'Non è stato trovato nessuno da aggiungere. Vai in `Persone` per crearne di nuove',  # line 2048
 'Failed to insert new project person. Data structure might have been corrupted'=>'Errore inserendo nuove persone al progetto. La struttura dati potrebbe essere corrotta',  # line 2338
 
 ### ../pages/search.inc.php   ###

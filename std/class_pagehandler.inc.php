@@ -711,8 +711,10 @@ class PageHandler extends BaseObject
         * to a result, because it switches the database for unit testing, though.
         */    
         if(getServerVar('HTTP_USER_AGENT') != 'streber_unit_tester') {
-            if( isset($auth) && $auth->isAnonymousUser() 
-                && ($auth->isAnonymousUser() && $handle->type == 'form' || $handle->type == 'subm' || $handle->type == 'func')
+            if( isset($auth) 
+                && $auth->isAnonymousUser()
+                && !$handle->valid_for_anonymous
+                && ($handle->type == 'form' || $handle->type == 'subm' || $handle->type == 'func')
             ) {
                 $this->abortWarning("insufficient rights");
             }

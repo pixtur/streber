@@ -232,7 +232,7 @@ class Project extends DbProjectItem
     }
 
 
-    function getTaskPersons($order_by=NULL, $visible_only=true, $alive_only=true)
+    function getTaskPeople($order_by=NULL, $visible_only=true, $alive_only=true)
     {
         global $auth;
         $prefix= confGet('DB_TABLE_PREFIX');
@@ -283,12 +283,12 @@ class Project extends DbProjectItem
         $sth= $dbh->prepare($str_query);
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
-        $taskpersons=array();
+        $taskpeople=array();
         foreach($tmp as $t) {
-            $taskpersons[]=new TaskPerson($t);
+            $taskpeople[]=new TaskPerson($t);
         }
 
-        return $taskpersons;
+        return $taskpeople;
     }
 
 
@@ -608,8 +608,8 @@ class Project extends DbProjectItem
     */
     private function getVisibleTeam() {
         $a= array();
-        $persons= $this->getPersons();
-        foreach($persons as $p) {
+        $people= $this->getPeople();
+        foreach($people as $p) {
             if($p->id) {
                 $a[floor($p->id)] = $p;
             }
@@ -658,11 +658,11 @@ class Project extends DbProjectItem
 
 
     /**
-    * get projectAssigments (not persons but their assigments to the current project)
+    * get projectAssigments (not people but their assigments to the current project)
     *
-    * @see: getPersons()
+    * @see: getPeople()
     **/
-    function getProjectPersons($args=NULL)
+    function getProjectPeople($args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');
@@ -758,13 +758,13 @@ class Project extends DbProjectItem
         $sth->execute("",1);
         
         $tmp=$sth->fetchall_assoc();
-        $ppersons=array();
+        $ppeople=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
-            $ppersons[]= $pperson;
+            $ppeople[]= $pperson;
         }
 
-        return $ppersons;
+        return $ppeople;
     }
     
     /**
@@ -836,18 +836,18 @@ class Project extends DbProjectItem
 
     
     /**
-    * get persons (team)
+    * get people (team)
     */
-    function getPersons($visible_only=true)
+    function getPeople($visible_only=true)
     {
-        $ppersons= $this->getProjectPersons(NULL, true, $visible_only);
-        $persons= array();
-        foreach($ppersons as $pp) {
+        $ppeople= $this->getProjectPeople(NULL, true, $visible_only);
+        $people= array();
+        foreach($ppeople as $pp) {
             if($p= Person::getById($pp->person)) {
-                $persons[]= $p;
+                $people[]= $p;
             }
         }
-        return $persons;
+        return $people;
     }
 
 
@@ -1093,18 +1093,18 @@ class Project extends DbProjectItem
         );
         $sth->execute("",1);
         $tmp=$sth->fetchall_assoc();
-        $ppersons=array();
+        $ppeople=array();
         foreach($tmp as $n) {
             $pperson=new ProjectPerson($n);
-            $ppersons[]= $pperson;
+            $ppeople[]= $pperson;
         }
-        if(count($ppersons) >1 ){
+        if(count($ppeople) >1 ){
             trigger_error("internal error: person assigned twice to project",E_USER_WARNING);
 
             $tmp_null=NULL;
             return $tmp_null;   # only var-refs can be returned
         }
-        else if (!$ppersons) {
+        else if (!$ppeople) {
             /**
             * this might occur on checking project-rights
             */
@@ -1112,7 +1112,7 @@ class Project extends DbProjectItem
             $tmp_null=NULL;
             return $tmp_null;   # only var-refs might be returned
         }
-        return $ppersons[0];
+        return $ppeople[0];
     }
 
     /**

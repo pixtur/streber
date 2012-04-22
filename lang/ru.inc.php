@@ -28,7 +28,7 @@ global $g_lang_table;$g_lang_table= array(
 'Create new project'          => 'Создать новый проект',           #690
 'New company'                 => 'Новая компания',                 #740
 'Edit Company'                => 'Изменение профиля компании',     #948
-'Link Persons'                => 'Привязать Профили',              #637
+'Link People'                => 'Привязать Профили',              #637
 'related projects of %s'      => 'относящиеся проекты %s',         #41
 'no companies'                => 'нет компаний',                   #423
 'Clients'                     => 'Клиенты',                        #124
@@ -43,7 +43,7 @@ global $g_lang_table;$g_lang_table= array(
                               => 'Создать нового пользователя для этой компании', #541
 'Create new project for this company'
                               => 'Создать новый проект для этой компании', #548
-'Add existing persons to this company'
+'Add existing people to this company'
                               => 'Добавить существующие профили пользователей к этой компании', #555
 'People'                     => 'Люди',                           #556
 'Adress'                      => 'Адрес',                          #578
@@ -51,10 +51,10 @@ global $g_lang_table;$g_lang_table= array(
 'Web'                         => 'Веб',                            #592
 'Intra'                       => 'Интранет',                       #595
 'Mail'                        => 'Е-mail',                         #598
-'related Persons'             => 'относящиеся пользователи',       #613
+'related People'             => 'относящиеся пользователи',       #613
 'Remove person from company'  => 'Удалить профиль пользователя из компании', #643
 'link existing Person'        => 'привязать существующий профиль пользователя', #651
-'no persons related'          => 'нет относящихся профилей пользователя', #656
+'no people related'          => 'нет относящихся профилей пользователя', #656
 'Active projects'             => 'Активные проекты',               #675
 ' Hint: for already existing projects please edit those and adjust company-setting.'
                               => 'Подсказка: для существующих проектов', #691
@@ -62,7 +62,7 @@ global $g_lang_table;$g_lang_table= array(
 'Closed projects'             => 'Завершенные проекты',            #708
 'Create another company after submit'
                               => 'Создать еще один профиль компании после завершения', #822
-'Add persons employed or related'
+'Add people employed or related'
                               => 'Добавить профили сотрудников или относящиеся профили пользователей', #950
 'Person already related to company'
                               => 'Профиль ользователя уже относится к компании', #1030
@@ -98,8 +98,8 @@ global $g_lang_table;$g_lang_table= array(
 'relating to %s|page title add on listing pages relating to current user'
                               => 'относящиеся к %s',               #390
 'People/Project Overview'     => 'Люди/Обзор Проекта',             #431
-'no related persons'          => 'Нет относящихся пользователей',  #442
-'Persons|Pagetitle for person list'
+'no related people'          => 'Нет относящихся пользователей',  #442
+'People|Pagetitle for person list'
                               => 'Список Людей',                   #135
 'relating to %s|Page title Person list title add on'
                               => 'Относящиеся к %s',               #306
@@ -107,7 +107,7 @@ global $g_lang_table;$g_lang_table= array(
                               => 'режим администратора',           #309
 'Employees|Pagetitle for person list'
                               => 'Сотрудники',                     #221
-'Contact Persons|Pagetitle for person list'
+'Contact People|Pagetitle for person list'
                               => 'Контактные лица',                #304
 'Deleted People'              => 'Удаленные профили',              #388
 'Create Note|Tooltip for page function'
@@ -196,11 +196,11 @@ global $g_lang_table;$g_lang_table= array(
                               => ' Уведомление / активация будет высланы на почтовый адрес %s после того, как вы выйдите из системы', #1509
 'Person %s created'           => 'Профиль %s создан',              #1549
 'Could not insert object'     => 'невозможно добавить объект',     #1552
-'Select some persons to delete'=> 'Выбитере несколько профилей для удаления', #1599
+'Select some people to delete'=> 'Выбитере несколько профилей для удаления', #1599
 '<b>%s</b> has been assigned to projects and can not be deleted. But you can deativate his right to login.'
                               => '<b>%s</b> был назначен к проекту и не может быть удален. Но есть возможнгость отключить возможность логина пользователя', #1616
-'Failed to delete %s persons' => 'невозможно удалить %s пользователей', #1628
-'Moved %s persons to trash'   => '%s пользователей перенесено в корзину', #1631
+'Failed to delete %s people' => 'невозможно удалить %s пользователей', #1628
+'Moved %s people to trash'   => '%s пользователей перенесено в корзину', #1631
 'Insufficient rights'         => 'Недостаточно прав',              #1649
 'Since the user does not have the right to edit his own profile and therefore to adjust his password, sending an activation does not make sense.'
                               => 'Т.к. у пользователя недостаточно прав на изменение настроек пароля, отправка активации не приведет ни к чему', #1661
@@ -210,11 +210,11 @@ global $g_lang_table;$g_lang_table= array(
                               => 'Активационное письмо послно',    #1677
 'Sending notification e-mail failed.'
                               => 'Отсылка почтового уведомления прошла безуспешно', #1680
-'Select some persons to notify'=> 'Выберете пользователей для уведомления', #1701
-'Failed to mail %s persons'   => 'Невозможно отправить почту %s пользователям', #1726
+'Select some people to notify'=> 'Выберете пользователей для уведомления', #1701
+'Failed to mail %s people'   => 'Невозможно отправить почту %s пользователям', #1726
 'Sent notification to %s person(s)'
                               => 'Уведомления отправлены %s пользователям', #1729
-'Select some persons to edit' => 'Выберите профили для редактирования', #1755
+'Select some people to edit' => 'Выберите профили для редактирования', #1755
 'Could not get Person'        => 'Невозможно получить Профиль пользователя', #1759
 'Edit Person|page type'       => 'Редактировать Профиль пользователя', #1775
 'Adjust user-rights'          => 'Настроить права пользователя',   #1777
@@ -238,7 +238,7 @@ global $g_lang_table;$g_lang_table= array(
 'without account'             => 'без аккаунта',                   #165
 'with account'                => 'с аккаунтом',                    #183
 'employees'                   => 'работники',                      #201
-'contact persons'             => 'контактное лицо',                #220
+'contact people'             => 'контактное лицо',                #220
 'notification'                => 'уведомление',                    #757
 'Last login|Label'            => 'Проследний вход',                #835
 'Projects|Page title add on'  => 'Проекты',                        #1095
@@ -486,7 +486,7 @@ global $g_lang_table;$g_lang_table= array(
 
 
 #------------------------------
-# ../lists/list_persons.inc.php
+# ../lists/list_people.inc.php
 #------------------------------
 'Tagline'                     => 'Таг',                            #68
 'Name Short'                  => 'Корокое наименование',           #34
@@ -761,7 +761,7 @@ global $g_lang_table;$g_lang_table= array(
 'For Project|form label'      => 'Для Прокта',                     #3065
 'New project|form label'      => 'Новый Проект',                   #3070
 'Project name|form label'     => 'Наименование Проекта',           #3071
-'ERROR: could not get assigned persons'
+'ERROR: could not get assigned people'
                               => 'ОШИБКА: невозможно получить назначенных пользователей', #3087
 'Also assign to'              => 'Так же назначить на',            #3123
 'Book effort after submit'    => 'Создать задания после завершения', #3127
@@ -890,11 +890,11 @@ global $g_lang_table;$g_lang_table= array(
                               => 'редактирование участников проекта', #86
 'View anything|a user right'  => 'Просмотр',                       #87
 'Edit anything|a user right'  => 'Редактирование',                 #88
-'Create Persons|a user right' => 'Создавать профили пользователей', #90
-'Create & Edit Persons|a user right'
+'Create People|a user right' => 'Создавать профили пользователей', #90
+'Create & Edit People|a user right'
                               => 'Создаваь и Редактировать профили пользователей', #91
-'Delete Persons|a user right' => 'Удалять профили пользователей',  #92
-'View all Persons|a user right'=> 'Просмотр всех профилей',         #93
+'Delete People|a user right' => 'Удалять профили пользователей',  #92
+'View all People|a user right'=> 'Просмотр всех профилей',         #93
 'Edit user rights|a user right'=> 'Назначение прав пользователей',  #94
 'Edit Own Profil|a user right'=> 'Редактировать собственный профиль', #95
 'Create Companies|a user right'=> 'Создавать компании',             #97
@@ -1090,9 +1090,9 @@ global $g_lang_table;$g_lang_table= array(
 # ../lists/list_project_team.inc.php
 #------------------------------
 'job'                         => 'назначение',                     #219
-'Your related persons'        => 'Ваши контактные лица',           #26
+'Your related people'        => 'Ваши контактные лица',           #26
 'Rights'                      => 'Права',                          #42
-'Persons rights in this project'
+'People rights in this project'
                               => 'Права Контактных лиц в текущем проекте', #43
 'Edit team member'            => 'Редактирование участника команды', #100
 'Add team member'             => 'Добавить участника',             #107
@@ -1238,7 +1238,7 @@ global $g_lang_table;$g_lang_table= array(
 'Edit Project'                => 'Редактировать Проект',           #2014
 'admin view'                  => 'административный просмотр',      #199
 'List|page type'              => 'Список',                         #201
-'No persons selected...'      => 'Не выбран профиль...',           #2095
+'No people selected...'      => 'Не выбран профиль...',           #2095
 '<b>NOTE</b>: Some projects are hidden from your view. Please ask an administrator to adjust you rights to avoid double-creation of projects'
                               => '<b>(i)</b>: Некоторые прокты скрыты для вашего просмотра. Обратитесь к администратору назначить права, воизбежание создания дубликатов проектов', #94
 'create new project'          => 'создать новый проект',           #97
@@ -1290,7 +1290,7 @@ global $g_lang_table;$g_lang_table= array(
 'Closed %s projects'          => 'Завершено %s проектов',          #1979
 'Reactivated %s projects'     => 'Перезапущено %s проектов',       #1982
 'Select new team members'     => 'Выберите нового участника команды', #2016
-'Found no persons to add. Go to `People` to create some.'
+'Found no people to add. Go to `People` to create some.'
                               => 'Некого добавлять. Перейдите в раздел Люди, что бы создать профили', #2060
 'Add'                         => 'Добавить',                       #2072
 'Could not access person by id'=> 'Нет доступа к профилю через ID', #2104
@@ -1458,10 +1458,10 @@ global $g_lang_table;$g_lang_table= array(
 'List Partners'               => 'Список Партнеров',               #884
 'View Company'                => 'Просмотр Компании',              #890
 'Delete Company'              => 'Удалить компанию',               #920
-'Remove persons from company' => 'Удалить профили компании',       #940
-'List Persons'                => 'Список Профилей',                #973
+'Remove people from company' => 'Удалить профили компании',       #940
+'List People'                => 'Список Профилей',                #973
 'List Employees'              => 'Список сотрудников',             #966
-'List Deleted Persons'        => 'Список удаленных Профилей',      #979
+'List Deleted People'        => 'Список удаленных Профилей',      #979
 'View Person'                 => 'Просмотреть Профиль',            #985
 'Delete Person'               => 'Удалить Профиль',                #1029
 'View Efforts of Person'      => 'Смотреть Задания',               #1034
@@ -1691,7 +1691,7 @@ global $g_lang_table;$g_lang_table= array(
 'Closed'                      => 'Завершено',                      #492
 'Today'                       => 'Сегодня',                        #730
 'With Account|page option'    => 'С аккаунтом',                    #430
-'Other Persons|page option'   => 'Другие лица',                    #434
+'Other People|page option'   => 'Другие лица',                    #434
 'Clients|page option'         => 'Клиенты',                        #461
 'Prospective Clients|page option'
                               => 'Потенциальные клиенты',          #465
@@ -1706,7 +1706,7 @@ global $g_lang_table;$g_lang_table= array(
 'Efforts|Project option'      => 'Работы',                         #411
 'History|Project option'      => 'История',                        #417
 'Employees|page option'       => 'Сотрудники',                     #438
-'Contact Persons|page option' => 'Контактные лица',                #442
+'Contact People|page option' => 'Контактные лица',                #442
 'Deleted|page option'         => 'Удaленные',                      #446
 'All Companies|page option'   => 'Все компании',                   #457
 'Active'                      => 'Активные',                       #488
@@ -1733,7 +1733,7 @@ global $g_lang_table;$g_lang_table= array(
 '%A, %B %e|strftime format string'
                               => '%e %B, %A',                      #921
 'Versions|Project option'     => 'Версии',                         #585
-'Persons|page option'         => 'Люди',                           #619
+'People|page option'         => 'Люди',                           #619
 '%s min ago'                  => '%s минут назад',                 #967
 '1 hour ago'                  => '1 час назад',                    #970
 '%s hours ago'                => '%s часов назад',                 #973
@@ -2215,7 +2215,7 @@ global $g_lang_table;$g_lang_table= array(
 'No notifications sent'       =>'Уведомления не отправлены',  # line 432
 
 ### ../pages/person.inc.php   ###
-'Add task for this persons (optionally creating project and effort on the fly)|Tooltip for page function'=>'Добавить задачу для текущего пользователя (опционально на лету создаются проект и задания)',  # line 627
+'Add task for this people (optionally creating project and effort on the fly)|Tooltip for page function'=>'Добавить задачу для текущего пользователя (опционально на лету создаются проект и задания)',  # line 627
 'Add note|Page function person'=>'Добавить заметку',  # line 628
 'Edit profile|Page function edit person'=>'Изменить профиль',  # line 642
 'Edit user rights|Page function for edit user rights'=>'Изменить права пользователя',  # line 650

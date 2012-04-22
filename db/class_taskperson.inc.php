@@ -5,7 +5,7 @@
 /**\file
 * task_person / jointable between company and person
 *
-* assigning tasks to persons
+* assigning tasks to people
 *
 * @author         Thomas Mann
 *
@@ -119,7 +119,7 @@ class TaskPerson extends DbProjectItem {
 
 
 
-    static function getTaskPersons( $args=NULL)
+    static function getTaskPeople( $args=NULL)
     {
         global $auth;
         $prefix = confGet('DB_TABLE_PREFIX');

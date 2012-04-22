@@ -91,10 +91,10 @@ $g_user_right_names=array(
     RIGHT_VIEWALL            =>__('View anything', 'a user right'),
     RIGHT_EDITALL            =>__('Edit anything', 'a user right'),
 
-    RIGHT_PERSON_CREATE      =>__('Create Persons', 'a user right'),
-    RIGHT_PERSON_EDIT        =>__('Create & Edit Persons', 'a user right'),
-    RIGHT_PERSON_DELETE      =>__('Delete Persons', 'a user right'),
-    RIGHT_PERSON_VIEWALL     =>__('View all Persons', 'a user right'),
+    RIGHT_PERSON_CREATE      =>__('Create People', 'a user right'),
+    RIGHT_PERSON_EDIT        =>__('Create & Edit People', 'a user right'),
+    RIGHT_PERSON_DELETE      =>__('Delete People', 'a user right'),
+    RIGHT_PERSON_VIEWALL     =>__('View all People', 'a user right'),
     RIGHT_PERSON_EDIT_RIGHTS =>__('Edit user rights', 'a user right'),
     RIGHT_PERSON_EDIT_SELF   =>__('Edit own profile', 'a user right'),
 

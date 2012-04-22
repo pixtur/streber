@@ -402,7 +402,7 @@ class Effort extends DbProjectItem
 		return sum;
 	}
 	
-	static function getEffortPersons($args=NULL)
+	static function getEffortPeople($args=NULL)
 	{
 		$prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');

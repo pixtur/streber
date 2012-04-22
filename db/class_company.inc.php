@@ -247,7 +247,7 @@ class Company extends DbProjectItem
                $str= "SELECT DISTINCT c.*, ic.* from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp, {$prefix}item ic
                  WHERE
                         upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1   /*      /* upp all user projectpersons */
+                    AND upp.state = 1   /*      /* upp all user projectpeople */
 
                     /*AND  upp.project = p.id*/  /* all user projects */
                      /*AND  p.company = c.id*/    /* all companies */
@@ -339,7 +339,7 @@ class Company extends DbProjectItem
                $str= "SELECT DISTINCT c.*, ic.* from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp, {$prefix}item ic
                  WHERE
                         upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1         /* upp all user projectpersons */
+                    AND upp.state = 1         /* upp all user projectpeople */
 
                     AND  upp.project = p.id  /* all user projects */
                        AND  p.company = c.id    /* all companies */
@@ -406,7 +406,7 @@ class Company extends DbProjectItem
                $str= "SELECT DISTINCT c.*, ic.* from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp, {$prefix}item ic
                  WHERE
                         upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1   */      /*upp all user projectpersons */
+                    AND upp.state = 1   */      /*upp all user projectpeople */
 
                     /*AND  upp.project = p.id*/  /* all user projects */
                     /*   AND  p.company = c.id*/    /* all companies */
@@ -482,7 +482,7 @@ class Company extends DbProjectItem
                 "SELECT p.* from {$prefix}project p, {$prefix}projectperson upp
                 WHERE
                         upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1       /* all projectpersons of user */
+                    AND upp.state = 1       /* all projectpeople of user */
 
 
                     AND   p.id  = upp.project       /* all projects of user */
@@ -534,11 +534,11 @@ class Company extends DbProjectItem
     }
 
     /**
-    * get Persons working for company
+    * get People working for company
     *
     * @@@ visibilities-validation is REALLY slow
     */
-    function getPersons()
+    function getPeople()
     {
 		$prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
@@ -574,7 +574,7 @@ class Company extends DbProjectItem
     #---------------------------
     function getPersonLinks($show_max_number=3)
     {
-        $ps= $this->getPersons();
+        $ps= $this->getPeople();
         $buffer= '';
         $sep= '';
         $num=0;
@@ -611,7 +611,7 @@ class Company extends DbProjectItem
            $str= "SELECT COUNT(*) from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp
              WHERE
                     upp.person = {$auth->cur_user->id}
-                AND upp.state = 1         /* upp all user projectpersons */
+                AND upp.state = 1         /* upp all user projectpeople */
 
                 AND  p.id = upp.project   /* all user projects */
                 AND  c.id = p.company     /* all companies */

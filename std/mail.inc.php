@@ -23,11 +23,11 @@ class Notifier
     public static function sendNotifications()
     {
         global $PH;
-        $persons=Person::getPersons(array('visible_only'=>false, 'can_login'=>true));
+        $people=Person::getPeople(array('visible_only'=>false, 'can_login'=>true));
 
         $num_notifications_sent = 0;
         $num_warnings = 0;
-        foreach($persons as $p) {
+        foreach($people as $p) {
             if($p->settings & USER_SETTING_NOTIFICATIONS) {
                 if($p->office_email  || $p->personal_email )  {
                     $now= time();

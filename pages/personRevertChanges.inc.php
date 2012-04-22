@@ -5,7 +5,7 @@
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
 /**\file
- * pages relating to persons
+ * pages relating to people
  *
  * @author Thomas Mann
  *
@@ -45,7 +45,7 @@ function personRevertChanges()
     }
     
     ### get person ###
-    $person_id = getOnePassedId('person','persons_*');
+    $person_id = getOnePassedId('person','people_*');
     
     if(!$person = Person::getVisibleById($person_id)) {
         $PH->abortWarning( sprintf(__("invalid Person #%s"), $person_id) );

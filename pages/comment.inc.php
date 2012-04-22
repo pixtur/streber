@@ -204,7 +204,7 @@ function commentNew() {
     }
 
     ### try single person-id ###
-    if($id=getOnePassedId('person','persons_*',false)) { #no not abort if not found
+    if($id=getOnePassedId('person','people_*',false)) { #no not abort if not found
         if($person= Person::getVisibleById($id)) {
             $newComment->person= $person->id;
         }

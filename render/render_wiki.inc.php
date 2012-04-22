@@ -1440,14 +1440,14 @@ class FormatBlockLink extends FormatBlock
             * now check for team-members...
             */
             if($g_wiki_project) {
-                $people = Person::getPersons(array(
+                $people = Person::getPeople(array(
                                 'project'=> $g_wiki_project->id,
                                 'search'=> $target,
                             ));
                 if(count($people) == 1) {
                     return  "<a class='item person' title= '" .asHtml( $people[0]->name) . "' href='".$PH->getUrl('personView',array('person'=>$people[0]->id))."'>" . asHtml($target) . "</a>";
                 }                
-                measure_stop("BlockLink::renderLinkFromTargetName::getPersons");
+                measure_stop("BlockLink::renderLinkFromTargetName::getPeople");
             }
             /**
             * Link to create new task or topic

@@ -5,7 +5,7 @@
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
 /**\file
- * pages relating to persons
+ * pages relating to people
  *
  * @author Thomas Mann
  *
@@ -16,7 +16,7 @@ require_once(confGet('DIR_STREBER') . 'db/class_project.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
 require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
 require_once(confGet('DIR_STREBER') . 'render/render_list.inc.php');
-require_once(confGet('DIR_STREBER') . 'lists/list_persons.inc.php');
+require_once(confGet('DIR_STREBER') . 'lists/list_people.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_projects.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 require_once(confGet('DIR_STREBER') . 'lists/list_efforts.inc.php');
@@ -58,7 +58,7 @@ You have insufficent user rights to see complete list.
     
     $presets= array(
         ### all ###
-        'all_persons' => array(
+        'all_people' => array(
             'name'=> __('all'),
             'filters'=> array(
                 'person_category'=> array(
@@ -77,7 +77,7 @@ You have insufficent user rights to see complete list.
             )
         ),
         ### without account ###
-        'persons_without_account' => array(
+        'people_without_account' => array(
             'name'=> __('without account'),
             'filters'=> array(
                 'can_login'=> array(
@@ -95,7 +95,7 @@ You have insufficent user rights to see complete list.
             )
         ),
         ### with account ###
-        'persons_with_account' => array(
+        'people_with_account' => array(
             'name'=> __('with account'),
             'filters'=> array(
                 'can_login'=> array(
@@ -131,9 +131,9 @@ You have insufficent user rights to see complete list.
                 )
             ),
         ),
-        ### contact persons ###
+        ### contact people ###
         'person_contact' => array(
-            'name'=> __('contact persons'),
+            'name'=> __('contact people'),
             'filters'=> array(
                 'person_category'=> array(
                     'id'        => 'person_category',
@@ -150,8 +150,8 @@ You have insufficent user rights to see complete list.
                 )
             )
         ),
-        ### deleted persons ###
-        'deleted_persons' => array(
+        ### deleted people ###
+        'deleted_people' => array(
             'name'=> __('deleted'),
             'filters'=> array(
                 'person_is_alive'=> array(
@@ -175,7 +175,7 @@ You have insufficent user rights to see complete list.
 
     ### get preset-id ###
     {
-        $preset_id= 'persons_with_account';                           # default value
+        $preset_id= 'people_with_account';                           # default value
         if($tmp_preset_id= get('preset')) {
             if(isset($presets[$tmp_preset_id])) {
                 $preset_id= $tmp_preset_id;
@@ -232,28 +232,23 @@ You have insufficent user rights to see complete list.
     
     echo (new PageContentOpen);
     
-    #--- list persons --------------------------------------------------------
+    #--- list people --------------------------------------------------------
     {
-        if($order_by=get('sort_'.$PH->cur_page->id."_persons_list")) {
+        if($order_by=get('sort_'.$PH->cur_page->id."_people_list")) {
             $order_by= str_replace(",",", ", $order_by);
         }
         else {
             $order_by='name';
         }
 
-        $list= new ListBlock_persons();
-        $list->reduced_header= true;
+        $list= new ListBlock_people();
         $list->title= $page->title;
         unset($list->columns['profile']);
         unset($list->columns['projects']);
-        #if(!confGet('PERSON_LAST_LOGIN')){
-        #   unset($list->columns['last_login']);
-        #}
         unset($list->columns['changes']);
         
-        $list->filters[] = new ListFilter_persons();
-        {
-            
+        $list->filters[] = new ListFilter_people();
+        {            
             $preset = $presets[$preset_id];
             foreach($preset['filters'] as $f_name=>$f_settings) {
                 switch($f_name) {
@@ -290,7 +285,7 @@ You have insufficent user rights to see complete list.
             $list->no_items_html=$PH->getLink('personNew','');
         }
         else {
-            $list->no_items_html=__("no related persons");
+            $list->no_items_html=__("no related people");
         }
         
         $page->print_presets(array(
@@ -327,7 +322,7 @@ function personViewProjects()
     global $PH;
     
     ### get current project ###
-    $id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','people_*');
     
     if(!$person = Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
@@ -503,7 +498,7 @@ function personViewTasks()
     global $auth;
     
     ### get current project ###
-    $id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','people_*');
     
     if(!$person = Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
@@ -768,7 +763,7 @@ function personViewEfforts()
     global $auth;
     
     ### get current project ###
-    $id=getOnePassedId('person','persons_*');
+    $id=getOnePassedId('person','people_*');
     
     if(!$person= Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
@@ -1137,7 +1132,7 @@ function personViewChanges()
     global $auth;
     
     ### get current project ###
-    $id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','people_*');
     
     if(!$person = Person::getVisibleById($id)) {
         $PH->abortWarning("invalid person-id");
@@ -1388,7 +1383,7 @@ function personEdit($person=NULL)
 
     ### new object not in database ###
     if(!$person) {
-        $id= getOnePassedId('person','persons_*');   # WARNS if multiple; ABORTS if no id found
+        $id= getOnePassedId('person','people_*');   # WARNS if multiple; ABORTS if no id found
         if(!$person= Person::getEditableById($id)) {
             $PH->abortWarning("ERROR: could not get Person");
             return;
@@ -1483,6 +1478,8 @@ function personEdit($person=NULL)
             }
             $tab->add($fnick);
 
+            $tab->add($person->fields['office_email']->getFormElement($person));
+
             ### show password-fields if can_login ###
             /**
             * since the password as stored as md5-hash, we can initiate current password,
@@ -1505,6 +1502,7 @@ function personEdit($person=NULL)
                 $authentication = array('streber'=>0, 'ldap'=>1);
                 $tab->add(new Form_Dropdown('person_auth', __("Authentication with","form label"), $authentication, $person->ldap));
             }
+
 
             ### profile and login ###
             if($auth->cur_user->user_rights & RIGHT_PERSON_EDIT_RIGHTS) {
@@ -1592,9 +1590,6 @@ function personEdit($person=NULL)
                 $perscat = $person->category;
             }
             $tab->add(new Form_Dropdown('pcategory',  __('Category','form label'),array_flip($g_pcategory_names), $perscat));
-
-
-            $tab->add($person->fields['office_email']->getFormElement($person));
             $tab->add($person->fields['mobile_phone']->getFormElement($person));
             $tab->add($person->fields['office_phone']->getFormElement($person));
             $tab->add($person->fields['office_fax']->getFormElement($person));
@@ -2163,7 +2158,7 @@ function personSendActivation()
     global $PH;
 
     ### get person ####
-    $person_id= getOnePassedId('person','persons_*');
+    $person_id= getOnePassedId('person','people_*');
 
     if(!$person = Person::getEditableById($person_id)) {
         $PH->abortWarning(__("Insufficient rights"));
@@ -2208,16 +2203,16 @@ function personSendActivation()
 /**
 * Send notication mail for one person right now @ingroup pages
 */
-function personsFlushNotifications()
+function peopleFlushNotifications()
 {
     global $PH;
     global $auth;
 
     ### get person ####
-    $ids= getPassedIds('person','persons_*');
+    $ids= getPassedIds('person','people_*');
 
     if(!$ids) {
-        $PH->abortWarning(__("Select some persons to notify"));
+        $PH->abortWarning(__("Select some people to notify"));
         return;
     }
 
@@ -2247,7 +2242,7 @@ function personsFlushNotifications()
     setLang($auth->cur_user->language);
     
     if($errors) {
-        new FeedbackWarning(sprintf(__("Failed to mail %s persons"), $errors));
+        new FeedbackWarning(sprintf(__("Failed to mail %s people"), $errors));
     }
     else {
         new FeedbackMessage(sprintf(__("Sent notification to %s person(s)"),$counter));
@@ -2275,10 +2270,10 @@ function personEditRights($person=NULL)
 
     ### get person ####
     if(!$person) {
-        $ids= getPassedIds('person','persons_*');
+        $ids= getPassedIds('person','people_*');
 
         if(!$ids) {
-            $PH->abortWarning(__("Select some persons to edit"));
+            $PH->abortWarning(__("Select some people to edit"));
             return;
         }
         if(!$person= Person::getEditableById($ids[0])) {
@@ -2414,7 +2409,7 @@ function personEditRightsSubmit()
 function personLinkCompanies() {
     global $PH;
 
-    $id = getOnePassedId('person','persons_*');   # WARNS if multiple; ABORTS if no id found
+    $id = getOnePassedId('person','people_*');   # WARNS if multiple; ABORTS if no id found
     $person = Person::getEditableById($id);
     if(!$person) {
         $PH->abortWarning("ERROR: could not get Person");
@@ -2462,14 +2457,14 @@ function personLinkCompanies() {
 }
 
 /**
-* companyLinkPersonsSubmit @ingroup pages
+* companyLinkPeopleSubmit @ingroup pages
 */
 function personLinkCompaniesSubmit()
 {
     global $PH;
     require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
 
-    $id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','people_*');
     $person = Person::getEditableById($id);
     if(!$person) {
         $PH->abortWarning("Could not get object...");
@@ -2520,7 +2515,7 @@ function personCompaniesDelete()
 {
     global $PH;
 
-    $id = getOnePassedId('person','persons_*');
+    $id = getOnePassedId('person','people_*');
     $person = Person::getEditableById($id);
     if(!$person) {
         $PH->abortWarning("Could not get object...");
@@ -2596,7 +2591,7 @@ function personAllItemsViewed()
     global $PH;
     global $auth;
 
-    $id = intval(getOnePassedId('person','persons_*'));
+    $id = intval(getOnePassedId('person','people_*'));
     if($id) {
         if($id == $auth->cur_user->id) {
             $person= $auth->cur_user;
@@ -2647,7 +2642,7 @@ function personToggleFilterOwnChanges()
     global $auth;
 
     ### get person ####
-    $id= getOnePassedId('person','persons_*');
+    $id= getOnePassedId('person','people_*');
 
     if(!$p= Person::getEditableById($id)) {
         $PH->abortWarning("Invalid person-id!");
