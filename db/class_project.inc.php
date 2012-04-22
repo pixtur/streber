@@ -951,7 +951,7 @@ class Project extends DbProjectItem
          : '';
 
         $AND_match= $search
-        ? "AND (MATCH (p.name,p.status_summary,p.description) AGAINST ('" . asCleanString($search) . "*' IN BOOLEAN MODE))"
+        ? "AND (MATCH (p.name,p.status_summary,p.description) AGAINST ('" . asMatchString($search) . "*' IN BOOLEAN MODE))"
         : '';
 
         if(!is_null($company)) {

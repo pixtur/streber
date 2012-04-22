@@ -1,6 +1,11 @@
 streber-version-history
 
-v0.093 / rev512
+v0.093 / 515
+- fixed javascript freezes when search for special characters
+- more aggressive cleaning for query strings (switched to white list)
+- fixed computation of password strength
+
+rev514
 - renamed persons->people
 - fixed installation sql setup (file had invalid version)
 - fixed rendering on people list header

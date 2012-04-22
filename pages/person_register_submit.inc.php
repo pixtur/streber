@@ -220,8 +220,8 @@ function personRegisterSubmit()
 
     ### check if password is good enough ###
     $password_length= strlen($t_password1);
-    $password_count_numbers= strlen(preg_replace('/[^\d]/','',$t_password1));
-    $password_count_special= strlen(preg_replace('/[^\wd]/','',$t_password1));
+    $password_count_numbers= strlen(preg_replace('/[\d]/','',$t_password1));
+    $password_count_special= strlen(preg_replace('/[\w]/','',$t_password1));
 
     $password_value= -7 + $password_length + $password_count_numbers*2 + $password_count_special*4;
     if($password_value < confGet('CHECK_PASSWORD_LEVEL')){

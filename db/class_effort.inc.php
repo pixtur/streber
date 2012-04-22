@@ -269,7 +269,7 @@ class Effort extends DbProjectItem
 		}
 
 		$str_match= $search
-            ? "AND MATCH (e.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
+            ? "AND MATCH (e.description) AGAINST ('". asMatchString($search) ."*' IN BOOLEAN MODE)"
         : '';
 				
         /**

@@ -588,10 +588,12 @@ document.my_form." . $this->page->autofocus_field. ".select();";
                 ';
 
         if($q=get('q')) {
-            $q= asCleanString($q);
+            $q= asCleanString($q);  
             if($ar = explode(" ",$q)) {
-                foreach($ar as $q) {
-                    $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q'); ";
+                foreach($ar as $q2) {
+                    if($q2) {
+                        $buffer.= "highlightWord(document.getElementsByTagName('body')[0],'$q2'); ";
+                    }
                 }
             }
             else {

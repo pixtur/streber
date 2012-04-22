@@ -568,7 +568,7 @@ class Person extends DbProjectItem {
 
 
         $AND_match= $search
-        ? "AND MATCH (pers.name,pers.nickname,pers.tagline,pers.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
+        ? "AND MATCH (pers.name,pers.nickname,pers.tagline,pers.description) AGAINST ('". asMatchString($search) ."*' IN BOOLEAN MODE)"
         : "";
 
         if($visible_only == 'auto') {

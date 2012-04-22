@@ -94,13 +94,13 @@ foreach(array(
         'tooltip'=>__('Optional'),
         'log_changes'=>true,
     )),
-	### company category ###
-	new FieldInternal(array(
-		'name'=>'category',
-		'view_in_forms' =>false,
-		'default'=>0,
-		'log_changes'=>true,
-	)),
+    ### company category ###
+    new FieldInternal(array(
+        'name'=>'category',
+        'view_in_forms' =>false,
+        'default'=>0,
+        'log_changes'=>true,
+    )),
 ) as $f) {
     $g_company_fields[$f->name]=$f;
 }
@@ -112,8 +112,8 @@ foreach(array(
 class Company extends DbProjectItem
 {
 
-	//=== constructor ================================================
-	function __construct ($id_or_array=NULL)
+    //=== constructor ================================================
+    function __construct ($id_or_array=NULL)
     {
         global $g_company_fields;
         $this->fields= &$g_company_fields;
@@ -122,7 +122,7 @@ class Company extends DbProjectItem
         if(!$this->type) {
             $this->type= ITEM_COMPANY;
         }
-   	}
+    }
 
     #------------------------------------------------------------
     # returns link to company-view with short name
@@ -165,8 +165,8 @@ class Company extends DbProjectItem
     {
 
         $companies= Company::getAll(array(
-				    'order_str'=>NULL,
-					'has_id'=>intval($id)));
+                    'order_str'=>NULL,
+                    'has_id'=>intval($id)));
 
         if(count($companies) == 1) {
             if($companies[0]->id) {
@@ -182,9 +182,9 @@ class Company extends DbProjectItem
     static function getEditableById($id)
     {
         global $auth;
-    	if(
-    		$auth->cur_user->user_rights & RIGHT_COMPANY_EDIT
-    	) {
+        if(
+            $auth->cur_user->user_rights & RIGHT_COMPANY_EDIT
+        ) {
             return Company::getById(intval($id));
         }
         return NULL;
@@ -192,14 +192,14 @@ class Company extends DbProjectItem
 
 
     static function queryFromDb($query_string)
-	{
+    {
         $dbh = new DB_Mysql;
 
         $sth= $dbh->prepare($query_string);
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
-    	$companies=array();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
+        $companies=array();
         foreach($tmp as $t) {
             $company=new Company($t);
             $companies[]=$company;
@@ -209,79 +209,23 @@ class Company extends DbProjectItem
 
 
     #------------------------------------------------------------
-    # get companies from db --> old function
-    #------------------------------------------------------------
-    /*public static function getAll($order_str=NULL, $has_id=NULL, $search=NULL)
-    {
-        global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
-
-        $has_id= intval($has_id);
-
-        $str_has_id= $has_id
-                ? ('AND c.id='.intval($has_id))
-                : '';
-
-        if($search) {
-            $search= asMatchString($search);
-            $AND_match= "AND (MATCH (c.name) AGAINST ('".asCleanString($search). "*') or MATCH (c.comments) AGAINST ('".asCleanString($search)."*'  IN BOOLEAN MODE))";
-        }
-        else {
-            $AND_match= '';
-        }
-
-        ### show all ###
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-            $str=
-                "SELECT c.*, ic.* from {$prefix}company c, {$prefix}item ic
-                WHERE
-                      c.state = 1
-                      $str_has_id
-                      AND c.id = ic.id
-                      $AND_match"
-                . getOrderByString($order_str, 'c.name');
-        }
-
-        ### only related companies ###
-        else {
-               $str= "SELECT DISTINCT c.*, ic.* from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp, {$prefix}item ic
-                 WHERE
-                        upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1   /*      /* upp all user projectpeople */
-
-                    /*AND  upp.project = p.id*/  /* all user projects */
-                     /*AND  p.company = c.id*/    /* all companies */
-                      /* AND  c.state = 1
-                       $str_has_id
-                         AND c.id = ic.id
-
-
-                      $AND_match
-
-                ". getOrderByString($order_str, 'c.name');
-        }
-  	    $companies = self::queryFromDb($str);               # store in variable to return by reference
-  	    return $companies;
-    }*/
-
-	#------------------------------------------------------------
     # get specific companies from db
     #------------------------------------------------------------
-	public static function getAll($args=NULL)
-	{
-		global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
+    public static function getAll($args=NULL)
+    {
+        global $auth;
+        $prefix = confGet('DB_TABLE_PREFIX');
 
-		### default parameter ###
-		$order_str=NULL;
-		$has_id=NULL;
-		$search=NULL;
-		$visible_only = NULL;
-		#$comcat=NULL;
-		$ccategory_min = CCATEGORY_UNDEFINED;
-		$ccategory_max = CCATEGORY_PARTNER;
+        ### default parameter ###
+        $order_str=NULL;
+        $has_id=NULL;
+        $search=NULL;
+        $visible_only = NULL;
+        #$comcat=NULL;
+        $ccategory_min = CCATEGORY_UNDEFINED;
+        $ccategory_max = CCATEGORY_PARTNER;
 
-		### filter parameter ###
+        ### filter parameter ###
         if($args) {
             foreach($args as $key=>$value) {
                 if(!isset($$key) && !is_null($$key) && !$$key==="") {
@@ -293,35 +237,35 @@ class Company extends DbProjectItem
             }
         }
 
-		$str_has_id= $has_id
+        $str_has_id= $has_id
                 ? ('AND c.id='.intval($has_id))
                 : '';
 
         if($search) {
             $search= asMatchString($search);
-            $AND_match= "AND (MATCH (c.name) AGAINST ('".asCleanString($search). "*') or MATCH (c.comments) AGAINST ('".asCleanString($search)."*'  IN BOOLEAN MODE))";
+            $AND_match= "AND (MATCH (c.name) AGAINST ('".asMatchString($search). "*') or MATCH (c.comments) AGAINST ('".asMatchString($search)."*'  IN BOOLEAN MODE))";
         }
         else {
             $AND_match= '';
         }
 
-		/*if(is_null($comcat))
-		{
-			$str_comcat = '';
-		}
-		else
-		{
-			$str_comcat = 'AND c.category=' .intval($comcat);
-		}*/
-		
-		if(!is_null($ccategory_min) && !is_null($ccategory_max)){
-			$str_ccategory = "AND (c.category BETWEEN " . $ccategory_min . " AND " . $ccategory_max . ")";
-		}
-		else{
-			$str_ccategory = '';
-		}
+        /*if(is_null($comcat))
+        {
+            $str_comcat = '';
+        }
+        else
+        {
+            $str_comcat = 'AND c.category=' .intval($comcat);
+        }*/
+        
+        if(!is_null($ccategory_min) && !is_null($ccategory_max)){
+            $str_ccategory = "AND (c.category BETWEEN " . $ccategory_min . " AND " . $ccategory_max . ")";
+        }
+        else{
+            $str_ccategory = '';
+        }
 
-		### show all ###
+        ### show all ###
         if($auth->cur_user->user_rights & RIGHT_COMPANY_VIEWALL) {
             $str=
                 "SELECT c.*, ic.* from {$prefix}company c, {$prefix}item ic
@@ -330,7 +274,7 @@ class Company extends DbProjectItem
                       $str_has_id
                       AND c.id = ic.id
                       $AND_match
-					  $str_ccategory "
+                      $str_ccategory "
                 . getOrderByString($order_str, 'c.name');
         }
 
@@ -349,88 +293,23 @@ class Company extends DbProjectItem
 
 
                       $AND_match
-					  $str_ccategory "
+                      $str_ccategory "
                 . getOrderByString($order_str, 'c.name');
         }
 
 
-  	    $companies = self::queryFromDb($str);               # store in variable to return by reference
-  	   
-		return $companies;
+        $companies = self::queryFromDb($str);               # store in variable to return by reference
+       
+        return $companies;
+    }
 
-	}
-
-	/*public static function getCompanies($order_str=NULL, $has_id=NULL, $search=NULL, $comcat=NULL)
-    {
-        global $auth;
-		$prefix = confGet('DB_TABLE_PREFIX');
-
-        $has_id= intval($has_id);
-
-        $str_has_id= $has_id
-                ? ('AND c.id='.intval($has_id))
-                : '';
-
-        if($search) {
-            $search= asMatchString($search);
-            $AND_match= "AND (MATCH (c.name) AGAINST ('".asCleanString($search). "*') or MATCH (c.comments) AGAINST ('".asCleanString($search)."*'  IN BOOLEAN MODE))";
-        }
-        else {
-            $AND_match= '';
-        }
-
-		if(is_null($comcat))
-		{
-			$str_comcat = '';
-		}
-		else
-		{
-			$str_comcat = 'AND c.category=' .intval($comcat);
-		}
-
-        ### show all ###
-        if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
-            $str=
-                "SELECT c.*, ic.* from {$prefix}company c, {$prefix}item ic
-                WHERE
-                      c.state = 1
-                      $str_has_id
-                      AND c.id = ic.id
-                      $AND_match
-					  $str_comcat "
-                . getOrderByString($order_str, 'c.name');
-        }
-
-        ### only related companies ###
-        else {
-               $str= "SELECT DISTINCT c.*, ic.* from {$prefix}company c, {$prefix}project p, {$prefix}projectperson upp, {$prefix}item ic
-                 WHERE
-                        upp.person = {$auth->cur_user->id}
-                    AND upp.state = 1   */      /*upp all user projectpeople */
-
-                    /*AND  upp.project = p.id*/  /* all user projects */
-                    /*   AND  p.company = c.id*/    /* all companies */
-                    /*   AND  c.state = 1
-                       $str_has_id
-                         AND c.id = ic.id
-
-
-                      $AND_match
-					  $str_comcat "
-                . getOrderByString($order_str, 'c.name');
-        }
-
-
-  	    $companies = self::queryFromDb($str);               # store in variable to return by reference
-  	    return $companies;
-    }*/
 
     #---------------------------
     # get nume tasks
     #---------------------------
     function getNumOpenProjects()
-	{
-		$prefix= confGet('DB_TABLE_PREFIX');
+    {
+        $prefix= confGet('DB_TABLE_PREFIX');
         $dbh = new DB_Mysql;
         $AND_status_min= "AND status >= ".STATUS_NEW;
         $AND_status_max= "AND status <= ".STATUS_OPEN;
@@ -445,8 +324,8 @@ class Company extends DbProjectItem
               "
 
               );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         return $tmp[0]['COUNT(*)'];
     }
 
@@ -456,7 +335,7 @@ class Company extends DbProjectItem
     function getProjects($f_order_by=NULL, $f_status_min=1, $f_status_max=4)
     {
         global $auth;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         $status_min= intval($f_status_min);
         $status_max= intval($f_status_max);
@@ -498,8 +377,8 @@ class Company extends DbProjectItem
         $sth= $dbh->prepare($str);
 
 
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $projects=array();
         foreach($tmp as $t) {
             $projects[]=new Project($t);
@@ -512,7 +391,7 @@ class Company extends DbProjectItem
     #---------------------------
     function getEmployments()
     {
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_employment.inc.php');
 
         $dbh = new DB_Mysql;
@@ -524,8 +403,8 @@ class Company extends DbProjectItem
               AND   em.company = $this->id
               "
         );
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $es=array();
         foreach($tmp as $t) {
             $es[]=new Employment($t);
@@ -540,22 +419,22 @@ class Company extends DbProjectItem
     */
     function getPeople()
     {
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
         require_once(confGet('DIR_STREBER') . 'db/class_person.inc.php');
         require_once(confGet('DIR_STREBER') . 'db/class_employment.inc.php');
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare(
-						"SELECT p.* FROM {$prefix}person p,{$prefix}employment em, {$prefix}item i
-						WHERE   i.type= ".ITEM_EMPLOYMENT."
-						AND     i.state=1
-						AND     i.id= em.id
-						AND     em.company = \"$this->id\"
-						AND     em.person= p.id
-						AND     p.state=1"
-		);
-		
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+                        "SELECT p.* FROM {$prefix}person p,{$prefix}employment em, {$prefix}item i
+                        WHERE   i.type= ".ITEM_EMPLOYMENT."
+                        AND     i.state=1
+                        AND     i.id= em.id
+                        AND     em.company = \"$this->id\"
+                        AND     em.person= p.id
+                        AND     p.state=1"
+        );
+        
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
         $es=array();
 
         foreach($tmp as $t) {
@@ -563,7 +442,7 @@ class Company extends DbProjectItem
                $es[]=$person;
             }
         }
-		
+        
         return $es;
     }
 
@@ -595,7 +474,7 @@ class Company extends DbProjectItem
     {
         global $auth;
         global $PH;
-		$prefix= confGet('DB_TABLE_PREFIX');
+        $prefix= confGet('DB_TABLE_PREFIX');
 
         ### all ###
         if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
@@ -621,8 +500,8 @@ class Company extends DbProjectItem
 
         $dbh = new DB_Mysql;
         $sth= $dbh->prepare($str);
-    	$sth->execute("",1);
-    	$tmp=$sth->fetchall_assoc();
+        $sth->execute("",1);
+        $tmp=$sth->fetchall_assoc();
 
         $count= $tmp[0]['COUNT(*)'];
 

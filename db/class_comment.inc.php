@@ -215,7 +215,7 @@ class Comment extends DbProjectItem
         : '';
 
         $AND_match= $search
-        ? "AND (MATCH (c.name,c.description) AGAINST ('". asCleanString($search)."*'  IN BOOLEAN MODE))"
+        ? "AND (MATCH (c.name,c.description) AGAINST ('". asMatchString($search)."*'  IN BOOLEAN MODE))"
         : '';
 
         $AND_project1= $project

@@ -2018,10 +2018,10 @@ function personEditSubmit()
         ### check if password is good enough ###
         if($person->can_login) {
             $password_length= strlen($t_password1);
-            $password_count_numbers= strlen(preg_replace('/[^\d]/','',$t_password1));
-            $password_count_special= strlen(preg_replace('/[^\wd]/','',$t_password1));
+            $password_count_numbers= strlen(preg_replace('/[\d]/','',$t_password1));
+            $password_count_special= strlen(preg_replace('/[\w]/','',$t_password1));
 
-            $password_value= -7 + $password_length + $password_count_numbers*2 + $password_count_special*4;
+            $password_value= -7 + $password_length + $password_count_numbers*2 + $password_count_special*8;
             if($password_value < confGet('CHECK_PASSWORD_LEVEL')){
                 new FeedbackWarning(__("Password is too weak (please add numbers, special chars or length)"));
                 $flag_ok= false;

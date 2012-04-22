@@ -651,16 +651,22 @@ function asSearchQuery($str) {
 
 function asMatchString($str) {
     #return preg_replace("/[^0-9A-Z_]/i",' ', $str); 
-    return preg_replace("/[\/\<\>\`\´_%&?\"\'()\[\]]/",' ', $str); 
+    return preg_replace("/[\/\<\>\`\´_%&?\"\'()\[\]%]/",' ', $str); 
 }
 
 function asIdentifier($str) {
     return strtolower( preg_replace("/[^0-9A-Z_]/i",'_', $str) ); 
 }
 
+/**
+* this function is used for cleaning strings that might be passed as parameters
+* to the database. With 0.093 we switched from stripping dangerous characters to
+* whitelisting only basic alpha-numeric chars.
+*/
 function asCleanString($str)
 {
-    return preg_replace("/[\\\<\>\`\´\"']/",'',$str);
+    return preg_replace("/[^\w ,.]/","",$str);  
+    //return preg_replace("/[\\\<\>\`\´\"']/",'',$str);
 }
 
 

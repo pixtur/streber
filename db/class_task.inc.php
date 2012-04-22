@@ -1010,7 +1010,7 @@ foreach($filters_str as $fs=>$value) {
             : '';
 
         $str_match= $search
-            ? "AND MATCH (t.name,t.short,t.description) AGAINST ('". asCleanString($search) ."*' IN BOOLEAN MODE)"
+            ? "AND MATCH (t.name,t.short,t.description) AGAINST ('". asMatchString($search) ."*' IN BOOLEAN MODE)"
         : '';
 		
 		$str_person = $person

@@ -178,7 +178,7 @@ class Issue extends DbProjectItem {
         : '';
 
         $AND_match= $search
-        ? "AND (MATCH (iss.plattform,iss.os,iss.version,iss.production_build,iss.steps_to_reproduce,iss.expected_result,iss.suggested_solution) AGAINST ('". asCleanString($search). "*' IN BOOLEAN MODE))"
+        ? "AND (MATCH (iss.plattform,iss.os,iss.version,iss.production_build,iss.steps_to_reproduce,iss.expected_result,iss.suggested_solution) AGAINST ('". asMatchString($search). "*' IN BOOLEAN MODE))"
         : "";
 
         $AND_project1= $project
