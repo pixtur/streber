@@ -233,7 +233,7 @@ class PageHandler extends BaseObject
     }
 
     /**
-    * return valid url to this page, checks rights & param
+    * return valid url to this page, checks rights & parameters
     *
     * for directly referring to a URL overwrite the amp-parameter to "&"
     */
@@ -253,12 +253,26 @@ class PageHandler extends BaseObject
             /**
             * auth could not be defined, if unit-tests running...
             */
-            if(!isset($auth) || !isset($auth->cur_user) || !($phandle->rights_required & $auth->cur_user->user_rights)) {
+            if( !isset($auth) 
+                || !isset($auth->cur_user) 
+                || !($phandle->rights_required & $auth->cur_user->user_rights)
+                
+            
+            ) {
                 return NULL;
             }
         }
-
-
+        
+        /*
+        * Hide modifications links from guest user.
+        * Accessing this links directly will be prevented in index.php
+        */        
+        if( isset($auth) && $auth->isAnonymousUser() 
+            && ($auth->isAnonymousUser() && $phandle->type == 'form' || $phandle->type == 'subm' || $phandle->type == 'func')
+        ) {
+            return NULL;
+        }
+        
         ### valid user? ###
         if(!$phandle->valid_for_crawlers && Auth::isCrawler()) {
             return NULL;            
@@ -492,11 +506,11 @@ class PageHandler extends BaseObject
 
         ### read current from-handles ###
         if(is_readable($filename)) {
-        	if (!($FH = fopen ( $filename, 'r'))) {
+            if (!($FH = fopen ( $filename, 'r'))) {
                 die ('could not open page-history. This might be cause by insufficient directory rights.');
-	        }
-	        $data = fread ($FH, 64000);
-    	    fclose ($FH);
+            }
+            $data = fread ($FH, 64000);
+            fclose ($FH);
 
             $arr= preg_split("/\n/",$data);
 
@@ -530,20 +544,20 @@ class PageHandler extends BaseObject
             if(file_exists($filename . '_tmp')) {
                 unlink($filename . '_tmp');
             }
-           	if(file_exists($filename)) {
-        	    $result= rename($filename, $filename . '_tmp');     # surpressing FILE-EXISTs notice
-        	}
-        	$FH=fopen ($filename."_tmp","w");
-        	fputs ($FH, join($stored_handles,"\n"));                       # join the array
-        	fclose ($FH);
-        	if(file_exists($filename."_tmp")) {
-        	    $result= rename($filename."_tmp", $filename);     # surpressing FILE-EXISTs notice
-        	}
+            if(file_exists($filename)) {
+                $result= rename($filename, $filename . '_tmp');     # surpressing FILE-EXISTs notice
+            }
+            $FH=fopen ($filename."_tmp","w");
+            fputs ($FH, join($stored_handles,"\n"));                       # join the array
+            fclose ($FH);
+            if(file_exists($filename."_tmp")) {
+                $result= rename($filename."_tmp", $filename);     # surpressing FILE-EXISTs notice
+            }
         }
         #--- write to file --
-    	#$result=chmod ("$tmp_dir/$filename", 0777);
+        #$result=chmod ("$tmp_dir/$filename", 0777);
         #$result=unlink("$tmp_dir/$filename");
-    	#$result=chmod ("$tmp_dir/$filename", 0664);
+        #$result=chmod ("$tmp_dir/$filename", 0664);
 
         $this->page_params=$params;     # keep for client-view-url
         return $md5;
@@ -567,12 +581,12 @@ class PageHandler extends BaseObject
 
         ### read current from-handles ###
         if(is_readable($filename)) {
-        	if (!($FH = fopen ( $filename, 'r'))) {
+            if (!($FH = fopen ( $filename, 'r'))) {
                 trigger_error('could not open page-history. This might be caused by insufficient directory rights.', E_USER_WARNING);
                 return NULL;
-	        }
-	        $data = fread ($FH, 64000);
-    	    fclose ($FH);
+            }
+            $data = fread ($FH, 64000);
+            fclose ($FH);
 
             $arr= preg_split("/\n/",$data);
 
@@ -689,8 +703,16 @@ class PageHandler extends BaseObject
         if($handle->rights_required && !($handle->rights_required & $auth->cur_user->user_rights)) {
             $this->abortWarning("insufficient rights");
         }
+        
+        ### hide modification pages from guests ###
+        if( isset($auth) && $auth->isAnonymousUser() 
+            && ($auth->isAnonymousUser() && $handle->type == 'form' || $handle->type == 'subm' || $handle->type == 'func')
+        ) {
+            $this->abortWarning("insufficient rights");
+        }
+        
 
-    	require_once($handle->req);
+        require_once($handle->req);
 
 
         #--- set page-handler-curpage ---

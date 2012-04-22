@@ -146,8 +146,10 @@ class CommentsOnItemBlock extends PageBlock
     }
 
     function render_blockFooter() {
-        $this->_render_commentField();
-
+        global $auth;
+        if(!$auth->isAnonymousUser()) {
+            $this->_render_commentField();
+        }
     }
   
  

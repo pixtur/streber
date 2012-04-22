@@ -112,7 +112,7 @@ require_once( confGet('DIR_STREBER') . 'std/class_auth.inc.php');
 require_once( confGet('DIR_STREBER') . 'db/db_item.inc.php');
 require_once( confGet('DIR_STREBER') . 'std/class_pagehandler.inc.php');
 
-### trigger db request ###
+### trigger db request to validate the Database is talking to us ###
 $dbh = new DB_Mysql;
 if(!is_null(confGet('SQL_MODE'))) {
     $dbh->prepare('SET sql_mode = "'. confGet('SQL_MODE') .'"')->execute();
@@ -121,7 +121,7 @@ if ($result = $dbh->prepare('SELECT NOW()')) {
   $result->execute();
 }
 
-measure_stop(  'core_includes');
+measure_stop('core_includes');
 
 if(!$requested_page_id = get('go')) {
     require_once( confGet('DIR_STREBER') . "./std/check_version.inc.php");
@@ -185,13 +185,9 @@ if($g_tags_removed) {
 ### if index.php was called without target, check environment ###
 
 
-
-
 $requested_page= $PH->getRequestedPage();
 
 ### pages with http auth ###
-
-
 if($requested_page->http_auth) {
     if(!$user) {
         if($user= Auth::getUserByHttpAuth()) {
@@ -204,6 +200,7 @@ if($requested_page->http_auth) {
         }
     }
 }
+
 ### valid user or anonymous user ###
 if($user) {
 

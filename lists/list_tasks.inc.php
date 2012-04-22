@@ -54,11 +54,11 @@ class ListBlock_tasks extends ListBlock
     public function __construct($args=NULL)
     {
         global $PH;
-		parent::__construct(array());
+        parent::__construct(array());
 
         $this->id           =  'tasks';
         $this->no_items_html=NULL;
-		$this->title        = __("Tasks");
+        $this->title        = __("Tasks");
 
         ### filter params ###
         if($args) {
@@ -85,63 +85,63 @@ class ListBlock_tasks extends ListBlock
 
         ### columns ###
         $this->add_col( new ListBlockColSelect());
-		$this->add_col( new ListBlockColPrio(array(
-			'key'=>'prio',
-			'name'=>"P",
-			'tooltip'=>__("Priority of task"),
-			'sort'=>1
-		)));
-		$this->add_col(new ListBlockColMethod(array(
-			'key'=>'project',
-			'name'=>__('Project'),
-			'func'=>'getProjectLink'
-		)));
+        $this->add_col( new ListBlockColPrio(array(
+            'key'=>'prio',
+            'name'=>"P",
+            'tooltip'=>__("Priority of task"),
+            'sort'=>1
+        )));
+        $this->add_col(new ListBlockColMethod(array(
+            'key'=>'project',
+            'name'=>__('Project'),
+            'func'=>'getProjectLink'
+        )));
 
-		$this->add_col( new ListBlockColStatus(array(
-			'key'=>'status',
-			'name'=>__("Status","Columnheader"),
-			'tooltip'=>__("Task-Status"),
-			'sort'=>0
-		)));
+        $this->add_col( new ListBlockColStatus(array(
+            'key'=>'status',
+            'name'=>__("Status","Columnheader"),
+            'tooltip'=>__("Task-Status"),
+            'sort'=>0
+        )));
 
-	    $this->add_col( new ListBlockCol_TaskLabel());
+        $this->add_col( new ListBlockCol_TaskLabel());
         $this->add_col( new ListBlockColMethod(array(
-			'key'=>'parent_task',
-			'name'=>__('Folder'),
-			'func'=>'getFolderLinks'
-		)));
+            'key'=>'parent_task',
+            'name'=>__('Folder'),
+            'func'=>'getFolderLinks'
+        )));
 
         $this->add_col( new ListBlockCol_TasknameWithFolder());
-	    $this->add_col( new ListBlockCol_TaskName(array(
-	        'use_short_names'=>$this->use_short_names,
-	        'indention'=>true
-	    )));
-	    $this->add_col( new ListBlockCol_TaskAssignedTo(array('use_short_names'=>false )));
+        $this->add_col( new ListBlockCol_TaskName(array(
+            'use_short_names'=>$this->use_short_names,
+            'indention'=>true
+        )));
+        $this->add_col( new ListBlockCol_TaskAssignedTo(array('use_short_names'=>false )));
 
         $this->add_col( new listBlockColDate(array(
-			'key'=>'modified',
+            'key'=>'modified',
             'name'=>__('Modified','Column header'),
         )));
 
         $this->add_col( new listBlockColDate(array(
-			'key'=>'date_closed',
+            'key'=>'date_closed',
             'name'=>__('Closed'),
         )));
-	    #$this->add_col( new ListBlockCol_TaskCreatedBy( array('use_short_names'=>false,'indention'=>true)));
+        #$this->add_col( new ListBlockCol_TaskCreatedBy( array('use_short_names'=>false,'indention'=>true)));
 
-		$this->add_col( new ListBlockColTime(array(
-			'key'=>'estimated',
-			'name'=>__("Est."),
-			'tooltip'=>__("Estimated time in hours"),
-			'sort'=>0,
-		)));
-		$this->add_col( new ListBlockCol_Milestone);
-		$this->add_col( new ListBlockCol_EstimatedComplete);
-		$this->add_col( new ListBlockCol_DaysLeft());
-		$this->add_col( new ListBlockCol_TaskSumEfforts());
-		if(confget('TASK_LIST_EFFORT_RELATION_COLUMN')) {
-		    $this->add_col( new ListBlockCol_TaskRelationEfforts);
-		}
+        $this->add_col( new ListBlockColTime(array(
+            'key'=>'estimated',
+            'name'=>__("Est."),
+            'tooltip'=>__("Estimated time in hours"),
+            'sort'=>0,
+        )));
+        $this->add_col( new ListBlockCol_Milestone);
+        $this->add_col( new ListBlockCol_EstimatedComplete);
+        $this->add_col( new ListBlockCol_DaysLeft());
+        $this->add_col( new ListBlockCol_TaskSumEfforts());
+        if(confget('TASK_LIST_EFFORT_RELATION_COLUMN')) {
+            $this->add_col( new ListBlockCol_TaskRelationEfforts);
+        }
         $this->add_col( new ListBlockColPubLevel());
         
         ### functions ###
@@ -192,10 +192,10 @@ class ListBlock_tasks extends ListBlock
             'target'=>$PH->getPage('tasksApproved')->id,
             'name'  =>__('Status->Approved'),
             'id'    =>'tasksApproved',
-			'icon'  =>'approve',
+            'icon'  =>'approve',
             'context_menu'=>'submit',
         )));
-		$this->add_function(new ListFunction(array(
+        $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('tasksClosed')->id,
             'name'  =>__('Status->Closed'),
             'id'    =>'tasksClosed',
@@ -218,13 +218,13 @@ class ListBlock_tasks extends ListBlock
             'context_menu'=>'submit',
         )));
 
-		$this->add_function(new ListFunction(array(
+        $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('itemsAsBookmark')->id,
             'name'  =>__('Mark as bookmark'),
             'id'    =>'itemsAsBookmark',
             'context_menu'=>'submit',
         )));
-		
+        
 
         ### block style functions ###
         $this->add_blockFunction(new BlockFunction(array(
@@ -285,15 +285,15 @@ class ListBlock_tasks extends ListBlock
     */
     public function render_list(&$tasks=NULL)
     {
-		switch($this->page->format){
-			case FORMAT_CSV:
-				$this->renderListCSV($tasks);
-				break;
+        switch($this->page->format){
+            case FORMAT_CSV:
+                $this->renderListCSV($tasks);
+                break;
 
-			default:
-				$this->renderListHtml($tasks);
-				break;
-		}
+            default:
+                $this->renderListHtml($tasks);
+                break;
+        }
     }
 
     /**
@@ -304,10 +304,10 @@ class ListBlock_tasks extends ListBlock
         global $PH;
         require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
-		$this->render_header();
-		if($this->groupings) {
-		    $this->groupings->getActiveFromCookie();
-		}
+        $this->render_header();
+        if($this->groupings) {
+            $this->groupings->getActiveFromCookie();
+        }
 
         /**
         * for rendering undefined wiki-links we need to know the
@@ -317,34 +317,36 @@ class ListBlock_tasks extends ListBlock
         $project= NULL;
 
 
-		/**
-		* @@@ dummy rending of filters. Should later be placed at ListBlock()
-		*/
-		/*if($this->filters) {
-		    echo '<span class=filters>Filters:';
-		    foreach($this->filters as $f) {
-		        echo '<span class=filter>'.$f->render().'</span> ';
-		    }
-		    echo '</span>';
-		}
-		*/
+        /**
+        * @@@ dummy rending of filters. Should later be placed at ListBlock()
+        */
+        /*if($this->filters) {
+            echo '<span class=filters>Filters:';
+            foreach($this->filters as $f) {
+                echo '<span class=filter>'.$f->render().'</span> ';
+            }
+            echo '</span>';
+        }
+        */
 
 
-		$style='';
+        $style='';
         if(!$tasks && $this->no_items_html) {
             $this->render_tfoot_empty();
         }
         else {
 
             ### render table lines ###
-    		$this->render_thead();
+            $this->render_thead();
             $count_estimated=0;
 
             $last_group= NULL;
-    		foreach($tasks as $t) {
+            foreach($tasks as $t) {
 
                 ### grouped style ###
                 if($this->groupings && $this->active_block_function == 'grouped') {
+                    
+
                     $gr= $this->groupings->active_grouping_key;
 
                     if($t->project != $last_project_id) {
@@ -355,8 +357,8 @@ class ListBlock_tasks extends ListBlock
 
                     if($gr=='parent_task') {
                         if($t->category == TCATEGORY_FOLDER) {
-    		                echo '<tr class=group><td colspan='. count($this->columns) .'>';
-    		                #. $this->groupings->active_grouping_obj->render($t)
+                            echo '<tr class=group><td colspan='. count($this->columns) .'>';
+                            #. $this->groupings->active_grouping_obj->render($t)
 
 
                             ### toggle ###
@@ -372,23 +374,23 @@ class ListBlock_tasks extends ListBlock
                             }
                             echo $toggle;
 
-    		                if($parents= $t->getFolderLinks(false)) {
-    		                    echo $parents. '<em>&gt;</em>';
-    		                }
-    		                echo $t->getLink();
-    		                echo $description;
-    		                echo '</td></tr>';
+                            if($parents= $t->getFolderLinks(false)) {
+                                echo $parents. '<em>&gt;</em>';
+                            }
+                            echo $t->getLink();
+                            echo $description;
+                            echo '</td></tr>';
                             continue;
                         }
 
                     }
                     else {
-    		            if($last_group != $t->$gr) {
-    		                echo '<tr class=group><td colspan='. count($this->columns) .'>'. $this->groupings->active_grouping_obj->render($t).'</td></tr>';
-		                    $last_group = $t->$gr;
-		                }
-           		    }
-           		}
+                        if($last_group != $t->$gr) {
+                            echo '<tr class=group><td colspan='. count($this->columns) .'>'. $this->groupings->active_grouping_obj->render($t).'</td></tr>';
+                            $last_group = $t->$gr;
+                        }
+                    }
+                }
 
                 $style=($t->category == TCATEGORY_FOLDER)
                     ?' isFolder'
@@ -402,135 +404,136 @@ class ListBlock_tasks extends ListBlock
                     $count_estimated+=$t->estimated;
                 }
 
-      			$this->render_trow($t,$style);
+                $this->render_trow($t,$style);
 
 
-      			### render additional information ###
+                ### render additional information ###
                 if($this->groupings && $this->active_block_function == 'grouped') {
-		            echo '<tr class=details><td colspan='. count($this->columns) .'>';
+                    echo '<tr class=details><td colspan='. count($this->columns) .'>';
 
 
-		            ### block 1 ###
-		            {
-		                $html_buffer='';
-    		            if($t->issue_report) {
+                    ### block 1 ###
+                    {
+                        $html_buffer='';
+                        if($t->issue_report) {
                             $ir=Issue::getById($t->issue_report);
-    	                }
-    	                else {
-    	                    $ir= NULL;
-    	                }
-    		            global $g_severity_names;
-    		            global $g_reproducibility_names;
-    		            global $g_prio_names;
-    		            global $g_status_names;
+                        }
+                        else {
+                            $ir= NULL;
+                        }
+                        global $g_severity_names;
+                        global $g_reproducibility_names;
+                        global $g_prio_names;
+                        global $g_status_names;
 
 
 
-    		            #if($t->prio != PRIO_NORMAL && isset($g_prio_names[$t->prio]))  {
-    		            #    echo "<p>".$g_prio_names[$t->prio]."</p>";
-    		            #}
+                        #if($t->prio != PRIO_NORMAL && isset($g_prio_names[$t->prio]))  {
+                        #    echo "<p>".$g_prio_names[$t->prio]."</p>";
+                        #}
 
-    		            if($ir && $ir->severity && isset($g_severity_names[$ir->severity]))  {
-    		                $html_buffer.= "<p>".$g_severity_names[$ir->severity]."</p>";
-    		            }
-    		            if($ir && $ir->version)  {
-    		                $html_buffer.=  "<p>".$ir->version."</p>";
-    		            }
+                        if($ir && $ir->severity && isset($g_severity_names[$ir->severity]))  {
+                            $html_buffer.= "<p>".$g_severity_names[$ir->severity]."</p>";
+                        }
+                        if($ir && $ir->version)  {
+                            $html_buffer.=  "<p>".$ir->version."</p>";
+                        }
 
-    		            if($ir && $ir->production_build)  {
-    		                $html_buffer.=  "<p>".$ir->production_build."</p>";
-    		            }
+                        if($ir && $ir->production_build)  {
+                            $html_buffer.=  "<p>".$ir->production_build."</p>";
+                        }
 
-    		            if($ir && $ir->reproducibility  && isset($g_reproducibility_names[$ir->reproducibility]))  {
-    		                $html_buffer.=  "<p>".$g_reproducibility_names[$ir->reproducibility]."</p>";
-    		            }
+                        if($ir && $ir->reproducibility  && isset($g_reproducibility_names[$ir->reproducibility]))  {
+                            $html_buffer.=  "<p>".$g_reproducibility_names[$ir->reproducibility]."</p>";
+                        }
 
-    		            if($t->status != STATUS_OPEN && $t->status != STATUS_NEW && isset($g_status_names[$t->status]))  {
-    		                $html_buffer.=  "<p>".$g_status_names[$t->status]."</p>";
-    		            }
+                        if($t->status != STATUS_OPEN && $t->status != STATUS_NEW && isset($g_status_names[$t->status]))  {
+                            $html_buffer.=  "<p>".$g_status_names[$t->status]."</p>";
+                        }
 
-    		            echo '<div class=severity>';
-    		            if($html_buffer) {
-    		                echo $html_buffer;
-    		            }
-    		            else {
-    		                echo '&nbsp;';   # dummy content to keep floating
-    		            }
-
-
-    		            echo '</div>';
-    		        }
-
-		            ### block description ###
-		            {
-    		            echo '<div class=description>&nbsp;';
-    		            if($t->description)  {
-    		                echo "<p>".wikifieldAsHtml($t, 'description')."</p>";
-    		            }
-
-		                ### steps ###
-    		            if($ir && isset($ir->steps_to_reproduce) && $ir->steps_to_reproduce)  {
-    		                echo "<p>".wikifieldAsHtml($ir, 'steps_to_reproduce')."</p>";
-    		            }
-    		            if($ir && isset($ir->expected_result) && $ir->expected_result)  {
-    		                echo "<p>".wikifieldAsHtml($ir, 'expected_result')."</p>";
-    		            }
-    		            if($ir && isset($ir->suggested_solution) && $ir->suggested_solution)  {
-    		                echo "<p>".wikifieldAsHtml($ir, 'suggested_solution')."</p>";
-    		            }
+                        echo '<div class=severity>';
+                        if($html_buffer) {
+                            echo $html_buffer;
+                        }
+                        else {
+                            echo '&nbsp;';   # dummy content to keep floating
+                        }
 
 
-    		            echo '&nbsp;</div>';
-    		        }
+                        echo '</div>';
+                    }
+
+                    ### block description ###
+                    {
+                        echo '<div class=description>&nbsp;';
+                        if($t->description)  {
+                            echo "<p>".wikifieldAsHtml($t, 'description')."</p>";
+                        }
+
+                        ### steps ###
+                        if($ir && isset($ir->steps_to_reproduce) && $ir->steps_to_reproduce)  {
+                            echo "<p>".wikifieldAsHtml($ir, 'steps_to_reproduce')."</p>";
+                        }
+                        if($ir && isset($ir->expected_result) && $ir->expected_result)  {
+                            echo "<p>".wikifieldAsHtml($ir, 'expected_result')."</p>";
+                        }
+                        if($ir && isset($ir->suggested_solution) && $ir->suggested_solution)  {
+                            echo "<p>".wikifieldAsHtml($ir, 'suggested_solution')."</p>";
+                        }
 
 
-		            ### block last comment ###
-		            {
+                        echo '&nbsp;</div>';
+                    }
+
+
+                    ### block last comment ###
+                    {
                         echo '<div class=steps>';
 
-    		            if($c = $t->getLatestComment()) {
+                        if($c = $t->getLatestComment()) {
 
-    		                echo "<p>".__('Latest Comment')." ";
-    		                if($person= Person::getVisibleById($c->created_by)) {
-    		                    echo __("by").' '.$person->getLink();
-    		                }
-    		                echo " (". renderDateHtml($c->modified). "):";
-    		                echo "</p>";
+                            echo "<p>".__('Latest Comment')." ";
+                            if($person= Person::getVisibleById($c->created_by)) {
+                                echo __("by").' '.$person->getLink();
+                            }
+                            echo " (". renderDateHtml($c->modified). "):";
+                            echo "</p>";
 
                             if($c->name) {
-    		                    echo '<p>'. asHtml($c->name) . '</p>';
-    		                }
-    		                if($c->description) {
-    		                    echo "<p>". wikifieldAsHtml($c->description, $project). "</p>";
-    		                }
-    		            }
-    		            echo '&nbsp;</div>';
-    		        }
+                                echo '<p>'. asHtml($c->name) . '</p>';
+                            }
+                            if($c->description) {
+                                #echo "<p>". wikifieldAsHtml($c->description, $project). "</p>";
+                                echo "<p>". wikifieldAsHtml($c, "description"). "</p>";
+                            }
+                        }
+                        echo '&nbsp;</div>';
+                    }
 
-		            ### assigned to ###
-		            {
-    		            echo '<div class=assigned_to>';
+                    ### assigned to ###
+                    {
+                        echo '<div class=assigned_to>';
 
-    		            $persons= $t->getAssignedPersons();
-    		            if($persons) {
-    		                $sep='';
-    		                echo "<p>".__('for')." ";
-    		                foreach($persons as $p) {
-    		                    echo $sep . $p->getLink();
-    		                    $sep= ', ';
-    		                }
-    		                echo "</p>";
-    		            }
-    		            echo '</div>';
-    		        }
-
-
+                        $persons= $t->getAssignedPersons();
+                        if($persons) {
+                            $sep='';
+                            echo "<p>".__('for')." ";
+                            foreach($persons as $p) {
+                                echo $sep . $p->getLink();
+                                $sep= ', ';
+                            }
+                            echo "</p>";
+                        }
+                        echo '</div>';
+                    }
 
 
-		            echo '</td></tr>';
-		        }
+
+
+                    echo '</td></tr>';
+                }
             }
-               		#$this->render_trow($t);
+                    #$this->render_trow($t);
 
             if($this->show_summary) {
                  $this->summary=sprintf(__("%s open tasks / %s h"), count($tasks), $count_estimated);
@@ -538,7 +541,7 @@ class ListBlock_tasks extends ListBlock
             else {
                 $this->summary= '';
             }
-    		$this->render_tfoot();
+            $this->render_tfoot();
             $this->render_blockEnd();            
         }
     }
@@ -629,7 +632,7 @@ class ListBlock_tasks extends ListBlock
             unset($this->columns['parent_task']);
             unset($this->columns['date_closed']);
             unset($this->columns['name']);
-	        unset($this->columns['estimated']);
+            unset($this->columns['estimated']);
             $tasks= Task::getAll($this->query_options);
         }
 
@@ -642,18 +645,18 @@ class ListBlock_tasks extends ListBlock
             unset($this->columns['date_closed']);
             unset($this->columns['parent_task']);
             unset($this->columns['name']);
-	        unset($this->columns['created_by']);
-	        unset($this->columns['estimated']);
-	        unset($this->columns['assigned_to']);
-	        unset($this->columns['status']);
+            unset($this->columns['created_by']);
+            unset($this->columns['estimated']);
+            unset($this->columns['assigned_to']);
+            unset($this->columns['status']);
 
-	        ### prepend key to sorting ###
-	        if(isset($this->query_options['order_by'])) {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
-	        }
-	        else {
-	            $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
-	        }
+            ### prepend key to sorting ###
+            if(isset($this->query_options['order_by'])) {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie() . ",".$this->query_options['order_by'];
+            }
+            else {
+                $this->query_options['order_by'] = $this->groupings->getActiveFromCookie();
+            }
 
             ### sort folders ? ###
             /**
@@ -683,16 +686,16 @@ class ListBlock_tasks extends ListBlock
 
         ### tree view ###
         else {
-						
+                        
             ### first get only folders ###
             $parent_task_id = $parent_task
                             ? $parent_task->id
                             : NULL;
-			
+            
             $t_order_by= isset($this->query_options['order_by'])
                        ?     $this->query_options['order_by'] .  ",order_id,status,prio"
                        : 'order_id,status,prio';
-			
+            
             $tmp_options= array(
                 'visible_only'      => true,
                 'folders_only'      => true,
@@ -703,17 +706,17 @@ class ListBlock_tasks extends ListBlock
                 'status_min'       => STATUS_NEW,
                 'status_max'       => STATUS_CLOSED,
             );
-			
-			if(isset($this->query_options['person'])){
-				$tmp_options['person']= $this->query_options['person'];
-			}
+            
+            if(isset($this->query_options['person'])){
+                $tmp_options['person']= $this->query_options['person'];
+            }
 
             if(isset($project)) {
                 $tmp_options['project']= $project->id;
             }
 
             $tmp_folders= Task::getAll($tmp_options);
-						
+                        
             $folders= array();
             foreach($tmp_folders as $f) {
                 $folders[$f->id]= $f;
@@ -727,11 +730,11 @@ class ListBlock_tasks extends ListBlock
             unset($this->columns['parent_task']);
             unset($this->columns['taskwithfolder']);
             unset($this->columns['date_closed']);
-	        unset($this->columns['estimated']);
-	        if(isset($this->query_options['folders_only'])) {
-	            $full_list= $folders;
-	        }
-	        else {
+            unset($this->columns['estimated']);
+            if(isset($this->query_options['folders_only'])) {
+                $full_list= $folders;
+            }
+            else {
                 $this->query_options['show_folders']= false;
                 $this->query_options['parent_task']= NULL;
                 $tasks= Task::getAll($this->query_options);
@@ -791,7 +794,7 @@ class ListBlock_tasks extends ListBlock
                         }
                     }
                 }
-	        }
+            }
 
             ### filter empty folders with wrong status ###
             # (or all empty, if set)
@@ -859,29 +862,29 @@ class ListBlockCol_TaskLabel extends ListBlockCol
         $this->name=__('Label','Columnheader');
     }
 
-	function render_tr(&$obj, $style="")
-	{
+    function render_tr(&$obj, $style="")
+    {
         measure_start('col_label');
-		if(!isset($obj) || !$obj instanceof Task) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($obj) || !$obj instanceof Task) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
         if($obj->category == TCATEGORY_FOLDER) {
-    		print "<td></td>";
+            print "<td></td>";
         }
 
         else if($str_label= $obj->getLabel()) {
             $class_label= $obj->label
                 ? "class=label$obj->label"
                 : '';
-    		print "<td class=label><span {$class_label}>$str_label</span></td>";
+            print "<td class=label><span {$class_label}>$str_label</span></td>";
         }
         else {
             print "<td></td>";
         }
 
         measure_stop('col_label');
-	}
+    }
 }
 
 
@@ -897,18 +900,18 @@ class ListBlockCol_Milestone extends ListBlockCol
         $this->name=__('Milestone');
     }
 
-	function render_tr(&$obj, $style='') {
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
+    function render_tr(&$obj, $style='') {
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
         $value="";
         if($obj->for_milestone) {
             if($milestone= Task::getVisibleById($obj->for_milestone)) {
                 $value= $milestone->getLink();
             }
         }
-		print "<td>$value</td>";
-	}
+        print "<td>$value</td>";
+    }
 }
 
 
@@ -924,18 +927,18 @@ class ListBlockCol_TaskCreatedBy extends ListBlockCol
         $this->name=__('Created by');
     }
 
-	function render_tr(&$obj, $style="nowrap") {
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
+    function render_tr(&$obj, $style="nowrap") {
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
         $value="";
         if($obj->created_by) {
             if($person= Person::getVisibleById($obj->created_by)) {
                 $value=$person->getLink();
             }
         }
-		print "<td class=nowrap>$value</td>";
-	}
+        print "<td class=nowrap>$value</td>";
+    }
 }
 
 
@@ -950,10 +953,10 @@ class ListBlockCol_TaskAssignedTo extends ListBlockCol
         $this->id='assigned_to';
     }
 
-	function render_tr(&$obj, $style="nowrap") {
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
+    function render_tr(&$obj, $style="nowrap") {
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
         $value="";
         if($tps= $obj->getAssignedPersons()) {
             $sep="";
@@ -962,8 +965,8 @@ class ListBlockCol_TaskAssignedTo extends ListBlockCol
                 $sep=", ";
             }
         }
-		print "<td class=nowrap>$value</td>";
-	}
+        print "<td class=nowrap>$value</td>";
+    }
 }
 
 
@@ -986,15 +989,15 @@ class ListBlockCol_TaskName extends ListBlockCol
         $this->id='name';
     }
 
-	function render_tr(&$task, $style="")
-	{
+    function render_tr(&$task, $style="")
+    {
         measure_start('col_taskname');
 
         global $PH;
-		if(!isset($task) || !is_object($task)) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($task) || !is_object($task)) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
 
         ### descriptions ###
         /*
@@ -1029,16 +1032,16 @@ class ListBlockCol_TaskName extends ListBlockCol
                 $attachments='<img title="' . sprintf(__('Task has %s attachments'), count($files))  . '" src="' . getThemeFile("items/item_attachment.png"). '">';
             }
          }
-		*/
-		
-		 
+        */
+        
+         
         ### task with zero-id is project-root ###
         if(!$task->id) {
             $link=$PH->getLink('projView',"...project...",array('prj'=>$task->project));
             echo '<td>'.$link."</td>";
         }
 
-		### name ###
+        ### name ###
         else {
             $name= $this->use_short_names
                 ? $task->getShort()
@@ -1083,7 +1086,7 @@ class ListBlockCol_TaskName extends ListBlockCol
             }
         }
         measure_stop('col_taskname');
-   	}
+    }
 }
 
 
@@ -1103,13 +1106,13 @@ class ListBlockCol_TaskAsDocu extends ListBlockCol
         $this->id='name_topic';
     }
 
-	function render_tr(&$task, $style="")
-	{
+    function render_tr(&$task, $style="")
+    {
         global $PH;
-		if(!isset($task) || !is_object($task)) {
-			trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
-   			return;
-		}
+        if(!isset($task) || !is_object($task)) {
+            trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
+            return;
+        }
 
         $link= $PH->getLink('taskViewAsDocu',$task->name,array('tsk'=>$task->id));
 
@@ -1131,7 +1134,7 @@ class ListBlockCol_TaskAsDocu extends ListBlockCol
             $html_indention= "style='padding-left:".(1.2 * ($no_folder+intval($task->level)))."em;'";
         }
         echo "<td $html_indention>{$toggle}$link</td>";
-   	}
+    }
 }
 
 
@@ -1147,18 +1150,18 @@ class ListBlockCol_TaskSumEfforts extends ListBlockCol
     }
 
 
-	function render_tr(&$obj, $style="nowrap")
-	{
-	    global $PH;
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
+    function render_tr(&$obj, $style="nowrap")
+    {
+        global $PH;
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
         $sum=$obj->getSumEfforts();
 
         $str=  $PH->getLink('taskViewEfforts',round($sum/60/60,1)."h", array('task'=>$obj->id));
 
-		print "<td class=nowrap title='" .__("Effort in hours") . "'>$str</td>";
-	}
+        print "<td class=nowrap title='" .__("Effort in hours") . "'>$str</td>";
+    }
 }
 
 class ListBlockCol_TaskRelationEfforts extends ListBlockCol
@@ -1171,55 +1174,55 @@ class ListBlockCol_TaskRelationEfforts extends ListBlockCol
     }
 
 
-	function render_tr(&$obj, $style="nowrap")
-	{
-	    global $PH;
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
-		$diff_str = '';
-		$estimated_str = '';
-		$estimated = 0;
-		$estimated_max = 0;
-		$sum_completion = 0;
-		$completion = 0;
-		
+    function render_tr(&$obj, $style="nowrap")
+    {
+        global $PH;
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
+        $diff_str = '';
+        $estimated_str = '';
+        $estimated = 0;
+        $estimated_max = 0;
+        $sum_completion = 0;
+        $completion = 0;
+        
         $sum = $obj->getSumTaskEfforts();
-		
-		if($obj->is_folder){
-			if($subtasks = $obj->getSubTasks()){
-				foreach($subtasks as $s){
-					$estimated += $s->estimated;
-				    $estimated_max += $s->estimated_max;
-					$sum_completion += $s->completion;
-				}
-				$completion = round(($sum_completion / count($subtasks)),1);
-			}
-		}
-		else{
-			$estimated = $obj->estimated;
-			$estimated_max = $obj->estimated_max;
-			$completion = $obj->completion;
-		}
-		
-		if($estimated_max){
-			$estimated_str = round($estimated_max/60/60,1) . "h";
-			$diff = $estimated_max - $sum;
-		}
-		else{
-			$estimated_str = round($estimated/60/60,1) . "h";
-			$diff = $estimated - $sum;
-		}
-		
-		if($diff){
-			$diff_str = "(" .round($diff/60/60,1). "h)";
-		}
-		
+        
+        if($obj->is_folder){
+            if($subtasks = $obj->getSubTasks()){
+                foreach($subtasks as $s){
+                    $estimated += $s->estimated;
+                    $estimated_max += $s->estimated_max;
+                    $sum_completion += $s->completion;
+                }
+                $completion = round(($sum_completion / count($subtasks)),1);
+            }
+        }
+        else{
+            $estimated = $obj->estimated;
+            $estimated_max = $obj->estimated_max;
+            $completion = $obj->completion;
+        }
+        
+        if($estimated_max){
+            $estimated_str = round($estimated_max/60/60,1) . "h";
+            $diff = $estimated_max - $sum;
+        }
+        else{
+            $estimated_str = round($estimated/60/60,1) . "h";
+            $diff = $estimated - $sum;
+        }
+        
+        if($diff){
+            $diff_str = "(" .round($diff/60/60,1). "h)";
+        }
+        
         $str =  $PH->getLink('taskViewEfforts', $estimated_str . " / " . round($sum/60/60,1) . "h {$diff_str}", array('task'=>$obj->id));
-		$percent = __('Completion:') . " " . $completion . "%";
-		
-		print "<td class=nowrap title='" .__("Relation between estimated time and booked efforts") . "'>$str<br><span class='sub who'>$percent</span></td>";
-	}
+        $percent = __('Completion:') . " " . $completion . "%";
+        
+        print "<td class=nowrap title='" .__("Relation between estimated time and booked efforts") . "'>$str<br><span class='sub who'>$percent</span></td>";
+    }
 }
 
 
@@ -1233,8 +1236,8 @@ class ListBlockCol_DaysLeft extends ListBlockCol
         $this->name=__("Due","column header, days until planned end");
     }
 
-	function render_tr(&$obj, $style="")
-	{
+    function render_tr(&$obj, $style="")
+    {
         measure_start('col_timedue');
         
         $class = "";
@@ -1319,7 +1322,7 @@ class ListBlockCol_DaysLeft extends ListBlockCol
         else {
             print "<td></td>";
         }
-	}
+    }
 }
 
 
@@ -1334,15 +1337,15 @@ class ListBlockCol_EstimatedComplete extends ListBlockCol
     }
 
 
-	function render_tr(&$obj, $style="nowrap") {
-		if(!isset($obj) || !$obj instanceof Task) {
-   			return;
-		}
+    function render_tr(&$obj, $style="nowrap") {
+        if(!isset($obj) || !$obj instanceof Task) {
+            return;
+        }
 
         $str= renderEstimationGraph($obj->estimated, $obj->estimated_max, $obj->completion );
-				
-		print "<td>$str</td>";
-	}
+                
+        print "<td>$str</td>";
+    }
 }
 
 
@@ -1360,12 +1363,12 @@ class ListBlockCol_TasknameWithFolder extends ListBlockCol
         $this->id= 'taskwithfolder';
     }
 
-	function render_tr(&$task, $style="nowrap")
-	{
-	    global $PH;
-		if(!isset($task) || !$task instanceof Task) {
-   			return;
-		}
+    function render_tr(&$task, $style="nowrap")
+    {
+        global $PH;
+        if(!isset($task) || !$task instanceof Task) {
+            return;
+        }
 
         ### task with zero-id is project-root ###
         if(!$task->id) {
@@ -1373,7 +1376,7 @@ class ListBlockCol_TasknameWithFolder extends ListBlockCol
             echo '<td><b>'.$link."</b></td>";
         }
 
-		### name ###
+        ### name ###
         else {
             $name= $task->name;
 
@@ -1400,11 +1403,11 @@ class ListBlockCol_TasknameWithFolder extends ListBlockCol
 
             $link= $PH->getLink('taskView',$name,array('tsk'=>$task->id));
             #echo "<td class=taskwithfolder><span class='name $isDone'>{$link}</span><br><span class=sub>$html_details</span></td>";
-			echo "<td class=taskwithfolder><span class='$isDone'>{$link}</span><br><span class=sub>$html_details</span></td>";
+            echo "<td class=taskwithfolder><span class='$isDone'>{$link}</span><br><span class=sub>$html_details</span></td>";
         }
         measure_stop('col_taskname');
 
-	}
+    }
 }
 
 

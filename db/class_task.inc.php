@@ -517,7 +517,10 @@ foreach($filters_str as $fs=>$value) {
             #$args['limit']=    1;
 
             $comments= $project->getComments($args);
-            return $comments[0];
+            if($comments) {
+                return $comments[0];
+            }
+            return NULL;
         }
     }
 

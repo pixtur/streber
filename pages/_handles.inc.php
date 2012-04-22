@@ -305,7 +305,7 @@ new PageHandle(array('id'=>'projViewChanges',
     'valid_for_crawlers'=>false,
 ));
 new PageHandle(array('id'=>'projViewTasks',
-    'req'=>'pages/project_more.inc.php',
+    'req'=>'pages/project_view_tasks.inc.php',
     'title'=>__('Tasks'),
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',

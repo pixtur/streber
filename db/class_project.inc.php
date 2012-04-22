@@ -1202,6 +1202,10 @@ class Project extends DbProjectItem
         global $PH;
         global $auth;
 
+        if( $auth->isAnonymousUser()) {
+            return false;
+        }
+        
         if(!$item) {
             if($abort_on_error) {
                 $PH->abortWarning(__("validating invalid item"),ERROR_BUG);

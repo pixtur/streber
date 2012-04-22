@@ -42,18 +42,22 @@ function error()
     echo "</div>";
 
 
-    $block->render_blockEnd();
+    ### Show traceback only for admins
+    if ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+    {
+        $block->render_blockEnd();
+        $block=new PageBlock(array('title'=>'Details', 'id'=>'details'));
+        $block->render_blockStart();
+        echo "<div class=text>";
+        echo "<pre>";
+        echo renderBacktrace(debug_backtrace());
 
-    $block=new PageBlock(array('title'=>'Details', 'id'=>'details'));
-    $block->render_blockStart();
-    echo "<div class=text>";
-    echo "<pre>";
-    echo renderBacktrace(debug_backtrace());
+        echo "</pre>";
+        echo "</div>";
 
-    echo "</pre>";
-    echo "</div>";
-
-    $block->render_blockEnd();
+        $block->render_blockEnd();
+    }
+    
 
 
     echo (new PageContentClose);

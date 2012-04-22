@@ -1047,6 +1047,7 @@ class FormatBlockLink extends FormatBlock
 
     public function __construct($str)
     {
+
         measure_start("blockLink::__construct");
         global $PH;
         global $g_wiki_project;
@@ -1954,6 +1955,11 @@ function wikiAsHtml($wikitext) {
 
 function wikifieldAsHtml($item, $field_name=NULL, $args= NULL)
 {
+    if(is_null($item) || !is_object($item)) {
+        trigger_error("Can't render field for null item", E_USER_WARNING);
+        return "";        
+    }
+    
     $editable= $item->isEditable();
     $empty_text = '';
 
