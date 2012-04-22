@@ -23,6 +23,7 @@ class TestPagesLogin extends WebTestCase {
         $this->assertWantedPattern('/please login/i',                                            'check content (%s)');
         $this->assertValidHtmlStucture('login');
 
+
         ### test license ###
         $this->assertTrue($this->clickLink('License'),                                          'click at license');
         $this->assertNoUnwantedPattern('/<b>Warning<\/b>:|<b>Error<\/b>:|<b>Notice<\/b>:/i',    'php-error found (%s)' );
@@ -75,7 +76,8 @@ class TestPagesLogin extends WebTestCase {
         ###
         $this->assertTrue( $this->clickLink( 'Peter Manage <x>'));
         $this->assertWantedPattern( '<body class="personView">');
-        $this->assertTrue( $this->clickLink('Edit profile'));
+        $this->assertTrue( $this->clickLink('Edit'));
+        #echo "<pre>" . $this->_browser->getContent() . "</pre>";
 
         ### can't save if not identical
         $this->assertTrue( $this->setField('person_password1',      'pm_secret'));

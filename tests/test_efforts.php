@@ -18,7 +18,6 @@ class TestEfforts extends WebTestCase {
         ### logout first ###
         $this->assertTrue($this->get($g_streber_url), 'getting login page (%s)' );
         $this->assertWantedPattern('/please login/i','check content (%s)');
-        #echo "<pre>" . $this->_browser->getContent() . "</pre>";
 
         $this->assertValidHtmlStucture('login');
 

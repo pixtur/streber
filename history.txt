@@ -1,18 +1,15 @@
 streber-version-history
 
-v0.093 / rev512 
+v0.093 / rev513
+- fixed unit-tests
 - Disable modifications by anonymous users (I.e. guests)
 - Fixed error in grouped list style
 - Fixed show traceback only for admins (http://streber-pm.org/7934)
 - disable comments for anonymous users
 
-
 rev511
 - fixed issue with items_delete_many and selected tasks/topics
 - fixed type syntax installation SQL-dump
-
-
-
 
 v0.092 / rev511
 - reduce people list visibility if anonymous login

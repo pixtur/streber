@@ -21,7 +21,7 @@ confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
 
 #confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
 #confChange('SMTP','mail.yourdomain.de');
-confChange('ANONYMOUS_USER', 7);
+#confChange('ANONYMOUS_USER', 7);
 #confChange('REGISTER_NEW_USERS', true);
 #confChange('REGISTER_NEW_USERS_TO_PROJECT', 10);
 

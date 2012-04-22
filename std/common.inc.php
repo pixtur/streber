@@ -266,7 +266,7 @@ function validateFormCaptcha($abort_on_failure = false)
 *
 * - adds table-prefix to all select and create-statements
 * - This function is a hack to quickly set up the db-structure. Sooner
-*   or later it will be replaces with a real table-creation-function.
+*   or later it will be replaced with a real table-creation-function.
 */
 function parse_mysql_dump($url, $table_prefix, $sql_obj)
 {

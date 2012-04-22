@@ -1202,8 +1202,8 @@ class Project extends DbProjectItem
         global $PH;
         global $auth;
 
-        if( $auth->isAnonymousUser()) {
-            return false;
+        if( isset($auth) &&  $auth->isAnonymousUser()) {
+           return false;
         }
         
         if(!$item) {
