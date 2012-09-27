@@ -1,4 +1,5 @@
 # Cleanurls with Apache 2.0
+Options +FollowSymLinks
 RewriteEngine on
 RewriteRule ^([0-9]+)$ index.php?go=itemView&id=$1 [L]
 RewriteRule ^([a-zA-Z]+)$ index.php?go=globalView&id=$1 [L]

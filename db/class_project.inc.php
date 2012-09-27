@@ -173,10 +173,10 @@ class Project extends DbProjectItem
         }
 
         if($id) {
+            $p= Project::getById($id, $use_cache);
             if(!$p) {
                 return NULL;
             }
-            $p= Project::getById($id, $use_cache);
             $g_cache_projects[$p->id]= $p;
 
             if($p && $p->validateView(
