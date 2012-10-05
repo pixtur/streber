@@ -376,6 +376,7 @@ function companyView()
         if($company->comments) {
             echo wikifieldAsHtml($company, 'comments');
         }
+                
         if($company->street) {
             echo '<div class=labeled><label>'. __('Adress') . ':</label>' . asHtml($company->street) .'</div>';
         }
@@ -400,10 +401,25 @@ function companyView()
             echo '<div class=labeled><label>'. __('Mail') . ':</label>'.url2linkMail($company->email).'</div>';
         }
 
+        #--- open efforts ------------
+        {
+            $sum = 0;
+            foreach($company->getProjects() as $p) {
+                $sum+= $p->getOpenEffortsSum();
+            }
+            if( $sum > 0) {
+                echo "<div class=text>";
+                    echo '<div class=labeled><label>'. __('Open efforts') . ':</label>' . round($sum/60/60,1)  .'h</div>';            
+            
+                echo "</div>";
+            }
+        }
+
         echo "</div>";
 
         $block->render_blockEnd();
     }
+    
 
     #--- list people -------------------------------
     {
@@ -475,6 +491,7 @@ function companyView()
         $list= new ListBlock_projects();
 
         $list->title=__("Active projects");
+                
         $list->id="active_projects";
         $list->groupings= NULL;
         $list->block_functions = NULL;
