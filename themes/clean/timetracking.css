@@ -1,0 +1,26 @@
+table.timetracking {
+    border: 1px solid #DBDBDB;
+    border-collapse: collapse;
+    width:100%;
+    color: #989898;
+}
+table.timetracking td{
+    border: 1px solid #DBDBDB;
+    padding:0.5em 1em 0.5em 1em;
+}
+
+table.timetracking td.hour {
+    width:5%;
+}
+
+
+table.timetracking tr td.day {
+    width: 140;
+    text-align:center;
+    
+}
+table.timetracking tr.timeline td {
+    border:none;
+    position: relative;
+    left:-20px;
+}

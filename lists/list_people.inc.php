@@ -4,7 +4,7 @@
 # Distributed under the terms and conditions of the GPL as stated in docs/license.txt
 
 /**
- * derived ListBlock-class for listing persons
+ * derived ListBlock-class for listing people
  *
  * @includedby:     pages/company.inc, pages/person.inc, pages/proj.inc
  *
@@ -13,7 +13,7 @@
  * @usedby:
  *
  */
-class ListBlock_persons extends ListBlock
+class ListBlock_people extends ListBlock
 {
     public $filters = array();
     
@@ -21,8 +21,8 @@ class ListBlock_persons extends ListBlock
     {
         parent::__construct($args);
 
-        $this->id='persons';
-        $this->title=__("Your related persons");
+        $this->id='people';
+        $this->title=__("Your related people");
 
 
         $this->add_col( new ListBlockColSelect());
@@ -198,8 +198,8 @@ class ListBlock_persons extends ListBlock
             }
         }
         
-        $persons = Person::getPersons($this->query_options);
-        $this->render_list($persons);
+        $people = Person::getPeople($this->query_options);
+        $this->render_list($people);
     }
 }
 

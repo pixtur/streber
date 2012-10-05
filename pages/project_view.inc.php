@@ -192,13 +192,19 @@ function ProjView()
     echo (new PageContentOpen_Columns);
 
 
-    #--- write info-block ------------
+    #--- write info-blocks ------------
     {
-        measure_stop('current milestone');
-        require_once(confGet('DIR_STREBER') . 'blocks/current_milestone_block.inc.php');        
+        measure_stop('infoblocks');
+        
+        require_once(confGet('DIR_STREBER') . 'blocks/project_summary_block.inc.php'); 
+        $block= new ProjectSummaryBlock($project);
+        $block->render();
+        
+        
+        require_once(confGet('DIR_STREBER') . 'blocks/current_milestone_block.inc.php'); 
         $block= new CurrentMilestoneBlock($project);
         $block->render();
-        measure_stop('current milestone');
+        measure_stop('infoblocks');
     }
 
 

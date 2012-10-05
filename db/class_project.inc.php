@@ -299,7 +299,6 @@ class Project extends DbProjectItem
     */
     function getEffortsSum()
     {
-
         $sum=0.0;
         if($efforts= $this->getEfforts()) {
             foreach($efforts as $e) {
@@ -310,8 +309,28 @@ class Project extends DbProjectItem
     }
 
     /**
-    * get Efforts sum
+    * get Open Efforts sum
+    * sums up open and new efforts (e.I. everything that's not closed, balanced or not billable)
     */
+    function getOpenEffortsSum()
+    {
+        $sum=0.0;
+        require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+            
+        $efforts= Effort::getAll(array(
+            'project'   => $this->id,
+            'effort_status_max' => EFFORT_STATUS_OPEN
+        ));
+        
+        foreach($efforts as $e) {
+            $sum+= 1.0*strToGMTime($e->time_end)-1.0*strToGMTime($e->time_start);
+        }
+        
+        return $sum;
+    }
+
+
+
     function getProgressSum()
     {
 

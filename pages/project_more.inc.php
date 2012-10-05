@@ -891,7 +891,7 @@ function ProjViewEfforts()
                     'id'        => 'effort_status',
                     'visible'   => true,
                     'active'    => true,
-                    'min'       => EFFORT_STATUS_OPEN,
+                    'min'       => EFFORT_STATUS_NEW,
                     'max'       => EFFORT_STATUS_OPEN,
                 ),
             ),

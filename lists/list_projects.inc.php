@@ -360,7 +360,7 @@ class ListBlockCol_ProjectName extends ListBlockCol
 
 
 class ListBlockCol_ProjectEffortSum extends ListBlockCol{
-    public $name='Efforts';
+    public $name='Open Efforts';
     public $tooltip="Not cleared project efforts in hours";
     public $id='efforts';
 
@@ -368,15 +368,19 @@ class ListBlockCol_ProjectEffortSum extends ListBlockCol{
         parent::__construct($args);
     }
     function render_tr(&$project, $style="") {
+        global $PH;
 
         if(!isset($project) || !$project instanceof Project) {
             trigger_error("ListBlock->render_tr() called without valid object", E_USER_WARNING);
             return;
         }
 
-        $value= round($project->getEffortsSum()/60/60,1);
+        //$value= round($project->getEffortsSum()/60/60,1);
+        $value = round($project->getOpenEffortsSum()/60/60,1);
         if($value) {
-            print "<td>{$value}h</td>";
+            print "<td>"
+                . $PH->getLink('projViewEfforts', $value ."h", array('prj'=> $project->id, 'preset' => 'open_efforts' ))
+                . "</td>";
         }
         else {
             print "<td></td>";

@@ -44,9 +44,16 @@ new PageHandle(array('id'=>'homeBookmarks',
     
     'valid_for_crawlers'=>false,
 ));
-new PageHandle(array('id'=>'homeEfforts',
-    'req'=>'pages/home.inc.php',
+new PageHandle(array('id'=>'homeListEfforts',
+    'req'=>'pages/home_list_efforts.inc.php',
     'title'=>__('Efforts'),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
+new PageHandle(array('id'=>'homeTimetracking',
+    'req'=>'pages/home_timetracking.inc.php',
+    'title'=>__('Time tracking'),
     'test'=>'yes',
     
     'valid_for_crawlers'=>false,

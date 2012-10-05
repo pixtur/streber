@@ -2,8 +2,9 @@ body {
   background: #f3f3f3 url(layout/bg_shade_content.png) repeat-x;
 	padding:0px;
 	margin:0px;
-	font-family: sans-serif;
+	font-family: "Helvetica", sans-serif;
     font-size:10.5pt;
+    font-weight:lighter;
 }
 
 a {

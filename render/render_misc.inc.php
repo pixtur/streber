@@ -566,7 +566,7 @@ function buildProjectSelector()
 
 
 /**
-* renders the list of open pages available in homeView
+* Renders list of pages shown when clicking the HOME-Tab drop down
 *
 * The opening is done with javascript. Placing the list beside the Home Selector icon
 * is done by css only. This is a little bit tricky, because the Tab-list is already an
@@ -586,15 +586,12 @@ function buildHomeSelector()
     $buffer.="<span id=homeselector class=selector>&nbsp;</span>";
     $buffer.= "<span style='display:none;' id='homeselectorlist' class=selectorlist><span class=selectorlist_content>";
 
-    /*
-    foreach(array('home', 'homeTasks', 'homeBookmarks', 'homeEfforts', 'homeAllChanges') as $p) {
-        $buffer.= $PH->getLink($p,NULL, array());
-    }
-    */
     $buffer.= $PH->getLink('home',NULL, array());
     $buffer.= $PH->getLink('homeTasks',NULL, array());
+
     if($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
-        $buffer.= $PH->getLink('homeEfforts',NULL, array());
+        $buffer.= $PH->getLink('homeListEfforts',NULL, array());
+        $buffer.= $PH->getLink('homeTimetracking',NULL, array());
     }
     
     if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
@@ -606,6 +603,47 @@ function buildHomeSelector()
     return $buffer;
 }
 
+/**
+* build the page-links under home
+*
+* @Note
+* - The names are taken from the handle definition
+*/
+function build_home_options()
+{
+    global $auth;
+    $options= array();
+
+    $options[]= new NaviOption(array(
+                'target_id'=>'home',
+        ));
+
+    $options[]= new NaviOption(array(
+            'target_id'     =>'homeTasks',
+        ));
+
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
+        
+        $options[]= new NaviOption(array(
+            'target_id'     =>'homeBookmarks',
+        ));
+    }
+
+    if($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
+        $options[]= new NaviOption(array(
+            'target_id'     =>'homeListEfforts',
+        ));
+        $options[]= new NaviOption(array(
+            'target_id'     =>'homeTimetracking',
+        ));
+    }
+
+    $options[]= new NaviOption(array(
+        'target_id'     =>'homeAllChanges',
+    ));
+
+    return $options;
+}
 
 
 /**
@@ -912,8 +950,6 @@ function renderTimestampHtml($t)
     else {
     */
         return $str;
-
-
 }
 
 
@@ -976,17 +1012,15 @@ function renderDate($t, $smartnames= true) {
         if(isset($auth->cur_user)) {
             $time_offset = $auth->cur_user->time_offset;
         }
-        $t= $time_offset;
+        $t+= $time_offset;
     }
 
 
     if($smartnames && gmdate('Y-m-d', time()) == gmdate('Y-m-d', $t)) {
         $str= __('Today');
-        if(gmdate('H:i:s',$t) !== '00:00:00') {
-            $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
-
-            
-        }
+        //if(gmdate('H:i:s',$t) !== '00:00:00') {
+        //    $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
+        //}
     }
     else if($smartnames && gmdate('Y-m-d',time()) == gmdate('Y-m-d', $t + 60*60*24)) {
         $str= __('Yesterday');
@@ -994,7 +1028,7 @@ function renderDate($t, $smartnames= true) {
         #    $str.= ' ' . gmstrftime(getUserFormatTime(), $t);
         #}
     }
-    else {
+    else {        
         $str= gmstrftime(getUserFormatDate(), $t);
     }
     return $str;

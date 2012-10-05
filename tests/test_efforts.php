@@ -30,7 +30,7 @@ class TestEfforts extends WebTestCase {
         
         $this->assertTrue($this->get($g_streber_url . "/index.php?go=projViewEfforts&prj=10"), 'getting project effort view (%s)' );
         validatePage($this);
-        $this->assertTrue($this->get($g_streber_url . "/index.php?go=homeEfforts"), 'getting user efforts (%s)' );
+        $this->assertTrue($this->get($g_streber_url . "/index.php?go=homeListEfforts"), 'getting user efforts (%s)' );
         validatePage($this);
 
         $this->assertTrue($this->get($g_streber_url . "/index.php?go=effortNew&prj=10"), 'book new effort (%s)' );

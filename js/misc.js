@@ -16,36 +16,54 @@
 var onLoadFunctions= new Array();
 var ajax_edits= new Array();
 
+
+function updateTimetrackingTable() {
+    var tableElement= $("div.timeblocks")[0];
+    
+    $([ { 'start':8, 'end':10}, {'start':12, 'end':15}   ]).each( function(i,block) {
+        $(tableElement).append( "<div style='background-color:red;position:relative;top:0px;'>bla2</div>");
+        //$(tableElement).html("here");
+    });
+    //tableElement.html("krass");
+    // $("table.timetracking").each(function(e){
+    //         var t = this;
+    //         $(this).html("krass!");
+    //     });
+    
+}
+
+
+
 /**
 * called after loading
 */
 function misc()
 {
+    updateTimetrackingTable();
 
 
-
-	/*******************************************************
+    /*******************************************************
     * Form - visual effects
     *
     */
 
-	/**
-	* chose between current or next project in notes on person dialog
-	* show and hide project list / project input field
-	*/
+    /**
+    * chose between current or next project in notes on person dialog
+    * show and hide project list / project input field
+    */
     $('body.taskNoteOnPersonEdit #new_project').click
     (
         function(e)
         {
             if(this.checked)
             {
-            	$('div.form #proj_list').slideUp('300');
-				$('div.form #proj_new_input').slideDown('300');
+                $('div.form #proj_list').slideUp('300');
+                $('div.form #proj_new_input').slideDown('300');
             }
             else
-			{
-               	$('div.form #proj_new_input').slideUp('300');
-				$('div.form #proj_list').slideDown('300');
+            {
+                $('div.form #proj_new_input').slideUp('300');
+                $('div.form #proj_list').slideDown('300');
             }
         }
     );
@@ -272,7 +290,7 @@ function AjaxEdit(dom_element, item_id, field)
                 chapter:true,
                 obj:dom_element,
                 placeholder:'',
-				onblur:'ignore',
+                onblur:'ignore',
                 event:'dblclick',
                 callback:function(value, settings){
                   keepParentNode = this.parentNode
@@ -288,19 +306,21 @@ function AjaxEdit(dom_element, item_id, field)
 /**
 * initialize handlers for autocompletion input fields on startup
 * 
-* Calledby render_page js-code if page->use_autocomplete enabled
+* Called by render_page js-code if page->use_autocomplete enabled
 */
 function initAutocompleteFields() {
-	$("input.autocomplete").each(function() {
-	    if($(this).attr('autocomplete_list')) {
-	        var autocomplete_list= $(this).attr('autocomplete_list');
-			$(this).autocomplete(autocomplete_list.split(','), {
-        		delay: 150,
-        		selectFirst: false,
-		        multiple: true,
-		        //mustMatch: true,
-		        autoFill: true
-		      });
-	    }
-	});
+    $("input.autocomplete").each(function() {
+        if($(this).attr('autocomplete_list')) {
+            var autocomplete_list= $(this).attr('autocomplete_list');
+            $(this).autocomplete(autocomplete_list.split(','), {
+                delay: 150,
+                selectFirst: false,
+                multiple: true,
+                //mustMatch: true,
+                autoFill: true
+              });
+        }
+    });
 }
+
+
