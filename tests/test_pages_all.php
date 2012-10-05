@@ -95,7 +95,7 @@ class TestPagesAll extends WebTestCase {
                 echo "<b>$handle->id</b> ";
                 print_r($params);
                 echo "<br>";
-                $this->assertTrue($this->get($url)         , "getting $url (%s)");
+                $this->assertTrue($this->get("/".$url)         , "getting $url (%s)");
                 $this->assertNoUnwantedPattern('/PHP Error |<b>Fatal error<\/b>|<b>Warning<\/b>|<b>Error<\/b>|<b>Notice<\/b>|<b>Parse error<\/b>/i',    'php-error found (%s)' );
                 $this->assertNoUnwantedPattern('/' . '%' . '%' . '/i',     'debug output found (%s)' );
                 $this->assertValidHtmlStucture($url);
@@ -110,11 +110,6 @@ class TestPagesAll extends WebTestCase {
                 for($i=0;$i<20;$i++) {
                     echo "                       ";
                 }
-
-                #$this->assertNoUnwantedPattern('/class=notice/',                                         'check for streber warnings (%s)');
-                #$this->assertTitle('XXX',         'title dummy (%s)');
-                #$this->assertNoUnwantedPattern('/message/');
-                #echo "title=".$this->webbrowser->getTitle();
             }
         }
     }
