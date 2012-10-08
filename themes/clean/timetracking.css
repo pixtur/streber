@@ -1,3 +1,4 @@
+/*
 table.timetracking {
     border: 1px solid #DBDBDB;
     border-collapse: collapse;
@@ -23,4 +24,52 @@ table.timetracking tr.timeline td {
     border:none;
     position: relative;
     left:-20px;
+}
+
+*/
+div.timetable {
+    position:relative;
+/*    border:1px solid #888;*/
+}
+
+div.timetable div.container {
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+div.timetable div.container a.timeblock {
+    display:block;
+    position: absolute;
+    height:18px;
+    background-color: rgba(80,80,200, 0.8);
+/*    border:1px solid white;*/
+    -webkit-box-shadow: 0px 0px 3px rgba(255,255,255,0.8);
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow:hidden;
+    color: white;
+    font-size:10px;
+    font-weight:normal;
+    text-align:center;
+}
+
+div.timetable div.currentTime {
+    background-color: red;
+    width: 2px;
+    position:absolute;
+    height:40px;
+    left:2px;
+    bottom:0px;
+    
+}
+
+.myCanvas{
+image-rendering: optimizeSpeed;             // Older versions of FF
+image-rendering: -moz-crisp-edges;          // FF 6.0+
+image-rendering: -webkit-optimize-contrast; // Webkit
+                                            //  (Safari now, Chrome soon)
+image-rendering: optimize-contrast;         // Possible future browsers.
+-ms-interpolation-mode: nearest-neighbor;   // IE
 }

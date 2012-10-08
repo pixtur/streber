@@ -58,6 +58,13 @@ new PageHandle(array('id'=>'homeTimetracking',
     
     'valid_for_crawlers'=>false,
 ));
+new PageHandle(array('id'=>'ajaxUserEfforts',
+    'req'=>'pages/home_timetracking.inc.php',
+    'title'=>__('Time tracking'),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
 
 
 new PageHandle(array('id'=>'homeAllChanges',

@@ -49,6 +49,10 @@ div.wiki .searchword
     background-color:#ff4;
 }
 
+div.doclear {
+    clear:both;
+    display:block;
+}
 b.doclear{
     clear:both;
     display:block;

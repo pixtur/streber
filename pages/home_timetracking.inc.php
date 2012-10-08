@@ -3,10 +3,7 @@
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
 /**\file
- * Timetracking
- Some notes
- 
- 
+ * Timetracking 
  *
  * @author Thomas Mann
  */
@@ -49,6 +46,9 @@ function homeTimetracking()
         $page= new Page();
         $page->cur_tab='home';
         $page->title=__("Time tracking");
+        $page->extra_header_html = '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
+        $page->extra_onload_js = "var timetracking = new TimeTracking();";
+        
         //$page->title_minor=__('Efforts','Page title add on');
         $page->type=__("Person");
 
@@ -69,35 +69,39 @@ function homeTimetracking()
 }
 
 function build_history_table() {
-    DEFINE("START_HOUR", 7);
-    DEFINE("END_HOUR", 25);
-    echo "<div id=timetable>";
-    echo "<div class=timeblocks>";
-    echo "<table class='timetracking'>";
-    for($day=3; $day>=0;$day--) {
-        echo "<tr>";
-        echo "<td class=day>";
-        echo renderDateHtml( time() - $day*60*60*24);
-        echo "</td>";
-        for($hour=7; $hour < END_HOUR; $hour++) {
-            echo "<td>.</td>";
-        }        
-        echo "</tr>";
+    echo "<div class='doclear'></div>";
+    echo "<div class=timetable>";
+        echo '<canvas id="myCanvas" width="100%" height="400"></canvas>';
+        echo "<div class=container>Container</div>";        
+        echo "<div class=currentTime></div>";
+    echo "</div>";
+}
+
+
+/**
+* display efforts for current user  @ingroup pages
+*
+* @NOTE 
+* - actually this is an excact copy for personViewEfforts
+* - this is of course not a good solution, but otherwise the breadcrumbs would change
+*
+*/
+function ajaxUserEfforts()
+{
+    global $PH;
+    global $auth;
+    require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+    require_once(confGet('DIR_STREBER') . 'lists/list_efforts.inc.php');
+    
+    #echo '{    "23": { "start": 1349698900879, "duration" : 2342342 , "id":23 },        "43": { "start": 1349692900879, "duration" : 8342342 , "id":23 }}';
+    $result = array();
+    foreach( $auth->cur_user->getEfforts() as $e ) {
+        $result[$e->id] = array('start'=>strToClientTime($e->time_start), 
+                                'duration'=> (strToClientTime($e->time_end) - strToClientTime($e->time_start)) , 
+                                'id'=> $e->id,
+                                'title'=> $e->name);
     }
-    
-    echo "<tr class=timeline>";
-    echo "<td></td>";
-    for($hour=7; $hour < END_HOUR; $hour++) {
-        echo "<td class=hour>$hour</td>";
-    }        
-    echo "</tr>";
-    
-    echo "</tr>";
-    
-    echo "</table>";
-    echo "<div>bla</div>";
-    echo "</div>";
-    echo "</div>";
+    echo json_encode($result);
 }
 
 

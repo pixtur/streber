@@ -214,7 +214,9 @@ class Page
     public  $functions      =array();
     public  $content_columns=false;
     public  $format         = FORMAT_HTML;
-    public  $extra_header_html = '';
+    public  $extra_header_html = '';    # useful for injecting addition javascript load statements
+    public  $extra_js = '';
+    public  $extra_onload_js ='';
     public  $use_autocomplete = false;
     #--- constructor ---------------------------
     public function __construct($args=NULL)
@@ -260,7 +262,7 @@ class Page
                 'bg'        =>"projects",
                 'accesskey' =>'p'
             ),
-			"people"    =>array(
+            "people"    =>array(
                 'target'    =>$PH->getUrl('personList',array()),
                 'title'     =>__("People"),
                 'tooltip'   =>__('Your related People'),
@@ -488,7 +490,7 @@ class PageHtmlStart extends PageElement {
     public function __toString()
     {
         global $auth;
-        $onload_javascript = "";
+        $onload_javascript = $this->page->extra_onload_js;
 
         ### include theme-config ###
         if($theme_config= getThemeFile("theme_config.inc.php")) {
@@ -545,15 +547,17 @@ class PageHtmlStart extends PageElement {
         }
 
         $buffer.='
-        <script type="text/javascript" src="js/jquery-1.2.6.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
+        <script type="text/javascript" src="js/jquery-1.8.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/jquery.jeditable.1.5.x.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
         <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
+        
 
         if($this->page->use_autocomplete) {
             $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
             $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
         }
+        
 
         $buffer.='
         <script type="text/javascript">

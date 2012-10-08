@@ -55,7 +55,7 @@ function listFunctions()
         return false;
     });
 
-    $('table.list input[@type=checkbox]').each(function(){
+    $('table.list input[type=checkbox]').each(function(){
         //   td         tr
         this.parentNode.parentNode['checkbox_obj']= this;
         this['table_row']= this.parentNode.parentNode;
@@ -195,7 +195,7 @@ function listFunctions()
     /**
     * prevent clicks on checkbox to be overwritten by single row select
     */
-    $('table.list input[@type=checkbox]').click
+    $('table.list input[type=checkbox]').click
     (
         function(e)
         {

@@ -351,23 +351,23 @@ class Person extends DbProjectItem {
                 'log_changes'=>false,
                 'export'        =>false,
             )),
-			
+            
             /* person category */
             new FieldInternal(array(    'name'=>'category',
                 'view_in_forms' =>false,
                 'default'       =>0,
                 'log_changes'   =>true,
             )),
-			new FieldString(array(     'name'=>'salary_per_hour',
-				'title'     =>__('Salary per hour') . " " . __('in Euro'),
+            new FieldString(array(     'name'=>'salary_per_hour',
+                'title'     =>__('Salary per hour') . " " . __('in Euro'),
                 'default'   =>0.0,
                 'export'    =>false,
             )),
-			new FieldInternal(array(    'name'=>'ldap',
+            new FieldInternal(array(    'name'=>'ldap',
                 'view_in_forms' =>false,
                 'log_changes'=>false,
-				'default'=>0,
-				'export'=>false,
+                'default'=>0,
+                'export'=>false,
             )),
     
         ) as $f) {
@@ -527,9 +527,9 @@ class Person extends DbProjectItem {
         $project            = NULL;     # all user projects
         $is_alive           = true;
         #$perscat            = NULL;
-		$pcategory_min       = PCATEGORY_UNDEFINED;
-		$pcategory_max       = PCATEGORY_PARTNER;
-		
+        $pcategory_min       = PCATEGORY_UNDEFINED;
+        $pcategory_max       = PCATEGORY_PARTNER;
+        
         ### filter params ###
         if($args) {
             foreach($args as $key=>$value) {
@@ -543,19 +543,19 @@ class Person extends DbProjectItem {
         }
 
         if(!is_null($can_login)) {
-			if($can_login == '0'){
-				 $str_can_login = "AND pers.can_login = 0";
-			}
-			else{
-				$str_can_login = "AND pers.can_login = 1";
-			}
+            if($can_login == '0'){
+                 $str_can_login = "AND pers.can_login = 0";
+            }
+            else{
+                $str_can_login = "AND pers.can_login = 1";
+            }
         }
         else {
             $str_can_login = '';
         }
 
         if(!is_null($project)) {
-			$str_project = "p.id";
+            $str_project = "p.id";
         }
         else {
             $str_project = intVal($project);
@@ -579,7 +579,7 @@ class Person extends DbProjectItem {
                          : true;
         }
         if(is_null($project)) {
-			$str_project = "p.id";
+            $str_project = "p.id";
         }
         else {
             $str_project = intVal($project);
@@ -595,14 +595,14 @@ class Person extends DbProjectItem {
                 : "AND pers.state=-1";
         }
 
-		
-		if(!is_null($pcategory_min) && !is_null($pcategory_max)){
-			$str_pcategory = "AND (pers.category BETWEEN " . $pcategory_min . " AND " . $pcategory_max . ")";
-		}
-		else{
-			$str_pcategory = '';
-		}
-		
+        
+        if(!is_null($pcategory_min) && !is_null($pcategory_max)){
+            $str_pcategory = "AND (pers.category BETWEEN " . $pcategory_min . " AND " . $pcategory_max . ")";
+        }
+        else{
+            $str_pcategory = '';
+        }
+        
         ### all people ###
         if(!$visible_only) {
             $str=
@@ -611,7 +611,7 @@ class Person extends DbProjectItem {
                     $str_alive
                     $str_id
                     $str_can_login
-					$str_pcategory
+                    $str_pcategory
                     AND i.id = pers.id
                     $AND_match
 
@@ -643,7 +643,7 @@ class Person extends DbProjectItem {
                     $str_alive
                     $str_id
                     $str_can_login
-					$str_pcategory
+                    $str_pcategory
                     $AND_match
                     AND pers.id = ipers.id
 
@@ -651,7 +651,7 @@ class Person extends DbProjectItem {
         }
 
         $people = self::queryFromDb($str);                 # store in variable to pass by reference
-		
+        
         /**
         * be sure that the current user is listed
         * NOTE:
@@ -755,14 +755,14 @@ class Person extends DbProjectItem {
         $prefix= confGet('DB_TABLE_PREFIX');
         global $auth;
 
-		### default parameter ###
-		$order_by       = NULL;
-		$alive_only     = true;
-		$visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
+        ### default parameter ###
+        $order_by       = NULL;
+        $alive_only     = true;
+        $visible_only = ($auth->cur_user->user_rights & RIGHT_VIEWALL)
                         ? false
                         : true;
 
-		### filter parameter ###
+        ### filter parameter ###
         if($args) {
             foreach($args as $key=>$value) {
                 if(!isset($$key) && !is_null($$key) && !$$key==="") {
@@ -977,8 +977,8 @@ class Person extends DbProjectItem {
         return $taskpeople;
 
     }
-	
-	function getTaskAssignment($task_id=NULL)
+    
+    function getTaskAssignment($task_id=NULL)
     {
         $dbh = new DB_Mysql;
         $prefix= confGet('DB_TABLE_PREFIX');
@@ -988,7 +988,7 @@ class Person extends DbProjectItem {
         "
         SELECT  itp.*, tp.* from {$prefix}taskperson tp, {$prefix}item itp
         WHERE tp.person = {$this->id}
-		AND tp.task = {$task_id}
+        AND tp.task = {$task_id}
         AND tp.id = itp.id
         AND itp.state = 1
         ");
@@ -997,9 +997,9 @@ class Person extends DbProjectItem {
         $tmp=$sth->fetch_row();
         $taskperson=0;
         require_once(confGet('DIR_STREBER') . 'db/class_taskperson.inc.php');
-		
+        
         //foreach($tmp as $tp) {
-		if($tmp){
+        if($tmp){
             $taskperson=new TaskPerson($tmp[0]);
         }
         return $taskperson;
@@ -1033,20 +1033,20 @@ class Person extends DbProjectItem {
         $buffer= '';
         $sep= ', ';
         $num=0;
-		$count = count($cs);
-		$counter = 1;
+        $count = count($cs);
+        $counter = 1;
         foreach($cs as $c) {
-			if($counter == $count){
-            	$sep=" ";
-			}
-			
+            if($counter == $count){
+                $sep=" ";
+            }
+            
             $buffer.= $c->getLink().$sep;
-			
+            
             if(++$num>$show_max_number) {
                 break;
             }
-			
-			$counter++;
+            
+            $counter++;
         }
         return $buffer;
     }
