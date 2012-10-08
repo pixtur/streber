@@ -1064,16 +1064,13 @@ class FormatBlockLink extends FormatBlock
         }
         ### id|title ###
         else if(preg_match("/\A([^\|]+)\|([^|]+)$/", $str, $matches)) {
-            $this->target=asCleanString($matches[1]);
-            
+            $this->target="#" . asCleanString($matches[1]);            
             $this->name  =$matches[2];
-
         }
         else {
             $this->name  ='';
             $this->target=$str;
         }
-
 
 
         /**
@@ -1098,6 +1095,8 @@ class FormatBlockLink extends FormatBlock
         * short item ala [[#234|some name]]
         */
         else if(preg_match("/\A\#(\d+)/",$this->target, $matches)){
+            
+            
             $id= intVal( $matches[1]);
             $this->html= FormatBlockLink::renderLinkFromItemId($id, $this->name);
         }
