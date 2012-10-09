@@ -193,21 +193,5 @@ function initContextMenus( ) {
     }
     // set intelligent tooltips
     setContextTitles( );
-
 }
 
-/*
-function addMenu(table,menu_div) {
-    cMenu.menus[table]={menuID:menu_div};
-    //alert("addMenu="+table+","+menu_div);
-}
-*/
-
-
- function SelectJump() {
-    var welcherLink = document.Springen.URLs.selectedIndex;
-    document.Springen.URLs.selectedIndex = "0";
-    if(welcherLink > "0"){
-       top.location.href = document.Springen.URLs.options[welcherLink].value;
-    }
- }

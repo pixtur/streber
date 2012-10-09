@@ -17,29 +17,12 @@ var onLoadFunctions= new Array();
 var ajax_edits= new Array();
 
 
-function updateTimetrackingTable() {
-    var tableElement= $("div.timeblocks")[0];
-    
-    $([ { 'start':8, 'end':10}, {'start':12, 'end':15}   ]).each( function(i,block) {
-        $(tableElement).append( "<div style='background-color:red;position:relative;top:0px;'>bla2</div>");
-        //$(tableElement).html("here");
-    });
-    //tableElement.html("krass");
-    // $("table.timetracking").each(function(e){
-    //         var t = this;
-    //         $(this).html("krass!");
-    //     });
-    
-}
-
-
-
 /**
 * called after loading
 */
 function misc()
 {
-    updateTimetrackingTable();
+    //updateTimetrackingTable();
 
 
     /*******************************************************
