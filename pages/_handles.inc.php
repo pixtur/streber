@@ -60,11 +60,19 @@ new PageHandle(array('id'=>'homeTimetracking',
 ));
 new PageHandle(array('id'=>'ajaxUserEfforts',
     'req'=>'pages/home_timetracking.inc.php',
-    'title'=>__('Time tracking'),
+    'title'=>__('users efforts in json'),
     'test'=>'yes',
     
     'valid_for_crawlers'=>false,
 ));
+new PageHandle(array('id'=>'ajaxUserTasks',
+    'req'=>'pages/home_timetracking.inc.php',
+    'title'=>__('users tasks in json'),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
+
 
 
 new PageHandle(array('id'=>'homeAllChanges',

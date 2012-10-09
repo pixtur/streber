@@ -546,16 +546,16 @@ class PageHtmlStart extends PageElement {
             $onload_javascript = 'window.scrollTo(0, 1);';
         }
 
-        $buffer.='
-        <script type="text/javascript" src="js/jquery-1.8.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/jquery.jeditable.1.5.x.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>
-        <script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
-        
+        $buffer.=   '<script type="text/javascript" src="js/jquery-1.8.2.js"></script>'
+                    .'<script type="text/javascript" src="js/jquery.jeditable.1.5.x.js"></script>'
+                    .'<script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>'
+                    .'<script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
+                    ;
+
 
         if($this->page->use_autocomplete) {
-            $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
-            $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
+            // $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
+            // $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
         }
         
 
@@ -589,7 +589,7 @@ document.my_form." . $this->page->autofocus_field. ".select();";
         }
 
         $buffer.='initContextMenus();
-                ';
+               ';
 
         if($q=get('q')) {
             $q= asCleanString($q);  
@@ -612,10 +612,10 @@ document.my_form." . $this->page->autofocus_field. ".select();";
             });
 
         //-->
-        </script>
-        <script type=\"text/javascript\" src=\"js/contextMenus.js\"></script>
-        <script type=\"text/javascript\" src=\"js/searchhi.js\"></script>
-        <script type=\"text/javascript\">
+        </script>"
+        ."<script type=\"text/javascript\" src=\"js/contextMenus.js\"></script>"
+        ."<script type=\"text/javascript\" src=\"js/searchhi.js\"></script>"
+        ."<script type=\"text/javascript\">
             cMenu.menus=new Object();
         </script>";
 
