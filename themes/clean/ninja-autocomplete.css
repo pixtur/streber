@@ -1,0 +1,9 @@
+.ninja-autocomplete {
+  display: inline-block;
+  position: relative;
+}
+
+
+.ninja-hover {
+    background-color:red;
+}

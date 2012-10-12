@@ -554,8 +554,8 @@ class PageHtmlStart extends PageElement {
 
 
         if($this->page->use_autocomplete) {
-            // $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
-            // $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
+            $buffer.='<script type="text/javascript" src="js/jquery.autocomplete.1.0.2.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>';
+            $buffer.='<link rel="stylesheet" type="text/css" href="' . getThemeFile("jquery.autocomplete.css") .'?v=' . confGet('STREBER_VERSION') . '" />';
         }
         
 
@@ -588,8 +588,7 @@ document.my_form." . $this->page->autofocus_field. ".focus();
 document.my_form." . $this->page->autofocus_field. ".select();";
         }
 
-        $buffer.='initContextMenus();
-               ';
+        $buffer.='initContextMenus();';
 
         if($q=get('q')) {
             $q= asCleanString($q);  

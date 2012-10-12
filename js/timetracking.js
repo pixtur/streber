@@ -174,174 +174,118 @@ function TimeTracking(html_canvas_element) {
         
         // Set time to update time indicator
         setInterval(this.updateCurrentTime, 5000);
+        
+        
     }
     this.init();
 }
 
-
-
-
-
-
-function TimetrackingForm() {
-    this.init=function() {
-        console.log("init timetracking form");
-        
-        this.addComboBoxWidget();
-        $("#project").combobox({
-            select:function(event, ui) {
-                alert('here');
-            }        
-        });
-        
-        $('#effort_task').autocomplete({
-            source: "index.php?go=ajaxUserTasks",
-            minLength: 0,
-            delay:50,
-            select: function( event, ui ) {
-                console.log( ui.item ?
-                    "Selected: " + ui.item.value + " aka " + ui.item.id :
-                    "Nothing selected, input was " + this.value );
-                this.value = ui.item.label;
-                $("effort_task_id").value= ui.item.value;
-                return false;
-            }
-        });
-    }
-        
-    this.addComboBoxWidget = function() {
-        (function( $ ) {
-            $.widget( "ui.combobox", {
-                _create: function() {
-                    var input,
-                        that = this,
-                        select = this.element.hide(),
-                        selected = select.children( ":selected" ),
-                        value = selected.val() ? selected.text() : "",
-                        wrapper = this.wrapper = $( "<span>" )
-                            .addClass( "ui-combobox" )
-                            .insertAfter( select );
- 
-                    function removeIfInvalid(element) {
-                        var value = $( element ).val(),
-                            matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( value ) + "$", "i" ),
-                            valid = false;
-                        select.children( "option" ).each(function() {
-                            if ( $( this ).text().match( matcher ) ) {
-                                this.selected = valid = true;
-                                return false;
-                            }
-                        });
-                        if ( !valid ) {
-                            // remove invalid value, as it didn't match anything
-                            $( element )
-                                .val( "" )
-                                .attr( "title", value + " didn't match any item" )
-                                .tooltip( "open" );
-                            select.val( "" );
-                            setTimeout(function() {
-                                input.tooltip( "close" ).attr( "title", "" );
-                            }, 2500 );
-                            input.data( "autocomplete" ).term = "";
-                            return false;
-                        }
-                    }
- 
-                    input = $( "<input>" )
-                        .appendTo( wrapper )
-                        .val( value )
-                        .attr( "title", "" )
-                        .addClass( "ui-state-default ui-combobox-input" )
-                        .autocomplete({
-                            delay: 0,
-                            minLength: 0,
-                            source: function( request, response ) {
-                                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-                                response( select.children( "option" ).map(function() {
-                                    var text = $( this ).text();
-                                    if ( this.value && ( !request.term || matcher.test(text) ) )
-                                        return {
-                                            label: text.replace(
-                                                new RegExp(
-                                                    "(?![^&;]+;)(?!<[^<>]*)(" +
-                                                    $.ui.autocomplete.escapeRegex(request.term) +
-                                                    ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                                                ), "<strong>$1</strong>" ),
-                                            value: text,
-                                            option: this
-                                        };
-                                }) );
-                            },
-                            select: function( event, ui ) {
-                                ui.item.option.selected = true;
-                                that._trigger( "selected", event, {
-                                    item: ui.item.option
-                                });
-                            },
-                            change: function( event, ui ) {
-                                if ( !ui.item )
-                                    return removeIfInvalid( this );
-                            }
-                        })
-                        .addClass( "ui-widget ui-widget-content ui-corner-left" );
- 
-                    input.data( "autocomplete" )._renderItem = function( ul, item ) {
-                        return $( "<li>" )
-                            .data( "item.autocomplete", item )
-                            .append( "<a>" + item.label + "</a>" )
-                            .appendTo( ul );
-                    };
- 
-                    $( "<a>" )
-                        .attr( "tabIndex", -1 )
-                        .attr( "title", "Show All Items" )
-                        .tooltip()
-                        .appendTo( wrapper )
-                        .button({
-                            icons: {
-                                primary: "ui-icon-triangle-1-s"
-                            },
-                            text: false
-                        })
-                        .removeClass( "ui-corner-all" )
-                        .addClass( "ui-corner-right ui-combobox-toggle" )
-                        .click(function() {
-                            // close if already visible
-                            if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
-                                input.autocomplete( "close" );
-                                removeIfInvalid( input );
-                                return;
-                            }
- 
-                            // work around a bug (likely same cause as #5265)
-                            $( this ).blur();
- 
-                            // pass empty string as value to search for, displaying all results
-                            input.autocomplete( "search", "" );
-                            input.focus();
-                        });
- 
-                        input
-                            .tooltip({
-                                position: {
-                                    of: this.button
-                                },
-                                tooltipClass: "ui-state-highlight"
-                            });
-                },
- 
-                destroy: function() {
-                    this.wrapper.remove();
-                    this.element.show();
-                    $.Widget.prototype.destroy.call( this );
-                }
-            });
-        })( jQuery );
-     }
-    this.init();    
-
+function initTimetrackingForm() 
+{        
+    var ttf = this;
     
-}
+    /*
+    * Gather fields
+    */
+    ttf.$projectInput= $("input.project");    
+    if($projectInput.length == 0) {
+        console.warn("Couldn't find project field");
+        return;
+    }
+    
+    ttf.$projectId= $("#effort_project_id");    
+    if($projectId.length == 0) {
+        console.warn("Couldn't find project id field");
+        return;
+    }
 
+    ttf.$taskId= $("#effort_task_id");    
+    if($projectId.length == 0) {
+        console.warn("Couldn't find task id field");
+        return;
+    }
+    
+    ttf.$taskInput= $("input.task");    
+    if($taskInput.length == 0) {
+        console.warn("Couldn't find task field");
+        return;
+    }
+    
+    
+    /*
+    * Setup project autocomplete search (should actually be preloaded...)
+    */
+    var ac= new $.Ninja.Autocomplete(ttf.$projectInput, {
+        get:function (q, callback) {
+            $.ajax({
+                url: 'index.php',
+                dataType: 'json',
+                data: {
+                    go: 'ajaxUserProjects',
+                    q: q
+                },
+                success: function (data) {
+                    var rich_value_map = {};
+
+                    values= $.map(data, function (item) {
+                      rich_value_map[item.name]= item.id;
+                      return item.name;
+                    });
+                    ttf.$projectInput.data('rich-values', rich_value_map);
+                    callback(values);
+                },
+
+            error: function (request, status, message) {
+              $.ninja.error(message);
+            }
+          });
+        },
+        select:function() {
+            var value = ttf.$projectInput.data('rich-values')[ this.$element.val() ];
+            if( $projectId.val() != value) {
+                ttf.$projectId.val( value );
+                ttf.$taskInput.val('');
+                ttf.$taskId.val(0);
+                console.log('set project_id:' + value);                
+            }
+        }
+    });
+
+    /*
+    * Setup Task autocomplete search (should actually be preloaded...)
+    */
+    var ac= new $.Ninja.Autocomplete(ttf.$taskInput, {
+        get:function (q, callback) {
+            $.ajax({
+                url: 'index.php',
+                dataType: 'json',
+                data: {
+                    go: 'ajaxUserTasks',
+                    q: q,
+                    prj: ttf.$projectId.val()
+                },
+                success: function (data) {
+                    var rich_value_map = {};
+
+                    values= $.map(data, function (item) {
+                      rich_value_map[item.name]= item.id;
+                      return item.name;
+                    });
+                    ttf.$taskInput.data('rich-values', rich_value_map);
+                    callback(values);
+                },
+
+            error: function (request, status, message) {
+              $.ninja.error(message);
+            }
+          });
+        },
+        select:function() {
+            var value = ttf.$taskInput.data('rich-values')[ this.$element.val() ];
+            ttf.$taskId.val( value );            
+            console.log('task-id:' + value);
+        }
+    });
+}
 
 

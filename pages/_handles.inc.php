@@ -72,6 +72,13 @@ new PageHandle(array('id'=>'ajaxUserTasks',
     
     'valid_for_crawlers'=>false,
 ));
+new PageHandle(array('id'=>'ajaxUserProjects',
+    'req'=>'pages/home_timetracking.inc.php',
+    'title'=>__('users project in json'),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
 
 
 
