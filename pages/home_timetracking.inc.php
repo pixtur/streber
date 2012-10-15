@@ -49,8 +49,8 @@ function homeTimetracking()
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<link rel="stylesheet" href="themes/clean/ninja-autocomplete.css" />';
 
-        $page->extra_onload_js .= "new TimeTracking();";        
-        $page->extra_onload_js .= "initTimetrackingForm();";
+        $page->extra_onload_js .= "new TimeTrackingTable();";        
+        $page->extra_onload_js .= "new TimeTrackingForm();";
                 
         $page->type=__("Person");
         $page->options= build_home_options($person);
@@ -90,8 +90,12 @@ function build_effort_edit_form()
             . "<div class='timetracking'>"
             . "<p>"
             . "<p>"
-            . "<input placeholder='Project' class='project'>"
-            .  "<input placeholder='Task' class='task'>"
+            .  "<input placeholder='Start' class='from' id='effort_start' >"
+            .  "<input placeholder='Time' class='for' id='effort_duration' >"
+            .  "<input placeholder='Now' class='to' id='effort_end' >"
+            . "</p><p>"
+            .  "<input placeholder='Project' class='project' id='effort_project' >"
+            .  "<input placeholder='Task' class='task' id='effort_task'>"
             .  "</p>"
             .  "<p><textarea name='comment' id='description' placeholder='Comment'></textarea></p>"
             . "</div>";
@@ -103,8 +107,6 @@ function build_effort_edit_form()
     echo "<input type=hidden id='effort_task_id'  name='effort_task_id' value=''>";
     echo "<input type=submit>";
 }
-
-
 
 
 function ajaxUserEfforts()
@@ -162,6 +164,5 @@ function ajaxUserTasks()
     }
     echo json_encode($result);
 }
-
 
 ?>
