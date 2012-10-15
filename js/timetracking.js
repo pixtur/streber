@@ -216,6 +216,13 @@ function TimeTrackingForm() {
         console.warn("Couldn't find start time field");
         return;
     }
+    ttf.$startSeconds= $("input#effort_start_seconds");    
+    if(ttf.$startSeconds.length != 1) {
+        console.warn("Couldn't find start time seconds field");
+        return;
+    }
+    
+    
     ttf.$duration= $("input#effort_duration");    
     if(ttf.$duration.length != 1) {
         console.warn("Couldn't find duration field");
@@ -229,11 +236,6 @@ function TimeTrackingForm() {
     }
 
 
-    ttf.$startSeconds= $("input#effort_end_seconds");    
-    if(ttf.$startSeconds.length != 1) {
-        console.warn("Couldn't find start time seconds field");
-        return;
-    }
 
     ttf.$endSeconds= $("input#effort_end_seconds");    
     if(ttf.$endSeconds.length != 1) {
@@ -372,47 +374,46 @@ function TimeTrackingForm() {
     * Timer to update duration
     */
     this.updateDuration = function() {
-        var st = ttf.$startTime.getTimeSeconds();
-                        
-        var et = ttf.$endTime.getTimeSeconds(); 
+        var st = ttf.getStartTime();                        
+        var et = ttf.getEndTime(); 
         if( et == 0) {
             et = Date.now() * 0.001;
         } 
 
         if( st > 0 ) {
-            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st));            
+            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st ));            
         }
         else {
             ttf.$duration.attr('placeholder', '???');                
         }
     }    
 
-    /**
-    * For precise storage we store time in seconds after 1970 but only show hh:mm for current time
-    */
-    this.setTimeSeconds= function(seconds) {
+    ttf.setStartTime= function(seconds) {        
         var seconds = seconds << 0;
-        this.data('seconds', seconds);
-        this.val( ttf.getTimeStringFromSeconds(seconds) );
+        ttf.$startSeconds.val(seconds);
+        ttf.$startTime.val( ttf.getTimeStringFromSeconds(seconds) );
         ttf.updateDuration();
     }
-    ttf.$startTime.setTimeSeconds = ttf.setTimeSeconds;
-    ttf.$endTime.setTimeSeconds = ttf.setTimeSeconds;
-
-    this.getTimeSeconds= function($element) {
-        var s= this.data('seconds');
-        return s === undefined ? 0 : s;
-    }    
-    ttf.$startTime.getTimeSeconds = ttf.getTimeSeconds;
-    ttf.$endTime.getTimeSeconds = ttf.getTimeSeconds;
-    
-    
-    this.setEndToNow = function() {
-        ttf.$endTime.addClass('now');
-        ttf.$endTime.val('');
-        ttf.$endTime.attr('placeholder','now');
-        ttf.$endTime.setTimeSeconds(0);
+    ttf.getStartTime= function() {
+        return ttf.$startSeconds.val() << 0;
+    } 
+        
+    ttf.setEndTime= function(seconds) {        
+        var seconds = seconds << 0;        
+        ttf.$endSeconds.val(seconds);
+        ttf.$endTime.val( ttf.getTimeStringFromSeconds(seconds) );
+        if( seconds ==0) {
+            ttf.$endTime.addClass('now');
+            ttf.$endTime.val('');
+            ttf.$endTime.attr('placeholder','now');
+        }
+        ttf.updateDuration();        
     }
+    ttf.getEndTime= function() {
+        return ttf.$endSeconds.val() << 0;
+    } 
+
+
 
     ttf.$startTime.click(function(event) {
         ttf.$startTime.select();
@@ -422,7 +423,7 @@ function TimeTrackingForm() {
         var v = ttf.$startTime.val();
         if( v!='') {
             var s = ttf.getTimeSecondsFromString(v);
-            ttf.$startTime.setTimeSeconds(s);
+            ttf.setStartTime(s);
         }        
     });
     
@@ -433,47 +434,42 @@ function TimeTrackingForm() {
     ttf.$endTime.click(function(event) {
         ttf.$endTime.removeClass('now');        
         ttf.$endTime.select();
-        $
-        return false;
     });
     
     ttf.$endTime.blur(function(event){
-        if( ttf.$endTime.val()=='' || ttf.$endTime.val() == 'now') {
-            ttf.setEndToNow();
+        var v = ttf.$endTime.val();
+        if( v=='' || v == 'now') {
+            ttf.setEndTime(0);
         }
         else {
-            var s = ttf.getTimeSecondsFromString(ttf.$endTime.val());
-            ttf.$endTime.setTimeSeconds(s);
+            ttf.setEndTime( ttf.getTimeSecondsFromString(v) );
         }
-        ttf.updateDuration();
     });
-    
+
 
     ttf.$duration.blur(function(event){
         var d = ttf.getDurationFromString( ttf.$duration.val() );
-        var st = ttf.$startTime.getTimeSeconds();
-        var et = ttf.$endTime.getTimeSeconds();
+        var st = ttf.getStartTime();
+        var et = ttf.getEndTime();
         var now = Date.now() * 0.001;
         if( d > 0) {
             if( st == 0 && et == 0) {
-                ttf.$startTime.setTimeSeconds( now - d );
+                ttf.setStartTime( now - d );
             }
             else if ( st == 0) {
-                ttf.$startTime.setTimeSeconds( et - d );                
+                ttf.setStartTime( et - d );                
                 ttf.$duration.val('');
             }
             else {
-                ttf.$endTime.setTimeSeconds( d + st );
+                ttf.setEndTime( d + st );
                 ttf.$duration.val('');
             }
         }
-        ttf.updateDuration();
     });
-    
+
 
     setInterval(this.updateDuration, 1000);
-    
-    
+        
     this.getDurationStringFromSeconds= function(s) {
         var s= parseInt(s);
         if(s < 60 ) {
@@ -497,7 +493,7 @@ function TimeTrackingForm() {
     * events for start time
     */
     if(ttf.$startTime.val() == '') {
-        ttf.$startTime.setTimeSeconds( Date.now()*0.001 );
+        ttf.setStartTime( Date.now()*0.001 );
     }
     //ttf.updateDuration();
     

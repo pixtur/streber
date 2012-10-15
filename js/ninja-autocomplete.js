@@ -77,6 +77,7 @@
         autocomplete.$list.remove();
       } else if (keycode === $.ninja.keys.enter && autocomplete.index > -1) {
         autocomplete.$element.trigger('select.ninja');
+        event.preventDefault();        
       } else if ($.ninja.key(keycode, ['arrowDown', 'arrowUp'])) {
         if (autocomplete.index > -1) {
           autocomplete.$list.find('div:eq(' + autocomplete.index + ')').removeClass('ninja-hover');
