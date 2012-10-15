@@ -43,23 +43,16 @@ function homeTimetracking()
         $page= new Page();
         $page->cur_tab='home';
         $page->title=__("Time tracking");
-        $path->use_autocomplete = true;
 
-//        $page->extra_header_html .= '<script src="http://code.jquery.com/jquery-1.8.2.js"></script>';
-        //$page->extra_header_html .= '<script src="js/jquery-ui-1.9.0.custom"></script>';
-        $page->extra_header_html = '<script type="text/javascript" src="js/ninja.js"></script>';
+        $page->extra_header_html  = '<script type="text/javascript" src="js/ninja.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/ninja-autocomplete.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
-        //$page->extra_header_html .= '<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />';
         $page->extra_header_html .= '<link rel="stylesheet" href="themes/clean/ninja-autocomplete.css" />';
-        
-        //$page->extra_onload_js .= "var timetracking = new TimeTracking();";
+
+        $page->extra_onload_js .= "new TimeTracking();";        
         $page->extra_onload_js .= "initTimetrackingForm();";
                 
-        //$page->title_minor=__('Efforts','Page title add on');
         $page->type=__("Person");
-
-        #$page->crumbs = build_person_crumbs($person);
         $page->options= build_home_options($person);
 
         echo(new PageHeader);
@@ -79,7 +72,7 @@ function homeTimetracking()
 function build_history_table() {
     echo "<div class='doclear'></div>";
     echo "<div class=timetable>";
-        echo '<canvas id="myCanvas" width="100%" height="400"></canvas>';
+        echo '<canvas id="myCanvas" width="100%" height="100"></canvas>';
         echo "<div class=container>Container</div>";        
         echo "<div class=currentTime></div>";
     echo "</div>";
@@ -88,23 +81,20 @@ function build_history_table() {
 
 function build_effort_edit_form() 
 {
-    
-    echo "<h3>" . __("New Effort") . "</h3>";
-
-    echo "<div class='timetracking'>";
-    //echo "<div class='rating'></div>";
-    //echo "<input id='effort_project' name='effort_project'>";    
-    //echo "<input id='effort_task' id='effort_task'>";    
-    echo "<textarea name='comment' id='description' placeholder='Comment'></textarea>";
-    echo "<button>Test me!</button>";
-    echo "<input class='project'>";
-    echo "<input class='task'>";
-    echo "</div>";
-    
     $effort = new Effort();
     global $g_effort_status_names;
     global $PH;
     global $auth;
+    
+    echo "<h3>" . __("New Effort") . "</h3>"
+            . "<div class='timetracking'>"
+            . "<p>"
+            . "<p>"
+            . "<input placeholder='Project' class='project'>"
+            .  "<input placeholder='Task' class='task'>"
+            .  "</p>"
+            .  "<p><textarea name='comment' id='description' placeholder='Comment'></textarea></p>"
+            . "</div>";
     
     require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');    
 

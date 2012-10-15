@@ -188,25 +188,25 @@ function initTimetrackingForm()
     * Gather fields
     */
     ttf.$projectInput= $("input.project");    
-    if($projectInput.length == 0) {
+    if($projectInput.length != 1) {
         console.warn("Couldn't find project field");
         return;
     }
     
     ttf.$projectId= $("#effort_project_id");    
-    if($projectId.length == 0) {
+    if($projectId.length != 1) {
         console.warn("Couldn't find project id field");
         return;
     }
 
     ttf.$taskId= $("#effort_task_id");    
-    if($projectId.length == 0) {
+    if($projectId.length != 1) {
         console.warn("Couldn't find task id field");
         return;
     }
     
     ttf.$taskInput= $("input.task");    
-    if($taskInput.length == 0) {
+    if($taskInput.length != 1) {
         console.warn("Couldn't find task field");
         return;
     }

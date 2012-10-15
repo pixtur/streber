@@ -9,7 +9,7 @@
 */
 
 confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
-#confChange('DISPLAY_ERROR_LIST', 'DETAILS');
+confChange('DISPLAY_ERROR_LIST', 'DETAILS');
 #confChange('CHECK_IP_ADDRESS', true);
 #confChange('USE_MOD_REWRITE', true);
 #confChange('USE_PROFILER', true);
