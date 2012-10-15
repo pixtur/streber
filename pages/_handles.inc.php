@@ -79,7 +79,10 @@ new PageHandle(array('id'=>'ajaxUserProjects',
     
     'valid_for_crawlers'=>false,
 ));
-
+new PageHandleSubm(array('id'=>'newEffortFromTimeTracking',
+    'req'=>'pages/home_timetracking.inc.php',
+    'valid_params'=>array(),
+));
 
 
 new PageHandle(array('id'=>'homeAllChanges',

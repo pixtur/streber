@@ -138,16 +138,16 @@ function TimeTrackingTable(html_canvas_element) {
 
         var start= new Date();
         start.setMinutes(0);
-        start.setHours(this.FIRST_HOUR);
+        start.setUTCHours(this.FIRST_HOUR);
         start.setSeconds(0);
-        this.start_time_today = start/1000 + 2*60*60;
+        this.start_time_today = start/1000;
 
 
         var e= new Date();
         e.setMinutes(0);
-        e.setHours(this.LAST_HOUR);
+        e.setUTCHours(this.LAST_HOUR);
         e.setSeconds(0);
-        this.end_time_today = e/1000 + 2*60*60;
+        this.end_time_today = e/1000;
         
         
         var canvas = document.getElementById("myCanvas");
@@ -279,7 +279,6 @@ function TimeTrackingForm() {
                 ttf.$projectId.val( value );
                 ttf.$taskInput.val('');
                 ttf.$taskId.val(0);
-                console.log('set project_id:' + value);                
             }
         }
     });
@@ -316,7 +315,6 @@ function TimeTrackingForm() {
         select:function() {
             var value = ttf.$taskInput.data('rich-values')[ this.$element.val() ];
             ttf.$taskId.val( value );            
-            console.log('task-id:' + value);
         }
     });
     
@@ -324,7 +322,7 @@ function TimeTrackingForm() {
     
     this.getTimeStringFromSeconds = function( s ) 
     {
-        d= new Date(s*1000);
+        var d = new Date(s*1000);
         var hours = d.getHours();
         var minutes = d.getMinutes();
         if (hours   < 10) {hours   = "0"+hours;}
@@ -344,12 +342,10 @@ function TimeTrackingForm() {
             }
 
             var t= new Date();
-            t.setMinutes(0);
-            t.setHours(0);
+            t.setHours(hours);
+            t.setMinutes(minutes);
             t.setSeconds(0);
-            t *= 0.001;
-            t += hours * 60 * 60 + minutes * 60;
-            return t;
+            return t * 0.001;
         }
         return 0;
     }

@@ -56,9 +56,10 @@
       } else {
         var keycode = event.which;
 
-        if (!autocomplete.$element.val()) {
-          autocomplete.$list.remove();
-        } else if (!$.ninja.key(keycode, ['arrowDown', 'arrowUp', 'escape', 'tab'])) {
+        //if (!autocomplete.$element.val()) {
+          //autocomplete.$list.remove();
+          //} else 
+        if (!$.ninja.key(keycode, ['arrowDown', 'arrowUp', 'escape', 'tab'])) {
           if ($.isFunction(autocomplete.get)) {
             autocomplete.get(autocomplete.$element.val(), function (list) {
               autocomplete.list = list;
@@ -75,7 +76,10 @@
 
       if ($.ninja.key(keycode, ['escape', 'tab'])) {
         autocomplete.$list.remove();
-      } else if (keycode === $.ninja.keys.enter && autocomplete.index > -1) {
+      } else if (keycode === $.ninja.keys.enter) {
+        if(autocomplete.index < 0) {
+            autocomplete.index = 0;
+        }
         autocomplete.$element.trigger('select.ninja');
         event.preventDefault();        
       } else if ($.ninja.key(keycode, ['arrowDown', 'arrowUp'])) {

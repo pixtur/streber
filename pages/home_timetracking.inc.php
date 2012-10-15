@@ -90,19 +90,19 @@ function build_effort_edit_form()
             . "<div class='timetracking'>"
             . "<p>"
             . "<p>"
-            .  "<input placeholder='Start' class='from' id='effort_start' >"
-            .  "<input placeholder='Time' class='for' id='effort_duration' >"
-            .  "<input placeholder='Now' class='to' id='effort_end' >"
+            .  "<input placeholder='Start' class='time start' id='effort_start' >"
+            .  "<input placeholder='Time' class='time duration' id='effort_duration' >"
+            .  "<input placeholder='Now' class='time end' id='effort_end' >"
             . "</p><p>"
             .  "<input placeholder='Project' class='project' id='effort_project' >"
             .  "<input placeholder='Task' class='task' id='effort_task'>"
             .  "</p>"
-            .  "<p><textarea name='comment' id='description' placeholder='Comment'></textarea></p>"
+            .  "<p><textarea name='description' id='description' placeholder='Comment'></textarea></p>"
             . "</div>";
     
     require_once(confGet('DIR_STREBER') . 'render/render_form.inc.php');    
 
-    $PH->go_submit='effortNewFromTimetracking';
+    $PH->go_submit='newEffortFromTimeTracking';
     echo "<input type=hidden id='effort_project_id' name='effort_project_id' value=''>";
     echo "<input type=hidden id='effort_task_id'  name='effort_task_id' value=''>";
     echo "<input type=hidden id='effort_start_seconds' name='effort_start_seconds' value=''>";
@@ -165,6 +165,68 @@ function ajaxUserTasks()
         $result[] = array('name'=> $t->name, 'id'=>$t->id);    
     }
     echo json_encode($result);
+}
+
+
+
+function newEffortFromTimeTracking() 
+{    
+    global $PH;
+    global $auth;
+    require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+    
+    $time_end = intval(get('effort_end_seconds'));
+    if( $time_end == 0) {
+        $time_end = null;
+    }
+
+    $new_effort= new Effort(array(
+            'id'=>0,
+            'time_start'=> getGMTString(get('effort_start_seconds')),
+            'time_end'=> getGMTString($time_end),
+            'name'=> get('description'),
+    ));
+        
+    ### link to task ###
+    $task_id = get('effort_task_id');
+    if(!is_null($task_id)){
+        if($task_id == 0) {
+            $new_effort->task = 0;
+        }
+        else{
+            if($task= Task::getVisibleById($task_id)) {
+                $new_effort->task = $task->id;
+            }
+        }
+    }
+
+    ### get project ###
+    $new_effort->project=get('effort_project_id');
+    if(!$project = Project::getVisibleById($new_effort->project)) {
+        $PH->abortWarning(__("Could not get project of effort"));
+    }
+
+    if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
+        $PH->abortWarning("ERROR: Insufficient rights");        
+    }
+
+    ### get person ###
+    $new_effort->person= $auth->cur_user->id;
+    
+    ### go back to from if validation fails ###
+    $failure= false;
+    if(strToGMTime($new_effort->time_end) - strToGMTime($new_effort->time_start) < 0) {
+        $failure= true;
+        new FeedbackWarning(__("Cannot start before end."));
+    }
+
+    ### write to db ###
+    $new_effort->insert();
+
+    ### display taskView ####
+    if(!$PH->showFromPage()) {
+        $PH->show('projView',array('prj'=>$effort->project));
+    }
 }
 
 ?>

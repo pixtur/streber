@@ -711,15 +711,10 @@ function effortEditSubmit()
     global $PH;
     global $auth;
 
-    ### Validate form crc
-        
-    # HACK!!!!!!!!!!!!!!!!!!!!!!    
-    # implement the quick edit in timetracking we had to sacrifice this check        
-    #if(!validateFormCrc()) {
-    #    $PH->abortWarning(__('Invalid checksum for hidden form elements'));
-    #}
-    echo "here";
-
+    ### Validate form crc        
+    if(!validateFormCrc()) {
+        $PH->abortWarning(__('Invalid checksum for hidden form elements'));
+    }
 
     ### get effort ####
     $id= getOnePassedId('effort');

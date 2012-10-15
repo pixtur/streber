@@ -1,9 +1,28 @@
-.ninja-autocomplete {
+span.ninja-autocomplete {
   display: inline-block;
   position: relative;
 }
 
+div.ninja-list {
+  position:absolute;
+  background:white;
+  -webkit-box-shadow: 1px 0px 3px rgba(0,0,0,0.4);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
+  min-width:130px;
+  max-width:450px;
+  white-space:nowrap;
+}
 
-.ninja-hover {
-    background-color:red;
+span.ninja-autocomplete div.ninja-item {
+  padding:5px 5px;    
+  font-size: 13px;
+  font-weight:normal;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow:hidden;
+}
+
+div.ninja-item.ninja-hover {
+    background-color:#4458c0;
+    color:white;
 }
