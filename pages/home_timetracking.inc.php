@@ -105,6 +105,8 @@ function build_effort_edit_form()
     $PH->go_submit='effortNewFromTimetracking';
     echo "<input type=hidden id='effort_project_id' name='effort_project_id' value=''>";
     echo "<input type=hidden id='effort_task_id'  name='effort_task_id' value=''>";
+    echo "<input type=hidden id='effort_start_seconds' name='effort_start_seconds' value=''>";
+    echo "<input type=hidden id='effort_end_seconds'  name='effort_end_seconds' value=''>";
     echo "<input type=submit>";
 }
 

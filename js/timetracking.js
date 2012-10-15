@@ -180,8 +180,6 @@ function TimeTrackingTable(html_canvas_element) {
     this.init();
 }
 
-
-
 function TimeTrackingForm() {
 
     var ttf = this;
@@ -231,7 +229,20 @@ function TimeTrackingForm() {
     }
 
 
-    
+    ttf.$startSeconds= $("input#effort_end_seconds");    
+    if(ttf.$startSeconds.length != 1) {
+        console.warn("Couldn't find start time seconds field");
+        return;
+    }
+
+    ttf.$endSeconds= $("input#effort_end_seconds");    
+    if(ttf.$endSeconds.length != 1) {
+        console.warn("Couldn't find end time seconds field");
+        return;
+    }
+
+
+
     /*
     * Setup project autocomplete search (should actually be preloaded...)
     */
@@ -307,27 +318,16 @@ function TimeTrackingForm() {
         }
     });
     
-    // this.getTimeFieldStatus= function( $f ) {
-    //     if($f.val() )
-    //     
-    // }
-    
-    /**
-    * Timer function to update duration fields
-    */
-    this.updateTimeFields= function() 
-    {
-        var startTimeSeconds= getTimeFromString( $startTime.val() );
-        var endTimeSeconds =  getTimeFromString( $endTime.val() );
 
-        if( startTimeSeconds != 0) {
-            if ($endTime.data('isNow')) {
-                var duration = Data.now()/1000 - startTimeSeconds;
-                if ( duration > 0) {
-                    $duration.val( parseInt(duration)+"".toHHMMSS() );  
-                }
-            }
-        }
+    
+    this.getTimeStringFromSeconds = function( s ) 
+    {
+        d= new Date(s*1000);
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        return hours + ":" + minutes;
     }
     
     this.getTimeSecondsFromString = function( str )
@@ -367,48 +367,63 @@ function TimeTrackingForm() {
         }    
         return 0;
     }
-
-
-
-
     
-    this.getTimeStringFromSeconds = function( s ) 
-    {
-        d= new Date(s*1000);
-        var hours = d.getHours();
-        var minutes = d.getMinutes();
-        if (hours   < 10) {hours   = "0"+hours;}
-        if (minutes < 10) {minutes = "0"+minutes;}
-        return hours + ":" + minutes;
+    /**
+    * Timer to update duration
+    */
+    this.updateDuration = function() {
+        var st = ttf.$startTime.getTimeSeconds();
+                        
+        var et = ttf.$endTime.getTimeSeconds(); 
+        if( et == 0) {
+            et = Date.now() * 0.001;
+        } 
+
+        if( st > 0 ) {
+            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st));            
+        }
+        else {
+            ttf.$duration.attr('placeholder', '???');                
+        }
+    }    
+
+    /**
+    * For precise storage we store time in seconds after 1970 but only show hh:mm for current time
+    */
+    this.setTimeSeconds= function(seconds) {
+        var seconds = seconds << 0;
+        this.data('seconds', seconds);
+        this.val( ttf.getTimeStringFromSeconds(seconds) );
+        ttf.updateDuration();
     }
+    ttf.$startTime.setTimeSeconds = ttf.setTimeSeconds;
+    ttf.$endTime.setTimeSeconds = ttf.setTimeSeconds;
+
+    this.getTimeSeconds= function($element) {
+        var s= this.data('seconds');
+        return s === undefined ? 0 : s;
+    }    
+    ttf.$startTime.getTimeSeconds = ttf.getTimeSeconds;
+    ttf.$endTime.getTimeSeconds = ttf.getTimeSeconds;
+    
     
     this.setEndToNow = function() {
         ttf.$endTime.addClass('now');
         ttf.$endTime.val('');
         ttf.$endTime.attr('placeholder','now');
+        ttf.$endTime.setTimeSeconds(0);
     }
 
-    /**
-    * events for start time
-    */
-    if(ttf.$startTime.val() == '') {
-        s= Date.now()*0.001;
-        ttf.$startTime.val( ttf.getTimeStringFromSeconds(s) );        
-        
-    }
-    
     ttf.$startTime.click(function(event) {
         ttf.$startTime.select();
-        return false;
     });
     
     ttf.$startTime.blur(function(event){
         var v = ttf.$startTime.val();
         if( v!='') {
             var s = ttf.getTimeSecondsFromString(v);
-            ttf.$startTime.val( ttf.getTimeStringFromSeconds(s) );
+            ttf.$startTime.setTimeSeconds(s);
         }        
-        ttf.updateDuration();
     });
     
     
@@ -428,7 +443,7 @@ function TimeTrackingForm() {
         }
         else {
             var s = ttf.getTimeSecondsFromString(ttf.$endTime.val());
-            ttf.$endTime.val( ttf.getTimeStringFromSeconds(s) );
+            ttf.$endTime.setTimeSeconds(s);
         }
         ttf.updateDuration();
     });
@@ -436,57 +451,26 @@ function TimeTrackingForm() {
 
     ttf.$duration.blur(function(event){
         var d = ttf.getDurationFromString( ttf.$duration.val() );
-        var st = ttf.getDurationFromString( ttf.$startTime.val() );
-        var et = ttf.getDurationFromString( ttf.$startTime.val() );
+        var st = ttf.$startTime.getTimeSeconds();
+        var et = ttf.$endTime.getTimeSeconds();
         var now = Date.now() * 0.001;
         if( d > 0) {
             if( st == 0 && et == 0) {
-                ttf.$startTime.val( ttf.getTimeStringFromSeconds( now - d ));
+                ttf.$startTime.setTimeSeconds( now - d );
             }
             else if ( st == 0) {
-                ttf.$startTime.val( ttf.getTimeStringFromSeconds( et - d ));                
+                ttf.$startTime.setTimeSeconds( et - d );                
                 ttf.$duration.val('');
             }
             else {
-                ttf.$endTime.val( ttf.getTimeStringFromSeconds(  d + ttf.getTimeSecondsFromString( ttf.$startTime.val()) ));
+                ttf.$endTime.setTimeSeconds( d + st );
                 ttf.$duration.val('');
             }
         }
-        ttf.updateDuration();        
+        ttf.updateDuration();
     });
+    
 
-    /**
-    * For precise storage we store time in seconds after 1970 but only show hh:mm for current time
-    */
-    this.setTimeSeconds= function($element, seconds) {
-        $element.data('seconds', seconds);
-        $element.val( getTimeStringFromSeconds(seconds) );
-    }
-    this.getTimeSeconds= function($element) {
-        return $element.data('seconds');
-    }
-    
-    
-    /**
-    * Timer to update duration
-    */
-    this.updateDuration = function() {
-        var st = ttf.getTimeSecondsFromString( ttf.$startTime.val() );
-                        
-        var et;
-        if( ttf.$endTime.val() == '') {
-            et = Date.now() * 0.001;
-        } 
-        else {
-            et= ttf.getTimeSecondsFromString( ttf.$endTime.val() );
-        }
-        if( st > 0 ) {
-            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st));            
-        }
-        else {
-            ttf.$duration.attr('placeholder', '???');                
-        }
-    }    
     setInterval(this.updateDuration, 1000);
     
     
@@ -507,6 +491,16 @@ function TimeTrackingForm() {
             return hours + ":" + minutes;                
         } 
     }
+    
+    
+    /**
+    * events for start time
+    */
+    if(ttf.$startTime.val() == '') {
+        ttf.$startTime.setTimeSeconds( Date.now()*0.001 );
+    }
+    //ttf.updateDuration();
+    
     
 }
 
