@@ -46,6 +46,11 @@ div.timetable div.currentTime {
 
 div.timetracking {
   padding:1em;
+  width:510px;
+}
+
+div.timetracking span.rating {
+  float:right;
 }
 
 div.timetracking p {
@@ -71,7 +76,7 @@ div.timetracking input.task {
   margin-left:-5px;
   border-radius: 0px 5px 5px 0px;
   border-left:none;
-  width:350px;
+  width:340px;
   padding-left:10px;
 }
 
@@ -82,7 +87,7 @@ div.timetracking input.time {
 }
 
 div.timetracking textarea{
-  width:510px;
+  width:500px;
 }
 
 
@@ -101,4 +106,52 @@ input:-moz-placeholder {
   color: #aaa; 
   font-size:13px;
 }
+
+
+
+
+/* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
+div.rating-cancel,div.star-rating {
+  float: left;
+  width: 17px;
+  height: 15px;
+  text-indent: -999em;
+  cursor: pointer;
+  display: block;
+  background: transparent;
+  overflow: hidden
+}
+div.rating-cancel,div.rating-cancel a {
+  background: url(img/delete.gif) no-repeat 0 -16px
+}
+div.star-rating,div.star-rating a {
+  background: url(img/star.gif) no-repeat 0 0px
+}
+div.rating-cancel a,div.star-rating a {
+  display: block;
+  width: 16px;
+  height: 100%;
+  background-position: 0 0px;
+  border: 0
+}
+div.star-rating-on a {
+  background-position: 0 -16px!important
+}
+div.star-rating-hover a {
+  background-position: 0 -32px
+}
+/* Read Only CSS */
+div.star-rating-readonly a {
+  cursor: default !important
+}
+/* Partial Star CSS */
+div.star-rating {
+  background: transparent!important;
+  overflow: hidden!important
+}
+/* END jQuery.Rating Plugin CSS */
+
+
+
+
 

@@ -494,6 +494,10 @@ function TimeTrackingForm() {
     //ttf.updateDuration();
     
     
+    /**
+    * init rating
+    */
+    
 }
 
 

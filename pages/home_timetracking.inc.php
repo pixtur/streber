@@ -47,6 +47,7 @@ function homeTimetracking()
         $page->extra_header_html  = '<script type="text/javascript" src="js/ninja.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/ninja-autocomplete.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
+        $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.pack.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<link rel="stylesheet" href="themes/clean/ninja-autocomplete.css" />';
 
         $page->extra_onload_js .= "new TimeTrackingTable();";        
@@ -93,6 +94,13 @@ function build_effort_edit_form()
             .  "<input placeholder='Start' class='time start' id='effort_start' >"
             .  "<input placeholder='Time' class='time duration' id='effort_duration' >"
             .  "<input placeholder='Now' class='time end' id='effort_end' >"
+            . '<span class="rating">'
+            .  '<input name="star1" type="radio" class="star required"/>'
+            .  '<input name="star1" type="radio" class="star"/>'
+            .  '<input name="star1" type="radio" class="star"/>'
+            .  '<input name="star1" type="radio" class="star"/>'
+            .  '<input name="star1" type="radio" class="star"/>'
+            . '</span>'
             . "</p><p>"
             .  "<input placeholder='Project' class='project' id='effort_project' >"
             .  "<input placeholder='Task' class='task' id='effort_task'>"
