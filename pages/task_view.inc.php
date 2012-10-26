@@ -18,7 +18,7 @@ require_once(confGet('DIR_STREBER') . 'lists/list_tasks.inc.php');
 /**
 * view a task @ingroup pages
 */
-function projViewTasks()
+function TaskView()
 {
     global $PH;
     global $auth;
