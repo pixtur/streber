@@ -56,7 +56,8 @@ function TimeTrackingTable(html_canvas_element) {
 
     this.updateCurrentTime = function()
     {
-        var x = window.timetracker.xFromTime(Date.now() / 1000 + 2*60*60);
+        var d= new Date();
+        var x = window.timetracker.xFromTime((Date.now() - d.getTimezoneOffset()*60*1000) / 1000);
         $('.currentTime').css('left', x );
     }
 
