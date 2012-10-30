@@ -40,7 +40,7 @@ function homeTimetracking()
 
     ### set up page ####
     {
-        $page= new Page();
+        $page= new Page(array('use_jscalendar'=>true));
         $page->cur_tab='home';
         $page->title=__("Time tracking");
 
@@ -87,20 +87,30 @@ function build_effort_edit_form()
     global $PH;
     global $auth;
     
+    $last_end_time = '';
+    if($last=Effort::getDateCreatedLast()) {
+        $seconds_since_last_effort = strToGMTime('') - strToGMTime($last);
+        if ($seconds_since_last_effort < 15*60*60) {
+            $last_end_time = strToGMTime($last);            
+        }        
+    }
+    
     echo "<h3>" . __("New Effort") . "</h3>"
             . "<div class='timetracking'>"
             . "<p>"
             . "<p>"
+            .  "<input type=hidden placeholder='Date' class='time date' id='effort_date' >"
+            . "<a href='' id='trigger_date'>Today</a>"
             .  "<input placeholder='Start' class='time start' id='effort_start' >"
             .  "<input placeholder='Time' class='time duration' id='effort_duration' >"
             .  "<input placeholder='Now' class='time end' id='effort_end' >"
-            . '<span class="rating">'
-            .  '<input name="star1" type="radio" class="star required"/>'
-            .  '<input name="star1" type="radio" class="star"/>'
-            .  '<input name="star1" type="radio" class="star"/>'
-            .  '<input name="star1" type="radio" class="star"/>'
-            .  '<input name="star1" type="radio" class="star"/>'
-            . '</span>'
+            // . '<span class="rating">'
+            // .  '<input name="star1" type="radio" class="star required"/>'
+            // .  '<input name="star1" type="radio" class="star"/>'
+            // .  '<input name="star1" type="radio" class="star"/>'
+            // .  '<input name="star1" type="radio" class="star"/>'
+            // .  '<input name="star1" type="radio" class="star"/>'
+            // . '</span>'
             . "</p><p>"
             .  "<input placeholder='Project' class='project' id='effort_project' >"
             .  "<input placeholder='Task' class='task' id='effort_task'>"
@@ -113,7 +123,7 @@ function build_effort_edit_form()
     $PH->go_submit='newEffortFromTimeTracking';
     echo "<input type=hidden id='effort_project_id' name='effort_project_id' value=''>";
     echo "<input type=hidden id='effort_task_id'  name='effort_task_id' value=''>";
-    echo "<input type=hidden id='effort_start_seconds' name='effort_start_seconds' value=''>";
+    echo "<input type=hidden id='effort_start_seconds' name='effort_start_seconds' value='" . $last_end_time . "'>";
     echo "<input type=hidden id='effort_end_seconds'  name='effort_end_seconds' value=''>";
     echo "<input type=submit>";
 }
@@ -194,7 +204,7 @@ function newEffortFromTimeTracking()
             'time_end'=> getGMTString($time_end),
             'name'=> get('description'),
     ));
-        
+            
     ### link to task ###
     $task_id = get('effort_task_id');
     if(!is_null($task_id)){

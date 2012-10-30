@@ -57,6 +57,7 @@ div.timetracking p {
   padding:3px 0;
 }
 
+div.timetracking a#trigger_date,
 div.timetracking textarea,
 div.timetracking input {
   background:white;
@@ -90,6 +91,17 @@ div.timetracking textarea{
   width:500px;
 }
 
+div.timetracking input.date {
+  width:100px;
+}
+
+
+div.timetracking a#trigger_date {
+  color: #999;
+  margin-right:15px;
+  width:120px;
+  font-size:13px;
+}
 
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {

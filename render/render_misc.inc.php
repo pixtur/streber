@@ -891,7 +891,8 @@ function getUserFormatTimestamp()
     global $g_userFormatTimestamp;
     if(!$g_userFormatTimestamp)
     {
-        $g_userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
+        //$g_userFormatTimestamp = __('%a %b %e, %Y %I:%M%P', 'strftime format string');
+        $g_userFormatTimestamp = __('%a %b %e, %Y %H:%M', 'strftime format string');
 
         # Fix %e formatter if not supported (e.g. on Windows)
         if(strftime("%e", mktime(12, 0, 0, 1, 1)) != '1') {

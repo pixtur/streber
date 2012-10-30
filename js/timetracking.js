@@ -23,44 +23,44 @@ function TimeTrackingTable(html_canvas_element) {
     this.days = 3;
     this.timeBlocks = {};
     this.context= undefined;
-    
+
     this.renderTimeblock= function( block ) {
         var c= this.context;
         c.fillStyle = "#dddd00";
-        c.fillRect(0, 0, 100, 40);        
+        c.fillRect(0, 0, 100, 40);
     }
-    
+
     this.start_time_today = undefined;
     this.end_time_today = undefined;
-    
+
     this.DATE_WIDTH = 180;
     this.DAY_HEIGHT= 20;
     this.TIMELINE_HEIGHT = 20;
 
-    this.NUM_DAYS_SHOWN = 4;    
+    this.NUM_DAYS_SHOWN = 4;
     this.FIRST_HOUR = 7;
     this.LAST_HOUR = 25;
-    
+
     this.daysSinceToday =  function(t) {
-        return Math.floor((t - this.start_time_today) / (60*60*24));        
+        return Math.floor((t - this.start_time_today) / (60*60*24));
     }
-    
+
     this.xFromTime = function(t)  {
         
         t -= this.daysSinceToday(t) *60*60*24;
-                
+
         var _width= (this.canvas.width - this.DATE_WIDTH);
-        var _ratio= (t - this.start_time_today) / (this.end_time_today - this.start_time_today); 
+        var _ratio= (t - this.start_time_today) / (this.end_time_today - this.start_time_today);
         return _width * _ratio + this.DATE_WIDTH;
     }
-    
-    this.updateCurrentTime = function() 
-    {        
+
+    this.updateCurrentTime = function()
+    {
         var x = window.timetracker.xFromTime(Date.now() / 1000 + 2*60*60);
         $('.currentTime').css('left', x );
     }
-    
-    this.updateCanvas = function() 
+
+    this.updateCanvas = function()
     {
         this.canvas.width=$("body").width();
         this.updateCurrentTime();
@@ -69,15 +69,15 @@ function TimeTrackingTable(html_canvas_element) {
         this.canvas.width=  width=$("body").width();
         this.canvas.height= this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT;
 //        this.context.scale(1,1);
-        
+
         // c.fillStyle = "#dddddd";
         // c.fillRect(0, 0, this.canvas.width-2, 400);
-        
+
         this.context.strokeStyle = "rgba(0, 0, 0,0.25)";
         this.context.lineWidth=0.5;
         this.context.font = "lighter 13px Helvetica";
         this.context.fillStyle = "#aaa";
-        
+
         // Horizontal Lines (days)
         for(var i=0; i <= this.NUM_DAYS_SHOWN; ++i) {
             this.context.beginPath();
@@ -85,14 +85,14 @@ function TimeTrackingTable(html_canvas_element) {
             this.context.moveTo(0,y );
             this.context.lineTo(this.canvas.width, y);
             this.context.stroke();
-            
+
             if( i < this.NUM_DAYS_SHOWN) {
                 var d3= new Date( new Date().getTime() + 24*60*60*1000* (i+1-this.NUM_DAYS_SHOWN));
-                this.context.fillText(d3.toLocaleDateString(), 10, y + this.DAY_HEIGHT - 5);                
+                this.context.fillText(d3.toLocaleDateString(), 10, y + this.DAY_HEIGHT - 5);
             }
         }
-        
-        
+
+
         // Vertical Lines (hours)
         var hours = this.LAST_HOUR - this.FIRST_HOUR;
         this.context.textAlign = "center";
@@ -103,21 +103,25 @@ function TimeTrackingTable(html_canvas_element) {
             this.context.moveTo(x,0 );
             this.context.lineTo(x, this.canvas.height - this.TIMELINE_HEIGHT);
             this.context.stroke();
-            
+
             this.context.fillText(i + this.FIRST_HOUR, x, this.canvas.height- 3);
         }
 
-        
+
         // create timeblocks
         this.container.innerHTML="";
         for( var key in this.timeBlocks) {
             this.createTimeblock( this.timeBlocks[key])
         }
     }
-    
-    this.createTimeblock = function(b) 
-    {        
-        var d = this.daysSinceToday(b.start);
+
+    this.createTimeblock = function(b)
+    {
+        var morningOffset = 0;
+        // if( Date.now() * 0.001 < this.start_time_today ) {
+        //     morningOffset= -1;
+        // }
+        var d = this.daysSinceToday(b.start) + morningOffset;
         if(d > 0 || d <= -this.NUM_DAYS_SHOWN) {
             return;
         }
@@ -131,8 +135,8 @@ function TimeTrackingTable(html_canvas_element) {
         blockElement.css('width',Math.floor(x2-x1)+"px");
         $(this.container).append(blockElement);
     }
-    
-    this.init = function() 
+
+    this.init = function()
     {
         window.timetracker = this; //very evil hack
 
@@ -148,13 +152,13 @@ function TimeTrackingTable(html_canvas_element) {
         e.setUTCHours(this.LAST_HOUR);
         e.setSeconds(0);
         this.end_time_today = e/1000;
-        
-        
+
+
         var canvas = document.getElementById("myCanvas");
         if (canvas && canvas.getContext){
             this.canvas = canvas;
-        } 
-        
+        }
+
         this.container = $('.container')[0];
 
         this.updateCanvas();
@@ -171,11 +175,11 @@ function TimeTrackingTable(html_canvas_element) {
         $(window).resize(function(e) {
             window.timetracker.updateCanvas();
         });
-        
+
         // Set time to update time indicator
         setInterval(this.updateCurrentTime, 5000);
-        
-        
+
+
     }
     this.init();
 }
@@ -183,53 +187,53 @@ function TimeTrackingTable(html_canvas_element) {
 function TimeTrackingForm() {
 
     var ttf = this;
-    
+
     /*
     * Gather fields
     */
-    ttf.$projectInput= $("input.project");    
+    ttf.$projectInput= $("input.project");
     if(ttf.$projectInput.length != 1) {
         console.warn("Couldn't find project field");
         return;
     }
-    
-    ttf.$projectId= $("#effort_project_id");    
+
+    ttf.$projectId= $("#effort_project_id");
     if(ttf.$projectId.length != 1) {
         console.warn("Couldn't find project id field");
         return;
     }
 
-    ttf.$taskId= $("#effort_task_id");    
+    ttf.$taskId= $("#effort_task_id");
     if(ttf.$projectId.length != 1) {
         console.warn("Couldn't find task id field");
         return;
     }
-    
-    ttf.$taskInput= $("input.task");    
+
+    ttf.$taskInput= $("input.task");
     if(ttf.$taskInput.length != 1) {
         console.warn("Couldn't find task field");
         return;
     }
-    
-    ttf.$startTime= $("input#effort_start");    
+
+    ttf.$startTime= $("input#effort_start");
     if(ttf.$startTime.length != 1) {
         console.warn("Couldn't find start time field");
         return;
     }
-    ttf.$startSeconds= $("input#effort_start_seconds");    
+    ttf.$startSeconds= $("input#effort_start_seconds");
     if(ttf.$startSeconds.length != 1) {
         console.warn("Couldn't find start time seconds field");
         return;
     }
-    
-    
-    ttf.$duration= $("input#effort_duration");    
+
+
+    ttf.$duration= $("input#effort_duration");
     if(ttf.$duration.length != 1) {
         console.warn("Couldn't find duration field");
         return;
     }
 
-    ttf.$endTime= $("input#effort_end");    
+    ttf.$endTime= $("input#effort_end");
     if(ttf.$endTime.length != 1) {
         console.warn("Couldn't find end time field");
         return;
@@ -237,7 +241,7 @@ function TimeTrackingForm() {
 
 
 
-    ttf.$endSeconds= $("input#effort_end_seconds");    
+    ttf.$endSeconds= $("input#effort_end_seconds");
     if(ttf.$endSeconds.length != 1) {
         console.warn("Couldn't find end time seconds field");
         return;
@@ -314,13 +318,13 @@ function TimeTrackingForm() {
         },
         select:function() {
             var value = ttf.$taskInput.data('rich-values')[ this.$element.val() ];
-            ttf.$taskId.val( value );            
+            ttf.$taskId.val( value );
         }
     });
-    
 
-    
-    this.getTimeStringFromSeconds = function( s ) 
+
+
+    this.getTimeStringFromSeconds = function( s )
     {
         var d = new Date(s*1000);
         var hours = d.getHours();
@@ -329,8 +333,8 @@ function TimeTrackingForm() {
         if (minutes < 10) {minutes = "0"+minutes;}
         return hours + ":" + minutes;
     }
-    
-    this.getTimeSecondsFromString = function( str )
+
+    this.getTimeSecondsFromString = function( str , d)
     {
         var match_hours = /^\s*(\d+):?(\d*)\s*(am|pm)?\s*$/;
         if( match_hours.exec(str )) {
@@ -341,11 +345,11 @@ function TimeTrackingForm() {
                 hours+= 12;
             }
 
-            var t= new Date();
-            t.setHours(hours);
-            t.setMinutes(minutes);
-            t.setSeconds(0);
-            return t * 0.001;
+            //var t= new Date();
+            d.setHours(hours);
+            d.setMinutes(minutes);
+            d.setSeconds(0);
+            return d * 0.001;
         }
         return 0;
     }
@@ -355,47 +359,50 @@ function TimeTrackingForm() {
         if( str.match(/^\s*(\d+):?(\d*)\s*$/ ) ) {
             var hours = RegExp.$1 * 1;
             var minutes = RegExp.$2 * 1;
-            
+
             return hours * 60 * 60 + minutes * 60;
         }
-        
+
         var h = str * 1.0;
         if( h != 0) {
             return h * 60 * 60;
-        }    
+        }
         return 0;
     }
-    
+
     /**
     * Timer to update duration
     */
     this.updateDuration = function() {
-        var st = ttf.getStartTime();                        
-        var et = ttf.getEndTime(); 
+        var st = ttf.getStartTime();
+        var et = ttf.getEndTime();
         if( et == 0) {
             et = Date.now() * 0.001;
-        } 
+        }
 
         if( st > 0 ) {
-            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st ));            
+            ttf.$duration.attr('placeholder', ttf.getDurationStringFromSeconds( et-st ));
         }
         else {
-            ttf.$duration.attr('placeholder', '???');                
+            ttf.$duration.attr('placeholder', '???');
         }
-    }    
+    }
 
-    ttf.setStartTime= function(seconds) {        
+    ttf.setStartTime= function(seconds) {
         var seconds = seconds << 0;
         ttf.$startSeconds.val(seconds);
         ttf.$startTime.val( ttf.getTimeStringFromSeconds(seconds) );
         ttf.updateDuration();
+        
+        var d = new Date( seconds * 1000);
+        $('#effort_date').val( d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() );
     }
     ttf.getStartTime= function() {
         return ttf.$startSeconds.val() << 0;
-    } 
-        
-    ttf.setEndTime= function(seconds) {        
-        var seconds = seconds << 0;        
+    }
+
+    ttf.setEndTime= function(seconds) {
+        var seconds = seconds << 0;
         ttf.$endSeconds.val(seconds);
         ttf.$endTime.val( ttf.getTimeStringFromSeconds(seconds) );
         if( seconds ==0) {
@@ -403,42 +410,47 @@ function TimeTrackingForm() {
             ttf.$endTime.val('');
             ttf.$endTime.attr('placeholder','now');
         }
-        ttf.updateDuration();        
+        ttf.updateDuration();
     }
     ttf.getEndTime= function() {
         return ttf.$endSeconds.val() << 0;
-    } 
+    }
 
 
 
     ttf.$startTime.click(function(event) {
         ttf.$startTime.select();
     });
-    
+
     ttf.$startTime.blur(function(event){
         var v = ttf.$startTime.val();
         if( v!='') {
-            var s = ttf.getTimeSecondsFromString(v);
+            var s = ttf.getTimeSecondsFromString(v, new Date(ttf.getStartTime() * 1000 ));
             ttf.setStartTime(s);
-        }        
+        }
     });
-    
-    
+
+
     /**
     * events for end time
     */
     ttf.$endTime.click(function(event) {
-        ttf.$endTime.removeClass('now');        
+        ttf.$endTime.removeClass('now');
         ttf.$endTime.select();
     });
-    
+
     ttf.$endTime.blur(function(event){
         var v = ttf.$endTime.val();
         if( v=='' || v == 'now') {
             ttf.setEndTime(0);
         }
         else {
-            ttf.setEndTime( ttf.getTimeSecondsFromString(v) );
+            var referenceDay= new Date( ttf.getStartTime() * 1000 );
+            var sec= ttf.getTimeSecondsFromString(v, referenceDay );
+            if ( sec < ttf.getStartTime()) {
+                sec += 24 * 60 * 60;
+            }
+            ttf.setEndTime( sec );
         }
     });
 
@@ -453,7 +465,7 @@ function TimeTrackingForm() {
                 ttf.setStartTime( now - d );
             }
             else if ( st == 0) {
-                ttf.setStartTime( et - d );                
+                ttf.setStartTime( et - d );
                 ttf.$duration.val('');
             }
             else {
@@ -465,7 +477,7 @@ function TimeTrackingForm() {
 
 
     setInterval(this.updateDuration, 1000);
-        
+
     this.getDurationStringFromSeconds= function(s) {
         var s= parseInt(s);
         if(s < 60 ) {
@@ -475,29 +487,56 @@ function TimeTrackingForm() {
             var seconds = s % 60;
             var minutes = (s/60) % 60 << 0;
             var hours = s / 60 / 60 << 0;
-            
-            seconds = seconds < 10 ? "0"+seconds : seconds; 
-            minutes = minutes < 10 ? "0"+minutes : minutes; 
 
-            hours   = hours   < 10 ? "0"+hours   : hours  ; 
-            return hours + ":" + minutes;                
-        } 
+            seconds = seconds < 10 ? "0"+seconds : seconds;
+            minutes = minutes < 10 ? "0"+minutes : minutes;
+
+            hours   = hours   < 10 ? "0"+hours   : hours  ;
+            return hours + ":" + minutes;
+        }
     }
-    
-    
+
+
     /**
     * events for start time
     */
-    if(ttf.$startTime.val() == '') {
+    if(ttf.$startSeconds.val() == '') {
         ttf.setStartTime( Date.now()*0.001 );
     }
+    else {
+        ttf.setStartTime( ttf.$startSeconds.val() * 1 );
+    }
     //ttf.updateDuration();
-    
-    
+
+
     /**
     * init rating
     */
-    
+
+
+    /**
+    * Init calendar
+    */
+    Calendar.setup({
+        inputField  : "effort_date",
+        ifFormat    : "%Y-%m-%d",
+        button      : "trigger_date",
+        onUpdate: function(e) {
+            var st= ttf.getStartTime();
+            $('#trigger_date').html(e.date.getFullYear() + "-" + (e.date.getMonth()+1) + "-" + e.date.getDate());
+            
+            var sd = new Date(st * 1000);
+            sd.setFullYear( e.date.getFullYear());
+            sd.setMonth( e.date.getMonth());
+            sd.setDate( e.date.getDate());
+            ttf.setStartTime( sd * 0.001 );
+                        
+            var et=ttf.getEndTime();
+            var duration = (et==0) ? 60 * 60
+                                   : et - st;
+            ttf.setEndTime( sd * 0.001 + duration );
+        }
+    });
 }
 
 
