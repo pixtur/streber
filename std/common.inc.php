@@ -665,7 +665,7 @@ function asIdentifier($str) {
 */
 function asCleanString($str)
 {
-    return preg_replace("/[^\w ,.]/","",$str);  
+    return preg_replace("/[^\w ,.\/:]/","",$str);  
     //return preg_replace("/[\\\<\>\`\´\"']/",'',$str);
 }
 

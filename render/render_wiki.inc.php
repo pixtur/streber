@@ -1064,7 +1064,8 @@ class FormatBlockLink extends FormatBlock
         }
         ### id|title ###
         else if(preg_match("/\A([^\|]+)\|([^|]+)$/", $str, $matches)) {
-            $this->target="#" . asCleanString($matches[1]);            
+            //$this->target="#" . asCleanString($matches[1]);            
+            $this->target = $matches[1];
             $this->name  =$matches[2];
         }
         else {
@@ -1095,7 +1096,7 @@ class FormatBlockLink extends FormatBlock
         * short item ala [[#234|some name]]
         */
         else if(preg_match("/\A\#(\d+)/",$this->target, $matches)){
-            
+
             
             $id= intVal( $matches[1]);
             $this->html= FormatBlockLink::renderLinkFromItemId($id, $this->name);
@@ -1194,7 +1195,7 @@ class FormatBlockLink extends FormatBlock
                 case 'item':
                     $this->html= FormatBlockLink::renderLinkFromItemId($target, $this->name);
                     break;
-
+                    
                 default:
                     /**
                     * note, since this message is normally printed after the header,
@@ -1204,6 +1205,34 @@ class FormatBlockLink extends FormatBlock
                         . " " . sprintf(__("Read more about %s."), $PH->getWikiLink('WikiSyntax')));
             }
         }
+        /**
+        * embed:???
+        */
+        else if(preg_match("/\Aembed\:(\S+)/",$this->target, $matches)) {
+            $t = $matches[1];
+            
+            /**
+            * http://youtu.be/eb0xhLq8oAQ
+            *
+            * <iframe width="560" height="315" src="http://www.youtube-nocookie.com/embed/eb0xhLq8oAQ" frameborder="0" allowfullscreen></iframe>
+            *
+            */
+            if( preg_match("/^http\:\/\/youtu\.be\/(\w*)/", $t, $embed_matches)) {
+                $this->html= "<iframe width=640 height=384 src='http://www.youtube-nocookie.com/embed/{$embed_matches[1]}' frameborder=0 allowfullscreen></iframe>";            
+            }
+            
+            /**
+            * http://vimeo.com/53155723
+            *
+            * <iframe src="http://player.vimeo.com/video/53155723?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/53155723">ShowReel2 (1920 x 1080)</a> from <a href="http://vimeo.com/user14581915">framefield</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+            */
+            else if ( preg_match("/^http\:\/\/vimeo.com\/(\d*)/", $t, $embed_matches)) {
+                $this->html="<iframe src='http://player.vimeo.com/video/{$embed_matches[1]}?badge=0' width=640 height=384 frameborder=0 webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>";
+            }
+
+        }
+        
+        
         /**
         * try to guess node from name
         * - we prefer the current project (has to be passed by wikifieldAsHtml()-callers
@@ -1499,8 +1528,6 @@ class FormatBlockLink extends FormatBlock
                 $text= $b->str;
                 $found= false;
                 while($text) {
-
-
                     if(preg_match("/^(.*?)\[\[([^\]]*)\]\](.*)/s", $text, $matches)) {
                         $blocks_new[]= new FormatBlock($matches[1]);
                         $blocks_new[]= new FormatBlockLink($matches[2]);
