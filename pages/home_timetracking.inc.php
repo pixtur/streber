@@ -109,7 +109,7 @@ function build_effort_edit_form()
             . '<span class="rating">'
             .  '<input name="productivity" type="radio" class="star required" value="1"/>'
             .  '<input name="productivity" type="radio" class="star" value="2"/>'
-            .  '<input name="productivity" type="radio" class="star" value="3"/>'
+            .  '<input name="productivity" type="radio" class="star" value="3" checked="checked"/>'
             .  '<input name="productivity" type="radio" class="star" value="4"/>'
             .  '<input name="productivity" type="radio" class="star" value="5"/>'
             . '</span>'
@@ -152,13 +152,18 @@ function ajaxUserEfforts()
     foreach( $auth->cur_user->getEfforts() as $e ) {
         $p= Project::getById($e->project);
         
+        $task_name="";
+        if($t= Task::getVisibleById($e->task)) {
+            $task_name= $t->name . " — ";
+        }
+        
         $result[$e->id] = array('start'=>strToClientTime($e->time_start), 
                                 'duration'=> (strToClientTime($e->time_end) - strToClientTime($e->time_start)) , 
                                 'id'=> $e->id,
                                 'productivity'=> $e->productivity,
                                 'color'=> ($p->color ? ("#".$p->color) : "#ff8080"),
                                 'title'=> $p->name,
-                                'tooltip'=> $e->name
+                                'tooltip'=> $task_name . $e->name
                                 );
     }
     echo json_encode($result);
@@ -189,7 +194,11 @@ function ajaxUserProjects()
     $result = array();
     foreach($projects  as $p) {        
         
-        $result[] = array('name'=> $p->name ." – "  . $company->name , 'id'=>$p->id);
+        $company_name = "";
+        if($company= Company::getVisibleById($p->company)) {
+            $company_name= $company->getShort(12);
+        }
+        $result[] = array('name'=> $p->name ." – "  . $company_name , 'id'=>$p->id);
     }
     echo json_encode($result);
 }
