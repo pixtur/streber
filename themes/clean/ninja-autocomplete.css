@@ -26,3 +26,12 @@ div.ninja-item.ninja-hover {
     background-color:#4458c0;
     color:white;
 }
+
+div.ninja-item small {
+  color:#aaa;
+  font-size:1em;
+}
+
+div.ninja-item small:before {
+  content: " – ";
+}

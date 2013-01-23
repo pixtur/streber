@@ -1575,6 +1575,7 @@ function projEdit($project=NULL)
             $tab_group->add($tab=new Page_Tab("tab3",__("Display")));
             $tab->add($project->fields['short']->getFormElement($project));
             $tab->add($project->fields['status_summary']->getFormElement($project));
+            $tab->add($project->fields['color']->getFormElement($project));
 
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_TASKS',         $g_project_setting_names[PROJECT_SETTING_ENABLE_TASKS], $project->settings & PROJECT_SETTING_ENABLE_TASKS));
             $tab->add(new Form_checkbox('PROJECT_SETTING_ENABLE_FILES',         $g_project_setting_names[PROJECT_SETTING_ENABLE_FILES], $project->settings & PROJECT_SETTING_ENABLE_FILES));

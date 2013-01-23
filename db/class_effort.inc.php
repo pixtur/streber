@@ -67,6 +67,12 @@ class Effort extends DbProjectItem
                     new FieldInternal(array(      'name'=>'task',
                     )),
     
+                    new FieldInternal(array(      'name'=>'billing',
+                    )),
+                    new FieldInternal(array(      'name'=>'productivity',
+                        'default'=> 3
+                    )),
+    
                     new FieldDatetime(array(    'name'=>'time_start',
                         'title'=> __('Time Start'),
                         'default'=>FINIT_NOW

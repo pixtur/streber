@@ -193,6 +193,13 @@ define('PRIO_LOWER',4);
 define('PRIO_LOWEST', 5);
 
 
+define('EFFORT_IS_BILLABLE', 0);
+define('EFFORT_IS_NOT_BILLABLE', 1);
+define('EFFORT_IS_REDUCED', 2);
+define('EFFORT_IS_TRAVEL', 3);
+define('EFFORT_IS_CHARGE_EXTRA', 4);
+
+
 define('PROJECT_SETTING_ENABLE_EFFORTS',           1<<1);
 define('PROJECT_SETTING_ENABLE_MILESTONES',        1<<2);
 define('PROJECT_SETTING_ENABLE_VERSIONS',          1<<3);

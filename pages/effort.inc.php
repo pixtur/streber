@@ -23,6 +23,7 @@ function effortView()
 {
     global $PH;
     global $auth;
+    global $g_effort_billing_names;
     require_once(confGet('DIR_STREBER') . 'render/render_wiki.inc.php');
 
     ### get effort ####
@@ -97,8 +98,8 @@ function effortView()
     ### details ###
     {
         $block = new PageBlock(array(
-            'title'=>__('Details'),
-            'id'=>'details',
+            'title'=>__('Description'),
+            //'id'=>'details',
         ));
 
         $block->render_blockStart();
@@ -140,6 +141,9 @@ function effortView()
                 echo "<div class=labeled><label>" . __('Time end','label') . "</label>" . renderTimestampHtml($effort->time_end) . "</div>";
                 echo "<div class=labeled><label>" . __('Duration','label') . "</label>" . asHtml($duration) . "</div>";
             }
+            
+            echo "<div class=labeled><label>" . __('Productivity','label') . "</label>" . asHtml($effort->productivity) . "</div>";
+            echo "<div class=labeled><label>" . __('Billing','label') . "</label>" .  $g_effort_billing_names[intval($effort->billing)] . "</div>";
         }
 
         echo "</div>";
@@ -546,6 +550,7 @@ function effortEdit($effort=NULL)
 {
     global $PH;
     global $g_effort_status_names;
+    global $g_effort_billing_names;
 
     if(!$effort) {
         $ids = getPassedIds('effort','efforts_*');  
@@ -644,6 +649,8 @@ function effortEdit($effort=NULL)
         }
         $form->add($effort->fields['description']->getFormElement($effort));
         $form->add(new Form_Dropdown("effort_status", __('Status'), array_flip($g_effort_status_names), $effort->status));
+        $form->add(new Form_Dropdown("effort_billing", __('Billing'), array_flip($g_effort_billing_names), $effort->billing));
+        $form->add(new Form_Dropdown("effort_productivity", __('Productivity'), array( "*****"=>5, "****"=>4, "***"=>3, "**"=>2, "*"=>1  ), $effort->productivity));
 
         ### get meta-tasks / folders ###
         #$folders= $project->getFolders();
@@ -810,6 +817,14 @@ function effortEditSubmit()
     ## effort status ##
     if($effort_status = get('effort_status')){
         $effort->status = $effort_status;
+    }
+
+    if($effort_billing = get('effort_billing')){
+        $effort->billing = intval($effort_billing);
+    }
+
+    if($effort_productivity = get('effort_productivity')){
+        $effort->productivity = intval($effort_productivity);
     }
 
     ### link to task ###

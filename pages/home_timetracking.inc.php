@@ -47,7 +47,7 @@ function homeTimetracking()
         $page->extra_header_html  = '<script type="text/javascript" src="js/ninja.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/ninja-autocomplete.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
-        $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.pack.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
+        $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<link rel="stylesheet" href="themes/clean/ninja-autocomplete.css" />';
 
         $page->extra_onload_js .= "new TimeTrackingTable();";        
@@ -100,21 +100,34 @@ function build_effort_edit_form()
             . "<p>"
             . "<p>"
             .  "<input type=hidden placeholder='Date' class='time date' id='effort_date' >"
-            . "<a href='' id='trigger_date'>Today</a>"
+            //.  "<a id='previous_date'>◀</a>"
+            .  "<a href='' id='trigger_date'>Today</a>"
+            //.  "<a id='next_date'>▶</a>"
             .  "<input placeholder='Start' class='time start' id='effort_start' >"
             .  "<input placeholder='Time' class='time duration' id='effort_duration' >"
             .  "<input placeholder='Now' class='time end' id='effort_end' >"
-            // . '<span class="rating">'
-            // .  '<input name="star1" type="radio" class="star required"/>'
-            // .  '<input name="star1" type="radio" class="star"/>'
-            // .  '<input name="star1" type="radio" class="star"/>'
-            // .  '<input name="star1" type="radio" class="star"/>'
-            // .  '<input name="star1" type="radio" class="star"/>'
-            // . '</span>'
-            . "</p><p>"
+            . '<span class="rating">'
+            .  '<input name="productivity" type="radio" class="star required" value="1"/>'
+            .  '<input name="productivity" type="radio" class="star" value="2"/>'
+            .  '<input name="productivity" type="radio" class="star" value="3"/>'
+            .  '<input name="productivity" type="radio" class="star" value="4"/>'
+            .  '<input name="productivity" type="radio" class="star" value="5"/>'
+            . '</span>'
+            . "</p>"
+            . "<p>"
             .  "<input placeholder='Project' class='project' id='effort_project' >"
-            .  "<input placeholder='Task' class='task' id='effort_task'>"
+            .  "<input placeholder='Task' class='task' id='effort_task' name='task_name' >"
             .  "</p>"
+            . "<p>"
+            . "<select name='billing'>"
+            . "<option value='" . EFFORT_IS_BILLABLE     . "'>Billable</option>"
+            . "<option value='" . EFFORT_IS_NOT_BILLABLE . "'>Not Billable</option>"
+            . "<option value='" . EFFORT_IS_REDUCED      . "'>Reduced</option>"
+            . "<option value='" . EFFORT_IS_TRAVEL       . "'>Travel</option>"
+            . "<option value='" . EFFORT_IS_CHARGE_EXTRA . "'>Extra Charge</option>"
+            . "</select>"
+            . "</p>"
+
             .  "<p><textarea name='description' id='description' placeholder='Comment'></textarea></p>"
             . "</div>";
     
@@ -142,7 +155,11 @@ function ajaxUserEfforts()
         $result[$e->id] = array('start'=>strToClientTime($e->time_start), 
                                 'duration'=> (strToClientTime($e->time_end) - strToClientTime($e->time_start)) , 
                                 'id'=> $e->id,
-                                'title'=> $p->name);
+                                'productivity'=> $e->productivity,
+                                'color'=> ($p->color ? ("#".$p->color) : "#ff8080"),
+                                'title'=> $p->name,
+                                'tooltip'=> $e->name
+                                );
     }
     echo json_encode($result);
 }
@@ -152,16 +169,27 @@ function ajaxUserProjects()
 {
     global $PH;
     global $auth;
+    require_once(confGet('DIR_STREBER') . 'db/class_company.inc.php');
+    
+    $projects = array();
+    
     if($q= getOnePassedId("q")) {
-         $projects = Project::getAll(array('search'=>$q))   ;
+         $all_projects = Project::getAll();
+         foreach($all_projects as $p) {
+
+             if(stristr( $p->name, $q) !== false ) {
+                 $projects[]= $p;
+             }
+         }
     }
     else {
          $projects = Project::getAll();
     }
     
     $result = array();
-    foreach($projects  as $t) {        
-        $result[] = array('name'=> $t->name, 'id'=>$t->id);    
+    foreach($projects  as $p) {        
+        
+        $result[] = array('name'=> $p->name ." – "  . $company->name , 'id'=>$p->id);
     }
     echo json_encode($result);
 }
@@ -203,20 +231,9 @@ function newEffortFromTimeTracking()
             'time_start'=> getGMTString(get('effort_start_seconds')),
             'time_end'=> getGMTString($time_end),
             'name'=> get('description'),
+            'billing' => get('billing'),
+            'productivity' => get('productivity'),
     ));
-            
-    ### link to task ###
-    $task_id = get('effort_task_id');
-    if(!is_null($task_id)){
-        if($task_id == 0) {
-            $new_effort->task = 0;
-        }
-        else{
-            if($task= Task::getVisibleById($task_id)) {
-                $new_effort->task = $task->id;
-            }
-        }
-    }
 
     ### get project ###
     $new_effort->project=get('effort_project_id');
@@ -227,6 +244,30 @@ function newEffortFromTimeTracking()
     if(!$project->isPersonVisibleTeamMember($auth->cur_user)) {
         $PH->abortWarning("ERROR: Insufficient rights");        
     }
+
+            
+    ### link to task ###
+    $task_id = get('effort_task_id');
+    if(!(is_null($task_id) || $task_id == 0)){
+        if($task_id == 0) {
+            $new_effort->task = 0;
+        }
+        else {
+            if($task= Task::getVisibleById($task_id)) {
+                $new_effort->task = $task->id;
+            }
+        }
+    }
+    else if ('task_name' != ""){
+        ### create new task
+        $newtask= new Task(array(
+            'id'=>0,
+            'name'=> get('task_name'),
+            'project' => $project->id,
+        ));
+        $newtask->insert();        
+    }
+
 
     ### get person ###
     $new_effort->person= $auth->cur_user->id;

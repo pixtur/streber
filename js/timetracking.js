@@ -9,7 +9,7 @@
  * @uses:
  * @usedby:
  */
-
+    
 /**
 * global variables
 */
@@ -69,11 +69,6 @@ function TimeTrackingTable(html_canvas_element) {
         this.context= this.canvas.getContext('2d');
         this.canvas.width=  width=$("body").width();
         this.canvas.height= this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT;
-//        this.context.scale(1,1);
-
-        // c.fillStyle = "#dddddd";
-        // c.fillRect(0, 0, this.canvas.width-2, 400);
-
         this.context.strokeStyle = "rgba(0, 0, 0,0.25)";
         this.context.lineWidth=0.5;
         this.context.font = "lighter 13px Helvetica";
@@ -131,9 +126,13 @@ function TimeTrackingTable(html_canvas_element) {
         var x2= this.xFromTime(b.start + b.duration);
 
         var blockElement = $("<a href='" + b.id +  "' class=timeblock>" + b.title + "</a>");
-        blockElement.css('top',(this.canvas.height - (-d+1) * this.DAY_HEIGHT - this.TIMELINE_HEIGHT + 1 )+"px");
+        blockElement.css('top',(this.canvas.height - (-d+1) * this.DAY_HEIGHT- this.TIMELINE_HEIGHT + 1 )+"px");
+        blockElement.css('height', this.DAY_HEIGHT  * b.productivity / 5);
+        blockElement.css('margin-top', this.DAY_HEIGHT  * (5-b.productivity) / 5);
+        blockElement.css('background-color', b.color);
         blockElement.css('left',x1+"px");
         blockElement.css('width',Math.floor(x2-x1)+"px");
+        blockElement.attr('title', b.tooltip);
         $(this.container).append(blockElement);
     }
 
@@ -215,6 +214,7 @@ function TimeTrackingForm() {
         console.warn("Couldn't find task field");
         return;
     }
+    
 
     ttf.$startTime= $("input#effort_start");
     if(ttf.$startTime.length != 1) {
@@ -387,6 +387,14 @@ function TimeTrackingForm() {
         else {
             ttf.$duration.attr('placeholder', '???');
         }
+        
+        if(et-st <= 0 ) {
+            ttf.$duration.addClass('error');
+        }
+        else {
+            ttf.$duration.removeClass('error');
+          
+        }
     }
 
     ttf.setStartTime= function(seconds) {
@@ -430,6 +438,26 @@ function TimeTrackingForm() {
             ttf.setStartTime(s);
         }
     });
+    
+    $("#previous_date").click(function(){
+      var st= ttf.getStartTime();
+      
+      //$('#trigger_date').html(e.date.getFullYear() + "-" + (e.date.getMonth()+1) + "-" + e.date.getDate());
+      $('#trigger_date').html("1974-07-30");
+            
+      // var sd = new Date(st * 1000);
+      // sd.setFullYear( e.date.getFullYear());
+      // sd.setMonth( e.date.getMonth());
+      // sd.setDate( e.date.getDate());
+      // ttf.setStartTime( sd * 0.001 );
+      //                   
+      // var et=ttf.getEndTime();
+      // var duration = (et==0) ? 60 * 60
+      //                        : et - st;
+      // ttf.setEndTime( sd * 0.001 + duration );
+  
+    });
+    
 
 
     /**
@@ -518,7 +546,7 @@ function TimeTrackingForm() {
     /**
     * Init calendar
     */
-    Calendar.setup({
+    xcal = Calendar.setup({
         inputField  : "effort_date",
         ifFormat    : "%Y-%m-%d",
         button      : "trigger_date",

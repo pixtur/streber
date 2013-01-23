@@ -16,7 +16,7 @@ require_once("defines.inc.php");
 global $g_config;
 $g_config= array(
 
-    'STREBER_VERSION'       => '0.094',
+    'STREBER_VERSION'       => '0.095',
     'STREBER_VERSION_DATE'  => '2012-10-05',
 
     'APP_NAME'              => 'streber',
@@ -60,7 +60,7 @@ $g_config= array(
     *
     * - additionally the current db-version is set by DB_VERSION in _settings/db_settings.inc
     */
-    'DB_CREATE_DUMP_VERSION'     => '0.093',     # sql-dump loaded from /_install/-directory at installation
+    'DB_CREATE_DUMP_VERSION'     => '0.095',     # sql-dump loaded from /_install/-directory at installation
 
     /**
     * url to online-help

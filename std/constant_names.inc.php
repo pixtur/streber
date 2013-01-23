@@ -249,4 +249,16 @@ EFFORT_STATUS_DISCOUNTED   => __('discounted','effort status'),
 EFFORT_STATUS_NOTCHARGEABLE=> __('not chargeable','effort status'),
 EFFORT_STATUS_BALANCED     => __('balanced','effort status')
 );
+
+global $g_effort_billing_names;
+$g_effort_billing_names = array(
+EFFORT_IS_BILLABLE    => __('billable','effort billing'),
+EFFORT_IS_NOT_BILLABLE=> __('not billable','effort billing'),
+EFFORT_IS_REDUCED     => __('reduced','effort billing'),
+EFFORT_IS_TRAVEL      => __('travel','effort billing'),
+EFFORT_IS_CHARGE_EXTRA=> __('charged extra','effort billing')
+);
+
+
+
 ?>

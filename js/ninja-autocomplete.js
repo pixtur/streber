@@ -145,9 +145,13 @@
 
     if (autocomplete.matchlist.length > 0) {
       $.each(autocomplete.matchlist, function (i, option) {
+        var pieces = option.split(" – ");
+        
+        var formattedOption = pieces.length == 1 ? pieces[0] 
+                                                  : pieces.slice(0,pieces.length-1).join(" – ") + "<small>"+pieces[pieces.length-1] + "</small>";
         $('<div>', {
           'class': 'ninja-item',
-          html: option
+          html: formattedOption
         }).on('mouseenter.ninja', function () {
           if (autocomplete.index > -1) {
             autocomplete.$list.find('div:eq(' + autocomplete.index + ')').removeClass('ninja-hover');

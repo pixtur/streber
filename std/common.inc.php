@@ -651,7 +651,7 @@ function asSearchQuery($str) {
 
 function asMatchString($str) {
     #return preg_replace("/[^0-9A-Z_]/i",' ', $str); 
-    return preg_replace("/[\/\<\>\`\´_%&?\"\'()\[\]%]/",' ', $str); 
+    return preg_replace("/[\/\<\>\`\Â´_%&?\"\'()\[\]%]/",' ', $str); 
 }
 
 function asIdentifier($str) {
@@ -666,7 +666,6 @@ function asIdentifier($str) {
 function asCleanString($str)
 {
     return preg_replace("/[^\w ,.\/:]/","",$str);  
-    //return preg_replace("/[\\\<\>\`\´\"']/",'',$str);
 }
 
 

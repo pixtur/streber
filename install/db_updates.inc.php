@@ -348,4 +348,9 @@ if($db_version < 0.08081) {
     $update_queries[] = "ALTER TABLE `{$db_table_prefix}task` ADD `show_folder_as_documentation` INT ( 1 ) DEFAULT '0' NOT NULL ";
 }
 
+if($db_version < 0.095) {
+    $update_queries[] = "ALTER TABLE `{$db_table_prefix}effort` ADD `billing` INT ( 1 ) DEFAULT '0' NOT NULL ";
+    $update_queries[] = "ALTER TABLE `{$db_table_prefix}effort` ADD `productivity` INT ( 1 ) DEFAULT '3' NOT NULL ";
+}
+
 ?>
