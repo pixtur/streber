@@ -37,8 +37,8 @@ function TimeTrackingTable(html_canvas_element) {
     this.DAY_HEIGHT= 20;
     this.TIMELINE_HEIGHT = 20;
 
-    this.NUM_DAYS_SHOWN = 4;
-    this.FIRST_HOUR = 7;
+    this.NUM_DAYS_SHOWN = 6;
+    this.FIRST_HOUR = 5;
     this.LAST_HOUR = 25;
 
     this.daysSinceToday =  function(t) {
