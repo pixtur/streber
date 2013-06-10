@@ -254,7 +254,6 @@ function newEffortFromTimeTracking()
         $PH->abortWarning("ERROR: Insufficient rights");        
     }
 
-            
     ### link to task ###
     $task_id = get('effort_task_id');
     if(!(is_null($task_id) || $task_id == 0)){
@@ -267,15 +266,17 @@ function newEffortFromTimeTracking()
             }
         }
     }
-    else if ('task_name' != ""){
+    else if ( get('task_name') != "") {
         ### create new task
         $newtask= new Task(array(
             'id'=>0,
             'name'=> get('task_name'),
             'project' => $project->id,
         ));
-        $newtask->insert();        
+        $newtask->insert();
+        $new_effort->task = $newtask->id;
     }
+
 
 
     ### get person ###
