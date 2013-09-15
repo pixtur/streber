@@ -1217,7 +1217,7 @@ class FormatBlockLink extends FormatBlock
             * <iframe width="560" height="315" src="http://www.youtube-nocookie.com/embed/eb0xhLq8oAQ" frameborder="0" allowfullscreen></iframe>
             *
             */
-            if( preg_match("/^http\:\/\/youtu\.be\/(\w*)/", $t, $embed_matches)) {
+            if( preg_match("/^http\:\/\/youtu\.be\/([A-Za-z0-9_->]*)/", $t, $embed_matches)) {
                 $this->html= "<iframe width=640 height=384 src='http://www.youtube-nocookie.com/embed/{$embed_matches[1]}' frameborder=0 allowfullscreen></iframe>";            
             }
             
