@@ -302,6 +302,19 @@ new PageHandle(array('id'=>'projViewEfforts',
     'test_params'=>array('prj'=>'_projectView_',),
     'valid_for_crawlers'=>false,
 ));
+
+new PageHandle(array('id'=>'projExportEfforts',
+    'req'       =>'pages/project_more.inc.php',
+    'title'     =>__('View Project'),
+    'valid_params'=>array(  'from'=>'.*',
+                            'prj'=>'\d*',
+                            'preset'=>'.*',
+                            'person'=>'.*',
+                            ),
+    'valid_for_crawlers'=>false,
+));
+
+
 new PageHandle(array('id'=>'projViewEffortCalculations',
     'req'       =>'pages/project_more.inc.php',
     'title'     =>__('View Project'),
@@ -805,6 +818,16 @@ new PageHandleForm(array('id'=>'effortEditMultiple',
     #'test'=>'yes',
     #'test_params'=>array('effort'=>'_effortEdit_',),
 ));
+
+new PageHandle(array('id'=>'effortShowAsCSV',
+    'req'=>'pages/effort_show_as_csv.inc.php',
+    'title'=>__('Show Efforts as CSV'),
+
+    #'test'=>'yes',
+    #'test_params'=>array('effort'=>'_effortEdit_',),
+));
+
+
 new PageHandleSubm(array('id'=>'effortEditMultipleSubmit',
     'req'=>'pages/effort.inc.php',
     'title'=>__('Edit multiple efforts'),

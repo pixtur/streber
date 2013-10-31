@@ -78,6 +78,12 @@ class ListBlock_efforts extends ListBlock
             'context_menu'=>'submit',
         )));
         $this->add_function(new ListFunction(array(
+            'target'=>$PH->getPage('effortShowAsCSV')->id,
+            'name'  =>__('Show as CSV'),
+            'id'    =>'effortShowAsCSV',
+            'context_menu'=>'submit',
+        )));
+        $this->add_function(new ListFunction(array(
             'target'=>$PH->getPage('itemsAsBookmark')->id,
             'name'  =>__('Mark as bookmark'),
             'id'    =>'itemsAsBookmark',
