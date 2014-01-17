@@ -1,11 +1,11 @@
 /**
- * all jquery-functions, no special relation
+ * javascript functions related to timetracking
  *
  * is been called on load
  *
  * included by:
  *
- * @author     Tino Beirau
+ * @author     Thomas Mann
  * @uses:
  * @usedby:
  */

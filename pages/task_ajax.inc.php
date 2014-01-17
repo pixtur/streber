@@ -2,8 +2,8 @@
 # streber - a php5 based project management system  (c) 2005-2007  / www.streber-pm.org
 # Distributed under the terms and conditions of the GPL as stated in lang/license.html
 
-require_once("db/class_task.inc.php");
-require_once("db/class_project.inc.php");
+require_once(confGet('DIR_STREBER') . "db/class_task.inc.php");
+require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
 
 
 /**\file

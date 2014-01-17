@@ -518,6 +518,10 @@ new PageHandleForm(array('id'=>'taskEdit',
     'test'=>'yes',
     'test_params'=>array('tsk'=>'_taskEdit_',),
 ));
+new PageHandleSubm(array('id'=>'taskEditSubmit',
+    'req'=>'pages/task_edit.inc.php',
+
+));
 
 new PageHandleForm(array('id'=>'taskEditMultiple',
     'req'=>'pages/task_more.inc.php',
@@ -545,10 +549,6 @@ new PageHandle(array('id'=>'taskViewEfforts',
     'valid_for_crawlers'=>false,
 ));
 
-new PageHandleSubm(array('id'=>'taskEditSubmit',
-    'req'=>'pages/task_more.inc.php',
-
-));
 new PageHandleFunc(array('id'=>'tasksDelete',
     'req'=>'pages/task_more.inc.php',
     'title'=>__('Delete Task(s)'),
@@ -563,13 +563,25 @@ new PageHandleFunc(array('id'=>'tasksUndelete',
 ));
 
 new PageHandleFunc(array('id'=>'tasksMoveToFolder',
-    'req'=>'pages/task_more.inc.php',
+    'req'=>'pages/task_move.inc.php',
     'title'=>__('Move tasks to folder'),
-
 
     'test'=>'yes',
     'test_params'=>array('tsk'=>'_taskView_',),
 ));
+
+new PageHandle(array('id'=>'ajaxListProjectFolders',
+    'req'=>'pages/task_move.inc.php',
+    'test'=>'no',
+    'valid_for_crawlers'=>false,
+    'valid_params'=> array('prj'=>'\d+'),
+
+));
+
+
+
+
+
 new PageHandleFunc(array('id'=>'tasksComplete',
     'req'=>'pages/task_more.inc.php',
     'title'=>__('Mark tasks as Complete'),
