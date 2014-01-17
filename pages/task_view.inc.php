@@ -67,6 +67,7 @@ function TaskView()
             $page->title_minor_html .= ' ' . sprintf(__('(deleted %s)','page title add on with date of deletion'),renderTimestamp($task->deleted));
         }
 
+
         ### page functions ###
         if($project->isPersonVisibleTeamMember($auth->cur_user)) {
             if($editable) {

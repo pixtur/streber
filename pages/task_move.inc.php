@@ -217,6 +217,12 @@ function _moveTask($task_id, $target_project_id, $target_task_id)
             }
         }
 
+        ### move subtasks
+        foreach($task->getSubtasksRecursiveAll(array('visible_only'=>true, 'alive_only'=>false)) as $subtask) {                    
+            _moveTask($subtask->id, $target_project_id, $subtask->parent_task);
+        }
+
+
         ### move linked issue
         if($task->issue_report) {
             $task->issue_report->project = $target_project_id;
@@ -256,8 +262,6 @@ function _isTaskInList($task, $list_of_tasks)
     }
     return false;
 }
-
-
 
 
 /**
@@ -317,12 +321,7 @@ function ajaxListProjectFolders()
 
     echo __("(or select nothing to move to project root)"). "<br> ";
     echo "<input type=hidden name='project' value='$project->id'>";
-
 }
-
-
-
-
 
 
 ?>

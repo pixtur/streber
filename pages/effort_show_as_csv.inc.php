@@ -123,10 +123,8 @@ function effortShowAsCSV()
                             $durationInMinutes=round( ( (strToGMTime($e->time_end) - strToGMTime($e->time_start))/60),0);
                             $roundUpTo15 =  ceil($durationInMinutes / 15)*15/60;
                             $overallDuration += $roundUpTo15;
-                            echo $roundUpTo15;
+                            echo number_format ( $roundUpTo15 , 2 , $dec_point = ',' ,'' );
                             break;
-                                            
-                        
                     }
                     $separator="\t";                    
                 }
@@ -139,101 +137,6 @@ function effortShowAsCSV()
         
         
         $block->render_blockEnd();
-        
-            
-        /*
-        $form = new PageForm();
-        $form->button_cancel = true;
-        
-        ### status ###
-        {
-            $st = array();
-            foreach($g_effort_status_names as $key=>$value) {
-                    $st[$key] = $value;
-            }
-            if(isset($different_fields['status'])) {
-                $st[-1]= ('-- ' . __('keep different'). ' --');
-                $form->add(new Form_Dropdown('effort_status',__("Status"),array_flip($st), -1));
-            }
-            else {
-                $form->add(new Form_Dropdown('effort_status',__("Status"),array_flip($st), $efforts[0]->status));
-            }
-        }
-        
-        ### get meta-tasks / folders ###
-        $folders= Task::getAll(array(
-            'sort_hierarchical'=>true,
-            'parent_task'=> 0,
-            'show_folders'=>true,
-            'folders_only'=>false,
-            'status_min'=> STATUS_UPCOMING,
-            'status_max'=> STATUS_CLOSED,
-            'project'=> $project->id,
-
-        ));
-        if($folders) {
-            $folder_list = array("undefined"=>"0");
-
-            if($effort->task) {
-                if($task = Task::getVisibleById($effort->task)) {
-                    ### add, if normal task (folders will added below) ###
-                    if(! $task->category == TCATEGORY_FOLDER) {
-                        $folder_list[$task->name] = $task->id;
-                    }
-                }
-            }
-
-            foreach($folders as $f) {
-                $str = '';
-                foreach($f->getFolder() as $pf) {
-                    $str.=$pf->getShort(). " > ";
-                }
-                $str .= $f->name;
-
-                $folder_list[$str] = $f->id;
-
-            }
-            
-            if(isset($different_fields['task'])) {
-                $folder_list[('-- ' . __('keep different'). ' --')] = -1;
-                $form->add(new Form_Dropdown('effort_task',__("For task"),$folder_list,  -1));
-            }
-            else {
-                $form->add(new Form_Dropdown('effort_task',__("For task"),$folder_list, $efforts[0]->task));
-            }
-
-        }
-        
-        ### public level ###
-        {
-            if(($pub_levels = $effort->getValidUserSetPublicLevels()) && count($pub_levels)>1) {
-                if(isset($different_fields['pub_level'])) {
-                    $pub_levels[('-- ' . __('keep different'). ' --')] = -1;
-                    $form->add(new Form_Dropdown('effort_pub_level',__("Publish to"),$pub_levels,  -1));
-                }
-                else {
-                    $form->add(new Form_Dropdown('effort_pub_level',__("Publish to"),$pub_levels,$efforts[0]->pub_level));
-                }
-            }
-        }
-        
-        $number = 0;
-        foreach($efforts as $e){
-            $form->add(new Form_HiddenField("effort_id_{$number}",'',$e->id));
-            $number++;
-        }
-        
-        $form->add(new Form_HiddenField("number",'',$number));
-        
-        echo($form);
-        
-        $block->render_blockEnd();
-        
-        $PH->go_submit = 'effortEditMultipleSubmit';
-        if($return = get('return')) {
-            echo "<input type=hidden name='return' value='$return'>";
-        }
-        */
     }
     
     echo (new PageContentClose);

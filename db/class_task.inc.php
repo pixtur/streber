@@ -351,7 +351,6 @@ foreach($filters_str as $fs=>$value) {
 
     function getSubtasksRecursive()
     {
-
         if(!$project = Project::getById($this->project)) {
             $PH->abortWarning(__("task without project?"), ERROR_BUG);
         }
@@ -374,6 +373,26 @@ foreach($filters_str as $fs=>$value) {
         }
         return $tasks;
     }
+
+
+    function getSubtasksRecursiveAll($options)
+    {
+        $tasks = array();
+
+        $options['parent_task'] = $this->id;
+
+        foreach(Task::getAll($options) as $subtask) {
+            $tasks[]= $subtask;
+            if($subtask->category == TCATEGORY_FOLDER) {
+                foreach($subtask->getSubtasksRecursiveAll($options) as $subfolder) {
+                    $tasks[]= $subfolder;
+                }
+            }
+        }
+        return $tasks;
+    }
+
+
 
 
 
