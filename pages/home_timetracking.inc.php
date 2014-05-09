@@ -147,9 +147,14 @@ function ajaxUserEfforts()
     global $PH;
     global $auth;
     require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
+        
+    $efforts= Effort::getAll(array(
+        'person'=> $auth->cur_user->id,
+        'effort_time_min'=> getGMTString( (time() - 7 * 24 * 60*60 )),        
+    ));
     
     $result = array();
-    foreach( $auth->cur_user->getEfforts() as $e ) {
+    foreach( $efforts as $e ) {
         $p= Project::getById($e->project);
         
         $task_name="";

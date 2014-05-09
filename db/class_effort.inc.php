@@ -212,6 +212,8 @@ class Effort extends DbProjectItem
         $search             = NULL;       # search query
         $effort_status_min  = NULL;
         $effort_status_max  = NULL;
+        $effort_date_min  = NULL;
+        $effort_date_max  = NULL;
 
         ### filter params ###
         if($args) {
@@ -256,6 +258,13 @@ class Effort extends DbProjectItem
             ? "AND e.status <= ' ". asCleanString($effort_status_max) . "'"
             : '';
 
+        $str_effort_time_min= $effort_time_min
+            ? "AND e.time_start >= ' ". asCleanString($effort_time_min) . "'"
+            : '';
+
+        $str_effort_time_max= $effort_time_max
+            ? "AND e.time_end <= ' ". asCleanString($effort_time_max) . "'"
+            : '';
 
         $str_task= !is_null($task)
             ? 'AND e.task=' . intval($task)
@@ -304,6 +313,8 @@ class Effort extends DbProjectItem
                  $str_date_min
                  $str_status_max
                  $str_status_min
+                 $str_effort_time_min
+                 $str_effort_time_max
                  $str_match
 
             ". getOrderByString($order_by)
