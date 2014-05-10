@@ -39,12 +39,13 @@ div.details-container .content {
 }
 
 .projViewTasks li {
+  font-weight:normal;
   list-style-position: inside;
   list-style:none;
   /*border: 1px solid #89B;*/
   /*background: #BCE;*/
   margin-left:-3px;
-  padding: 8px 4px 14px 17px;
+  padding: 6px 4px 4px 17px;
   /*margin: 2px 0;*/
   /*width: 275px;*/
   cursor: move;
@@ -64,6 +65,7 @@ div.details-container .content {
   display:block;
   font-size:10px;
   color:#888;
+  font-weight: lighter;
 }
 
 .projViewTasks li.selected {

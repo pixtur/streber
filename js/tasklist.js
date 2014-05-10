@@ -16,39 +16,37 @@
 
 function selectListEntry(elem)
 {
+   $('li.selected').removeClass('selected');
+   $(elem).addClass('selected');
 
+   $.post('index.php?go=taskAjax',{
+     go: 'taskAjax',
+     tsk: $(elem).data('id')
+   }, function(str) {
+       $('.details-container').html(str);
+       $('.details-container div.wiki.editable').each(function() {
+           aj= new AjaxWikiEdit(this);
+           ajax_edits.push(aj);
+           this.ajax_edit= aj;
+       });
+       $('.details-container h3.editable').each(function() {         
+         aj= new AjaxTextFieldEdit(this);         
+         this.ajax_edit= aj;
+       });
+   });
 }
 
 jQuery(function($){
    $('li')
       .click(function() 
       {
-         $('li.selected').removeClass('selected');
-         $(this).addClass('selected');
-
-         $.post('index.php?go=taskAjax',{
-           go: 'taskAjax',
-           tsk: $(this).data('id')
-         }, function(str) {
-             $('.details-container').html(str);
-             $('.details-container div.wiki.editable').each(function() {
-                 aj= new AjaxWikiEdit(this);
-                 ajax_edits.push(aj);
-                 this.ajax_edit= aj;
-             });
-             $('.details-container h3.editable').each(function() {
-               console.log(this);
-               aj= new AjaxTextFieldEdit(this);
-               //ajax_edits.push(aj);
-               this.ajax_edit= aj;
-             });
-
-         });
+         selectListEntry(this);
       })       
       .drag("start",function( ev, dd )
       {
          $(this)
             .css("opacity", 0.1);
+         selectListEntry(this);
          return $( this ).clone()
             .css("opacity", .75 )
             .addClass("proxy")
