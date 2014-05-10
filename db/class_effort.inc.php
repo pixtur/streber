@@ -212,8 +212,8 @@ class Effort extends DbProjectItem
         $search             = NULL;       # search query
         $effort_status_min  = NULL;
         $effort_status_max  = NULL;
-        $effort_date_min  = NULL;
-        $effort_date_max  = NULL;
+        $effort_time_min  = NULL;
+        $effort_time_max  = NULL;
 
         ### filter params ###
         if($args) {
