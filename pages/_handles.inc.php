@@ -349,8 +349,9 @@ new PageHandle(array('id'=>'projViewChanges',
     'test_params'=>array('prj'=>'_projectView_',),
     'valid_for_crawlers'=>false,
 ));
+
 new PageHandle(array('id'=>'projViewTasks',
-    'req'=>'pages/project_view_tasks.inc.php',
+    'req'=>'pages/project_view_tasks_in_groups.inc.php',
     'title'=>__('Tasks'),
     'valid_params'=>array(  'from'=>'.*',
                             'prj'=>'\d*',
@@ -754,28 +755,6 @@ new PageHandleForm(array('id'=>'taskEditDescription',
 new PageHandleSubm(array('id'=>'taskEditDescriptionSubmit',
     'req'=>'pages/task_more.inc.php',
 
-));
-
-new PageHandleForm(array('id'=>'taskNoteOnPersonNew',
-    'req'=>'pages/task_more.inc.php',
-    'title'=>__('Create Note'),
-    'test'=>'yes',
-    'test_params'=>array('tsk'=>'_taskNoteOnPersonNew_',),
-));
-
-new PageHandleForm(array('id'=>'taskNoteOnPersonEdit',
-    'req'=>'pages/task_more.inc.php',
-    'title'=>__('Edit Note'),
-    'test'=>'yes',
-    'test_params'=>array('tsk'=>'_taskNoteOnPersonEdit_',),
-));
-
-new PageHandleSubm(array('id'=>'taskNoteOnPersonEditSubmit',
-    'req'=>'pages/task_more.inc.php',
-    'title'=>__('Edit Note'),
-
-    'test'=>'yes',
-    'test_params'=>array('tsk'=>'_taskNoteOnPersonEdit_',),
 ));
 
 /**

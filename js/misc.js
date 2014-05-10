@@ -181,7 +181,7 @@ function misc()
     * init ajaxEdits
     */
     $('div.wiki.editable').each(function() {
-        aj= new AjaxEdit(this);
+        aj= new AjaxWikiEdit(this);
         ajax_edits.push(aj);
         this.ajax_edit= aj;
     });    
@@ -222,7 +222,7 @@ function getMoreChanges(project, start, count)
 * 
 * read more documentation at http://www.streber-pm.org/3695
 */
-function AjaxEdit(dom_element, item_id, field)
+function AjaxWikiEdit(dom_element, item_id, field)
 {
     this.dom_element    = dom_element;
     this.item_id        = item_id || 0;
@@ -285,6 +285,65 @@ function AjaxEdit(dom_element, item_id, field)
     }
     this.initEditChapters();
 }
+
+function AjaxTextFieldEdit(dom_element, item_id, field_name)
+{
+    this.dom_element    = dom_element;
+    this.item_id        = item_id || 0;
+    this.field_name     = field_name || 0;
+
+    if(!dom_element)
+        return;
+
+    if($(dom_element).attr('item_id')) {
+        this.item_id= $(dom_element).attr('item_id');
+    }
+    else {
+        alert("Warning: no item id for ajax editing!");
+        return;
+    }
+
+    if(this.dom_element.attributes['field_name']) {
+        this.field_name= this.dom_element.attributes['field_name'].value;
+    }
+    else {
+        console.log("Error: Can't get field_name for ajax editing", this);
+        return;
+    }
+
+    this.init = function()
+    {
+        if(!this.dom_element) {
+            alert("no dom element");
+            return;
+        }
+
+        $(this.dom_element).addClass('edit_chapter');
+        $(this.dom_element).attr('title', 'Doubleclick to edit');        
+        
+        $(this.dom_element).editable('index.php?go=itemSaveField&item=' + this.item_id + '&field=' + this.field_name , {
+            loadurl:'index.php?go=itemLoadField&item=' + this.item_id + '&field=' + this.field_name ,
+            type:'text',
+            submit:'Save',
+            cancel:'Cancel',
+            obj:dom_element,
+            placeholder:'',
+            autoheight:true,
+            onblur:'ignore',
+            event:'click',
+            callback:function(value, settings){
+              $(this).html( value );         
+            }
+        });
+        
+    }
+    this.init();
+}
+
+
+
+
+
 
 /**
 * initialize handlers for autocompletion input fields on startup

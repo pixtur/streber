@@ -68,19 +68,6 @@ function personView()
 
             ### page functions ###
             $page->add_function(new PageFunction(array(
-                'target'=>'taskNoteOnPersonNew',
-                'params'=>array('person'=>$person->id),
-                'tooltip'=>__('Add task for this people (optionally creating project and effort on the fly)','Tooltip for page function'),
-                'name'=>__('Add note','Page function person'),
-            )));
-            #$page->add_function(new PageFunction(array(
-            #'target'    =>'personLinkCompanies',
-            #'params'    =>array('person'=>$person->id),
-            #'tooltip'   =>__('Add existing companies to this person'),
-            #'name'      =>__('Companies'),
-            #)));
-
-            $page->add_function(new PageFunction(array(
                 'target'=>'personEdit',
                 'params'=>array('person'=>$person->id),
                 'icon'=>'edit',

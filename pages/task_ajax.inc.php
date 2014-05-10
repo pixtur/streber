@@ -38,9 +38,11 @@ function taskAjax()
             echo "Failure";
             return;
         }
-        echo "<h3>". asHtml($task->name)."</h3>";
+        echo "<div class='content'>";
+        echo "<h3 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h3>";
 
         echo  wikifieldAsHtml($task, 'description');
+        echo "</div>";
     }
 }
 

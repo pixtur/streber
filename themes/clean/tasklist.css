@@ -1,0 +1,87 @@
+/*body {
+    height:100%;
+}
+*/
+.projViewTasks {
+    background-image:none;  
+}
+
+div.details-container {
+  background-color:#fff;
+  box-shadow: rgba(0,0,0,0.3) 0px 3px 8px;
+  float:right;
+  width:60%;
+
+  bottom:0px;
+  height:900px;
+  
+  top:60px;
+  right:0;
+}
+
+
+
+div.details-container div.page-functions {
+  border-bottom:1px solid #888;
+  padding:3px;
+  line-height:25px;
+}
+
+div.details-container .content {
+  padding:3px;
+}
+
+
+.projViewTasks ol {
+  /*float: left;*/
+  margin: 0 40px 0 0;
+  padding: 0;
+}
+
+.projViewTasks li {
+  list-style-position: inside;
+  list-style:none;
+  /*border: 1px solid #89B;*/
+  /*background: #BCE;*/
+  margin-left:-3px;
+  padding: 8px 4px 14px 17px;
+  /*margin: 2px 0;*/
+  /*width: 275px;*/
+  cursor: move;
+  width:43%;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; 
+}
+
+.projViewTasks .proxy,
+.projViewTasks li:hover {
+  background-image:url(layout/bg_reorder_draghandle.png);
+  background-repeat:  no-repeat;
+  background-position: center left;
+}
+
+.projViewTasks li small {
+  display:block;
+  font-size:10px;
+  color:#888;
+}
+
+.projViewTasks li.selected {
+  background-color:#fff;
+  border:none;
+  box-shadow: rgba(0,0,0,0.3) -1px 1px 3px;
+}
+
+.projViewTasks .dragging {
+   background-color: #BEE;
+   border-color: #8BB;
+   
+}
+
+.projViewTasks .proxy {
+   position:absolute;
+   background-color: #fff;
+  box-shadow: rgba(0,0,0,0.3) -1px 1px 3px;  
+}
+
+

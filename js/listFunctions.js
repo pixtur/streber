@@ -180,7 +180,7 @@ function listFunctions()
                             $('#sideboard').addClass('sideboardOn');                        
                             $('#outer').addClass('sideboardOn');
                             $('#sideboard div.wiki.editable').each(function() {
-                                aj= new AjaxEdit(this);
+                                aj= new AjaxWikiEdit(this);
                                 ajax_edits.push(aj);
                                 this.ajax_edit= aj;
                             });
