@@ -47,4 +47,62 @@ function taskAjax()
 }
 
 
+/**
+* Sets the order inside a group
+*       $('#sideboard div').post('index.php',{
+*        go: 'taskSetOrderId',
+*        task_id: id,
+*        order_id: ,
+*        milestone_id: ,
+*       });
+* true on success / error-message on failure
+* Returns
+*/
+function taskSetOrderId() 
+{
+    $milestone_id   = intval(get('milestone_id'));
+    $task_id        = intval(get('task_id'));
+    $order_id       = intval(get('order_id'));
+
+    if($task_id == 0) {
+        echo json_encode( array( 'error' => "Task Id missing" ));
+        return false;
+    }
+    
+    if(!$task = Task::getVisibleById($task_id)) {
+        echo json_encode(array( 'error' => "Task inaccessible" ));    
+        return false;
+    }
+
+    $tasks = Task::getAll(array(
+        'for_milestone' => $milestone_id,
+        'order_by'      => 'order_id',
+        'category' => $task->category,
+    ));
+
+    $index=0;
+
+    foreach( $tasks as $task_entry )
+    {
+        if( $index == $order_id)
+        {
+            $task->order_id = $order_id;
+            $task->update(array('order_id'), false);            
+            $index++; 
+        }
+
+        if( $task_entry->id == $task->id) {
+            continue;
+        }
+        else {
+            $task_entry->order_id = $index;            
+            $task_entry->update(array('order_id'), false);
+            $index++;     
+        }         
+    }
+    
+    echo json_encode(array('succes'=> "updated $index elements"));    
+    return true;
+}
+
 ?>

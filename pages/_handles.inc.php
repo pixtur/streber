@@ -1452,6 +1452,12 @@ new PageHandle(array('id'=>'taskAjax',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'taskSetOrderId',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__('Task Test'),
+    'valid_for_crawlers'=>false,
+));
+
 
 new PageHandle(array('id'=>'itemLoadField',
     'req'=>'pages/item_ajax.inc.php',

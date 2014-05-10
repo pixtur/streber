@@ -111,6 +111,7 @@ function projViewTasks()
         'status_min'=> 0,
         'status_max'=> 10,
         'for_milestone' => 0,
+        'order_by'=>'order_id',
     ));
 
     renderTaskGroup($tasks, "Without Group");
@@ -133,6 +134,7 @@ function projViewTasks()
             'status_min'=> 0,
             'status_max'=> 10,
             'for_milestone' => $milestone->id,
+            'order_by' => 'order_id',
         ));        
         renderTaskGroup($tasks, $milestone->name);
     }
@@ -150,7 +152,7 @@ function renderTaskGroup($tasks, $title)
     echo "<ol>";
     foreach($tasks as $task ) {
         echo "<li data-id='". $task->id. "'>".$task->name;
-        echo "<small>blabl</small>";
+        echo "<small>#$task->order_id</small>";
         echo "</li>";
     }
 

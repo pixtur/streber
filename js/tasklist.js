@@ -82,6 +82,16 @@ jQuery(function($){
             }            
          })
          $( this ).removeClass('dragging');
+
+         $.post('index.php',{
+            go: 'taskSetOrderId',
+            task_id: $(e).data('id'),
+            order_id: $(e).index(),
+            milestone_id: 0
+         }, 
+         function(result) {
+            console.log(result);
+         });
       })
       .drop("init",function( ev, dd ){
          return !( this == dd.drag );
