@@ -88,18 +88,23 @@ function NewTaskLine(dom_element)
                project_id:   $(_self.ol).parent('div').data('project-id'),
                order_id:     order_id,               
             }, function(str) {
-               console.log(str);
-               _self.ol.append(str);
+               console.log(str);               
+
+               var newLine = $(str);
+               _self.ol.append(newLine);
+               selectListEntry(newLine);
+               makeListItemResortable(newLine);
+
+               _self.activateNewTaskLine();
             });
          });      
    }
 }
 
 
-
-jQuery(function($){
-   $('li')
-      .click(function() 
+function makeListItemResortable(item)
+{
+      $(item).click(function() 
       {
          selectListEntry(this);
       })       
@@ -164,4 +169,10 @@ jQuery(function($){
          return this.contains( target, [ event.pageX, event.pageY ] );
       }
    });
+}
+
+jQuery(function($){
+   $('li').each(function() {
+       makeListItemResortable(this);
+   } );
 });

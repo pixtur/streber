@@ -154,14 +154,21 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id)
     echo "<h2>$title</h2>";
     echo "<ol class='sortable'>";
     foreach($tasks as $task ) {
-        echo "<li data-id='{$task->id}'>";
-        echo "<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>";
-        echo "<small>#$task->order_id</small>";
-        echo "</li>";
+        echo buildListEntryForTask($task);
     }
     echo "</ol>";
     echo "<a class='new-task'>".__("Add task") . "</a>";
     echo "</div>";
 }
+
+function buildListEntryForTask($task) 
+{
+    return 
+     "<li data-id='{$task->id}'>"
+    ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
+    ."<small>#$task->order_id</small>"
+    ."</li>";
+}
+
 
 ?>

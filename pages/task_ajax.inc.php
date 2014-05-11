@@ -60,7 +60,9 @@ function taskAjax()
 *       });
 */
 function taskAjaxCreateNewTask() 
-{    
+{
+    require_once(confGet('DIR_STREBER') . "pages/project_view_tasks_in_groups.inc.php");
+
     $new_task = new Task(array(
             'id'            => 0,
             'project'       => intval(get('project_id')),
@@ -73,7 +75,8 @@ function taskAjaxCreateNewTask()
         print json_encode(array("error" => "Failed to create new task"));
         return;
     }
-    print "<li>". $new_task->getLink(). "</li>";
+    print buildListEntryForTask($new_task);    
+    return true;
 }
 
 
