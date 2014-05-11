@@ -74,6 +74,8 @@ function itemSaveField()
         return;
     }
 
+    $plainmode = get('plain'); // without wiki formatting
+
     if(!$item_id=get('item')) {
         print "Failure";
         return;
@@ -156,7 +158,14 @@ function itemSaveField()
             $parent_task->nowChangedByUser();
         }
     }
-    print wiki2purehtml($object->$field_name); 
+
+    if($plainmode) {
+        print $object->$field_name;
+    }
+    else {
+        print wiki2purehtml($object->$field_name);     
+    }
+    
     $item->nowChangedByUser();
 }
 

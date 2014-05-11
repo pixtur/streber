@@ -151,7 +151,8 @@ function renderTaskGroup($tasks, $title)
     echo "<h2>Without group</h2>";
     echo "<ol>";
     foreach($tasks as $task ) {
-        echo "<li data-id='". $task->id. "'>".$task->name;
+        echo "<li data-id='{$task->id}'>";
+        echo "<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>";
         echo "<small>#$task->order_id</small>";
         echo "</li>";
     }

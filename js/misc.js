@@ -288,6 +288,7 @@ function AjaxWikiEdit(dom_element, item_id, field)
 
 function AjaxTextFieldEdit(dom_element, item_id, field_name)
 {
+    var _self =this;
     this.dom_element    = dom_element;
     this.item_id        = item_id || 0;
     this.field_name     = field_name || 0;
@@ -321,18 +322,33 @@ function AjaxTextFieldEdit(dom_element, item_id, field_name)
         $(this.dom_element).addClass('edit_chapter');
         $(this.dom_element).attr('title', 'Doubleclick to edit');        
         
-        $(this.dom_element).editable('index.php?go=itemSaveField&item=' + this.item_id + '&field=' + this.field_name , {
-            loadurl:'index.php?go=itemLoadField&item=' + this.item_id + '&field=' + this.field_name ,
+
+        $(this.dom_element).editable('index.php?go=itemSaveField&item=' + this.item_id + '&field=' + this.field_name + "&plain=42", {
+            loadurl:'index.php?go=itemLoadField&item=' + this.item_id + '&field=' + this.field_name + "&plain=true" ,
             type:'text',
             submit:'Save',
             cancel:'Cancel',
             obj:dom_element,
             placeholder:'',
+            chapter:null,
             autoheight:true,
             onblur:'ignore',
             event:'click',
+
+            
             callback:function(value, settings){
-              $(this).html( value );         
+                
+                $(this).html( value );
+
+                //--- update linked itemfields
+                $('.itemfield').each(function(e) {
+                //console.log( this, $(this).attr('item_id'));
+
+
+                    if($(this).attr('item_id')== _self.item_id && $(this).attr('field_name') == _self.field_name) {
+                        $(this).html(value);
+                    }
+                });                         
             }
         });
         
