@@ -96,8 +96,10 @@ function projViewTasks()
         ### render title ###
         echo(new PageHeader);
         echo "<div class='details-container'>";
-        echo "<div class='page-functions'>blabla bla</div>";
-        echo "here be dragons";
+        echo "<div class='tip'>";
+        echo __("Select a task from the left");
+        echo "</div>";
+        
         echo "</div>";
     }
     echo (new PageContentOpen);

@@ -46,7 +46,9 @@ function taskRenderDetailsViewResponse()
         // Note: the task_id of the following h2 is also used for the comment form
         echo "<h2 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h2>";
 
-        echo  wikifieldAsHtml($task, 'description');
+        echo  wikifieldAsHtml($task, 'description', array(
+                                'empty_text'=> "[quote]" . __("This task does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
+                            ));
         echo "</div>";
 
         renderComments($task);

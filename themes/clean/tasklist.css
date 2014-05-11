@@ -75,7 +75,16 @@ div.details-container .content-section textarea {
 }
 
 
+div.details-container .tip {
+  font-style: italic;
+  color:#ccc;
+  font-weight: lighter;
+  text-align: center;
+  font-family: Georgia;
+  padding-top:14em;
+  font-size:20px;
 
+}
 
 
 div.details-container .content {
