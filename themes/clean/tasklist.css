@@ -19,6 +19,42 @@ div.details-container {
   right:0;
 }
 
+div.details-container .content-section {
+  border-top:1px solid #ccc;
+  padding:10px 5px 13px 13px; 
+}
+
+
+div.details-container .content-section h3 {  
+  font-weight: lighter;
+  color:#666;
+  font-size:20px;
+}
+
+div.details-container .content-section .post_list_entry h4 {
+  font-size:50px;
+  margin-bottom:3px;
+  margin-top:10px;
+  font-weight: lighter;
+  font-size:14px;
+  color:#888;
+}
+
+div.details-container .content-section .post_list_entry h4 .new {
+  font-weight:normal;
+}
+
+div.details-container .content-section .post_list_entry h4 .author {
+  font-weight: bold;
+}
+
+div.details-container .content-section .post_list_entry .additional {
+  visibility: hidden;
+}
+
+div.details-container .content-section .post_list_entry:hover .additional {
+  visibility: visible;
+}
 
 
 div.details-container div.page-functions {
@@ -26,6 +62,21 @@ div.details-container div.page-functions {
   padding:3px;
   line-height:25px;
 }
+
+
+
+
+
+div.details-container .content-section textarea {
+  border-radius:4px;
+  border-color:#ccc;
+  width:80%;
+  margin-top:20px;
+}
+
+
+
+
 
 div.details-container .content {
   padding:3px;
@@ -63,7 +114,7 @@ div.details-container .content {
 
 .sortable li small {
   display:block;
-  font-size:10px;
+  font-size:9px;
   color:#888;
   font-weight: lighter;
 }
@@ -78,6 +129,11 @@ div.details-container .content {
    background-color: #BEE;
    border-color: #8BB;
    
+}
+
+.sortable li.isDone {
+  text-decoration:line-through;
+  color:#aaa;  
 }
 
 .projViewTasks .proxy {

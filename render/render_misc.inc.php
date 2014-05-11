@@ -210,34 +210,8 @@ function initPageForTask($page, $task, $project=NULL)
 	if($task->id) {
         $page->title_minor_html= $PH->getLink('taskView', sprintf('#%d', $task->id), array('tsk'=>$task->id));
 	}
-    
-    /**
-    * render html buffer with page type of this task, including parent folders
-    * and type and status.
-    *
-    * - This is the tiny text about the page title.
-    */
-    {
-        global $g_status_names;
-        $type ="";
-
-        $status=  $task->status != STATUS_OPEN && isset($g_status_names[$task->status])
-               ?  ' ('.$g_status_names[$task->status] .')'
-               :  '';
-
-        $label=  $task->getLabel();
-        if(!$label) {
-            $label= __("Task");
-        }
-
-        if($folder= $task->getFolderLinks()) {
-            $type = $folder ." &gt; " . $label . '  '. $status ;
-        }
-        else {
-            $type =  $label .' ' . $status;
-        }
-        $page->type = $type;
-    }
+            
+    $page->type = $task->buildTypeText();;    
 }
 
 

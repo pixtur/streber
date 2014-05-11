@@ -16,13 +16,14 @@ require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
 *
 * the output of this function could be requested with jquery like:
 *
-*       $('#sideboard div').load('index.php?go=taskAjax',{
-*        go: 'taskAjax',
+*       $('#sideboard div').load('index.php',{
+*        go: 'taskRenderDetailsViewResponse',
 *        tsk: id
 *       });
 */
-function taskAjax()
+function taskRenderDetailsViewResponse()
 {
+
     if($task_id=intval(get('tsk'))) {
         require_once("render/render_wiki.inc.php");
 
@@ -38,14 +39,137 @@ function taskAjax()
             echo "Failure";
             return;
         }
-        echo "<div class='content'>";
-        echo "<h3 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h3>";
+        echo "<div class='content-section'>";
+
+        echo "<a href='{$task->getUrl()}'>bla</a>";
+
+        echo "<h2 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h2>";
 
         echo  wikifieldAsHtml($task, 'description');
         echo "</div>";
+
+        renderComments($task);
+    
+
     }
 }
 
+function renderComments($task)
+{
+    global $PH;
+    global $auth;
+
+    require_once(confGet('DIR_STREBER') . 'blocks/comments_on_item_block.inc.php');
+    require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
+
+    $comments = $task->getComments(array('order_by'=>'created'  ));
+    echo "<div class='content-section'>";
+    echo "<h3>";
+    echo __("Discussion");
+        // echo $comments ? sprintf(__("%s Comments"), count($comments))
+        //                : __("No Comments"); 
+    echo "</h3>";
+
+                        
+    
+    foreach($comments as $c) {                        
+        $is_comment_editable= ($auth->cur_user->user_rights & RIGHT_EDITALL) || ($c->created_by == $auth->cur_user->id);
+
+        if(! $creator= Person::getVisibleById($c->created_by) ) {
+            continue;
+        }
+                    
+        echo "<div class='post_list_entry'>";
+        echo "<h4>";
+        echo "<span class='author'>";
+        if($c->created_by == $auth->cur_user->id) {
+            echo $creator->nickname;
+        } 
+        else {
+            echo $creator->getLink();
+        }
+        echo "</span>";
+        echo ", ";
+        
+        #echo asHtml($c->name);
+
+        $newOrChanged = $c->isChangedForUser();
+        $versions= ItemVersion::getFromItem($c);
+        $hasBeenEdited = count($versions) > 1;
+
+        /*
+        if($new= ) {
+            if($new == 1) {
+                echo '<span class=new> (' . __('New') . ') </span>';
+            }
+            else {
+                echo '<span class=new>  (' . __('Updated') . ') </span>';
+            }
+        }*/
+      
+        /**
+        * timestamp is either...
+        *  rainer, 54 min ago                     (the timestamp in orange if new)
+        *  rainer, 54 min ago (editted just now)  (the 2nd timestamp in orange if new)
+        */
+
+        if(!$hasBeenEdited) {
+            echo "<span class='new'>";
+            echo renderTimeAgo($c->created); 
+            echo "</span>";
+        }
+        else {
+            echo renderTimeAgo($c->created); 
+
+            echo "<span class='additional'> (" . $PH->getLink('itemViewDiff', 
+                __("editted"), 
+                array('item' => $c->id)
+            ); 
+            echo " <span class='new'>". renderTimeAgo($c->modified) . "</span>";
+            echo ") ";    
+            echo "</span>";
+        }
+
+        
+        if($c->pub_level != PUB_LEVEL_OPEN)
+        {
+            echo ' - '. sprintf(__("visible as %s"), renderPubLevelName($c->pub_level));
+
+            ### publish ###
+            if( 
+                ($parent_task= Task::getEditableById($c->task))
+                && ($c->pub_level < PUB_LEVEL_OPEN) 
+            ) {
+                echo " - " .  $PH->getLink('itemsSetPubLevel', __('Publish'), array( 'item'=>$c->id, 'item_pub_level'=>PUB_LEVEL_OPEN));
+            }
+        }
+
+        ### delete
+        if( $is_comment_editable) {
+            echo "<span class='additional'> - " .  $PH->getLink('commentsDelete', __('Delete'), array('comment'=>$c->id)) . "</span>";
+        }
+        //echo "</p>";
+        echo "</h4>";
+        
+        if($is_comment_editable) {
+            echo wikifieldAsHtml($c, 'description');
+        }
+        else {
+            echo wikifieldAsHtml($c, 'description', array('editable'=>false));
+        }
+    
+        echo "</div>";
+        $c->nowViewedByUser();
+    }   
+
+    if($task->isEditable()){
+        echo "<textarea placeholder='Add comment'></textarea>";
+        
+    }
+        
+        
+    echo "</div>";
+}
 
 
 
@@ -113,6 +237,8 @@ function taskSetOrderId()
         'for_milestone' => $milestone_id,
         'order_by'      => 'order_id',
         'category'      => $task->category,
+        'status_min'=> 0,
+        'status_max'=> 10,        
     ));
 
     $index=0;
@@ -123,17 +249,16 @@ function taskSetOrderId()
             $task->order_id = $order_id;
             $task->for_milestone = $milestone_id;
             $task->update(array('order_id','for_milestone'), false);
-            $index++; 
+            $index++;             
         }
 
         if( $task_entry->id == $task->id) {
             continue;
         }
-        else {
-            $task_entry->order_id = $index;            
-            $task_entry->update(array('order_id'), false);
-            $index++;     
-        }         
+        
+        $task_entry->order_id = $index;            
+        $task_entry->update(array('order_id'), false);
+        $index++;             
     }
     
     echo json_encode(array('succes'=> "updated $index elements"));    

@@ -163,10 +163,17 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id)
 
 function buildListEntryForTask($task) 
 {
+    $classIsDone = $task->isDone() ? "isDone":'';
+
+    $additionalInfo = $task->buildTypeText();
+    $comments = $task->getComments();
+    if( count($comments) ) {
+        $additionalInfo.= " / ". sprintf(__("%s comments"), count($comments));
+    }
     return 
-     "<li data-id='{$task->id}'>"
+     "<li data-id='{$task->id}' class='$classIsDone'>"
     ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
-    ."<small>#$task->order_id</small>"
+    ."<small>$additionalInfo</small>"
     ."</li>";
 }
 

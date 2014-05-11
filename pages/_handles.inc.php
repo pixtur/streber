@@ -1446,7 +1446,7 @@ new PageHandle(array('id'=>'search',
 /**
 * misc pages / ajax etc.
 */
-new PageHandle(array('id'=>'taskAjax',
+new PageHandle(array('id'=>'taskRenderDetailsViewResponse',
     'req'=>'pages/task_ajax.inc.php',
     'title'=>__(''),
     'valid_for_crawlers'=>false,

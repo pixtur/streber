@@ -1376,10 +1376,8 @@ foreach($filters_str as $fs=>$value) {
 	
 
     public function getLink($short_name= true, $strikeDone= true)
-    {
-        $style_isdone=   ($this->isOfCategory(array(TCATEGORY_TASK, TCATEGORY_BUG))) && ($strikeDone && $this->status >= STATUS_COMPLETED)
-                    ? 'isDone'
-                    : '';
+    {        
+        $style_isdone=   ($strikeDone && $this->isDone()) ? 'isDone' : '';
 
         global $PH;
         if($short_name) {
@@ -1390,6 +1388,45 @@ foreach($filters_str as $fs=>$value) {
         }
     }
 
+    public function isDone()
+    {
+        return ($this->isOfCategory(array(TCATEGORY_TASK, TCATEGORY_BUG))) && $this->status >= STATUS_COMPLETED;
+    }
+
+    public function getUrl()
+    {
+        global $PH;
+        return $PH->getUrl('taskView', array('tsk'=>$this->id));        
+    }
+
+    /**
+    * render html buffer with page type of this task, including parent folders
+    * and type and status.
+    *
+    * - This is the tiny text about the page title.
+    */
+    public function buildTypeText()
+    {
+        global $g_status_names;
+        $type ="";
+
+        $status=  $this->status != STATUS_OPEN && isset($g_status_names[$this->status])
+               ?  ' ('.$g_status_names[$this->status] .')'
+               :  '';
+
+        $label=  $this->getLabel();
+        if(!$label) {
+            $label= __("Task");
+        }
+
+        if($folder= $this->getFolderLinks()) {
+            $type = $folder ." &gt; " . $label . '  '. $status ;
+        }
+        else {
+            $type =  $label .' ' . $status;
+        }
+        return $type;
+    }
 
     public function getLabel()
     {

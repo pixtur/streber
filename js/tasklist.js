@@ -23,8 +23,8 @@ function selectListEntry(elem)
    $('li.selected').removeClass('selected');
    $(elem).addClass('selected');
 
-   $.post('index.php?go=taskAjax',{
-     go: 'taskAjax',
+   $.post('index.php',{
+     go: 'taskRenderDetailsViewResponse',
      tsk: $(elem).data('id')
    }, function(str) {
        $('.details-container').html(str);
@@ -104,64 +104,64 @@ function NewTaskLine(dom_element)
 
 function makeListItemResortable(item)
 {
-      $(item).click(function() 
-      {
-         selectListEntry(this);
-      })       
-      .drag("start",function( ev, dd )
-      {
-         $(this)
-            .css("opacity", 0.1);
-         selectListEntry(this);
-         return $( this ).clone()
-            .css("opacity", .75 )
-            .addClass("proxy")
-            .appendTo( this.parentNode );
-      
-      })
-      .drag(function( ev, dd ){
-         var drop = dd.drop[0],
-         method = $.data( drop || {}, "drop+reorder" );
-         $( dd.proxy ).css({
-            top: dd.offsetY
-            //left: dd.offsetX
-         });
+   $(item).click(function() 
+   {
+      selectListEntry(this);
+   })       
+   .drag("start",function( ev, dd )
+   {
+      $(this)
+         .css("opacity", 0.1);
+      selectListEntry(this);
+      return $( this ).clone()
+         .css("opacity", .75 )
+         .addClass("proxy")
+         .appendTo( this.parentNode );
    
-         
-         if ( drop && ( drop != dd.current || method != dd.method ) ){   
-            $( this )[ method ]( drop );
-            dd.current = drop;
-            dd.method = method;
-            dd.update();
-         }
-      })
-      .drag("end",function( ev, dd ){      
-         var finalPosY=  $(this).position().top; 
-         var e = this;
-         $( dd.proxy ).animate({
-            top: finalPosY
-         },{
-            duration: 100,
-            complete: function(){
-               $(this).remove();
-               $(e).css("opacity",1);
-            }            
-         })
-         $( this ).removeClass('dragging');
+   })
+   .drag(function( ev, dd ){
+      var drop = dd.drop[0],
+      method = $.data( drop || {}, "drop+reorder" );
+      $( dd.proxy ).css({
+         top: dd.offsetY
+         //left: dd.offsetX
+      });
 
-         $.post('index.php',{
-            go: 'taskSetOrderId',
-            task_id: $(e).data('id'),
-            order_id: $(e).index(),
-            milestone_id: $(e).parents('div.task-group').data('milestone-id'),
-         }, 
-         function(result) {
-            console.log(result);
-         });
+      
+      if ( drop && ( drop != dd.current || method != dd.method ) ){   
+         $( this )[ method ]( drop );
+         dd.current = drop;
+         dd.method = method;
+         dd.update();
+      }
+   })
+   .drag("end",function( ev, dd ){      
+      var finalPosY=  $(this).position().top; 
+      var e = this;
+      $( dd.proxy ).animate({
+         top: finalPosY
+      },{
+         duration: 100,
+         complete: function(){
+            $(this).remove();
+            $(e).css("opacity",1);
+         }            
       })
-      .drop("init",function( ev, dd ){
-         return !( this == dd.drag );
-      });   
+      $( this ).removeClass('dragging');
+
+      $.post('index.php',{
+         go: 'taskSetOrderId',
+         task_id: $(e).data('id'),
+         order_id: $(e).index(),
+         milestone_id: $(e).parents('div.task-group').data('milestone-id'),
+      }, 
+      function(result) {
+         console.log(result);
+      });
+   })
+   .drop("init",function( ev, dd ){
+      return !( this == dd.drag );
+   });   
    $.drop({
       tolerance: function( event, proxy, target ){         
          var test = event.pageY > ( target.top + target.height / 2 );
