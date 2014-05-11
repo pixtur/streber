@@ -36,13 +36,14 @@ function taskRenderDetailsViewResponse()
             $editable= true;
         }
         else if(!$task=Task::getVisibleById($task_id)) {
-            echo "Failure";
+            echo "Error: Can read Task #$task_id";
             return;
         }
         echo "<div class='content-section'>";
 
         echo "<a href='{$task->getUrl()}'>bla</a>";
 
+        // Note: the task_id of the following h2 is also used for the comment form
         echo "<h2 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h2>";
 
         echo  wikifieldAsHtml($task, 'description');
@@ -162,10 +163,12 @@ function renderComments($task)
         $c->nowViewedByUser();
     }   
 
+    echo "<div class='new-comment'>";
     if($task->isEditable()){
-        echo "<textarea placeholder='Add comment'></textarea>";
-        
+        echo "<textarea placeholder='Add comment'></textarea>";        
     }
+    echo "<button>" . __("Add Comment").  "</button>";
+    echo "</div>";
         
         
     echo "</div>";
@@ -203,6 +206,47 @@ function taskAjaxCreateNewTask()
     return true;
 }
 
+
+
+/**
+* Adds a comment to a task
+*       $.post('index.php',{
+*        go: 'taskAddComment',
+*        task_id: id,
+*        text: ,
+*       });
+*/
+function taskAddComment() 
+{
+    require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
+
+    $task_id = intval( get('task_id'));
+    if(!$task = Task::getEditableById($task_id)) {
+        echo json_encode(array('error' => "Task #$task_id is not editiable"));
+        return;
+    }
+
+    if(!$text = get('text')) {
+        echo json_encode(array('error' => "Text cannot be empty"));
+        return;
+    }
+    
+    $new_comment= new Comment(array(
+        'id'=>0,
+        'name'=>'',
+        'task' => $task_id,
+        'project' => $task->project,
+        'description' => $text,
+    ));
+
+    if($new_comment->insert()) {
+        echo json_encode(array('success'=>true));
+    }
+    else {
+        echo json_encode(array('error'=>"Unable to create comment"));
+    }
+    return true;
+}
 
 
 /**

@@ -1464,6 +1464,11 @@ new PageHandle(array('id'=>'taskAjaxCreateNewTask',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'taskAddComment',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__(''),
+    'valid_for_crawlers'=>false,
+));
 
 
 

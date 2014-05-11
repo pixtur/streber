@@ -17,27 +17,63 @@ $(function() {
    });
 });
 
+function updateDetailsContainer(str)
+{
+    $('.details-container').html(str);
+    $('.details-container div.wiki.editable').each(function() {
+        aj= new AjaxWikiEdit(this);
+        ajax_edits.push(aj);
+        this.ajax_edit= aj;
+    });
+
+    $('.details-container h2.editable').each(function() {         
+      aj= new AjaxTextFieldEdit(this);         
+      this.ajax_edit= aj;
+    });   
+
+   $('.details-container .new-comment button').hide();
+
+   $('.details-container .new-comment textarea')
+   .focus(function() {
+      $('.details-container .new-comment button')
+      .show()
+      .click(function(e) {
+         e.preventDefault();
+
+         // insert new comment
+         var task_id= $('.details-container h2').attr('item_id');
+         console.log(this, task_id);
+
+         $.post('index.php',{
+            go:           'taskAddComment',
+            task_id:      task_id, 
+            text:          $('.details-container .new-comment textarea').val(),
+         }, function(str) {
+            console.log(str);
+            updateDetailsContainerWithTask($('.details-container h2').attr('item_id'));
+         });
+      });
+   });
+}
 
 function selectListEntry(elem)
 {
    $('li.selected').removeClass('selected');
    $(elem).addClass('selected');
 
+   var task_id= $(elem).data('id');
+
+   updateDetailsContainerWithTask(task_id);
+}
+
+function updateDetailsContainerWithTask(task_id)
+{
    $.post('index.php',{
      go: 'taskRenderDetailsViewResponse',
-     tsk: $(elem).data('id')
+     tsk: task_id,
    }, function(str) {
-       $('.details-container').html(str);
-       $('.details-container div.wiki.editable').each(function() {
-           aj= new AjaxWikiEdit(this);
-           ajax_edits.push(aj);
-           this.ajax_edit= aj;
-       });
-       $('.details-container h3.editable').each(function() {         
-         aj= new AjaxTextFieldEdit(this);         
-         this.ajax_edit= aj;
-       });
-   });
+      updateDetailsContainer(str);
+   });   
 }
 
 
