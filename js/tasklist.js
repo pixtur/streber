@@ -71,6 +71,7 @@ function updateDetailsContainerWithTask(task_id)
    $.post('index.php',{
      go: 'taskRenderDetailsViewResponse',
      tsk: task_id,
+     from_handle: $('input#fromHandle').val(),
    }, function(str) {
       updateDetailsContainer(str);
    });   
@@ -158,11 +159,13 @@ function makeListItemResortable(item)
    .drag(function( ev, dd ){
       var drop = dd.drop[0],
       method = $.data( drop || {}, "drop+reorder" );
-      $( dd.proxy ).css({
-         top: dd.offsetY
-         //left: dd.offsetX
-      });
 
+      var position = $('div.page-content').position();
+      var scrollOffsetY = $('div.page-content').scrollTop() - position.top;
+
+      $( dd.proxy ).css({
+         top: dd.offsetY + scrollOffsetY
+      });
       
       if ( drop && ( drop != dd.current || method != dd.method ) ){   
          $( this )[ method ]( drop );
@@ -172,7 +175,10 @@ function makeListItemResortable(item)
       }
    })
    .drag("end",function( ev, dd ){      
-      var finalPosY=  $(this).position().top; 
+      var position = $('div.page-content').position();
+      var scrollOffsetY = $('div.page-content').scrollTop() - position.top;
+
+      var finalPosY=  $(this).position().top + $('div.page-content').scrollTop(); 
       var e = this;
       $( dd.proxy ).animate({
          top: finalPosY

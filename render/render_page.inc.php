@@ -1153,7 +1153,7 @@ class PageContentOpen extends PageElement
             }
         }
         else {
-            $buffer.='<input type="hidden" name="from" value="'.$PH->cur_page_md5.'">';
+            $buffer.='<input type="hidden" id="fromHandle" name="from" value="'.$PH->cur_page_md5.'">';
         }
 
         $buffer.= '<div id="layout">';

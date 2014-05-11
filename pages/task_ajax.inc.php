@@ -23,6 +23,7 @@ require_once(confGet('DIR_STREBER') . "db/class_project.inc.php");
 */
 function taskRenderDetailsViewResponse()
 {
+    global $PH;
 
     if($task_id=intval(get('tsk'))) {
         require_once("render/render_wiki.inc.php");
@@ -39,11 +40,18 @@ function taskRenderDetailsViewResponse()
             echo "Error: Can read Task #$task_id";
             return;
         }
+
+        echo "<div class='page-functions'>";
+        echo $PH->getLink('taskEdit',  __("Edit"), array('tsk'=>$task->id, 'from'=> get('from_handle')) );
+        echo $PH->getLink('tasksDelete',  __("Delete"), array('tsk'=>$task->id, 'from'=> get('from_handle')) );
+        echo "</div>";
+
+        ### Headline and status ###
         echo "<div class='content-section'>";
+        echo $task->getLabel();
+        echo " <a href='{$task->getUrl()}'>#{$task->id}</a>";
 
-        echo "<a href='{$task->getUrl()}'>bla</a>";
-
-        // Note: the task_id of the following h2 is also used for the comment form
+        ### Note: the task_id of the following h2 is also used for the comment form
         echo "<h2 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h2>";
 
         echo  wikifieldAsHtml($task, 'description', array(
@@ -52,8 +60,6 @@ function taskRenderDetailsViewResponse()
         echo "</div>";
 
         renderComments($task);
-    
-
     }
 }
 
@@ -69,12 +75,8 @@ function renderComments($task)
     echo "<div class='content-section'>";
     echo "<h3>";
     echo __("Discussion");
-        // echo $comments ? sprintf(__("%s Comments"), count($comments))
-        //                : __("No Comments"); 
     echo "</h3>";
-
-                        
-    
+                
     foreach($comments as $c) {                        
         $is_comment_editable= ($auth->cur_user->user_rights & RIGHT_EDITALL) || ($c->created_by == $auth->cur_user->id);
 
@@ -94,41 +96,30 @@ function renderComments($task)
         echo "</span>";
         echo ", ";
         
-        #echo asHtml($c->name);
-
         $newOrChanged = $c->isChangedForUser();
         $versions= ItemVersion::getFromItem($c);
         $hasBeenEdited = count($versions) > 1;
 
-        /*
-        if($new= ) {
-            if($new == 1) {
-                echo '<span class=new> (' . __('New') . ') </span>';
-            }
-            else {
-                echo '<span class=new>  (' . __('Updated') . ') </span>';
-            }
-        }*/
-      
         /**
         * timestamp is either...
         *  rainer, 54 min ago                     (the timestamp in orange if new)
         *  rainer, 54 min ago (editted just now)  (the 2nd timestamp in orange if new)
         */
+        $newClass = $newOrChanged ? "new":'';
 
         if(!$hasBeenEdited) {
-            echo "<span class='new'>";
+            echo "<span class='$newClass'>";
             echo renderTimeAgo($c->created); 
             echo "</span>";
         }
         else {
             echo renderTimeAgo($c->created); 
-
+            
             echo "<span class='additional'> (" . $PH->getLink('itemViewDiff', 
                 __("editted"), 
                 array('item' => $c->id)
             ); 
-            echo " <span class='new'>". renderTimeAgo($c->modified) . "</span>";
+            echo " <span class='$newClass'>". renderTimeAgo($c->modified) . "</span>";
             echo ") ";    
             echo "</span>";
         }

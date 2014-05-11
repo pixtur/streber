@@ -38,6 +38,8 @@ function projViewTasks()
         return;
     }
 
+    $fromHandle = $PH->defineFromHandle(array('prj'=>$project->id));
+
     $page= new Page();
     $page->extra_header_html  = '<script type="text/javascript" src="js/jquery.event.drop-2.2.js"></script>';
     $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.event.drag-2.2.js"></script>';
@@ -46,7 +48,6 @@ function projViewTasks()
     ### init known filters for preset ###
     $list= new ListBlock_tasks(array(
         'active_block_function'=>'tree',
-
     ));
 
     ### set up page ####
@@ -92,16 +93,23 @@ function projViewTasks()
             #)));
 
         }
+    }
 
-        ### render title ###
-        echo(new PageHeader);
+    ### render title ###
+    echo(new PageHeader);
+
+
+    {
         echo "<div class='details-container'>";
         echo "<div class='tip'>";
         echo __("Select a task from the left");
-        echo "</div>";
-        
+        echo "</div>";    
         echo "</div>";
     }
+    echo "<div class='page-content'>";
+    
+    
+
     echo (new PageContentOpen);
 
 
@@ -147,8 +155,15 @@ function projViewTasks()
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
+
+    echo "</div>";
+    echo "<div class='shade-pagecontent'></div>";
+
     echo (new PageHtmlEnd());
+
 }
+
+
 
 function renderTaskGroup($tasks, $title, $milestone_id, $project_id)
 {
