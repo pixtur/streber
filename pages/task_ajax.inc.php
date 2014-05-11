@@ -61,14 +61,14 @@ function taskRenderDetailsViewResponse()
 
         renderComments($task);
     }
+    return true;
 }
 
 function renderComments($task)
 {
     global $PH;
     global $auth;
-
-    require_once(confGet('DIR_STREBER') . 'blocks/comments_on_item_block.inc.php');
+    
     require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
 
     $comments = $task->getComments(array('order_by'=>'created'  ));
