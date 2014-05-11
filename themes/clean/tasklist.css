@@ -32,13 +32,13 @@ div.details-container .content {
 }
 
 
-.projViewTasks ol {
+ ol.sortable {
   /*float: left;*/
   margin: 0 40px 0 0;
   padding: 0;
 }
 
-.projViewTasks li {
+.sortable li {
   font-weight:normal;
   list-style-position: inside;
   list-style:none;
@@ -54,27 +54,27 @@ div.details-container .content {
   -moz-box-sizing:border-box; 
 }
 
-.projViewTasks .proxy,
-.projViewTasks li:hover {
+.sortable .proxy,
+.sortable li:hover {
   background-image:url(layout/bg_reorder_draghandle.png);
   background-repeat:  no-repeat;
   background-position: center left;
 }
 
-.projViewTasks li small {
+.sortable li small {
   display:block;
   font-size:10px;
   color:#888;
   font-weight: lighter;
 }
 
-.projViewTasks li.selected {
+.sortable li.selected {
   background-color:#fff;
   border:none;
   box-shadow: rgba(0,0,0,0.3) -1px 1px 3px;
 }
 
-.projViewTasks .dragging {
+.sortable .dragging {
    background-color: #BEE;
    border-color: #8BB;
    

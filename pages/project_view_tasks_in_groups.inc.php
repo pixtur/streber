@@ -107,6 +107,7 @@ function projViewTasks()
     #--- without milestone ------------------------------------
     $tasks = Task::getAll(array(
         //'is_milestone'=>true,
+        'project' => $project->id,
         'category' => TCATEGORY_TASK,
         'status_min'=> 0,
         'status_max'=> 10,
@@ -114,12 +115,13 @@ function projViewTasks()
         'order_by'=>'order_id',
     ));
 
-    renderTaskGroup($tasks, "Without Group");
+    renderTaskGroup($tasks, "Without Group", 0, $project->id);
 
 
     #--- for milestones -------------------------------------
     $milestones = Task::getAll(array(
         //'is_milestone'=>true,
+        'project' => $project->id,
         'category' => TCATEGORY_MILESTONE,
         'status_min'=> 0,
         'status_max'=> 10,
@@ -130,13 +132,14 @@ function projViewTasks()
     foreach($milestones as $milestone) {
         $tasks = Task::getAll(array(
             //'is_milestone'=>true,
+            'project' => $project->id,
             'category' => TCATEGORY_TASK,
             'status_min'=> 0,
             'status_max'=> 10,
             'for_milestone' => $milestone->id,
             'order_by' => 'order_id',
         ));        
-        renderTaskGroup($tasks, $milestone->name);
+        renderTaskGroup($tasks, $milestone->name, $milestone->id, $project->id);
     }
 
 
@@ -145,19 +148,19 @@ function projViewTasks()
     echo (new PageHtmlEnd());
 }
 
-function renderTaskGroup($tasks, $title)
+function renderTaskGroup($tasks, $title, $milestone_id, $project_id)
 {
-    echo "<div>";
-    echo "<h2>Without group</h2>";
-    echo "<ol>";
+    echo "<div class='task-group' data-milestone-id='$milestone_id'  data-project-id='$project_id'>";
+    echo "<h2>$title</h2>";
+    echo "<ol class='sortable'>";
     foreach($tasks as $task ) {
         echo "<li data-id='{$task->id}'>";
         echo "<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>";
         echo "<small>#$task->order_id</small>";
         echo "</li>";
     }
-
     echo "</ol>";
+    echo "<a class='new-task'>".__("Add task") . "</a>";
     echo "</div>";
 }
 

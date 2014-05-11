@@ -47,6 +47,37 @@ function taskAjax()
 }
 
 
+
+
+/**
+* Creates a new task from...
+*       $.post('index.php',{
+*        go: 'taskAjaxCreateNewTask',
+*        task_id: -,
+*        order_id: -,
+*        project_id: 
+*        milestone_id: - ,
+*       });
+*/
+function taskAjaxCreateNewTask() 
+{    
+    $new_task = new Task(array(
+            'id'            => 0,
+            'project'       => intval(get('project_id')),
+            'for_milestone' => intval(get('milestone_id')),
+            'order_id'      => intval(get('order_id')),
+            'name'          => get('name'),
+        ));
+
+    if(!$new_task->insert()) {
+        print json_encode(array("error" => "Failed to create new task"));
+        return;
+    }
+    print "<li>". $new_task->getLink(). "</li>";
+}
+
+
+
 /**
 * Sets the order inside a group
 *       $('#sideboard div').post('index.php',{
@@ -75,19 +106,20 @@ function taskSetOrderId()
     }
 
     $tasks = Task::getAll(array(
+        'project'       => $task->project,
         'for_milestone' => $milestone_id,
         'order_by'      => 'order_id',
-        'category' => $task->category,
+        'category'      => $task->category,
     ));
 
     $index=0;
-
     foreach( $tasks as $task_entry )
     {
         if( $index == $order_id)
         {
             $task->order_id = $order_id;
-            $task->update(array('order_id'), false);            
+            $task->for_milestone = $milestone_id;
+            $task->update(array('order_id','for_milestone'), false);
             $index++; 
         }
 

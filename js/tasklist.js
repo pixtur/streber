@@ -9,10 +9,14 @@
  * @uses:
  * @usedby:
  */
-    
-/**
-* global variables
-*/
+
+// after loading...
+$(function() {
+   $('.new-task').each( function() {   
+      var x= new NewTaskLine(this);
+   });
+});
+
 
 function selectListEntry(elem)
 {
@@ -35,6 +39,63 @@ function selectListEntry(elem)
        });
    });
 }
+
+
+function NewTaskLine(dom_element) 
+{
+   var _self = this;
+   _self.dom_element= dom_element;
+   _self.ol = $(_self.dom_element).parent('div').children('ol');
+   
+   $(_self.dom_element).click(function(e) 
+   {
+      _self.activateNewTaskLine();
+   });
+
+   this.activateNewTaskLine= function()    
+   {
+      $(_self.ol).children('li.new-task-line').remove();            
+
+      var block= $("<li class='new-task-line'>\
+                     <input placeholder='Task Name'> \
+                     <button>Add</button>\
+                  </li>"); 
+
+      _self.ol.append(block); // We have to append before setting focus...
+      var order_id = $(block).index();
+   
+      block
+         .find('input')
+         .focus();
+
+      block
+         .find('button')         
+         .click(function(e) {
+            e.preventDefault();
+
+            var input= $(_self.ol).find('li.new-task-line input');
+
+            if(!input.val()) {
+               console.log("name can't be empty");
+               return;
+            }
+            
+            // insert new task
+            $.post('index.php',{
+               go:           'taskAjaxCreateNewTask',
+               name:         input.val(),
+               milestone_id: $(_self.ol).parent('div').data('milestone-id'),
+               project_id:   $(_self.ol).parent('div').data('project-id'),
+               order_id:     order_id,               
+            }, function(str) {
+               console.log(str);
+               _self.ol.append(str);
+            });
+         });      
+   }
+}
+
+
 
 jQuery(function($){
    $('li')
@@ -87,7 +148,7 @@ jQuery(function($){
             go: 'taskSetOrderId',
             task_id: $(e).data('id'),
             order_id: $(e).index(),
-            milestone_id: 0
+            milestone_id: $(e).parents('div.task-group').data('milestone-id'),
          }, 
          function(result) {
             console.log(result);

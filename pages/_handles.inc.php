@@ -1448,15 +1448,23 @@ new PageHandle(array('id'=>'search',
 */
 new PageHandle(array('id'=>'taskAjax',
     'req'=>'pages/task_ajax.inc.php',
-    'title'=>__('Task Test'),
+    'title'=>__(''),
     'valid_for_crawlers'=>false,
 ));
 
 new PageHandle(array('id'=>'taskSetOrderId',
     'req'=>'pages/task_ajax.inc.php',
-    'title'=>__('Task Test'),
+    'title'=>__(''),
     'valid_for_crawlers'=>false,
 ));
+
+new PageHandle(array('id'=>'taskAjaxCreateNewTask',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__(''),
+    'valid_for_crawlers'=>false,
+));
+
+
 
 
 new PageHandle(array('id'=>'itemLoadField',
