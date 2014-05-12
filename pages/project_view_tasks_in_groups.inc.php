@@ -188,7 +188,7 @@ function buildListEntryForTask($task)
         $additionalInfo.= " / ". sprintf(__("%s comments"), count($comments));
     }
     return 
-     "<li data-id='{$task->id}' class='$classIsDone'>"
+     "<li id='task-{$task->id}' data-id='{$task->id}' class='$classIsDone'>"
     ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
     ."<small>$additionalInfo</small>"
     ."</li>";

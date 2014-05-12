@@ -54,17 +54,120 @@ function taskRenderDetailsViewResponse()
         ### Note: the task_id of the following h2 is also used for the comment form
         echo "<h2 item_id='$task_id' field_name='name' class='editable'>". asHtml($task->name)."</h2>";
 
+        _renderStatusInfo($task);
+
         echo  wikifieldAsHtml($task, 'description', array(
                                 'empty_text'=> "[quote]" . __("This task does not have any text yet.\nDoubleclick here to add some.") . "[/quote]",
                             ));
         echo "</div>";
 
-        renderComments($task);
+        _renderComments($task);
     }
     return true;
 }
 
-function renderComments($task)
+function _renderStatusInfo($task)
+{
+    global $PH;
+    global $auth;
+
+
+    echo "<table><tr>";
+    echo _renderSelectionOption($task, 'prio');
+    echo _renderSelectionOption($task, 'status');
+    echo _renderSelectionOption($task, 'label');
+    echo "</table></tr>";
+}
+
+
+function _renderSelectionOption($task, $field_name)
+{
+    $field = $task->fields[$field_name];
+    $options = _getTastFieldOptions($task, $field);
+    //$options['selected']="0";
+
+    //$options= array('a' => 'A' , 'b'=> 'B');
+
+
+    echo "<td><label>". $field->title . "</label>";
+
+    printf("<div class='editable select' data-options='%s' data-saveurl='%s'>",
+        htmlspecialchars(json_encode( $options), ENT_QUOTES, 'UTF-8'),
+        "index.php?go=taskSetProperty&field_name={$field_name}&task_id=$task->id"
+        );
+
+    // echo "<span class='editable select' \
+    //             data-options='". json_encode($options). "'>";
+    echo $options[$task->$field_name];
+    echo "</div>";
+    echo "</td>";
+
+    //$url = go&saveField&field_name=priority&task_id=23432;
+}
+
+function _getTastFieldOptions($task, $field)
+{
+    if($field->name == 'prio') {
+        global $g_prio_names;
+        return $g_prio_names;
+    }
+    else if($field->name == 'status') {        
+        global $g_status_names;
+        return $g_status_names;
+    }
+    else if($field->name == 'label') {                
+        return $task->getLabelOptions();
+    }
+
+    return array();
+}
+
+/**
+*       $.post('index.php',{
+*        go: 'taskSetProperty',
+*        task_id: -,
+*        field_name: -,
+*        value: 
+*       });
+* returns the new value or an error-message
+*/
+function taskSetProperty() {
+    require_once(confGet('DIR_STREBER') . 'db/class_comment.inc.php');
+
+    $task_id = intval( get('task_id'));
+    if(!$task = Task::getEditableById($task_id)) {
+        echo __("Meh, Not allowed!");
+        return;
+    }    
+    
+    $value = get('value');
+    if($value == null || $value == '' ) {
+        echo __("Failed: may not be empty");
+        return;
+    }
+    $value = ''.$value; // convert to string
+
+    $field_name = "".get('field_name');
+    if(!$field = $task->fields[$field_name]) {
+        echo __("invalid field");
+        return;        
+    }
+    
+    $options = _getTastFieldOptions($task, $field);
+
+    
+    if(!$options[$value]) {
+        echo __("Failed: invalid option");
+        return;
+    }
+    $task->$field_name= $value;
+    $task->update(array($field_name), false);
+    echo $options[$value];
+    return true;
+}
+
+
+function _renderComments($task)
 {
     global $PH;
     global $auth;
@@ -197,6 +300,19 @@ function taskAjaxCreateNewTask()
     }
     print buildListEntryForTask($new_task);    
     return true;
+}
+
+function taskBuildListEntryResponse()
+{
+    require_once(confGet('DIR_STREBER') . "pages/project_view_tasks_in_groups.inc.php");
+
+    if(!$task=Task::getVisibleById( intval(get('task_id')))) {
+        echo "Error: Can read Task #$task_id";
+        return;
+    }
+
+    print buildListEntryForTask($task);    
+    return true;   
 }
 
 

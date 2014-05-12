@@ -19,20 +19,47 @@ $(function() {
 
 function updateDetailsContainer(str)
 {
-    $('.details-container').html(str);
-    $('.details-container div.wiki.editable').each(function() {
+   $('.details-container').html(str);
+   $('.details-container div.wiki.editable').each(function() {
         aj= new AjaxWikiEdit(this);
         ajax_edits.push(aj);
         this.ajax_edit= aj;
-    });
+   });
 
-    $('.details-container h2.editable').each(function() {         
+   $('.details-container h2.editable').each(function() {         
       aj= new AjaxTextFieldEdit(this);         
       this.ajax_edit= aj;
-    });   
+   });   
 
+   // Initialize inline parameter editing
+   $('.editable.select').each(function(element) {
+      var data = $(this).data('options');      
+      var saveurl= $(this).data('saveurl');
+
+
+      $(this).editable(saveurl, { 
+         data   :  JSON.stringify(data),  // data from data-attribuetes will automatically be parsed, but jeditable exspects string
+         type   : 'select',
+         submit : 'OK',
+
+         // Reload list entry to show update information
+         callback: function() {            
+            var task_id= $('.details-container h2').attr('item_id');            
+            $.post('index.php',{
+               go:           'taskBuildListEntryResponse',
+               task_id:      task_id,                
+            }, function(str) {
+               var newLine = $(str);
+               $('li#task-'+task_id).replaceWith(str);
+               makeListItemResortable($('li#task-'+task_id) );
+               $('li#task-'+task_id).addClass('selected');
+            });
+         }
+      });  
+   });
+
+   // Initialize comment form
    $('.details-container .new-comment button').hide();
-
    $('.details-container .new-comment textarea')
    .focus(function() {
       $('.details-container .new-comment button')
@@ -42,14 +69,12 @@ function updateDetailsContainer(str)
 
          // insert new comment
          var task_id= $('.details-container h2').attr('item_id');
-         console.log(this, task_id);
 
          $.post('index.php',{
             go:           'taskAddComment',
             task_id:      task_id, 
             text:          $('.details-container .new-comment textarea').val(),
          }, function(str) {
-            console.log(str);
             updateDetailsContainerWithTask($('.details-container h2').attr('item_id'));
          });
       });

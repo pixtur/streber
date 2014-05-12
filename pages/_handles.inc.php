@@ -1452,6 +1452,12 @@ new PageHandle(array('id'=>'taskRenderDetailsViewResponse',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'taskBuildListEntryResponse',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__(''),
+    'valid_for_crawlers'=>false,
+));
+
 new PageHandle(array('id'=>'taskSetOrderId',
     'req'=>'pages/task_ajax.inc.php',
     'title'=>__(''),
@@ -1470,6 +1476,11 @@ new PageHandle(array('id'=>'taskAddComment',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'taskSetProperty',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__(''),
+    'valid_for_crawlers'=>false,
+));
 
 
 new PageHandle(array('id'=>'itemLoadField',

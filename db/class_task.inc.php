@@ -1461,6 +1461,21 @@ foreach($filters_str as $fs=>$value) {
     }
 
 
+    public function getLabelOptions()
+    {
+        if(!$project= Project::getById($this->project)) {
+            trigger_error("task without project?", E_USER_WARNING);
+        }
+        $labels=preg_split("/,/",$project->labels);
+        $options = array();        
+        for ($i=0; $i < count($labels); $i++) { 
+            $options[$i] = $labels[$i];
+        }
+
+        return $options;
+    }
+
+
 
     /**
     * gets documentation sub tasks and folders of a task

@@ -50,6 +50,37 @@ div.details-container {
   overflow: scroll;
 }
 
+/* ---- status info -----------*/
+div.details-container table {
+  margin-top:10px;
+  margin-bottom:20px;
+  /*width:100%;*/
+}
+div.details-container table td {
+  min-width:100px;
+  padding-right:20px;
+}
+div.details-container table tr label {
+  padding:2px 8px;
+  display:block;
+  text-transform: uppercase;
+  color: #888;
+  font-size: 10px;
+}
+
+div.details-container table tr input {
+  height:12px;
+  margin:0;
+  padding:0;
+}
+div.details-container table tr div {
+  padding:2px 8px;
+  font-weight:bold;
+}
+div.details-container table tr div:hover {
+  background-color: #ffa;
+}
+
 
 /* ----- DETAILS CONTAINER ----------------------------------------------------- */
 div.details-container .content-section {
