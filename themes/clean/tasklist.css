@@ -32,8 +32,31 @@
   left:0;
   right:60%;
   height:80px;
+}
 
 
+@-webkit-keyframes fade {
+    0% { opacity: 0;   }
+    10% { opacity: 1; }
+    90% {  opacity: 1; }
+    100% { opacity: 0; }
+}
+.projViewTasks .messages {
+  position:absolute;
+  top:65px;
+  right:10px;
+  border:0px solid #888;
+  border-radius:2px;
+  box-shadow: rgba(0,0,0,0.4) 0px 2px 4px;  
+  z-index: 1000;
+  opacity: 0.5;
+
+  /*-webkit-transition: opacity 500ms ease-out 1s;
+  -moz-transition: opacity 500ms ease-out 1s;
+  -o-transition: opacity 500ms ease-out 1s;
+  transition:     opacity 500ms ease-out 1s;*/
+  -webkit-animation: fade 6s;
+  -webkit-animation-fill-mode: both;
 }
 
 
