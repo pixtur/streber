@@ -208,7 +208,8 @@ function NewTaskLine(dom_element)
          console.log(str);               
 
          var newLine = $(str);
-         $(_self.ol).find('li.new-task-line').before( newLine);
+         $(_self.ol).find('li.new-task-link').before( newLine);
+         $(_self.newTaskLine).children('input').val('');
          selectListEntry(newLine);
          makeListItemResortable(newLine);
       });      
