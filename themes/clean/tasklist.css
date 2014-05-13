@@ -25,6 +25,8 @@
   display:none;
 }
 
+
+
 .projViewTasks div.shade-pagecontent {
   position:absolute;
   background: linear-gradient(to bottom, rgba(240,240,240,1) 50%,rgba(220,220,220,0) 100%); /* W3C */
@@ -100,10 +102,25 @@ div.details-container table tr div {
   padding:2px 8px;
   font-weight:bold;
 }
-div.details-container table tr div:hover {
-  background-color: #ffa;
+div.details-container table tr div.editable:hover {
+  
 }
 
+@-webkit-keyframes flashHighlight {
+    0% { background-color: #fff;   }
+    30% { background-color: #ff8; }    
+    100% { background-color: #fff;  }
+}
+.editable:hover {
+    -webkit-animation: flashHighlight 2s;  
+    /*background-color: #ff8; 
+    -webkit-transition: background-color 2;  */
+}
+
+.editable {
+  /*background-color:#fff;
+  -webkit-transition: background-color 2;  */
+}
 
 /* ----- DETAILS CONTAINER ----------------------------------------------------- */
 div.details-container .content-section {
@@ -144,10 +161,15 @@ div.details-container .content-section .post_list_entry:hover .additional {
 }
 
 div.details-container div.page-functions {  
-  padding:3px;
+  padding:0px;
   line-height:25px;
 }
 
+div.details-container div.page-functions a {
+  margin-left:13px;
+  margin-right:13px;
+  color:#444;
+}
 
 div.details-container .content-section textarea {
   border-radius:4px;
@@ -168,20 +190,49 @@ div.details-container .tip {
 
 }
 
-
 div.details-container .content {
   padding:3px;
+}
+
+
+
+div.task-group * {
+  -webkit-user-select: none;  
 }
 
 div.task-group h2 {
   margin-top:15px;
   margin-bottom:5px;
-  padding-left:14px;
+  /*padding-left:14px;*/
   font-size:24px;
   color:#888;
   font-weight: lighter;
+  cursor:default;
 }
 
+div.task-group h2 .icon {
+  display: block;
+  height:18px;
+  width:18px;
+  border-width:9px;
+  border-color: transparent transparent transparent gray;
+  border-style:solid;
+  box-sizing:border-box;
+  float:left;
+  /*background-color: white;*/
+  position:relative;
+  color:transparent;
+}
+
+div.task-group h2 .icon.open {
+  /*border-left-color:black;*/
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform-origin:3px 13px;
+  transform: rotate(90deg);
+     -webkit-transition: -webkit-transform 0.5s ease-in;
+     cursor: pointer;
+}
 /* ----- LIST ----------------------------------------------------- */
  ol.sortable {
   /*float: left;*/
@@ -189,7 +240,7 @@ div.task-group h2 {
   padding: 0;
 }
 
-.sortable li {
+.sortable li.dragable {
   font-weight:normal;
   list-style-position: inside;
   list-style:none;
@@ -206,7 +257,7 @@ div.task-group h2 {
 }
 
 .sortable .proxy,
-.sortable li:hover {
+.sortable li.dragable:hover {
   background-image:url(layout/bg_reorder_draghandle.png);
   background-repeat:  no-repeat;
   background-position: center left;
@@ -219,7 +270,7 @@ div.task-group h2 {
   font-weight: lighter;
 }
 
-.sortable li.selected {
+.sortable li.dragable.selected {
   background-color:#fff;
   border:none;
   box-shadow: rgba(0,0,0,0.3) -1px 1px 3px;
@@ -242,4 +293,9 @@ div.task-group h2 {
   box-shadow: rgba(0,0,0,0.3) -1px 1px 3px;  
 }
 
-
+.task-group a.new-task {
+  display:block;
+  margin-top:5px;
+  padding-left:14px;
+  margin-bottom:9px;
+}

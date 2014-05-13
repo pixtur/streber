@@ -112,7 +112,7 @@ function projViewTasks()
 
     echo (new PageContentOpen);
 
-
+    echo "<div class='task-list'>";
 
     #--- without milestone ------------------------------------
     $tasks = Task::getAll(array(
@@ -125,7 +125,7 @@ function projViewTasks()
         'order_by'=>'order_id',
     ));
 
-    renderTaskGroup($tasks, "Without Group", 0, $project->id);
+    renderTaskGroup($tasks, "Without Group", 0, $project->id, false);
 
 
     #--- for milestones -------------------------------------
@@ -149,9 +149,9 @@ function projViewTasks()
             'for_milestone' => $milestone->id,
             'order_by' => 'order_id',
         ));        
-        renderTaskGroup($tasks, $milestone->name, $milestone->id, $project->id);
+        renderTaskGroup($tasks, $milestone->name, $milestone->id, $project->id, $milestone->view_collapsed);
     }
-
+    echo "</div>";  // /task-list
 
     #echo "<a href=\"javascript:document.my_form.go.value='tasksMoveToFolder';document.my_form.submit();\">move to task-folder</a>";
     echo (new PageContentClose);
@@ -163,20 +163,32 @@ function projViewTasks()
 
 }
 
-
-
-function renderTaskGroup($tasks, $title, $milestone_id, $project_id)
+function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_collapsed)
 {
     echo "<div class='task-group' data-milestone-id='$milestone_id'  data-project-id='$project_id'>";
-    echo "<h2>$title</h2>";
+    echo "<h2>";
+    if($view_collapsed) {
+        echo "<div class='icon closed'>+</div>";
+    }
+    else {
+        echo "<div class='icon open'>-</div>";    
+    }
+
+    echo $title;
+
+    echo "</h2>";
     echo "<ol class='sortable'>";
     foreach($tasks as $task ) {
         echo buildListEntryForTask($task);
     }
-    echo "</ol>";
+    echo "<li class='new-task-link'>";
     echo "<a class='new-task'>".__("Add task") . "</a>";
+    echo "</li>";
+    echo "</ol>";
+    
     echo "</div>";
 }
+
 
 function buildListEntryForTask($task) 
 {
@@ -188,7 +200,7 @@ function buildListEntryForTask($task)
         $additionalInfo.= " / ". sprintf(__("%s comments"), count($comments));
     }
     return 
-     "<li id='task-{$task->id}' data-id='{$task->id}' class='$classIsDone'>"
+     "<li id='task-{$task->id}' data-id='{$task->id}' class='$classIsDone dragable'>"
     ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
     ."<small>$additionalInfo</small>"
     ."</li>";

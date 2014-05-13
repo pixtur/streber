@@ -15,6 +15,19 @@ $(function() {
    $('.new-task').each( function() {   
       var x= new NewTaskLine(this);
    });
+
+   $('li.dragable').each(function() {
+       makeListItemResortable(this);
+   } );
+
+   // The differentiation between these to intersecting list elements is done be comparing tagNames in the drop-function 
+   $('div.task-group').each(function() {
+      makeListItemResortable(this);
+   });
+
+   $('.task-group .icon').click(function(e) {
+      $(e.currentTarget).parents('div:first').find('ol').slideToggle();
+   });
 });
 
 function updateDetailsContainer(str)
@@ -102,75 +115,92 @@ function updateDetailsContainerWithTask(task_id)
    });   
 }
 
-
 function NewTaskLine(dom_element) 
 {
    var _self = this;
    _self.dom_element= dom_element;
-   _self.ol = $(_self.dom_element).parent('div').children('ol');
+   _self.ol = $(_self.dom_element).parents('ol.sortable');
    
    $(_self.dom_element).click(function(e) 
    {
-      _self.activateNewTaskLine();
+      _self.activateNewTaskLine();      
    });
 
    this.activateNewTaskLine= function()    
    {
       $(_self.ol).children('li.new-task-line').remove();            
+      $(_self.ol).children('li.new-task-link').hide();
 
-      var block= $("<li class='new-task-line'>\
+      _self.newTaskLine= $("<li class='new-task-line'>\
                      <input placeholder='Task Name'> \
                      <button>Add</button>\
                   </li>"); 
 
-      _self.ol.append(block); // We have to append before setting focus...
-      var order_id = $(block).index();
-   
-      block
+      _self.ol.append(_self.newTaskLine); // We have to append before setting focus...
+      
+      _self.newTaskLine
          .find('input')
-         .focus();
-
-      block
-         .find('button')         
-         .click(function(e) {
-            e.preventDefault();
-
-            var input= $(_self.ol).find('li.new-task-line input');
-
-            if(!input.val()) {
-               console.log("name can't be empty");
-               return;
+         .focus()
+         .keydown(function(e)
+         {
+            // Return
+            if ( event.which == 13 ) {
+                event.preventDefault();
+                $(_self.newTaskLine).find('button').click();
             }
-            
-            // insert new task
-            $.post('index.php',{
-               go:           'taskAjaxCreateNewTask',
-               name:         input.val(),
-               milestone_id: $(_self.ol).parent('div').data('milestone-id'),
-               project_id:   $(_self.ol).parent('div').data('project-id'),
-               order_id:     order_id,               
-            }, function(str) {
-               console.log(str);               
+            // Esc
+            else if ( event.which == 27) {
+               $(_self.newTaskLine).remove();
+               $(_self.ol).children('li.new-task-link').show();
+            }
+         });
 
-               var newLine = $(str);
-               _self.ol.append(newLine);
-               selectListEntry(newLine);
-               makeListItemResortable(newLine);
-
-               _self.activateNewTaskLine();
-            });
+      _self.newTaskLine
+         .find('button')
+         .click(function(e) {
+            _self.sendNewTaskRequest(e);
          });      
+   }
+
+   this.sendNewTaskRequest = function(e)
+   {
+      e.preventDefault();
+
+      var input= $(_self.ol).find('li.new-task-line input');
+
+      if(!input.val()) {
+         console.log("name can't be empty");
+         return;
+      }
+      
+      // insert new task
+      $.post('index.php',{
+         go:           'taskAjaxCreateNewTask',
+         name:         input.val(),
+         milestone_id: $(_self.ol).parent('div').data('milestone-id'),
+         project_id:   $(_self.ol).parent('div').data('project-id'),
+         order_id:     $(_self.newTaskLine).index(),
+      }, function(str) {
+         console.log(str);               
+
+         var newLine = $(str);
+         $(_self.ol).find('li.new-task-line').before( newLine);
+         selectListEntry(newLine);
+         makeListItemResortable(newLine);
+      });      
    }
 }
 
 
 function makeListItemResortable(item)
 {
-   $(item).click(function() 
+
+   $(item).find('li').click(function() 
    {
       selectListEntry(this);
-   })       
-   .drag("start",function( ev, dd )
+   });   
+
+   $(item).drag("start",function( ev, dd )      
    {
       $(this)
          .css("opacity", 0.1);
@@ -227,10 +257,10 @@ function makeListItemResortable(item)
       });
    })
    .drop("init",function( ev, dd ){
-      return !( this == dd.drag );
+      return !( this == dd.drag || this.tagName != dd.drag.tagName);
    });   
    $.drop({
-      tolerance: function( event, proxy, target ){         
+      tolerance: function( event, proxy, target ){
          var test = event.pageY > ( target.top + target.height / 2 );
          $.data( target.elem, "drop+reorder", test ? "insertAfter" : "insertBefore" );   
          return this.contains( target, [ event.pageX, event.pageY ] );
@@ -239,7 +269,4 @@ function makeListItemResortable(item)
 }
 
 jQuery(function($){
-   $('li').each(function() {
-       makeListItemResortable(this);
-   } );
 });

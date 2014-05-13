@@ -1467,9 +1467,9 @@ foreach($filters_str as $fs=>$value) {
             trigger_error("task without project?", E_USER_WARNING);
         }
         $labels=preg_split("/,/",$project->labels);
-        $options = array();        
+        $options = array(0=>__("undefined"));        
         for ($i=0; $i < count($labels); $i++) { 
-            $options[$i] = $labels[$i];
+            $options[$i+1] = $labels[$i];
         }
 
         return $options;
@@ -1545,10 +1545,8 @@ foreach($filters_str as $fs=>$value) {
     public function isBug() {
         return isOfCategory(TCATEGORY_BUG);
     }
-
 }
 
 Task::init();
-
 
 ?>
