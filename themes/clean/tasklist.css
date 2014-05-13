@@ -222,6 +222,8 @@ div.task-group h2 .icon {
   /*background-color: white;*/
   position:relative;
   color:transparent;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
 }
 
 div.task-group h2 .icon.open {
@@ -230,7 +232,7 @@ div.task-group h2 .icon.open {
   -moz-transform: rotate(90deg);
   -webkit-transform-origin:3px 13px;
   transform: rotate(90deg);
-     -webkit-transition: -webkit-transform 0.5s ease-in;
+     -webkit-transition: -webkit-transform 0.2s ease-in;
      cursor: pointer;
 }
 /* ----- LIST ----------------------------------------------------- */
@@ -238,6 +240,10 @@ div.task-group h2 .icon.open {
   /*float: left;*/
   margin: 0 0 0 0;
   padding: 0;
+}
+
+ol.sortable.collapsed {
+  display:none;
 }
 
 .sortable li.dragable {

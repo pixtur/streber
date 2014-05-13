@@ -153,12 +153,13 @@ function taskSetProperty() {
         return;        
     }
     
-    $options = _getTastFieldOptions($task, $field);
-
-    
-    if(!$options[$value]) {
-        echo __("Failed: invalid option");
-        return;
+    if($field_name != "view_collapsed") {
+        $options = _getTastFieldOptions($task, $field);
+        
+        if(!$options[$value]) {
+            echo __("Failed: invalid option");
+            return;
+        }        
     }
     $task->$field_name= $value;
     $task->update(array($field_name), false);
@@ -391,7 +392,7 @@ function taskSetOrderId()
         'order_by'      => 'order_id',
         'category'      => $task->category,
         'status_min'=> 0,
-        'status_max'=> 10,        
+        'status_max'=> 5,        
     ));
 
     $index=0;

@@ -120,7 +120,7 @@ function projViewTasks()
         'project' => $project->id,
         'category' => TCATEGORY_TASK,
         'status_min'=> 0,
-        'status_max'=> 10,
+        'status_max'=> 5,
         'for_milestone' => 0,
         'order_by'=>'order_id',
     ));
@@ -134,7 +134,7 @@ function projViewTasks()
         'project' => $project->id,
         'category' => TCATEGORY_MILESTONE,
         'status_min'=> 0,
-        'status_max'=> 10,
+        'status_max'=> 5,
     ));
 
     
@@ -145,7 +145,7 @@ function projViewTasks()
             'project' => $project->id,
             'category' => TCATEGORY_TASK,
             'status_min'=> 0,
-            'status_max'=> 10,
+            'status_max'=> 5,
             'for_milestone' => $milestone->id,
             'order_by' => 'order_id',
         ));        
@@ -165,7 +165,7 @@ function projViewTasks()
 
 function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_collapsed)
 {
-    echo "<div class='task-group' data-milestone-id='$milestone_id'  data-project-id='$project_id'>";
+    echo "<div class='task-group' data-milestone-id='$milestone_id'  data-project-id='$project_id' >";
     echo "<h2>";
     if($view_collapsed) {
         echo "<div class='icon closed'>+</div>";
@@ -176,8 +176,10 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_colla
 
     echo $title;
 
+    $collapsedClass = $view_collapsed? "collapsed":'';
+
     echo "</h2>";
-    echo "<ol class='sortable'>";
+    echo "<ol class='sortable $collapsedClass'>";
     foreach($tasks as $task ) {
         echo buildListEntryForTask($task);
     }

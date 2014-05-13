@@ -25,7 +25,31 @@ $(function() {
       makeListItemResortable(this);
    });
 
-   $('.task-group .icon').click(function(e) {
+   // Collapse groups
+   $('.task-group .icon').click(function(e) 
+   {
+      var newValue = 0;
+      if($(e.currentTarget).hasClass('open')) {
+         console.log("is open!");   
+         $(e.currentTarget).removeClass('open');
+         newValue = 1;
+      }
+      else {
+         console.log("is closed!");
+         $(e.currentTarget).addClass('open');
+      }
+      var milestone_id = $(e.currentTarget).parents('.task-group').data('milestone-id');
+      console.log('milestone_id:', milestone_id);
+
+
+      $.post('index.php',{
+        go: 'taskSetProperty',
+        task_id: milestone_id,
+        field_name: 'view_collapsed',
+        value: newValue
+      }, function(response) {
+         console.log(response);
+      });
       $(e.currentTarget).parents('div:first').find('ol').slideToggle();
    });
 });
