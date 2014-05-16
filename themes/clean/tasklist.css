@@ -115,7 +115,7 @@ div.details-container table tr div.editable:hover {
     30% { background-color: #ff8; }    
     100% { background-color: #fff;  }
 }
-.editable:hover {
+table div.editable:hover {
     -webkit-animation: flashHighlight 2s;  
     /*background-color: #ff8; 
     -webkit-transition: background-color 2;  */
@@ -133,7 +133,7 @@ div.details-container .content-section {
 }
 
 
-div.details-container .content-section h3 {  
+div.details-container .content-section > h3 {  
   font-weight: lighter;
   color:#666;
   font-size:20px;
@@ -210,31 +210,52 @@ div.task-group h2 {
   /*padding-left:14px;*/
   font-size:24px;
   color:#888;
-  font-weight: lighter;
+  font-weight: 100;
   cursor:default;
+  position:relative;
+  padding-left: 18px;
 }
 
+
+div.task-group h2 .wrap-toggle {
+  
+  height:30px;
+  width:30px;
+  position:relative;
+  top:-15px;
+  left:-15px;
+}
+
+
 div.task-group h2 .icon {
+  left:-1px;
+  top:7px;
   display: block;
-  height:18px;
-  width:18px;
-  border-width:9px;
+  height:16px;
+  width:16px;
+  border-width:8px;  
   border-color: transparent transparent transparent gray;
   border-style:solid;
   box-sizing:border-box;
   float:left;
+
   /*background-color: white;*/
-  position:relative;
+  position:absolute;
   color:transparent;
   cursor: pointer;
+  -webkit-transform-origin:3px 8px;
   -webkit-transition: -webkit-transform 0.2s ease-in;
+  /*outline: 4px solid #699;*/
 }
 
+div.task-group h2 .icon:hover {
+  border-left-color:#444;
+}
 div.task-group h2 .icon.open {
   /*border-left-color:black;*/
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
-  -webkit-transform-origin:3px 13px;
+  -webkit-transform-origin:3px 8px;
   transform: rotate(90deg);
      -webkit-transition: -webkit-transform 0.2s ease-in;
      cursor: pointer;
@@ -257,7 +278,7 @@ ol.sortable.collapsed {
   /*border: 1px solid #89B;*/
   /*background: #BCE;*/
   margin-left:-3px;
-  padding: 6px 4px 4px 17px;
+  padding: 3px 4px 3px 24px;
   /*margin: 2px 0;*/
   /*width: 275px;*/
   cursor: move;
@@ -275,7 +296,7 @@ ol.sortable.collapsed {
 
 .sortable li small {
   display:block;
-  font-size:9px;
+  font-size:10px;
   color:#888;
   font-weight: lighter;
 }
@@ -295,6 +316,7 @@ ol.sortable.collapsed {
 .sortable li.isDone {
   text-decoration:line-through;
   color:#aaa;  
+  font-weight:lighter;
 }
 
 .projViewTasks .proxy {

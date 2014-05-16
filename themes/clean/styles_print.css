@@ -518,9 +518,6 @@ div.edit_functions {
         display:none;
     }
 
-
-
-
 .footer {
     display:none;
 }
@@ -536,6 +533,23 @@ div.edit_functions {
 /*=== page footer ===========================*/
 #footer {
     display:none;
+}
+
+/*==  Task list ==========*/
+div.content-section.discussion,
+div.shade-pagecontent,
+div.task-list {
+	display:none;
+}
+div.details-container {
+	position:relative;
+	padding:0;
+	width:100%;
+	box-shadow: none;
+}
+div.details-container .page-functions {
+	display:none;
+
 }
 
 

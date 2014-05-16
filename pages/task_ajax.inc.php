@@ -177,7 +177,7 @@ function _renderComments($task)
     require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
 
     $comments = $task->getComments(array('order_by'=>'created'  ));
-    echo "<div class='content-section'>";
+    echo "<div class='content-section discussion'>";
     echo "<h3>";
     echo __("Discussion");
     echo "</h3>";

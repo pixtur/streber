@@ -167,12 +167,14 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_colla
 {
     echo "<div class='task-group' data-milestone-id='$milestone_id'  data-project-id='$project_id' >";
     echo "<h2>";
+    
     if($view_collapsed) {
-        echo "<div class='icon closed'>+</div>";
+        echo "<div class='icon closed'><div class='wrap-toggle'></div></div>";
     }
     else {
-        echo "<div class='icon open'>-</div>";    
+        echo "<div class='icon open'><div class='wrap-toggle'>-</div></div>";    
     }
+    
 
     echo $title;
 

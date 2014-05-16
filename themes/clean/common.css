@@ -3,8 +3,9 @@ body {
 	padding:0px;
 	margin:0px;
 	font-family: "Helvetica", sans-serif;
-    font-size:10.5pt;
+    font-size:14px;
     font-weight:lighter;
+  /*-webkit-font-smoothing: antialiased;*/
 }
 
 a {
