@@ -63,6 +63,7 @@ div.wiki h1,div.wiki h2, div.wiki h3,div.wiki h4, div.wiki h5 {
     background-image:none;
     font-weight:normal;
     font-family: georgia;
+    line-height: 140%;
 }
 
 div.wiki a.anchor {
@@ -278,13 +279,21 @@ div.wiki .edit_chapter{
 }
 
 div.wiki .edit_chapter:hover {
-    background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;
+    /*background:#FBFBE1 url(layout/bg_ajaxedit_hover.png) top right no-repeat;*/
+    -webkit-animation: flashHighlight 2s;      
 }
 
 div.wiki .edit_chapter textarea {
     font-family: monospace;
     font-size: 12px;
+  min-height: 150px;
+    -webkit-transition: min-height 0.5s;
 }
+
+/*div.details-container .content-section.discussion  textarea:focus {
+  -webkit-transition: min-height 0.5s;
+}
+*/
 
 
 /* UPDATE MARKERS */

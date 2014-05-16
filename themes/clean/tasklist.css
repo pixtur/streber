@@ -112,7 +112,7 @@ div.details-container table tr div.editable:hover {
 
 @-webkit-keyframes flashHighlight {
     0% { background-color: #fff;   }
-    30% { background-color: #ff8; }    
+    10% { background-color: #ffc; }    
     100% { background-color: #fff;  }
 }
 table div.editable:hover {
@@ -175,13 +175,18 @@ div.details-container div.page-functions a {
   color:#444;
 }
 
-div.details-container .content-section textarea {
+div.details-container .content-section.discussion  textarea {
   border-radius:4px;
+  padding:3px;
   border-color:#ccc;
-  width:80%;
+  width:95%;
   margin-top:20px;
 }
 
+div.details-container .content-section.discussion  textarea:focus {
+  min-height: 100px;
+  -webkit-transition: min-height 0.5s;
+}
 
 div.details-container .tip {
   font-style: italic;
