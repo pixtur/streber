@@ -81,15 +81,17 @@ function updateDetailsContainer(str)
 
          // Reload list entry to show update information
          callback: function() {            
-            var task_id= $('.details-container h2').attr('item_id');            
+            var task_id= $('.details-container h2').attr('item_id');  
+
             $.post('index.php',{
                go:           'taskBuildListEntryResponse',
                task_id:      task_id,                
             }, function(str) {
                var newLine = $(str);
                $('li#task-'+task_id).replaceWith(str);
-               makeListItemResortable($('li#task-'+task_id) );
+               
                $('li#task-'+task_id).addClass('selected');
+               makeListItemResortable($('li#task-'+task_id) );
             });
          }
       });  
@@ -156,7 +158,7 @@ function NewTaskLine(dom_element)
       $(_self.ol).children('li.new-task-link').hide();
 
       _self.newTaskLine= $("<li class='new-task-line'>\
-                     <input placeholder='Task Name'> \
+                     <input placeholder='Name'> \
                      <button>Add</button>\
                   </li>"); 
 
@@ -219,11 +221,14 @@ function NewTaskLine(dom_element)
 
 function makeListItemResortable(item)
 {
-
-   $(item).find('li').click(function() 
-   {
-      selectListEntry(this);
-   });   
+   //console.log("makeListItemResortable:",item, this);
+   if($(item).is('li')) {
+      $(item).click(function() 
+      {
+         selectListEntry(this);
+      });   
+   }
+   
 
    $(item).drag("start",function( ev, dd )      
    {

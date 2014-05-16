@@ -76,6 +76,10 @@ div.details-container {
 }
 
 /* ---- status info -----------*/
+div.details-container div.status-options {
+  background-color: #f3f3f3;
+}
+
 div.details-container table {
   margin-top:10px;
   margin-bottom:20px;

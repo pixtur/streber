@@ -71,12 +71,13 @@ function _renderStatusInfo($task)
     global $PH;
     global $auth;
 
-
+    echo "<div class='status-options'>";
     echo "<table><tr>";
     echo _renderSelectionOption($task, 'prio');
     echo _renderSelectionOption($task, 'status');
     echo _renderSelectionOption($task, 'label');
     echo "</table></tr>";
+    echo "</div>";
 }
 
 

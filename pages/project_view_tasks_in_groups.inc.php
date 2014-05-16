@@ -184,7 +184,7 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_colla
         echo buildListEntryForTask($task);
     }
     echo "<li class='new-task-link'>";
-    echo "<a class='new-task'>".__("Add task") . "</a>";
+    echo "<a class='new-task'>".__("Add new") . "</a>";
     echo "</li>";
     echo "</ol>";
     
