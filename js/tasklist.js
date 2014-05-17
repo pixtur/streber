@@ -12,6 +12,8 @@
 
 // after loading...
 $(function() {
+   selectTaskInUrl();
+
    $('.new-task').each( function() {   
       var x= new NewTaskLine(this);
    });
@@ -120,12 +122,26 @@ function updateDetailsContainer(str)
    });
 }
 
+function updateTaskIdInBrowserUrl(task_id)
+{
+   var currentUrl = $(location).attr('href');
+   if ( currentUrl.search( /task=\d+/ ) == -1) {
+      currentUrl += "&task="+task_id;
+   }
+   else{
+      currentUrl = currentUrl.replace(/task=\d+/, "task="+task_id);
+   }
+
+   history.pushState(null, null, currentUrl);
+}
+
 function selectListEntry(elem)
 {
    $('li.selected').removeClass('selected');
    $(elem).addClass('selected');
 
    var task_id= $(elem).data('id');
+   updateTaskIdInBrowserUrl(task_id);
 
    updateDetailsContainerWithTask(task_id);
 }
@@ -300,3 +316,15 @@ function makeListItemResortable(item)
 
 jQuery(function($){
 });
+
+function selectTaskInUrl()
+{
+   var currentUrl = $(location).attr('href');
+   if( currentUrl.search(/task=\d+/) !=-1) {
+      var task_id = currentUrl.match(/task=(\d+)/)[1];
+      $('li#task-'+task_id).each(function() {
+         selectListEntry(this);   
+      });      
+   }
+}
+

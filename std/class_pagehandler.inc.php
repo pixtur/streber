@@ -871,62 +871,7 @@ class PageHandler extends BaseObject
 
 
     }
-
-
-
-    public function setupParamsWithModRewrite()
-    {
-        global $g_request_vars;
-
-        if(confGet('USE_MOD_REWRITE')) {
-
-            $baseDirectory = getBaseDirectory();
-            ### convert something like "http://localhost/streber/project/4" -> "project/4"
-
-            #echo "base: $baseDirectory <br>";
-            $parameterString = str_replace($baseDirectory, '', $_SERVER['REQUEST_URI'] );
-            #echo "parameterstring: $parameterString<br>";
-
-            $parameters = explode('/', $parameterString);
-            #print_r($parameters);
-
-            
-            if(count($parameters) == 0)
-                return;
-
-            $id = $parameters[0];
-            #echo "<br> id: '$id'<br>";        
-            #echo $this->hash[$id] ."<br>";
-            if(!$pageHandle = $this->hash[$id])
-                return;
-
-            if(!$pageHandle->cleanurl || !$pageHandle->cleanurl_mapping)
-                return;
-
-            $g_request_vars['go'] = $id;
-
-            $reversedMapping = array_flip($pageHandle->cleanurl_mapping);
-            $index = 0;
-            #print_r( explode('/', $pageHandle->cleanurl ));
-            foreach( explode('/', $pageHandle->cleanurl) as $param_id) {
-                #echo ">>> $index $param_id <br>";
-                $parameter_value = $parameters[$index];
-
-                if(isset($reversedMapping[$param_id]) ) {
-                    $parameter_name= $reversedMapping[$param_id];
-                    if(isset( $g_request_vars[ $parameter_name] )) {
-                        echo "Skipping variable";    
-                    }
-                    $g_request_vars[$parameter_name] = $parameter_value;
-                    
-                    #echo "$parameter_name -> $parameter_value <br>";
-
-                }
-                $index++;
-            }
-        }
-    }
-
+    
     /**
     * return requested pagehandle or loginForm if not valid
     *

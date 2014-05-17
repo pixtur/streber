@@ -170,7 +170,6 @@ require_once( confGet('DIR_STREBER') . "pages/_handles.inc.php");               
 measure_stop('plugins');
 
 global $PH;
-$PH->setupParamsWithModRewrite();
 $requested_page_id = get('go');
 
 if(function_exists('postInitCustomize')) {
