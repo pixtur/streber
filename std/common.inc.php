@@ -154,6 +154,79 @@ function getServerVar($name, $as_html= false)
         return $_SERVER[$name];
     }
 }
+
+/**
+* get html-passed ids
+*
+* - used to pass the ids of elements we want apply functions to (like edit a task, or delete task(2)
+* - to avoid accidentally applying functions to both, we will check for wildscards (selected rows in a list)
+*   rathen than for a single name (the id of the object the function is called from)
+*/
+function getPassedIds($name=false,$wild=false)
+{
+
+    $ids=NULL;
+    #--- first check use wildcards --
+    if(!$wild) {
+        $wild= strtolower($name)."s_*";     # eg: 'objectS_*'
+    }
+    $selected_items= get($wild);
+
+    if($selected_items) {
+        $keys= array_keys($selected_items);
+        foreach($keys as $key) {
+            if(preg_match("/_(\d+)_chk/",$key,$matches)) {
+                $ids[]=$matches[1];
+            }
+        }
+    }
+    if(!$ids) {
+        #--- try original id ---
+        if($name) {
+            $id=get($name);
+            $ids=array();
+            if(isset($id)) {
+                $ids[]=$id;
+            }
+        }
+    }
+    return $ids;
+}
+
+/**
+* get exactly one html-passed id
+* -  set PH->message if multiple selected
+*/
+function getOnePassedId($name=false,$wild=false, $abort_on_failure=true,$message=NULL)
+{
+    global $PH;
+
+    if(!$message) {
+        $message=__("No element selected? (could not find id)","Message if a function started without items selected");
+    }
+    $ids= getPassedIds($name,$wild);
+    if(!$ids) {
+        if($abort_on_failure) {
+            $PH->abortWarning($message,ERROR_NOTE);
+            exit("aborting");
+        }
+        return;
+    }
+    else if(count($ids)>1) {
+        $message= __('only one item expected.');
+        if($abort_on_failure) {
+            $PH->abortWarning($message,ERROR_NOTE);
+        }
+        else {
+            $PH->messages[]= $message;
+            return;
+        }
+    }
+    return $ids[0];
+}
+
+
+
 /**
 * sometimes useful for debugging
 * - note the print of a double % which will trigger a warning for debug out
@@ -413,75 +486,7 @@ function mysqlDatetime2utc($datetime) {
      return false;
 }
 
-/**
-* get html-passed ids
-*
-* - used to pass the ids of elements we want apply functions to (like edit a task, or delete task(2)
-* - to avoid accidentally applying functions to both, we will check for wildscards (selected rows in a list)
-*   rathen than for a single name (the id of the object the function is called from)
-*/
-function getPassedIds($name=false,$wild=false)
-{
 
-    $ids=NULL;
-    #--- first check use wildcards --
-    if(!$wild) {
-        $wild= strtolower($name)."s_*";     # eg: 'objectS_*'
-    }
-    $selected_items= get($wild);
-
-    if($selected_items) {
-        $keys= array_keys($selected_items);
-        foreach($keys as $key) {
-            if(preg_match("/_(\d+)_chk/",$key,$matches)) {
-                $ids[]=$matches[1];
-            }
-        }
-    }
-    if(!$ids) {
-        #--- try original id ---
-        if($name) {
-            $id=get($name);
-            $ids=array();
-            if(isset($id)) {
-                $ids[]=$id;
-            }
-        }
-    }
-    return $ids;
-}
-
-/**
-* get exactly one html-passed id
-* -  set PH->message if multiple selected
-*/
-function getOnePassedId($name=false,$wild=false, $abort_on_failure=true,$message=NULL)
-{
-    global $PH;
-
-    if(!$message) {
-        $message=__("No element selected? (could not find id)","Message if a function started without items selected");
-    }
-    $ids= getPassedIds($name,$wild);
-    if(!$ids) {
-        if($abort_on_failure) {
-            $PH->abortWarning($message,ERROR_NOTE);
-            exit("aborting");
-        }
-        return;
-    }
-    else if(count($ids)>1) {
-        $message= __('only one item expected.');
-        if($abort_on_failure) {
-            $PH->abortWarning($message,ERROR_NOTE);
-        }
-        else {
-            $PH->messages[]= $message;
-            return;
-        }
-    }
-    return $ids[0];
-}
 
 
 
@@ -800,6 +805,12 @@ function GMTToClientTime($time)
 
 
 
+function getBaseDirectory()
+{
+    $locationOfIndexPhp =  $_SERVER['PHP_SELF'];
+    $baseDirectory = str_replace("index.php", '', $locationOfIndexPhp );
+    return $baseDirectory;
+}
 
 
 

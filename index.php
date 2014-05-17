@@ -123,6 +123,7 @@ if ($result = $dbh->prepare('SELECT NOW()')) {
 
 measure_stop('core_includes');
 
+
 if(!$requested_page_id = get('go')) {
     require_once( confGet('DIR_STREBER') . "./std/check_version.inc.php");
     validateEnvironment();
@@ -168,12 +169,16 @@ require_once( confGet('DIR_STREBER') . "render/render_page.inc.php");
 require_once( confGet('DIR_STREBER') . "pages/_handles.inc.php");                 # already requires language-support
 measure_stop('plugins');
 
+global $PH;
+$PH->setupParamsWithModRewrite();
+$requested_page_id = get('go');
+
 if(function_exists('postInitCustomize')) {
     postInitCustomize();
 }
 
 measure_start('init2');
-global $PH;
+
 if($g_tags_removed) {
     new FeedbackWarning( __('For security reasons html tags were removed from passed variables')
     . " " . sprintf(__("Read more about %s."), $PH->getWikiLink('security settings')));
@@ -206,6 +211,7 @@ if($user) {
 
     ### if no target-page show home ###
     if(!$requested_page_id) {
+
 
         ### if user has only one project go there ###
         $projects = $auth->cur_user->getProjects();

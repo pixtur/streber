@@ -70,12 +70,11 @@ function getCurTheme()
 *
 * - if file does not exists, returns path to default theme
 * - if file does not exists there a warning is been triggered
-
 */
 function getThemeFile($filepath)
 {
     $theme= getCurTheme();
-    $path= "themes/".getCurTheme()."/".$filepath;
+    $path= "/themes/".getCurTheme()."/".$filepath;
     if(file_exists($path)) {
         return $path;
     }
