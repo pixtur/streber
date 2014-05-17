@@ -362,8 +362,8 @@ new PageHandle(array('id'=>'projViewTasks',
     'test'=>'yes',
     'test_params'=>array('prj'=>'_projectView_',),
 
-    'cleanurl'=>'projViewTasks/_PROJECT_/_TASK_',
-    'cleanurl_mapping'=>array('prj' => '_PROJECT_', 'task' => '_TASK_'),
+    #'cleanurl'=>'projViewTasks/_PROJECT_/_TASK_',
+    #'cleanurl_mapping'=>array('prj' => '_PROJECT_', 'task' => '_TASK_'),
 
 ));
 new PageHandleFunc(array('id'=>'projNew',
