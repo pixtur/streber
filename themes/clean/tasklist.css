@@ -322,6 +322,11 @@ ol.sortable.collapsed {
   background-color: #444;
 }
 
+.sortable li small .assignment.isNew {
+  background-color:#E57700;
+  font-weight:bold;
+}
+
 .sortable li.isDone small .assignment {
   background-color: #aaa;
 }

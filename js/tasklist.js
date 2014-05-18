@@ -244,9 +244,8 @@ function makeListItemResortable(item)
          selectListEntry(this);
       });   
    }
-   
 
-   $(item).drag("start",function( ev, dd )      
+   $(item).drag("start",function( ev, dd )
    {
       $(this)
          .css("opacity", 0.1);

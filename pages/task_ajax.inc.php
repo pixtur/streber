@@ -41,6 +41,12 @@ function taskRenderDetailsViewResponse()
             return;
         }
 
+        // Make changes no longer new
+        $task->nowViewedByUser();
+        foreach($task->getAssignments() as $assigment) {
+            $assigment->nowViewedByUser();
+        }
+
         echo "<div class='page-functions'>";
         echo $PH->getLink('taskEdit',  __("Edit"), array('tsk'=>$task->id, 'from'=> get('from_handle')) );
         echo $PH->getLink('tasksDelete',  __("Delete"), array('tsk'=>$task->id, 'from'=> get('from_handle')) );

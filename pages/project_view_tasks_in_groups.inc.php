@@ -202,12 +202,13 @@ function buildListEntryForTask($task)
 
     $assignments='';
     $sep = '';
-    foreach($task->getAssignedPeople() as $assignment) {
-        $person= Person::getVisibleById($assignment->id);
+    foreach($task->getAssignments() as $assignment) {
+        $person= Person::getVisibleById($assignment->person);
 
         $currentUserClass= ($person->id == $auth->cur_user->id) ? "current-user" : '';
+        $isNewClass = $assignment->isChangedForUser() ? "isNew": '';
 
-        $assignments.= $sep .  "<span class='assignment $currentUserClass'>$person->name</span>";
+        $assignments.= $sep .  "<span class='assignment $currentUserClass $isNewClass'>$person->name</span>";
         $sep = ", ";
     }
 
