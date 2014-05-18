@@ -196,7 +196,24 @@ function renderTaskGroup($tasks, $title, $milestone_id, $project_id, $view_colla
 
 function buildListEntryForTask($task) 
 {
+    global $auth;
     $classIsDone = $task->isDone() ? "isDone":'';
+
+
+    $assignments='';
+    $sep = '';
+    foreach($task->getAssignedPeople() as $assignment) {
+        $person= Person::getVisibleById($assignment->id);
+
+        $currentUserClass= ($person->id == $auth->cur_user->id) ? "current-user" : '';
+
+        $assignments.= $sep .  "<span class='assignment $currentUserClass'>$person->name</span>";
+        $sep = ", ";
+    }
+
+    if($assignments) {
+        $assignments= sprintf(__("%s"), $assignments);
+    }
 
     $additionalInfo = $task->buildTypeText();
     $comments = $task->getComments();
@@ -206,7 +223,7 @@ function buildListEntryForTask($task)
     return 
      "<li id='task-{$task->id}' data-id='{$task->id}' class='$classIsDone dragable'>"
     ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
-    ."<small>$additionalInfo</small>"
+    ."<small>$additionalInfo $assignments</small>"
     ."</li>";
 }
 

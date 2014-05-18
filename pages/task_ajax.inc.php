@@ -73,22 +73,19 @@ function _renderStatusInfo($task)
 
     echo "<div class='status-options'>";
     echo "<table><tr>";
-    echo _renderSelectionOption($task, 'prio');
-    echo _renderSelectionOption($task, 'status');
-    echo _renderSelectionOption($task, 'label');
+    echo _renderFieldOption($task, 'prio');
+    echo _renderFieldOption($task, 'status');
+    echo _renderFieldOption($task, 'label');
+    echo _renderAssignTaskOption($task);
     echo "</table></tr>";
     echo "</div>";
 }
 
 
-function _renderSelectionOption($task, $field_name)
+function _renderFieldOption($task, $field_name)
 {
     $field = $task->fields[$field_name];
     $options = _getTastFieldOptions($task, $field);
-    //$options['selected']="0";
-
-    //$options= array('a' => 'A' , 'b'=> 'B');
-
 
     echo "<td><label>". $field->title . "</label>";
 
@@ -97,14 +94,39 @@ function _renderSelectionOption($task, $field_name)
         "index.php?go=taskSetProperty&field_name={$field_name}&task_id=$task->id"
         );
 
-    // echo "<span class='editable select' \
-    //             data-options='". json_encode($options). "'>";
     echo $options[$task->$field_name];
     echo "</div>";
     echo "</td>";
-
-    //$url = go&saveField&field_name=priority&task_id=23432;
 }
+
+function _renderAssignTaskOption($task)
+{
+    $project = $task->getProject();
+    $pps = $project->getProjectPeople();
+    $options = array(0 => '-');
+
+    $currentName = "-";
+    foreach($pps as $pp) {        
+
+
+        $person = $pp->getPerson();
+        if( $task->isAssignedToPerson($person)){
+            $currentName = $person->name;
+        }
+        $options[$person->id] = $person->name;
+    }
+    echo "<td><label>". __('assigned to') . "</label>";
+
+    printf("<div class='editable select' data-options='%s' data-saveurl='%s'>",
+        htmlspecialchars(json_encode( $options), ENT_QUOTES, 'UTF-8'),
+        "index.php?go=taskAssignToPerson&task_id=$task->id"
+    );
+
+    echo $currentName;
+    echo "</div>";
+    echo "</td>";
+}
+
 
 function _getTastFieldOptions($task, $field)
 {
@@ -167,6 +189,67 @@ function taskSetProperty() {
     echo $options[$value];
     return true;
 }
+
+
+/**
+*       $.post('index.php',{
+*        go: 'taskAssignedToPerson',
+*        task_id: -,
+*        value: -> person-id of projectPerson
+*       });
+* returns the new value or an error-message
+*/
+function taskAssignToPerson() 
+{
+    $task_id = intval( get('task_id'));
+    if(!$task = Task::getEditableById($task_id)) {
+        echo __("Meh, Not allowed!");
+        return;
+    }
+
+    $project = $task->getProject();
+
+    $value = get('value');
+    if($value == null || $value == '' ) {
+        echo __("Failed: may not be empty");
+        return;
+    }
+    $person_id = intval($value); 
+
+    $keepCurrentAssignment = false;
+    foreach( $task->getAssignments() as $assigment) 
+    {
+        // keep
+        if($assigment->person == $person_id) {
+            $keepCurrentAssignment= true;
+        }
+        // remove assigment
+        else {
+           $assigment->delete();
+        }
+    }
+
+    if(!$keepCurrentAssignment && $person_id != 0) {
+        if( $project->isPersonVisibleTeamMember($person_id)) 
+        {
+            echo($person->name);
+            $person = Person::getVisibleById($person_id);
+
+            $new_assignment= new TaskPerson(array(
+                'person'=> $person_id,
+                'task'  => $task_id,
+                'project'=>$project->id
+            ));
+            $new_assignment->insert();
+            echo $person->name;
+        }        
+        return;
+    }
+
+    echo "-";
+    return true;
+}
+
 
 
 function _renderComments($task)

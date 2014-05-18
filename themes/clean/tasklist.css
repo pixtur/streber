@@ -306,6 +306,27 @@ ol.sortable.collapsed {
   font-weight: lighter;
 }
 
+.sortable li small .assignment {
+  background-color:#888;
+  color:white;
+  /*text-transform: uppercase;*/
+  
+  border-radius: 7px;
+  padding-left:4px;
+  padding-right:4px;
+  font-size:9px;
+  font-weight:500;
+}
+
+.sortable li small .assignment.current-user {
+  background-color: #444;
+}
+
+.sortable li.isDone small .assignment {
+  background-color: #aaa;
+}
+
+
 .sortable li.dragable.selected {
   background-color:#fff;
   border:none;
@@ -335,4 +356,14 @@ ol.sortable.collapsed {
   margin-top:5px;
   padding-left:14px;
   margin-bottom:9px;
+}
+
+.content-section.discussion {
+  position:fixed;
+  bottom:0px;
+  height:20px;
+  box-shadow: rgba(0,0,0,0.3) 0 0 5px;
+  overflow: hidden;
+  background-color: white;
+  width:100%;
 }

@@ -1486,6 +1486,11 @@ new PageHandle(array('id'=>'taskSetProperty',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'taskAssignToPerson',
+    'req'=>'pages/task_ajax.inc.php',
+    'title'=>__(''),
+    'valid_for_crawlers'=>false,
+));
 
 new PageHandle(array('id'=>'itemLoadField',
     'req'=>'pages/item_ajax.inc.php',
