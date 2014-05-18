@@ -72,7 +72,7 @@ function updateDetailsContainer(str)
 
    // Update list item to hide new markers
    var task_id= $('.details-container h2').attr('item_id');  
-   updateListItemForTask(task_id);
+   //updateListItemForTask(task_id);
 
    // Initialize inline parameter editing
    $('.editable.select').each(function(element) {
@@ -144,7 +144,7 @@ function updateListItemForTask(task_id)
 {
    $.post('index.php',{
       go:           'taskBuildListEntryResponse',
-      task_id:      task_id,                
+      task_id:      task_id,      
    }, function(str) {
       var newLine = $(str);
       $('li#task-'+task_id).replaceWith(str);
@@ -247,9 +247,13 @@ function makeListItemResortable(item)
 {
    //console.log("makeListItemResortable:",item, this);
    if($(item).is('li')) {
-      $(item).click(function() 
+      $(item).click(function(e) 
       {
          selectListEntry(this);
+         var task_id=  $(e.currentTarget).data('id')
+
+         if(task_id)
+            updateListItemForTask(task_id);
       });   
    }
 
@@ -295,6 +299,10 @@ function makeListItemResortable(item)
          complete: function(){
             $(this).remove();
             $(e).css("opacity",1);
+            var task_id=  $(e).data('id')
+
+            if(task_id)
+               updateListItemForTask(task_id);
          }            
       })
       $( this ).removeClass('dragging');
