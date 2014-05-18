@@ -72,25 +72,18 @@ function updateDetailsContainer(str)
 
    // Update list item to hide new markers
    var task_id= $('.details-container h2').attr('item_id');  
-   //updateListItemForTask(task_id);
 
    // Initialize inline parameter editing
-   $('.editable.select').each(function(element) {
-      var data = $(this).data('options');      
-      var saveurl= $(this).data('saveurl');
-
-
-      $(this).editable(saveurl, { 
-         data   :  JSON.stringify(data),  // data from data-attribuetes will automatically be parsed, but jeditable exspects string
-         type   : 'select',
-         submit : 'OK',
-
-         // Reload list entry to show update information
-         callback: function() {            
-            var task_id= $('.details-container h2').attr('item_id');  
-            updateListItemForTask(task_id);
-         }
-      });  
+   $('select.inline').change(function(e) {
+      var field_name = $(this).data('field-name');
+      $.post('index.php',{
+         go:           $(this).data('url'),
+         task_id:       task_id, 
+         field_name:    field_name,
+         value:         $(this).val(),         
+      }, function(str) {
+         updateListItemForTask(task_id);
+      });
    });
 
    // Initialize comment form

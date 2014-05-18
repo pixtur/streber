@@ -98,12 +98,13 @@ function _renderFieldOption($task, $field_name, $hasChanged)
     $hasChangedClass = $hasChanged ? 'has-changed':'';
     echo "<td><label class='$hasChangedClass'>". $field->title . "</label>";
 
-    printf("<div class='editable select' data-options='%s' data-saveurl='%s'>",
-        htmlspecialchars(json_encode( $options), ENT_QUOTES, 'UTF-8'),
-        "index.php?go=taskSetProperty&field_name={$field_name}&task_id=$task->id"
-        );
+    echo "<select class='inline' data-field-name='$field_name' data-task-id='$task->id' data-url='taskSetProperty' >";
+    foreach($options as $value=>$option) {
+        $isSelected = ($value ==$task->$field_name) ? 'selected' : '';
+        echo "<option value='$value' $isSelected> $option </option>";
+    }
+    echo "</select>";
 
-    echo $options[$task->$field_name];
     echo "</div>";
     echo "</td>";
 }
@@ -115,23 +116,26 @@ function _renderAssignTaskOption($task)
     $options = array(0 => '-');
 
     $currentName = "-";
+    $currentValue = 0;
     foreach($pps as $pp) {        
 
 
         $person = $pp->getPerson();
         if( $task->isAssignedToPerson($person)){
             $currentName = $person->name;
+            $currentValue = $person->id;
         }
         $options[$person->id] = $person->name;
     }
     echo "<td><label>". __('assigned to') . "</label>";
 
-    printf("<div class='editable select' data-options='%s' data-saveurl='%s'>",
-        htmlspecialchars(json_encode( $options), ENT_QUOTES, 'UTF-8'),
-        "index.php?go=taskAssignToPerson&task_id=$task->id"
-    );
+    echo "<select class='inline' data-field-name='$field_name' data-task-id='$task->id' data-url='taskAssignToPerson' >";
+    foreach($options as $value=>$option) {
+        $isSelected = ($value ==$currentValue) ? 'selected' : '';
+        echo "<option value='$value' $isSelected> $option </option>";
+    }
+    echo "</select>";
 
-    echo $currentName;
     echo "</div>";
     echo "</td>";
 }

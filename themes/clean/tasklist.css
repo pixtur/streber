@@ -101,18 +101,29 @@ div.details-container table tr label.has-changed {
   color:#E57700;
 }
 
-div.details-container table tr input {
+/*div.details-container table tr input {
   height:12px;
   margin:0;
   padding:0;
 }
+*/
 div.details-container table tr div {
   padding:2px 8px;
   font-weight:bold;
 }
-div.details-container table tr div.editable:hover {
-  
+
+div.details-container table select {
+  border:1px solid white;
+  background:none;
+  -webkit-appearance: none; 
+  -moz-appearance:none;
+  padding:2px 8px;
+  font-weight:bold;
+  font-size: 12px;
+  font-family: Helvetica;
+  outline:none;
 }
+
 
 @-webkit-keyframes flashHighlight {
     0% { background-color: #fff;   }
@@ -121,14 +132,8 @@ div.details-container table tr div.editable:hover {
 }
 table div.editable:hover {
     -webkit-animation: flashHighlight 2s;  
-    /*background-color: #ff8; 
-    -webkit-transition: background-color 2;  */
 }
 
-.editable {
-  /*background-color:#fff;
-  -webkit-transition: background-color 2;  */
-}
 
 /* ----- DETAILS CONTAINER ----------------------------------------------------- */
 div.details-container .content-section {
