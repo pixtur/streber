@@ -97,6 +97,10 @@ div.details-container table tr label {
   font-size: 10px;
 }
 
+div.details-container table tr label.has-changed {
+  color:#E57700;
+}
+
 div.details-container table tr input {
   height:12px;
   margin:0;

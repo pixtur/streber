@@ -77,23 +77,26 @@ function _renderStatusInfo($task)
     global $PH;
     global $auth;
 
+    $changedFields = $task->getFieldsChangedForCurrentUser();
+
     echo "<div class='status-options'>";
     echo "<table><tr>";
-    echo _renderFieldOption($task, 'prio');
-    echo _renderFieldOption($task, 'status');
-    echo _renderFieldOption($task, 'label');
+    echo _renderFieldOption($task, 'prio', isset($changedFields['prio']));
+    echo _renderFieldOption($task, 'status', isset($changedFields['status']));
+    echo _renderFieldOption($task, 'label', isset($changedFields['label']));
     echo _renderAssignTaskOption($task);
     echo "</table></tr>";
     echo "</div>";
 }
 
 
-function _renderFieldOption($task, $field_name)
+function _renderFieldOption($task, $field_name, $hasChanged)
 {
     $field = $task->fields[$field_name];
     $options = _getTastFieldOptions($task, $field);
 
-    echo "<td><label>". $field->title . "</label>";
+    $hasChangedClass = $hasChanged ? 'has-changed':'';
+    echo "<td><label class='$hasChangedClass'>". $field->title . "</label>";
 
     printf("<div class='editable select' data-options='%s' data-saveurl='%s'>",
         htmlspecialchars(json_encode( $options), ENT_QUOTES, 'UTF-8'),
@@ -191,7 +194,7 @@ function taskSetProperty() {
         }        
     }
     $task->$field_name= $value;
-    $task->update(array($field_name), false);
+    $task->update(array($field_name));
     echo $options[$value];
     return true;
 }

@@ -1523,6 +1523,50 @@ class DbProjectItem extends DbItem {
         }
     }
 
+    public function getFieldsChangedForCurrentUser()
+    {
+        require_once(confGet('DIR_STREBER') . "db/db_itemchange.inc.php");
+        require_once(confGet('DIR_STREBER') . 'db/db_itemperson.inc.php');
+
+        global $auth;
+
+        ### has user last edited this item? ###
+        if($this->modified_by == $auth->cur_user->id) {
+            return array();      
+        }
+
+        ### has user seen item? ###
+        else if($item_people = ItemPerson::getAll(array(
+            'person'=>$auth->cur_user->id,
+            'item' => $this->id
+        ))) {
+            $ip= $item_people[0];
+            if($ip->viewed_last > $this->modified) {
+                return array();
+            }
+        }
+        else {
+            return array();
+        }
+        
+        $changes= ItemChange::getItemChanges(array(
+            'item' => $this->id,
+            'date_min' => $ip->viewed_last,
+        ));
+        if(!$changes) {
+            return array();
+        }
+
+        $changedFields = array();
+        foreach( $changes as $change ) 
+        {
+            $changedFields[$change->field] = true;
+        }
+
+        return $changedFields;
+    }
+
+
     /**
     * internal function to add update markers to wiki texts
     * these markers will later be replaced by render_wiki (see render_wiki.inc.php FormatBlockChangemarks)
