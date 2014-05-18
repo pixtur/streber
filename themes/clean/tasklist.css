@@ -292,6 +292,7 @@ ol.sortable.collapsed {
   -moz-box-sizing:border-box; 
 }
 
+
 .sortable .proxy,
 .sortable li.dragable:hover {
   background-image:url(layout/bg_reorder_draghandle.png);
@@ -321,6 +322,19 @@ ol.sortable.collapsed {
 .sortable li small .assignment.current-user {
   background-color: #444;
 }
+
+.sortable li section span.isNew {
+  background-color:#E57700;
+  font-weight:bold;
+  color:white;
+  text-transform: uppercase;
+  font-size:9px;
+  border-radius: 5px;
+  padding-left:4px;
+  padding-right:4px;
+
+}
+
 
 .sortable li small .assignment.isNew {
   background-color:#E57700;
@@ -363,6 +377,7 @@ ol.sortable.collapsed {
   margin-bottom:9px;
 }
 
+/*
 .content-section.discussion {
   position:fixed;
   bottom:0px;
@@ -372,3 +387,4 @@ ol.sortable.collapsed {
   background-color: white;
   width:100%;
 }
+*/

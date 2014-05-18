@@ -216,6 +216,17 @@ function buildListEntryForTask($task)
         $assignments= sprintf(__("%s"), $assignments);
     }
 
+    $newMarker = '';
+    switch($task->isChangedForUser()) {
+    case 1: 
+        $newMarker = "<span class='isNew'>". __("new") . "</span>";
+        break;
+    case 2: 
+        $newMarker = "<span class='isNew'>". __("updated") . "</span>";
+        break;
+    }
+    
+
     $additionalInfo = $task->buildTypeText();
     $comments = $task->getComments();
     if( count($comments) ) {
@@ -223,7 +234,7 @@ function buildListEntryForTask($task)
     }
     return 
      "<li id='task-{$task->id}' data-id='{$task->id}' class='$classIsDone dragable'>"
-    ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name</section>"
+    ."<section class='itemfield' item_id='{$task->id}'' field_name='name'>$task->name $newMarker</section>"
     ."<small>$additionalInfo $assignments</small>"
     ."</li>";
 }

@@ -70,6 +70,10 @@ function updateDetailsContainer(str)
       this.ajax_edit= aj;
    });   
 
+   // Update list item to hide new markers
+   var task_id= $('.details-container h2').attr('item_id');  
+   updateListItemForTask(task_id);
+
    // Initialize inline parameter editing
    $('.editable.select').each(function(element) {
       var data = $(this).data('options');      
@@ -84,17 +88,7 @@ function updateDetailsContainer(str)
          // Reload list entry to show update information
          callback: function() {            
             var task_id= $('.details-container h2').attr('item_id');  
-
-            $.post('index.php',{
-               go:           'taskBuildListEntryResponse',
-               task_id:      task_id,                
-            }, function(str) {
-               var newLine = $(str);
-               $('li#task-'+task_id).replaceWith(str);
-               
-               $('li#task-'+task_id).addClass('selected');
-               makeListItemResortable($('li#task-'+task_id) );
-            });
+            updateListItemForTask(task_id);
          }
       });  
    });
@@ -146,6 +140,20 @@ function selectListEntry(elem)
    updateDetailsContainerWithTask(task_id);
 }
 
+function updateListItemForTask(task_id)
+{
+   $.post('index.php',{
+      go:           'taskBuildListEntryResponse',
+      task_id:      task_id,                
+   }, function(str) {
+      var newLine = $(str);
+      $('li#task-'+task_id).replaceWith(str);
+      
+      $('li#task-'+task_id).addClass('selected');
+      makeListItemResortable($('li#task-'+task_id) );
+   });
+
+}
 function updateDetailsContainerWithTask(task_id)
 {
    $.post('index.php',{

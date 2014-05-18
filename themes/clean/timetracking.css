@@ -35,12 +35,11 @@ div.timetable div.currentTime {
 }
 
 .myCanvas{
-  image-rendering: optimizeSpeed;             // Older versions of FF
-  image-rendering: -moz-crisp-edges;          // FF 6.0+
-  image-rendering: -webkit-optimize-contrast; // Webkit
-                                              //  (Safari now, Chrome soon)
-  image-rendering: optimize-contrast;         // Possible future browsers.
-  -ms-interpolation-mode: nearest-neighbor;   // IE
+  image-rendering: optimizeSpeed;             
+  image-rendering: -moz-crisp-edges;          
+  image-rendering: -webkit-optimize-contrast;                                               
+  image-rendering: optimize-contrast;         
+  -ms-interpolation-mode: nearest-neighbor;   
 }
 
 

@@ -1408,22 +1408,24 @@ foreach($filters_str as $fs=>$value) {
     public function buildTypeText()
     {
         global $g_status_names;
+        global $g_prio_names;
         $type ="";
 
-        $status=  $this->status != STATUS_OPEN && isset($g_status_names[$this->status])
+        $prio = $this->prio != PRIO_NORMAL && isset($g_prio_names[$this->prio])
+            ? $g_prio_names[$this->prio] .' '
+            : '';
+
+        $status=  $this->status != STATUS_OPEN && $this->status != STATUS_NEW  && isset($g_status_names[$this->status])
                ?  ' ('.$g_status_names[$this->status] .')'
                :  '';
 
         $label=  $this->getLabel();
-        if(!$label) {
-            $label= __("Task");
-        }
 
         if($folder= $this->getFolderLinks()) {
-            $type = $folder ." &gt; " . $label . '  '. $status ;
+            $type = $folder ." &gt; " . $prio . $label . '  '. $status ;
         }
         else {
-            $type =  $label .' ' . $status;
+            $type =  $prio .$label .' ' . $status;
         }
         return $type;
     }
