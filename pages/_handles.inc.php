@@ -85,6 +85,16 @@ new PageHandleSubm(array('id'=>'newEffortFromTimeTracking',
 ));
 
 
+new PageHandle(array('id'=>'ajaxSearch',
+    'req'=>'pages/ajax_search.inc.php',
+    'title'=>__(''),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
+
+
+
 new PageHandle(array('id'=>'homeAllChanges',
     'req'=>'pages/home.inc.php',
     'title'=>__('Overall changes'),

@@ -634,51 +634,54 @@ function search()
     * adjust query with more than one word...
     * e.g. "admi task" -> "+admi* +task"
     */
+
+
     $search_query = asSearchQuery( $search_query );
-    if(count($ar= explode(' ',$search_query)) >1) {
-        $search_query='';
-        $sep='+';
+    // if(count($ar= explode(' ',$search_query)) >1) {
+    //     $search_query='';
+    //     $sep='+';
 
-        foreach($ar as $a) {
-            #$a = preg_replace("/[\t (),\*+:\\_\"'.=]/","",$a);
-            if(!$a || strlen($a)<3) {
-                continue;
-            }
-            else if(isset($mysql_default_stopwords[$a])) {
-                $found_stop_words[]=$a;
-            }
-            else {
-                $search_query.= $sep.$a;
-                $sep= "* +";
-                $found_ok_words[]=$a;
-            }
-        }
-    }
-    else if(isset($mysql_default_stopwords[$search_query])) {
-        $found_stop_words[]= $search_query;
-    }
-    else if($search_query) {
-        $found_ok_words[]= $search_query;
-    }
+    //     foreach($ar as $a) {
+    //         #$a = preg_replace("/[\t (),\*+:\\_\"'.=]/","",$a);
+    //         if(!$a || strlen($a)<3) {
+    //             continue;
+    //         }
+    //         else if(isset($mysql_default_stopwords[$a])) {
+    //             $found_stop_words[]=$a;
+    //         }
+    //         else {
+    //             $search_query.= $sep.$a;
+    //             $sep= "* +";
+    //             $found_ok_words[]=$a;
+    //         }
+    //     }
+    // }
+    // else if(isset($mysql_default_stopwords[$search_query])) {
+    //     $found_stop_words[]= $search_query;
+    // }
+    // else if($search_query) {
+    //     $found_ok_words[]= $search_query;
+    // }
 
-    if($found_stop_words) {
-        new FeedbackHint(
-            sprintf(__("Due to the implementation of MySQL following words cannot be searched and have been ignored: %s"), join($found_stop_words, ', '))
-        );
+    // if($found_stop_words) {
+    //     new FeedbackHint(
+    //         sprintf(__("Due to the implementation of MySQL following words cannot be searched and have been ignored: %s"), join($found_stop_words, ', '))
+    //     );
+    // }
 
-    }
-    if(!$found_ok_words) {
-        new FeedbackWarning(__("Sorry, but there is nothing left to search."));
-        $results= array();
-    }
-    else {
+    // }
+    // if(!$found_ok_words) {
+    //     new FeedbackWarning(__("Sorry, but there is nothing left to search."));
+    //     $results= array();
+    // }
+    // else {
 
         if($results= SearchResult::getForQuery($search_query))
         {
             usort($results,  array("SearchResult", "cmp"));
             $results= array_reverse($results);
         }
-    }
+    // }
 
 
     if($flag_jump){

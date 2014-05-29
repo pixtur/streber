@@ -60,10 +60,10 @@ div#sections span.section input.searchfield {       /* seach field */
  font-size:     9pt;
  padding:       2px 1px 0px 2px;
 }
-div#sections span.section  input:focus {
+/*div#sections span.section  input:focus {
  width:         140px;
 }
-
+*/
 
 #header #user_functions {
     position:       absolute;

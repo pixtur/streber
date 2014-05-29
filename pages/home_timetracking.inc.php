@@ -44,11 +44,8 @@ function homeTimetracking()
         $page->cur_tab='home';
         $page->title=__("Time tracking");
 
-        $page->extra_header_html  = '<script type="text/javascript" src="js/ninja.js"></script>';
-        $page->extra_header_html .= '<script type="text/javascript" src="js/ninja-autocomplete.js"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
-        $page->extra_header_html .= '<link rel="stylesheet" href="themes/clean/ninja-autocomplete.css" />';
 
         $page->extra_onload_js .= "new TimeTrackingTable();";        
         $page->extra_onload_js .= "new TimeTrackingForm();";

@@ -185,6 +185,9 @@ function misc()
         ajax_edits.push(aj);
         this.ajax_edit= aj;
     });    
+
+    initAutocompleteSearch();
+
 }
 
 /**
@@ -356,9 +359,58 @@ function AjaxTextFieldEdit(dom_element, item_id, field_name)
     this.init();
 }
 
+function initAutocompleteSearch()
+{    
+    var self= this;
+    self.searchInput = $('span#tab_search input.searchfield');
+    self.searchQuery = "";
+    
+    self.ac= new $.Ninja.Autocomplete(self.searchInput, {
+        get:function (q, callback) {
+            self.searchQuery = q;            
+            $.ajax({
+                url: 'index.php',
+                dataType: 'json',
+                data: {
+                    go: 'ajaxSearch',
+                    q: q
+                },
+                success: function (data) {
+                    var rich_value_map = {};
 
+                    values= $.map(data, function (item) {
+                      rich_value_map[item.name]= item.id;
+                      return item.name;
+                    });
+                    self.searchInput.data('rich-values', rich_value_map);
+                    callback(values);
+                },
 
-
+            error: function (request, status, message) {
+              $.ninja.error(message);
+            }
+          });
+        },
+        select:function() {
+            var value = self.searchInput.data('rich-values')[ $(self.searchInput).val() ];
+            if( value > 0) {
+                $('form#my_form').submit(function (e) {
+                    e.preventDefault();                    
+                });                
+                window.location= "" + value ;
+                e.preventDefault;
+                return false;
+            }
+            else if (value == -1) {
+                $(self.searchInput).val(self.searchQuery);
+                $('form#my_form').submit();
+            }
+            else {
+                $(self.searchInput).val(self.searchQuery);
+            }
+        }
+    });
+}
 
 
 /**

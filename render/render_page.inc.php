@@ -549,7 +549,9 @@ class PageHtmlStart extends PageElement {
         $buffer.=   '<script type="text/javascript" src="js/jquery-1.8.2.js"></script>'
                     .'<script type="text/javascript" src="js/jquery.jeditable.1.5.x.js"></script>'
                     .'<script type="text/javascript" src="js/misc.js' . "?v=" . confGet('STREBER_VERSION') . '"></script>'
-                    .'<script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>';
+                    .'<script type="text/javascript" src="js/listFunctions.js'. "?v=" . confGet('STREBER_VERSION') . '"></script>'
+                    .'<script type="text/javascript" src="js/ninja.js"></script>'
+                    .'<script type="text/javascript" src="js/ninja-autocomplete.js"></script>'
                     ;
 
 
@@ -725,7 +727,7 @@ class PageHeader extends PageElement
                 ? 'submit'
                 : 'index.php';
 
-        $buffer= '<form name="my_form" action="'. $submit_url .'" method="post" enctype="multipart/form-data" >';
+        $buffer= '<form id="my_form" name="my_form" action="'. $submit_url .'" method="post" enctype="multipart/form-data" >';
         $buffer.="\n<div id=\"header\">
                 <div id=\"logo\">";
         $buffer.="<div class=\"text\">"
