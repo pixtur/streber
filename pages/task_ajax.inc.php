@@ -493,13 +493,12 @@ function taskSetOrderId()
     ));
 
     $index=0;
+    $new_task_order_id = -1;
     foreach( $tasks as $task_entry )
     {
         if( $index == $order_id)
         {
-            $task->order_id = $order_id;
-            $task->for_milestone = $milestone_id;
-            $task->update(array('order_id','for_milestone'), false);
+            $new_task_order_id= $order_id;
             $index++;             
         }
 
@@ -511,6 +510,13 @@ function taskSetOrderId()
         $task_entry->update(array('order_id'), false);
         $index++;             
     }
+
+    if($new_task_order_id != -1 || $index == $order_id) {
+        $task->order_id = $order_id;
+        $task->for_milestone = $milestone_id;
+        $task->update(array('order_id','for_milestone'), false);
+    }
+
     
     echo json_encode(array('succes'=> "updated $index elements"));    
     return true;
