@@ -188,6 +188,18 @@ function misc()
 
     initAutocompleteSearch();
 
+    /**
+    * focus the search field on first tab
+    */
+    $("body").keydown(function (e) {
+        if (e.which == 9) {
+            var $focused = $(':focus');
+            if($focused.length == 0) {
+                $("input.searchfield").focus();
+                e.preventDefault();
+            }
+        }
+    });
 }
 
 /**
