@@ -58,7 +58,14 @@ $(function() {
    // Use keyboard keys to cycle through tasks
    $('body').keydown(function(e) 
    {
+      
+      // ignore if a control has focus
+      var $focused = $(':focus');
+      if($focused.length > 0)
+         return;
+
       var code = (e.keyCode ? e.keyCode : e.which);
+
       if(code == 40 || code == 38) {
          var selectedItems = $('li.dragable.selected').first();
          var selectedItem = selectedItems.length > 0 ? selectedItems[0] : null;         
