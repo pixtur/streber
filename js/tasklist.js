@@ -54,7 +54,37 @@ $(function() {
       });
       $(e.currentTarget).parents('div:first').find('ol').slideToggle();
    });
+
+   // Use keyboard keys to cycle through tasks
+   $('body').keydown(function(e) 
+   {
+      var code = (e.keyCode ? e.keyCode : e.which);
+      if(code == 40 || code == 38) {
+         var selectedItems = $('li.dragable.selected').first();
+         var selectedItem = selectedItems.length > 0 ? selectedItems[0] : null;         
+         var items = $('li.dragable');
+         var index = items.index(selectedItem);
+
+         // down
+         if (code == 40) {
+            if(index < items.length -1) {
+               selectListEntry( items[index+1]);
+            }
+
+         } 
+         // up
+         else if (code == 38) {
+            if(index > 0) {
+               selectListEntry( items[index-1]);
+            }
+         }   
+         e.preventDefault();
+      }
+   });
+
 });
+
+
 
 function updateDetailsContainer(str)
 {
@@ -131,6 +161,12 @@ function selectListEntry(elem)
    updateTaskIdInBrowserUrl(task_id);
 
    updateDetailsContainerWithTask(task_id);
+
+   // Scroll Item into view
+   $("li.dragable.selected").scrollintoview( {
+      duration: 200
+   });
+
 }
 
 function updateListItemForTask(task_id)

@@ -44,6 +44,8 @@ function projViewTasks()
     $page->extra_header_html  = '<script type="text/javascript" src="js/jquery.event.drop-2.2.js"></script>';
     $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.event.drag-2.2.js"></script>';
     $page->extra_header_html .= '<script type="text/javascript" src="js/tasklist.js"></script>';
+    $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.scrollintoview.js"></script>';
+    
 
     ### init known filters for preset ###
     $list= new ListBlock_tasks(array(
