@@ -363,16 +363,16 @@ function initAutocompleteSearch()
     self.searchInput = $('span#tab_search input.searchfield');
     self.searchQuery = "";
 
-    self.lastReqestQuery = null;
+    self.lastRequestQuery = null;
     
     self.ac= new $.Ninja.Autocomplete(self.searchInput, {
         get:function (q, callback) {
             self.searchQuery = q;
-            if(q == self.lastReqestQuery) 
+            if(q == self.lastRequestQuery) 
                 return;
-            self.lastReqestQuery = q;
 
-            console.log("send request #", ++self.searchRequestIndex, "'" + q + "'");
+            self.lastRequestQuery = q;
+
             $.ajax({
                 url: 'index.php',
                 dataType: 'json',
@@ -381,11 +381,10 @@ function initAutocompleteSearch()
                     q: q
                 },
                 success: function (data) {
-                    console.log("got data request #", self.searchRequestIndex, this);
-                    var q=this.url.match(/q=(.*)/)[1];
-                    q = q.replace("+", " ");
-                    if(q != self.lastReqestQuery) {
-                        console.log("skipping obsolete request", q , self.lastReqestQuery);
+                    var queryFromUrl=this.url.match(/q=(.*)/)[1];
+                    var queryWithCorrectSpaces = queryFromUrl.replace("+", " ");
+                    if(queryWithCorrectSpaces != self.lastRequestQuery) {
+                        console.log("skipping obsolete request", queryWithCorrectSpaces , self.lastRequestQuery);
                         return;
                     }
 
@@ -393,7 +392,8 @@ function initAutocompleteSearch()
 
                     if(data != null) {
                         values= $.map(data, function (item) {
-                          rich_value_map[item.name]= item.id;
+
+                          rich_value_map[item.name.replace("\n","")]= item.id;
                           return item.name;
                         });                        
                     }

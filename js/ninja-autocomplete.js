@@ -107,7 +107,7 @@
       if (autocomplete.matchlist[autocomplete.index]) {
         autocomplete.$element.data('ninja-completed', true);
 
-        console.log(autocomplete.matchlist[autocomplete.index]);
+        //console.log(autocomplete.matchlist[autocomplete.index]);
 
         autocomplete.$element.val(autocomplete.matchlist[autocomplete.index]);
 

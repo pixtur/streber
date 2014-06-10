@@ -28,9 +28,32 @@ function ajaxSearch()
     $resultList = array();
     $count = 0;
     foreach($results as $r) {
-        $type_name = "foo";
+        $annotation = "";
+        $project_id = $r->item->project;
+        $item_type_name;
 
-        $resultList[] = array('name'=> $r->name ." – "  . $type_name , 'id'=>$r->item->id);
+        $item_type = DbItem::getItemType($r->item->id);
+
+        if( $item_type == ITEM_TASK) {
+            $t = Task::getVisibleById($r->item->id);
+            $item_type_name = $t->getLabel();
+        }
+        else {
+            global $g_item_type_names;        
+            $item_type_name = $g_item_type_names[$item_type] ;
+            $annotation = $item_type_name;
+        }
+
+        if( $project_id) {
+            if($project = Project::getVisibleById($project_id)) {
+                $annotation = $item_type_name . " in " . $project->name;
+            }
+            else {
+                $annotation = __('unknown project');
+            }
+        }
+
+        $resultList[] = array('name'=> $r->name ." – "  . $annotation , 'id'=>$r->item->id);
         if(++$count > 15) {
             $resultList[] = array( 'name' => __("Show all results"), 'id' => -1);            
             break;
