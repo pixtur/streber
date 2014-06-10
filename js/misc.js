@@ -345,8 +345,6 @@ function AjaxTextFieldEdit(dom_element, item_id, field_name)
 
                 //--- update linked itemfields
                 $('.itemfield').each(function(e) {
-                //console.log( this, $(this).attr('item_id'));
-
 
                     if($(this).attr('item_id')== _self.item_id && $(this).attr('field_name') == _self.field_name) {
                         $(this).html(value);
@@ -364,10 +362,17 @@ function initAutocompleteSearch()
     var self= this;
     self.searchInput = $('span#tab_search input.searchfield');
     self.searchQuery = "";
+
+    self.lastReqestQuery = null;
     
     self.ac= new $.Ninja.Autocomplete(self.searchInput, {
         get:function (q, callback) {
-            self.searchQuery = q;            
+            self.searchQuery = q;
+            if(q == self.lastReqestQuery) 
+                return;
+            self.lastReqestQuery = q;
+
+            console.log("send request #", ++self.searchRequestIndex, "'" + q + "'");
             $.ajax({
                 url: 'index.php',
                 dataType: 'json',
@@ -376,12 +381,22 @@ function initAutocompleteSearch()
                     q: q
                 },
                 success: function (data) {
+                    console.log("got data request #", self.searchRequestIndex, this);
+                    var q=this.url.match(/q=(.*)/)[1];
+                    q = q.replace("+", " ");
+                    if(q != self.lastReqestQuery) {
+                        console.log("skipping obsolete request", q , self.lastReqestQuery);
+                        return;
+                    }
+
                     var rich_value_map = {};
 
-                    values= $.map(data, function (item) {
-                      rich_value_map[item.name]= item.id;
-                      return item.name;
-                    });
+                    if(data != null) {
+                        values= $.map(data, function (item) {
+                          rich_value_map[item.name]= item.id;
+                          return item.name;
+                        });                        
+                    }
                     self.searchInput.data('rich-values', rich_value_map);
                     callback(values);
                 },

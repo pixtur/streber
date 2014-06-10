@@ -487,7 +487,7 @@ function taskSetOrderId()
         'project'       => $task->project,
         'for_milestone' => $milestone_id,
         'order_by'      => 'order_id',
-        'category'      => $task->category,
+        'category_in' => array(TCATEGORY_TASK, TCATEGORY_BUG),
         'status_min'=> 0,
         'status_max'=> 5,        
     ));

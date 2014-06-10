@@ -118,7 +118,7 @@ function projViewTasks()
     $tasks = Task::getAll(array(
         //'is_milestone'=>true,
         'project' => $project->id,
-        'category' => TCATEGORY_TASK,
+        'category_in' => array(TCATEGORY_TASK, TCATEGORY_BUG),
         'status_min'=> 0,
         'status_max'=> 5,
         'for_milestone' => 0,
@@ -143,7 +143,7 @@ function projViewTasks()
         $tasks = Task::getAll(array(
             //'is_milestone'=>true,
             'project' => $project->id,
-            'category' => TCATEGORY_TASK,
+            'category_in' => array(TCATEGORY_TASK, TCATEGORY_BUG),
             'status_min'=> 0,
             'status_max'=> 5,
             'for_milestone' => $milestone->id,
