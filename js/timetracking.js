@@ -318,7 +318,8 @@ function TimeTrackingForm() {
           });
         },
         select:function() {
-            var value = ttf.$taskInput.data('rich-values')[ this.$element.val() ];
+            var fixedLineBreak = this.$element.val().replace("\n","")
+            var value = ttf.$taskInput.data('rich-values')[ fixedLineBreak ];
             ttf.$taskId.val( value );
         }
     });
