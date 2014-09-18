@@ -865,6 +865,7 @@ function taskViewAsDocu()
     ### get task ####
     $tsk=get('tsk');
 
+
     $editable= false;                           # flag, if this task can be edited
 
     if($task= Task::getEditableById($tsk)) {
@@ -902,6 +903,7 @@ function taskViewAsDocu()
         if($project->isPersonVisibleTeamMember($auth->cur_user)) {
             ### edit ###
             if($editable) {
+
                 $page->add_function(new PageFunction(array(
                     'target'=>'taskEdit',
                     'params'=>array('tsk'=>$task->id),
@@ -934,6 +936,11 @@ function taskViewAsDocu()
                         'name'=>__('Undelete')
                     )));
                 }
+                $page->add_function(new PageFunction(array(
+                    'target'=>'topicExportAsHtml',
+                    'params'=>array('tsk'=>$task->id),
+                    'name'=>__('Export')
+                )));
             }
 
             if(

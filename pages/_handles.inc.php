@@ -198,6 +198,16 @@ new PageHandle(array('id'=>'itemViewDiff',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'topicExportAsHtml',
+    'req'=>'pages/topic_export_as_html.inc.php',
+    'title'=>__('Export as Html'),
+    'valid_params'=>array(
+           'from'=>'.*',
+           'tsk'=>'\*',
+    ),
+    'test'=>'no',
+));
+
 
 /**
 * collector for global views like projList, personList, home, etc.
