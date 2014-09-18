@@ -39,9 +39,9 @@ function TopicExportAsHtml()
     global $g_wiki_task;
     $g_wiki_task= $task;
 
-    $complete_buffer = "<html>";
+    $complete_buffer = "<html><head>";
     $complete_buffer .= '<link rel="stylesheet" type="text/css" href="themes/clean/documentation.css" media="screen">';
-    $complete_buffer .= "<head><link src='bla'></head>";
+    $complete_buffer .= "</head>";
     $complete_buffer .= "<body>";
     
     $subtasks = $subtasks= $task->getSubtasksRecursive();
@@ -56,7 +56,7 @@ function TopicExportAsHtml()
 
         $complete_buffer .= $with_local_links;
     }
-    $complete_buffer.= "</html>";
+    $complete_buffer.= "</body></html>";
 
     echo extractToc2($complete_buffer);
 }
