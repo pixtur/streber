@@ -52,9 +52,10 @@ function TopicExportAsHtml()
         $complete_buffer .= ("<h1>" . $t->name . "</h1>");
         
         $wiki_as_html = wikifieldAsHtml($t, 'description');
-        $with_local_links = preg_replace("/href='/", "href='" . $t->getUrl() , $wiki_as_html);
+        //$with_local_links = preg_replace("/href='/", "href='" . $t->getUrl() , $wiki_as_html);
 
-        $complete_buffer .= $with_local_links;
+        //$complete_buffer .= $with_local_links;
+        $complete_buffer .= $wiki_as_html;
     }
     $complete_buffer.= "</body></html>";
 
