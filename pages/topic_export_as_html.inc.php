@@ -58,7 +58,8 @@ function TopicExportAsHtml()
     }
     $complete_buffer.= "</body></html>";
 
-    echo extractToc2($complete_buffer);
+    //echo extractToc2($complete_buffer);
+    echo $complete_buffer;
 }
 
 
