@@ -35,7 +35,9 @@ body > ol ol  ol {
 h1 {
 	padding-top:3em;
 	text-transform: uppercase;
-	font-size: 40px;
+	font-size: 3em;
+	line-height: 1.0em;
+
 	font-weight:200;
 
 	counter-increment: section;
@@ -46,6 +48,7 @@ h1 {
 h2 {
 	counter-increment: sub-section;
 	page-break-before: avoid;
+	line-height: 1.2em;
 }
 
 h1:before {
