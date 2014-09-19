@@ -3,7 +3,7 @@ body {
 	margin-left: auto;
 	margin-right:auto;
 	font-size:14px;
-	line-height: 150%;
+	line-height: 1.4em;
 	font-family: "Segeo UI", "Helvetica", Tahoma;
 	padding-left:1em;
 	padding-right:1em;
@@ -21,11 +21,11 @@ body > ol li {
 	margin-bottom:0.4em;
 }
 
-body > ol > li > ol {
+body > ol   ol {
 	font-weight: normal;
 }
 
-body > ol > li > ol > li > ol {
+body > ol ol  ol {
 	font-size:12px;
 	list-style: none;
 	padding-left: 10px;
@@ -33,11 +33,32 @@ body > ol > li > ol > li > ol {
 }
 
 h1 {
-	margin-top:3em;
+	padding-top:3em;
 	text-transform: uppercase;
 	font-size: 40px;
 	font-weight:200;
+
+	counter-increment: section;
+	counter-reset: sub-section;
+	page-break-before: always;
 }
+
+h2 {
+	counter-increment: sub-section;
+	page-break-before: avoid;
+}
+
+h1:before {
+	content: counter(section) ". ";	
+}
+
+
+h2:before {
+	content: counter(section) "." counter(sub-section) " ";	
+}
+
+
+
 
 a {
 	text-decoration: none;
@@ -55,6 +76,15 @@ img {
 	margin-top: 1em;
 	margin-bottom: 2em;
 }
+
+
+
+ @page {
+   @bottom-left {
+        content: counter(page) "/" counter(pages);
+    }
+ }
+
 
 
 

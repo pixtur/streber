@@ -40,7 +40,7 @@ function TopicExportAsHtml()
     $g_wiki_task= $task;
 
     $complete_buffer = "<html><head>";
-    $complete_buffer .= '<link rel="stylesheet" type="text/css" href="themes/clean/documentation.css" media="screen">';
+    $complete_buffer .= '<link rel="stylesheet" type="text/css" href="themes/clean/documentation.css" media="all">';
     $complete_buffer .= "</head>";
     $complete_buffer .= "<body>";
     
@@ -59,8 +59,8 @@ function TopicExportAsHtml()
     }
     $complete_buffer.= "</body></html>";
 
-    //echo extractToc2($complete_buffer);
-    echo $complete_buffer;
+    echo extractToc2($complete_buffer);
+    //echo $complete_buffer;
 }
 
 
@@ -73,72 +73,78 @@ function extractToc2($code)
     $frag = $doc->createDocumentFragment();
 
     // create initial list
-    $frag->appendChild($doc->createElement('ol'));
-    $head = &$frag->firstChild;
     $xpath = new DOMXPath($doc);
-    $last = 1;
 
     $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');   # url part of the link to the task
     foreach($doc->getElementsByTagName('a') as $linkElement ) {
         $orgHref= $linkElement->getAttribute("href");
         $parameterString = preg_replace('/(.*index\.php)(.*)/', "$url/index.php$2", $orgHref);
-
-        //$newHref = "" . $parameterString;
     }
 
+    $last_h_level = 1;
+    $frag->appendChild($doc->createElement('ol'));
+    $head = &$frag->firstChild;
 
     # get all H1, H2, …, H6 elements
-    foreach ($xpath->query('//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]') as $headline) {
-        # get level of current headline
-        sscanf($headline->tagName, 'h%u', $curr);
-
-        # move head reference if necessary
-        if ($curr < $last) {
+    foreach ($xpath->query('//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]') as $h_tag) {
+        
+        list($current_h_level) = sscanf($h_tag->tagName, 'h%u');
+        
+        if ($current_h_level  < $last_h_level) {
             # move upwards
-            for ($i=$curr; $i<$last; $i++) {
-                $head = &$head->parentNode->parentNode;
+            for ($i=$current_h_level ; $i<$last_h_level; $i++) {
+                if($head->tagName == "li")
+                    $head = &$head->parentNode;
+                if($head->tagName == "ol")
+                    $head = &$head->parentNode;
             }
-        } else if ($curr > $last && $head->lastChild) {
+        } 
+        else if ($current_h_level  > $last_h_level && $head->lastChild) {
             # move downwards and create new lists
-            for ($i=$last; $i<$curr; $i++) {
-                if($head->lastChild) {
+            for ($i=$last_h_level; $i<$current_h_level ; $i++) {
+                if(!$head->hasChildren) {
+                    $head->appendChild($doc->createElement('ol'));    
+                    $head = &$head->lastChild;
+                }
+                else {
                     $head->lastChild->appendChild($doc->createElement('ol'));
                     $head = &$head->lastChild->lastChild;
-
                 }
             }
         }
-        $last = $curr;
+        $last_h_level = $current_h_level ;
 
         # add list item
         $li = $doc->createElement('li');
         $head->appendChild($li);
-        //$a = $doc->createElement('a',  $headline->textContent);
-        $a = $doc->createElement('a',  $headline->firstChild->textContent);
-        $head->lastChild->appendChild($a);
+
+        $link_node = $doc->createElement('a',  $h_tag->firstChild->textContent);
+        $head->lastChild->appendChild($link_node);
 
         # build ID
         $levels = array();
         $tmp = &$head;
+
         # walk subtree up to fragment root node of this subtree
         while (!is_null($tmp) && $tmp != $frag) {
             $levels[] = $tmp->childNodes->length;
             $tmp = &$tmp->parentNode->parentNode;
         }
+
         $id = 'sect'.implode('.', array_reverse($levels));
         # set destination
-        $a->setAttribute('href', '#'.$id);
+        $link_node->setAttribute('href', '#'.$id);
+
         # add anchor to headline
-        $a = $doc->createElement('a');
-        $a->setAttribute('name', $id);
-        $a->setAttribute('id', $id);
+        $anchor = $doc->createElement('a');
+        $anchor->setAttribute('name', $id);
+        $anchor->setAttribute('id', $id);
 
         # Fix edit links
-        if($curr > 1) {
-            $headline->lastChild->nodeValue= " ⇗";
-            $headline->insertBefore($a, $headline->firstChild);            
+        if($current_h_level  > 1) {
+            $h_tag->lastChild->nodeValue= " ⇗";
+            $h_tag->insertBefore($a, $h_tag->firstChild);            
         }
-
     }
 
     # append fragment to document
