@@ -363,6 +363,7 @@ foreach($filters_str as $fs=>$value) {
             'show_folders'=>true,
             'status_min'=> STATUS_UPCOMING,
             'status_max'=> STATUS_CLOSED,
+            'order_by' => 'order_id',
         )) as $t) {
             $tasks[]= $t;
             if($t->category == TCATEGORY_FOLDER) {
