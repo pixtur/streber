@@ -10,23 +10,30 @@ body {
 	color:#333;
 }
 
-
-body ol {
+div.document-title {
+	font-size: 4em;
+	margin:3em 1em 2em;
+	text-align: center;
+	page-break-after: always;
+}
+ 
+div.toc ol {
 	padding-left:20px;
 }
-body > ol {
+div.toc > ol {
 	font-weight: bold;
 }
 
-body > ol li {
+div.toc > ol li {
 	margin-bottom:0.4em;
 }
 
-body > ol   ol {
+div.toc > ol   ol {
 	font-weight: normal;
 }
 
-body > ol ol  ol {
+div.toc > ol ol ol {
+
 	font-size:12px;
 	list-style: none;
 	padding-left: 10px;
@@ -96,18 +103,25 @@ code {
 }
 
 pre {
+	color:#666;
+	text-indent: -2em;
 	background-color: #eee;
 	padding:0.5em;
+	padding-left:2.5em;
 	white-space: pre-wrap;
 }
 
- @page {
-   @bottom-left {
-        content: counter(page) "/" counter(pages);
-    }
- }
+pre::first-line {
+	color: #000;
+}
 
- blockquote {
+@page {
+	@bottom-left {
+   		 content: counter(page) "/" counter(pages);
+	}
+}
+
+blockquote {
  	font-size: 16px;
  	color:#444;
  	border-left:2px solid #aaa;
@@ -125,14 +139,15 @@ div ul {
 
 div ol {
 	margin: 1.5em 2em 1.5em;
-
 }
 
 div ol li,
 div ul li {
 	margin-bottom: 0.5em;
-
 }
 
+div#toc {
+	padding:3em 3em 3em 1em;
+}
 
 

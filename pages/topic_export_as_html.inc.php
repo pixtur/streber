@@ -40,15 +40,20 @@ function TopicExportAsHtml()
     $g_wiki_task= $task;
 
     $complete_buffer = "<html><head>";
+    $complete_buffer .= '<meta http-equiv="Content-type" content="text/html; charset=utf-8">';
     $complete_buffer .= '<link rel="stylesheet" type="text/css" href="themes/clean/documentation.css" media="all">';
     $complete_buffer .= "</head>";
     $complete_buffer .= "<body>";
     
+    //$url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');   # url part of the link to the task
 
     $subtasks= $task->getSubtasksRecursive();
-    array_unshift($subtasks, $task);
+    //array_unshift($subtasks, $task);
 
-    $url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');   # url part of the link to the task
+    $complete_buffer .= ("<div class='document-title'>" . $task->name . "</div>");
+    $complete_buffer .= "<div class='toc'></div>";
+    $complete_buffer .= wikifieldAsHtml($task, 'description');
+
 
     foreach($subtasks as $t) {
         $complete_buffer .= ("<h1>" . $t->name . "</h1>");
@@ -146,8 +151,15 @@ function extractToc2($code)
     }
 
     # append fragment to document
-    $bodyNode = $doc->getElementsByTagName('body')->item(0);
-    $bodyNode->insertBefore($frag, $bodyNode->firstChild);
+
+    $xpath = new DOMXPath($doc);
+    //foreach ($xpath->query('//*[self::div.toc]') as $toc_tag) {
+    foreach ($xpath->query("//*[contains(concat(' ', @class, ' '), ' toc ')]") as $toc_tag) {
+        //$bodyNode = $doc->getElementsByTagName('body')->item(0)->firstChild;
+        $toc_tag->appendChild($frag);
+    }
+
+
     return   $doc->saveHTML();
 }
 
