@@ -51,7 +51,7 @@ function TopicExportAsHtml()
     //array_unshift($subtasks, $task);
 
     $complete_buffer .= ("<div class='document-title'>" . $task->name . "</div>");
-    $complete_buffer .= "<div class='toc'></div>";
+    $complete_buffer .= "<ol class='toc'></ol>";
     $complete_buffer .= wikifieldAsHtml($task, 'description');
 
 

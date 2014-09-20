@@ -11,28 +11,29 @@ body {
 }
 
 div.document-title {
-	font-size: 4em;
-	margin:3em 1em 2em;
-	text-align: center;
+	font-size: 5em;
+	margin:3em 1em 2em 0;
+	font-weight: 200;
 	page-break-after: always;
+	line-height: 120%;
 }
  
-div.toc ol {
+ol.toc ol {
 	padding-left:20px;
 }
-div.toc > ol {
+ol.toc > li {
 	font-weight: bold;
 }
 
-div.toc > ol li {
+ol.toc > ol li {
 	margin-bottom:0.4em;
 }
 
-div.toc > ol   ol {
+ol.toc > ol ol {
 	font-weight: normal;
 }
 
-div.toc > ol ol ol {
+ol.toc > ol  ol {
 
 	font-size:12px;
 	list-style: none;
