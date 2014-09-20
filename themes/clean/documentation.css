@@ -95,6 +95,12 @@ code {
 	padding-right:0.3em; 
 }
 
+pre {
+	background-color: #eee;
+	padding:0.5em;
+	white-space: pre-wrap;
+}
+
  @page {
    @bottom-left {
         content: counter(page) "/" counter(pages);

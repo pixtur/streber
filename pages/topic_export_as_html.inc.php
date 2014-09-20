@@ -141,7 +141,7 @@ function extractToc2($code)
         # Fix edit links
         if($current_h_level  > 1) {
             $h_tag->lastChild->nodeValue= " ⇗";
-            $h_tag->insertBefore($a, $h_tag->firstChild);            
+            $h_tag->insertBefore($anchor, $h_tag->firstChild);            
         }
     }
 

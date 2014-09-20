@@ -456,7 +456,6 @@ class FormatBlockQuote extends FormatBlock
 
 
         $this->str='';      # prevent from further processing
-        #$this->quote=$str;
         if($options) {
 
             if(preg_match("/url=\s*&quot;([^\"]*)&quot;/",$options,$matches)) {
@@ -468,7 +467,7 @@ class FormatBlockQuote extends FormatBlock
             }
         }
 
-        $blocks= array(new FormatBlock($str));
+        $blocks= array(new FormatBlock(trim($str)));
 
         $blocks= FormatBlockChangemarks::parseBlocks($blocks);
 
