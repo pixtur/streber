@@ -107,6 +107,14 @@ div.wiki em {
     color:#060;
 }
 
+div.wiki em.entity {
+  border:1px solid #aaa;
+  background-color: #eee;
+  border-radius:2px;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  font-style: normal;
+}
 div.wiki div.frame {
     background-color:#eee;
     padding:5px;

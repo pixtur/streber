@@ -131,7 +131,12 @@ function extractToc2($code)
         # walk subtree up to fragment root node of this subtree
         while (!is_null($tmp) && $tmp != $frag) {
             $levels[] = $tmp->childNodes->length;
-            $tmp = &$tmp->parentNode->parentNode;
+            
+            if($tmp->tagName =='li') {
+                $tmp = &$tmp->parentNode;
+            }
+
+            $tmp = &$tmp->parentNode;
         }
 
         $id = 'sect'.implode('.', array_reverse($levels));
@@ -144,9 +149,12 @@ function extractToc2($code)
         $anchor->setAttribute('id', $id);
 
         # Fix edit links
-        if($current_h_level  > 1) {
-            $h_tag->lastChild->nodeValue= " ⇗";
-            $h_tag->insertBefore($anchor, $h_tag->firstChild);            
+        if($current_h_level  > 0) {
+            $h_tag->insertBefore($anchor, $h_tag->firstChild);
+            if($h_tag->lastChild->tagName =='a') {
+                $h_tag->lastChild->nodeValue= " ⇗";                
+            }
+            
         }
     }
 

@@ -467,10 +467,11 @@ class FormatBlockQuote extends FormatBlock
             }
         }
 
-        $blocks= array(new FormatBlock(trim($str)));
+        $blocks= array(new FormatBlock(trim($str). "\n"));
 
         $blocks= FormatBlockChangemarks::parseBlocks($blocks);
 
+        $blocks= FormatBlockList::parseBlocks($blocks);
         $blocks= FormatBlockBold::parseBlocks($blocks);
         $blocks= FormatBlockStrike::parseBlocks($blocks);
         $blocks= FormatBlockSub::parseBlocks($blocks);
@@ -485,8 +486,9 @@ class FormatBlockQuote extends FormatBlock
         $blocks= FormatBlockLongMinus::parseBlocks($blocks);
         $blocks= FormatBlockItemId::parseBlocks($blocks);
 
+        $blocks= FormatBlockLink::parseBlocks($blocks);
 
-        $this->children= FormatBlockLink::parseBlocks($blocks);
+        $this->children= FormatBlockEntity::parseBlocks($blocks);
 
     }
 
@@ -599,6 +601,50 @@ class FormatBlockEmphasize extends FormatBlock
     }
 }
 
+
+class FormatBlockEntity extends FormatBlock
+{
+    public function renderAsHtml()
+    {
+        return "<em class='entity'>".$this->str."</em>";
+    }
+
+    static function parseBlocks(&$blocks)
+    {
+        $blocks_new= array();
+
+        foreach($blocks as $b) {
+
+            if($b->str && !($b instanceof FormatBlockCode)) {
+
+                $text= $b->str;
+                $found= false;
+                while($text) {
+                    if(preg_match("/^(.*?)\[([^\]\s]+)\](.*)/s", $text, $matches)) {
+                        $blocks_new[]= new FormatBlock($matches[1]);
+                        $blocks_new[]= new FormatBlockEntity($matches[2]);
+                        $text= $matches[3];
+                        $found= true;
+                    }
+                    else if($found){
+                        $blocks_new[]= new FormatBlock($text);
+                        break;
+                    }
+                    else {
+                        $blocks_new[]= $b;
+                        break;
+                    }
+                }
+
+            }
+            else {
+                $blocks_new[]=$b;
+            }
+        }
+        return $blocks_new;
+
+    }
+}
 
 class FormatBlockMonospaced extends FormatBlock
 {
@@ -1626,6 +1672,7 @@ class FormatBlockListLine extends FormatBlock
 
         $blocks= FormatBlockLink::parseBlocks($blocks);
         $blocks= FormatBlockHref::parseBlocks($blocks);
+        $blocks= FormatBlockEntity::parseBlocks($blocks);
         $this->children= FormatBlockItemId::parseBlocks($blocks);
 
         $this->str= '';
@@ -2151,6 +2198,7 @@ function wiki2blocks(&$text)
     $blocks= FormatBlockMonospaced::parseBlocks($blocks);
     $blocks= FormatBlockEmphasize::parseBlocks($blocks);
     $blocks= FormatBlockLongMinus::parseBlocks($blocks);
+    $blocks= FormatBlockEntity::parseBlocks($blocks);
 
     measure_stop("wiki2blocks");
 

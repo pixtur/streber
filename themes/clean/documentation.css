@@ -18,6 +18,10 @@ div.document-title {
 	line-height: 120%;
 }
  
+ol.toc {
+	padding-bottom: 4em;
+}
+
 ol.toc ol {
 	padding-left:20px;
 }
@@ -122,17 +126,22 @@ pre::first-line {
 	}
 }
 
-blockquote {
+.wiki blockquote {
  	font-size: 16px;
  	color:#444;
  	border-left:2px solid #aaa;
- 	margin: 2em 1em 2em -0.5em;
+ 	margin: 1em 1em 1em -0.5em;
  	
- 	padding: 0.2em 1.5em;
+ 	padding: 0.5em 1.5em;
  	font-family: "Georgia";
  	line-height: 1.9em;
+ 	border-radius:10px;
+ 	background:#f8f8f8;
 }
 
+.wiki blockquote ol {
+	margin:0.5em 0em;
+}
 
 div ul {
 	margin: 1.5em 2em 1.5em 0.5em;
@@ -149,6 +158,15 @@ div ul li {
 
 div#toc {
 	padding:3em 3em 3em 1em;
+}
+
+div.wiki em.entity {
+  border:1px solid #aaa;
+  background-color: #eee;
+  border-radius:2px;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  font-style: normal;
 }
 
 
