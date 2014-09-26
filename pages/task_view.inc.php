@@ -318,7 +318,7 @@ function TaskView()
 
         $sum_efforts= $task->getSumEfforts();
         if($sum_efforts) {
-            echo "<div class=labeled><label>".__("Logged effort","Label in task-summary")."</label>".
+            echo "<div class=labeled><label>".__("Open effort","Label in task-summary")."</label>".
             $PH->getLink('taskViewEfforts',round($sum_efforts/60/60,1), array('task'=>$task->id))
             ."</div>" ;
         }

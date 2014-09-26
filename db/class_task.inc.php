@@ -602,7 +602,7 @@ foreach($filters_str as $fs=>$value) {
                 AND upp.state = 1
 
                 AND i.type = '".ITEM_EFFORT."'
-                AND i.state=1
+                AND i.state =1
                 AND i.project = $this->project
                 AND ( i.pub_level >= upp.level_view
                       OR
@@ -610,6 +610,7 @@ foreach($filters_str as $fs=>$value) {
                 )
 
                 AND e.id = i.id
+                AND e.status <= " . EFFORT_STATUS_OPEN . "
                 AND e.task=$this->id    /* only  task-efforts*/
             ";
 
