@@ -218,7 +218,15 @@ $g_config= array(
                     Use your chance now and <br>send a mail to <a href='%s'>%s</a> to get your special reward immediately.<br><br>
                     Problem: <b>",
 
-
+    /**
+    * You can override the activation message a new user receives after her 
+    * account has been created. 
+    *
+    * IMPORTANT: both message must include precisely one %s, which will be replaced
+    * with the url of the activation link.
+    */
+    'ACTIVATION_MAIL_PLAIN_BODY' => '',
+    'ACTIVATION_MAIL_HTML_BODY' => '',
 
     'EMAIL_ADMINISTRATOR'=>'',
 

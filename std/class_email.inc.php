@@ -170,4 +170,17 @@ class Email
             return $url . "?go=itemView&id=" . intval($id);
         }
     }
+
+    protected function recipientNeedsActivation()
+    {
+        return $this->recipient->settings & USER_SETTING_SEND_ACTIVATION;
+    }
+
+    protected function buildActivationUrl() 
+    {
+        return $this->url . "?go=activateAccount&tuid=". $this->recipient->identifier;        
+    }
+
+
+
 }

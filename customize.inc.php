@@ -10,27 +10,49 @@
 
 confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 confChange('DISPLAY_ERROR_LIST', 'DETAILS');
-#confChange('CHECK_IP_ADDRESS', true);
-#confChange('USE_MOD_REWRITE', true);
-#confChange('USE_PROFILER', true);
+confChange('USE_MOD_REWRITE', true);
 confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
-#confChange('LINK_STAR_LIGHT', true);		# syntaxhighlighting for Gheckobased browsers
 
-### uncomment the following line if you upgraded from mySQL 4
-#confChange('DB_USE_UTF8_ENCODING',true);
+confChange('ACTIVATION_MAIL_HTML_BODY', $str = <<<EOD
+<p><b>Welcome to the tooll.io beta-test.</b></p>
+<p>Please follow these steps:</p>
+<ol>
+<li><a href="%s">Click this link</a> to activate your account and set a password.</li>
+<li>Visit <a href="http://tooll.framefield.com">tooll.framefield.com</a> to download the latest version, to get help, and to give us feedback (which is most appreciated).</li>
+<li>After installation, start Tooll and have a look at the examples or watch the tutorial-videos.</li>
+</ol>
+<br>
+thanks for time,<br>
+tom
+EOD
+);
 
-#confChange('EMAIL_ADMINISTRATOR','mail.somedomain.de');
-#confChange('SMTP','mail.yourdomain.de');
-#confChange('ANONYMOUS_USER', 7);
-#confChange('REGISTER_NEW_USERS', true);
-#confChange('REGISTER_NEW_USERS_TO_PROJECT', 10);
+confChange('ACTIVATION_MAIL_PLAIN_BODY', $str = <<<EOD
+Welcome to the tooll.io beta-test program.  Please follow these steps:
 
-#function postInitCustomize() 
-#{
-#    global $PH;
-#    $PH->hash['projView']->req= 'pages/custom_projView.inc.php';
-#    $PH->hash['projViewFiles']->req= 'pages/custom_projViewFiles.inc.php';
-#}
+1. Click the link below to confirm your account and set a password:
+   %s
+
+2. At http://tooll.framefield.com you can always download the latest versions, 
+   get help, and give us feedback (which is most appreciated).
+
+3. After installation, start Tooll and have a look at the examples 
+   or watch the tutorial-videos.
+
+thanks for time,
+tom
+EOD
+);
+
+
+function postInitCustomize() 
+{
+	global $PH;
+	$PH->hash['projView']->req= 'pages/custom_projView.inc.php';
+	$PH->hash['projViewFiles']->req= 'pages/custom_projViewFiles.inc.php';
+
+	require_once(confGet('DIR_STREBER') . './std/class_email_notification.inc.php');
+}
 
 confChange('TASKDETAILS_IN_SIDEBOARD', true);
 ?>

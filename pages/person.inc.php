@@ -2062,8 +2062,24 @@ function personEditSubmit()
     if($person->id == 0) {
 
         if(($person->settings & USER_SETTING_NOTIFICATIONS) && $person->can_login) {
-            $person->settings |= USER_SETTING_SEND_ACTIVATION;
-            new FeedbackHint(sprintf(__("A notification / activation  will be mailed to <b>%s</b> when you log out."), $person->name). " " . sprintf(__("Read more about %s."), $PH->getWikiLink('notifications')));
+            $person->settings |= USER_SETTING_SEND_ACTIVATION;            
+
+            require_once(confGet('DIR_STREBER') . 'std/class_email_welcome.inc.php');
+
+            $email= new EmailWelcome($person);
+            
+            if($email->information_count) {
+                $result= $email->send();
+                if($result === true ) {
+                    ### reset activation-flag ###
+                    $person->settings &= USER_SETTING_SEND_ACTIVATION ^ RIGHT_ALL;
+                    $person->notification_last= gmdate("Y-m-d H:i:s");
+                }
+                else if ($result !== false) {
+                    $num_warnings++;
+                    new FeedbackWarning(sprintf(__('Failure sending mail: %s'), $result));
+                }
+            }
         }
 
         $person->notification_last = getGMTString(time() - $person->notification_period * 60*60*24 - 1);

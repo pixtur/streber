@@ -10,8 +10,7 @@
  * @author         Thomas Mann
  * @uses:           ListChanges
  * @usedby:
-
-*/
+**/
 
 require_once(confGet('DIR_STREBER') . './std/class_email.inc.php');
 
@@ -34,14 +33,13 @@ class EmailNotification extends Email
 
         $this->addIntroductionText();
 
-        $this->addInvitationForNewAccounts();
+
         $this->initRecipientProjects();
         $this->addRecententAssignedProjects();
         
         $this->addChangesToBookmarkedItems();
         $this->addUntouchedMonitoredItems();
-        $this->addRecentChanges();
-
+        $this->addRecentChanges();            
         $this->addFooter();
 
         if($smtp= confGet('SMTP')) {
@@ -64,43 +62,10 @@ class EmailNotification extends Email
                      . "<style> div.details{color:#888888; font-size: 80%;} h4 {font-size:110%;} li{ margin-bottom:0.2em; } ul {margin:0; padding:0px 0px 0px 1em;} li span.details { font-size: 80%; color: #888} </style>"
                      . "</head>"
                      . "<body text=\"#000000\" link=\"#163075\" alink=\"#ff0000\" vlink=\"#2046AA\">"
-                     . "<h2>". sprintf(__('Hello %s,','notification'), asHtml($this->recipient->name)) . "</h2>"
-                     . __('with this automatically created e-mail we want to inform you that', 'notification')
-                     . "<br>";
 
-        $this->body_plaintext.= sprintf(__('Hello %s,','notification'), $this->recipient->name)
-                    . LINE_BREAK
-                    . __('with this automatically created e-mail we want to inform you that', 'notification') . LINE_BREAK
-                    . LINE_BREAK;
+                     . "<h2>". sprintf(__('Hello %s,','notification'), asHtml($this->recipient->name)) . "</h2>";
 
-        if($this->recipient->notification_last) {
-            $this->body_html.= sprintf(__('since %s'), renderDate($this->recipient->notification_last, false) ). ' ';
-            $this->body_plaintext.=  sprintf(__('since %s'), renderDate($this->recipient->notification_last, false) ). ' ';
-        }
-
-        $this->body_html.= sprintf(__('following happened at %s ','notification'), confGet('SELF_DOMAIN')) . "<br>";
-        $this->body_plaintext.= sprintf(__('following happened at %s ','notification'), confGet('SELF_DOMAIN')) . LINE_BREAK;
-    }
-
-
-    private function addInvitationForNewAccounts()
-    {
-        ### new account ###
-        if($this->recipient->settings & USER_SETTING_SEND_ACTIVATION) {
-            $this->body_html.= __('Your account has been created.','notification')
-                    . "<a href='$this->url?go=activateAccount&tuid={$this->recipient->identifier}'>"
-                    . __('Please set a password to activate it.','notification')
-                    . "</a><br>";
-
-            $this->body_plaintext.= __('Your account has been created.','notification')
-                    . " "
-                    . __('Please set a password to activate it.','notification')
-                    . "\n\r"
-                    . $this->url."?go=activateAccount&tuid={$this->recipient->identifier}"
-                    . "\n\r\n\r";
-
-            $this->information_count++;
-        }
+        $this->body_plaintext.= sprintf(__('Hello %s,','notification'), $this->recipient->name) . LINE_BREAK;
     }
 
 
