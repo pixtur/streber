@@ -22,7 +22,7 @@ confChange('ACTIVATION_MAIL_HTML_BODY', $str = <<<EOD
 <li>After installation, start Tooll and have a look at the examples or watch the tutorial-videos.</li>
 </ol>
 <br>
-thanks for time,<br>
+thanks for your time,<br>
 tom
 EOD
 );
@@ -39,7 +39,7 @@ Welcome to the tooll.io beta-test program.  Please follow these steps:
 3. After installation, start Tooll and have a look at the examples 
    or watch the tutorial-videos.
 
-thanks for time,
+thanks for your time,
 tom
 EOD
 );
