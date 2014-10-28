@@ -37,10 +37,18 @@ class Email
         $this->errors= Array();
         $this->recipient= $person;
         $this->url= confGet('SELF_PROTOCOL').'://'.confGet('SELF_URL');
-        $this->from_domain = confGet('SELF_DOMAIN');;
-        $this->from = __('Streber Email Notification','notifcation mail from') . " <do-not-reply@".$this->from_domain.">";
-        $this->reply =         ### reply-addres? ###
-        $this->reply="do-not-reply@$this->from_domain";
+        $this->from_domain = confGet('SELF_DOMAIN');
+
+        $customSender= confGet('NOTIFICATION_EMAIL_SENDER');
+        if($customSender) {
+            $this->from = $customSender;
+            $this->reply= $customSender;
+        }
+        else {
+            $this->from = __('Streber Email Notification','notifcation mail from') . " <do-not-reply@".$this->from_domain.">";
+            $this->reply="do-not-reply@$this->from_domain";
+        }
+
         $this->to = $person->getValidEmailAddress();
         if(!$this->to) {
             $this->errors[]= _('no person does not have an Email-address','notification');

@@ -45,6 +45,13 @@ EOD
 );
 
 
+
+confChange('MESSAGE_OFFLINE',"<h1>What a Bummer!</h1>The wiki is offline right now. <br><br>Please come back a minute, or so.");
+confChange('EMAIL_ADMINISTRATOR', 'tooll.io@framefield.com');
+confChange('NOTIFICATION_EMAIL_SENDER', 'tooll.io <tooll.io@framefield.com>');
+confChange('NOTIFICATION_EMAIL_SUBJECT', "tooll.io beta – Updates");
+confChange('WELCOME_EMAIL_SUBJECT', "Welcome to the tooll.io beta");
+
 function postInitCustomize() 
 {
 	global $PH;

@@ -228,6 +228,11 @@ $g_config= array(
     'ACTIVATION_MAIL_PLAIN_BODY' => '',
     'ACTIVATION_MAIL_HTML_BODY' => '',
 
+    'WELCOME_EMAIL_SUBJECT'=>'',
+    'NOTIFICATION_EMAIL_SUBJECT'=>'',
+    'NOTIFICATION_EMAIL_SENDER'=>'',
+
+
     'EMAIL_ADMINISTRATOR'=>'',
 
     /**

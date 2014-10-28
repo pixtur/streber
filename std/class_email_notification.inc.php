@@ -23,9 +23,11 @@ class EmailNotification extends Email
 
     
     protected function initSubject() {
-        $this->subject = sprintf(__('Updates at %s','notification mail subject'), confGet('SELF_DOMAIN'));
+        $this->subject = confGet('NOTIFICATION_EMAIL_SUBJECT')
+                       ? confGet('NOTIFICATION_EMAIL_SUBJECT')
+                       : sprintf(__('Updates at %s','notification mail subject'), confGet('SELF_DOMAIN'));
     }
-        
+
 
     protected function initBody()
     {

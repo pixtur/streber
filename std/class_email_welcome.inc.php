@@ -23,7 +23,9 @@ class EmailWelcome extends Email
 
     
     protected function initSubject() {
-        $this->subject = sprintf(__('Updates at %s','notification mail subject'), confGet('SELF_DOMAIN'));
+        $this->subject = confGet('WELCOME_EMAIL_SUBJECT')
+                       ? confGet('WELCOME_EMAIL_SUBJECT')
+                       : sprintf(__('Updates at %s','notification mail subject'), confGet('SELF_DOMAIN'));
     }
         
 
@@ -39,10 +41,6 @@ class EmailWelcome extends Email
             $this->information_count++;
         }
         
-        echo $this->body_plaintext;
-        echo "<br><br>";
-        echo $this->body_html;
-
         if($smtp= confGet('SMTP')) {
             ini_set('SMTP', $smtp);
         }
