@@ -47,12 +47,14 @@ class ListGroupingCompany extends ListGrouping {
  *
  */
 class ListBlock_projects extends ListBlock
-{
+{    
 	public $filters = array();
 	
     public function __construct($args=NULL)
     {
         parent::__construct($args);
+        
+        global $auth;
 
         $this->id       = 'projects';
         $this->title    = "related Projects";
@@ -104,8 +106,10 @@ class ListBlock_projects extends ListBlock
             'format'=>'{?status_summary}'
         )));
 
-        $this->add_col( new ListBlockCol_ProjectPeople);
-
+        if(!$auth->hideOtherPeoplesDetails()) {
+            $this->add_col( new ListBlockCol_ProjectPeople);       
+        }
+        
         $this->add_col( new ListBlockCol_ProjectEffortSum);
 
         $this->add_col( new ListBlockColMethod(array(
