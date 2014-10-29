@@ -12,6 +12,7 @@ confChange('LOG_LEVEL', LOG_MESSAGE_ALL);
 confChange('DISPLAY_ERROR_LIST', 'DETAILS');
 confChange('USE_MOD_REWRITE', true);
 confChange('STOP_IF_INSTALL_DIRECTORY_EXISTS', false);
+confChange('HIDE_OTHER_PEOPLES_DETAILS', true);
 
 confChange('ACTIVATION_MAIL_HTML_BODY', $str = <<<EOD
 <p><b>Welcome to the tooll.io beta-test.</b></p>

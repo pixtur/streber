@@ -626,6 +626,16 @@ class Auth
             }
         }      
     }
+
+    public function hideOtherPeoplesDetails() {
+        $hide_because_user_is_anonymous = $this->cur_user->id == confGet('ANONYMOUS_USER');
+
+        $details_hidden_by_default=  confGet('HIDE_OTHER_PEOPLES_DETAILS') 
+                                        && $this->cur_user 
+                                        && !($this->cur_user->user_rights & RIGHT_VIEWALL);
+
+        return $hide_because_user_is_anonymous || $details_hidden_by_default;
+    }
 }
 
 $auth= new Auth();

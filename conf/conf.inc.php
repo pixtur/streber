@@ -378,6 +378,12 @@ $g_config= array(
     'TASKDETAILS_IN_SIDEBOARD' => false,
 
     /**
+    * Restrict display for normal users (e.g. to hide personal details of people)
+    * This does not affect the display for admins and PMs.
+    */
+    'HIDE_OTHER_PEOPLES_DETAILS' => false,
+
+    /**
     * details on how the project changes are displayed in the dashboard
     */
     'MAX_CHANGELINES_PER_PROJECT'=> 5,

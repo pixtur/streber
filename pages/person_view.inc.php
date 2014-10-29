@@ -129,10 +129,14 @@ function personView()
     }
     echo (new PageContentOpen_Columns);
 
-    ### write info block (but only for registed users)
-    global $auth;
-    if($auth->cur_user->id != confGet('ANONYMOUS_USER')) {
+    # some personal details (only if allowed)
+    if(!$auth->hideOtherPeoplesDetails()) 
+    {
+
+        ### write info block
+
         $block=new PageBlock(array('title'=>__('Summary','Block title'),'id'=>'summary'));
+
         $block->render_blockStart();
         echo "<div class=text>";
 
@@ -191,11 +195,9 @@ function personView()
         ### functions ####
         echo "</div>";
         $block->render_blockEnd();
-    }
 
+        #--- list companies -----------------------------------
 
-    #--- list companies -----------------------------------
-    {
         require_once(confGet('DIR_STREBER') . 'lists/list_companies.inc.php');
         $companies = $person->getCompanies();
         $list = new ListBlock_companies();
