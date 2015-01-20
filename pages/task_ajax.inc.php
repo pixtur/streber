@@ -129,7 +129,7 @@ function _renderAssignTaskOption($task)
     }
     echo "<td><label>". __('assigned to') . "</label>";
 
-    echo "<select class='inline' data-field-name='$field_name' data-task-id='$task->id' data-url='taskAssignToPerson' >";
+    echo "<select class='inline'  data-task-id='$task->id' data-url='taskAssignToPerson' >";
     foreach($options as $value=>$option) {
         $isSelected = ($value ==$currentValue) ? 'selected' : '';
         echo "<option value='$value' $isSelected> $option </option>";
@@ -245,7 +245,6 @@ function taskAssignToPerson()
     if(!$keepCurrentAssignment && $person_id != 0) {
         if( $project->isPersonVisibleTeamMember($person_id)) 
         {
-            echo($person->name);
             $person = Person::getVisibleById($person_id);
 
             $new_assignment= new TaskPerson(array(
@@ -253,8 +252,7 @@ function taskAssignToPerson()
                 'task'  => $task_id,
                 'project'=>$project->id
             ));
-            $new_assignment->insert();
-            echo $person->name;
+            $new_assignment->insert();            
         }        
         return;
     }
