@@ -353,4 +353,9 @@ if($db_version < 0.095) {
     $update_queries[] = "ALTER TABLE `{$db_table_prefix}effort` ADD `productivity` INT ( 1 ) DEFAULT '3' NOT NULL ";
 }
 
+if($db_version < 0.0971) {
+    $update_queries[]=  "ALTER TABLE `{$db_table_prefix}effort` ADD INDEX ( `time_start` );";
+    $update_queries[]=  "ALTER TABLE `{$db_table_prefix}effort` ADD INDEX ( `time_end` );";
+}
+
 ?>

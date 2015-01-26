@@ -215,7 +215,7 @@ function ajaxUserTasks()
     if ($prj == 0) $prj = NULL;
     if ($q == "") $q = NULL;
     
-    $tasks = Task::getAll(array('search'=>$q, 'project'=>$prj));
+    $tasks = Task::getAll(array('search'=>$q, 'project'=>$prj, 'order_by' => 'modified DESC'));
 
     $result = array();
     foreach( $tasks as $t) {        
