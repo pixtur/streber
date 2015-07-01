@@ -1088,7 +1088,7 @@ function ProjViewEfforts()
     
     ### get preset-id ###
     {
-        $preset_id= 'all_efforts';                           # default value
+        $preset_id= 'open_efforts';                           # default value
         if($tmp_preset_id= get('preset')) {
             if(isset($presets[$tmp_preset_id])) {
                 $preset_id= $tmp_preset_id;
