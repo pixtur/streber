@@ -86,11 +86,15 @@ global $PH;
         $block = new PageBlock(array('id'=>'functions','reduced_header' => true,));
         $block->render_blockStart();
         
+
+        $sorted_people_ids = array_keys($people);
+        asort($sorted_people_ids);
+
         echo "<textarea style='width:96%; height:300px;'>";
 
         ### list header with people
         echo "projects\t";
-        foreach(array_keys($people) as $person_id) {
+        foreach( $sorted_people_ids as $person_id) {
             $person= $people[$person_id];
             echo $person->nickname . "\t";
         
@@ -104,7 +108,8 @@ global $PH;
             echo $project->name;
             echo "\t";
 
-            foreach(array_keys($people) as $person_id) {
+
+            foreach($sorted_people_ids as $person_id) {
                 if( isset( $project_member_efforts[ $person_id] )) {
                     $hours = $project_member_efforts[ $person_id];
                     echo number_format ( $hours , 2 , $dec_point = ',' ,'' );
