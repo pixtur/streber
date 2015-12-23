@@ -493,7 +493,7 @@ function effortNew()
             $last_day=getdate(strToGMTime($last));
         }
         else {
-            $last_day="1980-01-01";
+            $last_day=getdate();
         }
 
         $today=getdate(time());

@@ -119,9 +119,9 @@ function customHandler($number, $error_string, $file, $line, $context)
                 if (!empty($value)) {
                     if(is_object($value)) {
                         $value= "OBJECT";                   # this is a hack for php5.2.0 which would otherwise break without any warning
-                    }
+                    }                    
 
-                    $error_buffer .= sprintf("%29s = %s\n", $name, $value);
+                    $error_buffer .= sprintf("%29s = %s\n", $name, sprint_r($value));
                 }
                 else {
                     $error_buffer .= sprintf("%29s = NULL\n", $name, $value);

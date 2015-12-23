@@ -103,6 +103,14 @@ new PageHandle(array('id'=>'homeAllChanges',
     'valid_for_crawlers'=>false,
 ));
 
+new PageHandle(array('id'=>'homeMonthlyReport',
+    'req'=>'pages/home_monthly_report.inc.php',
+    'title'=>__('Report'),
+    'test'=>'yes',
+    
+    'valid_for_crawlers'=>false,
+));
+
 new PageHandle(array('id'=>'playground',
     'req'=>'pages/playground.inc.php',
     'title'=>__('Playground'),

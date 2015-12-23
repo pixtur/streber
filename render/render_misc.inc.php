@@ -560,6 +560,7 @@ function buildHomeSelector()
     $buffer.= "<span style='display:none;' id='homeselectorlist' class=selectorlist><span class=selectorlist_content>";
 
     $buffer.= $PH->getLink('home',NULL, array());
+
     $buffer.= $PH->getLink('homeTasks',NULL, array());
 
     if($auth->cur_user->settings & USER_SETTING_ENABLE_EFFORTS) {
@@ -570,6 +571,11 @@ function buildHomeSelector()
     if($auth->cur_user->settings & USER_SETTING_ENABLE_BOOKMARKS) {
         $buffer.= $PH->getLink('homeBookmarks',NULL, array());
     }
+
+    if($auth->cur_user->user_rights & RIGHT_VIEWALL) {
+        $buffer.= $PH->getLink('homeMonthlyReport',NULL, array());
+    }
+
     $buffer.= $PH->getLink('homeAllChanges',NULL, array());
 
     $buffer.="</span></span>";

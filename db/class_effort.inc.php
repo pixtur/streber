@@ -677,6 +677,12 @@ class Effort extends DbProjectItem
     {
         return $this->effort_status;
     }
+
+    function getRoundedDurationInMinutes( $rounding = 15 ) {
+        $durationInMinutes=round( ( (strToGMTime($this->time_end) - strToGMTime($this->time_start))/60),0);
+        $roundUpTo15 =  ceil($durationInMinutes / $rounding)*$rounding/60;
+        return $roundUpTo15;
+    }
         
 }
 Effort::initFields();
