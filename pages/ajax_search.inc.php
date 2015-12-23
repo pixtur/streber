@@ -13,7 +13,7 @@ function ajaxSearch()
 {
     $q= asCleanString(getOnePassedId("q"));
     if ($q == "") 
-        return "{}";
+        return "[]";
 
     $sanitized_query = asSearchQuery( $q );
 
@@ -23,7 +23,7 @@ function ajaxSearch()
         $results= array_reverse($results);
     }
     else {
-        return "{}";
+        return "[]";
     }
 
     $resultList = array();
