@@ -12,7 +12,8 @@ require_once(confGet('DIR_STREBER') . './pages/search.inc.php');
 function ajaxSearch()
 {
     $q= asCleanString(getOnePassedId("q"));
-    if ($q == "") $q = NULL;
+    if ($q == "") 
+        return "{}";
 
     $sanitized_query = asSearchQuery( $q );
 

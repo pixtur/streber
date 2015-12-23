@@ -704,7 +704,7 @@ function asHtml($str) {
 
     #$str= str_replace("\\\"", '"',$str);
 
-    return htmlSpecialChars($str, ENT_QUOTES,'UTF-8' );
+    return htmlSpecialChars($str, ENT_QUOTES | ENT_IGNORE,'UTF-8' );
 }
 
 /**
