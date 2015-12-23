@@ -1009,7 +1009,7 @@ class Project extends DbProjectItem
         ### only assigned projects ###
         if($visible_only) {
             $str=
-                "SELECT DISTINCT i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, $AND_person_visible_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
+                "SELECT  i.*, p.* from {$prefix}item i, {$prefix}projectperson upp, $AND_person_visible_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
                 WHERE
                     upp.person = '{$auth->cur_user->id}'
                     AND upp.state = 1
@@ -1029,7 +1029,7 @@ class Project extends DbProjectItem
         ### all projects ###
         else {
             $str=
-                "SELECT DISTINCT i.*, p.* from {$prefix}item i, $AND_person_all_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
+                "SELECT  i.*, p.* from {$prefix}item i, $AND_person_all_part1 {$prefix}project p left join {$prefix}company c on p.company = c.id
 
                 WHERE
                        p.status <= ".intval($status_max)."

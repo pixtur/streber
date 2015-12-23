@@ -312,7 +312,7 @@ define('EFFORT_STATUS_BALANCED', 5);
 define('FINIT_REQUIRED','__FIELD_REQUIRED__');
 define('FINIT_TODAY',   '__TODAY_');
 define('FINIT_NOW',     '__TIMENOW__');
-define('FINIT_NEVER',   '0000-00-00 00:00:00');
+define('FINIT_NEVER',   '1970-01-01 00:00:01'); // Fucking awfull work around for mysql 5.7 refusing NULL Datetime
 define('FINIT_CUR_USER',   '__CUR_USER__');
 define('FINIT_RAND_MD5',   '__rand_md5__');
 
