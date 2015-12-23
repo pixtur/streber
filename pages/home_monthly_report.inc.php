@@ -37,8 +37,8 @@ global $PH;
     $year= get('year', date('Y'));
 
     $efforts = Effort::getAll(array(
-        'effort_time_min' => date("$year-$month-01"),
-        'effort_time_max' => date("$year-$month-t")
+        'effort_time_min' => date("$year-$month-01 00:00:01"),
+        'effort_time_max' => date("$year-$month-t 23:59:59")
     ));
 
     $projects_with_efforts = array();
