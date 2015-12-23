@@ -104,10 +104,11 @@ global $PH;
 
             foreach( $people as $person) {
                 if( isset( $project_member_efforts[ $person->id] )) {
-                    echo $project_member_efforts[ $person->id];
+                    $hours = $project_member_efforts[ $person->id];
+                    echo number_format ( $hours , 2 , $dec_point = ',' ,'' );
                 }
                 else {
-                    echo "-";
+                    echo "";
                 }
                 echo "\t";
             }
