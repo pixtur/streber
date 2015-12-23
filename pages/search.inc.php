@@ -437,6 +437,7 @@ class SearchResult extends BaseObject
         /**
         * search efforts
         */
+        /*
         {
             require_once(confGet('DIR_STREBER') . "db/class_effort.inc.php");
             $efforts= Effort::getAll(array(
@@ -493,6 +494,7 @@ class SearchResult extends BaseObject
 
             $count_overall+= count($efforts);
         }
+        */
 
         return $results;
     }
