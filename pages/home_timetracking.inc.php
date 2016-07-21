@@ -144,10 +144,15 @@ function ajaxUserEfforts()
     global $PH;
     global $auth;
     require_once(confGet('DIR_STREBER') . 'db/class_effort.inc.php');
-        
+
+    $numberOfDays =  get('days');
+    if($numberOfDays == 0 ) {
+        $numberOfDays = 7;  
+    }
+
     $efforts= Effort::getAll(array(
         'person'=> $auth->cur_user->id,
-        'effort_time_min'=> getGMTString( (time() - 7 * 24 * 60*60 )),        
+        'effort_time_min'=> getGMTString( (time() - $numberOfDays * 24 * 60*60 )),        
     ));
     
     $result = array();

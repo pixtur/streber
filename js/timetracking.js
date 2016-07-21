@@ -37,7 +37,7 @@ function TimeTrackingTable(html_canvas_element) {
     this.DAY_HEIGHT= 20;
     this.TIMELINE_HEIGHT = 20;
 
-    this.NUM_DAYS_SHOWN = 6;
+
     this.FIRST_HOUR = 5;
     this.LAST_HOUR = 25;
 
@@ -53,6 +53,24 @@ function TimeTrackingTable(html_canvas_element) {
         var _ratio= (t - this.start_time_today) / (this.end_time_today - this.start_time_today);
         return _width * _ratio + this.DATE_WIDTH;
     }
+
+    this.getNumberOfDaysShown = function()
+    {
+        var DEFAULT_NUMBER_OF_SHOWN_DAYS = 6;
+        var daysFromParameter = parseInt(getURLParameter('days')); 
+        daysFromParameter = Math.max(0, daysFromParameter);
+        daysFromParameter = Math.min(60, daysFromParameter);
+
+        return daysFromParameter || DEFAULT_NUMBER_OF_SHOWN_DAYS;
+    }
+
+    this.NUM_DAYS_SHOWN = this.getNumberOfDaysShown();
+
+
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    }
+
 
     this.updateCurrentTime = function()
     {
@@ -162,8 +180,11 @@ function TimeTrackingTable(html_canvas_element) {
         this.container = $('.container')[0];
 
         this.updateCanvas();
+
+        var queryUrl = "./index.php?go=ajaxUserEfforts" + "&days=" + this.NUM_DAYS_SHOWN;
+
         $.ajax({
-          url: "./index.php?go=ajaxUserEfforts",
+          url: queryUrl,
           cache: false,
           dataType: "JSON",
           context:this,
@@ -183,6 +204,7 @@ function TimeTrackingTable(html_canvas_element) {
     }
     this.init();
 }
+
 
 function TimeTrackingForm() {
 
