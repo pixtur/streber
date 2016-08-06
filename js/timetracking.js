@@ -17,18 +17,22 @@ var onLoadFunctions= new Array();
 var ajax_edits= new Array();
 
 
+
+
+
 function TimeTrackingTable(html_canvas_element) {
-    this.canvas= html_canvas_element;
-    this.container = undefined;
+    var ttt= this;
+    // this.canvas= html_canvas_element;
+    // this.container = undefined;
     this.days = 3;
     this.timeBlocks = {};
-    this.context= undefined;
+    // this.context= undefined;
 
-    this.renderTimeblock= function( block ) {
-        var c= this.context;
-        c.fillStyle = "#dddd00";
-        c.fillRect(0, 0, 100, 40);
-    }
+    // this.renderTimeblock= function( block ) {
+    //     var c= this.context;
+    //     c.fillStyle = "#dddd00";
+    //     c.fillRect(0, 0, 100, 40);
+    // }
 
     this.start_time_today = undefined;
     this.end_time_today = undefined;
@@ -37,19 +41,124 @@ function TimeTrackingTable(html_canvas_element) {
     this.DAY_HEIGHT= 20;
     this.TIMELINE_HEIGHT = 20;
 
-
     this.FIRST_HOUR = 5;
     this.LAST_HOUR = 25;
 
-    this.daysSinceToday =  function(t) {
+
+    this.createBlocks=function() 
+    {
+        var data=[];
+        for( var key in this.timeBlocks) {
+            data.push(this.timeBlocks[key]);
+        }
+        $('div.timetable div').remove();
+
+
+        var s= d3.select("div.timetable")
+                .append("div")
+                    .attr("class", "d3")
+                    .selectAll("a")
+                    .data(data)
+                    .enter()
+                        .append('a')
+                            .attr("class", "timeblock")
+                            .style("background-color", function(d,i) { 
+                                return d.color; 
+                            } )
+                            .style("left", function(d,i) { 
+                                return ttt.xFromTime(d.start) + "px"; 
+                            } )
+                            .style("top", function(d,i) { 
+                                var d = ttt.daysSinceToday(d.start);
+                                return  (ttt.height + (d-2) * ttt.DAY_HEIGHT - ttt.TIMELINE_HEIGHT + 1 ) + "px";
+                             } )
+                            .style("width", function(d,i) { 
+                                return Math.floor(ttt.xFromTime(d.start + d.duration) - ttt.xFromTime(d.start)) + "px";
+                            } )
+                            .style("height", function(d,i) { 
+                                return (ttt.DAY_HEIGHT  * d.productivity / 5) + "px";
+                            } )
+                            .attr('href', function(d,i) {
+                                return d.id;
+                            })
+                            .text( function(d,i) {
+                                return (d.title);
+                            })                            
+                            ;
+    }
+
+    this.createGrid = function() {
+        $('div.timetable svg').remove();
+
+        var svgTable= d3.select("div.timetable")
+                    .style('height', (this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT) + "px")
+                    .append("svg");
+
+        ttt.width= $("body").width();
+        ttt.height= ttt.NUM_DAYS_SHOWN * ttt.DAY_HEIGHT + ttt.TIMELINE_HEIGHT;
+
+        // Horizontal Lines and day-labels
+        for(var i=0; i <= ttt.NUM_DAYS_SHOWN; ++i) {
+            var y = Math.floor(i * ttt.DAY_HEIGHT);
+            svgTable
+                .append('rect')
+                .attr('x', 0)
+                .attr('width', '100%')
+                .attr('height', 1)
+                .attr('y', y)
+                ;
+
+            if( i >= ttt.NUM_DAYS_SHOWN) 
+                continue;
+
+            var dateOfRow= new Date( new Date().getTime() + 24*60*60*1000* (i+1-ttt.NUM_DAYS_SHOWN));
+
+            svgTable
+                .append('text')
+                .attr('y', y + ttt.DAY_HEIGHT - 5)
+                .attr('x', 5)
+                //.text( dateOfRow.toLocaleDateString() )
+                .text( function(d) {
+                    var f = d3.time.format("%b %d – %a");
+                    return f(dateOfRow);
+                })
+            
+        }
+
+        // Vertical Lines (hours)
+        var hours = ttt.LAST_HOUR - ttt.FIRST_HOUR;
+        for(var i=0; i <= hours; ++i) {
+            var x=  Math.floor( ttt.xFromTime( (i + ttt.FIRST_HOUR) * 60*60 ));
+
+            svgTable
+                .append('rect')
+                .attr('x', x)
+                .attr('y', 0)
+                .attr('width', 1)
+                .attr('height', ttt.height- ttt.DAY_HEIGHT)
+                ;
+
+            svgTable
+                .append('text')
+                .text(i + ttt.FIRST_HOUR)
+                .attr('text-anchor', 'middle')
+                .attr('x',x)
+                .attr('y', ttt.height- 3)
+                ;
+        }
+    }
+
+    this.daysSinceToday =  function(t) 
+    {
         return Math.floor((t - this.start_time_today) / (60*60*24));
     }
 
-    this.xFromTime = function(t)  {
-        
+    
+    this.xFromTime = function(t)  
+    { 
         t -= this.daysSinceToday(t) *60*60*24;
 
-        var _width= (this.canvas.width - this.DATE_WIDTH);
+        var _width= (ttt.width - this.DATE_WIDTH);
         var _ratio= (t - this.start_time_today) / (this.end_time_today - this.start_time_today);
         return _width * _ratio + this.DATE_WIDTH;
     }
@@ -75,92 +184,91 @@ function TimeTrackingTable(html_canvas_element) {
     this.updateCurrentTime = function()
     {
         var d= new Date();
-        var x = window.timetracker.xFromTime((Date.now() - d.getTimezoneOffset()*60*1000) / 1000);
+        var x = ttt.xFromTime((Date.now() - d.getTimezoneOffset()*60*1000) / 1000);
         $('.currentTime').css('left', x );
     }
 
-    this.updateCanvas = function()
-    {
-        this.canvas.width=$("body").width();
+    // this.updateCanvas = function()
+    // {
+    //     this.canvas.width=$("body").width();
         this.updateCurrentTime();
-        // get the canvas context and assign it to 'c' for ease of use
-        this.context= this.canvas.getContext('2d');
-        this.canvas.width=  width=$("body").width();
-        this.canvas.height= this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT;
-        this.context.strokeStyle = "rgba(0, 0, 0,0.25)";
-        this.context.lineWidth=0.5;
-        this.context.font = "lighter 13px Helvetica";
-        this.context.fillStyle = "#aaa";
+    //     // get the canvas context and assign it to 'c' for ease of use
+    //     this.context= this.canvas.getContext('2d');
+    //     this.canvas.width=  width=$("body").width();
+    //     this.canvas.height= this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT;
+    //     this.context.strokeStyle = "rgba(0, 0, 0,0.25)";
+    //     this.context.lineWidth=0.5;
+    //     this.context.font = "lighter 13px Helvetica";
+    //     this.context.fillStyle = "#aaa";
 
-        // Horizontal Lines (days)
-        for(var i=0; i <= this.NUM_DAYS_SHOWN; ++i) {
-            this.context.beginPath();
-            var y= Math.floor(i * this.DAY_HEIGHT)+0.6;
-            this.context.moveTo(0,y );
-            this.context.lineTo(this.canvas.width, y);
-            this.context.stroke();
+    //     // Horizontal Lines (days)
+    //     for(var i=0; i <= this.NUM_DAYS_SHOWN; ++i) {
+    //         this.context.beginPath();
+    //         var y= Math.floor(i * this.DAY_HEIGHT)+0.6;
+    //         this.context.moveTo(0,y );
+    //         this.context.lineTo(this.canvas.width, y);
+    //         this.context.stroke();
 
-            if( i < this.NUM_DAYS_SHOWN) {
-                var d3= new Date( new Date().getTime() + 24*60*60*1000* (i+1-this.NUM_DAYS_SHOWN));
-                this.context.fillText(d3.toLocaleDateString(), 10, y + this.DAY_HEIGHT - 5);
-            }
-        }
+    //         if( i < this.NUM_DAYS_SHOWN) {
+    //             var d3= new Date( new Date().getTime() + 24*60*60*1000* (i+1-this.NUM_DAYS_SHOWN));
+    //             this.context.fillText(d3.toLocaleDateString(), 10, y + this.DAY_HEIGHT - 5);
+    //         }
+    //     }
+
+    //     // Vertical Lines (hours)
+    //     var hours = this.LAST_HOUR - this.FIRST_HOUR;
+    //     this.context.textAlign = "center";
+    //     for(var i=0; i <= hours; ++i) {
+    //         this.context.beginPath();
+    //         var x= this.xFromTime( (i + this.FIRST_HOUR) * 60*60 );
+    //         //var x= (this.canvas.width - this.DATE_WIDTH) / hours * i + this.DATE_WIDTH;
+    //         this.context.moveTo(x,0 );
+    //         this.context.lineTo(x, this.canvas.height - this.TIMELINE_HEIGHT);
+    //         this.context.stroke();
+
+    //         this.context.fillText(i + this.FIRST_HOUR, x, this.canvas.height- 3);
+    //     }
 
 
-        // Vertical Lines (hours)
-        var hours = this.LAST_HOUR - this.FIRST_HOUR;
-        this.context.textAlign = "center";
-        for(var i=0; i <= hours; ++i) {
-            this.context.beginPath();
-            var x= this.xFromTime( (i + this.FIRST_HOUR) * 60*60 );
-            //var x= (this.canvas.width - this.DATE_WIDTH) / hours * i + this.DATE_WIDTH;
-            this.context.moveTo(x,0 );
-            this.context.lineTo(x, this.canvas.height - this.TIMELINE_HEIGHT);
-            this.context.stroke();
+    //     // create timeblocks
+    //     this.container.innerHTML="";
+    //     for( var key in this.timeBlocks) {
+    //         this.createTimeblock( this.timeBlocks[key])
+    //     }
+    // }
 
-            this.context.fillText(i + this.FIRST_HOUR, x, this.canvas.height- 3);
-        }
+    // this.createTimeblock = function(b)
+    // {
+    //     var morningOffset = 0;
+    //     // if( Date.now() * 0.001 < this.start_time_today ) {
+    //     //     morningOffset= -1;
+    //     // }
+    //     var d = this.daysSinceToday(b.start) + morningOffset;
+    //     if(d > 0 || d <= -this.NUM_DAYS_SHOWN) {
+    //         return;
+    //     }
 
+    //     var x1= this.xFromTime(b.start);
+    //     var x2= this.xFromTime(b.start + b.duration);
 
-        // create timeblocks
-        this.container.innerHTML="";
-        for( var key in this.timeBlocks) {
-            this.createTimeblock( this.timeBlocks[key])
-        }
-    }
-
-    this.createTimeblock = function(b)
-    {
-        var morningOffset = 0;
-        // if( Date.now() * 0.001 < this.start_time_today ) {
-        //     morningOffset= -1;
-        // }
-        var d = this.daysSinceToday(b.start) + morningOffset;
-        if(d > 0 || d <= -this.NUM_DAYS_SHOWN) {
-            return;
-        }
-
-        var x1= this.xFromTime(b.start);
-        var x2= this.xFromTime(b.start + b.duration);
-
-        var blockElement = $("<a href='" + b.id +  "' class=timeblock>" + b.title + "</a>");
-        blockElement.css('top',(this.canvas.height - (-d+1) * this.DAY_HEIGHT- this.TIMELINE_HEIGHT + 1 )+"px");
-        blockElement.css('height', this.DAY_HEIGHT  * b.productivity / 5);
-        blockElement.css('margin-top', this.DAY_HEIGHT  * (5-b.productivity) / 5);
-        blockElement.css('background-color', b.color);
-        blockElement.css('left',x1+"px");
-        blockElement.css('width',Math.floor(x2-x1)+"px");
-        blockElement.attr('title', b.tooltip);
-        $(this.container).append(blockElement);
-    }
+    //     var blockElement = $("<a href='" + b.id +  "' class=timeblock>" + b.title + "</a>");
+    //     blockElement.css('top',(this.canvas.height - (-d+1) * this.DAY_HEIGHT- this.TIMELINE_HEIGHT + 1 )+"px");
+    //     blockElement.css('height', this.DAY_HEIGHT  * b.productivity / 5);
+    //     blockElement.css('margin-top', this.DAY_HEIGHT  * (5-b.productivity) / 5);
+    //     blockElement.css('background-color', b.color);
+    //     blockElement.css('left',x1+"px");
+    //     blockElement.css('width',Math.floor(x2-x1)+"px");
+    //     blockElement.attr('title', b.tooltip);
+    //     $(this.container).append(blockElement);
+    // }
 
     this.init = function()
     {
         window.timetracker = this; //very evil hack
 
         var start= new Date();
-        start.setMinutes(0);
-        start.setUTCHours(this.FIRST_HOUR);
+        start.setMinutes(59);
+        start.setUTCHours(this.FIRST_HOUR-1);
         start.setSeconds(0);
         this.start_time_today = start/1000;
 
@@ -172,14 +280,16 @@ function TimeTrackingTable(html_canvas_element) {
         this.end_time_today = e/1000;
 
 
-        var canvas = document.getElementById("myCanvas");
-        if (canvas && canvas.getContext){
-            this.canvas = canvas;
-        }
+        // var canvas = document.getElementById("myCanvas");
+        // if (canvas && canvas.getContext){
+        //     this.canvas = canvas;
+        // }
 
-        this.container = $('.container')[0];
+        // this.container = $('.container')[0];
 
-        this.updateCanvas();
+        // this.updateCanvas();
+        this.createGrid();
+        this.updateCurrentTime();
 
         var queryUrl = "./index.php?go=ajaxUserEfforts" + "&days=" + this.NUM_DAYS_SHOWN;
 
@@ -190,17 +300,18 @@ function TimeTrackingTable(html_canvas_element) {
           context:this,
         }).done(function( data ) {
             this.timeBlocks = data;
-            this.updateCanvas();
+            // this.updateCanvas();
+            this.createBlocks();
         });
 
         $(window).resize(function(e) {
-            window.timetracker.updateCanvas();
+            // window.timetracker.updateCanvas();
+            ttt.createBlocks();
+            ttt.createGrid();
         });
 
         // Set time to update time indicator
         setInterval(this.updateCurrentTime, 5000);
-
-
     }
     this.init();
 }

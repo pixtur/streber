@@ -43,6 +43,7 @@ function homeTimetracking()
         $page= new Page(array('use_jscalendar'=>true));
         $page->cur_tab='home';
         $page->title=__("Time tracking");
+        $page->use_d3js = true;
 
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
@@ -70,8 +71,6 @@ function homeTimetracking()
 function build_history_table() {
     echo "<div class='doclear'></div>";
     echo "<div class=timetable>";
-        echo '<canvas id="myCanvas" width="100%" height="100"></canvas>';
-        echo "<div class=container>Container</div>";        
         echo "<div class=currentTime></div>";
     echo "</div>";
 }
@@ -170,7 +169,8 @@ function ajaxUserEfforts()
                                 'productivity'=> $e->productivity,
                                 'color'=> ($p->color ? ("#".$p->color) : "#ff8080"),
                                 'title'=> $p->name,
-                                'tooltip'=> $task_name . $e->name
+                                'tooltip'=> $task_name . $e->name,
+                                'created'=> strToClientTime($e->created),
                                 );
     }
     echo json_encode($result);

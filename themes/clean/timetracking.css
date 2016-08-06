@@ -1,14 +1,20 @@
 div.timetable {
     position:relative;
+    overflow: hidden;
 }
 
-div.timetable div.container {
-    position:absolute;
-    top:0;
-    left:0;
-}
+// div.timetable div.container {
+//     position:absolute;
+//     top:0;
+//     left:0;
+// }
 
-div.timetable div.container a.timeblock {
+// div.timetable .d3 div.block {
+//   position:absolute;
+//   border-radius:2px;
+// }
+
+div.timetable .d3 a.timeblock {
     display:block;
     position: absolute;
     height:18px;
@@ -22,6 +28,8 @@ div.timetable div.container a.timeblock {
     font-size:10px;
     font-weight:normal;
     text-align:center;
+    border-radius:3px;
+    opacity: 0.6;
 }
 
 div.timetable div.currentTime {
@@ -31,16 +39,41 @@ div.timetable div.currentTime {
     height:40px;
     left:2px;
     bottom:0px;
-    
 }
 
-.myCanvas{
-  image-rendering: optimizeSpeed;             
-  image-rendering: -moz-crisp-edges;          
-  image-rendering: -webkit-optimize-contrast;                                               
-  image-rendering: optimize-contrast;         
-  -ms-interpolation-mode: nearest-neighbor;   
+// div.timetable .d3 {
+//   position:absolute;
+//   width:100%;
+//   height:100%;
+//   top:0;
+//   left:0;
+//   z-index:100;
+// }
+
+div.timetable  svg rect {
+  fill: rgba(0,0,0,0.2);
 }
+
+div.timetable  svg text {
+  fill: rgba(0,0,0,0.3);
+}
+
+div.timetable svg {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+
+// .myCanvas{
+//   image-rendering: optimizeSpeed;             
+//   image-rendering: -moz-crisp-edges;          
+//   image-rendering: -webkit-optimize-contrast;                                               
+//   image-rendering: optimize-contrast;         
+//   -ms-interpolation-mode: nearest-neighbor;   
+// }
 
 
 div.timetracking {

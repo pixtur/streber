@@ -218,6 +218,8 @@ class Page
     public  $extra_js = '';
     public  $extra_onload_js ='';
     public  $use_autocomplete = false;
+    public  $use_d3js = false;
+
     #--- constructor ---------------------------
     public function __construct($args=NULL)
     {
@@ -553,6 +555,9 @@ class PageHtmlStart extends PageElement {
                     .'<script type="text/javascript" src="js/ninja.js"></script>'
                     .'<script type="text/javascript" src="js/ninja-autocomplete.js"></script>'
                     ;
+        if($this->page->use_d3js) {
+            $buffer.= '<script src="https://d3js.org/d3.v3.min.js"></script>';
+        }
 
 
         if($this->page->use_autocomplete) {
