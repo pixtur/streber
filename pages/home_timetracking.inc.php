@@ -48,17 +48,12 @@ function homeTimetracking()
         $page->extra_header_html .= '<script type="text/javascript" src="js/timetracking.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
         $page->extra_header_html .= '<script type="text/javascript" src="js/jquery.rating.js'  . "?v=" . confGet('STREBER_VERSION'). '"></script>';
 
-        $page->extra_onload_js .= "new TimeTrackingTable();";        
-        $page->extra_onload_js .= "new TimeTrackingForm();";
-                
         $page->type=__("Person");
         $page->options= build_home_options($person);
 
         echo(new PageHeader);
         build_history_table();
         build_effort_edit_form();
-
-        
     }
     echo (new PageContentOpen);
     
@@ -71,6 +66,7 @@ function homeTimetracking()
 function build_history_table() {
     echo "<div class='doclear'></div>";
     echo "<div class=timetable>";
+        echo "<div class=d3></div>";
         echo "<div class=currentTime></div>";
     echo "</div>";
 }

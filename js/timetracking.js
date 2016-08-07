@@ -16,75 +16,88 @@
 var onLoadFunctions= new Array();
 var ajax_edits= new Array();
 
+var timeTrackingTable;
+var timeTrackingForm;
+
+onLoadFunctions.push(function() {
+    timeTrackingTable = new TimeTrackingTable();
+    timeTrackingForm = new TimeTrackingForm();
+});
+
+var tempBlock= {
+    start:13,
+    duration:230,
+    title:"+",
+    productivity:5,
+    id:0,
+    color:""
+};
 
 
-
-
-function TimeTrackingTable(html_canvas_element) {
+function TimeTrackingTable() {
     var ttt= this;
-    // this.canvas= html_canvas_element;
-    // this.container = undefined;
-    this.days = 3;
-    this.timeBlocks = {};
-    // this.context= undefined;
 
-    // this.renderTimeblock= function( block ) {
-    //     var c= this.context;
-    //     c.fillStyle = "#dddd00";
-    //     c.fillRect(0, 0, 100, 40);
-    // }
+    ttt.days = 3;
+    ttt.timeBlocks = {};
 
-    this.start_time_today = undefined;
-    this.end_time_today = undefined;
+    ttt.start_time_today = undefined;
+    ttt.end_time_today = undefined;
 
-    this.DATE_WIDTH = 180;
-    this.DAY_HEIGHT= 20;
-    this.TIMELINE_HEIGHT = 20;
+    ttt.DATE_WIDTH = 180;
+    ttt.DAY_HEIGHT= 20;
+    ttt.TIMELINE_HEIGHT = 20;
 
-    this.FIRST_HOUR = 5;
-    this.LAST_HOUR = 25;
+    ttt.FIRST_HOUR = 7;
+    ttt.LAST_HOUR = 25;
 
-
-    this.createBlocks=function() 
+    this.renderBlocks=function() 
     {
         var data=[];
         for( var key in this.timeBlocks) {
             data.push(this.timeBlocks[key]);
         }
-        $('div.timetable div').remove();
+        data.push(tempBlock);
 
+        var selection= d3.select("div.d3")
+                .selectAll("a")
+                .data(data);
 
-        var s= d3.select("div.timetable")
-                .append("div")
-                    .attr("class", "d3")
-                    .selectAll("a")
-                    .data(data)
-                    .enter()
-                        .append('a')
-                            .attr("class", "timeblock")
-                            .style("background-color", function(d,i) { 
-                                return d.color; 
-                            } )
-                            .style("left", function(d,i) { 
-                                return ttt.xFromTime(d.start) + "px"; 
-                            } )
-                            .style("top", function(d,i) { 
-                                var d = ttt.daysSinceToday(d.start);
-                                return  (ttt.height + (d-2) * ttt.DAY_HEIGHT - ttt.TIMELINE_HEIGHT + 1 ) + "px";
-                             } )
-                            .style("width", function(d,i) { 
-                                return Math.floor(ttt.xFromTime(d.start + d.duration) - ttt.xFromTime(d.start)) + "px";
-                            } )
-                            .style("height", function(d,i) { 
-                                return (ttt.DAY_HEIGHT  * d.productivity / 5) + "px";
-                            } )
-                            .attr('href', function(d,i) {
-                                return d.id;
-                            })
-                            .text( function(d,i) {
-                                return (d.title);
-                            })                            
-                            ;
+        selection
+            .enter()
+                .append('a');
+
+        selection
+            .data(data)
+            .attr("class", function(d) {
+                return "timeblock" + ((d.id == 0) ? " new":'' );
+            })
+            .style("background-color", function(d,i) { 
+                return d.color; 
+            } )
+            .style("left", function(d,i) { 
+                return (ttt.xFromTime(d.start) - 1) + "px"; 
+            } )
+            .style("top", function(d,i) { 
+                var d = ttt.daysSinceToday(d.start);
+                return  (ttt.height + (d-2) * ttt.DAY_HEIGHT - ttt.TIMELINE_HEIGHT + 2 ) + "px";
+             } )
+            .style("width", function(d,i) { 
+                return Math.floor(ttt.xFromTime(d.start + d.duration) - ttt.xFromTime(d.start)) + "px";
+            } )
+            .style("height", function(d,i) { 
+                //return (ttt.DAY_HEIGHT  * d.productivity / 5) + "px";
+                return (ttt.DAY_HEIGHT - 5) + "px";
+            } )
+            .attr('href', function(d,i) {
+                return d.id;
+            })
+            .text( function(d,i) {
+                return (d.title);
+            });
+
+        selection
+            .exit()
+                .remove();
     }
 
     this.createGrid = function() {
@@ -99,6 +112,10 @@ function TimeTrackingTable(html_canvas_element) {
 
         // Horizontal Lines and day-labels
         for(var i=0; i <= ttt.NUM_DAYS_SHOWN; ++i) {
+            var dateOfRow= new Date( new Date().getTime() + 24*60*60*1000* (i+1-ttt.NUM_DAYS_SHOWN));
+            var day = dateOfRow.getDay();
+            var isWeekend = (day == 6) || (day == 0);                 
+
             var y = Math.floor(i * ttt.DAY_HEIGHT);
             svgTable
                 .append('rect')
@@ -111,17 +128,29 @@ function TimeTrackingTable(html_canvas_element) {
             if( i >= ttt.NUM_DAYS_SHOWN) 
                 continue;
 
-            var dateOfRow= new Date( new Date().getTime() + 24*60*60*1000* (i+1-ttt.NUM_DAYS_SHOWN));
-
+    
             svgTable
                 .append('text')
                 .attr('y', y + ttt.DAY_HEIGHT - 5)
                 .attr('x', 5)
-                //.text( dateOfRow.toLocaleDateString() )
+                .style('fill', isWeekend ? "#D13A4C" : "rgba(0,0,0,0.3)")
                 .text( function(d) {
                     var f = d3.time.format("%b %d – %a");
                     return f(dateOfRow);
                 })
+
+    
+            if(isWeekend) {
+                svgTable
+                    .append('rect')
+                    .attr('x', 0)
+                    .attr('width', '100%')
+                    .attr('height', ttt.DAY_HEIGHT+1)
+                    .attr('y', y)
+                    .style('fill', "rgba(0,0,0,0.05)")
+                    ;
+
+            }
             
         }
 
@@ -145,12 +174,14 @@ function TimeTrackingTable(html_canvas_element) {
                 .attr('x',x)
                 .attr('y', ttt.height- 3)
                 ;
+
         }
     }
 
     this.daysSinceToday =  function(t) 
     {
-        return Math.floor((t - this.start_time_today) / (60*60*24));
+        return Math.floor((t - this.start_time_today+60*60*2) / (60*60*24));
+        //return Math.floor((t - 1*60*60) / (60*60*24));
     }
 
     
@@ -188,79 +219,7 @@ function TimeTrackingTable(html_canvas_element) {
         $('.currentTime').css('left', x );
     }
 
-    // this.updateCanvas = function()
-    // {
-    //     this.canvas.width=$("body").width();
-        this.updateCurrentTime();
-    //     // get the canvas context and assign it to 'c' for ease of use
-    //     this.context= this.canvas.getContext('2d');
-    //     this.canvas.width=  width=$("body").width();
-    //     this.canvas.height= this.NUM_DAYS_SHOWN * this.DAY_HEIGHT + this.TIMELINE_HEIGHT;
-    //     this.context.strokeStyle = "rgba(0, 0, 0,0.25)";
-    //     this.context.lineWidth=0.5;
-    //     this.context.font = "lighter 13px Helvetica";
-    //     this.context.fillStyle = "#aaa";
-
-    //     // Horizontal Lines (days)
-    //     for(var i=0; i <= this.NUM_DAYS_SHOWN; ++i) {
-    //         this.context.beginPath();
-    //         var y= Math.floor(i * this.DAY_HEIGHT)+0.6;
-    //         this.context.moveTo(0,y );
-    //         this.context.lineTo(this.canvas.width, y);
-    //         this.context.stroke();
-
-    //         if( i < this.NUM_DAYS_SHOWN) {
-    //             var d3= new Date( new Date().getTime() + 24*60*60*1000* (i+1-this.NUM_DAYS_SHOWN));
-    //             this.context.fillText(d3.toLocaleDateString(), 10, y + this.DAY_HEIGHT - 5);
-    //         }
-    //     }
-
-    //     // Vertical Lines (hours)
-    //     var hours = this.LAST_HOUR - this.FIRST_HOUR;
-    //     this.context.textAlign = "center";
-    //     for(var i=0; i <= hours; ++i) {
-    //         this.context.beginPath();
-    //         var x= this.xFromTime( (i + this.FIRST_HOUR) * 60*60 );
-    //         //var x= (this.canvas.width - this.DATE_WIDTH) / hours * i + this.DATE_WIDTH;
-    //         this.context.moveTo(x,0 );
-    //         this.context.lineTo(x, this.canvas.height - this.TIMELINE_HEIGHT);
-    //         this.context.stroke();
-
-    //         this.context.fillText(i + this.FIRST_HOUR, x, this.canvas.height- 3);
-    //     }
-
-
-    //     // create timeblocks
-    //     this.container.innerHTML="";
-    //     for( var key in this.timeBlocks) {
-    //         this.createTimeblock( this.timeBlocks[key])
-    //     }
-    // }
-
-    // this.createTimeblock = function(b)
-    // {
-    //     var morningOffset = 0;
-    //     // if( Date.now() * 0.001 < this.start_time_today ) {
-    //     //     morningOffset= -1;
-    //     // }
-    //     var d = this.daysSinceToday(b.start) + morningOffset;
-    //     if(d > 0 || d <= -this.NUM_DAYS_SHOWN) {
-    //         return;
-    //     }
-
-    //     var x1= this.xFromTime(b.start);
-    //     var x2= this.xFromTime(b.start + b.duration);
-
-    //     var blockElement = $("<a href='" + b.id +  "' class=timeblock>" + b.title + "</a>");
-    //     blockElement.css('top',(this.canvas.height - (-d+1) * this.DAY_HEIGHT- this.TIMELINE_HEIGHT + 1 )+"px");
-    //     blockElement.css('height', this.DAY_HEIGHT  * b.productivity / 5);
-    //     blockElement.css('margin-top', this.DAY_HEIGHT  * (5-b.productivity) / 5);
-    //     blockElement.css('background-color', b.color);
-    //     blockElement.css('left',x1+"px");
-    //     blockElement.css('width',Math.floor(x2-x1)+"px");
-    //     blockElement.attr('title', b.tooltip);
-    //     $(this.container).append(blockElement);
-    // }
+    this.updateCurrentTime();
 
     this.init = function()
     {
@@ -280,14 +239,6 @@ function TimeTrackingTable(html_canvas_element) {
         this.end_time_today = e/1000;
 
 
-        // var canvas = document.getElementById("myCanvas");
-        // if (canvas && canvas.getContext){
-        //     this.canvas = canvas;
-        // }
-
-        // this.container = $('.container')[0];
-
-        // this.updateCanvas();
         this.createGrid();
         this.updateCurrentTime();
 
@@ -298,15 +249,15 @@ function TimeTrackingTable(html_canvas_element) {
           cache: false,
           dataType: "JSON",
           context:this,
-        }).done(function( data ) {
-            this.timeBlocks = data;
-            // this.updateCanvas();
-            this.createBlocks();
+        }).done(function( data ) 
+        {            
+            this.timeBlocks = data;            
+            this.renderBlocks();
+            timeTrackingForm.setStartTimeFromLastBookedEffort(data)
         });
 
         $(window).resize(function(e) {
-            // window.timetracker.updateCanvas();
-            ttt.createBlocks();
+            ttt.renderBlocks();
             ttt.createGrid();
         });
 
@@ -314,6 +265,7 @@ function TimeTrackingTable(html_canvas_element) {
         setInterval(this.updateCurrentTime, 5000);
     }
     this.init();
+    return this;
 }
 
 
@@ -529,6 +481,11 @@ function TimeTrackingForm() {
             ttf.$duration.removeClass('error');
           
         }
+        tempBlock.start = ttf.getStartTime() - new Date().getTimezoneOffset() * 60 ;
+        tempBlock.duration = Math.max( et-st, 1000);
+        //tempBlock.duration = 3000;
+        timeTrackingTable.renderBlocks();
+
     }
 
     ttf.setStartTime= function(seconds) {
@@ -536,9 +493,11 @@ function TimeTrackingForm() {
         ttf.$startSeconds.val(seconds);
         ttf.$startTime.val( ttf.getTimeStringFromSeconds(seconds) );
         ttf.updateDuration();
+
         
         var d = new Date( seconds * 1000);
         $('#effort_date').val( d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() );
+
     }
     ttf.getStartTime= function() {
         return ttf.$startSeconds.val() << 0;
@@ -576,19 +535,7 @@ function TimeTrackingForm() {
     $("#previous_date").click(function(){
       var st= ttf.getStartTime();
       
-      //$('#trigger_date').html(e.date.getFullYear() + "-" + (e.date.getMonth()+1) + "-" + e.date.getDate());
-      $('#trigger_date').html("1974-07-30");
-            
-      // var sd = new Date(st * 1000);
-      // sd.setFullYear( e.date.getFullYear());
-      // sd.setMonth( e.date.getMonth());
-      // sd.setDate( e.date.getDate());
-      // ttf.setStartTime( sd * 0.001 );
-      //                   
-      // var et=ttf.getEndTime();
-      // var duration = (et==0) ? 60 * 60
-      //                        : et - st;
-      // ttf.setEndTime( sd * 0.001 + duration );
+      $('#trigger_date').html("1974-07-30");            
   
     });
     
@@ -639,8 +586,6 @@ function TimeTrackingForm() {
     });
 
 
-    setInterval(this.updateDuration, 1000);
-
     this.getDurationStringFromSeconds= function(s) {
         var s= parseInt(s);
         if(s < 60 ) {
@@ -669,17 +614,32 @@ function TimeTrackingForm() {
     else {
         ttf.setStartTime( ttf.$startSeconds.val() * 1 );
     }
-    //ttf.updateDuration();
 
 
-    /**
-    * init rating
-    */
+    ttf.setStartTimeFromLastBookedEffort = function(effertsBlock) 
+    {
+        var maxId = 0;
+        var lastEnd=0;
+
+        for( var key in effertsBlock) {
+            var effort = effertsBlock[key];
+
+            var fiveMinutes = 100 * 60;
+            var createdRecently =  (Date.now() / 1000 - effort.created) < fiveMinutes;
+
+            if(createdRecently && effort.id > maxId) {
+                lastEnd = effort.start + effort.duration + new Date().getTimezoneOffset() * 60;
+            }
+        }
+        if(lastEnd != 0) {
+            ttf.setStartTime(lastEnd);
+            ttf.setEndTime(lastEnd + 15*60);
+            var lastEndDate= new Date(lastEnd*1000);
+            $('#trigger_date').html(lastEndDate.getFullYear() + "-" + (lastEndDate.getMonth()+1) + "-" + lastEndDate.getDate());
+        }
+    }
 
 
-    /**
-    * Init calendar
-    */
     xcal = Calendar.setup({
         inputField  : "effort_date",
         ifFormat    : "%Y-%m-%d",
@@ -700,6 +660,8 @@ function TimeTrackingForm() {
             ttf.setEndTime( sd * 0.001 + duration );
         }
     });
+
+    setInterval(this.updateDuration, 1000);    
 }
 
 

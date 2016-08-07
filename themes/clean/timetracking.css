@@ -1,36 +1,48 @@
 div.timetable {
     position:relative;
     overflow: hidden;
+    margin-left: 10px;
+    margin-right:10px;
+    margin-top:20px;
 }
-
-// div.timetable div.container {
-//     position:absolute;
-//     top:0;
-//     left:0;
-// }
-
-// div.timetable .d3 div.block {
-//   position:absolute;
-//   border-radius:2px;
-// }
 
 div.timetable .d3 a.timeblock {
     display:block;
     position: absolute;
     height:18px;
-    background-color: rgba(80,80,200, 0.8);
-    -webkit-box-shadow: 0px 0px 3px rgba(255,255,255,0.8);
+    background: rgba(49,160,230,0.72);
+    // -webkit-box-shadow: 0px 0px 3px rgba(255,255,255,0.8);
     white-space:nowrap;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
+    border:1px solid white;
     overflow:hidden;
     color: white;
     font-size:10px;
     font-weight:normal;
     text-align:center;
-    border-radius:3px;
-    opacity: 0.6;
+    border-radius:4px;
+    opacity: 0.8;
+    z-index: 100;
+    outline:none;
 }
+
+
+@keyframes blink {
+  30% {
+    opacity:1;
+  }
+}
+
+div.timetable div.d3 a.new.timeblock {
+  animation: blink 1s ease 0s infinite;
+  border:1px solid #32A0E6;
+  color: #32A0E6;
+  background-color: none !important;
+  border-left-width:3px;
+  border-right-width:3px;
+}
+
 
 div.timetable div.currentTime {
     background-color: red;
@@ -41,21 +53,14 @@ div.timetable div.currentTime {
     bottom:0px;
 }
 
-// div.timetable .d3 {
-//   position:absolute;
-//   width:100%;
-//   height:100%;
-//   top:0;
-//   left:0;
-//   z-index:100;
-// }
-
 div.timetable  svg rect {
-  fill: rgba(0,0,0,0.2);
+  fill: rgba(0,0,0,0.1);
 }
 
 div.timetable  svg text {
   fill: rgba(0,0,0,0.3);
+  font-size: 13px;
+  text-transform:uppercase;
 }
 
 div.timetable svg {
@@ -65,16 +70,6 @@ div.timetable svg {
   width:100%;
   height:100%;
 }
-
-
-// .myCanvas{
-//   image-rendering: optimizeSpeed;             
-//   image-rendering: -moz-crisp-edges;          
-//   image-rendering: -webkit-optimize-contrast;                                               
-//   image-rendering: optimize-contrast;         
-//   -ms-interpolation-mode: nearest-neighbor;   
-// }
-
 
 div.timetracking {
   padding:1em;
