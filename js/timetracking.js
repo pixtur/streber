@@ -624,7 +624,7 @@ function TimeTrackingForm() {
         for( var key in effertsBlock) {
             var effort = effertsBlock[key];
 
-            var fiveMinutes = 100 * 60;
+            var fiveMinutes = 5 * 60;
             var createdRecently =  (Date.now() / 1000 - effort.created) < fiveMinutes;
 
             if(createdRecently && effort.id > maxId) {
