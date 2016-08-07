@@ -91,9 +91,13 @@ function TimeTrackingTable() {
             .attr('href', function(d,i) {
                 return d.id;
             })
+            .attr('title', function(d,i) {
+                return d.tooltip;
+            })
             .text( function(d,i) {
                 return (d.title);
-            });
+            })
+            ;
 
         selection
             .exit()
