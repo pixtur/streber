@@ -79,7 +79,7 @@ function TimeTrackingTable() {
             } )
             .style("top", function(d,i) { 
                 var d = ttt.daysSinceToday(d.start);
-                return  (ttt.height + (d-2) * ttt.DAY_HEIGHT - ttt.TIMELINE_HEIGHT + 2 ) + "px";
+                return  (ttt.height + (d-1) * ttt.DAY_HEIGHT - ttt.TIMELINE_HEIGHT + 2 ) + "px";
              } )
             .style("width", function(d,i) { 
                 return Math.floor(ttt.xFromTime(d.start + d.duration) - ttt.xFromTime(d.start)) + "px";
