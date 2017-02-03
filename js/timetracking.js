@@ -200,7 +200,7 @@ function TimeTrackingTable() {
 
     this.getNumberOfDaysShown = function()
     {
-        var DEFAULT_NUMBER_OF_SHOWN_DAYS = 6;
+        var DEFAULT_NUMBER_OF_SHOWN_DAYS = 14;
         var daysFromParameter = parseInt(getURLParameter('days')); 
         daysFromParameter = Math.max(0, daysFromParameter);
         daysFromParameter = Math.min(60, daysFromParameter);
